@@ -1,0 +1,28 @@
+﻿.filter a {
+    display: inline-block;
+    color: var(--text-primary);
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+    
+    transition-duration: var(--transition-speed);
+    filter: brightness(1);
+    cursor: pointer;
+}
+
+.filter a:hover {
+    filter: brightness(1.5);
+}
+
+.filter a:active {
+    filter: brightness(0.8);
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}
+
+.filter a.toggled {
+    background-color: var(--accent);
+}

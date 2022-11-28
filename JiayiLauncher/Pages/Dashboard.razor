@@ -1,0 +1,20 @@
+﻿@page "/"
+@page "/Dashboard"
+<h3>Good @DetermineTimeOfDay()</h3>
+
+<p>
+    This page will display brief in-game statistics, like average time played, etc.<br><br>
+    It will also show you your recently launched mods, and the ones you play the most with.
+</p>
+
+@code {
+    private string DetermineTimeOfDay()
+    {
+        var hour = DateTime.Now.Hour;
+        if (hour is >= 5 and < 12)
+        {
+            return "morning";
+        }
+        return hour is >= 12 and < 17 ? "afternoon" : "evening";
+    }
+}

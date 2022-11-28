@@ -1,0 +1,31 @@
+﻿.button {
+    background-color: var(--accent);
+    border: none;
+    color: var(--text-primary);
+    padding: 1rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+    font-size: 24px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 900;
+
+    box-shadow: var(--shadow);
+
+    transition-duration: 0.2s;
+}
+
+.button:hover {
+    background-color: var(--accent-brightened);
+}
+
+.button:active {
+    background-color: var(--accent-darkened);
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}
+
+.button:focus {
+    outline: none;
+}

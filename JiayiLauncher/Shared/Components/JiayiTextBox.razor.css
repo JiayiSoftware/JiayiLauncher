@@ -1,0 +1,23 @@
+﻿.textbox {
+    background-color: var(--background-secondary);
+    border: var(--accent) 0 solid;
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    transition-duration: var(--transition-speed);
+    
+    box-shadow: var(--shadow);
+    
+    filter: brightness(1);
+}
+
+.textbox:hover {
+    filter: brightness(1.5);
+}
+
+.textbox:focus {
+    outline: none;
+    border-bottom: var(--accent) 2px solid;
+}

@@ -44,6 +44,8 @@ h1:focus {
 main {
     margin-left: 4rem;
     margin-right: 3rem;
+    margin-bottom: 1.5rem;
+    
     padding: 0 1.55rem;
 }
 

@@ -13,7 +13,9 @@
 </div>
 
 <div class="mods">
-    
+    <div class="add-new">
+        <span class="material-symbols-sharp">add</span>
+    </div>
 </div>
 
 @code {
@@ -40,6 +42,16 @@
         if (_filterClasses.TrueForAll(x => x == ""))
         {
             _filterClasses[0] = "toggled";
+        }
+
+        for (var i = 0; i < _filterClasses.Count; i++)
+        {
+            _currentFilters[i] = _filterClasses[i] == "toggled" ? _filters[i] : "";
+
+            if (_currentFilters[i] == "")
+            {
+                _currentFilters.RemoveAt(i);
+            }
         }
     }
 }

@@ -26,3 +26,13 @@
 .filter a.toggled {
     background-color: var(--accent);
 }
+
+.mods {
+    margin-top: 1rem;
+    display: flex;
+    width: 100%;
+}
+
+.add-new {
+    border: white 2px dashed;
+}

@@ -32,7 +32,7 @@
             _filterClasses[0] = "";
         }
         
-        if (_filterClasses[0] == "toggled")
+        if (_filterClasses[0] == "toggled" || _filterClasses.FindAll(x => x == "").Count == 4)
         {
             _filterClasses.Clear();
             _filterClasses.Add("toggled");

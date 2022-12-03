@@ -21,3 +21,7 @@
     outline: none;
     border-bottom: var(--accent) 2px solid;
 }
+
+.textbox::selection {
+    background: rgba(255, 0, 0, 0.5);
+}

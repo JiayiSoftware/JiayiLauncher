@@ -35,4 +35,12 @@
 
 .add-new {
     border: white 2px dashed;
+    width: 100%;
+    height: auto;
+    filter: brightness(0.5);
+    text-align: center;
+}
+
+.add-new img {
+    width: 150px;
 }

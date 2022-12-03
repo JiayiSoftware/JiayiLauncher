@@ -13,4 +13,11 @@
       <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="7.0.49" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Resources\Images\drag.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Include="wwwroot\images\drag.png" />
+    </ItemGroup>
+
 </Project>

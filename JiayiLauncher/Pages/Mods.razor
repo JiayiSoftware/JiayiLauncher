@@ -4,13 +4,9 @@
 
 <JiayiTextBox Placeholder="Search mods" Style="width: 100%"></JiayiTextBox>
 
-<div class="filter">
-    <a class="@_filterClasses[0]" onclick="@(() => ToggleFilter(0))">All</a>
-    <a class="@_filterClasses[1]" onclick="@(() => ToggleFilter(1))">Internal</a>
-    <a class="@_filterClasses[2]" onclick="@(() => ToggleFilter(2))">External</a>
-    <a class="@_filterClasses[3]" onclick="@(() => ToggleFilter(3))">Stored on disk</a>
-    <a class="@_filterClasses[4]" onclick="@(() => ToggleFilter(4))">From the web</a>
-</div>
+@* <div class="filter"> *@
+@* *@
+@* </div> *@
 
 <div class="mods">
     <div class="add-new">
@@ -19,36 +15,5 @@
 </div>
 
 @code {
-    private readonly List<string> _filters = new() { "All", "Internal", "External", "Stored on disk", "From the web" };
-    private List<string> _filterClasses = new() { "toggled", "", "", "", "" };
-    private List<string> _currentFilters = new() { "All" };
     
-    private void ToggleFilter(int index)
-    {
-        _filterClasses[index] = _filterClasses[index] == "toggled" ? "" : "toggled";
-
-        if (index != 0 && _filterClasses[index] == "toggled")
-        {
-            _filterClasses[0] = "";
-        }
-        
-        if (_filterClasses[0] == "toggled" || _filterClasses.FindAll(x => x == "").Count == 5)
-        {
-            _filterClasses.Clear();
-            _filterClasses.Add("toggled");
-            _filterClasses.AddRange(Enumerable.Repeat("", 4));
-        }
-
-        if (_filterClasses.TrueForAll(x => x == ""))
-        {
-            _filterClasses[0] = "toggled";
-        }
-
-        for (var i = 0; i < _filterClasses.Count; i++)
-        {
-            _currentFilters.Clear();
-            if (_filterClasses[i] == "toggled")
-                _currentFilters.Add(_filters[i]);
-        }
-    }
 }

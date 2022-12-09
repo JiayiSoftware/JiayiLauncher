@@ -1,8 +1,14 @@
-﻿@page "/Mods"
+﻿@using JiayiLauncher.Shared.Components.Mods
+
+@page "/Mods"
 
 <h3>Mods</h3>
 
-<JiayiTextBox Placeholder="Search mods"></JiayiTextBox>
+<div class="find-tools">
+    <JiayiTextBox Placeholder="Search mods"></JiayiTextBox>
+
+    <JiayiFilter>Internal</JiayiFilter>
+</div>
 
 @* <div class="filter"> *@
 @* *@

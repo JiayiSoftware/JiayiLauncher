@@ -1,0 +1,14 @@
+﻿<label class="filter" style="font-size: @Size">
+    @ChildContent
+    <input type="checkbox" class="check">
+</label>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string Size { get; set; } = "16px";
+    
+    public bool Checked { get; set; }
+}

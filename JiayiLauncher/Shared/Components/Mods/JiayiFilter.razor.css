@@ -1,0 +1,29 @@
+.filter {
+    padding: 0.5rem;
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition-duration: var(--transition-speed);
+}
+
+.check {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.check:checked + .filter {
+    background-color: var(--accent);
+}
+
+.filter:hover {
+    filter: brightness(1.5);
+}
+
+.filter:active {
+    filter: brightness(0.8);
+    translate: 5px 5px;
+    box-shadow: none;
+}

@@ -1,6 +1,6 @@
 ﻿<label class="filter" style="font-size: @Size">
     @ChildContent
-    <input type="checkbox" class="check">
+    <input type="checkbox" class="check" onclick="@Clicked">
 </label>
 
 @code {
@@ -11,4 +11,6 @@
     public string Size { get; set; } = "16px";
     
     public bool Checked { get; set; }
+    
+    private void Clicked() => Checked = !Checked;
 }

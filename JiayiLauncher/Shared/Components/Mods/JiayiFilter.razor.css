@@ -7,11 +7,7 @@
 }
 
 .check {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    padding: 0;
-    margin: 0;
+    display: none;
 }
 
 .check:checked + .filter {
@@ -24,6 +20,6 @@
 
 .filter:active {
     filter: brightness(0.8);
-    translate: 5px 5px;
+    transform: translate(5px, 5px);
     box-shadow: none;
 }

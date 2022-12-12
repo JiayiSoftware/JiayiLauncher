@@ -1,4 +1,5 @@
 .filter {
+    display: inline-block;
     padding: 0.5rem;
     background-color: var(--background-secondary);
     box-shadow: var(--shadow);
@@ -10,9 +11,7 @@
     display: none;
 }
 
-.check:checked + .filter {
-    background-color: var(--accent);
-}
+
 
 .filter:hover {
     filter: brightness(1.5);

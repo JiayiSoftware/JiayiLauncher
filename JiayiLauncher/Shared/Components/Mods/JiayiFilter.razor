@@ -1,4 +1,4 @@
-﻿<label class="filter" style="font-size: @Size">
+﻿<label class="filter" style="font-size: @Size; background-color:  @_color">
     <input type="checkbox" class="check" onclick="@Clicked">
     @ChildContent
 </label>
@@ -10,7 +10,10 @@
     [Parameter]
     public string Size { get; set; } = "16px";
     
+    [Parameter]
     public bool Checked { get; set; }
+    
+    private string _color => Checked ? "var(--accent)" : "var(--background-secondary)";
     
     private void Clicked() => Checked = !Checked;
 }

@@ -49,9 +49,10 @@ h1:focus {
 }
 
 main {
-    margin-left: 5.5rem;
+    /*margin-left: 5.5rem;*/
     margin-right: 1.5rem;
     margin-bottom: 1.5rem;
+    transition: var(--transition-speed);
 }
 
 #blazor-error-ui {

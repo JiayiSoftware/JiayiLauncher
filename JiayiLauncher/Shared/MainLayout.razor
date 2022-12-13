@@ -1,11 +1,24 @@
 ﻿@inherits LayoutComponentBase
 
-<Sidebar/>
+<Sidebar @ref="_sidebar"/>
 
-<main>
+<main style="margin-left: @_margin">
     @Body
 </main>
 
 @code {
+    private Sidebar? _sidebar;
+    private string _margin = "5.5rem";
     
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender) return;
+        if (_sidebar != null) _sidebar.OnToggle += ChangeMargin;
+    }
+
+    private void ChangeMargin(object? sender, EventArgs e)
+    {
+        _margin = _margin == "5.5rem" ? "13.5rem" : "5.5rem";
+        StateHasChanged();
+    }
 }

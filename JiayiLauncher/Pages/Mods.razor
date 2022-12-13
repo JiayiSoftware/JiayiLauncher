@@ -5,11 +5,12 @@
 <h3>Mods</h3>
 
 <div class="find-tools">
-    <JiayiTextBox Placeholder="Search mods" @bind="_searchText"></JiayiTextBox>
+    <JiayiTextBox Placeholder="Search mods"></JiayiTextBox>
     
     <div class="separator"></div>
 
-    <JiayiFilter>Internal</JiayiFilter>
+    <JiayiFilter>Locally stored</JiayiFilter>
+    <JiayiFilter>Online</JiayiFilter>
 </div>
 
 <div class="mods"> 
@@ -24,5 +25,5 @@
 </div>
 
 @code {
-    private string? _searchText;
+    
 }

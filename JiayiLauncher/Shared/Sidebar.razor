@@ -1,7 +1,9 @@
-﻿<nav class="sidebar">
+﻿<nav class="sidebar" data-sticky="@_sticky">
     <ul class="sidebar-items">
         <li class="logo">
             <JiayiLogo Size="2rem" Shadow="3px"/>
+            <p class="wordmark">Jiayi</p>
+            <button class="sticky" title="sticky" onclick="@Sticky"></button>
         </li>
         
         <li class="sidebar-item">
@@ -40,3 +42,9 @@
         </li>
     </ul>
 </nav>
+
+@code {
+    private string _sticky = "no";
+    
+    private void Sticky() => _sticky = _sticky == "no" ? "yes" : "no";
+}

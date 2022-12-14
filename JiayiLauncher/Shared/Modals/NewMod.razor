@@ -1,17 +1,29 @@
-﻿<div class="dim-background" style="opacity: @_opacity">
+﻿<div class="dim-background" style="opacity: @_opacity; z-index: @_z">
     <div class="modal">
-        <span class="material-symbols-sharp close" onclick="">close</span>
+        <div class="modal-header">
+            <h4 style="margin-top: 0.2rem; margin-left: 0.2rem;">Add new mod</h4>
+            <span class="material-symbols-sharp close" onclick="@Close">close</span>
+        </div>
+        
+        <div class="modal-part1">
+            <JiayiTextBox Placeholder="Name" Style="width: 100%"></JiayiTextBox>
+        </div>
     </div>
 </div>
 
 @code {
     private string _opacity = "0";
+    private string _z => _opacity == "0" ? "1" : "100";
     
-    protected override void OnAfterRender(bool firstRender)
+    public void Open()
     {
-        if (!firstRender) return;
-        
         _opacity = "100";
+        StateHasChanged();
+    }
+
+    private void Close()
+    {
+        _opacity = "0";
         StateHasChanged();
     }
 }

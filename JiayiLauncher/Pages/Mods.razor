@@ -31,17 +31,13 @@
     <span class="material-symbols-sharp">add</span>
 </button>
 
-@_modalContainer
+<NewMod @ref="_modal"/>
 
 @code {
-    private RenderFragment? _modalContainer;
+    private NewMod? _modal;
     
     private void ShowAddMods()
     {
-        _modalContainer = builder =>
-        {
-            builder.OpenComponent<NewMod>(0);
-            builder.CloseComponent();
-        };
+        _modal.Open();
     }
 }

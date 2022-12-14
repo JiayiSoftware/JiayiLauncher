@@ -1,22 +1,24 @@
 ﻿.dim-background {
-    opacity: 0;
-    position: fixed;
-    z-index: 1;
-    left: inherit;
+    position: absolute;
+    left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.4);
     
     transition: var(--transition-speed);
 }
 
 .modal {
-    background-color: var(--background-secondary);
-    margin: 50% auto;
+    background-color: var(--background-primary);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
     padding: 1rem;
-    width: 50%;
+    min-width: 20rem;
+    height: auto;
 }
 
 .close {
@@ -28,4 +30,14 @@
     color: var(--text-primary);
     text-decoration: none;
     cursor: pointer;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-part1 {
+    width: 8rem;
+    height: 10rem;
 }

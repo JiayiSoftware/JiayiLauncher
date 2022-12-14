@@ -1,0 +1,31 @@
+﻿.dim-background {
+    opacity: 0;
+    position: fixed;
+    z-index: 1;
+    left: inherit;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    
+    transition: var(--transition-speed);
+}
+
+.modal {
+    background-color: var(--background-secondary);
+    margin: 50% auto;
+    padding: 1rem;
+    width: 50%;
+}
+
+.close {
+    color: var(--text-secondary);
+    float: right;
+}
+
+.close:hover, .close:focus {
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -15,9 +15,11 @@
 </div>
 
 <div class="mods"> 
-    @* mods here *@
+    <ul class="mod-list">
+        @* mods here *@
+    </ul>
     <div class="add-new">
-        <img src="images/drag.png" alt="Drag icon"/>
+        <div class="add-new-image"></div>
         <p>
             Drag mods, folders, or URLs here<br>
             or click the plus icon to add mods
@@ -25,6 +27,21 @@
     </div>
 </div>
 
+<button class="add-button" onclick="@ShowAddMods">
+    <span class="material-symbols-sharp">add</span>
+</button>
+
+@_modalContainer
+
 @code {
+    private RenderFragment? _modalContainer;
     
+    private void ShowAddMods()
+    {
+        _modalContainer = builder =>
+        {
+            builder.OpenComponent<NewMod>(0);
+            builder.CloseComponent();
+        };
+    }
 }

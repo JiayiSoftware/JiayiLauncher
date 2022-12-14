@@ -5,7 +5,6 @@
 
 .mods {
     margin-top: 1rem;
-    display: flex;
     width: 100%;
 }
 
@@ -18,12 +17,52 @@
 }
 
 .add-new {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: auto;
     filter: brightness(0.5);
     text-align: center;
 }
 
-.add-new img {
+.add-new-image {
     width: 150px;
+    height: 150px;
+    text-align: center;
+    background-image: url("images/drag.png");
+    background-size: cover;
+}
+
+.add-button {
+    z-index: 100;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    
+    width: 3rem;
+    height: 3rem;
+    
+    background-color: var(--accent);
+    color: var(--text-primary);
+    box-shadow: var(--shadow);
+    
+    border: none;
+    transition: var(--transition-speed);
+}
+
+.add-button:hover {
+    background-color: var(--accent-brightened);
+}
+
+.add-button:active {
+    background-color: var(--accent-darkened);
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}
+
+.add-button:focus {
+    outline: none;
 }

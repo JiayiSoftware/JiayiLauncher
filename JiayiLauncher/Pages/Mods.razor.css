@@ -37,7 +37,7 @@
 }
 
 .add-button {
-    z-index: 100;
+    z-index: 2;
     position: fixed;
     bottom: 1.5rem;
     right: 1.5rem;

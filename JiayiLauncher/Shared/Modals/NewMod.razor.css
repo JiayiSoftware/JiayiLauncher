@@ -10,3 +10,26 @@
 .select-file p {
     color: dimgray;
 }
+
+.separator {
+    display: flex;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.separator-line {
+    border-bottom: 1px solid rgb(50, 50, 50);
+    width: 100%;
+}
+
+.separator p {
+    background-color: var(--background-primary);
+    color: dimgray;
+    text-align: center;
+    margin: 0;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+}

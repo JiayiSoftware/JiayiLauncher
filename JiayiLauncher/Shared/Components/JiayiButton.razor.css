@@ -12,6 +12,7 @@
     font-weight: 900;
 
     box-shadow: var(--shadow);
+    filter: none;
 
     transition-duration: 0.2s;
 }
@@ -28,4 +29,13 @@
 
 .button:focus {
     outline: none;
+}
+
+.button:disabled {
+    filter: grayscale(100%);
+    color: darkgray;
+    
+    background-color: var(--accent);
+    transform: none;
+    box-shadow: var(--shadow);
 }

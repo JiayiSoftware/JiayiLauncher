@@ -65,6 +65,7 @@ main {
     position: fixed;
     width: 100%;
     z-index: 1000;
+    color: black;
 }
 
 #blazor-error-ui .dismiss {
@@ -72,4 +73,26 @@ main {
     position: absolute;
     right: 0.75rem;
     top: 0.5rem;
+}
+.modal {
+    border-radius: 0;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    width: 60%;
+    margin-top: 64px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.modal h3 {
+    margin-top: 0;
+}
+
+.modal span {
+    color: white;
+    margin-right: 1rem;
+    margin-top: 1rem;
 }

@@ -5,7 +5,7 @@
     position: fixed;
     background-color: var(--background-secondary);
     transition: width 0.2s ease;
-    z-index: 100;
+    z-index: 5;
 }
 
 .sidebar-items {

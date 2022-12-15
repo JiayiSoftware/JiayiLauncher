@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<button class="add-button" @onclick="@(() => Modal.Show<NewMod>("Add new mod"))">
+<button class="add-button" @onclick="@ShowAddMods">
     <span class="material-symbols-sharp">add</span>
 </button>
 
@@ -35,4 +35,9 @@
     [CascadingParameter]
     public IModalService Modal { get; set; } = default!;
 
+    private async Task ShowAddMods()
+    {
+        var modal = Modal.Show<NewMod>("Add mods");
+        var result = await modal.Result;
+    }
 }

@@ -1,1 +1,40 @@
-﻿<h4>Add new mod</h4>
+﻿@using System.IO
+@using Microsoft.Win32
+
+<div class="select">
+    <div class="select-file">
+        <JiayiButton OnClick="SelectFile">Select a file</JiayiButton>
+        <p>
+            to begin<br>
+            .dll and .exe files only
+        </p>
+    </div>
+    
+    <hr>
+    
+    <div class="url">
+        <p>Or enter a URL</p>
+        <JiayiTextBox Placeholder="cool-website.com/path/to/mod.dll"></JiayiTextBox>
+    </div>
+</div>
+
+@code {
+    private async Task SelectFile()
+    {
+        var dialog = new OpenFileDialog
+        {
+            Title = "Select a mod",
+            Filter = "Injectable libraries (*.dll)|*.dll|" +
+                     "External clients and injectors (*.exe)|*.exe",
+            Multiselect = false
+        };
+
+        if (dialog.ShowDialog() == true)
+        {
+            var file = dialog.FileName;
+            var bytes = await File.ReadAllBytesAsync(file);
+            var base64 = Convert.ToBase64String(bytes);
+            Console.WriteLine(base64);
+        }
+    }
+}

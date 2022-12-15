@@ -27,21 +27,12 @@
     </div>
 </div>
 
-<button class="add-button" onclick="@ShowAddMods">
+<button class="add-button" @onclick="@(() => Modal.Show<NewMod>("Add new mod"))">
     <span class="material-symbols-sharp">add</span>
 </button>
 
-@_modalContainer
-
 @code {
-    private RenderFragment? _modalContainer;
-    
-    private void ShowAddMods()
-    {
-        _modalContainer = builder =>
-        {
-            builder.OpenComponent<NewMod>(0);
-            builder.CloseComponent();
-        };
-    }
+    [CascadingParameter]
+    public IModalService Modal { get; set; } = default!;
+
 }

@@ -10,6 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Blazored.Modal" Version="7.1.0" />
       <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="7.0.49" />
     </ItemGroup>
 

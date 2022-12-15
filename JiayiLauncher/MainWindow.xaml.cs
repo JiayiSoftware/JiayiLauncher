@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Windows;
 using System.Windows.Interop;
-using Microsoft.AspNetCore.Components.WebView.Wpf;
+using Blazored.Modal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JiayiLauncher;
@@ -13,7 +12,7 @@ namespace JiayiLauncher;
 public partial class MainWindow
 {
 	[DllImport("dwmapi.dll", PreserveSig = true)]
-	private static extern int DwmSetWindowAttribute(IntPtr hWnd, int attr, ref bool attrValue, int attrSize);
+	private static extern int DwmSetWindowAttribute(nint hWnd, int attr, ref bool attrValue, int attrSize);
 	
 	public MainWindow()
 	{
@@ -23,6 +22,7 @@ public partial class MainWindow
 
 		var services = new ServiceCollection();
 		services.AddWpfBlazorWebView();
+		services.AddBlazoredModal();
 #if DEBUG
 		services.AddBlazorWebViewDeveloperTools();
 #endif
@@ -34,11 +34,5 @@ public partial class MainWindow
 		var windowHelper = new WindowInteropHelper(this);
 		var value = true;
 		DwmSetWindowAttribute(windowHelper.Handle, 20, ref value, Marshal.SizeOf(value));
-	}
-
-	private void ShowWebView(object sender, RoutedEventArgs e)
-	{
-		var webView = (BlazorWebView)sender;
-		webView.Visibility = Visibility.Visible;
 	}
 }

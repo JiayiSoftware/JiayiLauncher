@@ -1,17 +1,1 @@
-﻿<div class="dim-background" style="opacity: @_opacity">
-    <div class="modal">
-        <span class="material-symbols-sharp close" onclick="">close</span>
-    </div>
-</div>
-
-@code {
-    private string _opacity = "0";
-    
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (!firstRender) return;
-        
-        _opacity = "100";
-        StateHasChanged();
-    }
-}
+﻿<h4>Add new mod</h4>

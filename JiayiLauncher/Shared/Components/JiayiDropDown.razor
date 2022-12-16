@@ -1,0 +1,49 @@
+﻿<div class="dropdown">
+    <button class="drop-button" onclick="@ToggleItems">Dropdown</button>
+    <div class="dropdown-items">
+        @foreach (var item in Items)
+        {
+            @if (Multiselect)
+            {
+                <label class="dropdown-item">
+                    <input type="checkbox" @(SelectedItems.Contains(item) ? "checked" : "") @onchange="@Changed" />
+                    @item
+                </label>
+            }
+            else
+            {
+                <label class="dropdown-item">
+                    <input type="radio" @(SelectedItems.Contains(item) ? "checked" : "") @onchange="@Changed" />
+                    @item
+                </label>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+    
+    [Parameter]
+    public List<string> Items { get; set; }
+    
+    [Parameter]
+    public bool Multiselect { get; set; }
+    
+    public List<string> SelectedItems { get; set; } = new();
+    
+    private bool _isOpen;
+    private string _textColor = "dimgray";
+    private string _hidden => _isOpen ? "0" : "100";
+
+    public void ToggleItems()
+    {
+        
+    }
+
+    public void Changed()
+    {
+        _textColor = SelectedItems.Count > 0 ? "var(--text-primary)" : "dimgray";
+    }
+}

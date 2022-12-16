@@ -1,7 +1,8 @@
 ﻿@using System.IO
+@using JiayiLauncher.Features.ModFolder
 @using Microsoft.Win32
 
-<div class="select">
+<div class="select" style="display: @_part1">
     <div class="select-file">
         <JiayiButton OnClick="SelectFile">Select a file</JiayiButton>
         <p>
@@ -22,8 +23,20 @@
     </div>
 </div>
 
+<div class="edit" style="display: @_part2">
+    <EditForm Model="@_mod" OnValidSubmit="@Valid">
+        <JiayiTextBox @bind="_mod.Name"></JiayiTextBox>
+        
+    </EditForm>
+</div>
+
 @code {
-    private async Task SelectFile()
+    private string _part1 = "block";
+    private string _part2 = "none";
+    
+    private ModModel _mod = new();
+    
+    private void SelectFile()
     {
         var dialog = new OpenFileDialog
         {
@@ -35,10 +48,21 @@
 
         if (dialog.ShowDialog() == true)
         {
-            var file = dialog.FileName;
-            var bytes = await File.ReadAllBytesAsync(file);
-            var base64 = Convert.ToBase64String(bytes);
-            Console.WriteLine(base64);
+            Part2(dialog.FileName);
         }
     }
+
+    private void Part2(string path)
+    {
+        _mod.Path = path;
+        _part1 = "none";
+        _part2 = "block";
+        StateHasChanged();
+    }
+
+    private void Valid()
+    {
+        
+    }
+
 }

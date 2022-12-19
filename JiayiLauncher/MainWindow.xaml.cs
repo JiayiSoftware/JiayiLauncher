@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Interop;
 using Blazored.Modal;
+using Microsoft.AspNetCore.Components.WebView;
+using Microsoft.AspNetCore.Components.WebView.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JiayiLauncher;
@@ -34,5 +38,10 @@ public partial class MainWindow
 		var windowHelper = new WindowInteropHelper(this);
 		var value = true;
 		DwmSetWindowAttribute(windowHelper.Handle, 20, ref value, Marshal.SizeOf(value));
+	}
+
+	private void ChangeColor(object? sender, BlazorWebViewInitializedEventArgs e)
+	{
+		e.WebView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);
 	}
 }

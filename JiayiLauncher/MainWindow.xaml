@@ -9,7 +9,7 @@
         Title="Jiayi Launcher" Height="550" Width="900" Background="#0F0F0F"
 	MinWidth="900" MinHeight="423">
     <Grid>
-        <blazor:BlazorWebView HostPage="wwwroot/index.html" Services="{DynamicResource services}">
+        <blazor:BlazorWebView HostPage="wwwroot/index.html" Services="{DynamicResource services}" BlazorWebViewInitialized="ChangeColor">
             <blazor:BlazorWebView.Background>#0F0F0F</blazor:BlazorWebView.Background>
             <blazor:BlazorWebView.RootComponents>
                 <blazor:RootComponent Selector="#app" ComponentType="{x:Type local:Main}"/>

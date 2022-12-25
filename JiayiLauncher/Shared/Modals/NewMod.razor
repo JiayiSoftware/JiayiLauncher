@@ -1,5 +1,4 @@
-﻿@using System.IO
-@using JiayiLauncher.Features.ModFolder
+﻿@using JiayiLauncher.Features.ModFolder
 @using Microsoft.Win32
 
 <div class="select" style="display: @_part1">
@@ -21,18 +20,23 @@
         <p>Enter the link to your mod</p>
         <JiayiTextBox Style="width: 91%" Placeholder="cool-website.com/path/to/mod.dll"></JiayiTextBox>
     </div>
+    
+    @* test *@
+    <JiayiDropDown Name="Test drop down" Items="@_items" Multiselect="true"></JiayiDropDown>
 </div>
 
-<div class="edit" style="display: @_part2">
-    <EditForm Model="@_mod" OnValidSubmit="@Valid">
-        <JiayiTextBox @bind="_mod.Name"></JiayiTextBox>
-        
-    </EditForm>
-</div>
+@* <div class="edit" style="display: @_part2"> *@
+@*     <EditForm Model="@_mod" OnValidSubmit="@Valid"> *@
+@*         <JiayiTextBox @bind="_mod.Name"></JiayiTextBox> *@
+@*          *@
+@*     </EditForm> *@
+@* </div> *@
 
 @code {
     private string _part1 = "block";
     private string _part2 = "none";
+    
+    private List<string> _items = new() { "test1", "test2", "test3" };
     
     private ModModel _mod = new();
     

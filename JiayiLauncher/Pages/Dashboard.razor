@@ -3,11 +3,16 @@
 <h3>Good @DetermineTimeOfDay()</h3>
 
 <p>
-    This page will display brief in-game statistics, like average time played, etc.<br><br>
-    It will also show you your recently launched mods, and the ones you play the most with.
+    This page will display important information, like your current Minecraft version.<br><br>
+    It will also show you your recently launched mods, and the Profile you have selected.
 </p>
 
+@* test *@
+<JiayiDropDown Name="Test drop down" Items="@_items" Multiselect="false"></JiayiDropDown>
+
 @code {
+    private List<string> _items = new() { "Item 1", "Item 2", "Item 3" };
+    
     private string DetermineTimeOfDay()
     {
         var hour = DateTime.Now.Hour;

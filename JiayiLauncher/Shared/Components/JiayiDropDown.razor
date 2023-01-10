@@ -1,13 +1,32 @@
-﻿<label>
-    @Name
+﻿<div class="dropdown">
+    <span class="selected">@Name</span>
+    <span class="material-symbols-sharp">expand_more</span>
     
-    <select @bind="SelectedItems" @_multiselect>
+    <ul class="dropdown-items">
         @foreach (var item in Items)
         {
-            <option value="@item">@item</option>
+            @if (Multiselect)
+            {
+                <li>
+                    <label>
+                        <input type="checkbox" value="@item" @(SelectedItems.Contains(item) ? "checked" : "") >
+                        @item
+                    </label>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <label>
+                        <input type="radio" name="selectedItem" value="@item" @(SelectedItem == item ? "checked" : "") >
+                        @item
+                    </label>
+                </li>
+            }
         }
-    </select>
-</label>
+    </ul>
+</div>
+    
 
 @code {
     [Parameter]
@@ -18,7 +37,9 @@
     
     [Parameter]
     public bool Multiselect { get; set; }
-    private string _multiselect => Multiselect ? "multiple" : "";
-
+    
     public string[] SelectedItems { get; set; } = Array.Empty<string>();
+    
+    // if not multiselect
+    public string SelectedItem { get; set; }
 }

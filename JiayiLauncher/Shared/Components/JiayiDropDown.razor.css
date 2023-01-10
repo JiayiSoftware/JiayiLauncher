@@ -1,0 +1,28 @@
+﻿.dropdown {
+    position: relative;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    padding: 0.5rem 0.5rem 0.5rem 0.8rem;
+    transition: var(--transition-speed);
+}
+
+.dropdown.active, .dropdown:focus {
+    outline: none;
+}
+
+.dropdown .dropdown-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown .dropdown-items.hidden {
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+}

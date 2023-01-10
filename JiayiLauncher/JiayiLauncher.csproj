@@ -7,6 +7,8 @@
         <UseWPF>true</UseWPF>
         <IsPackable>false</IsPackable>
         <ApplicationIcon>icon.ico</ApplicationIcon>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU;x64</Platforms>
     </PropertyGroup>
 
     <ItemGroup>

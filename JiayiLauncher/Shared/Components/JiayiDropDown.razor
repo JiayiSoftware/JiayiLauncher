@@ -9,7 +9,7 @@
             {
                 <li>
                     <label>
-                        <input type="checkbox" value="@item" @(SelectedItems.Contains(item) ? "checked" : "") >
+                        <input type="checkbox" value="@item">
                         @item
                     </label>
                 </li>
@@ -18,8 +18,8 @@
             {
                 <li>
                     <label>
-                        <input type="radio" name="selectedItem" value="@item" @(SelectedItem == item ? "checked" : "") >
                         @item
+                        <input type="radio" name="selectedItem" value="@item">
                     </label>
                 </li>
             }

@@ -2,7 +2,9 @@
     <span class="selected">@Name</span>
     <span class="material-symbols-sharp">expand_more</span>
     
-    <ul class="dropdown-items">
+    <span class="dropdown-click" onclick="@ToggleDropdown"></span>
+    
+    <ul class="dropdown-items" data-shown="@_showDropdown">
         @foreach (var item in Items)
         {
             @if (Multiselect)
@@ -18,8 +20,8 @@
             {
                 <li>
                     <label>
+                        <input type="radio" name="selectedItem" value="@item" class="dropdown-item">
                         @item
-                        <input type="radio" name="selectedItem" value="@item">
                     </label>
                 </li>
             }
@@ -42,4 +44,14 @@
     
     // if not multiselect
     public string SelectedItem { get; set; }
+    
+    private string _showDropdown = "false";
+    private string _icon = "expand_more";
+    
+    private void ToggleDropdown()
+    {
+        _showDropdown = _showDropdown == "false" ? "true" : "false";
+        _icon = _icon == "expand_more" ? "expand_less" : "expand_more";
+        //StateHasChanged();
+    }
 }

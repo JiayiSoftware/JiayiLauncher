@@ -9,6 +9,8 @@
     box-shadow: var(--shadow);
     padding: 0.5rem 0.5rem 0.5rem 0.8rem;
     transition: var(--transition-speed);
+
+    filter: brightness(1);
 }
 
 .dropdown.active, .dropdown:focus {
@@ -21,15 +23,42 @@
     left: 0;
 
     list-style: none;
-    padding: 0.5rem 0.7rem 0.5rem 0.5rem;
+    padding: 0 0.7rem 0.5rem 0.5rem;
     margin: 0;
     width: -webkit-fill-available;
     background-color: var(--background-secondary);
     box-shadow: var(--shadow);
+    
+    transition: var(--transition-speed);
 }
 
-.dropdown .dropdown-items.hidden {
-    max-height: 0;
+.dropdown-items[data-shown="true"] {
+    transform: translateY(0);
+    opacity: 100%;
+    visibility: visible;
+}
+
+.dropdown-items[data-shown="false"] {
+    transform: translateY(-1.8rem);
     opacity: 0;
     visibility: hidden;
+}
+
+.dropdown-click {
+    cursor: pointer;
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.dropdown:has(.dropdown-click:hover) {
+    filter: brightness(1.5);
+}
+
+.dropdown:has(.dropdown-click:active) {
+    filter: brightness(0.8);
+    transform: translate(5px, 5px);
+    box-shadow: none;
 }

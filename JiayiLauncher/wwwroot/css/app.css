@@ -20,11 +20,7 @@ body {
     padding: 0;
     transition-duration: var(--transition-speed);
     
-    cursor: default;
-}
-
-::selection {
-    background: transparent;
+    user-select: none;
 }
 
 body::-webkit-scrollbar {

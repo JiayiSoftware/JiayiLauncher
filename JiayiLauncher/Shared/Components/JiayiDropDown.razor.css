@@ -62,3 +62,73 @@
     transform: translate(5px, 5px);
     box-shadow: none;
 }
+
+input[type="radio"] {
+    appearance: none;
+    cursor: pointer;
+    margin-left: 0.1rem;
+    margin-bottom: 0.1rem;
+    transform: translateY(3px); /* dumb hack to make it look centered */
+    border-radius: 100%;
+    height: 15px;
+    width: 15px;
+    border-color: var(--accent);
+    background-color: var(--background-primary);
+    border-width: 0;
+    border-style: solid;
+    
+    filter: brightness(1);
+    
+    transition: var(--transition-speed);
+}
+
+input[type="radio"]:checked {
+    background-color: var(--accent);
+    border-width: 2px;
+}
+
+input[type="radio"]:hover {
+    filter: brightness(1.5);
+}
+
+input[type="radio"]:active {
+    filter: brightness(0.8);
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    cursor: pointer;
+    margin-left: 0.1rem;
+    transform: translateY(5px); /* dumb hack to make it look centered */
+    height: 15px;
+    width: 15px;
+    border-color: var(--accent);
+    background-color: var(--background-primary);
+    border-width: 0;
+    border-style: solid;
+    
+    filter: brightness(1);
+    
+    transition: var(--transition-speed);
+}
+
+.hack {
+    transform: translateY(-5px);
+}
+
+.also-hack {
+    transform: translateY(-3px);
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--accent);
+    border-width: 2px;
+}
+
+input[type="checkbox"]:hover {
+    filter: brightness(1.5);
+}
+
+label {
+    cursor: pointer;
+}

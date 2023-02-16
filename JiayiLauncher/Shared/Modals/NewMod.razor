@@ -1,7 +1,7 @@
 ﻿@using Microsoft.Win32
 @using JiayiLauncher.Features.Mods
 
-<div class="select" style="display: @_part1">
+<div class="select" style="opacity: @_part1; display: @(_part2 == "100%" ? "none" : "block")">
     <div class="select-file">
         <JiayiButton OnClick="SelectFile">Select a file</JiayiButton>
         <p>
@@ -18,25 +18,22 @@
     
     <div class="url">
         <p>Enter the link to your mod</p>
-        <JiayiTextBox Style="width: 91%" Placeholder="cool-website.com/path/to/mod.dll"></JiayiTextBox>
+        <JiayiTextBox Style="width: 91%" Placeholder="cool-website.com/path/to/mod.dll" />
     </div>
 </div>
 
-<div class="edit" style="display: @_part2">
-    <EditForm Model="@_mod" OnValidSubmit="@Valid">
-        <JiayiTextBox @bind="_mod.Name"></JiayiTextBox>
-
-    </EditForm>
+<div class="edit" style="opacity: @_part2; display: @(_part2 == "0" ? "none" : "block")">
+    <JiayiTextBox Placeholder="Name your mod" />
+    <JiayiDropDown Items="@_items" Name="Supported versions" Multiselect="true" />
+    <JiayiButton>Save</JiayiButton>
 </div>
 
 @code {
-    private string _part1 = "block";
-    private string _part2 = "none";
+    private string _part1 = "100%";
+    private string _part2 = "0";
     
-    private List<string> _items = new() { "test1", "test2", "test3" };
-    
-    private Mod _mod = new();
-    
+    private List<string> _items = new() { "Any", "filling this list later" };
+
     private void SelectFile()
     {
         var dialog = new OpenFileDialog
@@ -55,15 +52,8 @@
 
     private void Part2(string path)
     {
-        _mod.Path = path;
-        _part1 = "none";
-        _part2 = "block";
+        _part1 = "0";
+        _part2 = "100%";
         StateHasChanged();
     }
-
-    private void Valid()
-    {
-        
-    }
-
 }

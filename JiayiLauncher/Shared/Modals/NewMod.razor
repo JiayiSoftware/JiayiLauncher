@@ -1,5 +1,5 @@
-﻿@using JiayiLauncher.Features.ModFolder
-@using Microsoft.Win32
+﻿@using Microsoft.Win32
+@using JiayiLauncher.Features.Mods
 
 <div class="select" style="display: @_part1">
     <div class="select-file">
@@ -22,12 +22,12 @@
     </div>
 </div>
 
-@* <div class="edit" style="display: @_part2"> *@
-@*     <EditForm Model="@_mod" OnValidSubmit="@Valid"> *@
-@*         <JiayiTextBox @bind="_mod.Name"></JiayiTextBox> *@
-@*          *@
-@*     </EditForm> *@
-@* </div> *@
+<div class="edit" style="display: @_part2">
+    <EditForm Model="@_mod" OnValidSubmit="@Valid">
+        <JiayiTextBox @bind="_mod.Name"></JiayiTextBox>
+
+    </EditForm>
+</div>
 
 @code {
     private string _part1 = "block";
@@ -35,7 +35,7 @@
     
     private List<string> _items = new() { "test1", "test2", "test3" };
     
-    private ModModel _mod = new();
+    private Mod _mod = new();
     
     private void SelectFile()
     {

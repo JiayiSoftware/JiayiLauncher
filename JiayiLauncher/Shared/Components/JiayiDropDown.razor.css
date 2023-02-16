@@ -26,6 +26,8 @@
     padding: 0 0.7rem 0.5rem 0.5rem;
     margin: 0;
     width: -webkit-fill-available;
+    max-height: 15rem;
+    overflow-y: scroll;
     background-color: var(--background-secondary);
     box-shadow: var(--shadow);
     

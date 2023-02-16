@@ -7,8 +7,14 @@
         }
         else
         {
+            var items = string.Join(", ", SelectedItems);
+            if (items.Length > 30 && SelectedItems.Length > 1)
+            {
+                // truncate at the comma and + the remaining count
+                items = items[..items.IndexOfAny(new[] { ',' }, 2)] + $", +{SelectedItems.Length - 1}";
+            }
             <span class="selected">
-                @string.Join(", " , SelectedItems)
+                @items
             </span>
         }
     }
@@ -27,29 +33,31 @@
     
     <span class="dropdown-click" onclick="@ToggleDropdown"></span>
     
-    <ul class="dropdown-items" data-shown="@_showDropdown">
-        @foreach (var item in Items)
-        {
-            @if (Multiselect)
+    <div>
+        <ul class="dropdown-items" data-shown="@_showDropdown">
+            @foreach (var item in Items)
             {
-                <li class="hack">
-                    <label>
-                        <input type="checkbox" value="@item" @onclick="() => OnToggleMultiSelect(item)">
-                        @item
-                    </label>
-                </li>
+                @if (Multiselect)
+                {
+                    <li class="hack">
+                        <label>
+                            <input type="checkbox" value="@item" @onclick="() => OnToggleMultiSelect(item)">
+                            @item
+                        </label>
+                    </li>
+                }
+                else
+                {
+                    <li class="also-hack">
+                        <label>
+                            <input type="radio" name="selectedItem" value="@item" class="dropdown-item" @onchange="OnSelectSingle">
+                            @item
+                        </label>
+                    </li>
+                }
             }
-            else
-            {
-                <li class="also-hack">
-                    <label>
-                        <input type="radio" name="selectedItem" value="@item" class="dropdown-item" @onchange="OnSelectSingle">
-                        @item
-                    </label>
-                </li>
-            }
-        }
-    </ul>
+        </ul>
+    </div>
 </div>
     
 
@@ -82,7 +90,7 @@
         SelectedItems = SelectedItems.Contains(item) ?
             SelectedItems.Where(x => x != item).ToArray() :
             SelectedItems.Append(item).ToArray();
-        
+
         StateHasChanged();
     }
     

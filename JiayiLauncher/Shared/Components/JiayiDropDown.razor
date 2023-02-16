@@ -1,5 +1,28 @@
 ﻿<div class="dropdown">
-    <span class="selected">@Name</span>
+    @if (Multiselect)
+    {
+        @if (SelectedItems.Length == 0)
+        {
+            <span class="selected" style="color: var(--text-grayed)">@Name</span>
+        }
+        else
+        {
+            <span class="selected">
+                @string.Join(", " , SelectedItems)
+            </span>
+        }
+    }
+    else
+    {
+        if (string.IsNullOrEmpty(SelectedItem))
+        {
+            <span class="selected" style="color: var(--text-grayed)">@Name</span>
+        }
+        else
+        {
+            <span class="selected">@SelectedItem</span>
+        }
+    }
     <span class="material-symbols-sharp">expand_more</span>
     
     <span class="dropdown-click" onclick="@ToggleDropdown"></span>
@@ -11,7 +34,7 @@
             {
                 <li class="hack">
                     <label>
-                        <input type="checkbox" value="@item">
+                        <input type="checkbox" value="@item" @onclick="() => OnToggleMultiSelect(item)">
                         @item
                     </label>
                 </li>
@@ -20,7 +43,7 @@
             {
                 <li class="also-hack">
                     <label>
-                        <input type="radio" name="selectedItem" value="@item" class="dropdown-item">
+                        <input type="radio" name="selectedItem" value="@item" class="dropdown-item" @onchange="OnSelectSingle">
                         @item
                     </label>
                 </li>
@@ -40,10 +63,10 @@
     [Parameter]
     public bool Multiselect { get; set; }
     
-    public string[] SelectedItems { get; set; } = Array.Empty<string>();
+    public string?[] SelectedItems { get; set; } = Array.Empty<string>();
     
     // if not multiselect
-    public string SelectedItem { get; set; }
+    public string? SelectedItem { get; set; } = "";
     
     private string _showDropdown = "false";
     private string _icon = "expand_more";
@@ -52,6 +75,20 @@
     {
         _showDropdown = _showDropdown == "false" ? "true" : "false";
         _icon = _icon == "expand_more" ? "expand_less" : "expand_more";
-        //StateHasChanged();
+    }
+    
+    private void OnToggleMultiSelect(string item)
+    {
+        SelectedItems = SelectedItems.Contains(item) ?
+            SelectedItems.Where(x => x != item).ToArray() :
+            SelectedItems.Append(item).ToArray();
+        
+        StateHasChanged();
+    }
+    
+    private void OnSelectSingle(ChangeEventArgs e)
+    {
+        SelectedItem = e.Value.ToString();
+        StateHasChanged();
     }
 }

@@ -1,5 +1,7 @@
 ﻿@page "/"
 @page "/Dashboard"
+@using System.Windows
+
 <h3>Good @DetermineTimeOfDay()</h3>
 
 <p>
@@ -8,13 +10,27 @@
 </p>
 
 @* test *@
+
+<h3>Components</h3>
+<h4>Drop down buttons</h4>
 <div style="width: 100%; display: flex; gap: 1rem;">
-    <JiayiDropDown Name="1 option dropdown" Items="@_radioItems" Multiselect="false" />
+    <JiayiDropDown Name="Single option dropdown" Items="@_radioItems" Multiselect="false" />
     <JiayiDropDown Name="Multiple option dropdown" Items="@_checkboxItems" Multiselect="true" />
 </div>
 
+<h4>Buttons</h4>
+
+<div style="width: 100%; display: flex; gap: 1rem; place-items: center;">
+    <JiayiButton OnClick="ButtonClicked">Show a message box</JiayiButton>
+    <JiayiButton Size="14px">Small button (does nothing)</JiayiButton>
+</div>
+
+<h4>Text boxes</h4>
+
+<JiayiTextBox Placeholder="Put some words here..." />
+
 @code {
-    private List<string> _radioItems = new() { "Radio button", "Choose only 1", "Third option" };
+    private List<string> _radioItems = new() { "Radio button", "Choose one only", "Third option" };
     private List<string> _checkboxItems = new() { "Checkbox", "Choose multiple", "Also a third option" };
     
     private string DetermineTimeOfDay()
@@ -25,5 +41,10 @@
             return "morning";
         }
         return hour is >= 12 and < 17 ? "afternoon" : "evening";
+    }
+    
+    private void ButtonClicked()
+    {
+        MessageBox.Show("Button clicked!");
     }
 }

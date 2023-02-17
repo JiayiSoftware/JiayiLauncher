@@ -23,8 +23,13 @@
 </div>
 
 <div class="edit" style="opacity: @_part2; display: @(_part2 == "0" ? "none" : "block")">
-    <JiayiTextBox Placeholder="Name your mod" />
-    <JiayiDropDown Items="@_items" Name="Supported versions" Multiselect="true" />
+    <div class="edit-name">
+        <p>Mod name</p>
+        <JiayiTextBox Style="width: 91%" Placeholder="My mod" />
+    </div>
+    
+    <JiayiDropDown Multiselect="true" Items="_items" Name="Supported versions" />
+    
     <JiayiButton>Save</JiayiButton>
 </div>
 

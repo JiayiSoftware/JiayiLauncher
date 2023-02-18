@@ -9,6 +9,9 @@
         <ApplicationIcon>icon.ico</ApplicationIcon>
         <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU;x64</Platforms>
+        <Company>Jiayi Software</Company>
+        <Product>Jiayi Launcher</Product>
+        <NeutralLanguage>en-US</NeutralLanguage>
     </PropertyGroup>
 
     <ItemGroup>

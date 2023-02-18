@@ -18,12 +18,23 @@
     <ul class="mod-list">
         @* mods here *@
     </ul>
-    <div class="add-new">
+    <div class="add-new" @ondragover="OnDragOver" @ondragleave="OnDragLeave">
         <div class="add-new-image"></div>
-        <p>
-            Drag mods, folders, or URLs here<br>
-            or click the plus icon to add mods
-        </p>
+        @if (_modsFolderExists)
+        {
+            <p>
+                Drag mods, folders, or URLs here<br>
+                or click the plus icon to add mods
+            </p>
+        }
+        else
+        {
+            <p>
+                You don't have a mods folder set up.<br><br>
+                Drag a folder here to make it work with Jiayi,<br>
+                or add mods to create a new folder.
+            </p>
+        }
     </div>
 </div>
 
@@ -34,10 +45,23 @@
 @code {
     [CascadingParameter]
     public IModalService Modal { get; set; } = default!;
+    
+    private bool _modsFolderExists = false;
 
     private async Task ShowAddMods()
     {
         var modal = Modal.Show<NewMod>("Add new mod");
         var result = await modal.Result;
     }
+
+    private void OnDragOver(DragEventArgs obj)
+    {
+        
+    }
+
+    private void OnDragLeave(DragEventArgs obj)
+    {
+        
+    }
+
 }

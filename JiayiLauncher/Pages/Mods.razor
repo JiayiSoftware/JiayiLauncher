@@ -1,4 +1,5 @@
 ﻿@using JiayiLauncher.Shared.Components.Mods
+@using System.Timers
 
 @page "/Mods"
 
@@ -18,7 +19,7 @@
     <ul class="mod-list">
         @* mods here *@
     </ul>
-    <div class="add-new" @ondragover="OnDragOver" @ondragleave="OnDragLeave">
+    <div class="add-new" @ondragover="OnDragOver" @ondrop="OnDrop" @ondragleave="OnDragLeave" data-hovered="@_hovered">
         <div class="add-new-image"></div>
         @if (_modsFolderExists)
         {
@@ -48,6 +49,23 @@
     
     private bool _modsFolderExists = false;
 
+    private string _hovered = "no";
+    private string _hoveringFile = string.Empty;
+
+    private Timer? _dragTimer;
+    
+    private Timer SetTimeout(Action callback, int timeout)
+    {
+        var timer = new Timer(timeout);
+        timer.AutoReset = false;
+        timer.Elapsed += (_, _) =>
+        {
+            callback();
+        };
+        timer.Start();
+        return timer;
+    }
+
     private async Task ShowAddMods()
     {
         var modal = Modal.Show<NewMod>("Add new mod");
@@ -56,12 +74,32 @@
 
     private void OnDragOver(DragEventArgs obj)
     {
+        var transfer = obj.DataTransfer;
+        if (transfer.Types.Length > 0 && transfer.Types.Contains("Files"))
+        {
+            _hovered = "yes";
+            _dragTimer?.Stop();
+        }
         
+        // oops
+        StateHasChanged();
     }
 
-    private void OnDragLeave(DragEventArgs obj)
+    private void OnDrop(DragEventArgs obj)
     {
+        _hovered = "no";
+        if (obj.DataTransfer.Files.Length > 0)
+        {
+            _hoveringFile = obj.DataTransfer.Files[0];
+            _dragTimer?.Stop();
+        }
         
+        StateHasChanged();
+    }
+
+    private void OnDragLeave()
+    {
+        _dragTimer = SetTimeout(() => { _hovered = "no"; StateHasChanged(); }, 25);
     }
 
 }

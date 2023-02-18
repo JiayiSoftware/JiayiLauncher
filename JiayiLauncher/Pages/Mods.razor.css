@@ -26,6 +26,23 @@
     height: auto;
     filter: brightness(0.5);
     text-align: center;
+    
+    transition: var(--transition-speed);
+}
+
+.add-new[data-hovered="yes"] {
+    filter: brightness(1);
+    border-width: 5px;
+    border-style: dashed;
+    border-color: var(--accent);
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.add-new[data-hovered="no"] {
+    filter: brightness(0.5);
+    border-width: 0;
+    border-style: none;
+    background-color: transparent;
 }
 
 .add-new-image {

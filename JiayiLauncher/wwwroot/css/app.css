@@ -72,6 +72,8 @@ main {
     top: 0.5rem;
 }
 
+/* dumb stupid hacks to get modals to look right */
+
 .modal {
     border-radius: 0;
     background-color: var(--background-primary);
@@ -91,7 +93,11 @@ main {
     margin-top: 0;
 }
 
-.modal span {
+.modal button span {
     color: white;
     margin-top: 1rem;
+}
+
+.modal div:first-child {
+    padding-bottom: 0;
 }

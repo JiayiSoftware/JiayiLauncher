@@ -19,7 +19,8 @@
     <ul class="mod-list">
         @* mods here *@
     </ul>
-    <div class="add-new" @ondragover="OnDragOver" @ondrop="OnDrop" @ondragleave="OnDragLeave" data-hovered="@_hovered">
+    <div class="add-new" @ondragover="OnDragOver" @ondrop="OnDrop" @ondragleave="OnDragLeave" data-hovered="@_hovered"
+         @ondragover:preventDefault @ondrop:preventDefault @ondragleave:preventDefault>
         <div class="add-new-image"></div>
         @if (_modsFolderExists)
         {
@@ -80,9 +81,6 @@
             _hovered = "yes";
             _dragTimer?.Stop();
         }
-        
-        // oops
-        StateHasChanged();
     }
 
     private void OnDrop(DragEventArgs obj)
@@ -93,13 +91,10 @@
             _hoveringFile = obj.DataTransfer.Files[0];
             _dragTimer?.Stop();
         }
-        
-        StateHasChanged();
     }
 
-    private void OnDragLeave()
+    private void OnDragLeave(DragEventArgs obj)
     {
-        _dragTimer = SetTimeout(() => { _hovered = "no"; StateHasChanged(); }, 25);
+        _dragTimer = SetTimeout(() => { _hovered = "no"; }, 25);
     }
-
 }

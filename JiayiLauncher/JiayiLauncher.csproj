@@ -26,4 +26,12 @@
       <None Include="wwwroot\images\drag.png" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Shared\Modals\NewMod.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Modals\NewMod.razor" />
+    </ItemGroup>
+
 </Project>

@@ -1,7 +1,8 @@
 ﻿@using Microsoft.Win32
 @using JiayiLauncher.Features.Mods
+@using System.IO
 
-<div class="select" style="opacity: @_part1; display: @(_part2 == "100%" ? "none" : "block")">
+<div class="select">
     <div class="select-file">
         <JiayiButton OnClick="SelectFile">Select a file</JiayiButton>
         <p>
@@ -22,27 +23,14 @@
     </div>
 </div>
 
-<div class="edit" style="opacity: @_part2; display: @(_part2 == "0" ? "none" : "block")">
-    <div class="edit-name">
-        <p>Mod name</p>
-        <JiayiTextBox Style="width: 91%" Placeholder="My mod" />
-    </div>
-    
-    <div class="edit-versions">
-        <p>Supported versions</p>
-        <JiayiDropDown Multiselect="true" Items="_items" Name="Select versions" />
-    </div>
-    
-    <JiayiButton>Save</JiayiButton>
-</div>
-
 @code {
-    private string _part1 = "100%";
-    private string _part2 = "0";
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
     
-    private List<string> _items = new() { "Any", "filling this list later" };
-
-    private void SelectFile()
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+    
+    private async Task SelectFile()
     {
         var dialog = new OpenFileDialog
         {
@@ -54,14 +42,15 @@
 
         if (dialog.ShowDialog() == true)
         {
-            Part2(dialog.FileName);
+            var path = dialog.FileName;
+            var name = Path.GetFileNameWithoutExtension(path);
+            var mod = new Mod(name, path);
+            
+            var parameters = new ModalParameters()
+                .Add(nameof(EditMod.Mod), mod);
+            
+            await Modal.CloseAsync();
+            ModalService.Show<EditMod>("Edit mod", parameters);
         }
-    }
-
-    private void Part2(string path)
-    {
-        _part1 = "0";
-        _part2 = "100%";
-        StateHasChanged();
     }
 }

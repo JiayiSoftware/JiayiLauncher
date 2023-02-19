@@ -1,0 +1,21 @@
+﻿@using JiayiLauncher.Features.Mods
+<div class="edit">
+    <div class="edit-name">
+        <p>Mod name</p>
+        <JiayiTextBox Placeholder="@Mod.Name" />
+    </div>
+    
+    <div class="edit-versions" style="margin-bottom: 1em">
+        <p>Supported versions</p>
+        <JiayiDropDown Multiselect="true" Items="_supportedVersions" Name="Select versions" />
+    </div>
+    
+    <JiayiButton>Save</JiayiButton>
+</div>
+
+@code {
+    private List<string> _supportedVersions = new() { "Any", "filling this list later" };
+    
+    [Parameter]
+    public Mod? Mod { get; set; }
+}

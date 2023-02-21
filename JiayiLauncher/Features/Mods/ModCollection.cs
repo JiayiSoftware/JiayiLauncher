@@ -10,6 +10,8 @@ public class ModCollection
 {
 	public string BasePath { get; set; } = string.Empty;
 	public List<Mod> Mods { get; set; } = new();
+	
+	public static ModCollection? Current { get; set; }
 
 	private ModCollection() // nobody should be calling this
 	{
@@ -56,5 +58,39 @@ public class ModCollection
 		}
 		
 		return collection;
+	}
+
+	public static void Load(string path)
+	{
+		var folders = Directory.GetDirectories(path);
+		
+		if (folders.Length == 0)
+		{
+			// empty directory
+			Current = Create(path);
+			return;
+		}
+		
+		var collection = new ModCollection
+		{
+			BasePath = path
+		};
+		
+		foreach (var folder in folders)
+		{
+			var files2 = Directory.GetFiles(folder);
+			if (files2.Length == 0) continue;
+
+			foreach (var file in files2)
+			{
+				if (!file.EndsWith(".mod")) continue;
+				var mod = Mod.LoadFromMetadata(file);
+				collection.Mods.Add(mod);
+				Debug.WriteLine($"Added mod {mod.Name} at {mod.Path}");
+			}
+		}
+		
+		Current = collection;
+		Debug.WriteLine($"Loaded mod collection at {path}");
 	}
 }

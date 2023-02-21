@@ -1,5 +1,7 @@
 ﻿@using JiayiLauncher.Shared.Components.Mods
 @using System.Timers
+@using Microsoft.Win32
+@using System.Diagnostics
 
 @page "/Mods"
 
@@ -89,6 +91,7 @@
         if (obj.DataTransfer.Files.Length > 0)
         {
             _hoveringFile = obj.DataTransfer.Files[0];
+            Debug.WriteLine(_hoveringFile);
             _dragTimer?.Stop();
         }
     }

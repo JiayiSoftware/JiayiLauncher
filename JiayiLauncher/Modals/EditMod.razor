@@ -1,12 +1,11 @@
 ﻿@using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
 @using System.IO
-@using System.Diagnostics
 
 <div class="edit">
     <div class="edit-name">
         <p>Mod name</p>
-        <JiayiTextBox Placeholder="@Mod.Name" @ref="_nameTextBox"/>
+        <JiayiTextBox Placeholder="@Mod!.Name" @ref="_nameTextBox"/>
     </div>
     
     <div class="edit-versions" style="margin-bottom: 1em">
@@ -16,14 +15,14 @@
     
     <JiayiButton OnClick="SaveClicked">Save</JiayiButton>
     
-    @if (JiayiSettings.Instance.ModCollectionPath == string.Empty)
+    @if (JiayiSettings.Instance!.ModCollectionPath == string.Empty)
     {
         <p>This will create a new mod collection in your documents.</p>
     }
 </div>
 
 @code {
-    private List<string> _supportedVersions = new() { "Any", "filling this list later" };
+    private readonly List<string> _supportedVersions = new() { "Any version", "filling this list later" };
     
     [Parameter]
     public Mod? Mod { get; set; }
@@ -37,6 +36,12 @@
     private async Task SaveClicked()
     {
         if (Mod == null) return;
+        
+        if (_versionsDropDown!.SelectedItems.Contains("Any version") && _versionsDropDown.SelectedItems.Count > 1)
+        {
+            _versionsDropDown.SelectedItems.Clear();
+            return;
+        }
 
         Mod.Name = _nameTextBox?.Value ?? Mod.Name;
         Mod.SupportedVersions = _versionsDropDown?.SelectedItems ?? Mod.SupportedVersions;

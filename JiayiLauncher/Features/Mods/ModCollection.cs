@@ -74,7 +74,7 @@ public class ModCollection
 			BasePath = path
 		};
 		
-		var files = Directory.GetFiles(Path.Combine(path, ".jiayi"), "*.mod", SearchOption.AllDirectories);
+		var files = Directory.GetFiles(Path.Combine(path, ".jiayi"), "*.jmod", SearchOption.AllDirectories);
 
 		foreach (var file in files)
 		{

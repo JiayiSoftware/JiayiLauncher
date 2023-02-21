@@ -20,9 +20,10 @@ public class Mod
 
 	public void SaveMetadata(ModCollection collection)
 	{
-		var filename = System.IO.Path.GetFileName(Path);
-		var modRelativePath = Path.Replace(collection.BasePath, string.Empty);
-		var metadataPath = System.IO.Path.Combine(collection.BasePath, ".jiayi", modRelativePath, filename + ".mod");
+		var filename = System.IO.Path.GetFileNameWithoutExtension(Path);
+		var directory = System.IO.Path.GetDirectoryName(Path);
+		var modRelativePath = directory!.Replace(collection.BasePath, string.Empty);
+		var metadataPath = System.IO.Path.Combine(collection.BasePath, ".jiayi", modRelativePath, filename + ".jmod");
 		Directory.CreateDirectory(System.IO.Path.GetDirectoryName(metadataPath)!);
 		File.WriteAllText(metadataPath, $"{Name}\nat {Path}\nWorks on {string.Join(", ", SupportedVersions)}");
 	}

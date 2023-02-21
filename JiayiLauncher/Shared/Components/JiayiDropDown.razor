@@ -35,7 +35,7 @@
     
     <div>
         <ul class="dropdown-items" data-shown="@_showDropdown">
-            @foreach (var item in Items)
+            @foreach (var item in Items!)
             {
                 @if (Multiselect)
                 {
@@ -63,10 +63,10 @@
 
 @code {
     [Parameter]
-    public string Name { get; set; }
+    public string? Name { get; set; }
     
     [Parameter]
-    public List<string> Items { get; set; }
+    public List<string>? Items { get; set; }
     
     [Parameter]
     public bool Multiselect { get; set; }
@@ -96,7 +96,7 @@
     
     private void OnSelectSingle(ChangeEventArgs e)
     {
-        SelectedItem = e.Value.ToString();
+        SelectedItem = e.Value!.ToString();
         StateHasChanged();
     }
 }

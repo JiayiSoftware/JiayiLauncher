@@ -22,7 +22,7 @@ public class JiayiSettings
 	{
 		Directory.CreateDirectory(Path.GetDirectoryName(_settingsPath)!);
 		using var stream = File.OpenWrite(_settingsPath);
-		JsonSerializer.Serialize(stream, this, new JsonSerializerOptions { IgnoreReadOnlyFields = true });
+		JsonSerializer.Serialize(stream, this);
 		Debug.WriteLine("Saved settings.");
 	}
 
@@ -50,5 +50,6 @@ public class JiayiSettings
 		}
 		
 		Instance = settings;
+		Debug.WriteLine("Loaded settings.");
 	}
 }

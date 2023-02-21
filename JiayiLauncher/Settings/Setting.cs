@@ -16,4 +16,14 @@ public class Setting<T>
 		Description = description;
 		Value = value;
 	}
+	
+	public static bool operator ==(Setting<T> setting, T value)
+	{
+		return setting.Value.Equals(value);
+	}
+	
+	public static bool operator !=(Setting<T> setting, T value)
+	{
+		return !setting.Value.Equals(value);
+	}
 }

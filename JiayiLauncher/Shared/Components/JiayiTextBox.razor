@@ -1,4 +1,4 @@
-﻿<input type="text" class="textbox" placeholder="@Placeholder" style="@Style">
+﻿<input type="text" class="textbox" placeholder="@Placeholder" style="@Style" @bind="Value">
 
 @code {
     [Parameter]
@@ -6,4 +6,6 @@
     
     [Parameter]
     public string? Style { get; set; }
+    
+    public string? Value { get; set; }
 }

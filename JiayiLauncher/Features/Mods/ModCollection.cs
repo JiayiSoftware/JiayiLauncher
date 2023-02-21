@@ -7,10 +7,10 @@ namespace JiayiLauncher.Features.Mods;
 
 public class ModCollection
 {
-	public string BasePath { get; set; } = string.Empty;
-	public List<Mod> Mods { get; set; } = new();
+	public string BasePath { get; private init; } = string.Empty;
+	public List<Mod> Mods { get; } = new();
 	
-	public static ModCollection? Current { get; set; }
+	public static ModCollection? Current { get; private set; }
 
 	private ModCollection() // nobody should be calling this
 	{
@@ -23,7 +23,8 @@ public class ModCollection
 		// if it's empty, we'll create a new mod collection
 		
 		Directory.CreateDirectory(path);
-		Directory.CreateDirectory(Path.Combine(path, ".jiayi"));
+		var jiayiFolder = Directory.CreateDirectory(Path.Combine(path, ".jiayi"));
+		jiayiFolder.Attributes |= FileAttributes.Hidden;
 		File.WriteAllText(Path.Combine(path, ".jiayi", "README.txt"), 
 			"This folder contains metadata for all mods in this collection. Don't mess with it unless you know what you're doing.");
 		
@@ -47,11 +48,9 @@ public class ModCollection
 		foreach (var file in files)
 		{
 			// the user can give it a good name and supported versions later
-			var name = Path.GetFileName(file);
-			name = name[..^4];
+			var name = Path.GetFileName(file)[..^4];
 			var mod = new Mod(name, file);
-			mod.SaveMetadata(collection);
-			collection.Mods.Add(mod);
+			collection.Add(mod);
 			Debug.WriteLine($"Added mod {mod.Name} at {mod.Path}");
 		}
 
@@ -60,6 +59,7 @@ public class ModCollection
 
 	public static void Load(string path)
 	{
+		Directory.CreateDirectory(path);
 		var folders = Directory.GetDirectories(path);
 		
 		if (folders.Length == 0)
@@ -86,5 +86,21 @@ public class ModCollection
 
 		Current = collection;
 		Debug.WriteLine($"Loaded mod collection at {path}");
+	}
+
+	public void Add(Mod mod)
+	{
+		Mods.Add(mod);
+		
+		// copy the mod to the collection directory if it's not already there
+		if (!mod.Path.StartsWith(BasePath))
+		{
+			var filename = Path.GetFileName(mod.Path);
+			var newPath = Path.Combine(BasePath, filename);
+			File.Copy(mod.Path, newPath);
+			mod.Path = newPath;
+		}
+		
+		mod.SaveMetadata(this);
 	}
 }

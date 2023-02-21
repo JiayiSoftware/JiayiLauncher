@@ -1,16 +1,25 @@
 ﻿@using JiayiLauncher.Features.Mods
+@using JiayiLauncher.Settings
+@using System.IO
+@using System.Diagnostics
+
 <div class="edit">
     <div class="edit-name">
         <p>Mod name</p>
-        <JiayiTextBox Placeholder="@Mod.Name" />
+        <JiayiTextBox Placeholder="@Mod.Name" @ref="_nameTextBox"/>
     </div>
     
     <div class="edit-versions" style="margin-bottom: 1em">
         <p>Supported versions</p>
-        <JiayiDropDown Multiselect="true" Items="_supportedVersions" Name="Select versions" />
+        <JiayiDropDown Multiselect="true" Items="_supportedVersions" Name="Select versions" @ref="_versionsDropDown" />
     </div>
     
-    <JiayiButton>Save</JiayiButton>
+    <JiayiButton OnClick="SaveClicked">Save</JiayiButton>
+    
+    @if (JiayiSettings.Instance.ModCollectionPath == string.Empty)
+    {
+        <p>This will create a new mod collection in your documents.</p>
+    }
 </div>
 
 @code {
@@ -18,4 +27,31 @@
     
     [Parameter]
     public Mod? Mod { get; set; }
+    
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+    
+    private JiayiTextBox? _nameTextBox;
+    private JiayiDropDown? _versionsDropDown;
+
+    private async Task SaveClicked()
+    {
+        if (Mod == null) return;
+
+        Mod.Name = _nameTextBox?.Value ?? Mod.Name;
+        Mod.SupportedVersions = _versionsDropDown?.SelectedItems ?? Mod.SupportedVersions;
+        
+        if (JiayiSettings.Instance!.ModCollectionPath == string.Empty)
+        {
+            JiayiSettings.Instance.ModCollectionPath.Value = 
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Jiayi Mods");
+            JiayiSettings.Instance.Save();
+            ModCollection.Load(JiayiSettings.Instance.ModCollectionPath.Value);
+        }
+        
+        ModCollection.Current!.Add(Mod);
+        // TODO: update mods page
+        await Modal.CloseAsync();
+    }
+
 }

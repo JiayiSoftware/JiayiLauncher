@@ -23,6 +23,7 @@ public class Mod
 		var filename = System.IO.Path.GetFileName(Path);
 		var modRelativePath = Path.Replace(collection.BasePath, string.Empty);
 		var metadataPath = System.IO.Path.Combine(collection.BasePath, ".jiayi", modRelativePath, filename + ".mod");
+		Directory.CreateDirectory(System.IO.Path.GetDirectoryName(metadataPath)!);
 		File.WriteAllText(metadataPath, $"{Name}\nat {Path}\nWorks on {string.Join(", ", SupportedVersions)}");
 	}
 

@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using Blazored.Modal;
+using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Settings;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,6 +28,13 @@ public partial class MainWindow
 		services.AddBlazorWebViewDeveloperTools();
 #endif
 		Resources.Add("services", services.BuildServiceProvider());
+		
+		// startup stuff
+		JiayiSettings.Load();
+		if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
+		{
+			ModCollection.Load(JiayiSettings.Instance!.ModCollectionPath.Value);
+		}
 	}
 
 	private void DarkTitlebar(object? sender, EventArgs e)

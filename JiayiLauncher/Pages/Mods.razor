@@ -1,7 +1,7 @@
 ﻿@using JiayiLauncher.Shared.Components.Mods
-@using System.Timers
-@using Microsoft.Win32
 @using System.Diagnostics
+@using System.Timers
+@using JiayiLauncher.Settings
 
 @page "/Mods"
 
@@ -24,7 +24,7 @@
     <div class="add-new" @ondragover="OnDragOver" @ondrop="OnDrop" @ondragleave="OnDragLeave" data-hovered="@_hovered"
          @ondragover:preventDefault @ondrop:preventDefault @ondragleave:preventDefault>
         <div class="add-new-image"></div>
-        @if (_modsFolderExists)
+        @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
         {
             <p>
                 Drag mods, folders, or URLs here<br>
@@ -49,8 +49,6 @@
 @code {
     [CascadingParameter]
     public IModalService Modal { get; set; } = default!;
-    
-    private bool _modsFolderExists = false;
 
     private string _hovered = "no";
     private string _hoveringFile = string.Empty;

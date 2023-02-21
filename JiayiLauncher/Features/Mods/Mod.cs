@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -25,15 +26,23 @@ public class Mod
 		File.WriteAllText(metadataPath, $"{Name}\nat {Path}\nWorks on {string.Join(", ", SupportedVersions)}");
 	}
 
-	public static Mod LoadFromMetadata(string path)
+	public static Mod? LoadFromMetadata(string path)
 	{
-		if (!File.Exists(path)) return null!;
-		
-		var lines = File.ReadAllLines(path);
-		var name = lines[0];
-		var modPath = lines[1].Replace("at ", string.Empty);
-		var supportedVersions = lines[2].Replace("Works on ", string.Empty).Split(", ").ToList();
-		
-		return new Mod(name, modPath, supportedVersions);
+		if (!File.Exists(path)) return null;
+
+		try
+		{
+			var lines = File.ReadAllLines(path);
+			var name = lines[0];
+			var modPath = lines[1].Replace("at ", string.Empty);
+			var supportedVersions = lines[2].Replace("Works on ", string.Empty).Split(", ").ToList();
+			
+			return new Mod(name, modPath, supportedVersions);
+		}
+		catch
+		{
+			Debug.WriteLine("Failed to load mod metadata.");
+			return null;
+		}
 	}
 }

@@ -16,7 +16,12 @@ public class JiayiSettings
 		Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "settings.json");
 	
 	// general settings
-	public Setting<string> ModCollectionPath { get; set; } = new("Mod Collection Path", "General", "The path to your mod collection.", string.Empty);
+	public Setting<string> ModCollectionPath { get; set; } = new("Mod folder path", "General", 
+	"The path to your mod folder. If there is no folder at this path, Jiayi will create one.", string.Empty);
+
+	// network settings
+	public Setting<bool> EnforceHttps { get; set; } = new("Enforce HTTPS", "Network", 
+		"Only allow secure connections for mod downloads.", true);
 
 	public void Save()
 	{

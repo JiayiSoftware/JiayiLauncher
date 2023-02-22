@@ -2,6 +2,7 @@
 @using System.Diagnostics
 @using System.Timers
 @using JiayiLauncher.Settings
+@using JiayiLauncher.Utils
 
 @page "/Mods"
 
@@ -54,18 +55,6 @@
     private string _hoveringFile = string.Empty;
 
     private Timer? _dragTimer;
-    
-    private Timer SetTimeout(Action callback, int timeout)
-    {
-        var timer = new Timer(timeout);
-        timer.AutoReset = false;
-        timer.Elapsed += (_, _) =>
-        {
-            callback();
-        };
-        timer.Start();
-        return timer;
-    }
 
     private async Task ShowAddMods()
     {
@@ -96,6 +85,6 @@
 
     private void OnDragLeave(DragEventArgs obj)
     {
-        _dragTimer = SetTimeout(() => { _hovered = "no"; }, 25);
+        _dragTimer = Common.SetTimeout(() => { _hovered = "no"; }, 25);
     }
 }

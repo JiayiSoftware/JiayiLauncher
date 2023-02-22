@@ -33,7 +33,7 @@ public partial class MainWindow
 		JiayiSettings.Load();
 		if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
 		{
-			ModCollection.Load(JiayiSettings.Instance!.ModCollectionPath.Value);
+			ModCollection.Load(JiayiSettings.Instance.ModCollectionPath.Value);
 		}
 	}
 

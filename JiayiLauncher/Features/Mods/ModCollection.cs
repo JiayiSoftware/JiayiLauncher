@@ -93,7 +93,7 @@ public class ModCollection
 		Mods.Add(mod);
 		
 		// copy the mod to the collection directory if it's not already there
-		if (!mod.Path.StartsWith(BasePath))
+		if (!mod.FromInternet && !mod.Path.StartsWith(BasePath))
 		{
 			var filename = Path.GetFileName(mod.Path);
 			var newPath = Path.Combine(BasePath, filename);
@@ -102,5 +102,16 @@ public class ModCollection
 		}
 		
 		mod.SaveMetadata(this);
+	}
+	
+	public bool HasMod(string path)
+	{
+		return Mods.Any(mod => mod.Path == path);
+	}
+	
+	public string GetRelativePath(string path)
+	{
+		var filename = Path.GetFileName(path);
+		return Path.Combine(BasePath, filename);
 	}
 }

@@ -10,6 +10,7 @@ public class Mod
 	public string Name { get; set; }
 	public string Path { get; set; }
 	public List<string> SupportedVersions { get; set; }
+	public bool FromInternet => Path.StartsWith("http");
 
 	public Mod(string name, string path, List<string>? supportedVersions = null)
 	{
@@ -20,10 +21,22 @@ public class Mod
 
 	public void SaveMetadata(ModCollection collection)
 	{
-		var filename = System.IO.Path.GetFileNameWithoutExtension(Path);
-		var directory = System.IO.Path.GetDirectoryName(Path);
-		var modRelativePath = directory!.Replace(collection.BasePath, string.Empty);
-		var metadataPath = System.IO.Path.Combine(collection.BasePath, ".jiayi", modRelativePath, filename + ".jmod");
+		string metadataPath;
+		
+		if (FromInternet)
+		{
+			// make sure the name doesn't contain any illegal characters
+			var safeName = string.Join("", Name.Split(System.IO.Path.GetInvalidFileNameChars()));
+			metadataPath = System.IO.Path.Combine(collection.BasePath, ".jiayi", safeName + ".jmod");
+		}
+		else
+		{
+			var filename = System.IO.Path.GetFileNameWithoutExtension(Path);
+			var directory = System.IO.Path.GetDirectoryName(Path);
+			var modRelativePath = directory!.Replace(collection.BasePath, string.Empty);
+			metadataPath = System.IO.Path.Combine(collection.BasePath, ".jiayi", modRelativePath, filename + ".jmod");
+		}
+		
 		Directory.CreateDirectory(System.IO.Path.GetDirectoryName(metadataPath)!);
 		File.WriteAllText(metadataPath, $"{Name}\nat {Path}\nWorks on {string.Join(", ", SupportedVersions)}");
 	}

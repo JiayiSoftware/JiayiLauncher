@@ -65,7 +65,8 @@
     private void OnDragOver(DragEventArgs obj)
     {
         var transfer = obj.DataTransfer;
-        if (transfer.Types.Length > 0 && transfer.Types.Contains("Files"))
+        if (transfer.Types.Length <= 0) return;
+        if (transfer.Types.Contains("Files") || transfer.Types.Contains("text/uri-list"))
         {
             _hovered = "yes";
             _dragTimer?.Stop();
@@ -75,6 +76,18 @@
     private void OnDrop(DragEventArgs obj)
     {
         _hovered = "no";
+
+        foreach (var type in obj.DataTransfer.Types)
+        {
+            Debug.WriteLine(type);
+        }
+
+        foreach (var item in obj.DataTransfer.Items)
+        {
+            Debug.WriteLine(item.Kind);
+            Debug.WriteLine(item.Type);
+        }
+        
         if (obj.DataTransfer.Files.Length > 0)
         {
             _hoveringFile = obj.DataTransfer.Files[0];
@@ -85,6 +98,6 @@
 
     private void OnDragLeave(DragEventArgs obj)
     {
-        _dragTimer = Common.SetTimeout(() => { _hovered = "no"; }, 25);
+        _dragTimer = Timeout.Set(() => { _hovered = "no"; }, 25);
     }
 }

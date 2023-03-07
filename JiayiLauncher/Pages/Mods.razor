@@ -22,25 +22,27 @@
     <ul class="mod-list">
         @* mods here *@
     </ul>
-    <div class="add-new" @ondragover="OnDragOver" @ondrop="OnDrop" @ondragleave="OnDragLeave" data-hovered="@_hovered"
-         @ondragover:preventDefault @ondrop:preventDefault @ondragleave:preventDefault>
-        <div class="add-new-image"></div>
+    <p class="add-new" @ondragover="OnDragOver" @ondrop="OnDrop" @ondragleave="OnDragLeave" data-hovered="@_hovered"
+       @ondragover:preventDefault @ondrop:preventDefault @ondragleave:preventDefault>
+        <img src="images/drag.png" alt="Drag and drop icon" style="width: 150px;">
         @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
         {
-            <p>
+            <label>
                 Drag mods, folders, or URLs here<br>
                 or click the plus icon to add mods
-            </p>
+                <InputFile OnChange="FileDropped" multiple/>
+            </label>
         }
         else
         {
-            <p>
+            <label>
                 You don't have a mods folder set up.<br><br>
                 Drag a folder here to make it work with Jiayi,<br>
                 or add mods to create a new folder.
-            </p>
+                <InputFile OnChange="FileDropped" multiple/>
+            </label>
         }
-    </div>
+    </p>
 </div>
 
 <button class="add-button" @onclick="@ShowAddMods">
@@ -100,4 +102,10 @@
     {
         _dragTimer = Timeout.Set(() => { _hovered = "no"; }, 25);
     }
+
+    private void FileDropped(InputFileChangeEventArgs obj)
+    {
+        throw new NotImplementedException();
+    }
+
 }

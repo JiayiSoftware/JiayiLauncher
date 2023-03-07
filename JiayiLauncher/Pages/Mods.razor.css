@@ -45,14 +45,6 @@
     background-color: transparent;
 }
 
-.add-new-image {
-    width: 150px;
-    height: 150px;
-    text-align: center;
-    background-image: url("images/drag.png");
-    background-size: cover;
-}
-
 .add-button {
     z-index: 2;
     position: fixed;

@@ -30,6 +30,10 @@
     transition: var(--transition-speed);
 }
 
+input:first-child {
+    display: none;
+}
+
 .add-new[data-hovered="yes"] {
     filter: brightness(1);
     border-width: 5px;
@@ -43,6 +47,11 @@
     border-width: 0;
     border-style: none;
     background-color: transparent;
+}
+
+.add-new > label::before {
+    content: url("images/drag.png");
+    display: block;
 }
 
 .add-button {

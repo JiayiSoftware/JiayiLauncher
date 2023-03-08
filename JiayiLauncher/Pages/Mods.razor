@@ -1,6 +1,7 @@
 ﻿@using JiayiLauncher.Shared.Components.Mods
 @using System.Diagnostics
 @using System.Timers
+@using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
 @using JiayiLauncher.Utils
 
@@ -22,15 +23,14 @@
     <ul class="mod-list">
         @* mods here *@
     </ul>
-    <p class="add-new" @ondragover="OnDragOver" @ondrop="OnDrop" @ondragleave="OnDragLeave" data-hovered="@_hovered"
-       @ondragover:preventDefault @ondrop:preventDefault @ondragleave:preventDefault>
-        <img src="images/drag.png" alt="Drag and drop icon" style="width: 150px;">
+    <p class="add-new" @ondragover="OnDragOver" @ondragleave="OnDragLeave" data-hovered="@_hovered"
+       @ondragover:preventDefault @ondragleave:preventDefault>
         @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
         {
             <label>
                 Drag mods, folders, or URLs here<br>
                 or click the plus icon to add mods
-                <InputFile OnChange="FileDropped" multiple/>
+                <InputFile OnChange="FileDropped" multiple style="display: none" />
             </label>
         }
         else
@@ -39,7 +39,7 @@
                 You don't have a mods folder set up.<br><br>
                 Drag a folder here to make it work with Jiayi,<br>
                 or add mods to create a new folder.
-                <InputFile OnChange="FileDropped" multiple/>
+                <InputFile OnChange="FileDropped" multiple style="display: none" />
             </label>
         }
     </p>
@@ -75,29 +75,6 @@
         }
     }
 
-    private void OnDrop(DragEventArgs obj)
-    {
-        _hovered = "no";
-
-        foreach (var type in obj.DataTransfer.Types)
-        {
-            Debug.WriteLine(type);
-        }
-
-        foreach (var item in obj.DataTransfer.Items)
-        {
-            Debug.WriteLine(item.Kind);
-            Debug.WriteLine(item.Type);
-        }
-        
-        if (obj.DataTransfer.Files.Length > 0)
-        {
-            _hoveringFile = obj.DataTransfer.Files[0];
-            Debug.WriteLine(_hoveringFile);
-            _dragTimer?.Stop();
-        }
-    }
-
     private void OnDragLeave(DragEventArgs obj)
     {
         _dragTimer = Timeout.Set(() => { _hovered = "no"; }, 25);
@@ -105,7 +82,13 @@
 
     private void FileDropped(InputFileChangeEventArgs obj)
     {
-        throw new NotImplementedException();
+        _hovered = "no";
+        
+        foreach (var file in obj.GetMultipleFiles())
+        {
+            Debug.WriteLine(file.Name);
+            
+            
+        }
     }
-
 }

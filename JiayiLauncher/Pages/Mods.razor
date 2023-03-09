@@ -23,23 +23,22 @@
     <ul class="mod-list">
         @* mods here *@
     </ul>
-    <p class="add-new" @ondragover="OnDragOver" @ondragleave="OnDragLeave" data-hovered="@_hovered"
-       @ondragover:preventDefault @ondragleave:preventDefault>
+    <p class="add-new" @ondragenter="OnDragEnter" @ondragleave="OnDragLeave" @ondragover="OnDragEnter" data-hovered="@_hovered">
         @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
         {
-            <label>
+            <label class="drag-area">
                 Drag mods, folders, or URLs here<br>
                 or click the plus icon to add mods
-                <InputFile OnChange="FileDropped" multiple style="display: none" @onclick:preventDefault @ondrop:preventDefault/>
+                <InputFile OnChange="FileDropped" multiple @onclick:preventDefault />
             </label>
         }
         else
         {
-            <label>
+            <label class="drag-area">
                 You don't have a mods folder set up.<br><br>
                 Drag a folder here to make it work with Jiayi,<br>
                 or add mods to create a new folder.
-                <InputFile OnChange="FileDropped" multiple style="display: none" @onclick:preventDefault @ondrop:preventDefault />
+                <InputFile OnChange="FileDropped" multiple @onclick:preventDefault />
             </label>
         }
     </p>
@@ -64,20 +63,21 @@
         var result = await modal.Result;
     }
 
-    private void OnDragOver(DragEventArgs obj)
+    private void OnDragEnter(DragEventArgs obj)
     {
         var transfer = obj.DataTransfer;
         if (transfer.Types.Length <= 0) return;
         if (transfer.Types.Contains("Files") || transfer.Types.Contains("text/uri-list"))
         {
             _hovered = "yes";
-            _dragTimer?.Stop();
+            //_dragTimer?.Stop();
         }
     }
 
     private void OnDragLeave(DragEventArgs obj)
     {
-        _dragTimer = Timeout.Set(() => { _hovered = "no"; }, 25);
+        //_dragTimer = Timeout.Set(() => { _hovered = "no"; }, 25);
+        _hovered = "no";
     }
 
     private void FileDropped(InputFileChangeEventArgs obj)

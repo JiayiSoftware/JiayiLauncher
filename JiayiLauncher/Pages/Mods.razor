@@ -1,9 +1,6 @@
 ﻿@using JiayiLauncher.Shared.Components.Mods
 @using System.Diagnostics
-@using System.Timers
-@using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
-@using JiayiLauncher.Utils
 
 @page "/Mods"
 
@@ -53,9 +50,6 @@
     public IModalService Modal { get; set; } = default!;
 
     private string _hovered = "no";
-    private string _hoveringFile = string.Empty;
-
-    private Timer? _dragTimer;
 
     private async Task ShowAddMods()
     {
@@ -70,13 +64,11 @@
         if (transfer.Types.Contains("Files") || transfer.Types.Contains("text/uri-list"))
         {
             _hovered = "yes";
-            //_dragTimer?.Stop();
         }
     }
 
     private void OnDragLeave(DragEventArgs obj)
     {
-        //_dragTimer = Timeout.Set(() => { _hovered = "no"; }, 25);
         _hovered = "no";
     }
 

@@ -1,5 +1,7 @@
 ﻿@using JiayiLauncher.Shared.Components.Mods
 @using System.Diagnostics
+@using System.IO
+@using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
 
 @page "/Mods"
@@ -47,13 +49,13 @@
 
 @code {
     [CascadingParameter]
-    public IModalService Modal { get; set; } = default!;
+    public IModalService ModalService { get; set; } = default!;
 
     private string _hovered = "no";
 
     private async Task ShowAddMods()
     {
-        var modal = Modal.Show<NewMod>("Add new mod");
+        var modal = ModalService.Show<NewMod>("Add new mod");
         var result = await modal.Result;
     }
 
@@ -72,15 +74,27 @@
         _hovered = "no";
     }
 
-    private void FileDropped(InputFileChangeEventArgs obj)
+    private async Task FileDropped(InputFileChangeEventArgs obj)
     {
         _hovered = "no";
         
-        foreach (var file in obj.GetMultipleFiles())
+        var files = obj.GetMultipleFiles();
+
+        if (files.Count == 1)
         {
-            Debug.WriteLine(file.Name);
+            var file = files[0];
+            var tempPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", file.Name);
+
+            await using var fs = new FileStream(tempPath, FileMode.Create);
+            await file.OpenReadStream(524288000L).CopyToAsync(fs);
             
+            var mod = new Mod(Path.GetFileNameWithoutExtension(file.Name), tempPath);
             
+            var parameters = new ModalParameters()
+                .Add(nameof(EditMod.Mod), mod);
+            
+            ModalService.Show<EditMod>("Edit mod", parameters);
         }
     }
 }

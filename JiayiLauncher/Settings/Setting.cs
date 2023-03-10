@@ -8,15 +8,17 @@ public class Setting<T>
 	[JsonIgnore] public string Name { get; }
 	[JsonIgnore] public string Category { get; }
 	[JsonIgnore] public string Description { get; }
+	[JsonIgnore] public string Dependency { get; }
 	
 	public T Value { get; set; }
 	
-	public Setting(string name, string category, string description, T value)
+	public Setting(string name, string category, string description, T value, string dependency = "")
 	{
 		Name = name;
 		Category = category;
 		Description = description;
 		Value = value;
+		Dependency = dependency;
 	}
 	
 	public static bool operator ==(Setting<T> setting, T value)

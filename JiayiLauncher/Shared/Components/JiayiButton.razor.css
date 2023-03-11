@@ -13,6 +13,8 @@
 
     box-shadow: var(--shadow);
     filter: none;
+    
+    cursor: pointer;
 
     transition: var(--transition-speed);
 }

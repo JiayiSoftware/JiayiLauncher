@@ -1,0 +1,32 @@
+﻿.mod-background {
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    border-top: 5px solid var(--accent);
+    max-width: 185px;
+    padding: 0.5rem;
+}
+
+.mod-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.35rem;
+}
+
+.mod-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mod-version {
+    font-size: 0.8rem;
+    color: gray;
+    margin-top: 0.2rem;
+}
+
+.material-symbols-sharp {
+    transition: var(--transition-speed);
+}

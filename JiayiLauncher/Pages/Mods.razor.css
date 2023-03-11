@@ -8,6 +8,13 @@
     width: 100%;
 }
 
+.mod-list {
+    display: grid;
+    padding: 0;
+    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+    grid-gap: 10px;
+}
+
 .separator {
     border-right: 1px solid rgb(50, 50, 50);
     

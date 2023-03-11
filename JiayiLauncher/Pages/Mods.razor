@@ -20,7 +20,13 @@
 
 <div class="mods"> 
     <ul class="mod-list">
-        @* mods here *@
+        @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
+        {
+            foreach (var mod in ModCollection.Current!.Mods)
+            {
+                <JiayiModCard Mod="@mod" />
+            }
+        }
     </ul>
     <p class="add-new" @ondragenter="OnDragEnter" @ondragleave="OnDragLeave" @ondragover="OnDragEnter" data-hovered="@_hovered">
         @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)

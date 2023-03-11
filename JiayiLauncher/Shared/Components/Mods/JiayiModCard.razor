@@ -1,19 +1,46 @@
 ﻿@using JiayiLauncher.Features.Mods
 
-<div class="mod-background">
+<div class="mod-background" @onmouseenter="MouseOver" @onmouseleave="MouseLeave">
     <div class="mod-header">
-        <h5>@Mod.Name</h5>
-        @* some icons *@
+        <strong>@Mod.Name</strong>
+        
+        @if (Mod.FromInternet)
+        {
+            <span class="material-symbols-sharp">cloud_download</span>
+        }
+        else
+        {
+            <span class="material-symbols-sharp">hard_drive_2</span>
+        }
     </div>
-    <p class="mod-version">Works on @Mod.SupportedVersions</p>
-    <JiayiButton OnClick="LaunchClicked">Launch</JiayiButton>
+    <p class="mod-version">works on @(string.Join("," ,Mod.SupportedVersions))</p>
+    <div class="mod-controls">
+        <JiayiButton OnClick="LaunchClicked" Size="16px" Style="padding: 0.5rem 1.5rem;">Launch</JiayiButton>
+        <span class="material-symbols-sharp" style="cursor: pointer; opacity: @_controlsOpacity;" title="Edit mod">edit</span>
+        <span class="material-symbols-sharp" style="color: darkred; cursor: pointer; opacity: @_controlsOpacity;" title="Delete mod (irreversible)">delete</span>
+    </div>
 </div>
 
 @code {
     [Parameter] public Mod Mod { get; set; }
+    
+    private string _controlsOpacity = "0";
 
     private void LaunchClicked()
     {
         
     }
+
+    private void MouseOver()
+    {
+        _controlsOpacity = "100%";
+        StateHasChanged();
+    }
+
+    private void MouseLeave()
+    {
+        _controlsOpacity = "0";
+        StateHasChanged();
+    }
+
 }

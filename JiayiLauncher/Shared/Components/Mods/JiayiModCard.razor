@@ -1,0 +1,19 @@
+﻿@using JiayiLauncher.Features.Mods
+
+<div class="mod-background">
+    <div class="mod-header">
+        <h5>@Mod.Name</h5>
+        @* some icons *@
+    </div>
+    <p class="mod-version">Works on @Mod.SupportedVersions</p>
+    <JiayiButton OnClick="LaunchClicked">Launch</JiayiButton>
+</div>
+
+@code {
+    [Parameter] public Mod Mod { get; set; }
+
+    private void LaunchClicked()
+    {
+        
+    }
+}

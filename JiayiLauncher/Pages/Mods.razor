@@ -29,7 +29,7 @@
         }
     </ul>
     <p class="add-new" @ondragenter="OnDragEnter" @ondragleave="OnDragLeave" @ondragover="OnDragEnter" data-hovered="@_hovered">
-        @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
+        @if (JiayiSettings.Instance.ModCollectionPath != string.Empty)
         {
             <label class="drag-area">
                 Drag mods, folders, or URLs here<br>
@@ -62,7 +62,7 @@
     private async Task ShowAddMods()
     {
         var modal = ModalService.Show<NewMod>("Add new mod");
-        var result = await modal.Result;
+        await modal.Result;
     }
 
     private void OnDragEnter(DragEventArgs obj)

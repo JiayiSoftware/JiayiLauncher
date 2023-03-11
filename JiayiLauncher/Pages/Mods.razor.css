@@ -12,7 +12,7 @@
     display: grid;
     padding: 0;
     grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
-    grid-gap: 10px;
+    grid-gap: 9px;
 }
 
 .separator {

@@ -1,6 +1,9 @@
-﻿@using JiayiLauncher.Features.Mods
+﻿@inject NavigationManager Navigation
+
+@using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
 @using System.IO
+@using JiayiLauncher.Pages
 
 <div class="edit">
     <div class="edit-name">
@@ -42,6 +45,11 @@
             _versionsDropDown.SelectedItems.Clear();
             return;
         }
+        
+        if (_versionsDropDown.SelectedItems.Count == 0)
+        {
+            _versionsDropDown.SelectedItems.Add("Any version");
+        }
 
         Mod.Name = _nameTextBox?.Value ?? Mod.Name;
         Mod.SupportedVersions = _versionsDropDown?.SelectedItems ?? Mod.SupportedVersions;
@@ -55,8 +63,10 @@
         }
         
         ModCollection.Current!.Add(Mod);
-        // TODO: update mods page
         await Modal.CloseAsync();
+        
+        // update mods page
+        Navigation.NavigateTo("/mods", true);
     }
 
 }

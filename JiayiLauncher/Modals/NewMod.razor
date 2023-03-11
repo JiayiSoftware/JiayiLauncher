@@ -61,7 +61,7 @@
             var parameters = new ModalParameters()
                 .Add(nameof(EditMod.Mod), mod);
             
-            await Modal.CloseAsync();
+            await Modal.CloseAsync(ModalResult.Ok());
             ModalService.Show<EditMod>("Edit mod", parameters);
         }
     }

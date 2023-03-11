@@ -60,4 +60,25 @@ public class Mod
 			return null;
 		}
 	}
+	
+	public void DeleteMetadata(ModCollection collection)
+	{
+		string metadataPath;
+		
+		if (FromInternet)
+		{
+			// make sure the name doesn't contain any illegal characters
+			var safeName = string.Join("", Name.Split(System.IO.Path.GetInvalidFileNameChars()));
+			metadataPath = System.IO.Path.Combine(collection.BasePath, ".jiayi", safeName + ".jmod");
+		}
+		else
+		{
+			var filename = System.IO.Path.GetFileNameWithoutExtension(Path);
+			var directory = System.IO.Path.GetDirectoryName(Path);
+			var modRelativePath = directory!.Replace(collection.BasePath, string.Empty);
+			metadataPath = System.IO.Path.Combine(collection.BasePath, ".jiayi", modRelativePath, filename + ".jmod");
+		}
+		
+		File.Delete(metadataPath);
+	}
 }

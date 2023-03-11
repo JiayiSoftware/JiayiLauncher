@@ -90,6 +90,14 @@ public class ModCollection
 
 	public void Add(Mod mod)
 	{
+		// mods get replaced if they already exist
+		if (HasMod(mod.Path))
+		{
+			var oldMod = Mods.First(m => m.Path == mod.Path);
+			Mods.Remove(oldMod);
+			oldMod.DeleteMetadata(this);
+		}
+		
 		Mods.Add(mod);
 		
 		// copy the mod to the collection directory if it's not already there

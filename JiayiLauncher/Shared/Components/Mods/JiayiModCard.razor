@@ -16,13 +16,16 @@
     <p class="mod-version">works on @(string.Join("," ,Mod.SupportedVersions))</p>
     <div class="mod-controls">
         <JiayiButton OnClick="LaunchClicked" Size="16px" Style="padding: 0.5rem 1.5rem;">Launch</JiayiButton>
-        <span class="material-symbols-sharp" style="cursor: pointer; opacity: @_controlsOpacity;" title="Edit mod">edit</span>
+        <span class="material-symbols-sharp" style="cursor: pointer; opacity: @_controlsOpacity;" title="Edit mod" @onclick="EditClicked">edit</span>
         <span class="material-symbols-sharp" style="color: darkred; cursor: pointer; opacity: @_controlsOpacity;" title="Delete mod (irreversible)">delete</span>
     </div>
 </div>
 
 @code {
     [Parameter] public Mod Mod { get; set; }
+    
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
     
     private string _controlsOpacity = "0";
 
@@ -41,6 +44,14 @@
     {
         _controlsOpacity = "0";
         StateHasChanged();
+    }
+
+    private void EditClicked()
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(EditMod.Mod), Mod);
+            
+        ModalService.Show<EditMod>("Edit mod", parameters);
     }
 
 }

@@ -1,4 +1,4 @@
-﻿<input type="text" class="textbox" placeholder="@Placeholder" style="@Style" @bind="Value">
+﻿<input type="text" class="textbox" placeholder="@Placeholder" style="@Style" @oninput="OnChange">
 
 @code {
     [Parameter]
@@ -7,5 +7,16 @@
     [Parameter]
     public string? Style { get; set; }
     
+    [Parameter]
+    public EventCallback Changed { get; set; }
+    
     public string? Value { get; set; }
+
+    private void OnChange(ChangeEventArgs obj)
+    {
+        if (obj.Value is not string value) return;
+        Value = value;
+        Changed.InvokeAsync();
+    }
+
 }

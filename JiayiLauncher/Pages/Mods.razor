@@ -9,13 +9,13 @@
 <h3>Mods</h3>
 
 <div class="find-tools">
-    <JiayiTextBox Placeholder="Search mods"></JiayiTextBox>
+    <JiayiTextBox Placeholder="Search mods" @ref="_searchBox" Changed="StateHasChanged" />
     
     <div class="separator"></div>
 
-    <JiayiFilter Checked="true">All</JiayiFilter>
-    <JiayiFilter>Locally stored</JiayiFilter>
-    <JiayiFilter>Online</JiayiFilter>
+    <JiayiFilter Checked="true" @ref="_allFilter">All</JiayiFilter>
+    <JiayiFilter @ref="_localFilter">Locally stored</JiayiFilter>
+    <JiayiFilter @ref="_onlineFilter">Online</JiayiFilter>
 </div>
 
 <div class="mods"> 
@@ -24,7 +24,17 @@
         {
             foreach (var mod in ModCollection.Current!.Mods)
             {
-                <JiayiModCard Mod="@mod" />
+                @if (_searchBox != null && _searchBox.Value != string.Empty)
+                {
+                    if (mod.Name.ToLower().Contains(_searchBox.Value.ToLower()))
+                    {
+                        <JiayiModCard Mod="@mod" />
+                    }
+                }
+                else
+                {
+                    <JiayiModCard Mod="@mod" />
+                }
             }
         }
     </ul>
@@ -58,6 +68,12 @@
     public IModalService ModalService { get; set; } = default!;
 
     private string _hovered = "no";
+    
+    // refs
+    private JiayiTextBox? _searchBox;
+    private JiayiFilter? _allFilter;
+    private JiayiFilter? _localFilter;
+    private JiayiFilter? _onlineFilter;
 
     private async Task ShowAddMods()
     {
@@ -103,4 +119,5 @@
             ModalService.Show<EditMod>("Edit mod", parameters);
         }
     }
+
 }

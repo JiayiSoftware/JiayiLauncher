@@ -23,7 +23,6 @@
       <None Update="Resources\Images\drag.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Include="wwwroot\images\drag.png" />
     </ItemGroup>
 
     <ItemGroup>

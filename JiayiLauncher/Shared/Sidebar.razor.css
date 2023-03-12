@@ -20,6 +20,7 @@
 
 .sidebar-item {
     width: 100%;
+    overflow: hidden;
 }
 
 .sidebar-item:last-child {

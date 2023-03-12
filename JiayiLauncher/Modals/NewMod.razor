@@ -49,12 +49,6 @@
         {
             var path = dialog.FileName;
             var name = Path.GetFileNameWithoutExtension(path);
-
-            if (ModCollection.Current!.HasMod(ModCollection.Current.GetRelativePath(path)))
-            {
-                Modal.SetTitle("Add a UNIQUE mod");
-                return;
-            }
             
             var mod = new Mod(name, path);
             

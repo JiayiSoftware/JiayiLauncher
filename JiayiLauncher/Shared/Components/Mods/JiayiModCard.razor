@@ -6,11 +6,11 @@
         
         @if (Mod.FromInternet)
         {
-            <span class="material-symbols-sharp">cloud_download</span>
+            <span class="material-symbols-sharp" title="Downloaded from the web">cloud_download</span>
         }
         else
         {
-            <span class="material-symbols-sharp">hard_drive_2</span>
+            <span class="material-symbols-sharp" title="Stored locally">hard_drive_2</span>
         }
     </div>
     <p class="mod-version">works on @(string.Join("," ,Mod.SupportedVersions))</p>

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using JiayiLauncher.Settings;
 
 namespace JiayiLauncher.Features.Mods;
 
@@ -53,6 +54,9 @@ public class ModCollection
 			collection.Add(mod);
 			Debug.WriteLine($"Added mod {mod.Name} at {mod.Path}");
 		}
+		
+		// set path in settings
+		JiayiSettings.Instance!.ModCollectionPath.Value = path;
 
 		return collection;
 	}

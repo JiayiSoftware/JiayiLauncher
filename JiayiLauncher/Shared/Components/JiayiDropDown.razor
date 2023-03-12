@@ -33,31 +33,29 @@
     
     <span class="dropdown-click" onclick="@ToggleDropdown"></span>
     
-    <div>
-        <ul class="dropdown-items" data-shown="@_showDropdown">
-            @foreach (var item in Items!)
+    <ul class="dropdown-items" data-shown="@_showDropdown">
+        @foreach (var item in Items!)
+        {
+            @if (Multiselect)
             {
-                @if (Multiselect)
-                {
-                    <li class="hack">
-                        <label>
-                            <input type="checkbox" value="@item" @onclick="() => OnToggleMultiSelect(item)">
-                            @item
-                        </label>
-                    </li>
-                }
-                else
-                {
-                    <li class="also-hack">
-                        <label>
-                            <input type="radio" name="selectedItem" value="@item" class="dropdown-item" @onchange="OnSelectSingle">
-                            @item
-                        </label>
-                    </li>
-                }
+                <li class="hack">
+                    <label>
+                        <input type="checkbox" value="@item" @onclick="() => OnToggleMultiSelect(item)">
+                        @item
+                    </label>
+                </li>
             }
-        </ul>
-    </div>
+            else
+            {
+                <li class="also-hack">
+                    <label>
+                        <input type="radio" name="selectedItem" value="@item" class="dropdown-item" @onchange="OnSelectSingle">
+                        @item
+                    </label>
+                </li>
+            }
+        }
+    </ul>
 </div>
     
 

@@ -24,7 +24,7 @@
         {
             foreach (var mod in ModCollection.Current!.Mods)
             {
-                @if (_searchBox != null && _searchBox.Value != string.Empty)
+                @if (_searchBox is {Value: not null or "" })
                 {
                     if (mod.Name.ToLower().Contains(_searchBox.Value.ToLower()))
                     {

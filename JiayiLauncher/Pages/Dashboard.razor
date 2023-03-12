@@ -1,6 +1,7 @@
 ﻿@page "/"
 @page "/Dashboard"
-@using System.Windows
+
+@using JiayiLauncher.Modals
 
 <h3>Good @DetermineTimeOfDay()</h3>
 
@@ -31,6 +32,9 @@
 <JiayiTextBox Placeholder="Put some words here..." />
 
 @code {
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+    
     private List<string> _radioItems = new() { "Radio button", "Choose one only", "Third option" };
     private List<string> _checkboxItems = new() { "Checkbox", "Choose multiple", "Also a third option" };
     private List<string> _aLotOfItems = new() { "Bunch of items", "Testing truncating selected items", "Third option", "Fourth option", "Fifth option", "Sixth option", "Seventh option", "Eighth option", "Ninth option", "Tenth option", "Eleventh option", "Twelfth option", "Thirteenth option", "Fourteenth option", "Fifteenth option", "Sixteenth option", "Seventeenth option", "Eighteenth option", "Nineteenth option", "Twentieth option" };
@@ -47,6 +51,17 @@
     
     private void ButtonClicked()
     {
-        MessageBox.Show("Button clicked!");
+        var options = new List<(string, EventCallback)>
+        {
+            ("Yes", EventCallback.Empty),
+            ("No", EventCallback.Empty),
+            ("Maybe", EventCallback.Empty)
+        };
+
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), "This is a test message box.");
+        
+        ModalService.Show<MessageBox>("Test message box", parameters);
     }
 }

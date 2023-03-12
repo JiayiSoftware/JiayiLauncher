@@ -99,7 +99,7 @@ public class ModCollection
 		{
 			var oldMod = Mods.First(m => m.Path == mod.Path);
 			Mods.Remove(oldMod);
-			oldMod.DeleteMetadata(this);
+			oldMod.Delete(this);
 		}
 		
 		Mods.Add(mod);

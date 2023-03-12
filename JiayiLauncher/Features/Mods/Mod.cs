@@ -61,7 +61,7 @@ public class Mod
 		}
 	}
 	
-	public void DeleteMetadata(ModCollection collection)
+	public void Delete(ModCollection collection)
 	{
 		string metadataPath;
 		
@@ -77,8 +77,12 @@ public class Mod
 			var directory = System.IO.Path.GetDirectoryName(Path);
 			var modRelativePath = directory!.Replace(collection.BasePath, string.Empty);
 			metadataPath = System.IO.Path.Combine(collection.BasePath, ".jiayi", modRelativePath, filename + ".jmod");
+			
+			// also
+			File.Delete(Path);
 		}
 		
 		File.Delete(metadataPath);
+		collection.Mods.Remove(this);
 	}
 }

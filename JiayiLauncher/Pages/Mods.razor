@@ -118,7 +118,9 @@
             var parameters = new ModalParameters()
                 .Add(nameof(EditMod.Mod), mod);
             
-            ModalService.Show<EditMod>("Edit mod", parameters);
+            var modal = ModalService.Show<EditMod>("Edit mod", parameters);
+            await modal.Result;
+            File.Delete(tempPath);
         }
     }
 

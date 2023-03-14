@@ -18,10 +18,10 @@ public static class Log
 
 	public static void CreateLog()
 	{
-		Directory.CreateDirectory(_logPath);
+		Directory.CreateDirectory(Path.Combine(_logPath, "Previous"));
 		
 		if (File.Exists(Path.Combine(_logPath, "Current.log")))
-			File.Move(Path.Combine(_logPath, "Current.log"), Path.Combine(_logPath, $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log"));
+			File.Move(Path.Combine(_logPath, "Current.log"), Path.Combine(_logPath, "Previous", $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log"));
 	}
 
 	public static void Write(object sender, string message, LogLevel level = LogLevel.Info)

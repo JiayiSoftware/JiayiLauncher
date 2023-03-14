@@ -24,7 +24,7 @@
 
 <div style="width: 100%; display: flex; gap: 1rem; place-items: center;">
     <JiayiButton OnClick="ButtonClicked">Show a message box</JiayiButton>
-    <JiayiButton Size="14px">Small button (does nothing)</JiayiButton>
+    <JiayiButton Size="14px" OnClick="Crash">Crash Jiayi</JiayiButton>
 </div>
 
 <h4>Text boxes</h4>
@@ -64,4 +64,10 @@
         
         ModalService.Show<MessageBox>("Test message box", parameters);
     }
+
+    private void Crash()
+    {
+        throw new Exception("This is a test crash.");
+    }
+
 }

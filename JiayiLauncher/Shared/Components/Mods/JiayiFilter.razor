@@ -1,5 +1,5 @@
 ﻿<label class="filter" style="font-size: @Size; background-color:  @_color">
-    <input type="radio" name="filter" class="check" @onchange="OnChange">
+    <input type="checkbox" class="check" @onchange="OnChange">
     @ChildContent
 </label>
 
@@ -20,8 +20,7 @@
 
     private void OnChange(ChangeEventArgs e)
     {
-        // why is it "on" or "off" instead of a bool
-        Checked = (string)e.Value! == "on";
+        Checked = (bool)(e.Value ?? false);
         Changed.InvokeAsync();
     }
 

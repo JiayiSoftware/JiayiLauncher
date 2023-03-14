@@ -1,4 +1,4 @@
-﻿<button class="button" @onclick="OnClick" style="font-size: @Size; @Style">@ChildContent</button>
+﻿<button class="button" @onclick="OnClick" style="font-size: @Size; @Style" disabled=@Disabled>@ChildContent</button>
 
 @code {
     [Parameter]
@@ -12,4 +12,7 @@
     
     [Parameter]
     public string? Style { get; set; }
+    
+    [Parameter]
+    public bool Disabled { get; set; }
 }

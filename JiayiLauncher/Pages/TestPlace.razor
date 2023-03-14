@@ -1,0 +1,63 @@
+﻿@page "/TestPlace"
+@using JiayiLauncher.Features.Bridge
+
+<h3>Components</h3>
+<h4>Drop down buttons</h4>
+<div style="width: 100%; display: flex; gap: 1rem;">
+    <JiayiDropDown Name="Single option dropdown" Items="@_radioItems" />
+    <JiayiDropDown Name="Multiple option dropdown" Items="@_checkboxItems" Multiselect="true" />
+    <JiayiDropDown Name="A lot of items" Items="@_aLotOfItems" Multiselect="true" />
+</div>
+
+<h4>Buttons</h4>
+
+<div style="width: 100%; display: flex; gap: 1rem; place-items: center;">
+    <JiayiButton OnClick="ButtonClicked">Show a message box</JiayiButton>
+    <JiayiButton Size="14px" OnClick="Crash">Crash Jiayi</JiayiButton>
+    <JiayiButton OnClick="MinecraftVersion">@_minecraftVersion</JiayiButton>
+    <JiayiButton OnClick="Minecraft.Open">Open Minecraft</JiayiButton>
+</div>
+
+<h4>Text boxes</h4>
+
+<JiayiTextBox Placeholder="Put some words here..." />
+
+@code {
+
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+
+    private string _minecraftVersion = "Minecraft version";
+
+    private List<string> _radioItems = new() { "Radio button", "Choose one only", "Third option" };
+    private List<string> _checkboxItems = new() { "Checkbox", "Choose multiple", "Also a third option" };
+    private List<string> _aLotOfItems = new() { "Bunch of items", "Testing truncating selected items", "Third option", "Fourth option", "Fifth option", "Sixth option", "Seventh option", "Eighth option", "Ninth option", "Tenth option", "Eleventh option", "Twelfth option", "Thirteenth option", "Fourteenth option", "Fifteenth option", "Sixteenth option", "Seventeenth option", "Eighteenth option", "Nineteenth option", "Twentieth option" };
+
+    private void ButtonClicked()
+    {
+        var options = new List<(string, EventCallback)>
+        {
+            ("Yes", EventCallback.Empty),
+            ("No", EventCallback.Empty),
+            ("Maybe", EventCallback.Empty)
+        };
+
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), "This is a test message box.");
+
+        ModalService.Show<MessageBox>("Test message box", parameters);
+    }
+
+    private void Crash()
+    {
+        throw new Exception("This is a test crash.");
+    }
+
+    private async Task MinecraftVersion()
+    {
+        var version = await Minecraft.GetVersion();
+        _minecraftVersion = version;
+    }
+
+}

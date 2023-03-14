@@ -34,10 +34,12 @@
 }
 
 .button:disabled {
-    filter: grayscale(100%);
+    filter: grayscale(50%);
     color: darkgray;
     
     background-color: var(--accent);
     transform: none;
     box-shadow: var(--shadow);
+    
+    cursor: not-allowed;
 }

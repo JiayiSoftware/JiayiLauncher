@@ -15,23 +15,26 @@
     </div>
     <p class="mod-version">works on @(string.Join("," ,Mod.SupportedVersions))</p>
     <div class="mod-controls">
-        <JiayiButton OnClick="LaunchClicked" Size="16px" Style="padding: 0.5rem 1.5rem;">Launch</JiayiButton>
+        <JiayiButton OnClick="LaunchClicked" Size="16px" Style="padding: 0.5rem 1.5rem;" @ref="_launchButton">Launch</JiayiButton>
         <span class="material-symbols-sharp" style="cursor: pointer; opacity: @_controlsOpacity;" title="Edit mod" @onclick="EditClicked">edit</span>
         <span class="material-symbols-sharp" style="color: darkred; cursor: pointer; opacity: @_controlsOpacity;" title="Delete mod (irreversible)" @onclick="DeleteClicked">delete</span>
     </div>
 </div>
 
 @code {
-    [Parameter] public Mod Mod { get; set; }
-    
+    [Parameter] public Mod Mod { get; set; } = null!;
+
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
     
     private string _controlsOpacity = "0";
 
+    private JiayiButton? _launchButton;
+
     private void LaunchClicked()
     {
-        
+        _launchButton!.Disabled = true;
+        StateHasChanged();
     }
 
     private void MouseOver()

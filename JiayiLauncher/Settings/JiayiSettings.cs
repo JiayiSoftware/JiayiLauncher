@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Settings;
 
@@ -62,7 +62,7 @@ public class JiayiSettings
 		Directory.CreateDirectory(Path.GetDirectoryName(_settingsPath)!);
 		using var stream = File.OpenWrite(_settingsPath);
 		JsonSerializer.Serialize(stream, this);
-		Debug.WriteLine("Saved settings.");
+		Log.Write(this, "Saved settings.");
 	}
 
 	public static void Load()
@@ -74,7 +74,7 @@ public class JiayiSettings
 		{
 			Instance = new JiayiSettings();
 			Instance.Save();
-			Debug.WriteLine("Created new settings file.");
+			Log.Write(Instance, "Created new settings file.");
 			return;
 		}
 
@@ -85,12 +85,12 @@ public class JiayiSettings
 			Instance = new JiayiSettings();
 			Instance.Save();
 			// TODO: show a notification
-			Debug.WriteLine("Failed to load settings. Created new settings file.");
+			Log.Write(Instance, "Settings file was corrupted or invalid. Created new settings file.");
 			return;
 		}
 		
 		Instance = settings;
-		Debug.WriteLine("Loaded settings.");
+		Log.Write(Instance, "Loaded settings.");
 	}
 	
 	public Setting<T> GetSetting<T>(string name)

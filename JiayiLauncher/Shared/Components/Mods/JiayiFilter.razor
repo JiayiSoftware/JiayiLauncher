@@ -1,5 +1,5 @@
 ﻿<label class="filter" style="font-size: @Size; background-color:  @_color">
-    <input type="checkbox" class="check" @bind="Checked">
+    <input type="radio" name="filter" class="check" @onchange="OnChange">
     @ChildContent
 </label>
 
@@ -13,5 +13,16 @@
     [Parameter]
     public bool Checked { get; set; }
     
+    [Parameter]
+    public EventCallback Changed { get; set; }
+    
     private string _color => Checked ? "var(--accent)" : "var(--background-secondary)";
+
+    private void OnChange(ChangeEventArgs e)
+    {
+        // why is it "on" or "off" instead of a bool
+        Checked = (string)e.Value! == "on";
+        Changed.InvokeAsync();
+    }
+
 }

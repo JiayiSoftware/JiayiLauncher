@@ -1,5 +1,4 @@
 ﻿@using JiayiLauncher.Shared.Components.Mods
-@using System.Diagnostics
 @using System.IO
 @using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
@@ -12,17 +11,21 @@
     <JiayiTextBox Placeholder="Search mods" @ref="_searchBox" Changed="StateHasChanged" />
     
     <div class="separator"></div>
-
-    <JiayiFilter Checked="true" @ref="_allFilter">All</JiayiFilter>
-    <JiayiFilter @ref="_localFilter">Locally stored</JiayiFilter>
-    <JiayiFilter @ref="_onlineFilter">Online</JiayiFilter>
+    
+    <p>Filter by:</p>
+    <JiayiFilter @ref="_localFilter" Changed="StateHasChanged">Locally stored</JiayiFilter>
+    <JiayiFilter @ref="_onlineFilter" Changed="StateHasChanged">From the web</JiayiFilter>
 </div>
 
 <div class="mods"> 
     <ul class="mod-list">
         @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
         {
-            foreach (var mod in ModCollection.Current!.Mods)
+            var mods = ModCollection.Current!.Mods;
+            mods = _localFilter?.Checked == true ? mods.Where(x => !x.FromInternet).ToList() : mods;
+            if (_onlineFilter!.Checked)
+                mods.AddRange(ModCollection.Current.Mods.Where(x => x.FromInternet));
+            foreach (var mod in mods)
             {
                 @if (_searchBox is {Value: not null or "" })
                 {
@@ -71,7 +74,6 @@
     
     // refs
     private JiayiTextBox? _searchBox;
-    private JiayiFilter? _allFilter;
     private JiayiFilter? _localFilter;
     private JiayiFilter? _onlineFilter;
 

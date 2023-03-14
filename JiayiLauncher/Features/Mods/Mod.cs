@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Mods;
 
@@ -56,7 +57,7 @@ public class Mod
 		}
 		catch
 		{
-			Debug.WriteLine("Failed to load mod metadata.");
+			Log.Write("Mod.LoadFromMetadata()", $"Failed to load mod metadata from {path}!", Log.LogLevel.Error);
 			return null;
 		}
 	}

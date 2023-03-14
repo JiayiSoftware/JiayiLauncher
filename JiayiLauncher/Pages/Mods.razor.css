@@ -19,7 +19,7 @@
 .separator {
     border-right: 1px solid rgb(50, 50, 50);
     
-    height: auto;
+    height: 1.5rem;
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
 }

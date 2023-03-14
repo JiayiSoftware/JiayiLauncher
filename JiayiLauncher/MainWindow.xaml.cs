@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Interop;
 using Blazored.Modal;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Settings;
+using JiayiLauncher.Utils;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,8 +21,18 @@ public partial class MainWindow
 	public MainWindow()
 	{
 		InitializeComponent();
+		Log.CreateLog();
 		
 		SourceInitialized += DarkTitlebar;
+		
+		AppDomain.CurrentDomain.UnhandledException += (_, args) =>
+		{
+			Log.Write(args.ExceptionObject, ((Exception)args.ExceptionObject).ToString(), Log.LogLevel.Error);
+			MessageBox.Show(
+				"Jiayi has ran into a problem and needs to close. Please send your log file to the nearest developer.",
+				"Crash", MessageBoxButton.OK, MessageBoxImage.Error
+			);
+		};
 
 		var services = new ServiceCollection();
 		services.AddWpfBlazorWebView();
@@ -41,9 +54,11 @@ public partial class MainWindow
 	{
 		var windowHelper = new WindowInteropHelper(this);
 		var value = true;
-		DwmSetWindowAttribute(windowHelper.Handle, 20, ref value, Marshal.SizeOf(value));
+		var result = DwmSetWindowAttribute(windowHelper.Handle, 20, ref value, Marshal.SizeOf(value));
+		if (result != 0) Log.Write(this, $"Failed to set dark titlebar. Error code: {result}", Log.LogLevel.Warning);
 	}
 
+	// ReSharper disable once UnusedMember.Local
 	private void ChangeColor(object? sender, BlazorWebViewInitializedEventArgs e)
 	{
 		e.WebView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);

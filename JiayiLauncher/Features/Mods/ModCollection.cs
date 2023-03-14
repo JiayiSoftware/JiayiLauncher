@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using JiayiLauncher.Settings;
+using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Mods;
 
@@ -52,7 +53,7 @@ public class ModCollection
 			var name = Path.GetFileName(file)[..^4];
 			var mod = new Mod(name, file);
 			collection.Add(mod);
-			Debug.WriteLine($"Added mod {mod.Name} at {mod.Path}");
+			Log.Write("ModCollection", $"Added mod {mod.Name} at {mod.Path}");
 		}
 		
 		// set path in settings
@@ -85,11 +86,11 @@ public class ModCollection
 			var mod = Mod.LoadFromMetadata(file);
 			if (mod == null) continue;
 			collection.Mods.Add(mod);
-			Debug.WriteLine($"Added mod {mod.Name} at {mod.Path}");
+			Log.Write("ModCollection", $"Loaded mod {mod.Name} at {mod.Path}");
 		}
 
 		Current = collection;
-		Debug.WriteLine($"Loaded mod collection at {path}");
+		Log.Write("ModCollection", $"Loaded mod collection at {path}");
 	}
 
 	public void Add(Mod mod)
@@ -119,11 +120,5 @@ public class ModCollection
 	public bool HasMod(string path)
 	{
 		return Mods.Any(mod => mod.Path == path);
-	}
-	
-	public string GetRelativePath(string path)
-	{
-		var filename = Path.GetFileName(path);
-		return Path.Combine(BasePath, filename);
 	}
 }

@@ -72,7 +72,7 @@
         await Modal.CloseAsync();
         
         // update mods page
-        Navigation.NavigateTo("/mods", true);
+        Mods.Instance.Refresh();
     }
 
 }

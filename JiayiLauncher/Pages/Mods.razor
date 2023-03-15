@@ -83,6 +83,8 @@
 @code {
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
+    
+    public static Mods Instance { get; set; }
 
     private string _hovered = "no";
     
@@ -90,6 +92,13 @@
     private JiayiTextBox? _searchBox;
     private JiayiFilter? _localFilter;
     private JiayiFilter? _onlineFilter;
+    
+    protected override void OnInitialized()
+    {
+        Instance = this;
+    }
+    
+    public void Refresh() => StateHasChanged();
 
     private async Task ShowAddMods()
     {

@@ -17,11 +17,24 @@ public class Mod
 	{
 		Name = name;
 		Path = path;
-		SupportedVersions = supportedVersions ?? new List<string> { "Any" };
+		SupportedVersions = supportedVersions ?? new List<string> { "any version" };
+		
+		// just in case
+		if (SupportedVersions.Contains("Any version"))
+		{
+			SupportedVersions.Remove("Any version");
+			SupportedVersions.Add("any version");
+		}
 	}
 
 	public void SaveMetadata(ModCollection collection)
 	{
+		if (SupportedVersions.Contains("Any version"))
+		{
+			SupportedVersions.Remove("Any version");
+			SupportedVersions.Add("any version");
+		}
+
 		string metadataPath;
 		
 		if (FromInternet)

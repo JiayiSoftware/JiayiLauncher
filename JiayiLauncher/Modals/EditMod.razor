@@ -3,6 +3,7 @@
 @using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
 @using System.IO
+@using JiayiLauncher.Features.Bridge
 @using JiayiLauncher.Pages
 
 <div class="edit">
@@ -25,7 +26,7 @@
 </div>
 
 @code {
-    private readonly List<string> _supportedVersions = new() { "Any version", "filling this list later" };
+    private readonly List<string> _supportedVersions = new() { "Any version" };
     
     [Parameter]
     public Mod? Mod { get; set; }
@@ -35,6 +36,11 @@
     
     private JiayiTextBox? _nameTextBox;
     private JiayiDropDown? _versionsDropDown;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _supportedVersions.AddRange(await Minecraft.GetVersionList());
+    }
 
     private async Task SaveClicked()
     {

@@ -13,7 +13,7 @@
             <span class="material-symbols-sharp" title="Stored locally">hard_drive_2</span>
         }
     </div>
-    <p class="mod-version">works on @(string.Join("," ,Mod.SupportedVersions))</p>
+    <p class="mod-version">Works on @(string.Join(", ", Mod.SupportedVersions))</p>
     <div class="mod-controls">
         <JiayiButton OnClick="LaunchClicked" Size="16px" Style="padding: 0.5rem 1.5rem;" @ref="_launchButton">Launch</JiayiButton>
         <span class="material-symbols-sharp" style="cursor: pointer; opacity: @_controlsOpacity;" title="Edit mod" @onclick="EditClicked">edit</span>

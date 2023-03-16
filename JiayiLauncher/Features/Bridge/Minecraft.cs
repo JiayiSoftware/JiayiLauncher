@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.System;
+using JiayiLauncher.Features.Mods;
 
 namespace JiayiLauncher.Features.Bridge;
 
 public static class Minecraft
 {
 	private static List<string> _versions = new();
+	
+	public static List<Mod> ModsLoaded { get; } = new();
 
 	public static async Task<List<string>> GetVersionList()
 	{
@@ -16,6 +19,7 @@ public static class Minecraft
 
 		using var client = new HttpClient();
 
+		// thanks bionic
 		var response =
 			await client.GetAsync("https://raw.githubusercontent.com/BionicBen/ProjectStarFiles/main/MinecraftVersions.txt");
 		

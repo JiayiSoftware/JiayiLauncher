@@ -34,8 +34,4 @@
       <AdditionalFiles Include="Modals\NewMod.razor" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Features\Launch" />
-    </ItemGroup>
-
 </Project>

@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
 using JiayiLauncher.Features.Bridge;
 using JiayiLauncher.Features.Mods;
@@ -24,15 +23,73 @@ public static class Launcher
 	public static bool Launching { get; private set; }
 	
 	public static int LaunchProgress { get; private set; }
-	
-	private static async Task<bool> CheckVersion(Mod mod)
-	{
-		var version = await Minecraft.GetVersion();
-		return mod.SupportedVersions.Contains(version) || mod.SupportedVersions.Contains("any version");
-	}
 
-	private static async Task<LaunchResult> DownloadMod(Mod mod)
+	// the big method
+	public static async Task<LaunchResult> Launch(Mod mod)
 	{
-		throw new NotImplementedException();
+		if (Launching) return LaunchResult.AlreadyRunning;
+		Launching = true;
+		
+		LaunchProgress = 0;
+		
+		var supported = await Minecraft.ModSupported(mod);
+		if (!supported) return LaunchResult.VersionMismatch;
+		
+		LaunchProgress += 10;
+		
+		await Minecraft.Open();
+		
+		LaunchProgress += 5;
+
+		string path;
+		
+		// if this is a web mod, download it in the meantime
+		if (mod.FromInternet)
+		{
+			var downloadedPath = await Downloader.DownloadMod(mod);
+			if (downloadedPath == string.Empty) return LaunchResult.DownloadFailed;
+			path = downloadedPath;
+			
+			LaunchProgress += 30;
+		}
+		else
+		{
+			path = mod.Path;
+			LaunchProgress += 35;
+		}
+
+		// wait for the game to load
+		await Minecraft.WaitForModules();
+		
+		LaunchProgress += 25;
+		
+		if (!Minecraft.IsOpen()) return LaunchResult.GameNotFound;
+		
+		// determine whether this is an internal or external mod
+		bool external;
+		if (path.EndsWith(".exe")) external = true;
+		else if (path.EndsWith(".dll")) external = false;
+		else return LaunchResult.ModNotFound;
+
+		if (external)
+		{
+			if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(path)).Length != 0)
+				return LaunchResult.AlreadyRunning;
+
+			Process.Start(path);
+			LaunchProgress += 30;
+			Launching = false;
+			Minecraft.ModsLoaded.Add(mod);
+			return LaunchResult.Success;
+		}
+
+		// else
+		if (Injector.IsInjected(path)) return LaunchResult.AlreadyRunning;
+			
+		var injected = await Injector.Inject(path);
+		LaunchProgress += 30;
+		Launching = false;
+		if (injected) Minecraft.ModsLoaded.Add(mod);
+		return injected ? LaunchResult.Success : LaunchResult.InjectionFailed;
 	}
 }

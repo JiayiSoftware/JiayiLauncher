@@ -80,21 +80,30 @@
 
         try
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
             using var client = new HttpClient();
 
-            using var response = await client.SendAsync(request);
+            // we only need headers
+            using var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
 
             if (response.IsSuccessStatusCode)
             {
-                var name = response.Content.Headers.ContentDisposition?.FileName ?? "Unknown";
-                var mod = new Mod(Path.GetFileNameWithoutExtension(name), url);
+                if (response.Content.Headers.ContentDisposition != null)
+                {
+                    if (response.Content.Headers.ContentDisposition is not { FileName: { } })
+                    {
+                        _urlStatus = "Invalid link";
+                        return;
+                    }
+                    
+                    var name = response.Content.Headers.ContentDisposition.FileName;
+                    var mod = new Mod(Path.GetFileNameWithoutExtension(name), url);
 
-                var parameters = new ModalParameters()
-                    .Add(nameof(EditMod.Mod), mod);
+                    var parameters = new ModalParameters()
+                        .Add(nameof(EditMod.Mod), mod);
 
-                await Modal.CloseAsync();
-                ModalService.Show<EditMod>("Edit mod", parameters);
+                    await Modal.CloseAsync();
+                    ModalService.Show<EditMod>("Edit mod", parameters);
+                }
             }
             else
             {

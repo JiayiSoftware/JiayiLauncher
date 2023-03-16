@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.System;
@@ -12,6 +13,7 @@ public static class Minecraft
 	private static List<string> _versions = new();
 	
 	public static List<Mod> ModsLoaded { get; } = new();
+	public static Process Process { get; private set; } = null!;
 
 	public static async Task<List<string>> GetVersionList()
 	{
@@ -19,7 +21,6 @@ public static class Minecraft
 
 		using var client = new HttpClient();
 
-		// thanks bionic
 		var response =
 			await client.GetAsync("https://raw.githubusercontent.com/BionicBen/ProjectStarFiles/main/MinecraftVersions.txt");
 		
@@ -56,5 +57,36 @@ public static class Minecraft
 		var minecraftApp = await GetPackage();
 		if (minecraftApp == null) return;
 		await minecraftApp.LaunchAsync();
+		
+		Process = Process.GetProcessesByName("Minecraft.Windows")[0];
+	}
+
+	public static bool IsOpen()
+	{
+		var processes = Process.GetProcessesByName("Minecraft.Windows");
+		if (processes.Length == 0) return false;
+		Process = processes[0];
+		return true;
+	}
+
+	public static async Task WaitForModules()
+	{
+		await Task.Run(() =>
+		{
+			while (true)
+			{
+				Process.Refresh();
+				if (Process.Modules.Count > 160) break;
+
+				// wait for a bit
+				Task.Delay(4000).Wait();
+			}
+		});
+	}
+
+	public static async Task<bool> ModSupported(Mod mod)
+	{
+		var version = await GetVersion();
+		return mod.SupportedVersions.Contains(version) || mod.SupportedVersions.Contains("any version");
 	}
 }

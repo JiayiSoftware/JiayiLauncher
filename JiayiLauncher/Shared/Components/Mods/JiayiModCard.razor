@@ -1,5 +1,8 @@
 ﻿@using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Pages
+@using JiayiLauncher.Features.Launch
+@using JiayiLauncher.Features.Bridge
+@using System.Diagnostics
 
 <div class="mod-background" @onmouseenter="MouseOver" @onmouseleave="MouseLeave">
     <div class="mod-header">
@@ -29,13 +32,50 @@
     public IModalService ModalService { get; set; } = default!;
     
     private string _controlsOpacity = "0";
+    
+    private bool _launching;
+    // percentage to rem from 0-7
+    private string _launchProgress => _launching ? $"box-shadow: {Launcher.LaunchProgress * .07:0.00}rem 0 0 0 rgb(255, 55, 55);" : "";
 
     private JiayiButton? _launchButton;
 
-    private void LaunchClicked()
+    private async Task LaunchClicked()
     {
-        _launchButton!.Disabled = true;
+        if (Launcher.Launching) return;
+
+        Launcher.LaunchResult result;
+        
+        if (Minecraft.ModsLoaded.Contains(Mod))
+        {
+            // TODO: notify user that mod is already loaded
+            result = Launcher.LaunchResult.Success;
+            return;
+        }
+
+        if (Minecraft.ModsLoaded.Count > 0)
+        {
+            var options = new List<(string, EventCallback)>
+            {
+                ("Yes", new EventCallback(null, async () =>
+                {
+                    result = await Launcher.Launch(Mod);
+                })),
+                ("No", EventCallback.Empty)
+            };
+            
+            var parameters = new ModalParameters()
+                .Add(nameof(MessageBox.Buttons), options)
+                .Add(nameof(MessageBox.Message), $"Launching more than one mod at a time can make your game unstable. Are you sure you want to launch {Mod.Name}?");
+            
+            ModalService.Show<MessageBox>("Warning", parameters);
+        }
+        
         StateHasChanged();
+    }
+
+    private async Task Launch()
+    {
+        
     }
 
     private void MouseOver()

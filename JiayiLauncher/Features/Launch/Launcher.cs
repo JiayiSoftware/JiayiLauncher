@@ -1,8 +1,11 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using System.Timers;
 using JiayiLauncher.Features.Bridge;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Launch;
 
@@ -31,6 +34,7 @@ public static class Launcher
 		Launching = true;
 		
 		LaunchProgress = 0;
+		Log.Write(nameof(Launcher), $"Launching {mod.Name}");
 		
 		var supported = await Minecraft.ModSupported(mod);
 		if (!supported) return LaunchResult.VersionMismatch;
@@ -79,7 +83,9 @@ public static class Launcher
 			Process.Start(path);
 			LaunchProgress += 30;
 			Launching = false;
+			
 			Minecraft.ModsLoaded.Add(mod);
+			
 			return LaunchResult.Success;
 		}
 
@@ -89,7 +95,9 @@ public static class Launcher
 		var injected = await Injector.Inject(path);
 		LaunchProgress += 30;
 		Launching = false;
+		
 		if (injected) Minecraft.ModsLoaded.Add(mod);
+		
 		return injected ? LaunchResult.Success : LaunchResult.InjectionFailed;
 	}
 }

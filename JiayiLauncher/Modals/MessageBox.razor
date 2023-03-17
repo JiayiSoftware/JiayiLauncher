@@ -10,8 +10,12 @@
 </div>
 
 @code {
+
     [Parameter]
-    public List<(string, EventCallback)> Buttons { get; set; }
+    public List<(string, EventCallback)> Buttons { get; set; } = new()
+    {
+        ("Okay", EventCallback.Empty)
+    };
     
     [Parameter]
     public string Message { get; set; }

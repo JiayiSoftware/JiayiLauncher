@@ -14,31 +14,20 @@ namespace JiayiLauncher.Features.Launch;
 
 public static class Injector
 {
-	private static bool ApplyPermissions(string file)
+	private static void ApplyPermissions(string file)
 	{
-		try
-		{
-			var fileInfo = new FileInfo(file);
-			var fileSecurity = fileInfo.GetAccessControl();
-			fileSecurity.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier("S-1-15-2-1"),
-				FileSystemRights.FullControl, InheritanceFlags.None, PropagationFlags.NoPropagateInherit,
-				AccessControlType.Allow));
-		
-			fileInfo.SetAccessControl(fileSecurity);
-			return true;
-		}
-		catch
-		{
-			Log.Write(nameof(Injector),
-				$"Failed to apply permissions to {file}, maybe the user's antivirus is blocking it",
-				Log.LogLevel.Error);
-			return false;
-		}
+		var fileInfo = new FileInfo(file);
+		var fileSecurity = fileInfo.GetAccessControl();
+		fileSecurity.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier("S-1-15-2-1"),
+			FileSystemRights.FullControl, InheritanceFlags.None, PropagationFlags.NoPropagateInherit,
+			AccessControlType.Allow));
+	
+		fileInfo.SetAccessControl(fileSecurity);
 	}
 
 	public static async Task<bool> Inject(string path)
 	{
-		if (!ApplyPermissions(path)) return false;
+		ApplyPermissions(path);
 
 		return await Task.Run(() =>
 		{
@@ -56,7 +45,7 @@ public static class Injector
 				return false;
 			}
 
-			var loadLibraryAddress = GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
+			var loadLibraryAddress = GetProcAddress(GetModuleHandleW("kernel32.dll"), "LoadLibraryA");
 
 			if (loadLibraryAddress == 0)
 			{
@@ -95,6 +84,8 @@ public static class Injector
 			// check if the game is open after injection because some antiviruses will close the game if they detect it
 			if (Minecraft.IsOpen())
 			{
+				// wait just a bit for the module to load
+				Task.Delay(1000).Wait();
 				if (!IsInjected(path))
 				{
 					Log.Write(nameof(Injector), "Every native call succeeded, but the module wasn't loaded.",
@@ -114,6 +105,7 @@ public static class Injector
 	public static bool IsInjected(string path)
 	{
 		var process = Minecraft.Process;
+		process.Refresh();
 		return process.Modules.Cast<ProcessModule>().Any(m => m.FileName == path);
 	}
 }

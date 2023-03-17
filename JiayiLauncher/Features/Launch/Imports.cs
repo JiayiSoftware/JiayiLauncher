@@ -2,7 +2,7 @@
 
 namespace JiayiLauncher.Features.Launch;
 
-public partial class Imports
+public static partial class Imports
 {
 	public const int PROCESS_CREATE_THREAD = 0x0002;
 	public const int PROCESS_QUERY_INFORMATION = 0x0400;
@@ -18,7 +18,7 @@ public partial class Imports
 	public static partial nint OpenProcess(int dwDesiredAccess, [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle, int dwProcessId);
 
 	[LibraryImport("kernel32.dll")]
-	public static partial nint GetModuleHandle([MarshalAs(UnmanagedType.LPStr)] string lpModuleName);
+	public static partial nint GetModuleHandleW([MarshalAs(UnmanagedType.LPWStr)] string lpModuleName);
 
 	[LibraryImport("kernel32", SetLastError = true)]
 	public static partial nint GetProcAddress(nint hModule, [MarshalAs(UnmanagedType.LPStr)] string procName);

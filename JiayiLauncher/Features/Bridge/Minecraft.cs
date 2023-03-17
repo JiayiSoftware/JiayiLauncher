@@ -5,14 +5,24 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.System;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Bridge;
 
 public static class Minecraft
 {
-	private static List<string> _versions = new();
-	
-	public static List<Mod> ModsLoaded { get; } = new();
+	private static readonly List<string> _versions = new();
+	private static readonly List<Mod> _modsLoaded = new();
+
+	public static List<Mod> ModsLoaded
+	{
+		get
+		{
+			if (!IsOpen()) _modsLoaded.Clear();
+			return _modsLoaded;
+		}
+	}
+
 	public static Process Process { get; private set; } = null!;
 
 	public static async Task<List<string>> GetVersionList()
@@ -49,7 +59,15 @@ public static class Minecraft
 		var minecraftApp = await GetPackage();
 		if (minecraftApp == null) return "Unknown";
 		var version = minecraftApp.AppInfo.Package.Id.Version;
-		return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+		
+		// the game does it weird
+		var major = version.Major;
+		var minor = version.Minor;
+		// take the first two numbers of the build number
+		var build = version.Build.ToString()[..2];
+		// the last number of the build number is the revision
+		var revision = version.Build.ToString()[^1];
+		return $"{major}.{minor}.{build}.{revision}";
 	}
 
 	public static async Task Open()
@@ -87,6 +105,7 @@ public static class Minecraft
 	public static async Task<bool> ModSupported(Mod mod)
 	{
 		var version = await GetVersion();
+		Log.Write(nameof(Minecraft), $"Current game version is {version} and mod supports {string.Join(", ", mod.SupportedVersions)}");
 		return mod.SupportedVersions.Contains(version) || mod.SupportedVersions.Contains("any version");
 	}
 }

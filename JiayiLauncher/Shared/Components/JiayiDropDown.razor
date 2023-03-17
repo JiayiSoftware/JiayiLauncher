@@ -39,8 +39,16 @@
             @if (Multiselect)
             {
                 <li class="hack">
+                    @* this is stupid idk why i never did this before *@
                     <label>
-                        <input type="checkbox" value="@item" @onclick="() => OnToggleMultiSelect(item)">
+                        @if (SelectedItems.Contains(item))
+                        {
+                            <input type="checkbox" value="@item" checked @onclick="() => OnToggleMultiSelect(item)">
+                        }
+                        else
+                        {
+                            <input type="checkbox" value="@item" @onclick="() => OnToggleMultiSelect(item)">
+                        }
                         @item
                     </label>
                 </li>
@@ -49,7 +57,14 @@
             {
                 <li class="also-hack">
                     <label>
-                        <input type="radio" name="@Name" value="@item" class="dropdown-item" @onchange="OnSelectSingle">
+                        @if (SelectedItem == item)
+                        {
+                            <input type="radio" name="@Name" value="@item" class="dropdown-item" checked @onchange="OnSelectSingle">
+                        }
+                        else
+                        {
+                            <input type="radio" name="@Name" value="@item" class="dropdown-item" @onchange="OnSelectSingle">
+                        }
                         @item
                     </label>
                 </li>

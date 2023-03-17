@@ -38,6 +38,8 @@
             {
                 mods = ModCollection.Current!.Mods;
             }
+
+            _searchResults = 0;
             
             foreach (var mod in mods)
             {
@@ -45,16 +47,22 @@
                 {
                     if (mod.Name.ToLower().Contains(_searchBox.Value.ToLower()))
                     {
+                        _searchResults++;
                         <JiayiModCard Mod="@mod" />
                     }
                 }
                 else
                 {
                     <JiayiModCard Mod="@mod" />
+                    _searchResults++;
                 }
             }
         }
     </ul>
+    @if (_searchResults == 0)
+    {
+        <p style="text-align: center; margin-top: 0;">No results found.</p>
+    }
     <p class="add-new" @ondragenter="OnDragEnter" @ondragleave="OnDragLeave" @ondragover="OnDragEnter" data-hovered="@_hovered">
         @if (JiayiSettings.Instance.ModCollectionPath != string.Empty)
         {
@@ -92,6 +100,8 @@
     private JiayiTextBox? _searchBox;
     private JiayiFilter? _localFilter;
     private JiayiFilter? _onlineFilter;
+    
+    private int _searchResults = 0;
     
     protected override void OnInitialized()
     {

@@ -83,7 +83,7 @@
             using var client = new HttpClient();
 
             // we only need headers
-            using var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+            using var response = await client.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
             {

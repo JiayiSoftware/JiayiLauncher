@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -105,5 +106,50 @@ public class JiayiSettings
 		}
 
 		throw new ArgumentException($"Setting {name} not found.");
+	}
+	
+	public List<Setting<T>> GetSettings<T>()
+	{
+		var settings = new List<Setting<T>>();
+		var properties = GetType().GetProperties();
+		foreach (var property in properties)
+		{
+			if (property.PropertyType != typeof(Setting<T>)) continue;
+			var setting = property.GetValue(this);
+			if (setting is not Setting<T> s) continue;
+			settings.Add(s);
+		}
+
+		return settings;
+	}
+	
+	public List<Setting<T>> GetSettingsByCategory<T>(string category)
+	{
+		var settings = new List<Setting<T>>();
+		var properties = GetType().GetProperties();
+		foreach (var property in properties)
+		{
+			if (property.PropertyType != typeof(Setting<T>)) continue;
+			var setting = property.GetValue(this);
+			if (setting is not Setting<T> s) continue;
+			if (s.Category == category) settings.Add(s);
+		}
+
+		return settings;
+	}
+	
+	public List<string> GetCategories()
+	{
+		var categories = new List<string>();
+		var properties = GetType().GetProperties();
+		foreach (var property in properties)
+		{
+			if (property.PropertyType != typeof(Setting<string>)) continue;
+			var setting = property.GetValue(this);
+			if (setting is not Setting<string> s) continue;
+			if (!categories.Contains(s.Category)) categories.Add(s.Category);
+		}
+
+		return categories;
 	}
 }

@@ -17,46 +17,42 @@ public class JiayiSettings
 		Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "settings.json");
 	
 	// general settings
-	public Setting<string> ModCollectionPath { get; set; } = new("Mod folder path", "General", 
-	"The path to your mod folder. If there is no folder at this path, Jiayi will create one.", string.Empty);
+	[Setting("Mod folder path", "General", "The path to the folder containing your mods.")]
+	public string ModCollectionPath { get; set; } = string.Empty;
 
-	// network settings
-	public Setting<bool> EnforceHttps { get; set; } = new("Enforce HTTPS", "Network", 
-		"Only allow secure connections for mod downloads.", true);
-	
 	// discord settings
-	public Setting<bool> RichPresence { get; set; } = new("Enable rich presence", "Discord", 
-		"Show what you're doing in Jiayi on Discord.", true);
+	[Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.")]
+	public bool RichPresence { get; set; } = true;
 	
-	public Setting<bool> DiscordShowModName { get; set; } = new("Show mod name", "Discord", 
-		"Show the name of the mod you're playing in Discord.", true, "RichPresence");
+	[Setting("Show mod name", "Discord", "Show the name of the mod you're playing in Discord.", "RichPresence")]
+	public bool DiscordShowModName { get; set; } = true;
 	
-	public Setting<bool> DiscordShowGameVersion { get; set; } = new("Show game version", "Discord", 
-		"Show the game version you're playing in Discord.", true, "RichPresence");
+	[Setting("Show game version", "Discord", "Show the game version you're playing in Discord.", "RichPresence")]
+	public bool DiscordShowGameVersion { get; set; } = true;
 	
-	public Setting<bool> DiscordCustomStatus { get; set; } = new("Custom status text", "Discord",
-		"Use your own status text instead of the default ones.", false, "RichPresence");
+	[Setting("Custom status text", "Discord", "Use your own status text instead of the default ones.", "RichPresence")]
+	public bool DiscordCustomStatus { get; set; } = false;
 	
-	public Setting<string> DiscordDetails { get; set; } = new("Top text", "Discord",
-		"The top-most status text.", "Playing with {modName}", "DiscordCustomStatus");
+	[Setting("Top text", "Discord", "The top-most status text.", "DiscordCustomStatus")]
+	public string DiscordDetails { get; set; } = "Playing with {modName}";
 	
-	public Setting<string> DiscordState { get; set; } = new("Bottom text", "Discord",
-		"The bottom-most status text.", "on {gameVersion}", "DiscordCustomStatus");
+	[Setting("Bottom text", "Discord", "The bottom-most status text.", "DiscordCustomStatus")]
+	public string DiscordState { get; set; } = "on {gameVersion}";
 	
-	public Setting<string> DiscordAppId { get; set; } = new("Discord app ID", "Discord",
-		"The Discord app ID to use for rich presence. Leave this blank to use the default Jiayi app ID.", string.Empty);
+	[Setting("Discord app ID", "Discord", "The Discord app ID to use for rich presence. Leave this blank to use the default Jiayi app ID.")]
+	public string DiscordAppId { get; set; } = string.Empty;
 	
-	public Setting<string> DiscordLargeImageKey { get; set; } = new("Large image key", "Discord",
-		"The large image key to use for rich presence. Leave this blank to use the default Jiayi image.", string.Empty);
+	[Setting("Large image key", "Discord", "The large image key to use for rich presence. Leave this blank to use the default Jiayi image.")]
+	public string DiscordLargeImageKey { get; set; } = string.Empty;
 	
-	public Setting<string> DiscordLargeImageText { get; set; } = new("Large image text", "Discord",
-		"The large image text to use for rich presence. Leave this blank to use the default Jiayi text.", string.Empty);
+	[Setting("Large image text", "Discord", "The large image text to use for rich presence. Leave this blank to use the default Jiayi text.")]
+	public string DiscordLargeImageText { get; set; } = string.Empty;
 	
-	public Setting<string> DiscordSmallImageKey { get; set; } = new("Small image key", "Discord",
-		"The small image key to use for rich presence. Leave this blank to use the default Jiayi image.", string.Empty);
+	[Setting("Small image key", "Discord", "The small image key to use for rich presence. Leave this blank to use the default Jiayi image.")]
+	public string DiscordSmallImageKey { get; set; } = string.Empty;
 	
-	public Setting<string> DiscordSmallImageText { get; set; } = new("Small image text", "Discord",
-		"The small image text to use for rich presence. Leave this blank to use the default Jiayi text.", string.Empty);
+	[Setting("Small image text", "Discord", "The small image text to use for rich presence. Leave this blank to use the default Jiayi text.")]
+	public string DiscordSmallImageText { get; set; } = string.Empty;
 
 	public void Save()
 	{
@@ -92,64 +88,5 @@ public class JiayiSettings
 		
 		Instance = settings;
 		Log.Write(Instance, "Loaded settings.");
-	}
-	
-	public Setting<T> GetSetting<T>(string name)
-	{
-		var properties = GetType().GetProperties();
-		foreach (var property in properties)
-		{
-			if (property.PropertyType != typeof(Setting<T>)) continue;
-			var setting = property.GetValue(this);
-			if (setting is not Setting<T> s) continue;
-			if (s.Name == name) return s;
-		}
-
-		throw new ArgumentException($"Setting {name} not found.");
-	}
-	
-	public List<Setting<T>> GetSettings<T>()
-	{
-		var settings = new List<Setting<T>>();
-		var properties = GetType().GetProperties();
-		foreach (var property in properties)
-		{
-			if (property.PropertyType != typeof(Setting<T>)) continue;
-			var setting = property.GetValue(this);
-			if (setting is not Setting<T> s) continue;
-			settings.Add(s);
-		}
-
-		return settings;
-	}
-	
-	public List<Setting<T>> GetSettingsByCategory<T>(string category)
-	{
-		var settings = new List<Setting<T>>();
-		var properties = GetType().GetProperties();
-		foreach (var property in properties)
-		{
-			if (property.PropertyType != typeof(Setting<T>)) continue;
-			var setting = property.GetValue(this);
-			if (setting is not Setting<T> s) continue;
-			if (s.Category == category) settings.Add(s);
-		}
-
-		return settings;
-	}
-	
-	public List<string> GetCategories()
-	{
-		var categories = new List<string>();
-		var properties = GetType().GetProperties();
-		foreach (var property in properties)
-		{
-			if (property.PropertyType != typeof(Setting<string>)) continue;
-			var setting = property.GetValue(this);
-			if (setting is not Setting<string> s) continue;
-			if (!categories.Contains(s.Category)) categories.Add(s.Category);
-		}
-
-		return categories;
 	}
 }

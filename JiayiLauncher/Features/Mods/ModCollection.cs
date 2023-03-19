@@ -57,7 +57,7 @@ public class ModCollection
 		}
 		
 		// set path in settings
-		JiayiSettings.Instance!.ModCollectionPath.Value = path;
+		JiayiSettings.Instance!.ModCollectionPath = path;
 
 		return collection;
 	}

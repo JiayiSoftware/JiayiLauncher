@@ -59,7 +59,7 @@
             }
         }
     </ul>
-    @if (_searchResults == 0)
+    @if (_searchResults == 0 && JiayiSettings.Instance.ModCollectionPath != string.Empty)
     {
         <p style="text-align: center; margin-top: 0;">No results found.</p>
     }

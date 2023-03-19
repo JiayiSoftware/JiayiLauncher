@@ -8,8 +8,13 @@
     It will also show you your recently launched mods, and the Profile you have selected.
 </p>
 
+<div @(_debug ? "" : "style=\"display: none;\"")>
+    <a href="/TestPlace">debug stuff</a>
+</div>
 
 @code {
+    private bool _debug = true;
+    
     private string DetermineTimeOfDay()
     {
         var hour = DateTime.Now.Hour;

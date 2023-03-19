@@ -10,6 +10,7 @@ public class SettingAttribute : Attribute
 	[JsonIgnore] public string Category { get; }
 	[JsonIgnore] public string Description { get; }
 	[JsonIgnore] public string Dependency { get; }
+	[JsonIgnore] public string InternalName { get; set; }
 	
 	public SettingAttribute(string name, string category, string description, string dependency = "")
 	{

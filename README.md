@@ -3,6 +3,9 @@ Minecraft for Windows mod manager (Bedrock Edition)
 
 Project website @ https://jiayi.software/launcher (upcoming)
 
+[![Build](https://github.com/JiayiSoftware/JiayiLauncher/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JiayiSoftware/JiayiLauncher/actions/workflows/dotnet.yml)
+[![Discord server](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://jiayi.software/discord)
+
 ## Features
 > * Simple, clean user interface
 > * Manage and launch internal and external mods, both stored locally and from the Internet

@@ -1,5 +1,31 @@
 ﻿@page "/Settings"
+@using JiayiLauncher.Settings
+@using System.Reflection
+
 <h3>Settings</h3>
+
+<div class="tabs">
+    @foreach (var category in JiayiSettings.Instance!.GetCategories())
+    {
+        <a href="#@category.ToLower()" class="tab-button">@category</a>
+    }
+</div>
+
+<div class="settings-container">
+    @foreach (var category in JiayiSettings.Instance.GetCategories())
+    {
+        <h4 id="@category.ToLower()">@category</h4>
+                    
+        @foreach (var setting in JiayiSettings.Instance.GetSettingsInCategory(category))
+        {
+            var settingInfo = setting.GetCustomAttribute<SettingAttribute>();
+            <div class="setting">
+                <strong>@settingInfo!.Name</strong>
+                <p>@settingInfo.Description</p>
+            </div>
+        }
+    }
+</div>
 
 @code {
     

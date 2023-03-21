@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using JiayiLauncher.Settings.Special;
 using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Settings;
@@ -55,6 +56,13 @@ public class JiayiSettings
 	
 	[Setting("Small image text", "Discord", "The small image text to use for rich presence. Leave this blank to use the default Jiayi text.")]
 	public string DiscordSmallImageText { get; set; } = string.Empty;
+	
+	// injection settings
+	[Setting("Use injection delay", "Injection", "Wait for a set amount of time instead of waiting for the game to load before injecting.")]
+	public bool UseInjectionDelay { get; set; } = false;
+	
+	[Setting("Injection delay", "Injection", "The amount of time to wait before injecting, in seconds.", "UseInjectionDelay")]
+	public SliderSetting InjectionDelay { get; set; } = new(0, 30, 5);
 
 	public void Save()
 	{
@@ -95,4 +103,8 @@ public class JiayiSettings
 	public List<PropertyInfo> GetSettings() => GetType().GetProperties().Where(p => p.GetCustomAttribute<SettingAttribute>() != null).ToList();
 	
 	public PropertyInfo? GetSetting(string name) => GetSettings().FirstOrDefault(p => p.Name == name);
+	
+	public List<string> GetCategories() => GetSettings().Select(p => p.GetCustomAttribute<SettingAttribute>()!.Category).Distinct().ToList();
+	
+	public List<PropertyInfo> GetSettingsInCategory(string category) => GetSettings().Where(p => p.GetCustomAttribute<SettingAttribute>()!.Category == category).ToList();
 }

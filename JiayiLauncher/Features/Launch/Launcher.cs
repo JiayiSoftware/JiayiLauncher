@@ -74,6 +74,8 @@ public static class Launcher
 		if (path.EndsWith(".exe")) external = true;
 		else if (path.EndsWith(".dll")) external = false;
 		else return LaunchResult.ModNotFound;
+		
+		if (!File.Exists(path)) return LaunchResult.ModNotFound;
 
 		if (external)
 		{
@@ -91,7 +93,7 @@ public static class Launcher
 
 		// else
 		if (Injector.IsInjected(path)) return LaunchResult.AlreadyRunning;
-			
+
 		var injected = await Injector.Inject(path);
 		LaunchProgress += 30;
 		Launching = false;

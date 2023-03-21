@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using System.Timers;
 using JiayiLauncher.Features.Bridge;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Utils;
@@ -37,11 +35,16 @@ public static class Launcher
 		Log.Write(nameof(Launcher), $"Launching {mod.Name}");
 		
 		var supported = await Minecraft.ModSupported(mod);
-		if (!supported) return LaunchResult.VersionMismatch;
-		
+		if (!supported)
+		{
+			Log.Write(nameof(Launcher), $"{mod.Name} is not supported by the current version of Minecraft");
+			return LaunchResult.VersionMismatch;
+		}
+
 		LaunchProgress += 10;
 		
 		await Minecraft.Open();
+		Log.Write(nameof(Launcher), "Opened game, waiting to launch mod...");
 		
 		LaunchProgress += 5;
 
@@ -74,6 +77,8 @@ public static class Launcher
 		if (path.EndsWith(".exe")) external = true;
 		else if (path.EndsWith(".dll")) external = false;
 		else return LaunchResult.ModNotFound;
+		
+		Log.Write(nameof(Launcher), external ? "Detected external mod" : "Detected internal mod");
 		
 		if (!File.Exists(path)) return LaunchResult.ModNotFound;
 

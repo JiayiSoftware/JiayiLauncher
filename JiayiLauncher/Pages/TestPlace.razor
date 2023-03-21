@@ -26,9 +26,7 @@
 <h4>Settings</h4>
 
 <JiayiTextBox Placeholder="Setting name" @ref="_settingName"></JiayiTextBox>
-<JiayiTextBox Placeholder="Setting value" @ref="_settingValue"></JiayiTextBox>
-<JiayiButton OnClick="SetSetting">Set</JiayiButton>
-<JiayiButton OnClick="ValidSetting" @ref="_validSetting">Is this a setting?</JiayiButton>
+<JiayiButton OnClick="ValidSetting">@_validSetting</JiayiButton>
 
 @code {
 
@@ -36,14 +34,13 @@
     public IModalService ModalService { get; set; } = default!;
 
     private string _minecraftVersion = "Minecraft version";
+    private string _validSetting = "Is this a setting?";
 
     private List<string> _radioItems = new() { "Radio button", "Choose one only", "Third option" };
     private List<string> _checkboxItems = new() { "Checkbox", "Choose multiple", "Also a third option" };
     private List<string> _aLotOfItems = new() { "Bunch of items", "Testing truncating selected items", "Third option", "Fourth option", "Fifth option", "Sixth option", "Seventh option", "Eighth option", "Ninth option", "Tenth option", "Eleventh option", "Twelfth option", "Thirteenth option", "Fourteenth option", "Fifteenth option", "Sixteenth option", "Seventeenth option", "Eighteenth option", "Nineteenth option", "Twentieth option" };
 
     private JiayiTextBox? _settingName;
-    private JiayiTextBox? _settingValue;
-    private JiayiButton? _validSetting;
     
     private void ButtonClicked()
     {
@@ -72,14 +69,9 @@
         _minecraftVersion = version;
     }
 
-    private void SetSetting()
-    {
-        JiayiSettings.Instance!.SetSettingByName(_settingName.Value, _settingValue.Value);
-    }
-
     private void ValidSetting()
     {
-        throw new NotImplementedException();
+        _validSetting = JiayiSettings.Instance!.GetSetting(_settingName!.Value!) != null ? "Yes it is!" : "I didn't see it.";
     }
 
 }

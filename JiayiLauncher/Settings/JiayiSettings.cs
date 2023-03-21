@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using JiayiLauncher.Utils;
@@ -91,26 +92,7 @@ public class JiayiSettings
 		Log.Write(Instance, "Loaded settings.");
 	}
 	
-	public List<SettingAttribute> GetSettings() => GetType().GetCustomAttributes(typeof(SettingAttribute), true)
-		.Cast<SettingAttribute>().ToList();
-
-	public SettingAttribute? GetSettingByName(string name) => GetSettings().FirstOrDefault(setting => setting.Name == name);
+	public List<PropertyInfo> GetSettings() => GetType().GetProperties().Where(p => p.GetCustomAttribute<SettingAttribute>() != null).ToList();
 	
-	public void SetSettingByName<T>(string name, T value)
-	{
-		var properties = GetType().GetProperties();
-		
-		foreach (var property in properties)
-		{
-			var setting = property.GetCustomAttributes(typeof(SettingAttribute), true).Cast<SettingAttribute>().First();
-			if (setting.Name != name) continue;
-			property.SetValue(this, value);
-			return;
-		}
-	}
-
-	public List<string> GetCategories()
-	{
-		return GetSettings().Select(setting => setting.Category).Distinct().ToList();
-	}
+	public PropertyInfo? GetSetting(string name) => GetSettings().FirstOrDefault(p => p.Name == name);
 }

@@ -1,3 +1,13 @@
-﻿.settings-container {
-    scroll-behavior: smooth;
+﻿.setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.setting-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    width: max-content;
+    max-width: 45vw;
 }

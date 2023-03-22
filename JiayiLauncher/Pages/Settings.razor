@@ -1,13 +1,17 @@
 ﻿@page "/Settings"
 @using JiayiLauncher.Settings
 @using System.Reflection
+@using System.Diagnostics
+@using JiayiLauncher.Utils
+
+@inject NavigationManager NavigationManager
 
 <h3>Settings</h3>
 
 <div class="tabs">
     @foreach (var category in JiayiSettings.Instance!.GetCategories())
     {
-        <a href="#@category.ToLower()" class="tab-button">@category</a>
+        <a class="tab-button" onclick="">@category</a>
     }
 </div>
 
@@ -20,13 +24,33 @@
         {
             var settingInfo = setting.GetCustomAttribute<SettingAttribute>();
             <div class="setting">
-                <strong>@settingInfo!.Name</strong>
-                <p>@settingInfo.Description</p>
+                <div class="setting-info">
+                    <strong>@settingInfo!.Name</strong>
+                    <p class="setting-description">@settingInfo.Description</p>
+                </div>
+
+                @switch (true)
+                {
+                    case true when setting.PropertyType == typeof(bool):
+                        <input type="checkbox"/>
+                        break;
+                    case true when setting.PropertyType == typeof(string):
+                        <JiayiTextBox 
+                            Placeholder="@settingInfo.Name" 
+                            Style="width: -webkit-fill-available; max-width: 40%;" 
+                            Value="@((string?)setting.GetValue(JiayiSettings.Instance) ?? string.Empty)"
+                            Changed="args => ChangeStringSetting(args, setting)"/>
+                        break;
+                }
             </div>
         }
     }
 </div>
 
 @code {
-    
+    private void ChangeStringSetting(ChangeEventArgs args, PropertyInfo setting)
+    {
+        setting.SetValue(JiayiSettings.Instance, (string?)args.Value ?? string.Empty);
+        JiayiSettings.Instance!.Save();
+    }
 }

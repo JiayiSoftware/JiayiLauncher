@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace JiayiLauncher.Settings.Special;
 
 public struct SliderSetting
 {
-	public Range Range { get; }
+	[JsonIgnore] public Range Range { get; }
 	public int Value { get; }
 	
 	public SliderSetting(int min, int max, int value)

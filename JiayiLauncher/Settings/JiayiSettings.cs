@@ -59,9 +59,10 @@ public class JiayiSettings
 	// injection settings
 	[Setting("Use injection delay", "Injection", "Wait for a set amount of time instead of waiting for the game to load before injecting.")]
 	public bool UseInjectionDelay { get; set; } = false;
-	
-	[Setting("Injection delay", "Injection", "The amount of time to wait before injecting, in seconds.", "UseInjectionDelay")]
-	public SliderSetting InjectionDelay { get; set; } = new(0, 30, 5);
+
+	[Setting("Injection delay", "Injection", "The amount of time to wait before injecting, in seconds.",
+		"UseInjectionDelay")]
+	public int[] InjectionDelay { get; set; } = { 0, 30, 5 };
 
 	public void Save()
 	{
@@ -101,15 +102,12 @@ public class JiayiSettings
 			Instance = settings;
 			Log.Write(Instance, "Loaded settings.");
 		}
-		catch
+		catch (Exception e)
 		{
 			stream.Dispose();
-			// this is a bug in .NET where it places an extra bracket at the end
-			// of the file, so we just remove it and try again
-			var text = File.ReadAllText(path);
-			text = text.Remove(text.Length - 1);
-			File.WriteAllText(path, text);
-			Load();
+			Instance = new JiayiSettings();
+			Instance.Save();
+			Log.Write(Instance, $"Settings file was corrupted or invalid. Created new settings file. Error: {e}");
 		}
 	}
 	

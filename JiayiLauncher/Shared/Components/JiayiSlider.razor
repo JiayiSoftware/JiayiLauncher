@@ -19,7 +19,7 @@
     public EventCallback<int> ValueChanged { get; set; }
     
     // webkit doesn't support styling the slider progress so we use linear-gradient to fake it
-    private string _progress => $"var(--accent) 0%, var(--accent) {Value}%, var(--background-secondary) {Value}%, var(--background-secondary) 100%";
+    private string _progress => $"var(--accent) 0%, var(--accent) {Value * 100 / Max}%, var(--background-secondary) {Value * 100 / Max}%, var(--background-secondary) 100%";
 
     private void OnChanged(ChangeEventArgs obj)
     {

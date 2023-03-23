@@ -38,7 +38,7 @@ public class JiayiSettings
 	
 	// i can just use empty objects to display text in the settings window
 	[Setting("Formatting strings", "Discord", 
-		"Strings that can be used in custom status text:\n" +
+		"Strings that can be used in custom status text:\n\n" +
 		"%mod_name% - the name of the mod you're playing\n" +
 		"%game_version% - the game version you're playing\n" +
 		"%mod_count% - the number of mods you have in your collection", "DiscordCustomStatus")]

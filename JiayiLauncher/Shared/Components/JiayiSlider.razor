@@ -1,0 +1,30 @@
+﻿<div style="@Style">
+    <input type="range" min="@Min" max="@Max" class="slider" @oninput="OnChanged" @bind="Value" style="background: linear-gradient(to right, @_progress);">
+</div>
+
+@code {
+    [Parameter]
+    public string Style { get; set; } = "width: 100%";
+    
+    [Parameter]
+    public int Value { get; set; }
+    
+    [Parameter]
+    public int Min { get; set; }
+    
+    [Parameter]
+    public int Max { get; set; } = 100;
+    
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+    
+    // webkit doesn't support styling the slider progress so we use linear-gradient to fake it
+    private string _progress => $"var(--accent) 0%, var(--accent) {Value}%, var(--background-secondary) {Value}%, var(--background-secondary) 100%";
+
+    private void OnChanged(ChangeEventArgs obj)
+    {
+        Value = int.Parse(obj.Value?.ToString() ?? "0");
+        ValueChanged.InvokeAsync(Value);
+    }
+
+}

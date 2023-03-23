@@ -1,6 +1,7 @@
 ﻿@page "/Settings"
 @using JiayiLauncher.Settings
 @using System.Reflection
+@using JiayiLauncher.Settings.Special
 
 <h3>Settings</h3>
 
@@ -20,10 +21,8 @@
         {
             var settingInfo = setting.GetCustomAttribute<SettingAttribute>();
             var dependentSetting = JiayiSettings.Instance.GetSetting(settingInfo!.Dependency);
-            var dependentSettingInfo = dependentSetting?.GetCustomAttribute<SettingAttribute>();
             if (dependentSetting == null 
-                || (dependentSetting.PropertyType == typeof(bool) && (bool?)dependentSetting.GetValue(JiayiSettings.Instance) == true)
-                || dependentSettingInfo.Dependency == string.Empty)
+                || (dependentSetting.PropertyType == typeof(bool) && (bool?)dependentSetting.GetValue(JiayiSettings.Instance) == true))
             {
                 <div class="setting">
                     <div class="setting-info">
@@ -46,6 +45,14 @@
                                 Value="@((string?)setting.GetValue(JiayiSettings.Instance) ?? string.Empty)"
                                 Changed="value => ChangeStringSetting(value, setting)"/>
                             break;
+                        case true when setting.PropertyType == typeof(SliderSetting):
+                            <JiayiSlider 
+                                Min="((SliderSetting)setting.GetValue(JiayiSettings.Instance)!).Range.Start.Value" 
+                                Max="((SliderSetting)setting.GetValue(JiayiSettings.Instance)!).Range.End.Value" 
+                                Value="((SliderSetting)setting.GetValue(JiayiSettings.Instance)!).Value" 
+                                Style="width: -webkit-fill-available; max-width: 40%;"
+                                ValueChanged="value => ChangeSliderSetting((SliderSetting)setting.GetValue(JiayiSettings.Instance)!, value, setting)"/>
+                            break;
                     }
                 </div>
             }
@@ -63,6 +70,13 @@
     private void ChangeBoolSetting(bool value, PropertyInfo setting)
     {
         setting.SetValue(JiayiSettings.Instance, value);
+        JiayiSettings.Instance!.Save();
+    }
+    
+    private void ChangeSliderSetting(SliderSetting slider, int value, PropertyInfo setting)
+    {
+        var sliderSetting = new SliderSetting(slider.Range.Start.Value, slider.Range.End.Value, value);
+        setting.SetValue(JiayiSettings.Instance, sliderSetting);
         JiayiSettings.Instance!.Save();
     }
 }

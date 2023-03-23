@@ -13,6 +13,7 @@
     flex-direction: row;
     justify-content: space-between;
     filter: brightness(1);
+    cursor: pointer;
     
     transition: var(--transition-speed);
 }

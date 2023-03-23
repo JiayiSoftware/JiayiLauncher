@@ -27,27 +27,18 @@ public class JiayiSettings
 	[Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.")]
 	public bool RichPresence { get; set; } = true;
 	
-	[Setting("Show mod name", "Discord", "Show the name of the mod you're playing in Discord.", "RichPresence")]
-	public bool DiscordShowModName { get; set; } = true;
-	
-	[Setting("Show game version", "Discord", "Show the game version you're playing in Discord.", "RichPresence")]
-	public bool DiscordShowGameVersion { get; set; } = true;
-	
-	[Setting("Custom status text", "Discord", "Use your own status text instead of the default ones.", "RichPresence")]
-	public bool DiscordCustomStatus { get; set; } = false;
-	
 	// i can just use empty objects to display text in the settings window
 	[Setting("Formatting strings", "Discord", 
 		"Strings that can be used in custom status text:\n\n" +
 		"%mod_name% - the name of the mod you're playing\n" +
 		"%game_version% - the game version you're playing\n" +
-		"%mod_count% - the number of mods you have in your collection", "DiscordCustomStatus")]
+		"%mod_count% - the number of mods you have in your collection", "RichPresence")]
 	private object DiscordFormattingStrings { get; set; } = new();
 	
-	[Setting("Top text", "Discord", "The top-most status text.", "DiscordCustomStatus")]
+	[Setting("Top text", "Discord", "The top-most status text.", "RichPresence")]
 	public string DiscordDetails { get; set; } = "Playing with %mod_name%";
 	
-	[Setting("Bottom text", "Discord", "The bottom-most status text.", "DiscordCustomStatus")]
+	[Setting("Bottom text", "Discord", "The bottom-most status text.", "RichPresence")]
 	public string DiscordState { get; set; } = "on %game_version%";
 	
 	[Setting("Discord app ID", "Discord", "The Discord app ID to use for rich presence. Leave this blank to use the default Jiayi app ID.", "RichPresence")]
@@ -94,18 +85,32 @@ public class JiayiSettings
 		}
 
 		using var stream = File.OpenRead(path);
-		var settings = JsonSerializer.Deserialize<JiayiSettings>(stream);
-		if (settings == null)
+
+		try
 		{
-			Instance = new JiayiSettings();
-			Instance.Save();
-			// TODO: show a notification
-			Log.Write(Instance, "Settings file was corrupted or invalid. Created new settings file.");
-			return;
+			var settings = JsonSerializer.Deserialize<JiayiSettings>(stream);
+			if (settings == null)
+			{
+				Instance = new JiayiSettings();
+				Instance.Save();
+				// TODO: show a notification
+				Log.Write(Instance, "Settings file was corrupted or invalid. Created new settings file.");
+				return;
+			}
+
+			Instance = settings;
+			Log.Write(Instance, "Loaded settings.");
 		}
-		
-		Instance = settings;
-		Log.Write(Instance, "Loaded settings.");
+		catch
+		{
+			stream.Dispose();
+			// this is a bug in .NET where it places an extra bracket at the end
+			// of the file, so we just remove it and try again
+			var text = File.ReadAllText(path);
+			text = text.Remove(text.Length - 1);
+			File.WriteAllText(path, text);
+			Load();
+		}
 	}
 	
 	public List<PropertyInfo> GetSettings() => GetType().GetProperties().Where(p => p.GetCustomAttribute<SettingAttribute>() != null).ToList();

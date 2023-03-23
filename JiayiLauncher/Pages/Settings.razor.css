@@ -6,7 +6,7 @@
 
 .setting-description {
     font-size: 14px;
-    color: var(--text-secondary);
+    color: var(--text-grayed);
     margin-top: 0.5rem;
     width: max-content;
     max-width: 45vw;

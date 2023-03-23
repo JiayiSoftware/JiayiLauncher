@@ -42,19 +42,19 @@ public class JiayiSettings
 	[Setting("Bottom text", "Discord", "The bottom-most status text.", "DiscordCustomStatus")]
 	public string DiscordState { get; set; } = "on {gameVersion}";
 	
-	[Setting("Discord app ID", "Discord", "The Discord app ID to use for rich presence. Leave this blank to use the default Jiayi app ID.")]
+	[Setting("Discord app ID", "Discord", "The Discord app ID to use for rich presence. Leave this blank to use the default Jiayi app ID.", "RichPresence")]
 	public string DiscordAppId { get; set; } = string.Empty;
 	
-	[Setting("Large image key", "Discord", "The large image key to use for rich presence. Leave this blank to use the default Jiayi image.")]
+	[Setting("Large image key", "Discord", "The large image key to use for rich presence. Leave this blank to use the default Jiayi image.", "RichPresence")]
 	public string DiscordLargeImageKey { get; set; } = string.Empty;
 	
-	[Setting("Large image text", "Discord", "The large image text to use for rich presence. Leave this blank to use the default Jiayi text.")]
+	[Setting("Large image text", "Discord", "The large image text to use for rich presence. Leave this blank to use the default Jiayi text.", "RichPresence")]
 	public string DiscordLargeImageText { get; set; } = string.Empty;
 	
-	[Setting("Small image key", "Discord", "The small image key to use for rich presence. Leave this blank to use the default Jiayi image.")]
+	[Setting("Small image key", "Discord", "The small image key to use for rich presence. Leave this blank to use the default Jiayi image.", "RichPresence")]
 	public string DiscordSmallImageKey { get; set; } = string.Empty;
 	
-	[Setting("Small image text", "Discord", "The small image text to use for rich presence. Leave this blank to use the default Jiayi text.")]
+	[Setting("Small image text", "Discord", "The small image text to use for rich presence. Leave this blank to use the default Jiayi text.", "RichPresence")]
 	public string DiscordSmallImageText { get; set; } = string.Empty;
 	
 	// injection settings

@@ -8,7 +8,7 @@
     public string? Style { get; set; }
     
     [Parameter]
-    public EventCallback<ChangeEventArgs> Changed { get; set; }
+    public EventCallback<string?> Changed { get; set; }
     
     [Parameter]
     public string? Value { get; set; }
@@ -16,7 +16,7 @@
     private void OnChange(ChangeEventArgs obj)
     {
         Value = obj.Value as string ?? "";
-        Changed.InvokeAsync(obj);
+        Changed.InvokeAsync(Value);
     }
 
 }

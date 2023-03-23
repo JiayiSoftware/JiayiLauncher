@@ -1,10 +1,6 @@
 ﻿@page "/Settings"
 @using JiayiLauncher.Settings
 @using System.Reflection
-@using System.Diagnostics
-@using JiayiLauncher.Utils
-
-@inject NavigationManager NavigationManager
 
 <h3>Settings</h3>
 
@@ -23,34 +19,47 @@
         @foreach (var setting in JiayiSettings.Instance.GetSettingsInCategory(category))
         {
             var settingInfo = setting.GetCustomAttribute<SettingAttribute>();
-            <div class="setting">
-                <div class="setting-info">
-                    <strong>@settingInfo!.Name</strong>
-                    <p class="setting-description">@settingInfo.Description</p>
-                </div>
+            var dependentSetting = JiayiSettings.Instance.GetSetting(settingInfo!.Dependency);
+            if (dependentSetting == null || (dependentSetting.PropertyType == typeof(bool) && (bool?)dependentSetting.GetValue(JiayiSettings.Instance) == true))
+            {
+                <div class="setting">
+                    <div class="setting-info">
+                        <strong>@settingInfo.Name</strong>
+                        <p class="setting-description">@settingInfo.Description</p>
+                    </div>
+                
+                
 
-                @switch (true)
-                {
-                    case true when setting.PropertyType == typeof(bool):
-                        <input type="checkbox"/>
-                        break;
-                    case true when setting.PropertyType == typeof(string):
-                        <JiayiTextBox 
-                            Placeholder="@settingInfo.Name" 
-                            Style="width: -webkit-fill-available; max-width: 40%;" 
-                            Value="@((string?)setting.GetValue(JiayiSettings.Instance) ?? string.Empty)"
-                            Changed="args => ChangeStringSetting(args, setting)"/>
-                        break;
-                }
-            </div>
+                    @switch (true)
+                    {
+                        case true when setting.PropertyType == typeof(bool):
+                            <JiayiToggle Checked="@((bool?)setting.GetValue(JiayiSettings.Instance) ?? false)"
+                                         CheckedChanged="value => ChangeBoolSetting(value, setting)"/>
+                            break;
+                        case true when setting.PropertyType == typeof(string):
+                            <JiayiTextBox 
+                                Placeholder="@settingInfo.Name" 
+                                Style="width: -webkit-fill-available; max-width: 40%;" 
+                                Value="@((string?)setting.GetValue(JiayiSettings.Instance) ?? string.Empty)"
+                                Changed="value => ChangeStringSetting(value, setting)"/>
+                            break;
+                    }
+                </div>
+            }
         }
     }
 </div>
 
 @code {
-    private void ChangeStringSetting(ChangeEventArgs args, PropertyInfo setting)
+    private void ChangeStringSetting(string? value, PropertyInfo setting)
     {
-        setting.SetValue(JiayiSettings.Instance, (string?)args.Value ?? string.Empty);
+        setting.SetValue(JiayiSettings.Instance, value ?? string.Empty);
+        JiayiSettings.Instance!.Save();
+    }
+    
+    private void ChangeBoolSetting(bool value, PropertyInfo setting)
+    {
+        setting.SetValue(JiayiSettings.Instance, value);
         JiayiSettings.Instance!.Save();
     }
 }

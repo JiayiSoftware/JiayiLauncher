@@ -1,0 +1,22 @@
+﻿<label class="toggle">
+    <input type="checkbox" checked="@Checked" @onchange="Changed">
+    <span class="toggle-box"></span>
+    
+    <span class="material-symbols-sharp">close</span>
+    <span class="material-symbols-sharp">check</span>
+</label>
+
+@code {
+    [Parameter]
+    public bool Checked { get; set; }
+    
+    [Parameter]
+    public EventCallback<bool> CheckedChanged { get; set; }
+
+    private void Changed(ChangeEventArgs obj)
+    {
+        Checked = (bool)(obj.Value ?? false);
+        CheckedChanged.InvokeAsync(Checked);
+    }
+
+}

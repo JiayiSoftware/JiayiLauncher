@@ -1,0 +1,46 @@
+﻿.toggle input {
+    display: none;
+    position: absolute;
+}
+
+.toggle {
+    display: flex;
+    width: fit-content;
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    padding: 0.2rem;
+    gap: 0.5rem;
+    flex-direction: row;
+    justify-content: space-between;
+    filter: brightness(1);
+    
+    transition: var(--transition-speed);
+}
+
+.toggle:hover {
+    filter: brightness(1.5);
+}
+
+.toggle:active {
+    box-shadow: none;
+    transform: translate(5px, 5px);
+}
+
+.toggle-box {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.08);
+    width: 1.9rem;
+    height: 1.9rem;
+    margin: -0.2rem;
+    
+    transition: var(--transition-speed);
+}
+
+input:checked + .toggle-box {
+    background-color: var(--accent);
+    transform: translate(2rem, 0);
+}
+
+.material-symbols-sharp {
+    z-index: 2;
+}

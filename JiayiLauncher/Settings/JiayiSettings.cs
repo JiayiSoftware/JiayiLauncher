@@ -36,11 +36,19 @@ public class JiayiSettings
 	[Setting("Custom status text", "Discord", "Use your own status text instead of the default ones.", "RichPresence")]
 	public bool DiscordCustomStatus { get; set; } = false;
 	
+	// i can just use empty objects to display text in the settings window
+	[Setting("Formatting strings", "Discord", 
+		"Strings that can be used in custom status text:\n" +
+		"%mod_name% - the name of the mod you're playing\n" +
+		"%game_version% - the game version you're playing\n" +
+		"%mod_count% - the number of mods you have in your collection", "DiscordCustomStatus")]
+	private object DiscordFormattingStrings { get; set; } = new();
+	
 	[Setting("Top text", "Discord", "The top-most status text.", "DiscordCustomStatus")]
-	public string DiscordDetails { get; set; } = "Playing with {modName}";
+	public string DiscordDetails { get; set; } = "Playing with %mod_name%";
 	
 	[Setting("Bottom text", "Discord", "The bottom-most status text.", "DiscordCustomStatus")]
-	public string DiscordState { get; set; } = "on {gameVersion}";
+	public string DiscordState { get; set; } = "on %game_version%";
 	
 	[Setting("Discord app ID", "Discord", "The Discord app ID to use for rich presence. Leave this blank to use the default Jiayi app ID.", "RichPresence")]
 	public string DiscordAppId { get; set; } = string.Empty;

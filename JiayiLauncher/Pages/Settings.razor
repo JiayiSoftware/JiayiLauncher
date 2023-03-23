@@ -20,7 +20,10 @@
         {
             var settingInfo = setting.GetCustomAttribute<SettingAttribute>();
             var dependentSetting = JiayiSettings.Instance.GetSetting(settingInfo!.Dependency);
-            if (dependentSetting == null || (dependentSetting.PropertyType == typeof(bool) && (bool?)dependentSetting.GetValue(JiayiSettings.Instance) == true))
+            var dependentSettingInfo = dependentSetting?.GetCustomAttribute<SettingAttribute>();
+            if (dependentSetting == null 
+                || (dependentSetting.PropertyType == typeof(bool) && (bool?)dependentSetting.GetValue(JiayiSettings.Instance) == true)
+                || dependentSettingInfo.Dependency == string.Empty)
             {
                 <div class="setting">
                     <div class="setting-info">

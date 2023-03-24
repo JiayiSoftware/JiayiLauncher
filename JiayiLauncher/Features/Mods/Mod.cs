@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using JiayiLauncher.Features.Bridge;
 using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Mods;
@@ -53,6 +54,8 @@ public class Mod
 		
 		Directory.CreateDirectory(System.IO.Path.GetDirectoryName(metadataPath)!);
 		File.WriteAllText(metadataPath, $"{Name}\nat {Path}\nWorks on {string.Join(", ", SupportedVersions)}");
+		
+		Log.Write("Mod.SaveMetadata()", $"{Name}'s metadata saved to {metadataPath}");
 	}
 
 	public static Mod? LoadFromMetadata(string path)
@@ -98,5 +101,8 @@ public class Mod
 		
 		File.Delete(metadataPath);
 		collection.Mods.Remove(this);
+		Minecraft.ModsLoaded.Remove(this);
+		
+		Log.Write("Mod.Delete()", $"Deleted {Name} from the mod collection.");
 	}
 }

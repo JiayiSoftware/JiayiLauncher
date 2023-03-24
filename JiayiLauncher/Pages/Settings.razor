@@ -5,9 +5,12 @@
 <h3>Settings</h3>
 
 <div class="tabs">
+    <span class="material-symbols-sharp">sort</span>
+    <p>Categories:</p>
     @foreach (var category in JiayiSettings.Instance!.GetCategories())
     {
-        <a class="tab-button" onclick="">@category</a>
+        @* i sincerely hope this is the last bit of javascript i have to write for this project *@
+        <a class="tab-button" onclick="document.getElementById('@category.ToLower()').scrollIntoView({behavior:'smooth'})">@category</a>
     }
 </div>
 

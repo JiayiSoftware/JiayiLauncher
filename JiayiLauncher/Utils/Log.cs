@@ -4,7 +4,7 @@ using System.IO;
 
 namespace JiayiLauncher.Utils;
 
-public static class Log
+public class Log
 {
 	public enum LogLevel
 	{
@@ -13,7 +13,7 @@ public static class Log
 		Error
 	}
 	
-	private static string _logPath = Path.Combine(
+	private static readonly string _logPath = Path.Combine(
 		Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Logs");
 
 	public static void CreateLog()

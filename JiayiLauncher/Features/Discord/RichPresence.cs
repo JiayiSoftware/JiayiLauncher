@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Timers;
 using DiscordRPC;
+using DiscordRPC.Logging;
 using JiayiLauncher.Features.Bridge;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Settings;
+using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Discord;
 
@@ -51,8 +53,14 @@ public static class RichPresence
 			JiayiSettings.Instance.DiscordAppId == string.Empty
 			? "858033874264260658"
 			: JiayiSettings.Instance.DiscordAppId);
-		_client.Initialize();
+		
 		_client.SkipIdenticalPresence = true;
+		_client.OnError += (_, e) => Log.Write("Discord", e.Message, Log.LogLevel.Error);
+		_client.OnReady += (_, e) => Log.Write("Discord", $"Connected to {e.User}");
+		_client.OnPresenceUpdate += (_, e) 
+			=> Log.Write("Discord", $"Presence updated: {e.Presence.Details} - {e.Presence.State}");
+
+		_client.Initialize();
 		
 		Update();
 		

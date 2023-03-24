@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using JiayiLauncher.Features.Bridge;
@@ -24,6 +25,8 @@ public static class Launcher
 	public static bool Launching { get; private set; }
 	
 	public static int LaunchProgress { get; private set; }
+	
+	public static event EventHandler? LaunchProgressChanged;
 
 	// the big method
 	public static async Task<LaunchResult> Launch(Mod mod)
@@ -32,6 +35,7 @@ public static class Launcher
 		Launching = true;
 		
 		LaunchProgress = 0;
+		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		Log.Write(nameof(Launcher), $"Launching {mod.Name}");
 		
 		var supported = await Minecraft.ModSupported(mod);
@@ -42,11 +46,13 @@ public static class Launcher
 		}
 
 		LaunchProgress += 10;
+		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		
 		await Minecraft.Open();
 		Log.Write(nameof(Launcher), "Opened game, waiting to launch mod...");
 		
 		LaunchProgress += 5;
+		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 
 		string path;
 		
@@ -58,17 +64,20 @@ public static class Launcher
 			path = downloadedPath;
 			
 			LaunchProgress += 30;
+			LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		}
 		else
 		{
 			path = mod.Path;
 			LaunchProgress += 35;
+			LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		}
 
 		// wait for the game to load
 		await Minecraft.WaitForModules();
 		
 		LaunchProgress += 25;
+		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		
 		if (!Minecraft.IsOpen()) return LaunchResult.GameNotFound;
 		
@@ -89,6 +98,7 @@ public static class Launcher
 
 			Process.Start(path);
 			LaunchProgress += 30;
+			LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 			Launching = false;
 			
 			Minecraft.ModsLoaded.Add(mod);
@@ -101,6 +111,7 @@ public static class Launcher
 
 		var injected = await Injector.Inject(path);
 		LaunchProgress += 30;
+		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		Launching = false;
 		
 		if (injected) Minecraft.ModsLoaded.Add(mod);

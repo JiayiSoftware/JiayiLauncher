@@ -39,8 +39,8 @@
     private string _launchProgress => _launching ? 
         $"padding: 0.5rem 1.5rem; " +
         $"background: linear-gradient(to right, " +
-        $"rgb(255, 55, 55) 0%, rgb(255, 55, 55) {Launcher.LaunchProgress * .07:0.00}%," +
-        $"var(--accent) {Launcher.LaunchProgress * .07:0.00}%," +
+        $"rgb(255, 55, 55) 0%, rgb(255, 55, 55) {Launcher.LaunchProgress}%," +
+        $"var(--accent) {Launcher.LaunchProgress}%," +
         $"var(--accent) 100%"
         : "padding: 0.5rem 1.5rem;";
 
@@ -83,7 +83,10 @@
         // we good
         _launching = true;
         _launchButton!.Disabled = true;
+        
+        Launcher.LaunchProgressChanged += (_, _) => StateHasChanged();
         result = await Launcher.Launch(Mod);
+        
         _launching = false;
         _launchButton!.Disabled = false;
 
@@ -125,8 +128,7 @@
                 ModalService.Show<MessageBox>("Injection failed", parameters);
                 break;
         }
-
-        RichPresence.Update();
+        
         StateHasChanged();
     }
 

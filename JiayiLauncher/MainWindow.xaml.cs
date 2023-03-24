@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using Blazored.Modal;
+using JiayiLauncher.Features.Discord;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
@@ -48,6 +49,8 @@ public partial class MainWindow
 		{
 			ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
 		}
+		
+		RichPresence.Initialize();
 	}
 
 	private void DarkTitlebar(object? sender, EventArgs e)

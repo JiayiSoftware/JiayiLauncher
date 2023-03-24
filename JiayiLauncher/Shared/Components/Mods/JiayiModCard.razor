@@ -3,6 +3,7 @@
 @using JiayiLauncher.Features.Launch
 @using JiayiLauncher.Features.Bridge
 @using System.Diagnostics
+@using JiayiLauncher.Features.Discord
 
 <div class="mod-background" @onmouseenter="MouseOver" @onmouseleave="MouseLeave">
     <div class="mod-header">
@@ -19,7 +20,7 @@
     </div>
     <p class="mod-version">Works on @(string.Join(", ", Mod.SupportedVersions))</p>
     <div class="mod-controls">
-        <JiayiButton OnClick="LaunchClicked" Size="16px" Style="padding: 0.5rem 1.5rem;" @ref="_launchButton">Launch</JiayiButton>
+        <JiayiButton OnClick="LaunchClicked" Size="16px" Style="@_launchProgress" @ref="_launchButton">Launch</JiayiButton>
         <span class="material-symbols-sharp" style="cursor: pointer; opacity: @_controlsOpacity;" title="Edit mod" @onclick="EditClicked">edit</span>
         <span class="material-symbols-sharp" style="color: darkred; cursor: pointer; opacity: @_controlsOpacity;" title="Delete mod (irreversible)" @onclick="DeleteClicked">delete</span>
     </div>
@@ -35,7 +36,13 @@
     
     private bool _launching;
     // percentage to rem from 0-7
-    private string _launchProgress => _launching ? $"box-shadow: {Launcher.LaunchProgress * .07:0.00}rem 0 0 0 rgb(255, 55, 55);" : "";
+    private string _launchProgress => _launching ? 
+        $"padding: 0.5rem 1.5rem; " +
+        $"background: linear-gradient(to right, " +
+        $"rgb(255, 55, 55) 0%, rgb(255, 55, 55) {Launcher.LaunchProgress * .07:0.00}%," +
+        $"var(--accent) {Launcher.LaunchProgress * .07:0.00}%," +
+        $"var(--accent) 100%"
+        : "padding: 0.5rem 1.5rem;";
 
     private JiayiButton? _launchButton;
 
@@ -119,6 +126,7 @@
                 break;
         }
 
+        RichPresence.Update();
         StateHasChanged();
     }
 

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using JiayiLauncher.Settings.Special;
 using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Settings;
@@ -40,6 +39,9 @@ public class JiayiSettings
 	
 	[Setting("Bottom text", "Discord", "The bottom-most status text.", "RichPresence")]
 	public string DiscordState { get; set; } = "on %game_version%";
+	
+	[Setting("Show elapsed time", "Discord", "Show how long you've been playing for.", "RichPresence")]
+	public bool DiscordShowElapsedTime { get; set; } = true;
 	
 	[Setting("Discord app ID", "Discord", "The Discord app ID to use for rich presence. Leave this blank to use the default Jiayi app ID.", "RichPresence")]
 	public string DiscordAppId { get; set; } = string.Empty;

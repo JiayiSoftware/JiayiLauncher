@@ -72,7 +72,7 @@
         if (!url.StartsWith("http"))
             url = "https://" + url;
         
-        if (ModCollection.Current!.HasMod(url))
+        if (ModCollection.Current != null && ModCollection.Current.HasMod(url))
         {
             _urlStatus = "This mod is already in your collection!";
             return;

@@ -69,6 +69,10 @@ public class JiayiSettings
 	public void Save()
 	{
 		Directory.CreateDirectory(Path.GetDirectoryName(_settingsPath)!);
+		
+		// wipe first
+		File.WriteAllText(_settingsPath, string.Empty);
+		
 		using var stream = File.OpenWrite(_settingsPath);
 		JsonSerializer.Serialize(stream, this);
 		Log.Write(this, "Saved settings.");

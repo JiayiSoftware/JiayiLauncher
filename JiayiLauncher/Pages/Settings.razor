@@ -10,7 +10,7 @@
     @foreach (var category in JiayiSettings.Instance!.GetCategories())
     {
         @* i sincerely hope this is the last bit of javascript i have to write for this project *@
-        <a class="tab-button" onclick="document.getElementById('@category.ToLower()').scrollIntoView({behavior:'smooth'})">@category</a>
+        <a class="tab-button" onclick="document.getElementById('@category.ToLower()').scrollIntoView({behavior: 'smooth'})">@category</a>
     }
 </div>
 

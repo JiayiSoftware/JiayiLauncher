@@ -47,10 +47,7 @@
 
         if (dialog.ShowDialog() == true)
         {
-            var path = dialog.FileName;
-            var name = Path.GetFileNameWithoutExtension(path);
-            
-            var mod = new Mod(name, path);
+            var mod = ModImporter.ImportFromPath(dialog.FileName);
             
             var parameters = new ModalParameters()
                 .Add(nameof(EditMod.Mod), mod);

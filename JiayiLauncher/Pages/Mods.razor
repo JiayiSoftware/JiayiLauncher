@@ -135,25 +135,58 @@
     {
         _hovered = "no";
         
-        var files = obj.GetMultipleFiles();
+        var files = obj.GetMultipleFiles(50);
 
         if (files.Count == 1)
         {
             var file = files[0];
-            var tempPath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", file.Name);
-
-            await using var fs = new FileStream(tempPath, FileMode.Create);
-            await file.OpenReadStream(524288000L).CopyToAsync(fs);
-            
-            var mod = new Mod(Path.GetFileNameWithoutExtension(file.Name), tempPath);
+            var mod = await ModImporter.ImportFromBrowserFile(file);
             
             var parameters = new ModalParameters()
                 .Add(nameof(EditMod.Mod), mod);
             
             var modal = ModalService.Show<EditMod>("Edit mod", parameters);
             await modal.Result;
-            File.Delete(tempPath);
+        }
+        else if (files.Count > 1)
+        {
+            var mods = await ModImporter.ImportFromBrowserFiles(files);
+            
+            // don't bother showing the edit mod modal
+
+            if (ModCollection.Current == null)
+            {
+                var options = new List<(string, EventCallback)>
+                {
+                    ("Yes", new EventCallback(null, () =>
+                    {
+                        JiayiSettings.Instance!.ModCollectionPath = 
+                            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Jiayi Mods");
+                        JiayiSettings.Instance.Save();
+                        ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
+                        
+                        foreach (var mod in mods)
+                        {
+                            ModCollection.Current!.Mods.Add(mod);
+                        }
+                    })),
+                    ("No", EventCallback.Empty)
+                };
+                
+                var parameters = new ModalParameters()
+                    .Add(nameof(MessageBox.Buttons), options)
+                    .Add(nameof(MessageBox.Message), "Since you don't have a mods folder set up, Jiayi will make one for you to import these mods. Is that okay? It will be in your documents.");
+                
+                var modal = ModalService.Show<MessageBox>("Import", parameters);
+                await modal.Result;
+                Refresh();
+                return;
+            }
+            
+            foreach (var mod in mods)
+            {
+                ModCollection.Current.Mods.Add(mod);
+            }
         }
     }
 

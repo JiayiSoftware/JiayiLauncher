@@ -32,3 +32,14 @@
 .slider:active::-webkit-slider-thumb {
     width: 0;
 }
+
+.slider-value {
+    margin: 0;
+    position: relative;
+    top: 1.15rem;
+    opacity: 0;
+    font-size: 12px;
+    color: var(--text-secondary);
+    
+    transition: var(--transition-speed);
+}

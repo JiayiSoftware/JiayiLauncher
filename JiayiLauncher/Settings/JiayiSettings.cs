@@ -49,14 +49,14 @@ public class JiayiSettings
 	[Setting("Large image key", "Discord", "The large image key to use for rich presence. Leave this blank to use the default Jiayi image.", "RichPresence")]
 	public string DiscordLargeImageKey { get; set; } = string.Empty;
 	
-	[Setting("Large image text", "Discord", "The large image text to use for rich presence. Leave this blank to use the default Jiayi text.", "RichPresence")]
-	public string DiscordLargeImageText { get; set; } = string.Empty;
-	
 	[Setting("Small image key", "Discord", "The small image key to use for rich presence. Leave this blank to use the default Jiayi image.", "RichPresence")]
 	public string DiscordSmallImageKey { get; set; } = string.Empty;
 	
-	[Setting("Small image text", "Discord", "The small image text to use for rich presence. Leave this blank to use the default Jiayi text.", "RichPresence")]
-	public string DiscordSmallImageText { get; set; } = string.Empty;
+	[Setting("Large image text", "Discord", "The large image text to use for rich presence.", "RichPresence")]
+	public string DiscordLargeImageText { get; set; } = "Jiayi Launcher";
+
+	[Setting("Small image text", "Discord", "The small image text to use for rich presence.", "RichPresence")]
+	public string DiscordSmallImageText { get; set; } = "Minecraft for Windows";
 	
 	// injection settings
 	[Setting("Use injection delay", "Injection", "Wait for a set amount of time instead of waiting for the game to load before injecting.")]

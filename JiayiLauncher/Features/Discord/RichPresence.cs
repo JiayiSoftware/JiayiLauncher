@@ -97,10 +97,10 @@ public static class RichPresence
 			Assets = new Assets
 			{
 				LargeImageKey = JiayiSettings.Instance.DiscordLargeImageKey == string.Empty ? "logonewdiscord" : JiayiSettings.Instance.DiscordLargeImageKey,
-				LargeImageText = JiayiSettings.Instance.DiscordLargeImageText == string.Empty ? "Jiayi Launcher" : FormatString(JiayiSettings.Instance.DiscordLargeImageText),
+				LargeImageText = FormatString(JiayiSettings.Instance.DiscordLargeImageText),
 				
 				SmallImageKey = JiayiSettings.Instance.DiscordSmallImageKey == string.Empty ? "minecraft" : JiayiSettings.Instance.DiscordSmallImageKey,
-				SmallImageText = JiayiSettings.Instance.DiscordSmallImageText == string.Empty ? "Minecraft for Windows" : FormatString(JiayiSettings.Instance.DiscordSmallImageText)
+				SmallImageText = FormatString(JiayiSettings.Instance.DiscordSmallImageText)
 			},
 			
 			Timestamps = new Timestamps

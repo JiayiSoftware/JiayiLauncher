@@ -59,7 +59,7 @@
             }
         }
     </ul>
-    @if (_searchResults == 0 && JiayiSettings.Instance.ModCollectionPath != string.Empty)
+    @if (_searchResults == 0 && ModCollection.Current?.Mods.Count > 0)
     {
         <p style="text-align: center; margin-top: 0;">No results found.</p>
     }
@@ -167,7 +167,7 @@
                         
                         foreach (var mod in mods)
                         {
-                            ModCollection.Current!.Mods.Add(mod);
+                            ModCollection.Current!.Add(mod);
                         }
                     })),
                     ("No", EventCallback.Empty)
@@ -185,7 +185,7 @@
             
             foreach (var mod in mods)
             {
-                ModCollection.Current.Mods.Add(mod);
+                ModCollection.Current.Add(mod);
             }
         }
     }

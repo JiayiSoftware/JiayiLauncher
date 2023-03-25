@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using JiayiLauncher.Features.Bridge;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Launch;
@@ -73,8 +74,12 @@ public static class Launcher
 			LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		}
 
-		// wait for the game to load
-		await Minecraft.WaitForModules();
+		// either wait for the game's modules to load
+		// or if the user has injection delay enabled, wait for the time they specified
+		if (JiayiSettings.Instance!.UseInjectionDelay)
+			Task.Delay(JiayiSettings.Instance.InjectionDelay[2] * 1000).Wait();
+		else
+			await Minecraft.WaitForModules();
 		
 		LaunchProgress += 25;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);

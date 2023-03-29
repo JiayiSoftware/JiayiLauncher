@@ -65,6 +65,10 @@ public class JiayiSettings
 	[Setting("Injection delay", "Injection", "The amount of time to wait before injecting, in seconds.",
 		"UseInjectionDelay")]
 	public int[] InjectionDelay { get; set; } = { 0, 30, 5 };
+	
+	// profile settings
+	[Setting("Profile folder path", "Profiles", "The path to the folder containing your profiles.")]
+	public string ProfileCollectionPath { get; set; } = string.Empty;
 
 	public void Save()
 	{

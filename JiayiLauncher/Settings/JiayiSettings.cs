@@ -21,6 +21,9 @@ public class JiayiSettings
 	// general settings
 	[Setting("Mod folder path", "General", "The path to the folder containing your mods.")]
 	public string ModCollectionPath { get; set; } = string.Empty;
+	
+	[Setting("Profile folder path", "General", "The path to the folder containing your profiles.")]
+	public string ProfileCollectionPath { get; set; } = string.Empty;
 
 	// discord settings
 	[Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.")]
@@ -58,17 +61,26 @@ public class JiayiSettings
 	[Setting("Small image text", "Discord", "The small image text to use for rich presence.", "RichPresence")]
 	public string DiscordSmallImageText { get; set; } = "Minecraft for Windows";
 	
-	// injection settings
-	[Setting("Use injection delay", "Injection", "Wait for a set amount of time instead of waiting for the game to load before injecting.")]
+	// launch settings
+	[Setting("Use injection delay", "Launch", "Wait for a set amount of time instead of waiting for the game to load before injecting.")]
 	public bool UseInjectionDelay { get; set; } = false;
 
-	[Setting("Injection delay", "Injection", "The amount of time to wait before injecting, in seconds.",
+	[Setting("Injection delay", "Launch", "The amount of time to wait before injecting, in seconds.",
 		"UseInjectionDelay")]
 	public int[] InjectionDelay { get; set; } = { 0, 30, 5 };
 	
-	// profile settings
-	[Setting("Profile folder path", "Profiles", "The path to the folder containing your profiles.")]
-	public string ProfileCollectionPath { get; set; } = string.Empty;
+	[Setting("Override module requirement", "Launch",
+		"Override the amount of loaded modules needed before Jiayi will inject.\n\n" +
+		"If the launcher injects too early or too late, try changing this value.")]
+	public bool OverrideModuleRequirement { get; set; } = false;
+	
+	[Setting("Module requirement", "Launch",
+		"The amount of loaded modules needed before Jiayi will inject.", "OverrideModuleRequirement")]
+	public int[] ModuleRequirement { get; set; } = { 150, 180, 160 };
+	
+	[Setting("Accelerate game loading", "Launch",
+		"Speed up loading times by terminating unnecessary processes. Beware of jank.")]
+	public bool AccelerateGameLoading { get; set; } = false;
 
 	public void Save()
 	{

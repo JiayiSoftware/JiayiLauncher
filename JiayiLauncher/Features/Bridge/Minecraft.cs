@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.System;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Bridge;
@@ -94,10 +95,25 @@ public static class Minecraft
 			while (true)
 			{
 				Process.Refresh();
+				if (JiayiSettings.Instance!.OverrideModuleRequirement)
+					if (Process.Modules.Count > JiayiSettings.Instance.ModuleRequirement[2]) break;
+				
 				if (Process.Modules.Count > 160) break;
 
+				if (JiayiSettings.Instance.AccelerateGameLoading)
+				{
+					var brokers = Process.GetProcessesByName("RuntimeBroker");
+					if (brokers.Length > 0)
+					{
+						foreach (var broker in brokers)
+						{
+							broker.Kill();
+						}
+					}
+				}
+
 				// wait for a bit
-				Task.Delay(4000).Wait();
+				Task.Delay(100).Wait();
 			}
 		});
 	}

@@ -20,8 +20,16 @@
     [Parameter]
     public EventCallback<int> ValueChanged { get; set; }
     
-    private int _percentage => Value * 100 / Max;
-    
+    private int _percentage
+    {
+        get
+        {
+            var max = Max - Min;
+            var value = Value - Min;
+            return value * 100 / max;
+        }
+    }
+
     // webkit doesn't support styling the slider progress so we use linear-gradient to fake it
     private string _progress => 
         $"var(--accent) 0%, var(--accent) {_percentage}%, var(--background-secondary) {_percentage}%, var(--background-secondary) 100%";

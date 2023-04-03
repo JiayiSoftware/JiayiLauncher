@@ -10,7 +10,6 @@ namespace JiayiLauncher.Features.Mods;
 
 public class ModCollection
 {
-	public string Name { get; set; } = "My collection";
 	public string BasePath { get; private init; } = string.Empty;
 	public List<Mod> Mods { get; } = new();
 	
@@ -98,32 +97,9 @@ public class ModCollection
 	// path is a folder here, the file name will be the collection name + .jiayi
 	public void Export(string path)
 	{
-		var tempFolder = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-		Directory.CreateDirectory(tempFolder);
-
-		foreach (var file in Directory.GetFiles(BasePath))
-		{
-			// this is metadata, we don't want to copy it (yet)
-			if (file.EndsWith(".jmod")) continue;
-			
-			File.Copy(file, Path.Combine(tempFolder, Path.GetFileName(file)));
-		}
+		ZipFile.CreateFromDirectory(BasePath, path);
 		
-		// NOW we copy the metadata
-		Directory.CreateDirectory(Path.Combine(tempFolder, ".jiayi"));
-		foreach (var file in Directory.GetFiles(Path.Combine(BasePath, ".jiayi")))
-		{
-			File.Copy(file, Path.Combine(tempFolder, ".jiayi", Path.GetFileName(file)));
-		}
-		
-		// zip it
-		var zipPath = Path.Combine(path, $"{Name}.jiayi");
-		ZipFile.CreateFromDirectory(tempFolder, zipPath);
-		
-		// delete the temp folder
-		Directory.Delete(tempFolder, true);
-		
-		Log.Write("ModCollection", $"Exported mod collection to {zipPath}");
+		Log.Write("ModCollection", $"Exported mod collection to {path}");
 	}
 
 	public void Add(Mod mod)

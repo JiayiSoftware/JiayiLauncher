@@ -5,7 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Utils;
+using Microsoft.Win32;
 
 namespace JiayiLauncher.Settings;
 
@@ -21,6 +23,25 @@ public class JiayiSettings
 	// general settings
 	[Setting("Mod folder path", "General", "The path to the folder containing your mods.")]
 	public string ModCollectionPath { get; set; } = string.Empty;
+
+	// note these types of settings should probably be ignored by the json serializer
+	[Setting("Export collection", "General",
+		"Export your mod collection to a file. You can share this with other people.")]
+	[JsonIgnore] public (string, Action) ExportCollection { get; set; } = ("Export", () =>
+	{
+		var dialog = new SaveFileDialog
+		{
+			DefaultExt = "jiayi",
+			Filter = "Jiayi mod collection (*.jiayi)|*.jiayi",
+			InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+			Title = "Export mod collection"
+		};
+		if (dialog.ShowDialog() != true) return; // this is an action why do i have to return a bool
+
+		var path = dialog.FileName;
+
+		if (ModCollection.Current != null) ModCollection.Current.Export(path);
+	});
 	
 	[Setting("Profile folder path", "General", "The path to the folder containing your profiles.")]
 	public string ProfileCollectionPath { get; set; } = string.Empty;

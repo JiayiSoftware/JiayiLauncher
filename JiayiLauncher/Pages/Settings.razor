@@ -53,6 +53,10 @@
                                 Style="width: -webkit-fill-available; max-width: 40%;"
                                 ValueChanged="value => ChangeSliderSetting((int[])setting.GetValue(JiayiSettings.Instance)!, value, setting)"/>
                             break;
+                        case true when setting.PropertyType == typeof((string, Action)):
+                            var (name, action) = ((string, Action))setting.GetValue(JiayiSettings.Instance)!;
+                            <JiayiButton OnClick="action" Size="16px" Style="padding: 0.5rem 1rem">@name</JiayiButton>
+                            break;
                     }
                 </div>
             }

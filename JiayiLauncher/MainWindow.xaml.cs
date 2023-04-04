@@ -17,7 +17,7 @@ namespace JiayiLauncher;
 public partial class MainWindow
 {
 	[LibraryImport("dwmapi.dll")]
-	private static partial int DwmSetWindowAttribute(nint hWnd, int attr, ref bool attrValue, int attrSize);
+	private static partial int DwmSetWindowAttribute(nint hWnd, int attr, [MarshalAs(UnmanagedType.Bool)] ref bool attrValue, int attrSize);
 	
 	public MainWindow()
 	{

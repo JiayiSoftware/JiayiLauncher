@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Interop;
 using Blazored.Modal;
@@ -16,11 +16,19 @@ namespace JiayiLauncher;
 
 public partial class MainWindow
 {
-	[DllImport("dwmapi.dll", PreserveSig = true)]
-	private static extern int DwmSetWindowAttribute(nint hWnd, int attr, ref bool attrValue, int attrSize);
+	[LibraryImport("dwmapi.dll")]
+	private static partial int DwmSetWindowAttribute(nint hWnd, int attr, ref bool attrValue, int attrSize);
 	
 	public MainWindow()
 	{
+		var __ = new Mutex(true, "JiayiLauncher", out var createdNew);
+
+		if (!createdNew)
+		{
+			// send args to other instance, not implemented yet
+			Environment.Exit(0);
+		}
+		
 		InitializeComponent();
 		Log.CreateLog();
 		
@@ -62,7 +70,7 @@ public partial class MainWindow
 	}
 
 	// ReSharper disable once UnusedMember.Local
-	private void ChangeColor(object? sender, BlazorWebViewInitializedEventArgs e)
+	private void ChangeColor(object? _, BlazorWebViewInitializedEventArgs e)
 	{
 		e.WebView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);
 	}

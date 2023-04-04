@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Principal;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Windows;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Utils;
 using Microsoft.Win32;
@@ -45,6 +47,19 @@ public class JiayiSettings
 	
 	[Setting("Profile folder path", "General", "The path to the folder containing your profiles.")]
 	public string ProfileCollectionPath { get; set; } = string.Empty;
+
+	[Setting("Set file associations", "General", "Set up file associations for Jiayi related files.")]
+	[JsonIgnore] public (string, Action) SetFileAssociations { get; } = ("Set (requires admin)", () =>
+	{
+		// check for admin
+		using var identity = WindowsIdentity.GetCurrent();
+		var principal = new WindowsPrincipal(identity);
+		
+		// the user should already know this, no need to tell them (unless they're illiterate or something)
+		if (!principal.IsInRole(WindowsBuiltInRole.Administrator)) return;	
+		
+		WinRegistry.SetFileAssociation("Jiayi Mod Collection", ".jiayi");
+	});
 
 	// discord settings
 	[Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.")]

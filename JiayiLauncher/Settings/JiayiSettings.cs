@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -117,6 +118,25 @@ public class JiayiSettings
 	[Setting("Accelerate game loading", "Launch",
 		"Speed up loading times by terminating unnecessary processes. Beware of jank.")]
 	public bool AccelerateGameLoading { get; set; } = false;
+	
+	// log settings
+	[Setting("Open current log", "Logs", "Open the current log file.")]
+	[JsonIgnore] public (string, Action) OpenCurrentLog { get; set; } = ("Open", () =>
+	{
+		var path = Path.Combine(Log.LogPath, "Current.log");
+		var info = new ProcessStartInfo(path) { UseShellExecute = true };
+		Process.Start(info);
+	});
+
+	[Setting("Clear previous logs", "Logs", "Clear all previous log files.")]
+	[JsonIgnore] public (string, Action) ClearPreviousLogs { get; set; } = ("Clear", () =>
+	{
+		var path = Path.Combine(Log.LogPath, "Previous");
+		if (!Directory.Exists(path)) return;
+		
+		Directory.Delete(path, true);
+		Directory.CreateDirectory(path);
+	});
 
 	public void Save()
 	{

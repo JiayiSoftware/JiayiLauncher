@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
@@ -12,27 +13,45 @@ using JiayiLauncher.Utils;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.DependencyInjection;
 
+using static JiayiLauncher.Utils.Imports;
+
 namespace JiayiLauncher;
 
 public partial class MainWindow
 {
-	[LibraryImport("dwmapi.dll")]
-	private static partial int DwmSetWindowAttribute(nint hWnd, int attr, [MarshalAs(UnmanagedType.Bool)] ref bool attrValue, int attrSize);
-	
 	public MainWindow()
 	{
 		var __ = new Mutex(true, "JiayiLauncher", out var createdNew);
 
 		if (!createdNew)
 		{
-			// send args to other instance, not implemented yet
+			var args = Environment.GetCommandLineArgs().ToList();
+			args.RemoveAt(0);
+			var argString = string.Join(" ", args);
+			
+			// allocate memory for the string
+			var ptr = Marshal.StringToHGlobalUni(argString);
+			
+			var hWnd = FindWindow(null, "Jiayi Launcher");
+			if (hWnd != nint.Zero)
+			{
+				if (argString != string.Empty)
+				{
+					CopyData cds;
+					cds.dwData = 1;
+					cds.cbData = (uint)((argString.Length + 1) * 2);
+					cds.lpData = ptr;
+
+					SendMessage(hWnd, 0x004A, nint.Zero, ref cds);
+				}
+			}
 			Environment.Exit(0);
 		}
 		
 		InitializeComponent();
 		Log.CreateLog();
 		
-		SourceInitialized += DarkTitlebar;
+		SourceInitialized += NativeInit;
 		
 		AppDomain.CurrentDomain.UnhandledException += (_, args) =>
 		{
@@ -61,16 +80,33 @@ public partial class MainWindow
 		RichPresence.Initialize();
 	}
 
-	private void DarkTitlebar(object? sender, EventArgs e)
+	private void NativeInit(object? sender, EventArgs e)
 	{
 		var windowHelper = new WindowInteropHelper(this);
 		var value = true;
 		var result = DwmSetWindowAttribute(windowHelper.Handle, 20, ref value, Marshal.SizeOf(value));
 		if (result != 0) Log.Write(this, $"Failed to set dark titlebar. Error code: {result}", Log.LogLevel.Warning);
+		
+		var source = HwndSource.FromHwnd(windowHelper.Handle);
+		source?.AddHook(WndProc);
+	}
+
+	private nint WndProc(nint hWnd, int msg, nint wParam, nint lParam, ref bool handled)
+	{
+		if (msg != 0x004A) return 0;
+		handled = true;
+		
+		var data = Marshal.PtrToStructure<CopyData>(lParam);
+		var args = Marshal.PtrToStringUni(data.lpData);
+		if (args != null)
+		{
+			Log.Write(this, $"Received args: {args}");
+		}
+		return 0;
 	}
 
 	// ReSharper disable once UnusedMember.Local
-	private void ChangeColor(object? _, BlazorWebViewInitializedEventArgs e)
+	private void ChangeColor(object? unused, BlazorWebViewInitializedEventArgs e)
 	{
 		e.WebView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);
 	}

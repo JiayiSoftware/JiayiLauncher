@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JiayiLauncher.Features.Bridge;
 using JiayiLauncher.Utils;
-using static JiayiLauncher.Features.Launch.Imports;
+using static JiayiLauncher.Utils.Imports;
 
 namespace JiayiLauncher.Features.Launch;
 

@@ -1,9 +1,10 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace JiayiLauncher.Features.Launch;
+namespace JiayiLauncher.Utils;
 
 public static partial class Imports
 {
+	// constants
 	public const int PROCESS_CREATE_THREAD = 0x0002;
 	public const int PROCESS_QUERY_INFORMATION = 0x0400;
 	public const int PROCESS_VM_OPERATION = 0x0008;
@@ -14,6 +15,16 @@ public static partial class Imports
 	public const uint MEM_RESERVE = 0x00002000;
 	public const uint PAGE_READWRITE = 4;
 
+	// structs
+	[StructLayout(LayoutKind.Sequential)]
+	public struct CopyData
+	{
+		public nint dwData;
+		public uint cbData;
+		public nint lpData;
+	}
+	
+	// functions
 	[LibraryImport("kernel32.dll")]
 	public static partial nint OpenProcess(int dwDesiredAccess, [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle, int dwProcessId);
 
@@ -26,7 +37,7 @@ public static partial class Imports
 	[LibraryImport("kernel32.dll", SetLastError = true)]
 	public static partial nint VirtualAllocEx(nint hProcess, nint lpAddress, uint dwSize,
 		uint flAllocationType, uint flProtect);
-
+	
 	[LibraryImport("kernel32.dll", SetLastError = true)]
 	[return: MarshalAs(UnmanagedType.Bool)]
 	public static partial bool WriteProcessMemory(nint hProcess, nint lpBaseAddress, byte[] lpBuffer, uint nSize,
@@ -35,4 +46,16 @@ public static partial class Imports
 	[LibraryImport("kernel32.dll")]
 	public static partial nint CreateRemoteThread(nint hProcess, nint lpThreadAttributes, uint dwStackSize,
 		nint lpStartAddress, nint lpParameter, uint dwCreationFlags, nint lpThreadId);
+	
+	[LibraryImport("dwmapi.dll")]
+	public static partial int DwmSetWindowAttribute(nint hWnd, int attr, [MarshalAs(UnmanagedType.Bool)] ref bool attrValue, int attrSize);
+	
+	[LibraryImport("shell32.dll", SetLastError = true)]
+	public static partial void SHChangeNotify(uint eventId, uint flags, nint item1, nint item2);
+	
+	[LibraryImport("user32.dll")]
+	public static partial nint SendMessage(nint hWnd, uint msg, nint wParam, ref CopyData lParam);
+	
+	[LibraryImport("user32.dll")]
+	public static partial nint FindWindow([MarshalAs(UnmanagedType.LPWStr)] string? lpClassName, [MarshalAs(UnmanagedType.LPWStr)] string lpWindowName);
 }

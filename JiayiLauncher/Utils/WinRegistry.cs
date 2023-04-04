@@ -1,15 +1,12 @@
-﻿using System;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+using System;
+
+using static JiayiLauncher.Utils.Imports;
 
 namespace JiayiLauncher.Utils;
 
 public static partial class WinRegistry
 {
-	[LibraryImport("shell32.dll", SetLastError = true)]
-	private static partial void SHChangeNotify(uint eventId, uint flags, nint item1, nint item2);
-	
 	public static void SetFileAssociation(string description, string extension)
 	{
 		var baseKey = Registry.ClassesRoot.CreateSubKey(extension);

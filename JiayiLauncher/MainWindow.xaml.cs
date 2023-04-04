@@ -12,13 +12,15 @@ using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.Web.WebView2.Wpf;
 using static JiayiLauncher.Utils.Imports;
 
 namespace JiayiLauncher;
 
 public partial class MainWindow
 {
+	public static WebView2? WebView;
+
 	public MainWindow()
 	{
 		var __ = new Mutex(true, "JiayiLauncher", out var createdNew);
@@ -108,6 +110,7 @@ public partial class MainWindow
 	// ReSharper disable once UnusedMember.Local
 	private void ChangeColor(object? unused, BlazorWebViewInitializedEventArgs e)
 	{
-		e.WebView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);
+		WebView = e.WebView;
+		WebView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);
 	}
 }

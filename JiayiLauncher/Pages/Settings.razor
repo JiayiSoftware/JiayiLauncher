@@ -39,8 +39,11 @@
                                          CheckedChanged="value => ChangeBoolSetting(value, setting)"/>
                             break;
                         case true when setting.PropertyType == typeof(string):
+                            // feeling a bit silly today
+                            var random = Random.Shared.Next(1, 1000);
+                            var placeholder = random == 1 ? "Nothing!" : settingInfo.Name;
                             <JiayiTextBox 
-                                Placeholder="@settingInfo.Name" 
+                                Placeholder="@placeholder" 
                                 Style="width: -webkit-fill-available; max-width: 40%;" 
                                 Value="@((string?)setting.GetValue(JiayiSettings.Instance) ?? string.Empty)"
                                 Changed="value => ChangeStringSetting(value, setting)"/>

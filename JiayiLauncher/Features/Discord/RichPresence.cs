@@ -38,6 +38,9 @@ public static class RichPresence
 				if (ModCollection.Current is null) return f.Replace("%mod_count%", "no mods");
 				var plural = ModCollection.Current.Mods.Count == 1 ? "mod" : "mods";
 				return f.Replace("%mod_count%", $"{ModCollection.Current.Mods.Count.ToString()} {plural}");
+			case true when f.Contains("%current_page%"):
+				var page = MainWindow.WebView!.Source.LocalPath;
+				return f.Replace("%current_page%", page);
 		}
 		
 		return f;

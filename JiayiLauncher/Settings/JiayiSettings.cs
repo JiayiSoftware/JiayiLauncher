@@ -120,11 +120,16 @@ public class JiayiSettings
 	public bool AccelerateGameLoading { get; set; } = false;
 	
 	// log settings
-	[Setting("Open current log", "Logs", "Open the current log file.")]
-	[JsonIgnore] public (string, Action) OpenCurrentLog { get; set; } = ("Open", () =>
+	[Setting("Open log folder", "Logs", "Open the log folder.")]
+	[JsonIgnore] public (string, Action) OpenLogFolder { get; set; } = ("Open", () =>
 	{
-		var path = Path.Combine(Log.LogPath, "Current.log");
-		var info = new ProcessStartInfo(path) { UseShellExecute = true };
+		var info = new ProcessStartInfo
+		{
+			UseShellExecute = true,
+			Verb = "open",
+			FileName = Log.LogPath
+		};
+		
 		Process.Start(info);
 	});
 

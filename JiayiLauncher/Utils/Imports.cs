@@ -57,5 +57,5 @@ public static partial class Imports
 	public static partial nint SendMessage(nint hWnd, uint msg, nint wParam, ref CopyData lParam);
 	
 	[LibraryImport("user32.dll")]
-	public static partial nint FindWindow([MarshalAs(UnmanagedType.LPWStr)] string? lpClassName, [MarshalAs(UnmanagedType.LPWStr)] string lpWindowName);
+	public static partial nint FindWindowW([MarshalAs(UnmanagedType.LPWStr)] string? lpClassName, [MarshalAs(UnmanagedType.LPWStr)] string lpWindowName);
 }

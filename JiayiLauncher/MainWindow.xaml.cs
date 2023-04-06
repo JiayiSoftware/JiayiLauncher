@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Interop;
 using Blazored.Modal;
@@ -23,37 +21,8 @@ public partial class MainWindow
 
 	public MainWindow()
 	{
-		var __ = new Mutex(true, "JiayiLauncher", out var createdNew);
-
-		if (!createdNew)
-		{
-			var args = Environment.GetCommandLineArgs().ToList();
-			args.RemoveAt(0);
-			var argString = string.Join(" ", args);
-			
-			// allocate memory for the string
-			var ptr = Marshal.StringToHGlobalUni(argString);
-			
-			var hWnd = FindWindow(null, "Jiayi Launcher");
-			if (hWnd != nint.Zero)
-			{
-				if (argString != string.Empty)
-				{
-					CopyData cds;
-					cds.dwData = 1;
-					cds.cbData = (uint)((argString.Length + 1) * 2);
-					cds.lpData = ptr;
-
-					SendMessage(hWnd, 0x004A, nint.Zero, ref cds);
-				}
-			}
-			Environment.Exit(0);
-		}
-		
 		InitializeComponent();
 		Log.CreateLog();
-		
-		SourceInitialized += NativeInit;
 		
 		AppDomain.CurrentDomain.UnhandledException += (_, args) =>
 		{
@@ -82,7 +51,7 @@ public partial class MainWindow
 		RichPresence.Initialize();
 	}
 
-	private void NativeInit(object? sender, EventArgs e)
+	protected override void OnSourceInitialized(EventArgs e)
 	{
 		var windowHelper = new WindowInteropHelper(this);
 		var value = true;
@@ -91,11 +60,18 @@ public partial class MainWindow
 		
 		var source = HwndSource.FromHwnd(windowHelper.Handle);
 		source?.AddHook(WndProc);
+		
+		base.OnSourceInitialized(e);
 	}
 
 	private nint WndProc(nint hWnd, int msg, nint wParam, nint lParam, ref bool handled)
 	{
-		if (msg != 0x004A) return 0;
+		if (msg != 0x004A)
+		{
+			handled = false;
+			return 0; // WM_COPYDATA
+		}
+
 		handled = true;
 		
 		var data = Marshal.PtrToStructure<CopyData>(lParam);
@@ -104,11 +80,13 @@ public partial class MainWindow
 		{
 			Log.Write(this, $"Received args: {args}");
 		}
+		
 		return 0;
 	}
 
 	// ReSharper disable once UnusedMember.Local
-	private void ChangeColor(object? unused, BlazorWebViewInitializedEventArgs e)
+	// ReSharper disable once UnusedParameter.Local
+	private void ChangeColor(object? _, BlazorWebViewInitializedEventArgs e)
 	{
 		WebView = e.WebView;
 		WebView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);

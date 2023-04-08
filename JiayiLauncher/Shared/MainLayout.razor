@@ -23,8 +23,8 @@
         StateHasChanged();
     }
     
-    private List<string> _konami = new() { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a", "Enter" };
-    private string _nextKey = "ArrowUp";
+    private List<string?> _konami = new() { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a", "Enter" };
+    private string? _nextKey = "ArrowUp";
 
     private void KeyDown(KeyboardEventArgs obj)
     {
@@ -35,13 +35,13 @@
         }
         else
         {
-            _konami = new List<string> { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "KeyB", "KeyA", "Enter" };
+            _konami = new List<string?> { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "KeyB", "KeyA", "Enter" };
             _nextKey = _konami.FirstOrDefault();
         }
         
         if (_konami.Count == 0)
         {
-            _konami = new List<string> { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "KeyB", "KeyA", "Enter" };
+            _konami = new List<string?> { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "KeyB", "KeyA", "Enter" };
             _nextKey = _konami.FirstOrDefault();
             NavigationManager.NavigateTo("/Secret");
         }

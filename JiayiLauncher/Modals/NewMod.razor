@@ -86,7 +86,7 @@
             {
                 if (response.Content.Headers.ContentDisposition != null)
                 {
-                    if (response.Content.Headers.ContentDisposition is not { FileName: { } })
+                    if (response.Content.Headers.ContentDisposition is not { FileName: not null })
                     {
                         _urlStatus = "Invalid link";
                         return;

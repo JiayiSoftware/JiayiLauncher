@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Timers;
 using DiscordRPC;
-using DiscordRPC.Logging;
 using JiayiLauncher.Features.Bridge;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Settings;
@@ -71,7 +70,7 @@ public static class RichPresence
 		_timer.Start();
 	}
 
-	public static void Update()
+	private static void Update()
 	{
 		if (!JiayiSettings.Instance!.RichPresence)
 		{

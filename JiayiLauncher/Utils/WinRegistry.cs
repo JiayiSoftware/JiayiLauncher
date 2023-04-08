@@ -5,7 +5,7 @@ using static JiayiLauncher.Utils.Imports;
 
 namespace JiayiLauncher.Utils;
 
-public static partial class WinRegistry
+public static class WinRegistry
 {
 	public static void SetFileAssociation(string description, string extension)
 	{

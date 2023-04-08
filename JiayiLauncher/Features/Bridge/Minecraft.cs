@@ -19,8 +19,19 @@ public static class Minecraft
 	{
 		get
 		{
-			if (!IsOpen()) _modsLoaded.Clear();
+			if (!IsOpen) _modsLoaded.Clear();
 			return _modsLoaded;
+		}
+	}
+	
+	public static bool IsOpen
+	{
+		get
+		{
+			var processes = Process.GetProcessesByName("Minecraft.Windows");
+			if (processes.Length == 0) return false;
+			Process = processes[0];
+			return true;
 		}
 	}
 
@@ -78,14 +89,6 @@ public static class Minecraft
 		await minecraftApp.LaunchAsync();
 		
 		Process = Process.GetProcessesByName("Minecraft.Windows")[0];
-	}
-
-	public static bool IsOpen()
-	{
-		var processes = Process.GetProcessesByName("Minecraft.Windows");
-		if (processes.Length == 0) return false;
-		Process = processes[0];
-		return true;
 	}
 
 	public static async Task WaitForModules()

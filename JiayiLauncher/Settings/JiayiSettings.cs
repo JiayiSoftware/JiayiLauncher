@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Windows;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Utils;
 using Microsoft.Win32;
@@ -65,14 +64,6 @@ public class JiayiSettings
 	// discord settings
 	[Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.")]
 	public bool RichPresence { get; set; } = true;
-	
-	// i can just use empty objects to display text in the settings window
-	[Setting("Formatting strings", "Discord", 
-		"Strings that can be used in custom status text:\n\n" +
-		"%mod_name% - the name of the mod you're playing\n" +
-		"%game_version% - the game version you're playing\n" +
-		"%mod_count% - the number of mods you have in your collection", "RichPresence")]
-	private object DiscordFormattingStrings { get; set; } = new();
 	
 	[Setting("Top text", "Discord", "The top-most status text.", "RichPresence")]
 	public string DiscordDetails { get; set; } = "Playing with %mod_name%";

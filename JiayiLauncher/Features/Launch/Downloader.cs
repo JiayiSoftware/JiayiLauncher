@@ -21,7 +21,7 @@ public static class Downloader
 			response.IsSuccessStatusCode ? Log.LogLevel.Info : Log.LogLevel.Error);
 		if (!response.IsSuccessStatusCode) return string.Empty;
 
-		if (response.Content.Headers.ContentDisposition is not { FileName: { } })
+		if (response.Content.Headers.ContentDisposition is not { FileName: not null })
 		{
 			Log.Write(nameof(Downloader), "Server did not provide a file name", Log.LogLevel.Error);
 			return string.Empty;

@@ -2,6 +2,7 @@
 @using JiayiLauncher.Settings
 @using System.Reflection
 
+<!--suppress CssInvalidPropertyValue -->
 <h3>Settings</h3>
 
 <div class="tabs">
@@ -58,6 +59,7 @@
                             break;
                         case true when setting.PropertyType == typeof((string, Action)):
                             var (name, action) = ((string, Action))setting.GetValue(JiayiSettings.Instance)!;
+                            @* ReSharper disable once AccessToModifiedClosure *@
                             <JiayiButton OnClick="action" Size="16px" Style="padding: 0.5rem 1rem">@name</JiayiButton>
                             break;
                     }

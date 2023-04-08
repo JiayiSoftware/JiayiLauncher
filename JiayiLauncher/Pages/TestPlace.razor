@@ -44,9 +44,9 @@
     private string _minecraftVersion = "Minecraft version";
     private string _validSetting = "Is this a setting?";
 
-    private List<string> _radioItems = new() { "Radio button", "Choose one only", "Third option" };
-    private List<string> _checkboxItems = new() { "Checkbox", "Choose multiple", "Also a third option" };
-    private List<string> _aLotOfItems = new() { "Bunch of items", "Testing truncating selected items", "Third option", "Fourth option", "Fifth option", "Sixth option", "Seventh option", "Eighth option", "Ninth option", "Tenth option", "Eleventh option", "Twelfth option", "Thirteenth option", "Fourteenth option", "Fifteenth option", "Sixteenth option", "Seventeenth option", "Eighteenth option", "Nineteenth option", "Twentieth option" };
+    private readonly List<string> _radioItems = new() { "Radio button", "Choose one only", "Third option" };
+    private readonly List<string> _checkboxItems = new() { "Checkbox", "Choose multiple", "Also a third option" };
+    private readonly List<string> _aLotOfItems = new() { "Bunch of items", "Testing truncating selected items", "Third option", "Fourth option", "Fifth option", "Sixth option", "Seventh option", "Eighth option", "Ninth option", "Tenth option", "Eleventh option", "Twelfth option", "Thirteenth option", "Fourteenth option", "Fifteenth option", "Sixteenth option", "Seventeenth option", "Eighteenth option", "Nineteenth option", "Twentieth option" };
 
     private JiayiTextBox? _settingName;
     
@@ -66,7 +66,7 @@
         ModalService.Show<MessageBox>("Test message box", parameters);
     }
 
-    private void Crash()
+    private static void Crash()
     {
         throw new Exception("This is a test crash.");
     }

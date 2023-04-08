@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -99,6 +100,36 @@ public class ModCollection
 		ZipFile.CreateFromDirectory(BasePath, path);
 		
 		Log.Write("ModCollection", $"Exported mod collection to {path}");
+	}
+	
+	public static void Import(string path)
+	{
+		if (Current != null)
+		{
+			// merge the mods
+			var tempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+			Directory.CreateDirectory(tempDir);
+			ZipFile.ExtractToDirectory(path, tempDir);
+			
+			var files = Directory.GetFiles(tempDir, "*.jmod", SearchOption.AllDirectories);
+			foreach (var file in files)
+			{
+				var mod = Mod.LoadFromMetadata(file);
+				if (mod == null) continue;
+				Current.Add(mod);
+				Log.Write("ModCollection", $"Imported mod {mod.Name} at {mod.Path}");
+			}
+			
+			Directory.Delete(tempDir, true);
+			return;
+		}
+		
+		// create a new collection
+		JiayiSettings.Instance!.ModCollectionPath = 
+			Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Jiayi Mods");
+		JiayiSettings.Instance.Save();
+		Load(JiayiSettings.Instance.ModCollectionPath);
+		Import(path);
 	}
 
 	public void Add(Mod mod)

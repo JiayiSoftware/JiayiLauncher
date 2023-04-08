@@ -84,7 +84,7 @@ public static class Launcher
 		LaunchProgress += 25;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		
-		if (!Minecraft.IsOpen()) return LaunchResult.GameNotFound;
+		if (!Minecraft.IsOpen) return LaunchResult.GameNotFound;
 		
 		// determine whether this is an internal or external mod
 		bool external;

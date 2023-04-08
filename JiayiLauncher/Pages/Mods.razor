@@ -43,7 +43,7 @@
             
             foreach (var mod in mods)
             {
-                @if (_searchBox is {Value: not null or "" })
+                @if (_searchBox is {Value: not null and not "" })
                 {
                     if (mod.Name.ToLower().Contains(_searchBox.Value.ToLower()))
                     {
@@ -92,7 +92,7 @@
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
     
-    public static Mods Instance { get; set; }
+    public static Mods Instance { get; private set; } = default!;
 
     private string _hovered = "no";
     
@@ -101,7 +101,7 @@
     private JiayiFilter? _localFilter;
     private JiayiFilter? _onlineFilter;
     
-    private int _searchResults = 0;
+    private int _searchResults;
     
     protected override void OnInitialized()
     {

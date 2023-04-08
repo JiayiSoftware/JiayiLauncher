@@ -20,11 +20,9 @@ public class Mod
 		SupportedVersions = supportedVersions ?? new List<string> { "any version" };
 		
 		// just in case
-		if (SupportedVersions.Contains("Any version"))
-		{
-			SupportedVersions.Remove("Any version");
-			SupportedVersions.Add("any version");
-		}
+		if (!SupportedVersions.Contains("Any version")) return;
+		SupportedVersions.Remove("Any version");
+		SupportedVersions.Add("any version");
 	}
 
 	public void SaveMetadata(ModCollection collection)

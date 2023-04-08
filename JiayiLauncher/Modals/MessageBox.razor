@@ -4,7 +4,7 @@
     <div style="display: flex; gap: 0.5rem;">
         @foreach (var (name, callback) in Buttons)
         {
-            <JiayiButton Size="20px" Style="padding: 0.5rem 1rem;" OnClick="(() => { Modal.CloseAsync(); callback.InvokeAsync(); })">@name</JiayiButton>
+            <JiayiButton Size="20px" Style="padding: 0.5rem 1rem;" OnClick="() => { Modal.CloseAsync(); callback.InvokeAsync(); }">@name</JiayiButton>
         }
     </div>
 </div>
@@ -18,7 +18,7 @@
     };
     
     [Parameter]
-    public string Message { get; set; }
+    public string? Message { get; set; }
     
     [CascadingParameter]
     private BlazoredModalInstance Modal { get; set; } = default!;

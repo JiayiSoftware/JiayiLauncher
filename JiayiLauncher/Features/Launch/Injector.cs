@@ -82,7 +82,7 @@ public static class Injector
 			}
 			
 			// check if the game is open after injection because some antiviruses will close the game if they detect it
-			if (Minecraft.IsOpen())
+			if (Minecraft.IsOpen)
 			{
 				// wait just a bit for the module to load
 				Task.Delay(1000).Wait();

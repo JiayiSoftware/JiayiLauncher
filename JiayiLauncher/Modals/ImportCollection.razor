@@ -1,0 +1,49 @@
+﻿@using JiayiLauncher.Features.Mods
+
+<div>
+    <p>Would you like to import this collection?</p>
+    
+    @{
+        var info = ModCollection.GetInfo(Path);
+    }
+    
+    <ul>
+        <li>
+            @info.TotalMods mods
+        </li>
+        <li>
+            @info.LocallyStoredMods locally stored
+        </li>
+        <li>
+            @info.InternetMods from the web
+        </li>
+    </ul>
+    
+    @if (ModCollection.Current == null)
+    {
+        <strong>This will make a folder out of this collection file in your documents.</strong>
+    }
+    else
+    {
+        <p>The mods in this collection will be <strong>merged</strong> with your collection.</p>
+    }
+    
+    <div style="display: flex; gap: 0.5rem;">
+        <JiayiButton Size="20px" Style="padding: 0.5rem 1rem;" OnClick="ImportClicked">Import</JiayiButton>
+        <JiayiButton Size="20px" Style="padding: 0.5rem 1rem;" OnClick="Modal.CloseAsync">Cancel</JiayiButton>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Path { get; set; } = default!;
+    
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+
+    private async Task ImportClicked()
+    {
+        await Modal.CloseAsync();
+        ModCollection.Import(Path);
+    }
+}

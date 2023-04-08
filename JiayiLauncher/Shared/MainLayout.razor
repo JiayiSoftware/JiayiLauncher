@@ -1,4 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using JiayiLauncher.Utils
+@using System.IO
+@using JiayiLauncher.Features.Mods
+@inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
 
 <Sidebar @ref="_sidebar"/>
@@ -8,13 +11,35 @@
 </main>
 
 @code {
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+    
     private Sidebar? _sidebar;
     private string _margin = "5.5rem";
     
     protected override void OnAfterRender(bool firstRender)
     {
         if (!firstRender) return;
+        
         if (_sidebar != null) _sidebar.OnToggle += ChangeMargin;
+        Arguments.Changed += (_, _) => HandleArgs(Arguments.Get());
+
+        // handle arguments here because it's actually the best place to do it
+        if (Arguments.Get() != string.Empty)
+        {
+            HandleArgs(Arguments.Get());
+        }
+    }
+
+    private void HandleArgs(string args)
+    {
+        if (File.Exists(args))
+        {
+            var parameters = new ModalParameters()
+                .Add(nameof(ImportCollection.Path), args);
+            
+            ModalService.Show<ImportCollection>("Import collection", parameters);
+        }
     }
 
     private void ChangeMargin(object? sender, EventArgs e)

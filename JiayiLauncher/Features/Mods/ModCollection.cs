@@ -160,4 +160,37 @@ public class ModCollection
 	{
 		return Mods.Any(mod => mod.Path == path);
 	}
+
+	public static ModCollectionInfo GetInfo(string path = "")
+	{
+		if (path == string.Empty)
+		{
+			// get info for the current collection
+			if (Current == null) return new ModCollectionInfo();
+
+			return new ModCollectionInfo
+			{
+				TotalMods = Current.Mods.Count,
+				InternetMods = Current.Mods.Count(mod => mod.FromInternet),
+				LocallyStoredMods = Current.Mods.Count(mod => !mod.FromInternet)
+			};
+		}
+		
+		// path should be a .jiayi file
+		var tempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+		Directory.CreateDirectory(tempDir);
+		ZipFile.ExtractToDirectory(path, tempDir);
+		
+		var files = Directory.GetFiles(tempDir, "*.jmod", SearchOption.AllDirectories);
+		var mods = files.Select(Mod.LoadFromMetadata).Where(mod => mod != null).ToList();
+		
+		Directory.Delete(tempDir, true);
+		
+		return new ModCollectionInfo
+		{
+			TotalMods = mods.Count,
+			InternetMods = mods.Count(mod => mod is { FromInternet: true }),
+			LocallyStoredMods = mods.Count(mod => mod is { FromInternet: false })
+		};
+	}
 }

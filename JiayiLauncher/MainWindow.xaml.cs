@@ -79,6 +79,10 @@ public partial class MainWindow
 		if (args != null)
 		{
 			Log.Write(this, $"Received args: {args}");
+			Arguments.Set(args);
+			
+			// bring window to front
+			Activate();
 		}
 		
 		return 0;
@@ -90,10 +94,5 @@ public partial class MainWindow
 	{
 		WebView = e.WebView;
 		WebView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);
-	}
-
-	private void ArgsReceived(string[] args)
-	{
-		
 	}
 }

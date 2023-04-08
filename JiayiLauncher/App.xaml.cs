@@ -3,7 +3,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
-
+using JiayiLauncher.Utils;
 using static JiayiLauncher.Utils.Imports;
 
 namespace JiayiLauncher;
@@ -18,10 +18,13 @@ public partial class App
 	protected override void OnStartup(StartupEventArgs e)
 	{
 		_mutex = new Mutex(true, "Global\\JiayiLauncher", out var createdNew);
+		var args = Environment.GetCommandLineArgs().Skip(1);
 
-		if (createdNew) return;
-		var args = Environment.GetCommandLineArgs().ToList();
-		args.RemoveAt(0);
+		if (createdNew)
+		{
+			Arguments.Set(string.Join(" ", args));
+			return;
+		}
 		var argString = string.Join(" ", args);
 			
 		var ptr = Marshal.StringToHGlobalUni(argString);

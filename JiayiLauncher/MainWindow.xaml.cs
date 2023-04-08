@@ -91,4 +91,9 @@ public partial class MainWindow
 		WebView = e.WebView;
 		WebView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);
 	}
+
+	private void ArgsReceived(string[] args)
+	{
+		
+	}
 }

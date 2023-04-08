@@ -53,8 +53,9 @@ public static partial class Imports
 	[LibraryImport("shell32.dll", SetLastError = true)]
 	public static partial void SHChangeNotify(uint eventId, uint flags, nint item1, nint item2);
 	
-	[LibraryImport("user32.dll")]
-	public static partial nint SendMessage(nint hWnd, uint msg, nint wParam, ref CopyData lParam);
+	// because LibraryImport just dies when it comes to this function
+	[DllImport("user32.dll")]
+	public static extern int SendMessage(nint hWnd, int Msg, int wParam, long lParam);
 	
 	[LibraryImport("user32.dll")]
 	public static partial nint FindWindowW([MarshalAs(UnmanagedType.LPWStr)] string? lpClassName, [MarshalAs(UnmanagedType.LPWStr)] string lpWindowName);

@@ -24,21 +24,20 @@ public partial class App
 		args.RemoveAt(0);
 		var argString = string.Join(" ", args);
 			
-		// allocate memory for the string
 		var ptr = Marshal.StringToHGlobalUni(argString);
-			
+		
 		var hWnd = FindWindowW(null, "Jiayi Launcher");
 		if (hWnd != nint.Zero)
 		{
-			if (argString != string.Empty)
-			{
-				CopyData cds;
-				cds.dwData = 1;
-				cds.cbData = (uint)((argString.Length + 1) * 2);
-				cds.lpData = ptr;
+			CopyData cds;
+			cds.dwData = 1;
+			cds.cbData = (uint)((argString.Length + 1) * 2);
+			cds.lpData = ptr;
+			
+			var pCds = Marshal.AllocHGlobal(Marshal.SizeOf<CopyData>());
+			Marshal.StructureToPtr(cds, pCds, false);
 
-				SendMessage(hWnd, 0x004A, nint.Zero, ref cds);
-			}
+			SendMessage(hWnd, 0x004A, 0, pCds.ToInt64());
 		}
 		
 		_mutex = null;

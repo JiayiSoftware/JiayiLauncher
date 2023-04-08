@@ -32,10 +32,12 @@ If you're a developer, you can clone the repository and build Jiayi Launcher you
 * ```git clone https://github.com/JiayiSoftware/JiayiLauncher.git```
 
 **With an IDE:**
+
 2. Open the solution file in the IDE
 3. Build the solution
 
 **Without an IDE:**
+
 2. Navigate to the repository's root directory
 3. Run ```dotnet build```
 

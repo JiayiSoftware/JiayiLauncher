@@ -1,7 +1,8 @@
-# Jiayi Launcher
-Minecraft for Windows mod manager (Bedrock Edition)
+<div align="center">
+  <img src="https://github.com/JiayiSoftware/JiayiLauncher/tree/master/.github/assets/logo.png" alt="Jiayi Launcher" width="700">
+</div>
 
-Project website @ https://jiayi.software/launcher
+### Minecraft for Windows mod manager (Bedrock Edition)
 
 [![Build](https://github.com/JiayiSoftware/JiayiLauncher/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JiayiSoftware/JiayiLauncher/actions/workflows/dotnet.yml)
 [![Discord server](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://jiayi.software/discord)

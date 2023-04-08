@@ -25,14 +25,21 @@ If you're a developer, you can clone the repository and build Jiayi Launcher you
 * A computer running Windows 10
 * [Git](https://git-scm.com/)
 * [.NET 7 SDK](https://dotnet.microsoft.com/download/dotnet/7.0)
-* An IDE that supports .NET 7 (e.g. [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) or [JetBrains Rider](https://www.jetbrains.com/rider/))
-  * *VS Code can work but it's not recommended*
+* Optionally, an IDE that supports .NET 7 (e.g. [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) or [JetBrains Rider](https://www.jetbrains.com/rider/))
 
 ### Steps
 1. Clone the repository
 * ```git clone https://github.com/JiayiSoftware/JiayiLauncher.git```
-2. Open the solution file in your IDE
-3. Build the solution for x64
+
+**With an IDE:**
+2. Open the solution file in the IDE
+3. Build the solution
+
+**Without an IDE:**
+2. Navigate to the repository's root directory
+3. Run ```dotnet build```
+
+This will build the launcher in debug mode. You can append ```-c Release``` to build in release mode.
 
 ## Contributing
 If you want to contribute to Jiayi Launcher, you can fork the repository and submit a pull request.

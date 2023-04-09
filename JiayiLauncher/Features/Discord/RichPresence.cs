@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Timers;
 using DiscordRPC;
-using JiayiLauncher.Features.Bridge;
+using JiayiLauncher.Features.Launch;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;

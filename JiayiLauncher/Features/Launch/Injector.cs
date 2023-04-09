@@ -6,7 +6,6 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-using JiayiLauncher.Features.Bridge;
 using JiayiLauncher.Utils;
 using static JiayiLauncher.Utils.Imports;
 

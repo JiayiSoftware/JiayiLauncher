@@ -43,8 +43,4 @@
       <AdditionalFiles Include="Modals\NewMod.razor" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Features\Profiles" />
-    </ItemGroup>
-
 </Project>

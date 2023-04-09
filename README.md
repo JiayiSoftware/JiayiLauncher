@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/JiayiSoftware/JiayiLauncher/tree/master/.github/assets/logo.png" alt="Jiayi Launcher" width="700">
+  <a href="https://jiayi.software/launcher"><img src="https://github.com/JiayiSoftware/JiayiLauncher/tree/master/.github/assets/logo.png" alt="Jiayi Launcher" width="700"></a>
 </div>
 
 ### Minecraft for Windows mod manager (Bedrock Edition)
@@ -22,7 +22,7 @@ If you're a developer, you can clone the repository and build Jiayi Launcher you
 
 ## Building
 ### Requirements
-* A computer running Windows 10
+* A computer running Windows 10 or later
 * [Git](https://git-scm.com/)
 * [.NET 7 SDK](https://dotnet.microsoft.com/download/dotnet/7.0)
 * Optionally, an IDE that supports .NET 7 (e.g. [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) or [JetBrains Rider](https://www.jetbrains.com/rider/))

@@ -8,7 +8,7 @@ using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 
-namespace JiayiLauncher.Features.Bridge;
+namespace JiayiLauncher.Features.Launch;
 
 public static class Minecraft
 {

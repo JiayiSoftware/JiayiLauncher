@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using JiayiLauncher.Features.Bridge;
+using JiayiLauncher.Features.Launch;
 using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Mods;

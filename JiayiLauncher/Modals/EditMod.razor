@@ -1,6 +1,7 @@
 ﻿@using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
 @using System.IO
+@using JiayiLauncher.Features.Game
 @using JiayiLauncher.Features.Launch
 @using JiayiLauncher.Pages
 
@@ -37,7 +38,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _supportedVersions.AddRange(await Minecraft.GetVersionList());
+        _supportedVersions.AddRange(await PackageData.GetVersionList());
     }
 
     private async Task SaveClicked()

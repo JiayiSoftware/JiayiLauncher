@@ -1,6 +1,7 @@
 ﻿@page "/TestPlace"
 @using JiayiLauncher.Settings
 @using JiayiLauncher.Features.Launch
+@using JiayiLauncher.Features.Game
 
 <h3>Components</h3>
 <h4>Drop down buttons</h4>
@@ -17,6 +18,7 @@
     <JiayiButton Size="14px" OnClick="Crash">Crash Jiayi</JiayiButton>
     <JiayiButton OnClick="MinecraftVersion">@_minecraftVersion</JiayiButton>
     <JiayiButton OnClick="Minecraft.Open">Open Minecraft</JiayiButton>
+    <JiayiButton OnClick="GameDataPath">Game data path</JiayiButton>
 </div>
 
 <h4>Text boxes</h4>
@@ -73,13 +75,28 @@
 
     private async Task MinecraftVersion()
     {
-        var version = await Minecraft.GetVersion();
+        var version = await PackageData.GetVersion();
         _minecraftVersion = version;
     }
 
     private void ValidSetting()
     {
         _validSetting = JiayiSettings.Instance!.GetSetting(_settingName!.Value!) != null ? "Yes it is!" : "I didn't see it.";
+    }
+
+    private void GameDataPath()
+    {
+        var options = new List<(string, EventCallback)>
+        {
+            ("Okay", EventCallback.Empty)
+        };
+
+        var path = PackageData.GetGameDataPath();
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), $"Game data path: {path}");
+        
+        ModalService.Show<MessageBox>("Game data path", parameters);
     }
 
 }

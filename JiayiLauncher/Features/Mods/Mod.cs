@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Launch;
 using JiayiLauncher.Utils;
 

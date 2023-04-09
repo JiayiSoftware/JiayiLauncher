@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Timers;
 using DiscordRPC;
+using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Launch;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Settings;
@@ -32,7 +33,7 @@ public static class RichPresence
 				}
 				break;
 			case true when f.Contains("%game_version%"):
-				return f.Replace("%game_version%", Minecraft.GetVersion().GetAwaiter().GetResult());
+				return f.Replace("%game_version%", PackageData.GetVersion().GetAwaiter().GetResult());
 			case true when f.Contains("%mod_count%"):
 				if (ModCollection.Current is null) return f.Replace("%mod_count%", "no mods");
 				var plural = ModCollection.Current.Mods.Count == 1 ? "mod" : "mods";

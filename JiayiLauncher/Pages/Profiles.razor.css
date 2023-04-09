@@ -1,0 +1,13 @@
+﻿.no-profiles {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.find-tools {
+    display: flex;
+    align-items: center;
+    column-gap: 0.7rem;
+}

@@ -1,9 +1,30 @@
 ﻿@page "/Profiles"
+@using JiayiLauncher.Features.Profiles
 
 <h3>Profiles</h3>
 
-<div class="profiles-page"></div>
+<div class="find-tools">
+    <span class="material-symbols-sharp">search</span>
+    <JiayiTextBox Placeholder="Search profiles" @ref="_searchBox" Changed="StateHasChanged"/>
+</div>
+
+<div class="profiles-page">
+    <ul class="profiles">
+        @if (ProfileCollection.Current == null || ProfileCollection.Current.Profiles.Count == 0)
+        {
+            <li class="no-profiles">
+                You don't have any profiles saved.<br>
+                Click this button here to create one with your current game data.
+                
+                <JiayiButton Size="16px" Style="padding: 0.5rem 1rem">Create</JiayiButton>
+            </li>
+        }
+    </ul>
+</div>
 
 @code {
-    
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+
+    private JiayiTextBox? _searchBox;
 }

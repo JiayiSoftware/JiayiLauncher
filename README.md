@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://jiayi.software/launcher"><img src="https://github.com/JiayiSoftware/JiayiLauncher/tree/master/.github/assets/logo.png" alt="Jiayi Launcher" width="700"></a>
+  <a href="https://jiayi.software/launcher"><img src="https://github.com/JiayiSoftware/JiayiLauncher/blob/master/.github/assets/logo.png" alt="Jiayi Launcher" width="700"></a>
 </div>
 
 ### Minecraft for Windows mod manager (Bedrock Edition)

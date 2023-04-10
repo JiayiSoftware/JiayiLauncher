@@ -1,4 +1,6 @@
 ﻿.no-profiles {
+    margin-top: 2rem;
+    color: var(--text-grayed);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -10,4 +12,12 @@
     display: flex;
     align-items: center;
     column-gap: 0.7rem;
+}
+
+.separator {
+    border-right: 1px solid rgb(50, 50, 50);
+
+    height: 1.5rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
 }

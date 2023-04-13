@@ -1,6 +1,13 @@
-﻿<button class="button" @onclick="OnClick" style="font-size: @Size; @Style" disabled=@Disabled>@ChildContent</button>
+﻿<button class="button" @onclick="OnClick" style="@GetStyle(); @Style" disabled=@Disabled>@ChildContent</button>
 
 @code {
+    public enum ButtonSize
+    {
+        Small,
+        Normal,
+        Large
+    }
+
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
     
@@ -8,11 +15,19 @@
     public EventCallback OnClick { get; set; }
     
     [Parameter]
-    public string Size { get; set; } = "24px";
+    public ButtonSize Size { get; set; } = ButtonSize.Normal;
     
     [Parameter]
     public string? Style { get; set; }
     
     [Parameter]
     public bool Disabled { get; set; }
+
+    private string GetStyle() => Size switch
+    {
+        ButtonSize.Small => "font-size: 16px; padding: 0.5rem 1rem",
+        ButtonSize.Normal => "font-size: 24px; padding: 1rem 1.5rem",
+        ButtonSize.Large => "font-size: 32px; padding: 1.5rem 2rem",
+        _ => throw new ArgumentOutOfRangeException()
+    };
 }

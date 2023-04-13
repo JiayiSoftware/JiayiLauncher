@@ -60,7 +60,7 @@
                         case true when setting.PropertyType == typeof((string, Action)):
                             var (name, action) = ((string, Action))setting.GetValue(JiayiSettings.Instance)!;
                             @* ReSharper disable once AccessToModifiedClosure *@
-                            <JiayiButton OnClick="action" Size="16px" Style="padding: 0.5rem 1rem">@name</JiayiButton>
+                            <JiayiButton OnClick="action" Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem">@name</JiayiButton>
                             break;
                     }
                 </div>

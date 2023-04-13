@@ -20,7 +20,9 @@
     </div>
     <p class="mod-version">Works on @(string.Join(", ", Mod.SupportedVersions))</p>
     <div class="mod-controls">
-        <JiayiButton OnClick="LaunchClicked" Size="16px" Style="@_launchProgress" @ref="_launchButton">Launch</JiayiButton>
+        <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" 
+                     Size="JiayiButton.ButtonSize.Small" Style="@_launchProgress">Launch</JiayiButton>
+        
         <span class="material-symbols-sharp" style="cursor: pointer; opacity: @_controlsOpacity;" title="Edit mod" @onclick="EditClicked">edit</span>
         <span class="material-symbols-sharp" style="color: darkred; cursor: pointer; opacity: @_controlsOpacity;" title="Delete mod (irreversible)" @onclick="DeleteClicked">delete</span>
     </div>

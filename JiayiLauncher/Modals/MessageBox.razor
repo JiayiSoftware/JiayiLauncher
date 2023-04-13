@@ -4,7 +4,8 @@
     <div style="display: flex; gap: 0.5rem;">
         @foreach (var (name, callback) in Buttons)
         {
-            <JiayiButton Size="20px" Style="padding: 0.5rem 1rem;" OnClick="() => { Modal.CloseAsync(); callback.InvokeAsync(); }">@name</JiayiButton>
+            <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem;" 
+                         OnClick="() => { Modal.CloseAsync(); callback.InvokeAsync(); }">@name</JiayiButton>
         }
     </div>
 </div>

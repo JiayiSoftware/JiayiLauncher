@@ -8,7 +8,7 @@
     gap: 0.5rem;
 }
 
-.find-tools {
+.find-tools, .create-profile {
     display: flex;
     align-items: center;
     column-gap: 0.7rem;
@@ -20,4 +20,51 @@
     height: 1.5rem;
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
+}
+
+#help-button {
+    opacity: 0;
+    color: var(--text-grayed);
+    cursor: pointer;
+    
+    transition: var(--transition-speed);
+}
+
+.create-profile:hover #help-button {
+    opacity: 100%;
+}
+
+#help-button:hover {
+    color: var(--text-primary);
+}
+
+/* i like css3 */
+.profile-item:nth-child(even) {
+    background-color: var(--background-secondary);
+}
+
+.profile-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    
+    border-left: 5px solid var(--accent);
+}
+
+.profile-item p {
+    margin-bottom: 0;
+}
+
+.profile-info {
+    font-size: 14px;
+    color: var(--text-grayed);
+    margin-top: 0.5rem;
+    width: max-content;
+    max-width: 45vw;
+}
+
+.profiles {
+    list-style: none;
+    padding-left: 0;
 }

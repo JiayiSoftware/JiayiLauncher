@@ -7,7 +7,11 @@
     <span class="material-symbols-sharp">search</span>
     <JiayiTextBox Placeholder="Search profiles" @ref="_searchBox" Changed="StateHasChanged"/>
     <div class="separator"></div>
-    <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem">Create</JiayiButton>
+ 
+    <div class="create-profile">
+        <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem" OnClick="CreateClicked">Create</JiayiButton>
+        <span class="material-symbols-sharp" title="What's this do?" id="help-button" @onclick="HelpClicked">help</span>
+    </div>
     
     @* invisible paragraph to make the div's height consistent with the other pages *@
     <p style="opacity: 0">invisible</p>
@@ -21,6 +25,24 @@
                 No profiles saved
             </li>
         }
+        else
+        {
+            foreach (var profile in ProfileCollection.Current.Profiles)
+            {
+                var info = profile.GetInfo();
+                
+                <li class="profile-item">
+                    <div>
+                        <strong>@profile.Name</strong>
+                        <p class="profile-info">
+                            @info.Worlds @Pluralize(info.Worlds, "world") &#x2022; 
+                            @info.ResourcePacks @Pluralize(info.ResourcePacks, "resource pack") &#x2022;
+                            @info.BehaviorPacks @Pluralize(info.BehaviorPacks, "behavior pack")
+                        </p>
+                    </div>
+                </li>
+            }
+        }
     </ul>
 </div>
 
@@ -29,4 +51,29 @@
     public IModalService ModalService { get; set; } = default!;
 
     private JiayiTextBox? _searchBox;
+
+    private void HelpClicked()
+    {
+        var options = new List<(string, EventCallback)>
+        {
+            ("Okay", EventCallback.Empty)
+        };
+
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message),
+                "Creating a profile will copy your current game data, like your worlds, resource packs, and settings.");
+        
+        ModalService.Show<MessageBox>("Profiles", parameters);
+    }
+
+    private static string Pluralize(int count, string word) => count == 1 ? word : word + "s";
+
+    private async Task CreateClicked()
+    {
+        var modal = ModalService.Show<EditProfile>("Create profile");
+        await modal.Result;
+        
+        if (modal.Result.Result.Confirmed) StateHasChanged();
+    }
 }

@@ -1,9 +1,8 @@
-﻿@using JiayiLauncher.Features.Mods
+﻿@using JiayiLauncher.Features.Game
+@using JiayiLauncher.Features.Mods
+@using JiayiLauncher.Pages
 @using JiayiLauncher.Settings
 @using System.IO
-@using JiayiLauncher.Features.Game
-@using JiayiLauncher.Features.Launch
-@using JiayiLauncher.Pages
 
 <div class="edit">
     <div class="edit-name">
@@ -16,11 +15,14 @@
         <JiayiDropDown Multiselect="true" Items="_supportedVersions" Name="Select versions" @ref="_versionsDropDown" />
     </div>
     
-    <JiayiButton OnClick="SaveClicked">Save</JiayiButton>
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">Save</JiayiButton>
     
     @if (JiayiSettings.Instance!.ModCollectionPath == string.Empty)
     {
-        <p>This will create a new mod collection in your documents.</p>
+        <br>
+        <i style="color: var(--text-grayed); font-size: 14px">
+            Mods are saved in your documents by default; you can change this in settings
+        </i>
     }
 </div>
 
@@ -68,10 +70,9 @@
         }
         
         ModCollection.Current!.Add(Mod);
-        await Modal.CloseAsync();
+        await Modal.CloseAsync(ModalResult.Ok(Mod));
         
         // update mods page
         Mods.Instance.Refresh();
     }
-
 }

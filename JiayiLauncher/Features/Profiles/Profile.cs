@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using JiayiLauncher.Features.Game;
+using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Profiles;
 
@@ -8,13 +9,13 @@ public class Profile
 	public string Name { get; set; }
 	public string Path { get; set; }
 	
-	private Profile(string name, string path)
+	public Profile(string name, string path)
 	{
 		Name = name;
 		Path = path;
 	}
 	
-	public static Profile Create(ProfileCollection collection, string name)
+	public static Profile Create(string name, ProfileCollection collection)
 	{
 		var fullPath = System.IO.Path.Combine(collection.BasePath, name);
 		Directory.CreateDirectory(fullPath);
@@ -34,18 +35,29 @@ public class Profile
 		Directory.CreateDirectory(System.IO.Path.Combine(fullPath, "LocalState"));
 		Directory.CreateDirectory(System.IO.Path.Combine(fullPath, "RoamingState"));
 		
-		var localStateFiles = Directory.GetFiles(localState);
-		var roamingStateFiles = Directory.GetFiles(roamingState);
+		var localStateFiles = Directory.GetFiles(localState, "*.*", SearchOption.AllDirectories);
+		var roamingStateFiles = Directory.GetFiles(roamingState, "*.*", SearchOption.AllDirectories);
 		
 		// turn all of these paths into relative paths
 		for (var i = 0; i < localStateFiles.Length; i++)
 		{
 			localStateFiles[i] = localStateFiles[i][localState.Length..];
+			
+			// remove backslash at the start to not confuse Path.Combine
+			if (localStateFiles[i][0] == '\\')
+			{
+				localStateFiles[i] = localStateFiles[i][1..];
+			}
 		}
 		
 		for (var i = 0; i < roamingStateFiles.Length; i++)
 		{
 			roamingStateFiles[i] = roamingStateFiles[i][roamingState.Length..];
+			
+			if (roamingStateFiles[i][0] == '\\')
+			{
+				roamingStateFiles[i] = roamingStateFiles[i][1..];
+			}
 		}
 		
 		// create any missing directories
@@ -81,6 +93,8 @@ public class Profile
 		// create a README.txt
 		File.WriteAllText(System.IO.Path.Combine(fullPath, "README.txt"), 
 			"This folder contains the game data for this profile. Don't mess with it unless you know what you're doing.");
+		
+		Log.Write("Profile.Create", $"Created profile {name} at {fullPath}");
 		
 		return new Profile(name, fullPath);
 	}

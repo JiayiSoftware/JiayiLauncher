@@ -7,6 +7,7 @@ using System.Windows.Interop;
 using Blazored.Modal;
 using JiayiLauncher.Features.Discord;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Features.Profiles;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 using Microsoft.AspNetCore.Components.WebView;
@@ -47,6 +48,11 @@ public partial class MainWindow
 		if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
 		{
 			ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
+		}
+		
+		if (JiayiSettings.Instance.ProfileCollectionPath != string.Empty)
+		{
+			ProfileCollection.Load(JiayiSettings.Instance.ProfileCollectionPath);
 		}
 		
 		RichPresence.Initialize();
@@ -91,7 +97,7 @@ public partial class MainWindow
 
 	// ReSharper disable once UnusedMember.Local
 	// ReSharper disable once UnusedParameter.Local
-	private void ChangeColor(object? _, BlazorWebViewInitializedEventArgs e)
+	private void ModifyWebView(object? _, BlazorWebViewInitializedEventArgs e)
 	{
 		WebView = e.WebView;
 		WebView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);

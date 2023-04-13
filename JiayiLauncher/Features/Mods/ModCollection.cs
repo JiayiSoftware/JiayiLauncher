@@ -59,6 +59,8 @@ public class ModCollection
 		
 		// set path in settings
 		JiayiSettings.Instance!.ModCollectionPath = path;
+		
+		Log.Write("ModCollection", $"Created mod collection at {path}");
 
 		return collection;
 	}

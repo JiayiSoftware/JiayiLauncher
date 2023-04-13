@@ -138,9 +138,8 @@
     opacity: 0;
     
     text-transform: uppercase;
-    /*font-weight: 900;*/
+    font-weight: 900;
     font-style: italic;
-    vertical-align: center;
     text-shadow: 3px 3px rgba(0, 0, 0, 0.4);
     margin-left: 1.6rem;
     transition: var(--transition-speed);

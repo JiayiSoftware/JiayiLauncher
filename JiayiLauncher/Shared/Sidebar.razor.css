@@ -4,7 +4,7 @@
     top: 0;
     position: fixed;
     background-color: var(--background-secondary);
-    transition: width 0.2s ease;
+    transition: width var(--transition-speed) ease;
     z-index: 5;
 }
 

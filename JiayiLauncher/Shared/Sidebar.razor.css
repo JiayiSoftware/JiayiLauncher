@@ -32,14 +32,16 @@
     align-items: center;
     height: 4rem;
     text-decoration: none;
-    filter: grayscale(100%) opacity(0.5);
     transition: var(--transition-speed);
-    color: var(--text-secondary);
+    color: var(--text-grayed);
 }
 
 .sidebar-link:hover {
-    filter: grayscale(0%) opacity(1);
     background: var(--background-primary);
+    color: var(--text-primary);
+}
+
+.sidebar-link:hover .material-symbols-sharp {
     color: var(--text-primary);
 }
 
@@ -50,7 +52,7 @@
 .material-symbols-sharp {
     min-width: 2rem;
     margin: 0 1.2rem;
-    color: var(--text-primary);
+    color: var(--text-grayed);
     transition: var(--transition-speed);
 }
 

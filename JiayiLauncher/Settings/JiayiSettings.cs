@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -60,6 +61,34 @@ public class JiayiSettings
 		
 		WinRegistry.SetFileAssociation("Jiayi Mod Collection", ".jiayi");
 	});
+	
+	// appearance settings (my favorite)
+	[Setting("Primary background color", "Appearance", "The primary background color of the launcher.")]
+	public Color PrimaryBackgroundColor { get; set; } = Color.FromArgb(15, 15, 15);
+	
+	[Setting("Secondary background color", "Appearance", "The secondary background color of the launcher.")]
+	public Color SecondaryBackgroundColor { get; set; } = Color.FromArgb(30, 30, 30);
+	
+	[Setting("Accent color", "Appearance", "The accent color of the launcher.")]
+	public Color AccentColor { get; set; } = Color.Red;
+	
+	[Setting("Dark accent color", "Appearance", "A darker version of the accent color.")]
+	public Color DarkAccentColor { get; set; } = Color.FromArgb(200, 0, 0);
+	
+	[Setting("Bright accent color", "Appearance", "A brighter version of the accent color.")]
+	public Color BrightAccentColor { get; set; } = Color.FromArgb(255, 75, 75);
+	
+	[Setting("Text color", "Appearance", "The text color of the launcher.")]
+	public Color TextColor { get; set; } = Color.White;
+	
+	[Setting("Gray text color", "Appearance", "A gray version of the text color.")]
+	public Color GrayTextColor { get; set; } = Color.FromArgb(126, 126, 126);
+
+	[Setting("Shadow distance", "Appearance", "The distance of the shadow.")]
+	public int[] ShadowDistance { get; set; } = { 0, 10, 5 };
+	
+	[Setting("UI movement speed", "Appearance", "The speed at which the UI moves.")]
+	public float[] MovementSpeed { get; set; } = { 0, 0.5f, 0.2f };
 
 	// discord settings
 	[Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.")]

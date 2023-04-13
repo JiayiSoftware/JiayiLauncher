@@ -1,6 +1,6 @@
 ﻿<div style="@Style">
     <span class="slider-value" style="@_percentageStyle">@Value</span>
-    <input type="range" min="@Min" max="@Max" class="slider" @oninput="OnChanged" @bind="Value"
+    <input type="range" min="@Min" max="@Max" step="@Step" class="slider" @oninput="OnChanged" @bind="Value"
            @onmousedown="() => _active = true" @onmouseup="() => _active = false" style="background: linear-gradient(to right, @_progress);">
 </div>
 
@@ -9,18 +9,21 @@
     public string Style { get; set; } = "width: 100%";
     
     [Parameter]
-    public int Value { get; set; }
+    public float Value { get; set; }
     
     [Parameter]
-    public int Min { get; set; }
+    public float Min { get; set; }
     
     [Parameter]
-    public int Max { get; set; } = 100;
+    public float Max { get; set; } = 100;
     
     [Parameter]
-    public EventCallback<int> ValueChanged { get; set; }
+    public float Step { get; set; } = 1;
     
-    private int _percentage
+    [Parameter]
+    public EventCallback<float> ValueChanged { get; set; }
+    
+    private float _percentage
     {
         get
         {
@@ -39,7 +42,7 @@
 
     private void OnChanged(ChangeEventArgs obj)
     {
-        Value = int.Parse(obj.Value?.ToString() ?? "0");
+        Value = float.Parse(obj.Value?.ToString() ?? "0");
         ValueChanged.InvokeAsync(Value);
     }
 

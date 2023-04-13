@@ -1,6 +1,8 @@
 ﻿@page "/Settings"
 @using JiayiLauncher.Settings
 @using System.Reflection
+@using System.Drawing
+@using System.Diagnostics
 
 <!--suppress CssInvalidPropertyValue -->
 <h3>Settings</h3>
@@ -55,12 +57,27 @@
                                 Max="((int[])setting.GetValue(JiayiSettings.Instance)!)[1]" 
                                 Value="((int[])setting.GetValue(JiayiSettings.Instance)!)[2]" 
                                 Style="width: -webkit-fill-available; max-width: 40%;"
-                                ValueChanged="value => ChangeSliderSetting((int[])setting.GetValue(JiayiSettings.Instance)!, value, setting)"/>
+                                ValueChanged="value => ChangeSliderSetting((int[])setting.GetValue(JiayiSettings.Instance)!, (int)value, setting)"/>
+                            break;
+                        case true when setting.PropertyType == typeof(float[]):
+                            <JiayiSlider 
+                                Min="((float[])setting.GetValue(JiayiSettings.Instance)!)[0]" 
+                                Max="((float[])setting.GetValue(JiayiSettings.Instance)!)[1]" 
+                                Step="0.05f"
+                                Value="((float[])setting.GetValue(JiayiSettings.Instance)!)[2]" 
+                                Style="width: -webkit-fill-available; max-width: 40%;"
+                                ValueChanged="value => ChangeSliderSetting((float[])setting.GetValue(JiayiSettings.Instance)!, value, setting)"/>
                             break;
                         case true when setting.PropertyType == typeof((string, Action)):
                             var (name, action) = ((string, Action))setting.GetValue(JiayiSettings.Instance)!;
                             @* ReSharper disable once AccessToModifiedClosure *@
                             <JiayiButton OnClick="action" Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem">@name</JiayiButton>
+                            break;
+                        case true when setting.PropertyType == typeof(Color):
+                            @* for now *@
+                            var color = (Color)setting.GetValue(JiayiSettings.Instance)!;
+                            var hex = $"#{color.R:x2}{color.G:x2}{color.B:x2}";
+                            <input type="color" value="@hex">
                             break;
                     }
                 </div>
@@ -83,6 +100,13 @@
     }
     
     private void ChangeSliderSetting(int[] slider, int value, PropertyInfo setting)
+    {
+        slider[2] = value;
+        setting.SetValue(JiayiSettings.Instance, slider);
+        JiayiSettings.Instance!.Save();
+    }
+    
+    private void ChangeSliderSetting(float[] slider, float value, PropertyInfo setting)
     {
         slider[2] = value;
         setting.SetValue(JiayiSettings.Instance, slider);

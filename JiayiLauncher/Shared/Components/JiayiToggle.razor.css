@@ -25,6 +25,7 @@
 .toggle:active {
     box-shadow: none;
     transform: translate(5px, 5px);
+    filter: brightness(0.8);
 }
 
 .toggle-box {

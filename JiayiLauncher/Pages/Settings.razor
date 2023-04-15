@@ -82,7 +82,7 @@
                             @* for now *@
                             var color = (Color)setting.GetValue(JiayiSettings.Instance)!;
                             var hex = $"#{color.R:x2}{color.G:x2}{color.B:x2}";
-                            <input type="color" value="@hex" @onchange="args => ChangeColorSetting(args.Value, setting)">
+                            <JiayiColorPicker Color="@hex" ColorChanged="s => ChangeColorSetting(s, setting)"/>
                             break;
                     }
                 </div>

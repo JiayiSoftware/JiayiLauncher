@@ -22,7 +22,9 @@ public class JiayiSettings
 	
 	private string _settingsPath = Path.Combine(
 		Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "settings.json");
-	
+
+	private static JsonSerializerOptions? _options;
+
 	// general settings
 	[Setting("Mod folder path", "General", "The path to the folder containing your mods.")]
 	public string ModCollectionPath { get; set; } = string.Empty;
@@ -169,11 +171,15 @@ public class JiayiSettings
 		
 		// wipe first
 		File.WriteAllText(_settingsPath, string.Empty);
-		
-		var options = new JsonSerializerOptions { WriteIndented = true };
+
+		_options ??= new JsonSerializerOptions
+		{
+			WriteIndented = true,
+			Converters = { new ColorJsonConverter() }
+		};
 
 		using var stream = File.OpenWrite(_settingsPath);
-		JsonSerializer.Serialize(stream, this, options);
+		JsonSerializer.Serialize(stream, this, _options);
 		Log.Write(this, "Saved settings.");
 	}
 
@@ -194,7 +200,13 @@ public class JiayiSettings
 
 		try
 		{
-			var settings = JsonSerializer.Deserialize<JiayiSettings>(stream);
+			_options ??= new JsonSerializerOptions
+			{
+				WriteIndented = true,
+				Converters = { new ColorJsonConverter() }
+			};
+			
+			var settings = JsonSerializer.Deserialize<JiayiSettings>(stream, _options);
 			if (settings == null)
 			{
 				Instance = new JiayiSettings();

@@ -170,8 +170,10 @@ public class JiayiSettings
 		// wipe first
 		File.WriteAllText(_settingsPath, string.Empty);
 		
+		var options = new JsonSerializerOptions { WriteIndented = true };
+
 		using var stream = File.OpenWrite(_settingsPath);
-		JsonSerializer.Serialize(stream, this);
+		JsonSerializer.Serialize(stream, this, options);
 		Log.Write(this, "Saved settings.");
 	}
 

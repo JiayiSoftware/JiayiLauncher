@@ -3,6 +3,7 @@
 @using System.Reflection
 @using System.Drawing
 @using System.Diagnostics
+@using System.Globalization
 
 <!--suppress CssInvalidPropertyValue -->
 <h3>Settings</h3>
@@ -15,6 +16,8 @@
         @* i sincerely hope this is the last bit of javascript i have to write for this project *@
         <a class="tab-button" onclick="document.getElementById('@category.ToLower()').scrollIntoView({behavior: 'smooth'})">@category</a>
     }
+    
+    <a class="tab-button">About</a>
 </div>
 
 <div class="settings-container">
@@ -52,21 +55,23 @@
                                 Changed="value => ChangeStringSetting(value, setting)"/>
                             break;
                         case true when setting.PropertyType == typeof(int[]):
+                            var intSlider = (int[])setting.GetValue(JiayiSettings.Instance)!;
                             <JiayiSlider 
-                                Min="((int[])setting.GetValue(JiayiSettings.Instance)!)[0]" 
-                                Max="((int[])setting.GetValue(JiayiSettings.Instance)!)[1]" 
-                                Value="((int[])setting.GetValue(JiayiSettings.Instance)!)[2]" 
+                                Min="@intSlider[0]" 
+                                Max="@intSlider[1]" 
+                                Value="@intSlider[2]" 
                                 Style="width: -webkit-fill-available; max-width: 40%;"
-                                ValueChanged="value => ChangeSliderSetting((int[])setting.GetValue(JiayiSettings.Instance)!, (int)value, setting)"/>
+                                ValueChanged="value => ChangeSliderSetting(intSlider, (int)value, setting)"/>
                             break;
                         case true when setting.PropertyType == typeof(float[]):
+                            var floatSlider = (float[])setting.GetValue(JiayiSettings.Instance)!;
                             <JiayiSlider 
-                                Min="((float[])setting.GetValue(JiayiSettings.Instance)!)[0]" 
-                                Max="((float[])setting.GetValue(JiayiSettings.Instance)!)[1]" 
+                                Min="@floatSlider[0]" 
+                                Max="@floatSlider[1]" 
                                 Step="0.05f"
-                                Value="((float[])setting.GetValue(JiayiSettings.Instance)!)[2]" 
+                                Value="@floatSlider[2]" 
                                 Style="width: -webkit-fill-available; max-width: 40%;"
-                                ValueChanged="value => ChangeSliderSetting((float[])setting.GetValue(JiayiSettings.Instance)!, value, setting)"/>
+                                ValueChanged="value => ChangeSliderSetting(floatSlider, value, setting)"/>
                             break;
                         case true when setting.PropertyType == typeof((string, Action)):
                             var (name, action) = ((string, Action))setting.GetValue(JiayiSettings.Instance)!;
@@ -77,7 +82,7 @@
                             @* for now *@
                             var color = (Color)setting.GetValue(JiayiSettings.Instance)!;
                             var hex = $"#{color.R:x2}{color.G:x2}{color.B:x2}";
-                            <input type="color" value="@hex">
+                            <input type="color" value="@hex" @onchange="args => ChangeColorSetting(args.Value, setting)">
                             break;
                     }
                 </div>
@@ -112,4 +117,19 @@
         setting.SetValue(JiayiSettings.Instance, slider);
         JiayiSettings.Instance!.Save();
     }
+
+    private void ChangeColorSetting(object? value, PropertyInfo setting)
+    {
+        var color = value as string ?? "#000000";
+        var bytes = new byte[3];
+        for (var i = 0; i < 3; i++)
+        {
+            bytes[i] = byte.Parse(color.Substring(i * 2 + 1, 2), NumberStyles.HexNumber);
+        }
+        
+        var newColor = Color.FromArgb(bytes[0], bytes[1], bytes[2]);
+        setting.SetValue(JiayiSettings.Instance, newColor);
+        JiayiSettings.Instance!.Save();
+    }
+
 }

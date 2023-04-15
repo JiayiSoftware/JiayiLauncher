@@ -1,0 +1,16 @@
+﻿/* your launcher theme - edit in settings or yourself if you know the bare minimum about css */
+
+:root {
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+
+    --background-primary: rgb(15, 15, 15);
+    --background-secondary: rgb(30, 30, 30);
+    --accent: red;
+    --accent-darkened: rgb(200, 0, 0);
+    --accent-brightened: rgb(255, 75, 75);
+    --text-primary: white;
+    --text-grayed: rgb(126, 126, 126);
+    --shadow: 5px 5px rgba(0, 0, 0, 0.4);
+    --transition-speed: 0.2s;
+}

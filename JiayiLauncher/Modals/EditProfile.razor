@@ -8,7 +8,7 @@
         <JiayiTextBox Placeholder="@Name" @ref="_textBox"/>
     </div>
     
-    <JiayiButton OnClick="SaveClicked" @ref="_button"
+    <JiayiButton OnClick="SaveClicked" Disabled="!(_isButtonEnabled ?? true)"
                  Size="JiayiButton.ButtonSize.Small" Style="margin-bottom: 1em;">Save</JiayiButton>
     
     @if (JiayiSettings.Instance!.ProfileCollectionPath == string.Empty)
@@ -23,32 +23,34 @@
 @code {
     [Parameter]
     public string Name { get; set; } = "My profile";
-    
+
     [CascadingParameter]
     private BlazoredModalInstance Modal { get; set; } = default!;
-    
+
     private JiayiTextBox? _textBox;
-    private JiayiButton? _button;
+    private bool? _isButtonEnabled;
 
     private async Task SaveClicked()
     {
         // takes a bit to copy game data, so disable button
-        _button!.Disabled = true;
-        
+        _isButtonEnabled= false;
+
         if (JiayiSettings.Instance!.ProfileCollectionPath == string.Empty)
         {
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Profiles");
-            
+
             JiayiSettings.Instance.ProfileCollectionPath = path;
             ProfileCollection.Create(path);
             JiayiSettings.Instance.Save();
         }
-        
+
         var name = _textBox?.Value is null or "" ? Name : _textBox.Value;
         var profile = Profile.Create(name, ProfileCollection.Current!);
         ProfileCollection.Current!.Add(profile);
-        
+
         await Modal.CloseAsync(ModalResult.Ok(profile));
+        _isButtonEnabled = true;
+
     }
 }

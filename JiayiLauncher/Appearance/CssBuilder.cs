@@ -1,34 +1,35 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 
 namespace JiayiLauncher.Appearance;
 
 public class CssBuilder
 {
-	private readonly List<string> _properties = new();
-	private string _css = string.Empty;
-	
-	public CssBuilder(string selector)
-	{
-		_css += $"{selector} {{\n";
-	}
-	
-	public CssBuilder AddProperty(string property, string value)
-	{
-		_properties.Add($"{property}: {value};");
-		return this;
-	}
-	
-	public string Build()
-	{
-		foreach (var property in _properties)
-		{
-			_css += $"\t{property}\n";
-		}
-		
-		_css += "}\n";
-		return _css;
-	}
+    private readonly List<string> _properties = new();
+    private string _selector = string.Empty;
 
-	public override string ToString() => Build();
+    public CssBuilder(string selector)
+    {
+        _selector = selector;
+    }
+
+    public CssBuilder AddProperty(string property, string value)
+    {
+        _properties.Add($"{property}: {value};");
+        return this;
+    }
+
+    public string Build()
+    {
+        var css = $"{_selector} {{\n";
+
+        foreach (var property in _properties)
+        {
+            css += $"\t{property}\n";
+        }
+
+        css += "}\n";
+        return css;
+    }
+
+    public override string ToString() => Build();
 }

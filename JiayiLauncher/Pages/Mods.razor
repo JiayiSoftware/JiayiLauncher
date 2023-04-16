@@ -2,6 +2,7 @@
 @using System.IO
 @using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
+@using JiayiLauncher.Utils
 
 @page "/Mods"
 
@@ -9,41 +10,43 @@
 
 <div class="find-tools">
     <span class="material-symbols-sharp">search</span>
-    <JiayiTextBox Placeholder="Search mods" @ref="_searchBox" Changed="StateHasChanged"/>
+    <JiayiTextBox Placeholder="Search mods" @ref="_searchBox" Changed="StateHasChanged" />
 
     <div class="separator"></div>
 
     <span class="material-symbols-sharp">filter_list</span>
-    <p>Filter by:</p>
+    <p class="filter-by">Filter by:</p>
     <JiayiFilter @ref="_localFilter" Changed="StateHasChanged">Locally stored</JiayiFilter>
     <JiayiFilter @ref="_onlineFilter" Changed="StateHasChanged">From the web</JiayiFilter>
+
+    <p class="invisible-normalizer">invisible</p>
 </div>
 
-<div class="mods"> 
+<div class="mods">
     <ul class="mod-list">
         @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
         {
             var mods = new List<Mod>();
-            if (_localFilter is {Checked: true})
+            if (_localFilter is { Checked: true })
             {
                 mods.AddRange(ModCollection.Current!.Mods.Where(mod => !mod.FromInternet));
             }
-            
-            if (_onlineFilter is {Checked: true})
+
+            if (_onlineFilter is { Checked: true })
             {
                 mods.AddRange(ModCollection.Current!.Mods.Where(mod => mod.FromInternet));
             }
-            
+
             if (mods.Count == 0)
             {
                 mods = ModCollection.Current!.Mods;
             }
 
             _searchResults = 0;
-            
+
             foreach (var mod in mods)
             {
-                @if (_searchBox is {Value: not null and not "" })
+                @if (_searchBox is { Value: not null and not "" })
                 {
                     if (mod.Name.ToLower().Contains(_searchBox.Value.ToLower()))
                     {
@@ -63,7 +66,7 @@
     {
         <p style="text-align: center; margin-top: 0;">No results found.</p>
     }
-    <p class="add-new" @ondragenter="OnDragEnter" @ondragleave="OnDragLeave" @ondragover="OnDragEnter" data-hovered="@_hovered">
+    <p class="add-new" @ondragenter="OnDragEnter" @ondragleave="OnDragLeave" @ondragover="OnDragEnter" data-hovered="@(_hovered ? "yes" : "no")">
         @if (JiayiSettings.Instance.ModCollectionPath != string.Empty)
         {
             <label class="drag-area">
@@ -91,23 +94,23 @@
 @code {
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
-    
+
     public static Mods Instance { get; private set; } = default!;
 
-    private string _hovered = "no";
-    
+    private bool _hovered = false;
+
     // refs
     private JiayiTextBox? _searchBox;
     private JiayiFilter? _localFilter;
     private JiayiFilter? _onlineFilter;
-    
+
     private int _searchResults;
-    
+
     protected override void OnInitialized()
     {
         Instance = this;
     }
-    
+
     public void Refresh() => StateHasChanged();
 
     private async Task ShowAddMods()
@@ -120,38 +123,50 @@
     {
         var transfer = obj.DataTransfer;
         if (transfer.Types.Length <= 0) return;
-        if (transfer.Types.Contains("Files") || transfer.Types.Contains("text/uri-list"))
+        if ((transfer.Types.Contains("Files") && transfer.Items[0].Type == "application/x-msdownload") || transfer.Types.Contains("text/uri-list"))
         {
-            _hovered = "yes";
+            _hovered = true;
         }
     }
 
     private void OnDragLeave(DragEventArgs obj)
     {
-        _hovered = "no";
+        _hovered = false;
     }
 
+    // Support for importing a list of urls/folder (as dragging a folder just creates file)
     private async Task FileDropped(InputFileChangeEventArgs obj)
     {
-        _hovered = "no";
-        
+        _hovered = false;
+
         var files = obj.GetMultipleFiles(50);
+
+        files = files.Where(file =>
+        {
+            // DLL or exe
+            if (file.ContentType == "application/x-msdownload")
+                return true;
+
+            Log.Write("Mods", $"Invalid file: {file.Name} | Expected: .dll", Log.LogLevel.Warning);
+            return false;
+        }).ToList().AsReadOnly();
 
         if (files.Count == 1)
         {
             var file = files[0];
+
             var mod = await ModImporter.ImportFromBrowserFile(file);
-            
+
             var parameters = new ModalParameters()
                 .Add(nameof(EditMod.Mod), mod);
-            
+
             var modal = ModalService.Show<EditMod>("Edit mod", parameters);
             await modal.Result;
         }
         else if (files.Count > 1)
         {
             var mods = await ModImporter.ImportFromBrowserFiles(files);
-            
+
             // don't bother showing the edit mod modal
 
             if (ModCollection.Current == null)
@@ -160,11 +175,11 @@
                 {
                     ("Yes", new EventCallback(null, () =>
                     {
-                        JiayiSettings.Instance!.ModCollectionPath = 
+                        JiayiSettings.Instance!.ModCollectionPath =
                             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Jiayi Mods");
                         JiayiSettings.Instance.Save();
                         ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
-                        
+
                         foreach (var mod in mods)
                         {
                             ModCollection.Current!.Add(mod);
@@ -172,17 +187,17 @@
                     })),
                     ("No", EventCallback.Empty)
                 };
-                
+
                 var parameters = new ModalParameters()
                     .Add(nameof(MessageBox.Buttons), options)
                     .Add(nameof(MessageBox.Message), "Since you don't have a mods folder set up, Jiayi will make one for you to import these mods. Is that okay? It will be in your documents.");
-                
+
                 var modal = ModalService.Show<MessageBox>("Import", parameters);
                 await modal.Result;
                 Refresh();
                 return;
             }
-            
+
             foreach (var mod in mods)
             {
                 ModCollection.Current.Add(mod);

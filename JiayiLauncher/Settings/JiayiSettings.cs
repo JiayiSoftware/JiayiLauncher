@@ -86,7 +86,7 @@ public class JiayiSettings
 	[Setting("Gray text color", "Appearance", "A gray version of the text color.")]
 	public Color GrayTextColor { get; set; } = Color.FromArgb(126, 126, 126);
 
-	[Setting("Shadow distance", "Appearance", "The distance of the shadow.")]
+	[Setting("Shadow distance", "Appearance", "The distance of the shadows on UI elements.")]
 	public int[] ShadowDistance { get; set; } = { 0, 10, 5 };
 	
 	[Setting("UI movement speed", "Appearance", "The speed at which the UI moves.")]

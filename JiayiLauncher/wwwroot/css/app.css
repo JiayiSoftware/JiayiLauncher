@@ -5,6 +5,12 @@
     font-family: Montserrat, sans-serif;
 }
 
+.invisible-normalizer {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+}
+
 body {
     color: white;
     background-color: var(--background-primary);

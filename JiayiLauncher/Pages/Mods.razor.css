@@ -4,6 +4,12 @@
     column-gap: 0.7rem;
 }
 
+@media only screen and (max-width: 1000px) {
+    .find-tools .filter-by {
+        display: none;
+    }
+}
+
 .mods {
     display: flex;
     flex-direction: column;
@@ -21,7 +27,6 @@
 
 .separator {
     border-right: 1px solid rgb(50, 50, 50);
-    
     height: 1.5rem;
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
@@ -38,8 +43,11 @@
     height: auto;
     filter: brightness(0.5);
     text-align: center;
-    
     transition: var(--transition-speed);
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    padding: 1em 0;
 }
 
 ::deep input[type="file"] {
@@ -52,16 +60,12 @@
 
 .add-new[data-hovered="yes"] {
     filter: brightness(1);
-    border-width: 2px;
-    border-style: solid;
     border-color: var(--accent);
     background-color: rgba(255, 0, 0, 0.2);
 }
 
 .add-new[data-hovered="no"] {
     filter: brightness(0.5);
-    border-width: 0;
-    border-style: none;
     background-color: transparent;
 }
 
@@ -85,29 +89,26 @@
     position: fixed;
     bottom: 1.5rem;
     right: 1.5rem;
-    
     width: 3rem;
     height: 3rem;
-    
     background-color: var(--accent);
     color: var(--text-primary);
     box-shadow: var(--shadow);
     filter: brightness(1);
-    
     border: none;
     transition: var(--transition-speed);
 }
 
-.add-button:hover {
-    filter: brightness(1.5);
-}
+    .add-button:hover {
+        filter: brightness(1.5);
+    }
 
-.add-button:active {
-    filter: brightness(0.8);
-    transform: translate(5px, 5px);
-    box-shadow: none;
-}
+    .add-button:active {
+        filter: brightness(0.8);
+        transform: translate(5px, 5px);
+        box-shadow: none;
+    }
 
-.add-button:focus {
-    outline: none;
-}
+    .add-button:focus {
+        outline: none;
+    }

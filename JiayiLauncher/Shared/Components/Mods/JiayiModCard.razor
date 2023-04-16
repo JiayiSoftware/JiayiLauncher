@@ -20,7 +20,7 @@
     </div>
     <p class="mod-version">Works on @(string.Join(", ", Mod.SupportedVersions))</p>
     <div class="mod-controls">
-        <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" 
+        <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" Disabled="@_launching"
                      Size="JiayiButton.ButtonSize.Small" Style="@_launchProgress">Launch</JiayiButton>
         
         <span class="material-symbols-sharp" style="cursor: pointer; opacity: @_controlsOpacity;" title="Edit mod" @onclick="EditClicked">edit</span>
@@ -84,13 +84,11 @@
         
         // we good
         _launching = true;
-        _launchButton!.Disabled = true;
         
         Launcher.LaunchProgressChanged += (_, _) => StateHasChanged();
         result = await Launcher.Launch(Mod);
         
         _launching = false;
-        _launchButton!.Disabled = false;
 
         switch (result)
         {

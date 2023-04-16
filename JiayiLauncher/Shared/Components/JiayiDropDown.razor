@@ -31,7 +31,7 @@
     }
     <span class="material-symbols-sharp">expand_more</span>
     
-    <span class="dropdown-click" onclick="@ToggleDropdown"></span>
+    <span class="dropdown-click" @onclick="ToggleDropdown"></span>
     
     <ul class="dropdown-items" data-shown="@_showDropdown">
         @foreach (var item in Items!)

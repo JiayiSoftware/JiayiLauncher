@@ -48,17 +48,20 @@
 
         if (dialog.ShowDialog() == true)
         {
-            await Modal.CloseAsync(ModalResult.Ok());
-            foreach (string filename in dialog.FileNames)
+            if (dialog.FileNames.Length == 1)
             {
-                var mod = ModImporter.ImportFromPath(filename);
+                var mod = ModImporter.ImportFromPath(dialog.FileName);
 
                 var parameters = new ModalParameters()
                     .Add(nameof(EditMod.Mod), mod);
 
-                var editModal = ModalService.Show<EditMod>("Edit mod", parameters);
-                await editModal.Result;
+                ModalService.Show<EditMod>("Edit mod", parameters);
+            } else if (dialog.FileNames.Length > 1)
+            {
+                var mods = ModImporter.ImportFromPaths(dialog.FileNames);
             }
+
+            await Modal.CloseAsync(ModalResult.Ok());
         }
     }
 

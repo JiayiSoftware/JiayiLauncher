@@ -1,15 +1,16 @@
 ﻿@using JiayiLauncher.Features.Profiles
 @using JiayiLauncher.Settings
 @using System.IO
+@using JiayiLauncher.Utils;
 
 <div class="edit">
     <div class="edit-name" style="margin-bottom: 1em">
         <p>Give your profile a name!</p>
-        <JiayiTextBox Placeholder="@Profile!.Name" @ref="_textBox"/>
+        <JiayiTextBox Placeholder="@Profile!.Name" @ref="_textBox" />
     </div>
-    
+
     <JiayiButton OnClick="SaveClicked" Size="JiayiButton.ButtonSize.Small" Style="margin-bottom: 1em;">Save</JiayiButton>
-    
+
     @if (JiayiSettings.Instance!.ProfileCollectionPath == string.Empty)
     {
         <br>
@@ -22,24 +23,36 @@
 @code {
     [Parameter]
     public Profile? Profile { get; set; }
-    
+
     [CascadingParameter]
     private BlazoredModalInstance Modal { get; set; } = default!;
-    
+
     private JiayiTextBox? _textBox;
 
     private async Task SaveClicked()
     {
-        if (Profile == null) return;
+        if (Profile == null || _textBox?.Value == null || _textBox?.Value?.Trim() == string.Empty || _textBox?.Value.Length >= 256) return;
+
+        var newName = _textBox!.Value?.Trim() ?? Profile.Name;
 
         if (Directory.Exists(Profile.Path))
         {
-            var newPath = Profile.Path.Replace(Profile.Name, _textBox!.Value ?? Profile.Name);
-            Directory.Move(Profile.Path, newPath);
-            Profile.Path = newPath;
+            var newPath = Profile.Path.Replace(Profile.Name, newName);
+            if (Directory.Exists(newPath))
+            {
+                await Modal.CloseAsync(ModalResult.Cancel());
+                Log.Write("Profile", $"Directory already exists: {newPath}");
+                return;
+            }
+
+            if (Profile.Path != newPath)
+            {
+                Directory.Move(Profile.Path, newPath);
+                Profile.Path = newPath;
+            }
         }
-        
-        Profile.Name = _textBox!.Value ?? Profile.Name;
+
+        Profile.Name = newName;
         ProfileCollection.Current!.Add(Profile);
 
         await Modal.CloseAsync();

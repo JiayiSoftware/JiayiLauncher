@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Windows.Controls;
 using JiayiLauncher.Features.Game;
 using JiayiLauncher.Utils;
 

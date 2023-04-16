@@ -84,3 +84,9 @@
 .modify-buttons:hover .modify-button {
     opacity: 100%;
 }
+
+.profile-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

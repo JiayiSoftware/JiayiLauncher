@@ -6,6 +6,7 @@
     background-color: var(--background-secondary);
     transition: width var(--transition-speed) ease;
     z-index: 5;
+    box-shadow: 5px 0 rgba(0, 0, 0, 0.4);
 }
 
 .sidebar-items {
@@ -58,7 +59,6 @@
 
 .sidebar:hover {
     width: 12rem;
-    box-shadow: 5px 0 rgba(0, 0, 0, 0.4);
 }
 
 .sidebar:hover .sidebar-link-text {
@@ -109,7 +109,6 @@
 /* styles when sidebar[data-sticky] is "yes" */
 .sidebar[data-sticky="yes"] {
     width: 12rem;
-    box-shadow: none;
 }
 
 .sidebar[data-sticky="yes"] .sidebar-link-text {

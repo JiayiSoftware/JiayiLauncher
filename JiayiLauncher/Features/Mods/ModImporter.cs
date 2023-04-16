@@ -12,6 +12,7 @@ public static class ModImporter
         var name = Path.GetFileNameWithoutExtension(path);
         return new Mod(name, path);
     }
+    
     public static List<Mod> ImportFromPaths(string[] paths)
     {
         var list = new List<Mod>();
@@ -25,7 +26,6 @@ public static class ModImporter
                 ModCollection.Current!.Add(mod);
             }
         }
-
 
         return list;
     }

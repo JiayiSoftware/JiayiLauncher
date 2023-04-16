@@ -43,18 +43,25 @@
                 Title = "Select a mod",
                 Filter = "Injectable libraries (*.dll)|*.dll|" +
                              "External clients and injectors (*.exe)|*.exe",
-                Multiselect = false
+                Multiselect = true
             };
 
         if (dialog.ShowDialog() == true)
         {
-            var mod = ModImporter.ImportFromPath(dialog.FileName);
+            if (dialog.FileNames.Length == 1)
+            {
+                var mod = ModImporter.ImportFromPath(dialog.FileName);
 
-            var parameters = new ModalParameters()
-                .Add(nameof(EditMod.Mod), mod);
+                var parameters = new ModalParameters()
+                    .Add(nameof(EditMod.Mod), mod);
+
+                ModalService.Show<EditMod>("Edit mod", parameters);
+            } else if (dialog.FileNames.Length > 1)
+            {
+                var mods = ModImporter.ImportFromPaths(dialog.FileNames);
+            }
 
             await Modal.CloseAsync(ModalResult.Ok());
-            ModalService.Show<EditMod>("Edit mod", parameters);
         }
     }
 

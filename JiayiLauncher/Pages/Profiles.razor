@@ -38,11 +38,11 @@
                         <div class="profile-name">
                             <strong>@profile.Name</strong>
                             
-                            @if (!Directory.Exists(profile.Path))
+                            @if (!profile.IsValid())
                             {
                                 <span class="material-symbols-sharp"
-                                      style="color: orangered"
-                                      title="This profile is broken; the folder containing its game data is missing.">
+                                      style="color: darkorange"
+                                      title="This profile is broken; the folder containing its game data is missing or empty.">
                                     error
                                 </span>
                             }

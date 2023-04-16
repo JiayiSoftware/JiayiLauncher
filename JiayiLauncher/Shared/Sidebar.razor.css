@@ -102,6 +102,7 @@
 }
 
 .sticky:hover {
+    /* TODO: un-hardcode this */
     background-color: rgba(255, 0, 0, 0.2);
 }
 

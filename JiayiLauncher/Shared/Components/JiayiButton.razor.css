@@ -2,6 +2,7 @@
     background-color: var(--accent);
     border: none;
     color: var(--text-primary);
+    filter: brightness(1) grayscale(0);
     padding: 1rem 1.5rem;
     text-align: center;
     text-decoration: none;
@@ -12,7 +13,6 @@
     font-weight: 900;
 
     box-shadow: var(--shadow);
-    filter: none;
     
     cursor: pointer;
 
@@ -20,11 +20,11 @@
 }
 
 .button:hover {
-    background-color: var(--accent-brightened);
+    filter: brightness(1.5);
 }
 
 .button:active {
-    background-color: var(--accent-darkened);
+    filter: brightness(0.8);
     transform: translate(5px, 5px);
     box-shadow: none;
 }

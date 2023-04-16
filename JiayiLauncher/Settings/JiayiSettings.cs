@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Utils;
 using Microsoft.Win32;
@@ -74,12 +75,6 @@ public class JiayiSettings
 	[Setting("Accent color", "Appearance", "The accent color of the launcher.")]
 	public Color AccentColor { get; set; } = Color.Red;
 	
-	[Setting("Dark accent color", "Appearance", "A darker version of the accent color.")]
-	public Color DarkAccentColor { get; set; } = Color.FromArgb(200, 0, 0);
-	
-	[Setting("Bright accent color", "Appearance", "A brighter version of the accent color.")]
-	public Color BrightAccentColor { get; set; } = Color.FromArgb(255, 75, 75);
-	
 	[Setting("Text color", "Appearance", "The text color of the launcher.")]
 	public Color TextColor { get; set; } = Color.White;
 	
@@ -92,7 +87,11 @@ public class JiayiSettings
 	[Setting("UI movement speed", "Appearance", "The speed at which the UI moves.")]
 	public float[] MovementSpeed { get; set; } = { 0, 0.5f, 0.2f };
 
-	// discord settings
+	[Setting("Apply theme", "Appearance",
+		"Apply changes made to the launcher's appearance. This will be removed in the future.")]
+	[JsonIgnore] public (string, Action) ApplyTheme { get; set; } = ("Apply", ThemeManager.ApplyTheme);
+
+		// discord settings
 	[Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.")]
 	public bool RichPresence { get; set; } = true;
 	

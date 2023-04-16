@@ -1,5 +1,10 @@
 ﻿/* REQUIRED STYLES FOR JIAYI; don't be dumb and edit this file */
 
+:root {
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+}
+
 body {
     color: white;
     background-color: var(--background-primary);

@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using Blazored.Modal;
+using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Discord;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Profiles;
@@ -56,6 +57,7 @@ public partial class MainWindow
 		}
 		
 		RichPresence.Initialize();
+		ThemeManager.ApplyTheme();
 	}
 
 	protected override void OnSourceInitialized(EventArgs e)

@@ -5,11 +5,10 @@
 <div class="edit">
     <div class="edit-name" style="margin-bottom: 1em">
         <p>Give your profile a name!</p>
-        <JiayiTextBox Placeholder="@Name" @ref="_textBox"/>
+        <JiayiTextBox Placeholder="@Profile.Name" @ref="_textBox"/>
     </div>
     
-    <JiayiButton OnClick="SaveClicked" @ref="_button"
-                 Size="JiayiButton.ButtonSize.Small" Style="margin-bottom: 1em;">Save</JiayiButton>
+    <JiayiButton OnClick="SaveClicked" Size="JiayiButton.ButtonSize.Small" Style="margin-bottom: 1em;">Save</JiayiButton>
     
     @if (JiayiSettings.Instance!.ProfileCollectionPath == string.Empty)
     {
@@ -22,33 +21,27 @@
 
 @code {
     [Parameter]
-    public string Name { get; set; } = "My profile";
+    public Profile? Profile { get; set; }
     
     [CascadingParameter]
     private BlazoredModalInstance Modal { get; set; } = default!;
     
     private JiayiTextBox? _textBox;
-    private JiayiButton? _button;
 
     private async Task SaveClicked()
     {
-        // takes a bit to copy game data, so disable button
-        _button!.Disabled = true;
-        
-        if (JiayiSettings.Instance!.ProfileCollectionPath == string.Empty)
+        if (Profile == null) return;
+
+        if (Directory.Exists(Profile.Path))
         {
-            var path = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Profiles");
-            
-            JiayiSettings.Instance.ProfileCollectionPath = path;
-            ProfileCollection.Create(path);
-            JiayiSettings.Instance.Save();
+            var newPath = Profile.Path.Replace(Profile.Name, _textBox!.Value ?? Profile.Name);
+            Directory.Move(Profile.Path, newPath);
+            Profile.Path = newPath;
         }
         
-        var name = _textBox?.Value is null or "" ? Name : _textBox.Value;
-        var profile = Profile.Create(name, ProfileCollection.Current!);
-        ProfileCollection.Current!.Add(profile);
-        
-        await Modal.CloseAsync(ModalResult.Ok(profile));
+        Profile.Name = _textBox!.Value ?? Profile.Name;
+        ProfileCollection.Current!.Add(Profile);
+
+        await Modal.CloseAsync();
     }
 }

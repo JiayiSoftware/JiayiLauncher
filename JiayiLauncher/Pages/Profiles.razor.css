@@ -68,3 +68,19 @@
     list-style: none;
     padding-left: 0;
 }
+
+.modify-buttons {
+    display: flex;
+    column-gap: 0.5rem;
+    align-items: center;
+}
+
+.modify-button {
+    cursor: pointer;
+    opacity: 0;
+    transition: var(--transition-speed);
+}
+
+.modify-buttons:hover .modify-button {
+    opacity: 100%;
+}

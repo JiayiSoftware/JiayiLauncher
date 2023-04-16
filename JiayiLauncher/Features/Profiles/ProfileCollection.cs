@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Profiles;
@@ -46,6 +47,9 @@ public class ProfileCollection
 	
 	public void Add(Profile profile)
 	{
+		if (Profiles.Any(x => x.Path == profile.Path))
+			Profiles.Remove(Profiles.First(x => x.Path == profile.Path));
+		
 		Profiles.Add(profile);
 	}
 }

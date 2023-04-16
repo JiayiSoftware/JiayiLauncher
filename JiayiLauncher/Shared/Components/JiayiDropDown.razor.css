@@ -11,6 +11,8 @@
     transition: var(--transition-speed);
 
     filter: brightness(1);
+
+    z-index: 2; /* Dropdown behind other elements when opened if removed */
 }
 
 .dropdown.active, .dropdown:focus {

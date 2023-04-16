@@ -9,10 +9,13 @@
     It will also show you your recently launched mods, and the Profile you have selected.
 </p>
 
-<a href="/TestPlace" style="display: @_debug">debug stuff</a>
+@if (_debug)
+{
+    <a href="/TestPlace" style="display: @_debug">debug stuff</a>
+}
 
 @code {
-    private string _debug => Debugger.IsAttached ? "block" : "none";
+    bool _debug => Debugger.IsAttached;
     
     private string DetermineTimeOfDay()
     {

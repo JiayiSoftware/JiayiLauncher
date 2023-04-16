@@ -23,7 +23,7 @@
 }
 
 #help-button {
-    opacity: 0;
+    opacity: 0.25;
     color: var(--text-grayed);
     cursor: pointer;
     

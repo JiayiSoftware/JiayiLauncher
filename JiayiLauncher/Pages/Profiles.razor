@@ -59,13 +59,21 @@
                     </div>
 
                     <div class="modify-buttons">
-                        <span class="material-symbols-sharp modify-button"
-                              title="Edit profile" @onclick="() => EditClicked(profile)">edit</span>
-                        <span class="material-symbols-sharp modify-button" style="color: darkred"
-                              title="Delete profile" @onclick="() => DeleteClicked(profile)">delete</span>
+                        @if (profile.IsValid())
+                        {
+                            <span class="material-symbols-sharp modify-button"
+                                  title="Edit profile" @onclick="() => EditClicked(profile)">edit</span>
+                            <span class="material-symbols-sharp modify-button" style="color: darkred"
+                                  title="Delete profile" @onclick="() => DeleteClicked(profile)">delete</span>
 
-                        <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-left: 0.2rem"
-                             OnClick="() => ApplyClicked(profile)">Apply</JiayiButton>
+                            <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-left: 0.2rem"
+                                         OnClick="() => ApplyClicked(profile)">Apply</JiayiButton>
+                        }
+                        else
+                        {
+                            <JiayiButton Size="JiayiButton.ButtonSize.Small"
+                                         OnClick="() => DeleteNoConfirm(profile)">Delete</JiayiButton>
+                        }
                     </div>
                 </li>
             }
@@ -172,4 +180,9 @@
         ModalService.Show<MessageBox>("Apply profile", parameters);
     }
 
+    private void DeleteNoConfirm(Profile profile)
+    {
+        profile.Delete();
+        StateHasChanged();
+    }
 }

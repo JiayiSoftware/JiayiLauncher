@@ -139,22 +139,28 @@ public class ModCollection
         Import(path);
     }
 
-    public async void Add(Mod mod)
+    public void Add(Mod mod)
     {
         // mods get replaced if they already exist
         if (HasMod(mod.Path))
         {
-            var idx = Mods.IndexOf(mod);
-            Mods[idx] = mod;
+            var existingMod = Mods.First(m => m.Path == mod.Path);
+            File.Delete(existingMod.MetadataPath);
         }
         else
         {
-            // copy the mod to the collection directory if it's not already there
+			if (mod.FromInternet)
+			{
+				mod.SaveMetadata();
+				return;
+			}
+
+			// copy the mod to the collection directory if it's not already there
             var extension = Path.GetExtension(mod.Path);
             var newFileName = mod.Name + extension;
             var newPath = Path.Combine(BasePath, newFileName);
 
-            bool alreadyExists = File.Exists(newPath);
+            var alreadyExists = File.Exists(newPath);
 
             if (alreadyExists)
             {
@@ -169,27 +175,31 @@ public class ModCollection
 
                 var parameters = new ModalParameters()
                     .Add(nameof(MessageBox.Buttons), options)
-                    .Add(nameof(MessageBox.Message), "This mod already exists, do you want to overwrite it? (irreversible)");
+                    .Add(nameof(MessageBox.Message), "This mod points to a file that already exists. Do you want to overwrite it? (irreversible)");
 
                 var modal = ModalService.Show<MessageBox>("Overwrite?", parameters);
                 var result = await modal.Result;
                 if (result.Cancelled) return;*/
-                if (MessageBox.Show($"This mod already exists, do you want to overwrite it? (irreversible)", $"Overwrite? ({mod.Name})", MessageBoxButton.YesNo) == MessageBoxResult.No) return;
+                
+                if (MessageBox.Show(
+	                    "This mod points to a file that already exists. Do you want to overwrite it? (irreversible)",
+	                    "Jiayi Launcher", MessageBoxButton.YesNo, MessageBoxImage.Question) ==
+                    MessageBoxResult.No) return;
             }
+            
             if (!mod.FromInternet && !mod.Path.StartsWith(BasePath))
             {
                 File.Copy(mod.Path, newPath, true);
-
                 mod.Path = newPath;
+                
                 if (alreadyExists)
                     Mods[Mods.FindIndex(m => m.Path == mod.Path)] = mod;
                 else
                     Mods.Add(mod);
-
             }
         }
 
-        mod.SaveMetadata(this);
+        mod.SaveMetadata();
     }
 
     public bool HasMod(string path)

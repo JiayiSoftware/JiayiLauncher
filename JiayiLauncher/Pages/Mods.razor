@@ -41,7 +41,6 @@
 
                 _searchResults++;
                 <JiayiModCard Mod="@mod" />
-                
             }
         }
     </ul>
@@ -80,7 +79,7 @@
 
     public static Mods Instance { get; private set; } = default!;
 
-    private bool _hovered = false;
+    private bool _hovered;
 
     // refs
     private JiayiTextBox? _searchBox;

@@ -10,34 +10,56 @@
         <strong>@Mod.Name</strong>
 
         <div class="right">
-            @if (!@Mod.IsValid())
+            @if (!Mod.IsValid())
             {
-                <span class="material-symbols-sharp"
-                      style="color: darkorange;"
-                      title="This mod is broken; the file is missing from the mods directory.">
-                    error
-                </span>
-            }
-            @if (Mod.FromInternet)
-            {
-                <span class="material-symbols-sharp" title="Downloaded from the web">cloud_download</span>
+                @if (Mod.FromInternet)
+                {
+                    <span class="material-symbols-sharp"
+                          style="color: darkorange;"
+                          title="This mod is broken; it doesn't exist on the web anymore.">
+                        error
+                    </span>
+                }
+                else
+                {
+                    <span class="material-symbols-sharp"
+                          style="color: darkorange;"
+                          title="This mod is broken; the file is missing from the mods directory.">
+                        error
+                    </span>
+                }
             }
             else
             {
-                <span class="material-symbols-sharp" title="Stored locally">hard_drive_2</span>
+                @if (Mod.FromInternet)
+                {
+                    <span class="material-symbols-sharp" title="Downloaded from the web">cloud_download</span>
+                }
+                else
+                {
+                    <span class="material-symbols-sharp" title="Stored locally">hard_drive_2</span>
+                }
             }
         </div>
     </div>
     <p class="mod-version">Works on @(string.Join(", ", Mod.SupportedVersions))</p>
     <div class="mod-controls">
-        <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" Disabled="@_launching"
-                     Size="JiayiButton.ButtonSize.Small" Style="@_launchProgress">Launch</JiayiButton>
+        @if (Mod.IsValid())
+        {
+            <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" Disabled="@_launching"
+                         Size="JiayiButton.ButtonSize.Small" Style="@_launchProgress">Launch</JiayiButton>
 
-        <div class="right">
-            <span class="material-symbols-sharp" style="cursor: pointer; opacity: @_controlsOpacity;" title="Edit mod" @onclick="EditClicked">edit</span>
-            <span class="material-symbols-sharp" style="color: darkred; cursor: pointer; opacity: @_controlsOpacity;" title="Delete mod (irreversible)" @onclick="DeleteClicked">delete</span>
-
-        </div>
+            <div class="right">
+                <span class="material-symbols-sharp" style="cursor: pointer; opacity: @_controlsOpacity;"
+                      title="Edit mod" @onclick="EditClicked">edit</span>
+                <span class="material-symbols-sharp" style="color: darkred; cursor: pointer; opacity: @_controlsOpacity;"
+                      title="Delete mod (irreversible)" @onclick="DeleteClicked">delete</span>
+            </div>
+        }
+        else
+        {
+            <JiayiButton OnClick="DeleteNoConfirm" Size="JiayiButton.ButtonSize.Small">Delete</JiayiButton>
+        }
     </div>
 </div>
 
@@ -184,4 +206,9 @@
         ModalService.Show<MessageBox>("Delete mod", parameters);
     }
 
+    private void DeleteNoConfirm()
+    {
+        Mod.Delete(ModCollection.Current!);
+        Mods.Instance.Refresh();
+    }
 }

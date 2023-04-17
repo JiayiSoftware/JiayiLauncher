@@ -2,7 +2,7 @@
     background-color: var(--background-secondary);
     box-shadow: var(--shadow);
     border-top: 5px solid var(--accent);
-    width: 15rem;
+    width: 12rem;
     padding: 0.5rem;
     transition: var(--transition-speed);
 }
@@ -21,7 +21,7 @@
     align-items: center;
     justify-content: space-between;
 }
-.mod-header .right, .mod-controls .right{
+.mod-header .right, .mod-controls .right {
     display: flex;
     gap: 0.5em;
 }

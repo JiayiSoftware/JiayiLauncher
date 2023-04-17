@@ -4,6 +4,11 @@
     column-gap: 0.7rem;
 }
 
+.find-tools .filter-by {
+    display: block;
+    transition: var(--transition-speed);
+}
+
 @media only screen and (max-width: 1000px) {
     .find-tools .filter-by {
         display: none;
@@ -21,7 +26,7 @@
 .mod-list {
     display: grid;
     padding: 0;
-    grid-template-columns: repeat(auto-fill, 15rem);
+    grid-template-columns: repeat(auto-fill, 12rem);
     gap: 0.5rem;
 }
 
@@ -99,16 +104,16 @@
     transition: var(--transition-speed);
 }
 
-    .add-button:hover {
-        filter: brightness(1.5);
-    }
+.add-button:hover {
+    filter: brightness(1.5);
+}
 
-    .add-button:active {
-        filter: brightness(0.8);
-        transform: translate(5px, 5px);
-        box-shadow: none;
-    }
+.add-button:active {
+    filter: brightness(0.8);
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}
 
-    .add-button:focus {
-        outline: none;
-    }
+.add-button:focus {
+    outline: none;
+}

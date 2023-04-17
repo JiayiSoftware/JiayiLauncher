@@ -2,9 +2,8 @@
     background-color: var(--background-secondary);
     box-shadow: var(--shadow);
     border-top: 5px solid var(--accent);
-    max-width: 185px;
+    width: 15rem;
     padding: 0.5rem;
-    
     transition: var(--transition-speed);
 }
 
@@ -21,6 +20,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+.mod-header .right, .mod-controls .right{
+    display: flex;
+    gap: 0.5em;
 }
 
 .mod-version {

@@ -21,7 +21,7 @@
     {
         <br>
         <i style="color: var(--text-grayed); font-size: 14px">
-            Mods are saved in your documents by default; you can change this in settings
+            Mods will be saved to their default location, which you can change in settings
         </i>
     }
 </div>
@@ -64,7 +64,7 @@
         if (JiayiSettings.Instance!.ModCollectionPath == string.Empty)
         {
             JiayiSettings.Instance.ModCollectionPath = 
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Jiayi Mods");
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mods");
             JiayiSettings.Instance.Save();
             ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
         }

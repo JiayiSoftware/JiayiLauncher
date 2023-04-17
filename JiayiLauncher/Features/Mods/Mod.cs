@@ -103,4 +103,11 @@ public class Mod
 		
 		Log.Write("Mod.Delete()", $"Deleted {Name} from the mod collection.");
 	}
+
+	public bool IsValid()
+	{
+		var exists = File.Exists(Path);
+		var isValidFile = Path.EndsWith(".dll") || Path.EndsWith(".exe");
+        return exists && isValidFile;
+    }
 }

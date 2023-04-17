@@ -48,7 +48,8 @@ public static class Launcher
 
 		LaunchProgress += 10;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
-		
+
+		var isMcOpen = Minecraft.IsOpen;
 		await Minecraft.Open();
 		Log.Write(nameof(Launcher), "Opened game, waiting to launch mod...");
 		
@@ -76,7 +77,7 @@ public static class Launcher
 
 		// either wait for the game's modules to load
 		// or if the user has injection delay enabled, wait for the time they specified
-		if (JiayiSettings.Instance!.UseInjectionDelay)
+		if (JiayiSettings.Instance!.UseInjectionDelay && !isMcOpen)
 			Task.Delay(JiayiSettings.Instance.InjectionDelay[2] * 1000).Wait();
 		else
 			await Minecraft.WaitForModules();

@@ -26,39 +26,22 @@
     <ul class="mod-list">
         @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
         {
-            var mods = new List<Mod>();
-            if (_localFilter is { Checked: true })
-            {
-                mods.AddRange(ModCollection.Current!.Mods.Where(mod => !mod.FromInternet));
-            }
-
-            if (_onlineFilter is { Checked: true })
-            {
-                mods.AddRange(ModCollection.Current!.Mods.Where(mod => mod.FromInternet));
-            }
-
-            if (mods.Count == 0)
-            {
-                mods = ModCollection.Current!.Mods;
-            }
-
             _searchResults = 0;
-
-            foreach (var mod in mods)
+            foreach (var mod in ModCollection.Current!.Mods)
             {
-                @if (_searchBox is { Value: not null and not "" })
+                if (_localFilter != null && _onlineFilter != null)
                 {
-                    if (mod.Name.ToLower().Contains(_searchBox.Value.ToLower()))
-                    {
-                        _searchResults++;
-                        <JiayiModCard Mod="@mod" />
-                    }
+                    if (_localFilter.Checked && !_onlineFilter.Checked && mod.FromInternet)
+                        continue;
+                    if (_onlineFilter.Checked && !_localFilter.Checked && !mod.FromInternet)
+                        continue;
                 }
-                else
-                {
-                    <JiayiModCard Mod="@mod" />
-                    _searchResults++;
-                }
+
+                if (!mod.Name.ToLower().Contains(_searchBox?.Value?.ToLower() ?? "")) continue;
+
+                _searchResults++;
+                <JiayiModCard Mod="@mod" />
+                
             }
         }
     </ul>
@@ -176,7 +159,7 @@
                     ("Yes", new EventCallback(null, () =>
                     {
                         JiayiSettings.Instance!.ModCollectionPath =
-                            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Jiayi Mods");
+                            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mods");
                         JiayiSettings.Instance.Save();
                         ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
 

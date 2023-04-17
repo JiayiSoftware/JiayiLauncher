@@ -5,11 +5,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Windows;
 
 namespace JiayiLauncher.Features.Mods;
 
 public class ModCollection
 {
+    // Help
+    /*[CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;*/
+
     public string BasePath { get; private init; } = string.Empty;
     public List<Mod> Mods { get; } = new();
 
@@ -128,13 +133,13 @@ public class ModCollection
 
         // create a new collection
         JiayiSettings.Instance!.ModCollectionPath =
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Jiayi Mods");
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mods");
         JiayiSettings.Instance.Save();
         Load(JiayiSettings.Instance.ModCollectionPath);
         Import(path);
     }
 
-    public void Add(Mod mod)
+    public async void Add(Mod mod)
     {
         // mods get replaced if they already exist
         if (HasMod(mod.Path))
@@ -144,15 +149,43 @@ public class ModCollection
         }
         else
         {
-            Mods.Add(mod);
-
             // copy the mod to the collection directory if it's not already there
+            var extension = Path.GetExtension(mod.Path);
+            var newFileName = mod.Name + extension;
+            var newPath = Path.Combine(BasePath, newFileName);
+
+            bool alreadyExists = File.Exists(newPath);
+
+            if (alreadyExists)
+            {
+                /*var options = new List<(string, EventCallback)>
+                {
+                    ("Yes", new EventCallback(null, () =>
+                    {
+                        File.Delete(newPath);
+                    })),
+                    ("No", EventCallback.Empty)
+                };
+
+                var parameters = new ModalParameters()
+                    .Add(nameof(MessageBox.Buttons), options)
+                    .Add(nameof(MessageBox.Message), "This mod already exists, do you want to overwrite it? (irreversible)");
+
+                var modal = ModalService.Show<MessageBox>("Overwrite?", parameters);
+                var result = await modal.Result;
+                if (result.Cancelled) return;*/
+                if (MessageBox.Show($"This mod already exists, do you want to overwrite it? (irreversible)", $"Overwrite? ({mod.Name})", MessageBoxButton.YesNo) == MessageBoxResult.No) return;
+            }
             if (!mod.FromInternet && !mod.Path.StartsWith(BasePath))
             {
-                var filename = Path.GetFileName(mod.Path);
-                var newPath = Path.Combine(BasePath, filename);
-                File.Copy(mod.Path, newPath);
+                File.Copy(mod.Path, newPath, true);
+
                 mod.Path = newPath;
+                if (alreadyExists)
+                    Mods[Mods.FindIndex(m => m.Path == mod.Path)] = mod;
+                else
+                    Mods.Add(mod);
+
             }
         }
 

@@ -3,6 +3,7 @@
 @using JiayiLauncher.Pages
 @using JiayiLauncher.Settings
 @using System.IO
+@using JiayiLauncher.Features.Versions
 
 <div class="edit">
     <div class="edit-name">
@@ -40,7 +41,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _supportedVersions.AddRange(await PackageData.GetVersionList());
+        _supportedVersions.AddRange(await VersionList.GetVersionList());
     }
 
     private async Task SaveClicked()

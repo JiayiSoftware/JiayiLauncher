@@ -1,0 +1,53 @@
+﻿.info-card {
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    width: fit-content;
+    padding: 0.7rem;
+}
+
+.info-card p {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0.7rem 0;
+}
+
+.info-card h4 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.info-card i {
+    color: var(--text-grayed);
+    font-size: 14px;
+}
+
+.popular-versions {
+    list-style: none;
+    padding: 0;
+    margin: 0.7rem 0 0;
+    border-left: 3px solid var(--background-primary);
+}
+
+.popular-version {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 0.7rem 0.3rem;
+}
+
+.popular-version-info strong {
+    font-size: 16px;
+    margin-bottom: 0.2rem;
+}
+
+.popular-version-info p {
+    color: var(--text-grayed);
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.popular-version:first-child {
+    padding-top: 0.3rem;
+}

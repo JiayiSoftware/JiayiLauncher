@@ -2,6 +2,7 @@
 @using JiayiLauncher.Settings
 @using JiayiLauncher.Features.Launch
 @using JiayiLauncher.Features.Game
+@using JiayiLauncher.Features.Versions
 
 <h3>Components</h3>
 <h4>Drop down buttons</h4>
@@ -27,7 +28,7 @@
 
 <h4>Settings</h4>
 
-<JiayiTextBox Placeholder="Setting name" @ref="_settingName"></JiayiTextBox>
+<JiayiTextBox Placeholder="Setting name" @ref="_settingName" />
 <JiayiButton OnClick="ValidSetting">@_validSetting</JiayiButton>
 
 <h4>Toggles</h4>
@@ -37,6 +38,10 @@
 
 <h4>Sliders</h4>
 <JiayiSlider Value="50" />
+
+<h4>Version URLs</h4>
+<JiayiTextBox Placeholder="Minecraft version" @ref="_versionsBox" />
+<JiayiButton OnClick="VersionsClicked">Get download URL</JiayiButton>
 
 @code {
 
@@ -51,6 +56,8 @@
     private readonly List<string> _aLotOfItems = new() { "Bunch of items", "Testing truncating selected items", "Third option", "Fourth option", "Fifth option", "Sixth option", "Seventh option", "Eighth option", "Ninth option", "Tenth option", "Eleventh option", "Twelfth option", "Thirteenth option", "Fourteenth option", "Fifteenth option", "Sixteenth option", "Seventeenth option", "Eighteenth option", "Nineteenth option", "Twentieth option" };
 
     private JiayiTextBox? _settingName;
+    
+    private JiayiTextBox? _versionsBox;
     
     private void ButtonClicked()
     {
@@ -97,6 +104,25 @@
             .Add(nameof(MessageBox.Message), $"Game data path: {path}");
         
         ModalService.Show<MessageBox>("Game data path", parameters);
+    }
+
+    private async Task VersionsClicked()
+    {
+        if (_versionsBox?.Value == null) return;
+        
+        var version = await VersionList.GetVersion(_versionsBox.Value);
+        var url = await RequestFactory.GetDownloadUrl(version.Archs.x64!.UpdateIds[0]);
+        
+        var options = new List<(string, EventCallback)>
+        {
+            ("Okay", EventCallback.Empty)
+        };
+        
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), url);
+        
+        ModalService.Show<MessageBox>("Download URL", parameters);
     }
 
 }

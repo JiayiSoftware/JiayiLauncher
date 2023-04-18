@@ -23,7 +23,16 @@ public static class VersionList
 		var content = await response.Content.ReadAsStringAsync();
 		var json = JsonConvert.DeserializeObject<Dictionary<string, MinecraftVersion>>(content);
 		
-		if (json != null) _versionDict = json;
+		if (json != null)
+		{
+			_versionDict = json;
+
+			_versions.Clear();
+			_versions.AddRange(_versionDict.Keys);
+			
+			// reverse the list so the newest version is first
+			_versions.Reverse();
+		}
 	}
 
 	public static async Task<List<string>> GetVersionList()
@@ -31,15 +40,6 @@ public static class VersionList
 		if (_versions.Count > 0) return _versions;
 
 		await UpdateVersions();
-
-		foreach (var version in _versionDict.Keys)
-		{
-			_versions.Add(version);
-		}
-		
-		// reverse the list so the newest version is first
-		_versions.Reverse();
-
 		return _versions;
 	}
 	

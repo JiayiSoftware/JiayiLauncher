@@ -1,11 +1,75 @@
 ﻿@page "/Versions"
+@using JiayiLauncher.Features.Game
+@using JiayiLauncher.Features.Versions
 <h3>Version Manager</h3>
 
-<p>
-    Jiayi's Version Manager allows you to switch to different Minecraft versions.<br><br>
-    The launcher can also bring you here if you try to launch a mod that doesn't support your current version.
-</p>
+<div class="versions-menu">
+    <div class="info-card">
+        <h4>Your current version</h4>
+        <p>@_currentVersion</p>
+        <i>@_installLocation</i>
+    </div>
+    
+    <div class="info-card">
+        <h4>Popular versions</h4>
+        
+        <ul class="popular-versions">
+            @if (_latestVersion != null)
+            {
+                <li class="popular-version">
+                    <div class="popular-version-info">
+                        <strong>@_latestVersion</strong>
+                        <p>Latest version</p>
+                    </div>
+                    
+                    <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
+                </li>
+            }
+            
+            <li class="popular-version">
+                <div class="popular-version-info">
+                    <strong>1.18.12</strong>
+                    <p>Popular among the community</p>
+                </div>
+                
+                <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
+            </li>
+            
+            <li class="popular-version">
+                <div class="popular-version-info">
+                    <strong>1.16.40</strong>
+                    <p>Best stable release without Renderdragon</p>
+                </div>
+                
+                <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
+            </li>
+        </ul>
+    </div>
+</div>
 
 @code {
-    
+    private string _currentVersion = "...";
+    private string _installLocation = "...";
+    private string? _latestVersion;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _currentVersion = await PackageData.GetVersion();
+        var location = await PackageData.GetInstallLocation();
+
+        _installLocation = location switch {
+            InstallLocation.FromJiayi => "Installed by Jiayi",
+            InstallLocation.MicrosoftStore => "From Microsoft Store",
+            InstallLocation.OtherVersionManager => "Installed by another version manager",
+            InstallLocation.Unknown => "Unknown install location",
+            _ => "Unknown install location"
+        };
+
+        var versions = await VersionList.GetVersionList();
+        // shave the last 2 characters off the version name as they're not shown in game
+        _latestVersion = versions[0][..^2];
+        
+        await base.OnInitializedAsync();
+    }
+
 }

@@ -51,6 +51,9 @@ public class JiayiSettings
 	
 	[Setting("Profile folder path", "General", "The path to the folder containing your profiles.")]
 	public string ProfileCollectionPath { get; set; } = string.Empty;
+	
+	[Setting("Version folder path", "General", "The path to the folder containing your game installs.")]
+	public string VersionsPath { get; set; } = string.Empty;
 
 	[Setting("Set file associations", "General", "Set up file associations for Jiayi related files.")]
 	[JsonIgnore] public (string, Action) SetFileAssociations { get; } = ("Set (requires admin)", () =>

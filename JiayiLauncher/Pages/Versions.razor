@@ -3,47 +3,54 @@
 @using JiayiLauncher.Features.Versions
 <h3>Version Manager</h3>
 
-<div class="versions-menu">
-    <div class="info-card">
-        <h4>Your current version</h4>
-        <p>@_currentVersion</p>
-        <i>@_installLocation</i>
-    </div>
-    
-    <div class="info-card">
-        <h4>Popular versions</h4>
+<div class="versions-page">
+    <div class="version-cards">
+        <div class="info-card">
+            <h4>Your current version</h4>
+            <p>@_currentVersion</p>
+            <i>@_installLocation</i>
+        </div>
         
-        <ul class="popular-versions">
-            @if (_latestVersion != null)
-            {
+        <div class="info-card">
+            <h4>Popular versions</h4>
+            
+            <ul class="popular-versions">
+                @if (_latestVersion != null)
+                {
+                    <li class="popular-version">
+                        <div class="popular-version-info">
+                            <strong>@_latestVersion</strong>
+                            <p>Latest version</p>
+                        </div>
+                        
+                        <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
+                    </li>
+                }
+                
                 <li class="popular-version">
                     <div class="popular-version-info">
-                        <strong>@_latestVersion</strong>
-                        <p>Latest version</p>
+                        <strong>1.18.12</strong>
+                        <p>Popular among the community</p>
                     </div>
                     
                     <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
                 </li>
-            }
-            
-            <li class="popular-version">
-                <div class="popular-version-info">
-                    <strong>1.18.12</strong>
-                    <p>Popular among the community</p>
-                </div>
                 
-                <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
-            </li>
-            
-            <li class="popular-version">
-                <div class="popular-version-info">
-                    <strong>1.16.40</strong>
-                    <p>Best stable release without Renderdragon</p>
-                </div>
-                
-                <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
-            </li>
-        </ul>
+                <li class="popular-version">
+                    <div class="popular-version-info">
+                        <strong>1.16.40</strong>
+                        <p>Best stable release without Renderdragon</p>
+                    </div>
+                    
+                    <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="version-list">
+        @* only shows if the screen is wide enough *@
+        <strong style="text-align: center">Full version list (placeholder)</strong>
     </div>
 </div>
 

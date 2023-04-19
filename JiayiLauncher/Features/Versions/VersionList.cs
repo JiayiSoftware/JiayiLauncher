@@ -42,7 +42,15 @@ public static class VersionList
 		await UpdateVersions();
 		return _versions;
 	}
-	
+
+	public static async Task<Dictionary<string, MinecraftVersion>> GetFullVersionList()
+	{
+		if (_versionDict.Count > 0) return _versionDict;
+		
+		await UpdateVersions();
+		return _versionDict;
+	}
+
 	public static async Task<MinecraftVersion> GetVersion(string version)
 	{
 		if (_versionDict.TryGetValue(version, out var mcVersion)) return mcVersion;

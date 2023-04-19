@@ -1,6 +1,7 @@
 ﻿.no-profiles {
     margin-top: 2rem;
     color: var(--text-grayed);
+    font-style: italic;
     text-align: center;
     display: flex;
     flex-direction: column;

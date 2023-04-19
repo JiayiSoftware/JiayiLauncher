@@ -10,9 +10,7 @@ public class MinecraftVersion
 
 public class Architectures
 {
-	public Architecture? arm { get; set; }
 	public Architecture? x64 { get; set; }
-	public Architecture? x86 { get; set; }
 }
 
 public class Architecture

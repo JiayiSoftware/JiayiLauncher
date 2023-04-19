@@ -1,4 +1,22 @@
-﻿.info-card {
+﻿.versions-page {
+    display: flex;
+    gap: 2rem;
+}
+
+.version-cards {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+}
+
+.version-list {
+    display: none;
+    width: 0;
+}
+
+.info-card {
     background-color: var(--background-secondary);
     box-shadow: var(--shadow);
     width: fit-content;
@@ -50,4 +68,15 @@
 
 .popular-version:first-child {
     padding-top: 0.3rem;
+}
+
+@media only screen and (min-width: 1000px) {
+    .version-cards {
+        width: 50%;
+    }
+    
+    .version-list {
+        display: block;
+        width: 50%;
+    }
 }

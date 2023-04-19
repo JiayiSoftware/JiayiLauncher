@@ -3,11 +3,11 @@
 * {
     box-sizing: border-box;
 }
+
 :root {
     font-size: 16px;
     font-family: Montserrat, sans-serif;
 }
-
 
 .invisible-normalizer {
     opacity: 0;

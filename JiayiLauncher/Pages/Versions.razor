@@ -1,50 +1,63 @@
 ﻿@page "/Versions"
 @using JiayiLauncher.Features.Game
 @using JiayiLauncher.Features.Versions
+@inject NavigationManager NavigationManager
+
 <h3>Version Manager</h3>
 
 <div class="versions-page">
     <div class="version-cards">
-        <div class="info-card">
-            <h4>Your current version</h4>
-            <p>@_currentVersion</p>
-            <i>@_installLocation</i>
+        @* simulates masonry layout *@
+        <div class="cards-row row-1">
+            <div class="info-card">
+                <h4>Your current version</h4>
+                <p>@_currentVersion</p>
+                <i>@_installLocation</i>
+            </div>
+
+            <div class="info-card">
+                <h4>Full version list</h4>
+                <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="FullListClicked">Open</JiayiButton>
+                <i class="resize-tip">You can resize Jiayi to see the full list on the right</i>
+            </div>
         </div>
-        
-        <div class="info-card">
-            <h4>Popular versions</h4>
-            
-            <ul class="popular-versions">
-                @if (_latestVersion != null)
-                {
+
+        <div class="cards-row row-2">
+            <div class="info-card">
+                <h4>Popular versions</h4>
+
+                <ul class="popular-versions">
+                    @if (_latestVersion != null)
+                    {
+                        <li class="popular-version">
+                            <div class="popular-version-info">
+                                <strong>@_latestVersion</strong>
+                                <p>Latest version</p>
+                            </div>
+
+                            <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
+                        </li>
+                    }
+
                     <li class="popular-version">
                         <div class="popular-version-info">
-                            <strong>@_latestVersion</strong>
-                            <p>Latest version</p>
+                            <strong>1.18.12</strong>
+                            <p>Popular among the community</p>
                         </div>
-                        
+
                         <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
                     </li>
-                }
-                
-                <li class="popular-version">
-                    <div class="popular-version-info">
-                        <strong>1.18.12</strong>
-                        <p>Popular among the community</p>
-                    </div>
-                    
-                    <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
-                </li>
-                
-                <li class="popular-version">
-                    <div class="popular-version-info">
-                        <strong>1.16.40</strong>
-                        <p>Best stable release without Renderdragon</p>
-                    </div>
-                    
-                    <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
-                </li>
-            </ul>
+
+                    <li class="popular-version">
+                        <div class="popular-version-info">
+                            <strong>1.16.40</strong>
+                            <p>Best stable release without Renderdragon</p>
+                        </div>
+
+                        <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     
@@ -77,6 +90,11 @@
         _latestVersion = versions[0][..^2];
         
         await base.OnInitializedAsync();
+    }
+
+    private void FullListClicked()
+    {
+        NavigationManager.NavigateTo("/Versions/Full");
     }
 
 }

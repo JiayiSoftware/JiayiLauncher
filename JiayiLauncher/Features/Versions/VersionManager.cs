@@ -21,7 +21,7 @@ public static class VersionManager
 		return folders.Any(x => x.Contains(ver));
 	}
 
-	public static async Task DownloadVersion(MinecraftVersion version, IProgress<ProgressEventArgs> progress)
+	public static async Task DownloadVersion(MinecraftVersion version, IProgress<int> progress)
 	{
 		var updateId = version.Archs.x64!.UpdateIds[0];
 		var url = await RequestFactory.GetDownloadUrl(updateId);
@@ -42,7 +42,7 @@ public static class VersionManager
 		await using var stream = await response.Content.ReadAsStreamAsync();
 		await using var fileStream = new FileStream(filePath, FileMode.Create);
 		
-		progress.Report(new ProgressEventArgs(0));
+		progress.Report(0);
 
 		while (true)
 		{
@@ -51,10 +51,10 @@ public static class VersionManager
 			
 			await fileStream.WriteAsync(buffer.AsMemory(0, read));
 			totalRead += read;
-			progress.Report(new ProgressEventArgs((int)(totalRead * 100 / contentLength)!));
+			progress.Report((int)(totalRead * 100 / contentLength)!);
 		}
 		
-		progress.Report(new ProgressEventArgs(100));
+		progress.Report(100);
 		
 		fileStream.Close();
 		stream.Close();

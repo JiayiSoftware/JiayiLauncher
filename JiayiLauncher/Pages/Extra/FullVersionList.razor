@@ -1,7 +1,6 @@
 ﻿@page "/Versions/Full/{version?}"
 @using JiayiLauncher.Features.Versions
 @using Microsoft.JSInterop
-@using ProgressEventArgs = JiayiLauncher.Utils.ProgressEventArgs
 
 @* javascript :( *@
 @inject IJSRuntime JavaScript
@@ -58,10 +57,10 @@
                             else
                             {
                                 text = "0% downloaded";
-                                var progress = new Progress<ProgressEventArgs>(args =>
+                                var progress = new Progress<int>(x =>
                                 {
                                     downloadDisabled = true;
-                                    text = args.Percentage == 100 ? $"{args.Percentage}% downloaded" : "Extracting...";
+                                    text = x == 100 ? $"{x}% downloaded" : "Extracting...";
                                     StateHasChanged();
                                 });
                                 

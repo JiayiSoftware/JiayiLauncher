@@ -56,6 +56,22 @@
     background-color: var(--background-secondary);
 }
 
+.version-text {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.version-text i {
+    color: var(--text-grayed);
+    font-size: 14px;
+    font-style: italic;
+}
+
+.version-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
 .load-more {
     cursor: pointer;
     display: flex;

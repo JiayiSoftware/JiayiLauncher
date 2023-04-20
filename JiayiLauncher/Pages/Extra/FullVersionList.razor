@@ -1,6 +1,7 @@
 ﻿@page "/Versions/Full/{version?}"
 @using JiayiLauncher.Features.Versions
 @using Microsoft.JSInterop
+@using ProgressEventArgs = JiayiLauncher.Utils.ProgressEventArgs
 
 @* javascript :( *@
 @inject IJSRuntime JavaScript
@@ -38,9 +39,39 @@
                     var name = versions[i].Key;
                     var id = name.Replace(".", "");
                     var version = versions[i].Value;
+                    var text = string.Empty;
+                    var downloadDisabled = false;
                     
                     <li class="version" id="@id">
-                        <strong>@name</strong>
+                        <div class="version-text">
+                            <strong>@name</strong>
+                            <i>@text</i>
+                        </div>
+
+                        <div class="version-buttons">
+                            @if (VersionManager.VersionInstalled(name))
+                            {
+                                <JiayiButton Size="JiayiButton.ButtonSize.Small" 
+                                             OnClick="async () => await RemoveClicked(name)">Remove</JiayiButton>
+                                <JiayiButton Size="JiayiButton.ButtonSize.Small">Switch</JiayiButton>
+                            }
+                            else
+                            {
+                                text = "0% downloaded";
+                                var progress = new Progress<ProgressEventArgs>(args =>
+                                {
+                                    downloadDisabled = true;
+                                    text = args.Percentage == 100 ? $"{args.Percentage}% downloaded" : "Extracting...";
+                                    StateHasChanged();
+                                });
+                                
+                                <JiayiButton Size="JiayiButton.ButtonSize.Small"
+                                             Disabled="@downloadDisabled"
+                                             OnClick="async () => await VersionManager.DownloadVersion(version, progress)">
+                                    Download
+                                </JiayiButton>
+                            }
+                        </div>
                     </li>
                 }
             </ul>
@@ -62,6 +93,9 @@
     
     [Parameter]
     public bool ShowTitle { get; set; } = true;
+    
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
 
     private Dictionary<string, MinecraftVersion>? _versionList;
     private int _amountToDisplay = 10;
@@ -73,6 +107,7 @@
     protected override async Task OnInitializedAsync()
     {
         _versionList = await VersionList.GetFullVersionList();
+        VersionManager.DownloadFinished += (_, _) => StateHasChanged();
     }
 
     protected override async Task OnParametersSetAsync()
@@ -93,4 +128,24 @@
         NavigationManager.NavigateTo("/Versions");
     }
 
+    private async Task RemoveClicked(string ver)
+    {
+        var options = new List<(string, EventCallback)>
+        {
+            ("Yes", new EventCallback(null, async () =>
+            {
+                await VersionManager.RemoveVersion(ver);
+                StateHasChanged();
+            })),
+            ("No", EventCallback.Empty)
+        };
+
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), "Are you sure you want to remove this version?");
+        
+        var modal = ModalService.Show<MessageBox>("Remove version", parameters);
+        await modal.Result;
+        StateHasChanged();
+    }
 }

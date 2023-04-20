@@ -1,5 +1,17 @@
 ﻿@page "/Versions/Full/{version?}"
 @using JiayiLauncher.Features.Versions
+@using Microsoft.JSInterop
+
+@* javascript :( *@
+@inject IJSRuntime JavaScript
+
+@inject NavigationManager NavigationManager
+
+<div class="page-title" style="display: @_showTitle">
+    <h4 @onclick="BackClicked">Version Manager</h4>
+    <span class="material-symbols-sharp">arrow_right</span>
+    <h3>Full version list</h3>
+</div>
 
 <div class="find-tools">
     <span class="material-symbols-sharp">search</span>
@@ -24,9 +36,10 @@
                 @for (var i = 0; i < Math.Min(_amountToDisplay, versions.Count); i++)
                 {
                     var name = versions[i].Key;
+                    var id = name.Replace(".", "");
                     var version = versions[i].Value;
                     
-                    <li class="version">
+                    <li class="version" id="@id">
                         <strong>@name</strong>
                     </li>
                 }
@@ -34,8 +47,8 @@
             
             @if (versions.Count > _amountToDisplay)
             {
-                <div class="load-more-box">
-                    <a class="load-more" @onclick="() => _amountToDisplay += 10">Load more</a>
+                <div class="load-more" @onclick="() => _amountToDisplay += 10">
+                    <a>Load more</a>
                     <span class="material-symbols-sharp">expand_more</span>
                 </div>
             }
@@ -46,19 +59,38 @@
 @code {
     [Parameter]
     public string? Version { get; set; }
+    
+    [Parameter]
+    public bool ShowTitle { get; set; } = true;
 
     private Dictionary<string, MinecraftVersion>? _versionList;
     private int _amountToDisplay = 10;
     
     private JiayiTextBox? _searchBox;
 
+    private string _showTitle => ShowTitle ? "flex" : "none";
+
     protected override async Task OnInitializedAsync()
     {
         _versionList = await VersionList.GetFullVersionList();
     }
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
         Version ??= "None";
+        if (Version == "None") return;
+        
+        var index = _versionList?.Keys.ToList().IndexOf(Version);
+        _amountToDisplay = index is > 0 ? index.Value + 5 : 10;
+    
+        var id = Version.Replace(".", "");
+        var element = await JavaScript.InvokeAsync<IJSObjectReference>("document.getElementById", id);
+        await element.InvokeVoidAsync("scrollIntoView", new { behavior = "smooth" });
     }
+
+    private void BackClicked()
+    {
+        NavigationManager.NavigateTo("/Versions");
+    }
+
 }

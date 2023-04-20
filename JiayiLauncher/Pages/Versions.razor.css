@@ -1,4 +1,19 @@
-﻿.versions-page {
+﻿.page-title {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.page-title h3 {
+    width: 50%;
+}
+
+.version-list-title {
+    display: none;
+}
+
+.versions-page {
     display: flex;
     gap: 2rem;
 }
@@ -9,19 +24,13 @@
     align-items: flex-start;
     gap: 1rem;
     width: 100%;
+    height: fit-content;
 }
 
 .cards-row {
     display: flex;
-    gap: 1rem;
-}
-
-.row-1 {
     flex-direction: row;
-}
-
-.row-2 {
-    flex-direction: column;
+    gap: 1rem;
 }
 
 .info-card {
@@ -30,6 +39,12 @@
     width: fit-content;
     max-width: 45vw;
     padding: 0.7rem;
+}
+
+.shader-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .version-list {
@@ -53,6 +68,7 @@
     margin-top: 0.7rem;
     display: block;
     font-size: 14px;
+    max-width: 25vw;
 }
 
 .popular-versions {
@@ -98,5 +114,9 @@
     
     .resize-tip {
         display: none !important;
+    }
+    
+    .version-list-title {
+        display: block;
     }
 }

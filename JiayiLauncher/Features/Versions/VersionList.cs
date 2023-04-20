@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -25,13 +26,14 @@ public static class VersionList
 		
 		if (json != null)
 		{
-			_versionDict = json;
+			// 2 numbers at the end means that version is a beta version that somehow got into the releases
+			_versionDict = json
+				.Where(version => version.Key.Split('.').Last().Length < 2)
+				.Reverse()
+				.ToDictionary(x => x.Key, x => x.Value);
 
 			_versions.Clear();
 			_versions.AddRange(_versionDict.Keys);
-			
-			// reverse the list so the newest version is first
-			_versions.Reverse();
 		}
 	}
 
@@ -59,5 +61,19 @@ public static class VersionList
 
 		if (!_versions.Contains(version)) throw new ArgumentException("The version you specified does not exist.");
 		return _versionDict[version];
+	}
+	
+	public static bool CompareVersions(string left, string right)
+	{
+		var leftVersion = left.Split('.');
+		var rightVersion = right.Split('.');
+
+		for (var i = 0; i < leftVersion.Length; i++)
+		{
+			if (int.Parse(leftVersion[i]) > int.Parse(rightVersion[i])) return true;
+			if (int.Parse(leftVersion[i]) < int.Parse(rightVersion[i])) return false;
+		}
+
+		return false;
 	}
 }

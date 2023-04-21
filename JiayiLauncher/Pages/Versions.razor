@@ -40,7 +40,8 @@
                                 <p>Latest version</p>
                             </div>
 
-                            <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
+                            <JiayiButton Size="JiayiButton.ButtonSize.Small" 
+                                         OnClick="() => GotoVersion(_popularVersions[2])">View</JiayiButton>
                         </li>
                     }
 
@@ -50,7 +51,8 @@
                             <p>Popular among the community</p>
                         </div>
 
-                        <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
+                        <JiayiButton Size="JiayiButton.ButtonSize.Small" 
+                                     OnClick="() => GotoVersion(_popularVersions[0])">View</JiayiButton>
                     </li>
 
                     <li class="popular-version">
@@ -59,7 +61,8 @@
                             <p>Best stable release without Renderdragon</p>
                         </div>
 
-                        <JiayiButton Size="JiayiButton.ButtonSize.Small">View</JiayiButton>
+                        <JiayiButton Size="JiayiButton.ButtonSize.Small"
+                                     OnClick="() => GotoVersion(_popularVersions[1])">View</JiayiButton>
                     </li>
                 </ul>
             </div>
@@ -83,7 +86,8 @@
     private string _installLocation = "...";
     private string? _latestVersion;
     private string _shaderText = "Easily apply Renderdragon shaders to your game. It's best if you have the game installed through Jiayi.";
-    
+    private List<string> _popularVersions = new() { "1.18.12.1", "1.16.40.2" };
+
     private bool _shadersDisabled;
 
     protected override async Task OnInitializedAsync()
@@ -102,6 +106,7 @@
         var versions = await VersionList.GetVersionList();
         // shave the last 2 characters off the version name as they're not shown in game
         _latestVersion = versions[0][..^2];
+        _popularVersions.Add(versions[0]);
         
         if (VersionList.CompareVersions("1.16.200.2", _currentVersion))
         {
@@ -121,6 +126,11 @@
     private void FullListClicked()
     {
         NavigationManager.NavigateTo("/Versions/Full");
+    }
+
+    private void GotoVersion(string ver)
+    {
+        NavigationManager.NavigateTo($"/Versions/Full/{ver}");
     }
 
 }

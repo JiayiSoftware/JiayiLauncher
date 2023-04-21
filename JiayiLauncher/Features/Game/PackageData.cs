@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Windows.Management.Deployment;
 using Windows.System;
 using JiayiLauncher.Settings;
 
@@ -8,6 +9,8 @@ namespace JiayiLauncher.Features.Game;
 
 public static class PackageData
 {
+	public static PackageManager PackageManager { get; } = new();
+	
 	public static async Task<AppDiagnosticInfo?> GetPackage()
 	{
 		var info = 

@@ -36,15 +36,12 @@
                 @for (var i = 0; i < Math.Min(_amountToDisplay, versions.Count); i++)
                 {
                     var name = versions[i].Key;
-                    var id = name.Replace(".", "");
                     var version = versions[i].Value;
-                    var text = string.Empty;
-                    var downloadDisabled = false;
                     
-                    <li class="version" id="@id">
+                    <li class="version" id="@name">
                         <div class="version-text">
                             <strong>@name</strong>
-                            <i>@text</i>
+                            <i>@_statuses[i]</i>
                         </div>
 
                         <div class="version-buttons">
@@ -56,17 +53,9 @@
                             }
                             else
                             {
-                                text = "0% downloaded";
-                                var progress = new Progress<int>(x =>
-                                {
-                                    downloadDisabled = true;
-                                    text = x == 100 ? $"{x}% downloaded" : "Extracting...";
-                                    StateHasChanged();
-                                });
-                                
                                 <JiayiButton Size="JiayiButton.ButtonSize.Small"
-                                             Disabled="@downloadDisabled"
-                                             OnClick="async () => await VersionManager.DownloadVersion(version, progress)">
+                                             Disabled="@_buttonStates[i]"
+                                             OnClick="async () => await DownloadClicked(version)">
                                     Download
                                 </JiayiButton>
                             }
@@ -98,7 +87,9 @@
 
     private Dictionary<string, MinecraftVersion>? _versionList;
     private int _amountToDisplay = 10;
-    
+    private List<string> _statuses = new();
+    private List<bool> _buttonStates = new();
+
     private JiayiTextBox? _searchBox;
 
     private string _showTitle => ShowTitle ? "flex" : "none";
@@ -106,7 +97,15 @@
     protected override async Task OnInitializedAsync()
     {
         _versionList = await VersionList.GetFullVersionList();
-        VersionManager.DownloadFinished += (_, _) => StateHasChanged();
+        _statuses = new string[_versionList.Count].ToList();
+        _buttonStates = new bool[_versionList.Count].ToList();
+        
+        VersionManager.DownloadFinished += (_, _) =>
+        {
+            _statuses = new string[_versionList.Count].ToList();
+            _buttonStates = new bool[_versionList.Count].ToList();
+            StateHasChanged();
+        };
     }
 
     protected override async Task OnParametersSetAsync()
@@ -116,15 +115,37 @@
         
         var index = _versionList?.Keys.ToList().IndexOf(Version);
         _amountToDisplay = index is > 0 ? index.Value + 5 : 10;
+        
+        // refresh state so js can scroll to the version
+        StateHasChanged();
+        await Task.Delay(100);
     
-        var id = Version.Replace(".", "");
-        var element = await JavaScript.InvokeAsync<IJSObjectReference>("document.getElementById", id);
-        await element.InvokeVoidAsync("scrollIntoView", new { behavior = "smooth" });
+        var element = await JavaScript.InvokeAsync<IJSObjectReference>("document.getElementById", Version);
+        await element.InvokeVoidAsync("scrollIntoView", new { behavior = "smooth", block = "center" });
     }
 
     private void BackClicked()
     {
         NavigationManager.NavigateTo("/Versions");
+    }
+
+    private async Task DownloadClicked(MinecraftVersion ver)
+    {
+        var i = _versionList?.Keys.ToList().IndexOf(ver.Version) ?? 0;
+        
+        var progress = new Progress<int>(x =>
+        {
+            _statuses[i] = x == 100 ? $"{x}% downloaded" : "Extracting...";
+        });
+        
+        _statuses[i] = "Downloading...";
+        _buttonStates[i] = true;
+        
+        await VersionManager.DownloadVersion(ver, progress);
+        
+        _statuses[i] = string.Empty;
+        _buttonStates[i] = false;
+        StateHasChanged();
     }
 
     private async Task RemoveClicked(string ver)

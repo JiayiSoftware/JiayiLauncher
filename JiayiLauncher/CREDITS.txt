@@ -1,0 +1,20 @@
+﻿Developers:
+carlton
+
+Testers:
+AvoidFrankie • fizz • n3twoik • Sir Gary • SlySlacker • CheemzZ • f*ck! • hmmm_ • ItzPhoenix • Rainny. • TTF_fog • bolo
+
+Contributors (up to this release):
+GacekKosmatek • DeathlyBower959
+
+VIPs (from the Discord server):
+bolo • NoSkillPureAndy • pod • rice • VastraKai • DeathlyBower959 • megahendrik (happened again) • hgrvbrrds • JayRSky
+
+Press:
+GroundedChild • SpinierYard212 • YaGoat
+
+And finally, greets to:
+mrarm and dktapps for some version manager code • White • Bionic • Flash_ • Floppy • Plextora • riester (meowmeowcat12) • brook(e) • Dr.FarFar • the StarZ team for being my #1 haters • DeadSafari • Distant • GamerPP • DidntPot • kelvinn • xqwo • Plu4qlEve • arson/penguin/qieh • Haze. • 12brendon34 • ByArth • Kl0dz • notshige • Exallotriote • Hammond • the people over at CSI • j* • Aether • Frostify • my mom lol
+
+Jiayi Launcher is released under the GNU General Public License, version 3.0. You can find the source code on GitHub.
+If you bought this program, you were scammed!

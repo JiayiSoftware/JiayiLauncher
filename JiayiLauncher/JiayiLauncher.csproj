@@ -62,6 +62,10 @@
       <Content Include="WUTokenHelper.dll">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <None Remove="CREDITS.txt" />
+      <Content Include="CREDITS.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,17 @@
+﻿.about-page {
+    text-align: center;
+}
+
+.about-page i {
+    color: var(--text-grayed);
+    font-size: 14px;
+    font-style: italic;
+}
+
+.about-page a {
+    color: var(--text-primary);
+}
+
+.logo {
+    width: 95%;
+}

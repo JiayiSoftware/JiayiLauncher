@@ -5,6 +5,8 @@
 @using JiayiLauncher.Features.Discord
 @using JiayiLauncher.Features.Game
 
+@inject NavigationManager NavigationManager
+
 <div class="mod-background" @onmouseenter="MouseOver" @onmouseleave="MouseLeave">
     <div class="mod-header">
         <strong>@Mod.Name</strong>
@@ -142,11 +144,13 @@
                 break;
             case Launcher.LaunchResult.VersionMismatch:
                 // something different
+                var supportedVersion = Mod.SupportedVersions[0];
+                
                 var buttons = new List<(string, EventCallback)>
                 {
                     ("Yes", new EventCallback(null, () =>
                     {
-                        // TODO: bring the user to the version changer
+                        NavigationManager.NavigateTo($"/Versions/Full/{supportedVersion}");
                     })),
                     ("No", EventCallback.Empty)
                 };
@@ -154,7 +158,7 @@
                 parameters
                     .Add(nameof(MessageBox.Buttons), buttons)
                     .Add(nameof(MessageBox.Message),
-                        $"{Mod.Name} doesn't support your current game version. Would you like to switch to {Mod.SupportedVersions[0]}?");
+                        $"{Mod.Name} doesn't support your current game version. Would you like to switch to {supportedVersion}?");
 
                 ModalService.Show<MessageBox>("Unsupported version", parameters);
                 break;

@@ -81,3 +81,50 @@
     margin-top: 1rem;
     width: 100%;
 }
+
+.alert {
+    animation: alert 3s;
+}
+
+@keyframes alert {
+    0% {
+        border: 3px solid var(--accent);
+        background-color: var(--background-secondary);
+    }
+    
+    /* flash background */
+    10% {
+        background-color: var(--background-primary);
+    }
+    
+    25% {
+        background-color: var(--background-secondary);
+    }
+    
+    40% {
+        background-color: var(--background-primary);
+    }
+    
+    55% {
+        background-color: var(--background-secondary);
+    }
+    
+    70% {
+        background-color: var(--background-primary);
+    }
+    
+    85% {
+        background-color: var(--background-secondary);
+    }
+    
+    90% {
+        border: 3px solid var(--accent);
+        background-color: var(--background-secondary);
+    }
+    
+    /* back to normal */
+    100% {
+        border: 0;
+        border-left: 5px solid var(--accent);
+    }
+}

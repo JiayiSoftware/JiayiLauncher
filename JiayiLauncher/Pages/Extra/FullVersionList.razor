@@ -1,6 +1,8 @@
 ﻿@page "/Versions/Full/{version?}"
 @using JiayiLauncher.Features.Versions
 @using Microsoft.JSInterop
+@using System.Diagnostics
+@using JiayiLauncher.Features.Game
 
 @* javascript :( *@
 @inject IJSRuntime JavaScript
@@ -37,8 +39,9 @@
                 {
                     var name = versions[i].Key;
                     var version = versions[i].Value;
+                    var alert = name == Version ? "alert" : string.Empty;
                     
-                    <li class="version" id="@name">
+                    <li class="version @alert" id="@name">
                         <div class="version-text">
                             <strong>@name</strong>
                             <i>@_statuses[i]</i>
@@ -47,17 +50,18 @@
                         <div class="version-buttons">
                             @if (VersionManager.VersionInstalled(name))
                             {
-                                <JiayiButton Size="JiayiButton.ButtonSize.Small" 
+                                <JiayiButton Size="JiayiButton.ButtonSize.Small"
+                                             Disabled="@_buttonStates[i]"
                                              OnClick="async () => await RemoveClicked(name)">Remove</JiayiButton>
-                                <JiayiButton Size="JiayiButton.ButtonSize.Small">Switch</JiayiButton>
+                                <JiayiButton Size="JiayiButton.ButtonSize.Small"
+                                             Disabled="@_buttonStates[i]"
+                                             OnClick="async () => await SwitchClicked(name)">Switch</JiayiButton>
                             }
                             else
                             {
                                 <JiayiButton Size="JiayiButton.ButtonSize.Small"
                                              Disabled="@_buttonStates[i]"
-                                             OnClick="async () => await DownloadClicked(version)">
-                                    Download
-                                </JiayiButton>
+                                             OnClick="async () => await DownloadClicked(version)">Download</JiayiButton>
                             }
                         </div>
                     </li>
@@ -128,15 +132,21 @@
     {
         NavigationManager.NavigateTo("/Versions");
     }
+    
+    private int _switching = -1;
+
+    private void ProgressUpdate(int x)
+    {
+        // i think this doesn't work because this function runs on a different thread so TODO: fix this
+        _statuses[_switching] = x == 100 ? $"{x}% downloaded" : "Extracting...";
+    }
 
     private async Task DownloadClicked(MinecraftVersion ver)
     {
         var i = _versionList?.Keys.ToList().IndexOf(ver.Version) ?? 0;
+        _switching = i;
         
-        var progress = new Progress<int>(x =>
-        {
-            _statuses[i] = x == 100 ? $"{x}% downloaded" : "Extracting...";
-        });
+        var progress = new Progress<int>(ProgressUpdate);
         
         _statuses[i] = "Downloading...";
         _buttonStates[i] = true;
@@ -145,22 +155,43 @@
         
         _statuses[i] = string.Empty;
         _buttonStates[i] = false;
+        _switching = -1;
         StateHasChanged();
     }
 
     private async Task RemoveClicked(string ver)
     {
-        var options = new List<(string, EventCallback)>
+        var options = new List<(string, EventCallback)>();
+        var parameters = new ModalParameters();
+        
+        if (await PackageData.GetVersion() == ver)
         {
-            ("Yes", new EventCallback(null, async () =>
-            {
-                await VersionManager.RemoveVersion(ver);
-                StateHasChanged();
-            })),
-            ("No", EventCallback.Empty)
-        };
+            options.Add(("Okay", EventCallback.Empty));
+            
+            parameters
+                .Add(nameof(MessageBox.Buttons), options)
+                .Add(nameof(MessageBox.Message), 
+                    "This is your current version. Please switch to another version before removing this one.");
+            
+            ModalService.Show<MessageBox>("Remove version", parameters);
+            return;
+        }
 
-        var parameters = new ModalParameters()
+        options.Add(("Yes", new EventCallback(null, async () =>
+        {
+            var i = _versionList?.Keys.ToList().IndexOf(ver) ?? 0;
+            _statuses[i] = "Removing...";
+            _buttonStates[i] = true;
+
+            await VersionManager.RemoveVersion(ver);
+
+            _statuses[i] = string.Empty;
+            _buttonStates[i] = false;
+            StateHasChanged();
+        })));
+        options.Add(("No", EventCallback.Empty));
+
+        parameters
             .Add(nameof(MessageBox.Buttons), options)
             .Add(nameof(MessageBox.Message), "Are you sure you want to remove this version?");
         
@@ -168,4 +199,54 @@
         await modal.Result;
         StateHasChanged();
     }
+
+    private async Task SwitchClicked(string ver)
+    {
+        var result = await VersionManager.Switch(ver);
+        var parameters = new ModalParameters();
+        var options = new List<(string, EventCallback)>();
+
+        switch (result)
+        {
+            case VersionManager.SwitchResult.DeveloperModeDisabled:
+                options.Add(("Yes", new EventCallback(null, () =>
+                {
+                    var info = new ProcessStartInfo
+                    {
+                        UseShellExecute = true,
+                        FileName = "ms-settings:developers"
+                    };
+                    
+                    Process.Start(info);
+                })));
+                options.Add(("No", EventCallback.Empty));
+                
+                parameters.Add(nameof(MessageBox.Buttons), options);
+                parameters.Add(nameof(MessageBox.Message), 
+                    "You need to enable developer mode to switch versions. Do you want to enable it now?");
+                
+                break;
+            case VersionManager.SwitchResult.VersionNotFound:
+                options.Add(("Okay", EventCallback.Empty));
+                parameters.Add(nameof(MessageBox.Message), "This version has not been downloaded yet.");
+                break;
+            case VersionManager.SwitchResult.UnknownError:
+            default:
+                options.Add(("Okay", EventCallback.Empty));
+                parameters.Add(nameof(MessageBox.Message), "An unknown error occurred. Check the logs for more information.");
+                break;
+        }
+        
+        if (result != VersionManager.SwitchResult.Succeeded)
+        {
+            var modal = ModalService.Show<MessageBox>("Error", parameters);
+            await modal.Result;
+            StateHasChanged();
+        }
+        else
+        {
+            await Minecraft.Open();
+        }
+    }
+
 }

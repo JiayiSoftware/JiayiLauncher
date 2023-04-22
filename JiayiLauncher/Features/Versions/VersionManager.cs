@@ -73,6 +73,10 @@ public static class VersionManager
 		ZipFile.ExtractToDirectory(filePath, folder);
 		File.Delete(filePath);
 		
+		// DELETE AppxSignature.p7x so that the game can be installed with developer mode
+		var signature = Path.Combine(folder, "AppxSignature.p7x");
+		if (File.Exists(signature)) File.Delete(signature);
+		
 		DownloadFinished?.Invoke(null, EventArgs.Empty);
 	}
 

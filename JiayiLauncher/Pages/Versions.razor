@@ -102,13 +102,19 @@
             InstallLocation.Unknown => "Unknown install location",
             _ => "Unknown install location"
         };
+        
+        if (_currentVersion == "Unknown")
+        {
+            _installLocation = "You don't have the game installed.";
+            _shadersDisabled = true;
+        }
 
         var versions = await VersionList.GetVersionList();
         // shave the last 2 characters off the version name as they're not shown in game
         _latestVersion = versions[0][..^2];
         _popularVersions.Add(versions[0]);
         
-        if (VersionList.CompareVersions("1.16.200.2", _currentVersion))
+        if (_currentVersion != "Unknown" && VersionList.CompareVersions("1.16.200.2", _currentVersion))
         {
             _shaderText = "Your game version does not have Renderdragon. Instead, use a resource pack for shaders.";
             _shadersDisabled = true;

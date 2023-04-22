@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Windows.Security.Authentication.Web.Core;
 using static JiayiLauncher.Utils.Imports;
 
 namespace JiayiLauncher.Features.Versions;
@@ -34,7 +35,10 @@ public static class RequestFactory
 			
 			if (result is >= WU_ERRORS_START and <= WU_ERRORS_END)
 			{
-				throw new Exception("Windows update error: " + result);
+				var code = result & 0xFFFF;
+				var status = (WebTokenRequestStatus)Enum.ToObject(typeof(WebTokenRequestStatus), code);
+
+				throw new Exception($"GetWUToken failed with status {status}");
 			}
 			
 			if (result != 0) Marshal.ThrowExceptionForHR(result);

@@ -35,7 +35,7 @@ public static class RequestFactory
 			
 			if (result is >= WU_ERRORS_START and <= WU_ERRORS_END)
 			{
-				var code = result & 0xFFFF;
+				var code = (byte)result & 0xFFFF;
 				var status = (WebTokenRequestStatus)Enum.ToObject(typeof(WebTokenRequestStatus), code);
 
 				throw new Exception($"GetWUToken failed with status {status}");

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
+using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 using static JiayiLauncher.Utils.Imports;
 
@@ -50,6 +51,7 @@ public partial class App
 	protected override void OnExit(ExitEventArgs e)
 	{
 		_mutex?.ReleaseMutex();
+		JiayiSettings.Instance!.Save();
 		base.OnExit(e);
 	}
 }

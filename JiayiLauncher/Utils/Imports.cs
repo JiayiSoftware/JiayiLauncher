@@ -65,5 +65,6 @@ public static partial class Imports
 	
 	// NOT a windows api function can you believe it
 	[LibraryImport("WUTokenHelper.dll")]
-	public static partial int GetWUToken([MarshalAs(UnmanagedType.LPWStr)] out string token);
+    [UnmanagedCallConv(CallConvs = new[] { typeof(System.Runtime.CompilerServices.CallConvStdcall) })]
+    public static partial int GetWUToken([MarshalAs(UnmanagedType.LPWStr)] out string token);
 }

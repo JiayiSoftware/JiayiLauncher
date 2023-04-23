@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -54,6 +55,12 @@ public partial class MainWindow
 		if (JiayiSettings.Instance.ProfileCollectionPath != string.Empty)
 		{
 			ProfileCollection.Load(JiayiSettings.Instance.ProfileCollectionPath);
+		}
+
+		if (JiayiSettings.Instance.VersionsPath != string.Empty)
+		{
+			JiayiSettings.Instance.VersionsPath = Path.Combine(
+				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Versions");
 		}
 		
 		RichPresence.Initialize();

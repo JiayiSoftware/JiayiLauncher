@@ -15,6 +15,10 @@
     overflow: hidden;
 }
 
+*:focus {
+    outline: none;
+}
+
 body {
     color: white;
     background-color: var(--background-primary);

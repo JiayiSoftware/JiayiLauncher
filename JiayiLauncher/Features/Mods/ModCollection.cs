@@ -9,6 +9,7 @@ using System.Windows;
 
 namespace JiayiLauncher.Features.Mods;
 
+[Serializable]
 public class ModCollection
 {
     // Help

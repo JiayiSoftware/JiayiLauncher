@@ -223,6 +223,7 @@ public class JiayiSettings
 		}
 		catch (Exception e)
 		{
+			stream.Close();
 			Instance = new JiayiSettings();
 			Instance.Save();
 			Log.Write(Instance, $"Settings file was corrupted or invalid. Created new settings file. Error: {e}");

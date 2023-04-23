@@ -104,7 +104,7 @@ public static class VersionManager
 		var packages = PackageData.PackageManager.FindPackages("Microsoft.MinecraftUWP_8wekyb3d8bbwe");
 		foreach (var package in packages)
 		{
-			if (package.InstalledPath.Contains(JiayiSettings.Instance.VersionsPath))
+			if (package.InstalledPath.Contains(version))
 			{
 				Log.Write(nameof(VersionManager), "Version already installed");
 				return SwitchResult.Succeeded;

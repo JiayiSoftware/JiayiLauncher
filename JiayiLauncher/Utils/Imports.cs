@@ -64,6 +64,6 @@ public static partial class Imports
 	public static partial nint FindWindowW([MarshalAs(UnmanagedType.LPWStr)] string? lpClassName, [MarshalAs(UnmanagedType.LPWStr)] string lpWindowName);
 	
 	// NOT a windows api function can you believe it
-	[LibraryImport("WUTokenHelper.dll")]
-	public static partial int GetWUToken([MarshalAs(UnmanagedType.LPWStr)] out string token);
+	[DllImport("WUTokenHelper.dll", CallingConvention = CallingConvention.StdCall)]
+	public static extern int GetWUToken([MarshalAs(UnmanagedType.LPWStr)] out string token);
 }

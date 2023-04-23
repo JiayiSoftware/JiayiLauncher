@@ -61,6 +61,7 @@ public partial class MainWindow
 		{
 			JiayiSettings.Instance.VersionsPath = Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Versions");
+			JiayiSettings.Instance.Save();
 		}
 		
 		RichPresence.Initialize();

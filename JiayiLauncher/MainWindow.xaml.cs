@@ -57,7 +57,7 @@ public partial class MainWindow
 			ProfileCollection.Load(JiayiSettings.Instance.ProfileCollectionPath);
 		}
 
-		if (JiayiSettings.Instance.VersionsPath != string.Empty)
+		if (JiayiSettings.Instance.VersionsPath == string.Empty)
 		{
 			JiayiSettings.Instance.VersionsPath = Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Versions");

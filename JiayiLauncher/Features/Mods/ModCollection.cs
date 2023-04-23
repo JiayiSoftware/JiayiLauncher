@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows;
 
 namespace JiayiLauncher.Features.Mods;
@@ -16,14 +18,16 @@ public class ModCollection
     /*[CascadingParameter]
     public IModalService ModalService { get; set; } = default!;*/
 
-    public string BasePath { get; private init; } = string.Empty;
+    [JsonIgnore] public string BasePath { get; private set; }
     public List<Mod> Mods { get; } = new();
 
-    public static ModCollection? Current { get; private set; }
+    [JsonIgnore] public static ModCollection? Current { get; private set; }
+    
+    private static JsonSerializerOptions? _options;
 
-    private ModCollection() // nobody should be calling this
+    private ModCollection(string basePath) // nobody should be calling this
     {
-
+		BasePath = basePath;
     }
 
     public static ModCollection Create(string path)
@@ -32,73 +36,94 @@ public class ModCollection
         // if it's empty, we'll create a new mod collection
 
         Directory.CreateDirectory(path);
-        var jiayiFolder = Directory.CreateDirectory(Path.Combine(path, ".jiayi"));
-        jiayiFolder.Attributes |= FileAttributes.Hidden;
-        File.WriteAllText(Path.Combine(path, ".jiayi", "README.txt"),
-            "This folder contains metadata for all mods in this collection. Don't mess with it unless you know what you're doing.");
 
-        var collection = new ModCollection
-        {
-            BasePath = path
-        };
+        var collection = new ModCollection(path);
 
         var folders = Directory.GetDirectories(path);
         var fileList = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories).ToList();
         fileList.AddRange(Directory.GetFiles(path, "*.exe", SearchOption.AllDirectories));
-        var files = fileList.ToArray();
+        var files = fileList.ToList();
 
-        if (folders.Length == 1 && folders[0].EndsWith(".jiayi") && files.Length == 0)
+        if (folders.Length == 0 && files.Count == 0)
         {
             // empty directory
             return collection;
         }
 
-        // create metadata for all mods in the directory
-        foreach (var file in files)
+        // add mods
+        foreach (var mod in 
+                 from file in files 
+                 let name = Path.GetFileNameWithoutExtension(file) 
+                 select new Mod(name, file))
         {
-            // the user can give it a good name and supported versions later
-            var name = Path.GetFileName(file)[..^4];
-            var mod = new Mod(name, file);
-            collection.Add(mod);
-            Log.Write("ModCollection", $"Added mod {mod.Name} at {mod.Path}");
+	        collection.Add(mod);
+	        Log.Write("ModCollection", $"Added mod {mod.Name} at {mod.Path}");
         }
 
         // set path in settings
         JiayiSettings.Instance!.ModCollectionPath = path;
+        JiayiSettings.Instance.Save();
 
         Log.Write("ModCollection", $"Created mod collection at {path}");
 
+        collection.Save();
         return collection;
+    }
+
+    public void Save()
+    {
+	    var indexPath = Path.Combine(BasePath, "index.json");
+	    File.WriteAllText(indexPath, string.Empty);
+	    
+	    _options ??= new JsonSerializerOptions { WriteIndented = true };
+	    
+	    using var stream = File.OpenWrite(indexPath);
+	    JsonSerializer.Serialize(stream, this, _options);
+	    Log.Write(this, "Saved mod collection.");
     }
 
     public static void Load(string path)
     {
-        Directory.CreateDirectory(path);
-        var folders = Directory.GetDirectories(path);
-
-        if (folders.Length == 0)
-        {
-            // empty directory
-            Current = Create(path);
-            return;
-        }
-
-        var collection = new ModCollection
-        {
-            BasePath = path
-        };
-
-        var files = Directory.GetFiles(Path.Combine(path, ".jiayi"), "*.jmod", SearchOption.AllDirectories);
-
-        foreach (var file in files)
-        {
-            var mod = Mod.LoadFromMetadata(file);
-            if (mod == null) continue;
-            collection.Mods.Add(mod);
-            Log.Write("ModCollection", $"Loaded mod {mod.Name} at {mod.Path}");
-        }
-
-        Current = collection;
+	    // an artifact from the old mod collection system
+	    var oldPath = Path.Combine(path, ".jiayi");
+	    if (Directory.Exists(oldPath))
+	    {
+		    Directory.Delete(oldPath, true);
+		    Current = Create(path);
+		    return;
+	    }
+	    
+	    var indexPath = Path.Combine(path, "index.json");
+        if (!File.Exists(indexPath))
+		{
+			Current = Create(path);
+			return;
+		}
+        
+        using var stream = File.OpenRead(indexPath);
+        
+        try
+		{
+	        _options ??= new JsonSerializerOptions { WriteIndented = true };
+	        
+	        var collection = JsonSerializer.Deserialize<ModCollection>(stream, _options);
+	        if (collection == null)
+	        {
+		        Log.Write("ModCollection", $"Failed to load mod collection at {path}: index.json is invalid.");
+		        Current = Create(path);
+		        return;
+			}
+	        
+	        collection.BasePath = path;
+	        Current = collection;
+	    }
+        catch (Exception e)
+		{
+			stream.Close();
+	        Log.Write("ModCollection", $"Failed to load mod collection at {path}: {e.Message}");
+	        Current = Create(path);
+		}
+        
         Log.Write("ModCollection", $"Loaded mod collection at {path}");
     }
 
@@ -119,13 +144,35 @@ public class ModCollection
             Directory.CreateDirectory(tempDir);
             ZipFile.ExtractToDirectory(path, tempDir);
 
-            var files = Directory.GetFiles(tempDir, "*.jmod", SearchOption.AllDirectories);
-            foreach (var file in files)
+            var index = Path.Combine(tempDir, "index.json");
+            if (!File.Exists(index))
+			{
+				Log.Write("ModCollection", $"Failed to import mod collection from {path}: index.json is missing.");
+				Directory.Delete(tempDir, true);
+				return;
+			}
+            
+            using var stream = File.OpenRead(index);
+            
+            try
             {
-                var mod = Mod.LoadFromMetadata(file);
-                if (mod == null) continue;
-                Current.Add(mod);
-                Log.Write("ModCollection", $"Imported mod {mod.Name} at {mod.Path}");
+	            _options ??= new JsonSerializerOptions { WriteIndented = true };
+	        
+	            var collection = JsonSerializer.Deserialize<ModCollection>(stream, _options);
+	            if (collection == null)
+	            {
+		            Log.Write("ModCollection", $"Failed to load mod collection at {path}: index.json is invalid.");
+		            Current = Create(path);
+		            return;
+	            }
+	        
+	            collection.BasePath = path;
+	            Current = collection;
+            }
+            catch (Exception e)
+            {
+	            Log.Write("ModCollection", $"Failed to load mod collection at {path}: {e.Message}");
+	            Current = Create(path);
             }
 
             Directory.Delete(tempDir, true);
@@ -140,67 +187,32 @@ public class ModCollection
         Import(path);
     }
 
-    public void Add(Mod mod)
+    public void Add(Mod mod, bool confirm = true)
     {
-        // mods get replaced if they already exist
-        if (HasMod(mod.Path))
-        {
-            var existingMod = Mods.First(m => m.Path == mod.Path);
-            File.Delete(existingMod.MetadataPath);
-        }
-        else
-        {
-			if (mod.FromInternet)
-			{
-				mod.SaveMetadata();
-				return;
-			}
+	    if (HasMod(mod.Path))
+	    {
+		    var existing = Mods.First(m => m.Path == mod.Path);
+		    if (confirm && 
+		        MessageBox.Show("This mod already exists in your collection. Do you want to replace it?",
+			        "Jiayi Launcher", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+		    {
+			    return;
+		    }
+			    
+		    Mods.Remove(existing);
+		    if (!existing.FromInternet && File.Exists(existing.Path) && mod.Path != existing.Path)
+			    File.Copy(mod.Path, existing.Path, true);
+	    }
 
-			// copy the mod to the collection directory if it's not already there
-            var extension = Path.GetExtension(mod.Path);
-            var newFileName = mod.Name + extension;
-            var newPath = Path.Combine(BasePath, newFileName);
+	    if (!mod.Path.StartsWith(BasePath))
+	    {
+		    var newPath = Path.Combine(BasePath, Path.GetFileName(mod.Path));
+		    File.Copy(mod.Path, newPath, true);
+		    mod.Path = newPath;
+	    }
 
-            var alreadyExists = File.Exists(newPath);
-
-            if (alreadyExists)
-            {
-                /*var options = new List<(string, EventCallback)>
-                {
-                    ("Yes", new EventCallback(null, () =>
-                    {
-                        File.Delete(newPath);
-                    })),
-                    ("No", EventCallback.Empty)
-                };
-
-                var parameters = new ModalParameters()
-                    .Add(nameof(MessageBox.Buttons), options)
-                    .Add(nameof(MessageBox.Message), "This mod points to a file that already exists. Do you want to overwrite it? (irreversible)");
-
-                var modal = ModalService.Show<MessageBox>("Overwrite?", parameters);
-                var result = await modal.Result;
-                if (result.Cancelled) return;*/
-                
-                if (MessageBox.Show(
-	                    "This mod points to a file that already exists. Do you want to overwrite it? (irreversible)",
-	                    "Jiayi Launcher", MessageBoxButton.YesNo, MessageBoxImage.Question) ==
-                    MessageBoxResult.No) return;
-            }
-            
-            if (!mod.FromInternet && !mod.Path.StartsWith(BasePath))
-            {
-                File.Copy(mod.Path, newPath, true);
-                mod.Path = newPath;
-                
-                if (alreadyExists)
-                    Mods[Mods.FindIndex(m => m.Path == mod.Path)] = mod;
-                else
-                    Mods.Add(mod);
-            }
-        }
-
-        mod.SaveMetadata();
+	    Mods.Add(mod);
+		Save();
     }
 
     public bool HasMod(string path)
@@ -228,16 +240,42 @@ public class ModCollection
         Directory.CreateDirectory(tempDir);
         ZipFile.ExtractToDirectory(path, tempDir);
 
-        var files = Directory.GetFiles(tempDir, "*.jmod", SearchOption.AllDirectories);
-        var mods = files.Select(Mod.LoadFromMetadata).Where(mod => mod != null).ToList();
-
-        Directory.Delete(tempDir, true);
-
-        return new ModCollectionInfo
-        {
-            TotalMods = mods.Count,
-            InternetMods = mods.Count(mod => mod is { FromInternet: true }),
-            LocallyStoredMods = mods.Count(mod => mod is { FromInternet: false })
-        };
+        var index = Path.Combine(tempDir, "index.json");
+        if (!File.Exists(index))
+		{
+			Log.Write("ModCollection", $"Failed to get info for mod collection at {path}: index.json is missing.");
+			Directory.Delete(tempDir, true);
+			return new ModCollectionInfo();
+		}
+        
+        using var stream = File.OpenRead(index);
+        
+        try
+		{
+	        _options ??= new JsonSerializerOptions { WriteIndented = true };
+	        
+	        var collection = JsonSerializer.Deserialize<ModCollection>(stream, _options);
+	        if (collection == null)
+	        {
+		        Log.Write("ModCollection", $"Failed to get info for mod collection at {path}: index.json is invalid.");
+		        Directory.Delete(tempDir, true);
+		        return new ModCollectionInfo();
+	        }
+	        
+	        var mods = collection.Mods;
+	        Directory.Delete(tempDir, true);
+	        return new ModCollectionInfo
+	        {
+		        TotalMods = mods.Count,
+		        InternetMods = mods.Count(mod => mod.FromInternet),
+		        LocallyStoredMods = mods.Count(mod => !mod.FromInternet)
+	        };
+		}
+		catch (Exception e)
+		{
+	        Log.Write("ModCollection", $"Failed to get info for mod collection at {path}: {e.Message}");
+	        Directory.Delete(tempDir, true);
+	        return new ModCollectionInfo();
+		}
     }
 }

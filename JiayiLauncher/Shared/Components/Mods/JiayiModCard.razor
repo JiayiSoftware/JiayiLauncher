@@ -44,7 +44,7 @@
             }
         </div>
     </div>
-    <p class="mod-version">Works on @(string.Join(", ", Mod.SupportedVersions))</p>
+    <p class="mod-version">Works on @(string.Join(", ", Mod.SupportedVersions).ToLower())</p>
     <div class="mod-controls">
         @if (Mod.IsValid())
         {
@@ -197,7 +197,7 @@
         {
             ("Yes", new EventCallback(null, () =>
             {
-                Mod.Delete(ModCollection.Current!);
+                Mod.Delete();
                 Mods.Instance.Refresh();
             })),
             ("No", EventCallback.Empty)
@@ -212,7 +212,7 @@
 
     private void DeleteNoConfirm()
     {
-        Mod.Delete(ModCollection.Current!);
+        Mod.Delete();
         Mods.Instance.Refresh();
     }
 }

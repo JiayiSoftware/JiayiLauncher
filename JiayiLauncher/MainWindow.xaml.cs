@@ -65,7 +65,7 @@ public partial class MainWindow
 		}
 		
 		RichPresence.Initialize();
-		ThemeManager.ApplyTheme();
+		ThemeManager.LoadTheme();
 	}
 
 	protected override void OnSourceInitialized(EventArgs e)

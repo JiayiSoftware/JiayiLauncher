@@ -94,6 +94,18 @@ public class JiayiSettings
 		"Apply changes made to the launcher's appearance. This will be removed in the future.")]
 	[JsonIgnore] public (string, Action) ApplyTheme { get; set; } = ("Apply", ThemeManager.ApplyTheme);
 
+	[Setting("Show theme", "Appearance",
+		"Reveal your theme in File Explorer. You can share this with other people or use other people's themes.")]
+	[JsonIgnore] public (string, Action) OpenTheme { get; set; } = ("Open", () =>
+	{
+		Process.Start(new ProcessStartInfo
+		{
+			FileName = "explorer.exe ",
+			Arguments = $"/select, \"{ThemeManager.ThemePath}\"",
+			UseShellExecute = true
+		});
+	});
+
 		// discord settings
 	[Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.")]
 	public bool RichPresence { get; set; } = true;

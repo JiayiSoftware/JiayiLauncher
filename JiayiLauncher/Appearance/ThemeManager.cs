@@ -9,13 +9,13 @@ namespace JiayiLauncher.Appearance;
 
 public static class ThemeManager
 {
-	private static readonly string _themePath = Path.Combine(Environment.CurrentDirectory, "wwwroot", "css", "theme.css");
+	public static readonly string ThemePath = Path.Combine(Environment.CurrentDirectory, "wwwroot", "css", "theme.css");
 
 	public static void LoadTheme()
 	{
 		if (JiayiSettings.Instance == null) return;
 		
-		var builder = CssBuilder.FromFile(_themePath, ":root");
+		var builder = CssBuilder.FromFile(ThemePath, ":root");
 		var styles = builder.GetAllPropertyValues();
 		
 		JiayiSettings.Instance.PrimaryBackgroundColor = GetColorFromHex(styles[0]);
@@ -53,7 +53,7 @@ public static class ThemeManager
 		// add this comment at the top of the file
 		styles = $"/* your launcher theme - edit in settings or yourself if you know the bare minimum about css */\n\n{styles}";
 		
-		File.WriteAllText(_themePath, styles);
+		File.WriteAllText(ThemePath, styles);
 		
 		Log.Write(nameof(ThemeManager), "Applied theme.");
 	}

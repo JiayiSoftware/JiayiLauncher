@@ -8,7 +8,7 @@ namespace JiayiLauncher.Appearance;
 public class CssBuilder
 {
     private readonly List<string> _properties = new();
-    private string _selector = string.Empty;
+    private readonly string _selector;
 
     public CssBuilder(string selector)
     {

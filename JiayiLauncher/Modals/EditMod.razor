@@ -70,14 +70,8 @@
             ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
         }
 
-        if (ModCollection.Current!.HasMod(Mod.Path))
-        {
-            Mod.SaveMetadata();
-        }
-        else
-        {
-            ModCollection.Current.Add(Mod);
-        }
+        // basically skips confirmation if mod is already in collection
+        ModCollection.Current.Add(Mod, !ModCollection.Current.HasMod(Mod.Path));
         
         await Modal.CloseAsync(ModalResult.Ok(Mod));
         

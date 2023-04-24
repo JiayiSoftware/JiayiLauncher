@@ -4,12 +4,12 @@ using System.IO;
 using System.Threading.Tasks;
 using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Features.Stats;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Launch;
 
-// maybe i should use dependency injection for this class but it'll be static until i figure out how to do that
 public static class Launcher
 {
 	public enum LaunchResult
@@ -108,6 +108,8 @@ public static class Launcher
 			Launching = false;
 			
 			Minecraft.ModsLoaded.Add(mod);
+			Minecraft.TrackGameTime();
+			JiayiStats.Instance!.MostRecentMod = mod;
 			
 			return LaunchResult.Success;
 		}
@@ -120,8 +122,13 @@ public static class Launcher
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		Launching = false;
 		
-		if (injected) Minecraft.ModsLoaded.Add(mod);
-		
+		if (injected)
+		{
+			Minecraft.ModsLoaded.Add(mod);
+			Minecraft.TrackGameTime();
+			JiayiStats.Instance!.MostRecentMod = mod;
+		}
+
 		return injected ? LaunchResult.Success : LaunchResult.InjectionFailed;
 	}
 }

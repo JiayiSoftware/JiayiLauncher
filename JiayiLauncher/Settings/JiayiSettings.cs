@@ -21,9 +21,8 @@ public class JiayiSettings
 	[JsonIgnore] // idk if static fields are serialized but just in case
 	public static JiayiSettings? Instance { get; set; }
 	
-	private string _settingsPath = Path.Combine(
+	private static string _settingsPath = Path.Combine(
 		Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "settings.json");
-
 	private static JsonSerializerOptions? _options;
 
 	// general settings
@@ -199,10 +198,7 @@ public class JiayiSettings
 
 	public static void Load()
 	{
-		var path = Path.Combine(
-			Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "settings.json");
-
-		if (!File.Exists(path))
+		if (!File.Exists(_settingsPath))
 		{
 			Instance = new JiayiSettings();
 			Instance.Save();
@@ -210,7 +206,7 @@ public class JiayiSettings
 			return;
 		}
 
-		using var stream = File.OpenRead(path);
+		using var stream = File.OpenRead(_settingsPath);
 
 		try
 		{

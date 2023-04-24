@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Timers;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Features.Stats;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 
@@ -11,6 +13,7 @@ namespace JiayiLauncher.Features.Game;
 public static class Minecraft
 {
 	private static readonly List<Mod> _modsLoaded = new();
+	private static readonly Timer _timer = new(1000);
 
 	public static List<Mod> ModsLoaded
 	{
@@ -41,6 +44,39 @@ public static class Minecraft
 		await minecraftApp.LaunchAsync();
 		
 		Process = Process.GetProcessesByName("Minecraft.Windows")[0];
+	}
+
+	public static void TrackGameTime()
+	{
+		_timer.Elapsed += (_, _) =>
+		{
+			if (!IsOpen)
+				_timer.Stop();
+			else
+			{
+				JiayiStats.Instance!.TotalPlayTime += TimeSpan.FromSeconds(1);
+
+				foreach (var mod in _modsLoaded)
+				{
+					mod.PlayTime += TimeSpan.FromSeconds(1);
+				}
+				
+				foreach (var mod in ModCollection.Current!.Mods)
+				{
+					JiayiStats.Instance!.MostPlayedMod ??= mod;
+					
+					// get highest playtime
+					if (mod.PlayTime > JiayiStats.Instance.MostPlayedMod.PlayTime)
+					{
+						JiayiStats.Instance.MostPlayedMod = mod;
+					}
+				}
+			}
+			
+			JiayiStats.Save();
+		};
+		
+		_timer.Start();
 	}
 
 	public static async Task WaitForModules()

@@ -10,6 +10,7 @@ using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Discord;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Profiles;
+using JiayiLauncher.Features.Stats;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 using Microsoft.AspNetCore.Components.WebView;
@@ -66,6 +67,7 @@ public partial class MainWindow
 		
 		RichPresence.Initialize();
 		ThemeManager.LoadTheme();
+		JiayiStats.Load();
 	}
 
 	protected override void OnSourceInitialized(EventArgs e)

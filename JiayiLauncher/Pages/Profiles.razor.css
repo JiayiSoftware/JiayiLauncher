@@ -82,7 +82,7 @@
     transition: var(--transition-speed);
 }
 
-.modify-buttons:hover .modify-button {
+.profile-item:hover .modify-buttons .modify-button {
     opacity: 100%;
 }
 

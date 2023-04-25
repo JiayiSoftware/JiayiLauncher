@@ -23,6 +23,18 @@ public class JiayiStats
 	{
 		if (Instance == null) Load();
 		
+		// crunch some numbers
+		foreach (var mod in ModCollection.Current!.Mods)
+		{
+			Instance!.MostPlayedMod = mod;
+					
+			// get highest playtime
+			if (mod.PlayTime > Instance.MostPlayedMod.PlayTime)
+			{
+				Instance.MostPlayedMod = mod;
+			}
+		}
+		
 		File.WriteAllText(_statsPath, string.Empty);
 		
 		_options ??= new JsonSerializerOptions { WriteIndented = true };

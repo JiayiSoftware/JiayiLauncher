@@ -14,7 +14,7 @@ public class ProfileCollection
 	
 	private ProfileCollection() { }
 	
-	public static ProfileCollection Create(string basePath)
+	public static void Create(string basePath)
 	{
 		var collection = new ProfileCollection
 		{
@@ -22,8 +22,6 @@ public class ProfileCollection
 		};
 		
 		Current = collection;
-		
-		return collection;
 	}
 	
 	public static void Load(string basePath)

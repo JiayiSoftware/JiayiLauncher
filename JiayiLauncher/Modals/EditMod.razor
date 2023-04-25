@@ -3,6 +3,7 @@
 @using JiayiLauncher.Pages
 @using JiayiLauncher.Settings
 @using System.IO
+@using JiayiLauncher.Features.Stats
 @using JiayiLauncher.Features.Versions
 
 <div class="edit">
@@ -75,7 +76,8 @@
         
         await Modal.CloseAsync(ModalResult.Ok(Mod));
         
-        // update mods page
-        Mods.Instance.Refresh();
+        // update mods page and stats
+        Mods.Instance?.Refresh();
+        JiayiStats.Save();
     }
 }

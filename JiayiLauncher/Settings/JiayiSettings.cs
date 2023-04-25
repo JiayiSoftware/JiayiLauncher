@@ -53,19 +53,6 @@ public class JiayiSettings
 	
 	[Setting("Version folder path", "General", "The path to the folder containing your game installs.")]
 	public string VersionsPath { get; set; } = string.Empty;
-
-	[Setting("Set file associations", "General", "Set up file associations for Jiayi related files.")]
-	[JsonIgnore] public (string, Action) SetFileAssociations { get; } = ("Set (requires admin)", () =>
-	{
-		// check for admin
-		using var identity = WindowsIdentity.GetCurrent();
-		var principal = new WindowsPrincipal(identity);
-		
-		// the user should already know this, no need to tell them (unless they're illiterate or something)
-		if (!principal.IsInRole(WindowsBuiltInRole.Administrator)) return;	
-		
-		WinRegistry.SetFileAssociation("Jiayi Mod Collection", ".jiayi");
-	});
 	
 	// appearance settings (my favorite)
 	[Setting("Primary background color", "Appearance", "The primary background color of the launcher.")]

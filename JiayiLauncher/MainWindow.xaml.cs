@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Principal;
 using System.Windows;
 using System.Windows.Interop;
 using Blazored.Modal;
@@ -47,6 +48,15 @@ public partial class MainWindow
 		Resources.Add("services", services.BuildServiceProvider());
 		
 		// startup stuff
+		
+		// user should be admin at this point but just in case
+		using var identity = WindowsIdentity.GetCurrent();
+		var principal = new WindowsPrincipal(identity);
+		if (!principal.IsInRole(WindowsBuiltInRole.Administrator)) return;	
+		
+		// register file associations
+		WinRegistry.SetFileAssociation("Jiayi Mod Collection", ".jiayi");
+		
 		JiayiSettings.Load();
 		if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
 		{

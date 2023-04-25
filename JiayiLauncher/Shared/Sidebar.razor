@@ -1,4 +1,7 @@
-﻿<nav class="sidebar" data-sticky="@_sticky">
+﻿@using System.Diagnostics
+@inject NavigationManager NavigationManager
+
+<nav class="sidebar" data-sticky="@_sticky">
     <ul class="sidebar-items">
         <li class="logo">
             <JiayiLogo Size="2rem" Shadow="3px"/>
@@ -7,35 +10,35 @@
         </li>
         
         <li class="sidebar-item">
-            <a href="Dashboard" class="sidebar-link">
+            <a href="Dashboard" class="sidebar-link" data-selected="@_tabs["Dashboard"]" @onclick="UpdateCurrentTab">
                 <span class="material-symbols-sharp">dashboard</span>
                 <span class="sidebar-link-text">Dashboard</span>
             </a>
         </li>
         
         <li class="sidebar-item">
-            <a href="Mods" class="sidebar-link">
+            <a href="Mods" class="sidebar-link" data-selected="@_tabs["Mods"]" @onclick="UpdateCurrentTab">
                 <span class="material-symbols-sharp">collections_bookmark</span>
                 <span class="sidebar-link-text">Mods</span>
             </a>
         </li>
 
         <li class="sidebar-item">
-            <a href="Profiles" class="sidebar-link">
+            <a href="Profiles" class="sidebar-link" data-selected="@_tabs["Profiles"]" @onclick="UpdateCurrentTab">
                 <span class="material-symbols-sharp">texture</span>
                 <span class="sidebar-link-text">Profiles</span>
             </a>
         </li>
         
         <li class="sidebar-item">
-            <a href="Versions" class="sidebar-link">
+            <a href="Versions" class="sidebar-link" data-selected="@_tabs["Versions"]" @onclick="UpdateCurrentTab">
                 <span class="material-symbols-sharp">update</span>
                 <span class="sidebar-link-text">Versions</span>
             </a>
         </li>
 
         <li class="sidebar-item">
-            <a href="Settings" class="sidebar-link">
+            <a href="Settings" class="sidebar-link" data-selected="@_tabs["Settings"]" @onclick="UpdateCurrentTab">
                 <span class="material-symbols-sharp">settings</span>
                 <span class="sidebar-link-text">Settings</span>
             </a>
@@ -45,7 +48,17 @@
 
 @code {
     private string _sticky = "no";
+    private string _currentTab = "Dashboard";
     
+    private Dictionary<string, string> _tabs = new()
+    {
+        {"Dashboard", "yes"},
+        {"Mods", "no"},
+        {"Profiles", "no"},
+        {"Versions", "no"},
+        {"Settings", "no"}
+    };
+
     public event EventHandler? OnToggle;
     
     private void Sticky()
@@ -54,4 +67,14 @@
         OnToggle?.Invoke(this, EventArgs.Empty);
     }
 
+    private async Task UpdateCurrentTab()
+    {
+        await Task.Delay(100);
+        _currentTab = NavigationManager.ToBaseRelativePath(NavigationManager.Uri).Split('/').First();
+        
+        foreach (var tab in _tabs)
+        {
+            _tabs[tab.Key] = tab.Key == _currentTab ? "yes" : "no";
+        }
+    }
 }

@@ -113,6 +113,8 @@ public static class Minecraft
 	{
 		var version = await PackageData.GetVersion();
 		Log.Write(nameof(Minecraft), $"Current game version is {version} and mod supports {string.Join(", ", mod.SupportedVersions)}");
-		return mod.SupportedVersions.Contains(version) || mod.SupportedVersions.Contains("any version");
+		return mod.SupportedVersions.Contains(version) 
+		       || mod.SupportedVersions.Contains("Any version")
+		       || mod.SupportedVersions.Contains("any version"); // for legacy support
 	}
 }

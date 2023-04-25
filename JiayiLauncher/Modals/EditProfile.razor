@@ -51,12 +51,11 @@
 
                 try
                 {
-
                     Directory.Move(Profile.Path, newPath);
                 }
-                catch
+                catch (Exception e)
                 {
-                    Log.Write("EditProfile.SaveClicked", "Could not move directory");
+                    Log.Write("EditProfile.SaveClicked", $"Could not move directory: {e}", Log.LogLevel.Error);
                 }
 
                 Profile.Path = newPath;

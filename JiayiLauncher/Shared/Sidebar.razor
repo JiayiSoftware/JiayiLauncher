@@ -10,35 +10,40 @@
         </li>
         
         <li class="sidebar-item">
-            <a href="Dashboard" class="sidebar-link" data-selected="@_tabs["Dashboard"]" @onclick="UpdateCurrentTab">
+            <a href="Dashboard" class="sidebar-link" data-selected="@_tabs["Dashboard"]">
+                <div class="select-border"></div>
                 <span class="material-symbols-sharp">dashboard</span>
                 <span class="sidebar-link-text">Dashboard</span>
             </a>
         </li>
         
         <li class="sidebar-item">
-            <a href="Mods" class="sidebar-link" data-selected="@_tabs["Mods"]" @onclick="UpdateCurrentTab">
+            <a href="Mods" class="sidebar-link" data-selected="@_tabs["Mods"]">
+                <div class="select-border"></div>
                 <span class="material-symbols-sharp">collections_bookmark</span>
                 <span class="sidebar-link-text">Mods</span>
             </a>
         </li>
 
         <li class="sidebar-item">
-            <a href="Profiles" class="sidebar-link" data-selected="@_tabs["Profiles"]" @onclick="UpdateCurrentTab">
+            <a href="Profiles" class="sidebar-link" data-selected="@_tabs["Profiles"]">
+                <div class="select-border"></div>
                 <span class="material-symbols-sharp">texture</span>
                 <span class="sidebar-link-text">Profiles</span>
             </a>
         </li>
         
         <li class="sidebar-item">
-            <a href="Versions" class="sidebar-link" data-selected="@_tabs["Versions"]" @onclick="UpdateCurrentTab">
+            <a href="Versions" class="sidebar-link" data-selected="@_tabs["Versions"]">
+                <div class="select-border"></div>
                 <span class="material-symbols-sharp">update</span>
                 <span class="sidebar-link-text">Versions</span>
             </a>
         </li>
 
         <li class="sidebar-item">
-            <a href="Settings" class="sidebar-link" data-selected="@_tabs["Settings"]" @onclick="UpdateCurrentTab">
+            <a href="Settings" class="sidebar-link" data-selected="@_tabs["Settings"]">
+                <div class="select-border"></div>
                 <span class="material-symbols-sharp">settings</span>
                 <span class="sidebar-link-text">Settings</span>
             </a>
@@ -60,21 +65,27 @@
     };
 
     public event EventHandler? OnToggle;
-    
+
+    protected override void OnInitialized()
+    {
+        NavigationManager.LocationChanged += (_, _) => UpdateCurrentTab();
+    }
+
     private void Sticky()
     {
         _sticky = _sticky == "no" ? "yes" : "no";
         OnToggle?.Invoke(this, EventArgs.Empty);
     }
 
-    private async Task UpdateCurrentTab()
+    private void UpdateCurrentTab()
     {
-        await Task.Delay(100);
         _currentTab = NavigationManager.ToBaseRelativePath(NavigationManager.Uri).Split('/').First();
         
         foreach (var tab in _tabs)
         {
             _tabs[tab.Key] = tab.Key == _currentTab ? "yes" : "no";
         }
+        
+        StateHasChanged();
     }
 }

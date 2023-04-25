@@ -44,18 +44,28 @@
 
 .sidebar-link[data-selected="yes"] {
     background-color: var(--background-primary);
-    border-left: 4px solid var(--accent);
     color: var(--text-primary);
     cursor: default;
+}
+
+.select-border {
+    position: absolute;
+    width: 0;
+    height: 4rem;
+    background-color: var(--accent);
+    transition: var(--transition-speed);
 }
 
 .sidebar-link:hover .material-symbols-sharp {
     color: var(--text-primary);
 }
 
-.sidebar-link[data-selected="yes"] .material-symbols-sharp {
+.sidebar-link[data-selected="yes"] span {
     color: var(--text-primary);
-    margin: 0 1.2rem 0 calc(1.2rem + -4px);
+}
+
+.sidebar-link[data-selected="yes"] .select-border {
+    width: 4px;
 }
 
 .sidebar-link-text {

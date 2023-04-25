@@ -12,6 +12,7 @@
         <Company>Jiayi Software</Company>
         <Product>Jiayi Launcher</Product>
         <NeutralLanguage>en-US</NeutralLanguage>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

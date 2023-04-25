@@ -198,7 +198,7 @@
             ("Yes", new EventCallback(null, () =>
             {
                 Mod.Delete();
-                Mods.Instance.Refresh();
+                Mods.Instance?.Refresh();
             })),
             ("No", EventCallback.Empty)
         };
@@ -213,6 +213,6 @@
     private void DeleteNoConfirm()
     {
         Mod.Delete();
-        Mods.Instance.Refresh();
+        Mods.Instance?.Refresh();
     }
 }

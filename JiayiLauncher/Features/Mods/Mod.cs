@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text.Json.Serialization;
+using JiayiLauncher.Features.Stats;
 
 namespace JiayiLauncher.Features.Mods;
 
@@ -62,5 +63,7 @@ public class Mod
 		
 		ModCollection.Current?.Mods.Remove(this);
 		ModCollection.Current?.Save();
+		
+		JiayiStats.Save();
 	}
 }

@@ -34,6 +34,12 @@ public class JiayiStats
 				Instance.MostPlayedMod = mod;
 			}
 		}
+
+		if (ModCollection.Current.Mods.Count == 0)
+		{
+			Instance!.MostPlayedMod = null;
+			Instance!.MostRecentMod = null;
+		}
 		
 		File.WriteAllText(_statsPath, string.Empty);
 		

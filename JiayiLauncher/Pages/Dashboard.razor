@@ -33,7 +33,7 @@
                 <p>
                     @if (ProfileCollection.Current == null)
                     {
-                        @("No profiles saved")
+                        <i>No profiles saved</i>
                     }
                     else
                     {
@@ -53,7 +53,7 @@
                 
                 @if (_stats.MostRecentMod == null)
                 {
-                    @("Launch a mod to see it here")
+                    <i>Launch a mod to see it here</i>
                 }
                 else
                 {
@@ -67,7 +67,7 @@
 
                 @if (_stats.MostPlayedMod == null)
                 {
-                    @("Launch a mod to see it here")
+                    <i>Launch a mod to see it here</i>
                 }
                 else
                 {

@@ -63,7 +63,7 @@ public static class Minecraft
 				
 				foreach (var mod in ModCollection.Current!.Mods)
 				{
-					JiayiStats.Instance!.MostPlayedMod ??= mod;
+					JiayiStats.Instance.MostPlayedMod ??= mod;
 					
 					// get highest playtime
 					if (mod.PlayTime > JiayiStats.Instance.MostPlayedMod.PlayTime)

@@ -36,6 +36,14 @@
     max-width: 25vw;
 }
 
+.card a {
+    color: var(--text-primary);
+}
+
+.card i a {
+    color: var(--text-primary);
+}
+
 .card h4 {
     margin: 0 0 0.7rem;
     font-size: 18px;
@@ -43,6 +51,22 @@
 
 .logo {
     display: none;
+}
+
+.links {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.links a span {
+    font-size: 40px;
+}
+
+.links a img {
+    width: 40px;
 }
 
 @media only screen and (min-height: 700px) {

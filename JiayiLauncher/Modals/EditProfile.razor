@@ -47,7 +47,18 @@
 
             if (Profile.Path != newPath)
             {
-                Directory.Move(Profile.Path, newPath);
+                // Crash here 
+
+                try
+                {
+
+                    Directory.Move(Profile.Path, newPath);
+                }
+                catch
+                {
+                    Log.Write("EditProfile.SaveClicked", "Could not move directory");
+                }
+
                 Profile.Path = newPath;
             }
         }

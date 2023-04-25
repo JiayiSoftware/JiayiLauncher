@@ -1,4 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Security.AccessControl;
+using System.Security.Principal;
+using System.Threading.Tasks;
 using JiayiLauncher.Features.Game;
 using JiayiLauncher.Utils;
 
@@ -79,18 +83,39 @@ public class Profile
             }
         }
 
-        // copy the files
-        foreach (var file in localStateFiles)
+        Task.Run(() =>
         {
-            File.Copy(System.IO.Path.Combine(localState, file),
-                System.IO.Path.Combine(fullPath, "LocalState", file));
-        }
 
-        foreach (var file in roamingStateFiles)
-        {
-            File.Copy(System.IO.Path.Combine(roamingState, file),
-                System.IO.Path.Combine(fullPath, "RoamingState", file));
-        }
+            // copy the files
+            foreach (var file in localStateFiles)
+            {
+                try
+                {
+                    // use a stream to move the file contents (File.Copy has issues because of file owner)
+                    File.OpenRead(System.IO.Path.Combine(localState, file)).CopyTo(
+                        File.OpenWrite(System.IO.Path.Combine(fullPath, "LocalState", file)));
+                }
+                catch (Exception ex)
+                {
+                    Log.Write("Profile.Create", $"Failed to copy file {file}");
+                }
+            }
+
+            foreach (var file in roamingStateFiles)
+            {
+                try
+                {
+                    File.OpenRead(System.IO.Path.Combine(roamingState, file)).CopyTo(
+                        File.OpenWrite(System.IO.Path.Combine(fullPath, "RoamingState", file)));
+                }
+                catch
+                {
+                    Log.Write("Profile.Create", $"Failed to copy file {file}");
+
+                }
+            }
+        });
+        
 
         // create a README.txt
         File.WriteAllText(System.IO.Path.Combine(fullPath, "README.txt"),

@@ -19,7 +19,7 @@ public class Profile
         Path = path;
     }
 
-    public static Profile Create(string name, ProfileCollection collection)
+    public static async Task<Profile> Create(string name, ProfileCollection collection)
     {
         var fullPath = System.IO.Path.Combine(collection.BasePath, name);
         Directory.CreateDirectory(fullPath);
@@ -83,10 +83,9 @@ public class Profile
             }
         }
 
-        Task.Run(() =>
+        await Task.Run(() =>
         {
-
-            // copy the files
+	        // copy the files
             foreach (var file in localStateFiles)
             {
                 try
@@ -97,7 +96,7 @@ public class Profile
                 }
                 catch (Exception ex)
                 {
-                    Log.Write("Profile.Create", $"Failed to copy file {file}");
+                    Log.Write("Profile.Create", $"Failed to copy file {file}: {ex}");
                 }
             }
 
@@ -108,18 +107,17 @@ public class Profile
                     File.OpenRead(System.IO.Path.Combine(roamingState, file)).CopyTo(
                         File.OpenWrite(System.IO.Path.Combine(fullPath, "RoamingState", file)));
                 }
-                catch
+                catch (Exception ex)
                 {
-                    Log.Write("Profile.Create", $"Failed to copy file {file}");
-
+                    Log.Write("Profile.Create", $"Failed to copy file {file}: {ex}");
                 }
             }
         });
         
 
         // create a README.txt
-        File.WriteAllText(System.IO.Path.Combine(fullPath, "README.txt"),
-            "This folder contains the game data for this profile. Don't mess with it unless you know what you're doing.");
+        await File.WriteAllTextAsync(System.IO.Path.Combine(fullPath, "README.txt"),
+	        "This folder contains the game data for this profile. Don't mess with it unless you know what you're doing.");
 
         Log.Write("Profile.Create", $"Created profile {name} at {fullPath}");
 

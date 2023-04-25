@@ -10,7 +10,9 @@
     <JiayiTextBox Placeholder="Search profiles" @ref="_searchBox" Changed="StateHasChanged" />
     <div class="separator"></div>
 
-    <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem" OnClick="CreateClicked">Create</JiayiButton>
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem" OnClick="CreateClicked" Disabled="@_creating">
+        Create
+    </JiayiButton>
     <span class="material-symbols-sharp" title="What's this do?" id="help-button" @onclick="HelpClicked">help</span>
 
     @* invisible paragraph to make the div's height consistent with the other pages *@
@@ -114,7 +116,6 @@
     private async Task CreateClicked()
     {
         if (_creating) return;
-        _creating = true;
 
         if (JiayiSettings.Instance!.ProfileCollectionPath == string.Empty)
         {
@@ -125,15 +126,18 @@
             ProfileCollection.Create(path);
             JiayiSettings.Instance.Save();
         }
+        
+        _creating = true;
+        var profile = await Profile.Create("My profile", ProfileCollection.Current!);
+        _creating = false;
 
         var parameters = new ModalParameters()
-            .Add(nameof(EditProfile.Profile), Profile.Create("My profile", ProfileCollection.Current!));
+            .Add(nameof(EditProfile.Profile), profile);
 
         var modal = ModalService.Show<EditProfile>("Create profile", parameters);
         await modal.Result;
+        
         StateHasChanged();
-
-        _creating = false;
     }
 
     private async Task EditClicked(Profile profile)

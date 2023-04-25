@@ -30,16 +30,17 @@
             
             <div class="card">
                 <h4>Profiles</h4>
-                <p>
-                    @if (ProfileCollection.Current == null)
-                    {
-                        <i>No profiles saved</i>
-                    }
-                    else
-                    {
-                        @ProfileCollection.Current.Profiles.Count @(" ") @Pluralize(ProfileCollection.Current.Profiles.Count, "profile")
-                    }
-                </p>
+                @if (ProfileCollection.Current == null || ProfileCollection.Current.Profiles.Count == 0)
+                {
+                    <i>No profiles</i>
+                }
+                else
+                {
+                    <p>
+                        @ProfileCollection.Current.Profiles.Count @(" ") 
+                        @Pluralize(ProfileCollection.Current.Profiles.Count, "profile")
+                    </p>
+                }
                 
                 <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-top: 0.7rem;" OnClick="ProfileClicked">
                     View profiles

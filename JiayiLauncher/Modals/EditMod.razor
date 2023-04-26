@@ -66,7 +66,7 @@
         if (JiayiSettings.Instance!.ModCollectionPath == string.Empty)
         {
             JiayiSettings.Instance.ModCollectionPath = 
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mods");
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Mods");
             JiayiSettings.Instance.Save();
             ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
         }

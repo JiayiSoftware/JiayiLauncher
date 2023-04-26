@@ -6,8 +6,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Windows;
+using Newtonsoft.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace JiayiLauncher.Features.Mods;
 
@@ -18,10 +19,10 @@ public class ModCollection
     /*[CascadingParameter]
     public IModalService ModalService { get; set; } = default!;*/
 
-    [JsonIgnore] public string BasePath { get; private set; } = string.Empty;
+    [System.Text.Json.Serialization.JsonIgnore] public string BasePath { get; private set; } = string.Empty;
     public List<Mod> Mods { get; } = new();
 
-    [JsonIgnore] public static ModCollection? Current { get; private set; }
+    [System.Text.Json.Serialization.JsonIgnore] public static ModCollection? Current { get; private set; }
     
     private static JsonSerializerOptions? _options;
     
@@ -103,13 +104,13 @@ public class ModCollection
 			return;
 		}
         
-        using var stream = File.OpenRead(indexPath);
+        var json = File.ReadAllText(indexPath);
         
         try
 		{
-	        _options ??= new JsonSerializerOptions { WriteIndented = true };
+	        // since standard library's json returns an empty collection
+	        var collection = JsonConvert.DeserializeObject<ModCollection>(json);
 	        
-	        var collection = JsonSerializer.Deserialize<ModCollection>(stream, _options);
 	        if (collection == null)
 	        {
 		        Log.Write("ModCollection", $"Failed to load mod collection at {path}: index.json is invalid.");
@@ -122,7 +123,6 @@ public class ModCollection
 	    }
         catch (Exception e)
 		{
-			stream.Close();
 	        Log.Write("ModCollection", $"Failed to load mod collection at {path}: {e.Message}");
 	        Current = Create(path);
 		}

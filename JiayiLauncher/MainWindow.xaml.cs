@@ -77,7 +77,7 @@ public partial class MainWindow
 		
 		RichPresence.Initialize();
 		ThemeManager.LoadTheme();
-		JiayiStats.Load();
+		JiayiStats.Save();
 	}
 
 	protected override void OnSourceInitialized(EventArgs e)

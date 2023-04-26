@@ -60,20 +60,10 @@ public static class Minecraft
 				{
 					mod.PlayTime += TimeSpan.FromSeconds(1);
 				}
-				
-				foreach (var mod in ModCollection.Current!.Mods)
-				{
-					JiayiStats.Instance.MostPlayedMod ??= mod;
-					
-					// get highest playtime
-					if (mod.PlayTime > JiayiStats.Instance.MostPlayedMod.PlayTime)
-					{
-						JiayiStats.Instance.MostPlayedMod = mod;
-					}
-				}
 			}
 			
 			JiayiStats.Save();
+			ModCollection.Current!.Save();
 		};
 		
 		_timer.Start();

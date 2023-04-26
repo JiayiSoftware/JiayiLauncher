@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Utils;
@@ -24,7 +25,7 @@ public class JiayiStats
 		if (Instance == null) Load();
 		
 		// crunch some numbers
-		foreach (var mod in ModCollection.Current!.Mods)
+		foreach (var mod in ModCollection.Current!.Mods.Where(mod => mod.PlayTime != TimeSpan.Zero))
 		{
 			Instance!.MostPlayedMod = mod;
 					

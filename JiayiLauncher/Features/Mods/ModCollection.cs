@@ -18,12 +18,15 @@ public class ModCollection
     /*[CascadingParameter]
     public IModalService ModalService { get; set; } = default!;*/
 
-    [JsonIgnore] public string BasePath { get; private set; }
+    [JsonIgnore] public string BasePath { get; private set; } = string.Empty;
     public List<Mod> Mods { get; } = new();
 
     [JsonIgnore] public static ModCollection? Current { get; private set; }
     
     private static JsonSerializerOptions? _options;
+    
+    // serialization thing
+    public ModCollection() { }
 
     private ModCollection(string basePath) // nobody should be calling this
     {
@@ -204,7 +207,7 @@ public class ModCollection
 			    File.Copy(mod.Path, existing.Path, true);
 	    }
 
-	    if (!mod.Path.StartsWith(BasePath))
+	    if (!mod.FromInternet && !mod.Path.StartsWith(BasePath))
 	    {
 		    var newPath = Path.Combine(BasePath, Path.GetFileName(mod.Path));
 		    File.Copy(mod.Path, newPath, true);

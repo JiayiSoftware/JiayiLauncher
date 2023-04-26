@@ -15,6 +15,8 @@ public static class ThemeManager
 	{
 		if (JiayiSettings.Instance == null) return;
 		
+		if (!File.Exists(ThemePath)) ApplyTheme(); // create theme file if it doesn't exist
+		
 		var builder = CssBuilder.FromFile(ThemePath, ":root");
 		var styles = builder.GetAllPropertyValues();
 		

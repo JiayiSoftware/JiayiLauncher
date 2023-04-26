@@ -22,7 +22,12 @@ public class CssBuilder
 	    if (!styles.Contains(selector)) 
 		    throw new ArgumentException($"Selector '{selector}' was not found in this file.");
 	    
+	    // i hate windows newlines
 	    var lines = styles.Split('\n');
+	    
+	    if (lines.Any(x => x.Contains('\r')))
+		    lines = styles.Split("\r\n");
+	    
 	    var start = Array.IndexOf(lines, selector + " {");
 	    var end = Array.IndexOf(lines, "}", start);
 	    

@@ -20,5 +20,5 @@
 }
 
 .textbox::selection {
-    background: rgba(255, 0, 0, 0.5);
+    background: var(--accent);
 }

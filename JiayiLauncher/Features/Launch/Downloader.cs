@@ -28,7 +28,7 @@ public static class Downloader
 		}
 
 		var path = Path.Combine(ModCollection.Current!.BasePath,
-			response.Content.Headers.ContentDisposition.FileName);
+			response.Content.Headers.ContentDisposition.FileName.Replace("\"", ""));
 
 		// check if the file already exists, and if so, compare the hashes
 		if (File.Exists(path))

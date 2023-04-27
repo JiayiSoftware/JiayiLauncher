@@ -26,14 +26,17 @@ public class JiayiStats
 		if (ModCollection.Current == null) return; // this func called after the attempt to load mods
 		
 		// crunch some numbers
-		foreach (var mod in ModCollection.Current.Mods.Where(mod => mod.PlayTime != TimeSpan.Zero))
+		if (Instance.MostPlayedMod != null)
 		{
-			//Instance!.MostPlayedMod = mod;
-					
-			// get highest playtime
-			if (mod.PlayTime > Instance.MostPlayedMod.PlayTime)
+			foreach (var mod in ModCollection.Current.Mods.Where(mod => mod.PlayTime != TimeSpan.Zero))
 			{
-				Instance.MostPlayedMod = mod;
+				//Instance!.MostPlayedMod = mod;
+				
+				// get highest playtime
+				if (mod.PlayTime > Instance.MostPlayedMod.PlayTime)
+				{
+					Instance.MostPlayedMod = mod;
+				}
 			}
 		}
 

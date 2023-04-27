@@ -22,7 +22,8 @@ public static class VersionManager
 		UnknownError
 	}
 	
-	public static event EventHandler<EventArgs>? DownloadFinished; 
+	public static int SwitchProgress { get; private set; }
+	public static event EventHandler? SwitchProgressChanged;
 
 	public static bool VersionInstalled(string ver)
 	{
@@ -31,7 +32,7 @@ public static class VersionManager
 		return folders.Any(x => x.Contains(ver));
 	}
 
-	public static async Task DownloadVersion(MinecraftVersion version, IProgress<int> progress)
+	public static async Task DownloadVersion(MinecraftVersion version)
 	{
 		var updateId = version.Archs.x64!.UpdateIds[0];
 		var url = await RequestFactory.GetDownloadUrl(updateId);
@@ -52,7 +53,7 @@ public static class VersionManager
 		await using var stream = await response.Content.ReadAsStreamAsync();
 		await using var fileStream = new FileStream(filePath, FileMode.Create);
 		
-		progress.Report(0);
+		SwitchProgress = 0;
 
 		while (true)
 		{
@@ -61,10 +62,13 @@ public static class VersionManager
 			
 			await fileStream.WriteAsync(buffer.AsMemory(0, read));
 			totalRead += read;
-			progress.Report((int)(totalRead * 100 / contentLength)!);
+			
+			var oldProgress = SwitchProgress;
+			SwitchProgress = (int)(totalRead * 100 / contentLength)!;
+			if (SwitchProgress != oldProgress) SwitchProgressChanged?.Invoke(null, EventArgs.Empty);
 		}
 		
-		progress.Report(100);
+		SwitchProgress = 100;
 		
 		fileStream.Close();
 		stream.Close();
@@ -80,8 +84,6 @@ public static class VersionManager
 		
 		// copy shaders
 		await ShaderManager.BackupVanillaShaders();
-		
-		DownloadFinished?.Invoke(null, EventArgs.Empty);
 	}
 
 	public static async Task RemoveVersion(string ver)

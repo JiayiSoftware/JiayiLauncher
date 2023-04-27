@@ -27,6 +27,13 @@
     column-gap: 0.7rem;
 }
 
+.separator {
+    border-right: 1px solid rgb(50, 50, 50);
+    height: 1.5rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+
 .no-versions {
     margin-top: 2rem;
     color: var(--text-grayed);

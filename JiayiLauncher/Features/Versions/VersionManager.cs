@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.Management.Deployment;
 using JiayiLauncher.Features.Game;
+using JiayiLauncher.Features.Shaders;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 
@@ -76,6 +77,9 @@ public static class VersionManager
 		// DELETE AppxSignature.p7x so that the game can be installed with developer mode
 		var signature = Path.Combine(folder, "AppxSignature.p7x");
 		if (File.Exists(signature)) File.Delete(signature);
+		
+		// copy shaders
+		await ShaderManager.BackupVanillaShaders();
 		
 		DownloadFinished?.Invoke(null, EventArgs.Empty);
 	}

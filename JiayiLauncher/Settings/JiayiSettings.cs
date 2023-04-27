@@ -54,6 +54,9 @@ public class JiayiSettings
 	[Setting("Version folder path", "General", "The path to the folder containing your game installs.")]
 	public string VersionsPath { get; set; } = string.Empty;
 	
+	[Setting("Shader folder path", "General", "The path to the folder containing your shaders.")]
+	public string ShadersPath { get; set; } = string.Empty;
+	
 	// appearance settings (my favorite)
 	[Setting("Primary background color", "Appearance", "The primary background color of the launcher.")]
 	public Color PrimaryBackgroundColor { get; set; } = Color.FromArgb(15, 15, 15);

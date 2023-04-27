@@ -91,8 +91,12 @@ public class Profile
                 try
                 {
                     // use a stream to move the file contents (File.Copy has issues because of file owner)
-                    File.OpenRead(System.IO.Path.Combine(localState, file)).CopyTo(
-                        File.OpenWrite(System.IO.Path.Combine(fullPath, "LocalState", file)));
+                    var read = File.OpenRead(System.IO.Path.Combine(localState, file));
+                    var write = File.OpenWrite(System.IO.Path.Combine(fullPath, "LocalState", file));
+                    read.CopyTo(write);
+                    
+                    read.Close();
+                    write.Close();
                 }
                 catch (Exception ex)
                 {
@@ -104,8 +108,12 @@ public class Profile
             {
                 try
                 {
-                    File.OpenRead(System.IO.Path.Combine(roamingState, file)).CopyTo(
-                        File.OpenWrite(System.IO.Path.Combine(fullPath, "RoamingState", file)));
+                    var read = File.OpenRead(System.IO.Path.Combine(roamingState, file));
+					var write = File.OpenWrite(System.IO.Path.Combine(fullPath, "RoamingState", file));
+					read.CopyTo(write);
+					
+					read.Close();
+					write.Close();
                 }
                 catch (Exception ex)
                 {
@@ -146,7 +154,7 @@ public class Profile
         };
     }
 
-    public void Apply()
+    public async Task Apply()
     {
         var localState = System.IO.Path.Combine(PackageData.GetGameDataPath(), "LocalState");
         var roamingState = System.IO.Path.Combine(PackageData.GetGameDataPath(), "RoamingState");
@@ -200,17 +208,30 @@ public class Profile
             }
         }
 
-        foreach (var file in localStateFiles)
+        await Task.Run(() =>
         {
-            File.Copy(System.IO.Path.Combine(profileLocalState, file),
-                System.IO.Path.Combine(localState, file));
-        }
+	        foreach (var file in localStateFiles)
+	        {
+		        var read = File.OpenRead(System.IO.Path.Combine(profileLocalState, file));
+		        var write = File.OpenWrite(System.IO.Path.Combine(localState, file));
+		        read.CopyTo(write);
 
-        foreach (var file in roamingStateFiles)
-        {
-            File.Copy(System.IO.Path.Combine(profileRoamingState, file),
-                System.IO.Path.Combine(roamingState, file));
-        }
+		        read.Close();
+		        write.Close();
+	        }
+
+	        foreach (var file in roamingStateFiles)
+	        {
+		        var read = File.OpenRead(System.IO.Path.Combine(profileRoamingState, file));
+		        var write = File.OpenWrite(System.IO.Path.Combine(roamingState, file));
+		        read.CopyTo(write);
+
+		        read.Close();
+		        write.Close();
+	        }
+        });
+        
+        Log.Write("Profile.Apply", $"Applied profile {Name}");
     }
 
     public void Delete()
@@ -219,16 +240,17 @@ public class Profile
             Directory.Delete(Path, true);
 
         ProfileCollection.Current!.Profiles.Remove(this);
+        Log.Write("Profile.Delete", $"Deleted profile {Name}");
     }
 
     public bool IsValid()
     {
-        bool dirExists = Directory.Exists(Path);
+        var dirExists = Directory.Exists(Path);
 
         var profileLocalState = System.IO.Path.Combine(Path, "LocalState");
         var profileRoamingState = System.IO.Path.Combine(Path, "RoamingState");
-        bool localStateExists = Directory.Exists(profileLocalState);
-        bool roamingStateExists = Directory.Exists(profileLocalState);
+        var localStateExists = Directory.Exists(profileLocalState);
+        var roamingStateExists = Directory.Exists(profileRoamingState);
 
         return dirExists && localStateExists && roamingStateExists;
     }

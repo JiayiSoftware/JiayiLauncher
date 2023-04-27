@@ -202,6 +202,10 @@
 
     private async Task SwitchClicked(string ver)
     {
+        var i = _versionList?.Keys.ToList().IndexOf(ver) ?? 0;
+        _statuses[i] = "Switching...";
+        _buttonStates[i] = true;
+        
         var result = await VersionManager.Switch(ver);
         var parameters = new ModalParameters();
         var options = new List<(string, EventCallback)>();
@@ -247,6 +251,9 @@
         {
             await Minecraft.Open();
         }
+        
+        _statuses[i] = string.Empty;
+        _buttonStates[i] = false;
     }
 
 }

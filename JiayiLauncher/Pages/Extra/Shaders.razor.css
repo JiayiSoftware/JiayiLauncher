@@ -1,0 +1,58 @@
+﻿.shader-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.applied-toggle, .available-toggle {
+    text-decoration: none;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    transition: var(--transition-speed);
+}
+
+.applied-toggle:hover, .available-toggle:hover {
+    filter: brightness(1.5);
+}
+
+.applied-toggle:active, .available-toggle:active {
+    filter: brightness(0.8);
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}
+
+.applied-shaders, .available-shaders {
+    list-style: none;
+    padding: 0;
+}
+
+.applied-shaders li, .available-shaders li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    
+    border-left: 5px solid var(--background-secondary);
+}
+
+.add-new {
+    border: 2px dashed var(--text-grayed);
+    text-align: center;
+    padding: 0.5rem;
+    color: var(--text-grayed);
+    cursor: pointer;
+
+    transition: var(--transition-speed);
+}
+
+.add-new:hover {
+    filter: brightness(1.5);
+}

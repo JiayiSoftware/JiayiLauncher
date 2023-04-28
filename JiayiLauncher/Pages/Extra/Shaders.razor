@@ -1,11 +1,52 @@
 ﻿@page "/Shaders"
+@using JiayiLauncher.Features.Shaders
 
 <h3>Shaders</h3>
 
 <div class="shader-page">
+    <a class="applied-toggle" @onclick="() => _appliedExpanded = !_appliedExpanded">
+        Applied shaders
+        <span class="material-symbols-sharp">
+            @(_appliedExpanded ? "expand_less" : "expand_more")
+        </span>
+    </a>
+    <ul class="applied-shaders" style="display: @(_appliedExpanded ? "block" : "none")">
+        
+    </ul>
     
+    <a class="available-toggle" @onclick="() => _availableExpanded = !_availableExpanded">
+        Available shaders
+        <span class="material-symbols-sharp">
+            @(_availableExpanded ? "expand_less" : "expand_more")
+        </span>
+    </a>
+    <ul class="available-shaders" style="display: @(_availableExpanded ? "block" : "none")">
+        @foreach (var shader in ShaderManager.AvailableShaders)
+        {
+            
+        }
+    </ul>
+    
+    <div class="add-new" title=".zip files only">
+        <label>
+            Drag or click to add shaders
+            <InputFile OnChange="FileSelected"></InputFile>
+        </label>
+    </div>
 </div>
 
 @code {
-    
+    private bool _appliedExpanded = true;
+    private bool _availableExpanded; // false
+
+    protected override void OnInitialized()
+    {
+        ShaderManager.UpdateShaders();
+    }
+
+    private void FileSelected(InputFileChangeEventArgs file)
+    {
+        
+    }
+
 }

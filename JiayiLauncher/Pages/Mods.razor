@@ -63,7 +63,7 @@
                 You don't have a mods folder set up.<br><br>
                 Drag a folder here to make it work with Jiayi,<br>
                 or add mods to create a new folder.
-                <InputFile OnChange="FileDropped" multiple @onclick:preventDefault />
+                <InputFile OnChange="FileDropped" AdditionalAttributes="@_noTitle" multiple @onclick:preventDefault />
             </label>
         }
     </p>
@@ -87,6 +87,8 @@
     private JiayiFilter? _onlineFilter;
 
     private int _searchResults;
+    
+    private readonly Dictionary<string, object> _noTitle = new() { { "title", " " } };
 
     protected override void OnInitialized()
     {

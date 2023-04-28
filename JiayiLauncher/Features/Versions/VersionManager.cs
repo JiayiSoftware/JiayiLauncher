@@ -4,6 +4,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Windows.Management.Core;
 using Windows.Management.Deployment;
 using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Shaders;
@@ -96,6 +97,8 @@ public static class VersionManager
 
 			Directory.Delete(folder, true);
 		});
+
+		await ShaderManager.DeleteBackupShaders();
 	}
 	
 	// my favorite part of this class
@@ -120,7 +123,13 @@ public static class VersionManager
 				await PackageData.PackageManager.RemovePackageAsync(package.Id.FullName, RemovalOptions.PreserveApplicationData);
 			else
 			{
-				Directory.Move(PackageData.GetGameDataPath(), JiayiSettings.Instance.VersionsPath);
+				//Directory.Move(PackageData.GetGameDataPath(), JiayiSettings.Instance.VersionsPath);
+				
+				// let's try this
+				using var gameData = ApplicationDataManager.CreateForPackageFamily("Microsoft.MinecraftUWP_8wekyb3d8bbwe");
+				var gameDataPath = gameData.LocalFolder.Path;
+				Directory.Move(gameDataPath, JiayiSettings.Instance.VersionsPath);
+				
 				await PackageData.PackageManager.RemovePackageAsync(package.Id.FullName, 0);
 			}
 		}
@@ -137,8 +146,11 @@ public static class VersionManager
 			
 			var path = Path.Combine(JiayiSettings.Instance.VersionsPath, "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
 			if (Directory.Exists(path))
-				Directory.Move(path, PackageData.GetGameDataPath());
-			
+			{
+				var appdata = PackageData.GetGameDataPath().TrimEnd("Microsoft.MinecraftUWP_8wekyb3d8bbwe".ToCharArray());
+				Directory.Move(path, appdata);
+			}
+
 			return SwitchResult.Succeeded;
 		}
 

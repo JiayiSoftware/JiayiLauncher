@@ -47,7 +47,7 @@
         }
     } else
     {
-        <p>@loading_text</p>
+        <p>Loading clients..</p>
     }
 </div>
 
@@ -56,9 +56,8 @@
     public IModalService ModalService { get; set; } = default!;
 
     private JiayiTextBox? _searchBox;
-    private List<Client> clients = new List<Client>();
+    private List<Client>? clients;
     private string clients_url = "https://raw.githubusercontent.com/disepi/ambrosial/main/clientEndpoint.json";
-    private string loading_text = "Loading clients..";
 
     private void BackClicked()
     {
@@ -69,13 +68,9 @@
     {
         var mod = new Mod(client.FormattedName, client.DllURL, new List<string> { client.MCVersion });
         
-        /*
         var parameters = new ModalParameters();
         parameters.Add(nameof(EditMod.Mod), mod);
         ModalService.Show<EditMod>("Edit mod", parameters);
-        */
-
-        ModCollection.Current.Add(mod, !ModCollection.Current.HasMod(mod.Path));
 
         Mods.Instance?.Refresh();
         JiayiStats.Save();
@@ -92,12 +87,12 @@
         var key = info[1];
         var data = AmbrosialDecrypt(encrypted_data, key);
         var json_clients = data.Split("[<JSON_END>]").Skip(1).ToArray(); // Skip one to remove the discord link
+        clients = new List<Client>();
         foreach (var item in json_clients)
         {
             try {
                 var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(item);
                 if (json == null) {
-                    loading_text = $"Failed to deserialize client JSON";
                     continue;
                 }
 
@@ -117,8 +112,12 @@
                     link
                 ));
             } catch (Exception e) {
-                loading_text = "Failed to deserialize Ambrosial clients JSON";
-                throw;
+                Log.Write("Ambrosial", $"Item: {item}", Log.LogLevel.Error);
+                if (e.StackTrace != null) {
+                    Log.Write("Ambrosial", e.StackTrace, Log.LogLevel.Error);
+                } else {
+                    Log.Write("Ambrosial", "No stack trace available", Log.LogLevel.Error);
+                }
             }
         }
     }

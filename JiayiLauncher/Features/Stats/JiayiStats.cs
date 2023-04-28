@@ -30,6 +30,7 @@ public class JiayiStats
 		var MostPlayed = new List<Mod>(ModCollection.Current.Mods) // Copy
 			.OrderBy(mod => mod.PlayTime) // Order by playtime
 			.Where(mod => mod.PlayTime != TimeSpan.Zero) // Remove everything where timespan is 0
+			.Reverse() // Reverse it so we get the highest value
 			.ToList(); // Convert to a list
 		if (MostPlayed.Count > 0) {
 			Instance.MostPlayedMod = MostPlayed[0];

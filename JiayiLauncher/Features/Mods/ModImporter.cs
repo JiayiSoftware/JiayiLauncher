@@ -22,7 +22,7 @@ public static class ModImporter
             if (mod != null)
             {
                 list.Add(mod);
-                mod.SupportedVersions = new List<string> { "any version" };
+                mod.SupportedVersions = new List<string> { "Any version" };
                 ModCollection.Current!.Add(mod);
             }
         }

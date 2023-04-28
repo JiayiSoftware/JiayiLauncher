@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Utils;
+using System.Collections.Generic;
 
 namespace JiayiLauncher.Features.Stats;
 
@@ -26,18 +27,12 @@ public class JiayiStats
 		if (ModCollection.Current == null) return; // this func called after the attempt to load mods
 		
 		// crunch some numbers
-		if (Instance.MostPlayedMod != null)
-		{
-			foreach (var mod in ModCollection.Current.Mods.Where(mod => mod.PlayTime != TimeSpan.Zero))
-			{
-				//Instance!.MostPlayedMod = mod;
-				
-				// get highest playtime
-				if (mod.PlayTime > Instance.MostPlayedMod.PlayTime)
-				{
-					Instance.MostPlayedMod = mod;
-				}
-			}
+		var MostPlayed = new List<Mod>(ModCollection.Current.Mods) // Copy
+			.OrderBy(mod => mod.PlayTime) // Order by playtime
+			.Where(mod => mod.PlayTime != TimeSpan.Zero) // Remove everything where timespan is 0
+			.ToList(); // Convert to a list
+		if (MostPlayed.Count > 0) {
+			Instance.MostPlayedMod = MostPlayed[0];
 		}
 
 		if (ModCollection.Current.Mods.Count == 0)

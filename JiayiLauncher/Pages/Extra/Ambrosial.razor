@@ -69,13 +69,11 @@
     {
         var mod = new Mod(client.FormattedName, client.DllURL, new List<string> { client.MCVersion });
         
-        /*
         var parameters = new ModalParameters();
         parameters.Add(nameof(EditMod.Mod), mod);
         ModalService.Show<EditMod>("Edit mod", parameters);
-        */
 
-        ModCollection.Current.Add(mod, !ModCollection.Current.HasMod(mod.Path));
+        @* ModCollection.Current.Add(mod, !ModCollection.Current.HasMod(mod.Path)); *@
 
         Mods.Instance?.Refresh();
         JiayiStats.Save();

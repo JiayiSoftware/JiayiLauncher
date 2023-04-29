@@ -27,12 +27,10 @@
         }
     </ul>
     
-    <div class="add-new" title=".zip files only">
-        <label>
-            Drag or click to add shaders
-            <InputFile OnChange="FileSelected"></InputFile>
-        </label>
-    </div>
+    <label class="add-new" title=".zip files only">
+        Drag or click to add shaders
+        <InputFile OnChange="FileSelected" />
+    </label>
 </div>
 
 @code {
@@ -44,9 +42,21 @@
         ShaderManager.UpdateShaders();
     }
 
-    private void FileSelected(InputFileChangeEventArgs file)
+    private async Task FileSelected(InputFileChangeEventArgs file)
     {
+        if (file.FileCount == 1)
+        {
+            await ShaderManager.AddShader(file.File);
+        }
+        else
+        {
+            foreach (var multipleFile in file.GetMultipleFiles())
+            {
+                await ShaderManager.AddShader(multipleFile);
+            }
+        }
         
+        StateHasChanged();
     }
 
 }

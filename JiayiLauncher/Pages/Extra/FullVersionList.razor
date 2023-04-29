@@ -3,6 +3,7 @@
 @using Microsoft.JSInterop
 @using System.Diagnostics
 @using JiayiLauncher.Features.Game
+@using JiayiLauncher.Utils
 
 @* javascript :( *@
 @inject IJSRuntime JavaScript
@@ -221,17 +222,11 @@
 
         switch (result)
         {
+            // stop crying rider
+            case VersionManager.SwitchResult.Succeeded: break;
+                
             case VersionManager.SwitchResult.DeveloperModeDisabled:
-                options.Add(("Yes", new EventCallback(null, () =>
-                {
-                    var info = new ProcessStartInfo
-                    {
-                        UseShellExecute = true,
-                        FileName = "ms-settings:developers"
-                    };
-                    
-                    Process.Start(info);
-                })));
+                options.Add(("Yes", new EventCallback(null, WinRegistry.EnableDeveloperMode)));
                 options.Add(("No", EventCallback.Empty));
                 
                 parameters.Add(nameof(MessageBox.Buttons), options);

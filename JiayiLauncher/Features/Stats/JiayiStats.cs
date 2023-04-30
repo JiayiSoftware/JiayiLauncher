@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -26,16 +27,12 @@ public class JiayiStats
 		if (ModCollection.Current == null) return; // this func called after the attempt to load mods
 		
 		// crunch some numbers
-		foreach (var mod in ModCollection.Current.Mods.Where(mod => mod.PlayTime != TimeSpan.Zero))
-		{
-			//Instance!.MostPlayedMod = mod;
-					
-			// get highest playtime
-			if (mod.PlayTime > Instance.MostPlayedMod.PlayTime)
-			{
-				Instance.MostPlayedMod = mod;
-			}
-		}
+		var mostPlayed = new List<Mod>(ModCollection.Current.Mods)
+			.OrderByDescending(mod => mod.PlayTime)
+			.Where(mod => mod.PlayTime != TimeSpan.Zero)
+			.ToList();
+		
+		Instance.MostPlayedMod = mostPlayed.Count > 0 ? mostPlayed[0] : null;
 
 		if (ModCollection.Current.Mods.Count == 0)
 		{

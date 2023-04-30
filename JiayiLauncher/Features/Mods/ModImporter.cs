@@ -20,7 +20,7 @@ public static class ModImporter
         {
             var mod = ImportFromPath(path);
             list.Add(mod);
-            mod.SupportedVersions = new List<string> { "any version" };
+            mod.SupportedVersions = new List<string> { "Any version" };
             ModCollection.Current!.Add(mod);
         }
 

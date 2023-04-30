@@ -23,7 +23,7 @@ public class Mod
 	{
 		Name = name;
 		Path = path;
-		SupportedVersions = supportedVersions ?? new List<string> { "any version" };
+		SupportedVersions = supportedVersions ?? new List<string> { "Any version" };
 	}
 	
 	// for speed

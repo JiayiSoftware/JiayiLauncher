@@ -33,7 +33,11 @@
         } else
         {
             <ul class="clients">
-                @foreach (var client in clients)
+                @foreach (var client in clients.Where(c => (
+                    c.FormattedName.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)
+                    ||
+                    c.MCVersion.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)
+                )))
                 {
                     <li class="client">
                         <div class="client-info">

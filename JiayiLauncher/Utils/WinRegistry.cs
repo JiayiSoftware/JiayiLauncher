@@ -40,4 +40,13 @@ public static class WinRegistry
 		
 		appModelUnlockKey?.SetValue("AllowDevelopmentWithoutDevLicense", 1, RegistryValueKind.DWord);
 	}
+
+	public static bool DeveloperModeEnabled()
+	{
+		var appModelUnlockKey = Registry.LocalMachine.OpenSubKey(
+			"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock", false);
+
+		var val = (int?)appModelUnlockKey?.GetValue("AllowDevelopmentWithoutDevLicense");
+		return val == 1;
+	}
 }

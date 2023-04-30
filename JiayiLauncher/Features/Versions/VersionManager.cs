@@ -109,6 +109,12 @@ public static class VersionManager
 		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);
 		var folder = folders.FirstOrDefault(x => x.Contains(version));
 		if (folder == null) return SwitchResult.VersionNotFound;
+
+		if (!WinRegistry.DeveloperModeEnabled())
+		{
+			Log.Write(nameof(VersionManager), "Developer mode is disabled, asking user to enable", Log.LogLevel.Warning);
+			return SwitchResult.DeveloperModeDisabled;
+		}
 		
 		var packages = PackageData.PackageManager.FindPackages("Microsoft.MinecraftUWP_8wekyb3d8bbwe");
 		foreach (var package in packages)
@@ -137,30 +143,37 @@ public static class VersionManager
 		Log.Write(nameof(VersionManager), "Registering package");
 		
 		var manifest = Path.Combine(folder, "AppxManifest.xml");
-		var result = await PackageData.PackageManager.RegisterPackageAsync(new Uri(manifest), null,
+
+		try
+		{
+			var result = await PackageData.PackageManager.RegisterPackageAsync(new Uri(manifest), null,
 				DeploymentOptions.DevelopmentMode);
 
-		if (result.IsRegistered)
-		{
-			Log.Write(nameof(VersionManager), "Package registered");
-			
-			var path = Path.Combine(JiayiSettings.Instance.VersionsPath, "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
-			if (Directory.Exists(path))
+			if (result.IsRegistered)
 			{
-				var appdata = PackageData.GetGameDataPath().TrimEnd("Microsoft.MinecraftUWP_8wekyb3d8bbwe".ToCharArray());
-				Directory.Move(path, appdata);
+				Log.Write(nameof(VersionManager), "Package registered");
+			
+				var path = Path.Combine(JiayiSettings.Instance.VersionsPath, "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
+				if (Directory.Exists(path))
+				{
+					var appdata = PackageData.GetGameDataPath().TrimEnd("Microsoft.MinecraftUWP_8wekyb3d8bbwe".ToCharArray());
+					Directory.Move(path, appdata);
+				}
+
+				return SwitchResult.Succeeded;
 			}
-
-			return SwitchResult.Succeeded;
 		}
-
-		if (result.ErrorText.Contains("sideload"))
+		catch (Exception e)
 		{
-			Log.Write(nameof(VersionManager), "Developer mode disabled");
-			return SwitchResult.DeveloperModeDisabled;
+			if (e.ToString().Contains("sideload"))
+			{
+				Log.Write(nameof(VersionManager), "Developer mode is disabled, asking user to enable", Log.LogLevel.Warning);
+				return SwitchResult.DeveloperModeDisabled;
+			}
+			
+			Log.Write(nameof(VersionManager), $"Unknown error: {e}");
 		}
-
-		Log.Write(nameof(VersionManager), $"Unknown error: {result.ErrorText}");
+		
 		return SwitchResult.UnknownError;
 	}
 }

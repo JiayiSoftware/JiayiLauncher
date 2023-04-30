@@ -84,7 +84,8 @@ public static class ShaderManager
 		Shaders.Clear();
 		AppliedShaders.Clear();
 		
-		if (!Directory.Exists(JiayiSettings.Instance!.ShadersPath))
+		if (!Directory.Exists(JiayiSettings.Instance!.ShadersPath) 
+		    || !Directory.Exists(Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied")))
 		{
 			var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
 				"JiayiLauncher", "Shaders");

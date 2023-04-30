@@ -1,31 +1,64 @@
 ﻿@page "/Shaders"
 @using JiayiLauncher.Features.Shaders
 
+@* rider mistaking C# for javascript *@
+<!--suppress JSUndeclaredVariable, JSUnresolvedReference -->
+
 <h3>Shaders</h3>
 
 <div class="shader-page">
-    <a class="applied-toggle" @onclick="() => _appliedExpanded = !_appliedExpanded">
-        Applied shaders
-        <span class="material-symbols-sharp">
-            @(_appliedExpanded ? "expand_less" : "expand_more")
-        </span>
-    </a>
-    <ul class="applied-shaders" style="display: @(_appliedExpanded ? "block" : "none")">
-        
-    </ul>
-    
-    <a class="available-toggle" @onclick="() => _availableExpanded = !_availableExpanded">
-        Available shaders
-        <span class="material-symbols-sharp">
-            @(_availableExpanded ? "expand_less" : "expand_more")
-        </span>
-    </a>
-    <ul class="available-shaders" style="display: @(_availableExpanded ? "block" : "none")">
-        @foreach (var shader in ShaderManager.AvailableShaders)
-        {
+    <div>
+        <a class="shader-list-toggle" @onclick="() => _appliedExpanded = !_appliedExpanded">
+            Applied shaders
+            <span class="material-symbols-sharp">
+                @(_appliedExpanded ? "expand_less" : "expand_more")
+            </span>
+        </a>
+        <ul class="shader-list" style="display: @(_appliedExpanded ? "block" : "none")">
+            @foreach (var shader in ShaderManager.AppliedShaders)
+            {
+                <li class="shader">
+                    <strong>@shader</strong>
+                    
+                    <div class="shader-controls">
+                        <span class="material-symbols-sharp" title="Move up">arrow_drop_up</span>
+                        <span class="material-symbols-sharp" title="Move down">arrow_drop_down</span>
+                        
+                        <JiayiButton Size="JiayiButton.ButtonSize.Small">Disable</JiayiButton>
+                    </div>
+                </li>
+            }
             
-        }
-    </ul>
+            @if (ShaderManager.AppliedShaders.Count == 0)
+            {
+                <li class="no-shaders">
+                    <i>No shaders applied</i>
+                </li>
+            }
+        </ul>
+    </div>
+    
+    <div>
+        <a class="shader-list-toggle" @onclick="() => _availableExpanded = !_availableExpanded">
+            Available shaders
+            <span class="material-symbols-sharp">
+                @(_availableExpanded ? "expand_less" : "expand_more")
+            </span>
+        </a>
+        <ul class="shader-list" style="display: @(_availableExpanded ? "block" : "none")">
+            @foreach (var shader in ShaderManager.AvailableShaders)
+            {
+                <li class="shader">
+                    <strong>@shader</strong>
+                    
+                    <div class="shader-controls">
+                        <span class="material-symbols-sharp" title="Delete shader (irreversible)">delete</span>
+                        <JiayiButton Size="JiayiButton.ButtonSize.Small">Enable</JiayiButton>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
     
     <label class="add-new" title=".zip files only">
         Drag or click to add shaders

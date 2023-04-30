@@ -70,7 +70,7 @@
             <div class="info-card shader-card">
                 <h4>Shader manager</h4>
                 <i style="text-align: center; margin-bottom: 0.7rem;">@_shaderText</i>
-                <JiayiButton Disabled="@_shadersDisabled">Open</JiayiButton>
+                <JiayiButton Disabled="@_shadersDisabled" OnClick="ShadersClicked">Open</JiayiButton>
             </div>
         </div>
     </div>
@@ -137,6 +137,11 @@
     private void GotoVersion(string ver)
     {
         NavigationManager.NavigateTo($"/Versions/Full/{ver}");
+    }
+
+    private void ShadersClicked()
+    {
+        NavigationManager.NavigateTo("/Shaders");
     }
 
 }

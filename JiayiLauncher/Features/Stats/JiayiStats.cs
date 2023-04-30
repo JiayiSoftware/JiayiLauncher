@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -32,10 +33,8 @@ public class JiayiStats
 			.Where(mod => mod.PlayTime != TimeSpan.Zero) // Remove everything where timespan is 0
 			.Reverse() // Reverse it so we get the highest value
 			.ToList(); // Convert to a list
-		if (MostPlayed.Count > 0) {
-			Instance.MostPlayedMod = MostPlayed[0];
-		}
 
+		Instance.MostPlayedMod = MostPlayed.Count > 0 ? MostPlayed[0] : null;
 		if (ModCollection.Current.Mods.Count == 0)
 		{
 			Instance!.MostPlayedMod = null;

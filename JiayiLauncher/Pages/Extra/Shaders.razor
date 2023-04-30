@@ -1,0 +1,182 @@
+﻿@page "/Shaders"
+@using JiayiLauncher.Features.Shaders
+
+@* rider mistaking C# for javascript *@
+<!--suppress JSUndeclaredVariable, JSUnresolvedReference -->
+
+<h3>Shaders</h3>
+
+<div class="header-buttons">
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" 
+                 OnClick="async () => await ApplyClicked()">Apply current shader</JiayiButton>
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" 
+                 OnClick="async () => await RestoreClicked()">Restore vanilla shaders</JiayiButton>
+    
+    <p class="invisible-normalizer">invisible</p>
+</div>
+
+<div class="shader-page">
+    <div>
+        <a class="shader-list-toggle" @onclick="() => _appliedExpanded = !_appliedExpanded">
+            Your current shader pack
+            <span class="material-symbols-sharp">
+                @(_appliedExpanded ? "expand_less" : "expand_more")
+            </span>
+        </a>
+        <ul class="shader-list" style="display: @(_appliedExpanded ? "block" : "none")">
+            @if (ShaderManager.AppliedShader == string.Empty)
+            {
+                <li class="no-shaders">
+                    <i>No shader applied</i>
+                </li>
+            }
+            else
+            {
+                <li class="shader">
+                    <strong>@ShaderManager.AppliedShader</strong>
+                    
+                    <JiayiButton Size="JiayiButton.ButtonSize.Small"
+                                 OnClick="() => DisableClicked(ShaderManager.AppliedShader)">Disable</JiayiButton>
+                </li>
+            }
+        </ul>
+    </div>
+    
+    <div>
+        <a class="shader-list-toggle" @onclick="() => _availableExpanded = !_availableExpanded">
+            Available shaders
+            <span class="material-symbols-sharp">
+                @(_availableExpanded ? "expand_less" : "expand_more")
+            </span>
+        </a>
+        <ul class="shader-list" style="display: @(_availableExpanded ? "block" : "none")">
+            @foreach (var shader in ShaderManager.AvailableShaders)
+            {
+                <li class="shader">
+                    <strong>@shader</strong>
+                    
+                    <div class="shader-controls">
+                        <span class="material-symbols-sharp" title="Delete shader (irreversible)" style="color: darkred"
+                              @onclick="() => DeleteClicked(shader)">delete</span>
+                        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="() => EnableClicked(shader)">Enable</JiayiButton>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    
+    <label class="add-new" title=".zip files only">
+        Drag or click to add shaders
+        <InputFile OnChange="FileSelected" />
+    </label>
+</div>
+
+@code {
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+    
+    private bool _appliedExpanded = true;
+    private bool _availableExpanded; // false
+
+    protected override void OnInitialized()
+    {
+        ShaderManager.UpdateShaders();
+    }
+
+    private async Task FileSelected(InputFileChangeEventArgs file)
+    {
+        if (file.FileCount == 1)
+        {
+            await ShaderManager.AddShader(file.File);
+        }
+        else
+        {
+            foreach (var multipleFile in file.GetMultipleFiles())
+            {
+                await ShaderManager.AddShader(multipleFile);
+            }
+        }
+        
+        StateHasChanged();
+    }
+
+    private async Task DeleteClicked(string shader)
+    {
+        var options = new List<(string, EventCallback)>
+        {
+            ("Yes", new EventCallback(null, () =>
+            {
+                ShaderManager.DeleteShader(shader);
+            })),
+            ("No", EventCallback.Empty)
+        };
+        
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), "Are you sure you want to delete this shader? This action is irreversible.");
+        
+        var modal = ModalService.Show<MessageBox>("Delete shader", parameters);
+        await modal.Result;
+        
+        StateHasChanged();
+    }
+
+    private void EnableClicked(string shader)
+    {
+        ShaderManager.EnableShader(shader);
+        StateHasChanged();
+    }
+    
+    private void DisableClicked(string shader)
+    {
+        ShaderManager.DisableShader(shader);
+        StateHasChanged();
+    }
+
+    private async Task ApplyClicked()
+    {
+        var options = new List<(string, EventCallback)>
+        {
+            ("Yes", new EventCallback(null, async () =>
+            {
+                await ShaderManager.ApplyShader();
+            })),
+            ("No", EventCallback.Empty)
+        };
+        
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), 
+                "Are you sure you want to apply this shader? This will replace any shaders with the ones in this pack.");
+        
+        var modal = ModalService.Show<MessageBox>("Apply shader", parameters);
+        await modal.Result;
+        
+        StateHasChanged();
+    }
+
+    private async Task RestoreClicked()
+    {
+        var options = new List<(string, EventCallback)>
+        {
+            ("Yes", new EventCallback(null, async () =>
+            {
+                if (ShaderManager.AppliedShader != string.Empty) 
+                    ShaderManager.DisableShader(ShaderManager.AppliedShader);
+                await ShaderManager.RestoreVanillaShaders();
+            })),
+            ("No", EventCallback.Empty)
+        };
+        
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), 
+                "Are you sure you want to go back to vanilla shaders? This will disable your current shader pack and restore vanilla shaders.");
+        
+        var modal = ModalService.Show<MessageBox>("Restore shaders", parameters);
+        await modal.Result;
+        
+        StateHasChanged();
+    }
+
+}

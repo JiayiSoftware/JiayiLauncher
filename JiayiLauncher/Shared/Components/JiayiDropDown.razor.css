@@ -1,8 +1,10 @@
 ﻿.dropdown {
     position: relative;
     width: fit-content;
+    min-width: 10rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 3px;
     
     background-color: var(--background-secondary);

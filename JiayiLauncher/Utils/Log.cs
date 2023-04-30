@@ -19,10 +19,16 @@ public static class Log
 	public static void CreateLog()
 	{
 		Directory.CreateDirectory(Path.Combine(LogPath, "Previous"));
+
+		if (!File.Exists(Path.Combine(LogPath, "Current.log"))) return;
 		
-		if (File.Exists(Path.Combine(LogPath, "Current.log")))
-			File.Move(Path.Combine(LogPath, "Current.log"),
-				Path.Combine(LogPath, "Previous", $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log"));
+		var name = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
+		var previous = File.ReadAllText(Path.Combine(LogPath, "Current.log"));
+		if (previous.Contains("Exception"))
+			name = $"[CRASH] {name}";
+
+		File.Move(Path.Combine(LogPath, "Current.log"),
+			Path.Combine(LogPath, "Previous", name));
 	}
 
 	public static void Write(object sender, string message, LogLevel level = LogLevel.Info)

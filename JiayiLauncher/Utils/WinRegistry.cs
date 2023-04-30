@@ -32,4 +32,12 @@ public static class WinRegistry
 		
 		SHChangeNotify(0x08000000, 0x0000, nint.Zero, nint.Zero);
 	}
+
+	public static void EnableDeveloperMode()
+	{
+		var appModelUnlockKey = Registry.LocalMachine.OpenSubKey(
+			"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock", true);
+		
+		appModelUnlockKey?.SetValue("AllowDevelopmentWithoutDevLicense", 1, RegistryValueKind.DWord);
+	}
 }

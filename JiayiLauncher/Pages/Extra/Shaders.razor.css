@@ -4,6 +4,13 @@
     gap: 1rem;
 }
 
+.header-buttons {
+    display: flex;
+    align-items: center;
+    column-gap: 0.7rem;
+    margin-bottom: 1rem;
+}
+
 .shader-list-toggle {
     text-decoration: none;
     width: 100%;
@@ -50,6 +57,16 @@
     display: flex;
     column-gap: 0.5rem;
     align-items: center;
+}
+
+.shader:hover .shader-controls span {
+    opacity: 100%;
+}
+
+.shader-controls span {
+    cursor: pointer;
+    opacity: 0;
+    transition: var(--transition-speed);
 }
 
 .no-shaders i {

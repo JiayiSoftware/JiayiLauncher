@@ -27,8 +27,7 @@ public static class Log
 		if (previous.Contains("Exception"))
 			name = $"[CRASH] {name}";
 
-		File.Move(Path.Combine(LogPath, "Current.log"),
-			Path.Combine(LogPath, "Previous", name));
+		File.Move(Path.Combine(LogPath, "Current.log"), Path.Combine(LogPath, "Previous", name));
 	}
 
 	public static void Write(object sender, string message, LogLevel level = LogLevel.Info)

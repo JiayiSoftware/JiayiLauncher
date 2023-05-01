@@ -42,8 +42,20 @@ public static class Minecraft
 		var minecraftApp = await PackageData.GetPackage();
 		if (minecraftApp == null) return;
 		await minecraftApp.LaunchAsync();
-		
+
 		Process = Process.GetProcessesByName("Minecraft.Windows")[0];
+		
+		if (!JiayiSettings.Instance!.AccelerateGameLoading) return;
+		
+		// accelerate loading on a separate task
+		Task.Run(() =>
+		{
+			while (true)
+			{
+				AccelerateGameLoading();
+				Task.Delay(100).Wait();
+			}
+		});
 	}
 
 	public static void TrackGameTime()
@@ -76,27 +88,28 @@ public static class Minecraft
 			while (true)
 			{
 				Process.Refresh();
-				if (JiayiSettings.Instance!.OverrideModuleRequirement)
-					if (Process.Modules.Count > JiayiSettings.Instance.ModuleRequirement[2]) break;
+				
+				if (JiayiSettings.Instance!.OverrideModuleRequirement 
+				    && Process.Modules.Count > JiayiSettings.Instance.ModuleRequirement[2])
+					break;
 				
 				if (Process.Modules.Count > 160) break;
-
-				if (JiayiSettings.Instance.AccelerateGameLoading)
-				{
-					var brokers = Process.GetProcessesByName("RuntimeBroker");
-					if (brokers.Length > 0)
-					{
-						foreach (var broker in brokers)
-						{
-							broker.Kill();
-						}
-					}
-				}
 
 				// wait for a bit
 				Task.Delay(100).Wait();
 			}
 		});
+	}
+
+	private static void AccelerateGameLoading()
+	{
+		var brokers = Process.GetProcessesByName("RuntimeBroker");
+		if (brokers.Length <= 0) return;
+		
+		foreach (var broker in brokers)
+		{
+			broker.Kill();
+		}
 	}
 
 	public static async Task<bool> ModSupported(Mod mod)

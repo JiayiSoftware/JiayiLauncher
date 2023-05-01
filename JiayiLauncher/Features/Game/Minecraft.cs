@@ -14,6 +14,8 @@ public static class Minecraft
 {
 	private static readonly List<Mod> _modsLoaded = new();
 	private static readonly Timer _timer = new(1000);
+	
+	private static bool _loaded;
 
 	public static List<Mod> ModsLoaded
 	{
@@ -30,15 +32,24 @@ public static class Minecraft
 		{
 			var processes = Process.GetProcessesByName("Minecraft.Windows");
 			if (processes.Length == 0) return false;
+
 			Process = processes[0];
 			return true;
 		}
+	}
+
+	public static bool Loaded
+	{
+		get => IsOpen && _loaded;
+		set => _loaded = value;
 	}
 
 	public static Process Process { get; private set; } = null!;
 
 	public static async Task Open()
 	{
+		if (!IsOpen) Loaded = false;
+		
 		var minecraftApp = await PackageData.GetPackage();
 		if (minecraftApp == null) return;
 		await minecraftApp.LaunchAsync();
@@ -50,7 +61,9 @@ public static class Minecraft
 		// accelerate loading on a separate task
 		Task.Run(() =>
 		{
-			while (true)
+			WaitForModules();
+			
+			while (!Loaded)
 			{
 				AccelerateGameLoading();
 				Task.Delay(100).Wait();
@@ -98,6 +111,8 @@ public static class Minecraft
 				// wait for a bit
 				Task.Delay(100).Wait();
 			}
+			
+			Loaded = true;
 		});
 	}
 

@@ -73,7 +73,6 @@ Console.ReadKey(true);
 Console.Clear();
 
 // path
-choosePath:
 Console.WriteLine("[1/4] Path\n");
 Console.WriteLine("By default, Jiayi Launcher will be installed to:");
 Console.WriteLine(path);

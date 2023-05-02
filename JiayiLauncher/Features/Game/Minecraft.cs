@@ -14,6 +14,8 @@ public static class Minecraft
 {
 	private static readonly List<Mod> _modsLoaded = new();
 	private static readonly Timer _timer = new(1000);
+	
+	private static bool _loaded;
 
 	public static List<Mod> ModsLoaded
 	{
@@ -30,20 +32,43 @@ public static class Minecraft
 		{
 			var processes = Process.GetProcessesByName("Minecraft.Windows");
 			if (processes.Length == 0) return false;
+
 			Process = processes[0];
 			return true;
 		}
+	}
+
+	public static bool Loaded
+	{
+		get => IsOpen && _loaded;
+		set => _loaded = value;
 	}
 
 	public static Process Process { get; private set; } = null!;
 
 	public static async Task Open()
 	{
+		if (!IsOpen) Loaded = false;
+		
 		var minecraftApp = await PackageData.GetPackage();
 		if (minecraftApp == null) return;
 		await minecraftApp.LaunchAsync();
-		
+
 		Process = Process.GetProcessesByName("Minecraft.Windows")[0];
+		
+		if (!JiayiSettings.Instance!.AccelerateGameLoading) return;
+		
+		// accelerate loading on a separate task
+		Task.Run(() =>
+		{
+			WaitForModules();
+			
+			while (!Loaded)
+			{
+				AccelerateGameLoading();
+				Task.Delay(100).Wait();
+			}
+		});
 	}
 
 	public static void TrackGameTime()
@@ -76,27 +101,30 @@ public static class Minecraft
 			while (true)
 			{
 				Process.Refresh();
-				if (JiayiSettings.Instance!.OverrideModuleRequirement)
-					if (Process.Modules.Count > JiayiSettings.Instance.ModuleRequirement[2]) break;
+				
+				if (JiayiSettings.Instance!.OverrideModuleRequirement 
+				    && Process.Modules.Count > JiayiSettings.Instance.ModuleRequirement[2])
+					break;
 				
 				if (Process.Modules.Count > 160) break;
-
-				if (JiayiSettings.Instance.AccelerateGameLoading)
-				{
-					var brokers = Process.GetProcessesByName("RuntimeBroker");
-					if (brokers.Length > 0)
-					{
-						foreach (var broker in brokers)
-						{
-							broker.Kill();
-						}
-					}
-				}
 
 				// wait for a bit
 				Task.Delay(100).Wait();
 			}
+			
+			Loaded = true;
 		});
+	}
+
+	private static void AccelerateGameLoading()
+	{
+		var brokers = Process.GetProcessesByName("RuntimeBroker");
+		if (brokers.Length <= 0) return;
+		
+		foreach (var broker in brokers)
+		{
+			broker.Kill();
+		}
 	}
 
 	public static async Task<bool> ModSupported(Mod mod)

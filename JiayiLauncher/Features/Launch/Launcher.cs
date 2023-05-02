@@ -42,7 +42,7 @@ public static class Launcher
 		var supported = await Minecraft.ModSupported(mod);
 		if (!supported)
 		{
-			Log.Write(nameof(Launcher), $"{mod.Name} is not supported by the current version of Minecraft");
+			Log.Write(nameof(Launcher), $"{mod.Name} does not support this version of Minecraft");
 			return LaunchResult.VersionMismatch;
 		}
 

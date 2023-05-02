@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiayiLauncher", "JiayiLauncher\JiayiLauncher.csproj", "{26BD2C3C-4226-45AD-98F7-4B4219FF9171}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiayiInstaller", "JiayiInstaller\JiayiInstaller.csproj", "{DBBA4A74-C605-452E-ACBD-DC3EE79B0303}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,13 @@ Global
 		{26BD2C3C-4226-45AD-98F7-4B4219FF9171}.Release|x64.Build.0 = Release|x64
 		{26BD2C3C-4226-45AD-98F7-4B4219FF9171}.Debug|x64.ActiveCfg = Debug|x64
 		{26BD2C3C-4226-45AD-98F7-4B4219FF9171}.Debug|x64.Build.0 = Debug|x64
+		{DBBA4A74-C605-452E-ACBD-DC3EE79B0303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBBA4A74-C605-452E-ACBD-DC3EE79B0303}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBBA4A74-C605-452E-ACBD-DC3EE79B0303}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DBBA4A74-C605-452E-ACBD-DC3EE79B0303}.Debug|x64.Build.0 = Debug|Any CPU
+		{DBBA4A74-C605-452E-ACBD-DC3EE79B0303}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBBA4A74-C605-452E-ACBD-DC3EE79B0303}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBBA4A74-C605-452E-ACBD-DC3EE79B0303}.Release|x64.ActiveCfg = Release|Any CPU
+		{DBBA4A74-C605-452E-ACBD-DC3EE79B0303}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -29,7 +29,8 @@ public static class ThemeManager
 		var shadow = styles[5].Split(' ');
 		JiayiSettings.Instance.ShadowDistance[2] = int.Parse(shadow[0].Trim('p', 'x'));
 		
-		JiayiSettings.Instance.MovementSpeed[2] = float.Parse(styles[6].Trim('s'));
+		// STUPID EDGE CASE WHERE SOME COUNTRIES REPRESENT DECIMALS WITH COMMAS I HATE IT
+		JiayiSettings.Instance.MovementSpeed[2] = float.Parse(styles[6].Trim('s'), CultureInfo.InvariantCulture);
 		
 		JiayiSettings.Instance.Save();
 		ApplyTheme();

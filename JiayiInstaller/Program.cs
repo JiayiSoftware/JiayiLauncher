@@ -32,7 +32,8 @@ if (!IsAdministrator())
 if (!arg.Empty) goto install;
 	
 // actual installer code
-Console.WriteLine("""
+Console.Clear();
+var jiayi = """
 ................................................................................
 ................................................................................
 .............................................(%%%%%%(...........................
@@ -66,7 +67,13 @@ Console.WriteLine("""
 .%##/***,............../////***........*#####*..................................
 ................................................................................
 
-""");
+""";
+
+foreach (var line in jiayi.Split('\n'))
+{
+	Console.WriteLine(line);
+	Thread.Sleep(50);
+}
 
 Console.WriteLine("Press any key to start the installation...");
 Console.ReadKey(true);

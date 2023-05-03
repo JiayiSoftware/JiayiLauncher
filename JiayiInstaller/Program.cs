@@ -11,6 +11,7 @@ var arg = new Args();
 // flags
 var desktop = arg.GetFlag("desktop");
 var dotnet  = arg.GetFlag("install-dotnet");
+var open	= arg.GetFlag("open-immediately");
 
 // commands
 var version = arg.GetCommand("version");
@@ -175,9 +176,12 @@ var startMenuPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMen
 var startMenuShortcutPath = Path.Combine(startMenuPath, "Jiayi Launcher.lnk");
 CreateShortcut(startMenuShortcutPath, Path.Combine(path, "JiayiLauncher.exe"));
 
-Console.WriteLine("\nJiayi Launcher has been installed.");
-Console.WriteLine("Press enter to open the launcher, or close this window to exit.");
-Console.ReadLine();
+if (!open)
+{
+	Console.WriteLine("\nJiayi Launcher has been installed.");
+	Console.WriteLine("Press enter to open the launcher, or close this window to exit.");
+	Console.ReadLine();
+}
 
 // make sure to set working directory or the launcher will crash
 Process.Start(new ProcessStartInfo

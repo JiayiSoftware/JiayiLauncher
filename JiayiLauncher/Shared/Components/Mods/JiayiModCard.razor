@@ -4,8 +4,10 @@
 @using System.Diagnostics
 @using JiayiLauncher.Features.Discord
 @using JiayiLauncher.Features.Game
+@using JiayiLauncher.Shared.Components.Toasts
 
 @inject NavigationManager NavigationManager
+@inject IToastService ToastService
 
 <div class="mod-background" @onmouseenter="MouseOver" @onmouseleave="MouseLeave">
     <div class="mod-header">
@@ -93,7 +95,10 @@
 
         if (Minecraft.ModsLoaded.Contains(Mod))
         {
-            // TODO: notify user that mod is already loaded
+            var toastParams = new ToastParameters()
+                .Add(nameof(JiayiToast.Title), "This mod is already loaded!");
+            
+            ToastService.ShowToast<JiayiToast>(toastParams);
             return;
         }
 

@@ -7,19 +7,26 @@
                 ToastLevel.Success => "check",
                 ToastLevel.Warning => "warning",
                 _ => "info"
-            })
+                })
         </span>
-        <strong>@Message</strong>
+        <strong>@Title</strong>
         <span class="material-symbols-sharp close" @onclick="Toast.Close">close</span>
     </div>
     
-    <div class="toast-buttons">
-        @foreach (var (text, callback) in Buttons)
-        {
-            <JiayiButton Size="JiayiButton.ButtonSize.Small" 
-                         OnClick="() => { Toast.Close(); callback.InvokeAsync(); }">@text</JiayiButton>
-        }
+    <div class="toast-body">
+        @Content
     </div>
+    
+    @if (Buttons.Count > 0)
+    {
+        <div class="toast-buttons">
+            @foreach (var (text, callback) in Buttons)
+            {
+                <JiayiButton Size="JiayiButton.ButtonSize.Small" 
+                             OnClick="() => { Toast.Close(); callback.InvokeAsync(); }">@text</JiayiButton>
+            }
+        </div>
+    }
 </div>
 
 @code {
@@ -27,14 +34,14 @@
     private BlazoredToast Toast { get; set; } = default!;
     
     [Parameter]
-    public string? Message { get; set; }
+    public string? Title { get; set; }
+    
+    [Parameter]
+    public RenderFragment? Content { get; set; }
     
     [Parameter]
     public ToastLevel Level { get; set; }
     
     [Parameter]
-    public List<(string, EventCallback)> Buttons { get; set; } = new()
-    {
-        ("Okay", EventCallback.Empty)
-    };
+    public List<(string, EventCallback)> Buttons { get; set; } = new();
 }

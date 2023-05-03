@@ -147,7 +147,13 @@
         };
         
         var parameters = new ToastParameters()
-            .Add(nameof(JiayiToast.Message), "This is a test toast.")
+            .Add(nameof(JiayiToast.Title), "This is a test toast.")
+            .Add(nameof(JiayiToast.Content),  new RenderFragment(builder =>
+            {
+                builder.OpenElement(0, "p");
+                builder.AddContent(1, "This is a toast body.");
+                builder.CloseElement();
+            }))
             .Add(nameof(JiayiToast.Level), toastType);
         
         ToastService.ShowToast<JiayiToast>(parameters, settings =>

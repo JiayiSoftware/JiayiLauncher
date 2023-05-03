@@ -96,7 +96,8 @@
         if (Minecraft.ModsLoaded.Contains(Mod))
         {
             var toastParams = new ToastParameters()
-                .Add(nameof(JiayiToast.Title), "This mod is already loaded!");
+                .Add(nameof(JiayiToast.Title), "This mod is already loaded!")
+                .Add(nameof(JiayiToast.Level), ToastLevel.Warning);
             
             ToastService.ShowToast<JiayiToast>(toastParams);
             return;

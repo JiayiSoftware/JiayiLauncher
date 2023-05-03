@@ -105,3 +105,38 @@ main {
 .modal div:first-child {
     padding-bottom: 0;
 }
+
+/* me when !important spam */
+.blazored-toast {
+    border: none !important;
+    box-shadow: var(--shadow) !important;
+    border-radius: 0 !important;
+    background-color: var(--background-secondary) !important;
+    
+    animation: slide var(--transition-speed) ease !important;
+}
+
+.blazored-toast .blazored-toast-progressbar {
+    background-color: var(--background-primary) !important;
+    border-radius: 0 !important;
+    height: 3px !important;
+}
+
+.blazored-toast .blazored-toast-progressbar span {
+    background-color: var(--accent) !important;
+    border-radius: 0 !important;
+    height: 3px !important;
+    filter: none !important;
+    transition: var(--transition-speed) linear !important;
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(40vw);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

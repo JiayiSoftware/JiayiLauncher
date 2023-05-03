@@ -1,8 +1,10 @@
 ﻿@page "/TestPlace"
 @using JiayiLauncher.Settings
-@using JiayiLauncher.Features.Launch
 @using JiayiLauncher.Features.Game
 @using JiayiLauncher.Features.Versions
+@using JiayiLauncher.Shared.Components.Toasts
+
+@inject IToastService ToastService
 
 <h3>Components</h3>
 <h4>Drop down buttons</h4>
@@ -43,6 +45,10 @@
 <JiayiTextBox Placeholder="Minecraft version" @ref="_versionsBox" />
 <JiayiButton OnClick="VersionsClicked">Get download URL</JiayiButton>
 
+<h4>Toasts</h4>
+<JiayiDropDown Items="@_toastTypes" Name="Toast type" @ref="_toastType" />
+<JiayiButton OnClick="ToastClicked">Show toast</JiayiButton>
+
 @code {
 
     [CascadingParameter]
@@ -59,6 +65,9 @@
     
     private JiayiTextBox? _versionsBox;
     
+    private readonly List<string> _toastTypes = new() { "Success", "Warning", "Error", "Info" };
+    private JiayiDropDown? _toastType;
+
     private void ButtonClicked()
     {
         var options = new List<(string, EventCallback)>
@@ -123,6 +132,29 @@
             .Add(nameof(MessageBox.Message), url);
         
         ModalService.Show<MessageBox>("Download URL", parameters);
+    }
+
+    private void ToastClicked()
+    {
+        var type = _toastType?.SelectedItem ?? "Success";
+        var toastType = type switch
+        {
+            "Success" => ToastLevel.Success,
+            "Warning" => ToastLevel.Warning,
+            "Error" => ToastLevel.Error,
+            "Info" => ToastLevel.Info,
+            _ => ToastLevel.Success
+        };
+        
+        var parameters = new ToastParameters()
+            .Add(nameof(JiayiToast.Message), "This is a test toast.")
+            .Add(nameof(JiayiToast.Level), toastType);
+        
+        ToastService.ShowToast<JiayiToast>(parameters, settings =>
+        {
+            settings.Timeout = 5;
+            settings.ShowProgressBar = true;
+        });
     }
 
 }

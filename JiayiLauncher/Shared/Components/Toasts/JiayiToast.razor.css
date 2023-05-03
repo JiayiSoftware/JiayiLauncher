@@ -1,0 +1,23 @@
+﻿.toast {
+    padding: 1rem;
+    background-color: var(--background-secondary);
+    border-radius: 0;
+    color: var(--text-primary);
+}
+
+.toast-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.close {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.toast-buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}

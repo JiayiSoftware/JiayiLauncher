@@ -1,9 +1,15 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
 
 @using JiayiLauncher.Utils
 @using System.IO
 
-@inject NavigationManager NavigationManager
+<BlazoredToasts Position="ToastPosition.BottomRight"
+                ShowProgressBar="true"
+                PauseProgressOnHover="true"
+                ShowCloseButton="true"
+                IconType="IconType.None"
+/>
 
 <Sidebar @ref="_sidebar"/>
 
@@ -61,13 +67,13 @@
         }
         else
         {
-            _konami = new List<string?> { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "KeyB", "KeyA", "Enter" };
+            _konami = new List<string?> { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a", "Enter" };
             _nextKey = _konami.FirstOrDefault();
         }
         
         if (_konami.Count == 0)
         {
-            _konami = new List<string?> { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "KeyB", "KeyA", "Enter" };
+            _konami = new List<string?> { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a", "Enter" };
             _nextKey = _konami.FirstOrDefault();
             NavigationManager.NavigateTo("/Secret");
         }

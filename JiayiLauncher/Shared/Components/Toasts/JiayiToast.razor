@@ -1,5 +1,40 @@
-﻿<h3>JiayiToast</h3>
+﻿<div class="toast">
+    <div class="toast-header">
+        <span class="material-symbols-sharp">
+            @(Level switch {
+                ToastLevel.Error => "exclamation",
+                ToastLevel.Info => "info",
+                ToastLevel.Success => "check",
+                ToastLevel.Warning => "warning",
+                _ => "info"
+            })
+        </span>
+        <strong>@Message</strong>
+        <span class="material-symbols-sharp close" @onclick="Toast.Close">close</span>
+    </div>
+    
+    <div class="toast-buttons">
+        @foreach (var (text, callback) in Buttons)
+        {
+            <JiayiButton Size="JiayiButton.ButtonSize.Small" 
+                         OnClick="() => { Toast.Close(); callback.InvokeAsync(); }">@text</JiayiButton>
+        }
+    </div>
+</div>
 
 @code {
+    [CascadingParameter]
+    private BlazoredToast Toast { get; set; } = default!;
     
+    [Parameter]
+    public string? Message { get; set; }
+    
+    [Parameter]
+    public ToastLevel Level { get; set; }
+    
+    [Parameter]
+    public List<(string, EventCallback)> Buttons { get; set; } = new()
+    {
+        ("Okay", EventCallback.Empty)
+    };
 }

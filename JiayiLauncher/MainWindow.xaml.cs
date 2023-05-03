@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Windows;
 using System.Windows.Interop;
 using Blazored.Modal;
+using Blazored.Toast;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Discord;
 using JiayiLauncher.Features.Mods;
@@ -42,6 +43,7 @@ public partial class MainWindow
 		var services = new ServiceCollection();
 		services.AddWpfBlazorWebView();
 		services.AddBlazoredModal();
+		services.AddBlazoredToast();
 #if DEBUG
 		services.AddBlazorWebViewDeveloperTools();
 #endif

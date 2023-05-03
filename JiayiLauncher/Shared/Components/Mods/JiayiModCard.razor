@@ -99,7 +99,11 @@
                 .Add(nameof(JiayiToast.Title), "This mod is already loaded!")
                 .Add(nameof(JiayiToast.Level), ToastLevel.Warning);
             
-            ToastService.ShowToast<JiayiToast>(toastParams);
+            ToastService.ShowToast<JiayiToast>(toastParams, settings =>
+            {
+                settings.Timeout = 5;
+                settings.ShowProgressBar = true;
+            });
             return;
         }
 

@@ -21,6 +21,9 @@ public static class Util
 			var path = Path.Combine(extractPath, entry.FullName);
 			Directory.CreateDirectory(Path.GetDirectoryName(path)!);
 			
+			// there is a slight chance that this entry is a folder
+			if (entry.Length == 0) continue;
+			
 			await using var stream = entry.Open();
 			await using var fileStream = File.Create(path);
 			await stream.CopyToAsync(fileStream);

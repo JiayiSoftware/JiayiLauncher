@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.about-page i {
+i {
     color: var(--text-grayed);
     font-size: 14px;
     font-style: italic;
@@ -14,4 +14,12 @@
 
 .logo {
     width: 95%;
+    max-width: 35rem;
+}
+
+.logo-stuff {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }

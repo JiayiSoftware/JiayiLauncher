@@ -19,12 +19,9 @@ public static class ModImporter
         foreach (var path in paths)
         {
             var mod = ImportFromPath(path);
-            if (mod != null)
-            {
-                list.Add(mod);
-                mod.SupportedVersions = new List<string> { "Any version" };
-                ModCollection.Current!.Add(mod);
-            }
+            list.Add(mod);
+            mod.SupportedVersions = new List<string> { "Any version" };
+            ModCollection.Current!.Add(mod);
         }
 
         return list;

@@ -4,7 +4,8 @@
 @using System.IO
 @using System.Net
 @using System.Net.Http
-@using System.Net.Http.Headers;
+
+@inject NavigationManager NavigationManager
 
 <div class="select">
     <div class="select-file">
@@ -32,8 +33,8 @@
     </div>
 
     <div class="ambrosial">
-        <p>Use clients from <a class="ambrosial-link" href="https://github.com/disepi/ambrosial">Ambrosial</a></p>
-        <a href="/Ambrosial" class="ambrosial-select">Browse Ambrosial clients</a>
+        <p>Import clients from <a class="ambrosial-link" href="https://github.com/disepi/ambrosial">Ambrosial</a></p>
+        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="AmbrosialClicked">Browse</JiayiButton>
     </div>
 </div>
 
@@ -69,7 +70,7 @@
                 ModalService.Show<EditMod>("Edit mod", parameters);
             } else if (dialog.FileNames.Length > 1)
             {
-                var mods = ModImporter.ImportFromPaths(dialog.FileNames);
+                ModImporter.ImportFromPaths(dialog.FileNames);
             }
 
             await Modal.CloseAsync(ModalResult.Ok());
@@ -117,8 +118,9 @@
             {
                 var fileName = uri.AbsoluteUri.Split('/')[^1];
 
-                var hasContentDisposition = !(response.Content.Headers.ContentDisposition == null || response.Content.Headers.ContentDisposition is not { FileName: not null });
-                var isValidFileName = fileName?.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 && (fileName.EndsWith(".exe") || fileName.EndsWith(".dll"));
+                var hasContentDisposition = response.Content.Headers.ContentDisposition is { FileName: not null };
+                var isValidFileName = fileName.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 
+                                      && (fileName.EndsWith(".exe") || fileName.EndsWith(".dll"));
                 if (!hasContentDisposition && !isValidFileName)
                 {
                     _urlStatus = "Invalid link";
@@ -126,12 +128,6 @@
                 }
 
                 var name = response.Content.Headers.ContentDisposition?.FileName ?? Path.GetFileNameWithoutExtension(fileName);
-                if (name == null)
-                {
-                    _urlStatus = "Invalid link";
-                    return;
-                }
-
                 var mod = new Mod(Path.GetFileNameWithoutExtension(name), url);
 
                 var parameters = new ModalParameters()
@@ -163,6 +159,11 @@
 
         _urlStatus = "Checking link...";
         await LinkSubmitted();
+    }
+
+    private void AmbrosialClicked()
+    {
+        NavigationManager.NavigateTo("/Ambrosial");
     }
 
 }

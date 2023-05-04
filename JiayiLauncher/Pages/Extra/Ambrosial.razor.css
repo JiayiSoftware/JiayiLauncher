@@ -40,7 +40,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.5rem 0.8rem 0.5rem 0.5rem;
     border-left: 5px solid var(--accent);
 }
 
@@ -53,7 +53,12 @@
     font-size: 14px;
     color: var(--text-grayed);
     margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
     width: max-content;
     max-width: 45vw;
+}
+
+.client-list-page i {
+    color: var(--text-grayed);
+    font-size: 14px;
 }

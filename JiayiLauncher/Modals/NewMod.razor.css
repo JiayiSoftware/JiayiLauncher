@@ -34,3 +34,39 @@
     padding-left: 0.2rem;
     padding-right: 0.2rem;
 }
+
+.ambrosial {
+    color: white;
+}
+
+.ambrosial-link {
+    color: white;
+}
+
+.ambrosial-select {
+    background-color: var(--accent);
+    border: none;
+    color: var(--text-primary);
+    filter: brightness(1) grayscale(0);
+    padding: 1rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 900;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: var(--transition-speed);
+    width: 99%;
+}
+
+.ambrosial-select:hover {
+    filter: brightness(1.5);
+}
+
+.ambrosial-select:active {
+    filter: brightness(0.8);
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}

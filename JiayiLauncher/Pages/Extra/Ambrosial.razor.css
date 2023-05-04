@@ -1,0 +1,59 @@
+﻿.page-title {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.page-title span {
+    color: var(--text-grayed);
+}
+
+.page-title h4 {
+    color: var(--text-grayed);
+    cursor: pointer;
+}
+
+.page-title h4:hover {
+    text-decoration: underline;
+}
+
+.page-title h3 {
+    color: var(--text-primary);
+}
+
+.find-tools {
+    display: flex;
+    align-items: center;
+    column-gap: 0.7rem;
+}
+
+.clients {
+    list-style: none;
+    padding: 0;
+}
+
+.client:nth-child(even) {
+    background-color: var(--background-secondary);
+}
+
+.client {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-left: 5px solid var(--accent);
+}
+
+.client-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.client-info p {
+    font-size: 14px;
+    color: var(--text-grayed);
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: max-content;
+    max-width: 45vw;
+}

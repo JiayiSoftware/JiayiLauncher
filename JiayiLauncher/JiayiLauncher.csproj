@@ -13,6 +13,8 @@
         <Product>Jiayi Launcher</Product>
         <NeutralLanguage>en-US</NeutralLanguage>
         <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AssemblyVersion>1.1.0</AssemblyVersion>
+        <FileVersion>1.1.0.0</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -29,6 +31,7 @@
       <PackageReference Include="DiscordRichPresence" Version="1.1.3.18" />
       <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="7.0.49" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="Octokit" Version="5.1.0" />
     </ItemGroup>
 
     <ItemGroup>

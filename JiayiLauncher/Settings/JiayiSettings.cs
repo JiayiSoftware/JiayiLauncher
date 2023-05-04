@@ -123,6 +123,19 @@ public class JiayiSettings
 	[Setting("Small image text", "Discord", "The small image text to use for rich presence.", "RichPresence")]
 	public string DiscordSmallImageText { get; set; } = "Minecraft for Windows";
 	
+	// update settings
+	[Setting("Enable the updater", "Update", "Allow the launcher to check for and download updates.")]
+	public bool EnableUpdater { get; set; } = true;
+	
+	[Setting("Automatically download updates", "Update", "Always download updates when they're available.")]
+	public bool AutoDownloadUpdates { get; set; } = false;
+
+	[Setting("Check for updates", "Update", "Look for a new version of the launcher right now.")]
+	[JsonIgnore] public (string, Action) CheckUpdates { get; set; } = ("Check", () =>
+	{
+
+	});
+	
 	// launch settings
 	[Setting("Use injection delay", "Launch", "Wait for a set amount of time instead of waiting for the game to load before injecting.")]
 	public bool UseInjectionDelay { get; set; } = false;

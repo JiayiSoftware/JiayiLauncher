@@ -1,8 +1,12 @@
 ﻿@inherits LayoutComponentBase
+
 @inject NavigationManager NavigationManager
+@inject IToastService ToastService
 
 @using JiayiLauncher.Utils
 @using System.IO
+@using JiayiLauncher.Settings
+@using JiayiLauncher.Shared.Components.Toasts
 
 <BlazoredToasts Position="ToastPosition.BottomRight"
                 ShowProgressBar="true"
@@ -24,7 +28,23 @@
     private Sidebar? _sidebar;
     private string _margin = "5.5rem";
     
-    protected override void OnAfterRender(bool firstRender)
+    private readonly Updater _updater = new();
+    
+    // silly
+    private readonly List<string> _dontAskAgain = new()
+    {
+        "Stop asking",
+        "I said no",
+        "Shut up",
+        "Really, no",
+        "No more",
+        "No means no",
+        "Please stop",
+        "Stop it",
+        "Never again"
+    };
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (!firstRender) return;
         
@@ -36,6 +56,82 @@
         {
             HandleArgs(Arguments.Get());
         }
+
+        if (JiayiSettings.Instance!.EnableUpdater)
+        {
+            _updater.UpdateDownloaded += UpdateDownloaded;
+            
+            var result = await _updater.IsUpdateAvailable();
+            if (result)
+            {
+                var parameters = new ToastParameters()
+                    .Add(nameof(JiayiToast.Title), "Update available");
+
+                if (JiayiSettings.Instance.AutoDownloadUpdates)
+                {
+                    parameters.Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
+                    {
+                        builder.OpenElement(0, "p");
+                        builder.AddContent(1, "Downloading update...");
+                        builder.CloseElement();
+                    }));
+                    
+                    ToastService.ShowToast<JiayiToast>(parameters, settings =>
+                    {
+                        settings.Timeout = 5;
+                        settings.ShowProgressBar = true;
+                    });
+                    
+                    await _updater.DownloadLatest();
+                }
+                else
+                {
+                    parameters.Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
+                    {
+                        builder.OpenElement(0, "p");
+                        builder.AddContent(1, "An update is available. Would you like to download it?");
+                        builder.CloseElement();
+                    }))
+                        .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
+                        {
+                            ("Yes", new EventCallback(null, async () =>
+                            {
+                                await _updater.DownloadLatest();
+                            })),
+                            ("No", EventCallback.Empty),
+                            (_dontAskAgain[Random.Shared.Next(_dontAskAgain.Count - 1)], new EventCallback(null, () =>
+                            {
+                                JiayiSettings.Instance.EnableUpdater = false;
+                                JiayiSettings.Instance.Save();
+                            }))
+                        });
+                    
+                    ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
+                }
+            }
+        }
+    }
+
+    private void UpdateDownloaded(object? sender, EventArgs e)
+    {
+        var parameters = new ToastParameters()
+            .Add(nameof(JiayiToast.Title), "Update downloaded")
+            .Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
+            {
+                builder.OpenElement(0, "p");
+                builder.AddContent(1, "Restart to install this update.");
+                builder.CloseElement();
+            }))
+            .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
+            {
+                ("Restart", new EventCallback(null, () =>
+                {
+                    _updater.Update();
+                })),
+                ("Later", EventCallback.Empty)
+            });
+
+        ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
     }
 
     private void HandleArgs(string args)

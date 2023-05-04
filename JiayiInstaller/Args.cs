@@ -2,7 +2,7 @@
 
 public class Args
 {
-	private readonly string _args = string.Empty;
+	private readonly string _args;
 	
 	public Args()
 	{

@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Shared;
 using JiayiLauncher.Utils;
 using Microsoft.Win32;
 
@@ -131,9 +132,9 @@ public class JiayiSettings
 	public bool AutoDownloadUpdates { get; set; } = false;
 
 	[Setting("Check for updates", "Update", "Look for a new version of the launcher right now.")]
-	[JsonIgnore] public (string, Action) CheckUpdates { get; set; } = ("Check", () =>
+	[JsonIgnore] public (string, Action) CheckUpdates { get; set; } = ("Check", async () =>
 	{
-
+		await MainLayout.Instance.UpdateCheck();
 	});
 	
 	// launch settings

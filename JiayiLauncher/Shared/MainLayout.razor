@@ -25,6 +25,8 @@
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
     
+    public static MainLayout Instance { get; private set; } = default!;
+    
     private Sidebar? _sidebar;
     private string _margin = "5.5rem";
     
@@ -47,6 +49,7 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (!firstRender) return;
+        Instance = this;
         
         if (_sidebar != null) _sidebar.OnToggle += ChangeMargin;
         Arguments.Changed += (_, _) => HandleArgs(Arguments.Get());
@@ -60,8 +63,13 @@
         if (JiayiSettings.Instance!.EnableUpdater)
         {
             _updater.UpdateDownloaded += UpdateDownloaded;
-            
-            var result = await _updater.IsUpdateAvailable();
+            await UpdateCheck();
+        }
+    }
+
+    public async Task UpdateCheck()
+    {
+        var result = await _updater.IsUpdateAvailable();
             if (result)
             {
                 var parameters = new ToastParameters()
@@ -109,7 +117,6 @@
                     ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
                 }
             }
-        }
     }
 
     private void UpdateDownloaded(object? sender, EventArgs e)

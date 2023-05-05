@@ -38,6 +38,8 @@ public static class RequestFactory
 				var code = (byte)result & 0xFF;
 				var status = (WebTokenRequestStatus)Enum.ToObject(typeof(WebTokenRequestStatus), code);
 
+				if (status == WebTokenRequestStatus.Success) return token; // ????
+
 				throw new Exception($"GetWUToken failed with status {status}");
 			}
 			

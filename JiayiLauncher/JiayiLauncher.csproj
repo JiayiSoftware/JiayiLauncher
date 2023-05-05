@@ -13,8 +13,8 @@
         <Product>Jiayi Launcher</Product>
         <NeutralLanguage>en-US</NeutralLanguage>
         <ApplicationManifest>app.manifest</ApplicationManifest>
-        <AssemblyVersion>1.2.1</AssemblyVersion>
-        <FileVersion>1.2.1.0</FileVersion>
+        <AssemblyVersion>1.2.2</AssemblyVersion>
+        <FileVersion>1.2.2.0</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

@@ -12,6 +12,8 @@ namespace JiayiLauncher.Utils;
 
 public class Updater
 {
+	private const string INSTALLER_URL = "https://dl.jiayi.software/static/JiayiInstaller.exe";
+	
 	private readonly GitHubClient _gh = new(new ProductHeaderValue("JiayiLauncher"));
 	private readonly HttpClient _client = new();
 
@@ -43,19 +45,9 @@ public class Updater
 
 	public async Task DownloadLatest()
 	{
-		var release = await _gh.Repository.Release.GetLatest("JiayiSoftware", "JiayiLauncher");
-		var installer = release.Assets.FirstOrDefault(x => x.Name == "JiayiInstaller.exe");
+		Log.Write(this, "Downloading latest version");
 		
-		if (installer == null)
-		{
-			Log.Write(this, "Failed to find installer", Log.LogLevel.Error);
-			return;
-		}
-		
-		var url = installer.BrowserDownloadUrl;
-		Log.Write(this, $"Downloading latest version from {url}");
-		
-		await using var response = await _client.GetStreamAsync(url);
+		await using var response = await _client.GetStreamAsync(INSTALLER_URL);
 		await using var fileStream = File.Create("JiayiInstaller.exe");
 		await response.CopyToAsync(fileStream);
 		

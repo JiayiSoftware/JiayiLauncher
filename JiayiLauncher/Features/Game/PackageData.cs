@@ -28,8 +28,8 @@ public static class PackageData
 		// the game does it weird
 		var major = version.Major;
 		var minor = version.Minor;
-		// take the first two numbers of the build number
-		var build = version.Build.ToString()[..2];
+		// actual build number does not include the last 2 digits
+		var build = version.Build.ToString()[..(version.Build.ToString().Length - 2)];
 		// the last number of the build number is the revision
 		var revision = version.Build.ToString()[^1];
 		return $"{major}.{minor}.{build}.{revision}";

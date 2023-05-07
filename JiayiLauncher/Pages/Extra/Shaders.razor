@@ -1,5 +1,8 @@
 ﻿@page "/Shaders"
 @using JiayiLauncher.Features.Shaders
+@using JiayiLauncher.Shared.Components.Toasts
+
+@inject IToastService ToastService
 
 @* rider mistaking C# for javascript *@
 <!--suppress JSUndeclaredVariable, JSUnresolvedReference -->
@@ -140,6 +143,16 @@
             ("Yes", new EventCallback(null, async () =>
             {
                 await ShaderManager.ApplyShader();
+
+                var toastParams = new ToastParameters()
+                    .Add(nameof(JiayiToast.Title), "Shader successfully applied!")
+                    .Add(nameof(JiayiToast.Level), ToastLevel.Success);
+                
+                ToastService.ShowToast<JiayiToast>(toastParams, settings =>
+                {
+                    settings.Timeout = 5;
+                    settings.ShowProgressBar = true;
+                });
             })),
             ("No", EventCallback.Empty)
         };
@@ -164,6 +177,16 @@
                 if (ShaderManager.AppliedShader != string.Empty) 
                     ShaderManager.DisableShader(ShaderManager.AppliedShader);
                 await ShaderManager.RestoreVanillaShaders();
+                
+                var toastParams = new ToastParameters()
+                    .Add(nameof(JiayiToast.Title), "Restored vanilla shaders.")
+                    .Add(nameof(JiayiToast.Level), ToastLevel.Success);
+                
+                ToastService.ShowToast<JiayiToast>(toastParams, settings =>
+                {
+                    settings.Timeout = 5;
+                    settings.ShowProgressBar = true;
+                });
             })),
             ("No", EventCallback.Empty)
         };

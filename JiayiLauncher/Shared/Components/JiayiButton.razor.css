@@ -1,7 +1,7 @@
 ﻿.button {
     background-color: var(--accent);
     border: none;
-    color: var(--text-primary);
+    color: var(--text-accent);
     filter: brightness(1) grayscale(0);
     padding: 1rem 1.5rem;
     text-align: center;

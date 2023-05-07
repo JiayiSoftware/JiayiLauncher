@@ -45,4 +45,5 @@ input:checked + .toggle-box {
 
 .material-symbols-sharp {
     z-index: 2;
+    transition: var(--transition-speed);
 }

@@ -24,13 +24,30 @@ public static class ThemeManager
 		JiayiSettings.Instance.SecondaryBackgroundColor = GetColorFromHex(styles[1]);
 		JiayiSettings.Instance.AccentColor = GetColorFromHex(styles[2]);
 		JiayiSettings.Instance.TextColor = GetColorFromHex(styles[3]);
-		JiayiSettings.Instance.GrayTextColor = GetColorFromHex(styles[4]);
+
+		if (styles.Count == 7)
+		{
+			// legacy theme
+			JiayiSettings.Instance.GrayTextColor = GetColorFromHex(styles[4]);
 		
-		var shadow = styles[5].Split(' ');
-		JiayiSettings.Instance.ShadowDistance[2] = int.Parse(shadow[0].Trim('p', 'x'));
+			var shadow = styles[5].Split(' ');
+			JiayiSettings.Instance.ShadowDistance[2] = int.Parse(shadow[0].Trim('p', 'x'));
 		
-		// STUPID EDGE CASE WHERE SOME COUNTRIES REPRESENT DECIMALS WITH COMMAS I HATE IT
-		JiayiSettings.Instance.MovementSpeed[2] = float.Parse(styles[6].Trim('s'), CultureInfo.InvariantCulture);
+			// STUPID EDGE CASE WHERE SOME COUNTRIES REPRESENT DECIMALS WITH COMMAS I HATE IT
+			JiayiSettings.Instance.MovementSpeed[2] = float.Parse(styles[6].Trim('s'), CultureInfo.InvariantCulture);
+		}
+		else
+		{
+			// accent text color lives at styles[4] now
+			JiayiSettings.Instance.AccentTextColor = GetColorFromHex(styles[4]);
+			
+			JiayiSettings.Instance.GrayTextColor = GetColorFromHex(styles[5]);
+			
+			var shadow = styles[6].Split(' ');
+			JiayiSettings.Instance.ShadowDistance[2] = int.Parse(shadow[0].Trim('p', 'x'));
+			
+			JiayiSettings.Instance.MovementSpeed[2] = float.Parse(styles[7].Trim('s'), CultureInfo.InvariantCulture);
+		}
 		
 		JiayiSettings.Instance.Save();
 		ApplyTheme();
@@ -45,6 +62,7 @@ public static class ThemeManager
 			.AddProperty("--background-secondary", GetHexForColor(JiayiSettings.Instance.SecondaryBackgroundColor))
 			.AddProperty("--accent", GetHexForColor(JiayiSettings.Instance.AccentColor))
 			.AddProperty("--text-primary", GetHexForColor(JiayiSettings.Instance.TextColor))
+			.AddProperty("--text-accent", GetHexForColor(JiayiSettings.Instance.AccentTextColor))
 			.AddProperty("--text-grayed", GetHexForColor(JiayiSettings.Instance.GrayTextColor))
 			.AddProperty("--shadow",
 				$"{JiayiSettings.Instance.ShadowDistance[2]}px {JiayiSettings.Instance.ShadowDistance[2]}px rgba(0, 0, 0, 0.4)")

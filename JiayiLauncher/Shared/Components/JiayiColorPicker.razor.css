@@ -12,6 +12,7 @@
     height: 2.5rem;
     box-shadow: var(--shadow);
     filter: brightness(1);
+    border: 1px solid var(--text-grayed);
     
     transition-duration: var(--transition-speed);
 }

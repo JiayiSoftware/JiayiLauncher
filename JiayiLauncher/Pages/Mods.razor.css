@@ -97,7 +97,7 @@
     width: 3rem;
     height: 3rem;
     background-color: var(--accent);
-    color: var(--text-primary);
+    color: var(--text-accent);
     box-shadow: var(--shadow);
     filter: brightness(1);
     border: none;

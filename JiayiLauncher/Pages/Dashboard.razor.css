@@ -65,8 +65,8 @@
     font-size: 40px;
 }
 
-.links a img {
-    width: 40px;
+.links a svg {
+    fill: var(--text-primary);
 }
 
 @media only screen and (min-height: 700px) {

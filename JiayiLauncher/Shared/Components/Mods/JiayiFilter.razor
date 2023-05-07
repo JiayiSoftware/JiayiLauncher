@@ -1,4 +1,4 @@
-﻿<label class="filter" style="font-size: @Size; background-color:  @_color">
+﻿<label class="filter" style="font-size: @Size; @_color">
     <input type="checkbox" class="check" @onchange="OnChange">
     @ChildContent
 </label>
@@ -16,7 +16,8 @@
     [Parameter]
     public EventCallback Changed { get; set; }
     
-    private string _color => Checked ? "var(--accent)" : "var(--background-secondary)";
+    private string _color => Checked ? "background-color: var(--accent); color: var(--text-accent)" 
+        : "background-color: var(--background-secondary); color: var(--text-primary)";
 
     private void OnChange(ChangeEventArgs e)
     {

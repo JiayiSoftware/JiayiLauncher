@@ -71,6 +71,9 @@ public class JiayiSettings
 	[Setting("Text color", "Appearance", "The text color of the launcher.")]
 	public Color TextColor { get; set; } = Color.White;
 	
+	[Setting("Text color (on accent)", "Appearance", "The color of text on top of the accent color.")]
+	public Color AccentTextColor { get; set; } = Color.White;
+	
 	[Setting("Gray text color", "Appearance", "A gray version of the text color.")]
 	public Color GrayTextColor { get; set; } = Color.FromArgb(126, 126, 126);
 
@@ -80,8 +83,8 @@ public class JiayiSettings
 	[Setting("UI movement speed", "Appearance", "The speed at which the UI moves.")]
 	public float[] MovementSpeed { get; set; } = { 0, 0.5f, 0.2f };
 
-	[Setting("Apply theme", "Appearance",
-		"Apply changes made to the launcher's appearance. This will be removed in the future.")]
+	[Setting("Save theme", "Appearance",
+		"Save changes made to your theme. Hit F5 to see it in action.")]
 	[JsonIgnore] public (string, Action) ApplyTheme { get; set; } = ("Apply", ThemeManager.ApplyTheme);
 
 	[Setting("Show theme", "Appearance",

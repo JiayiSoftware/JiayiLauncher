@@ -133,12 +133,6 @@ public class JiayiSettings
 	
 	[Setting("Automatically download updates", "Update", "Always download updates when they're available.")]
 	public bool AutoDownloadUpdates { get; set; } = false;
-
-	[Setting("Check for updates", "Update", "Look for a new version of the launcher right now.")]
-	[JsonIgnore] public (string, Action) CheckUpdates { get; set; } = ("Check", async () =>
-	{
-		await MainLayout.Instance.UpdateCheck();
-	});
 	
 	// launch settings
 	[Setting("Use injection delay", "Launch", "Wait for a set amount of time instead of waiting for the game to load before injecting.")]

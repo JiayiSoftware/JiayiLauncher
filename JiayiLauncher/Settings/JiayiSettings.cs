@@ -85,7 +85,7 @@ public class JiayiSettings
 
 	[Setting("Save theme", "Appearance",
 		"Save changes made to your theme. Hit F5 to see it in action.")]
-	[JsonIgnore] public (string, Action) ApplyTheme { get; set; } = ("Apply", ThemeManager.ApplyTheme);
+	[JsonIgnore] public (string, Action) SaveTheme { get; set; } = ("Save", ThemeManager.ApplyTheme);
 
 	[Setting("Show theme", "Appearance",
 		"Reveal your theme in File Explorer. You can share this with other people or use other people's themes.")]

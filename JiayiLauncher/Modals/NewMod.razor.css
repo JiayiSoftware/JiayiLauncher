@@ -9,7 +9,7 @@
 }
 
 .select-file p {
-    color: dimgray;
+    color: var(--text-grayed);
 }
 
 .separator {
@@ -28,7 +28,7 @@
 
 .separator p {
     background-color: var(--background-primary);
-    color: dimgray;
+    color: var(--text-grayed);
     text-align: center;
     margin: 0;
     padding-left: 0.2rem;
@@ -36,7 +36,7 @@
 }
 
 .ambrosial {
-    color: white;
+    color: var(--text-primary);
     display: flex;
     justify-content: space-between;
     align-items: center;

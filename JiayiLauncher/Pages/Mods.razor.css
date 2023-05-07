@@ -66,7 +66,7 @@
 .add-new[data-hovered="yes"] {
     filter: brightness(1);
     border-color: var(--accent);
-    background-color: rgba(255, 0, 0, 0.2);
+    background-color: var(--background-secondary);
 }
 
 .add-new[data-hovered="no"] {

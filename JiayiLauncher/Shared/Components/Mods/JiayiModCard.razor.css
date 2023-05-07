@@ -32,19 +32,24 @@
     margin-top: 0.2rem;
 }
 
-.material-symbols-sharp {
+.mod-background .mod-controls .right .material-symbols-sharp {
     transition: var(--transition-speed);
+    opacity: 0;
+    cursor: pointer;
+}
+
+.mod-background:hover .mod-controls .right .material-symbols-sharp {
+    opacity: 100%;
 }
 
 /* loading */
 .loading-bar {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
     background-color: white;
     opacity: 0.2;
-    z-index: 1;
+    filter: brightness(1.2);
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: calc(19px + 1rem);
+    transition: var(--transition-speed);
 }

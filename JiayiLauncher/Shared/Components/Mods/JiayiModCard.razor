@@ -9,7 +9,7 @@
 @inject NavigationManager NavigationManager
 @inject IToastService ToastService
 
-<div class="mod-background" @onmouseenter="MouseOver" @onmouseleave="MouseLeave">
+<div class="mod-background">
     <div class="mod-header">
         <strong>@Mod.Name</strong>
 
@@ -51,12 +51,14 @@
         @if (Mod.IsValid())
         {
             <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" Disabled="@_launching"
-                         Size="JiayiButton.ButtonSize.Small" Style="@_launchProgress">Launch</JiayiButton>
+                         Size="JiayiButton.ButtonSize.Small">
+                <div class="loading-bar" style="width: @Launcher.LaunchProgress%; opacity: @_showLoadingBar;"></div>
+                Launch
+            </JiayiButton>
 
             <div class="right">
-                <span class="material-symbols-sharp" style="cursor: pointer; opacity: @_controlsOpacity;"
-                      title="Edit mod" @onclick="EditClicked">edit</span>
-                <span class="material-symbols-sharp" style="color: darkred; cursor: pointer; opacity: @_controlsOpacity;"
+                <span class="material-symbols-sharp" title="Edit mod" @onclick="EditClicked">edit</span>
+                <span class="material-symbols-sharp" style="color: darkred"
                       title="Delete mod (irreversible)" @onclick="DeleteClicked">delete</span>
             </div>
         }
@@ -73,17 +75,8 @@
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
 
-    private string _controlsOpacity = "0";
-
     private bool _launching;
-    // percentage to rem from 0-7
-    private string _launchProgress => _launching ?
-        $"padding: 0.5rem 1.5rem; " +
-        $"background: linear-gradient(to right, " +
-        $"rgb(255, 55, 55) 0%, rgb(255, 55, 55) {Launcher.LaunchProgress}%," +
-        $"var(--accent) {Launcher.LaunchProgress}%," +
-        $"var(--accent) 100%"
-        : "padding: 0.5rem 1.5rem;";
+    private string _showLoadingBar => _launching ? "0.2" : "0";
 
     private JiayiButton? _launchButton;
 
@@ -178,18 +171,6 @@
                 break;
         }
 
-        StateHasChanged();
-    }
-
-    private void MouseOver()
-    {
-        _controlsOpacity = "100%";
-        StateHasChanged();
-    }
-
-    private void MouseLeave()
-    {
-        _controlsOpacity = "0";
         StateHasChanged();
     }
 

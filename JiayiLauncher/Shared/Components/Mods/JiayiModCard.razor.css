@@ -2,7 +2,7 @@
     background-color: var(--background-secondary);
     box-shadow: var(--shadow);
     border-top: 5px solid var(--accent);
-    width: 12rem;
+    width: 11.5rem;
     padding: 0.5rem;
     transition: var(--transition-speed);
 }

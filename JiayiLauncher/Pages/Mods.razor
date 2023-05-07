@@ -27,6 +27,12 @@
         @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
         {
             _searchResults = 0;
+
+            if (ModCollection.Current == null || ModCollection.Current.BasePath != JiayiSettings.Instance.ModCollectionPath)
+            {
+                ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
+            }
+            
             foreach (var mod in ModCollection.Current!.Mods)
             {
                 if (_localFilter != null && _onlineFilter != null)

@@ -43,13 +43,13 @@ public static class Launcher
 		if (!supported)
 		{
 			Log.Write(nameof(Launcher), $"{mod.Name} does not support this version of Minecraft");
+			Launching = false;
 			return LaunchResult.VersionMismatch;
 		}
 
 		LaunchProgress += 10;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 
-		var isMcOpen = Minecraft.IsOpen;
 		await Minecraft.Open();
 		Log.Write(nameof(Launcher), "Opened game, waiting to launch mod...");
 		
@@ -62,7 +62,12 @@ public static class Launcher
 		if (mod.FromInternet)
 		{
 			var downloadedPath = await Downloader.DownloadMod(mod);
-			if (downloadedPath == string.Empty) return LaunchResult.DownloadFailed;
+			if (downloadedPath == string.Empty)
+			{
+				Launching = false;
+				return LaunchResult.DownloadFailed;
+			}
+
 			path = downloadedPath;
 			
 			LaunchProgress += 30;
@@ -77,7 +82,7 @@ public static class Launcher
 
 		// either wait for the game's modules to load
 		// or if the user has injection delay enabled, wait for the time they specified
-		if (JiayiSettings.Instance!.UseInjectionDelay && !isMcOpen)
+		if (JiayiSettings.Instance!.UseInjectionDelay)
 			Task.Delay(JiayiSettings.Instance.InjectionDelay[2] * 1000).Wait();
 		else
 			await Minecraft.WaitForModules();
@@ -85,22 +90,37 @@ public static class Launcher
 		LaunchProgress += 25;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		
-		if (!Minecraft.IsOpen) return LaunchResult.GameNotFound;
-		
+		if (!Minecraft.IsOpen)
+		{
+			Launching = false;
+			return LaunchResult.GameNotFound;
+		}
+
 		// determine whether this is an internal or external mod
 		bool external;
 		if (path.EndsWith(".exe")) external = true;
 		else if (path.EndsWith(".dll")) external = false;
-		else return LaunchResult.ModNotFound;
-		
+		else
+		{
+			Launching = false;
+			return LaunchResult.ModNotFound;
+		}
+
 		Log.Write(nameof(Launcher), external ? "Detected external mod" : "Detected internal mod");
 		
-		if (!File.Exists(path)) return LaunchResult.ModNotFound;
+		if (!File.Exists(path))
+		{
+			Launching = false;
+			return LaunchResult.ModNotFound;
+		}
 
 		if (external)
 		{
 			if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(path)).Length != 0)
+			{
+				Launching = false;
 				return LaunchResult.AlreadyRunning;
+			}
 
 			Process.Start(path);
 			LaunchProgress += 30;
@@ -115,7 +135,11 @@ public static class Launcher
 		}
 
 		// else
-		if (Injector.IsInjected(path)) return LaunchResult.AlreadyRunning;
+		if (Injector.IsInjected(path))
+		{
+			Launching = false;
+			return LaunchResult.AlreadyRunning;
+		}
 
 		var injected = await Injector.Inject(path);
 		LaunchProgress += 30;

@@ -155,22 +155,41 @@ public class ModCollection
 				return;
 			}
             
-            using var stream = File.OpenRead(index);
+            var json = File.ReadAllText(index);
             
             try
             {
-	            _options ??= new JsonSerializerOptions { WriteIndented = true };
-	        
-	            var collection = JsonSerializer.Deserialize<ModCollection>(stream, _options);
+	            var collection = JsonConvert.DeserializeObject<ModCollection>(json);
 	            if (collection == null)
 	            {
 		            Log.Write("ModCollection", $"Failed to load mod collection at {path}: index.json is invalid.");
 		            Current = Create(path);
 		            return;
 	            }
-	        
-	            collection.BasePath = path;
-	            Current = collection;
+	            
+	            foreach (var mod in collection.Mods)
+	            {
+		            // zero out playtime and fix path
+		            mod.PlayTime = TimeSpan.Zero;
+
+		            if (!mod.FromInternet)
+		            {
+			            mod.Path = Path.Combine(Current.BasePath, Path.GetFileName(mod.Path));
+			            File.Copy(Path.Combine(tempDir, Path.GetFileName(mod.Path)), mod.Path, true);
+		            }
+
+		            if (Current.HasMod(mod.Path))
+		            {
+			            var existingIndex = Current.Mods.FindIndex(m => m.Path == mod.Path);
+			            Current.Mods[existingIndex] = mod;
+		            }
+		            else
+		            {
+			            Current.Add(mod, false);
+		            }
+	            }
+	            
+	            Current.Save();
             }
             catch (Exception e)
             {
@@ -251,13 +270,11 @@ public class ModCollection
 			return new ModCollectionInfo();
 		}
         
-        using var stream = File.OpenRead(index);
+        var json = File.ReadAllText(index);
         
         try
 		{
-	        _options ??= new JsonSerializerOptions { WriteIndented = true };
-	        
-	        var collection = JsonSerializer.Deserialize<ModCollection>(stream, _options);
+			var collection = JsonConvert.DeserializeObject<ModCollection>(json);
 	        if (collection == null)
 	        {
 		        Log.Write("ModCollection", $"Failed to get info for mod collection at {path}: index.json is invalid.");
@@ -267,6 +284,7 @@ public class ModCollection
 	        
 	        var mods = collection.Mods;
 	        Directory.Delete(tempDir, true);
+	        
 	        return new ModCollectionInfo
 	        {
 		        TotalMods = mods.Count,

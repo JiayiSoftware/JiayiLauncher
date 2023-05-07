@@ -26,8 +26,8 @@
 .mod-list {
     display: grid;
     padding: 0;
-    grid-template-columns: repeat(auto-fill, 12rem);
-    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fill, 11.5rem);
+    gap: 0.6rem;
 }
 
 .separator {

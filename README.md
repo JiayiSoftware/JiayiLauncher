@@ -16,7 +16,9 @@
 > * Easily apply Renderdragon shaders and make your game look beautiful
 
 ## Installation
-If you're a regular user, you can download the latest version of the launcher in the [Releases](https://github.com/JiayiSoftware/JiayiLauncher/releases) page.
+If you're a regular user, you can download the installer [here](https://dl.jiayi.software/static/JiayiInstaller.exe). It's about 8 MB in size.
+
+Older releases can be found in the [Releases](https://github.com/JiayiSoftware/JiayiLauncher/releases) page.
 
 You can clone the repository and build Jiayi Launcher yourself with the instructions below.
 

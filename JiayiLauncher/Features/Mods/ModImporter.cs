@@ -13,7 +13,7 @@ public static class ModImporter
         return new Mod(name, path);
     }
     
-    public static List<Mod> ImportFromPaths(string[] paths)
+    public static List<Mod> ImportFromPaths(IEnumerable<string> paths)
     {
         var list = new List<Mod>();
         foreach (var path in paths)
@@ -21,7 +21,6 @@ public static class ModImporter
             var mod = ImportFromPath(path);
             list.Add(mod);
             mod.SupportedVersions = new List<string> { "Any version" };
-            ModCollection.Current!.Add(mod);
         }
 
         return list;

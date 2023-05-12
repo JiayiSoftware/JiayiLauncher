@@ -99,6 +99,25 @@ public class JiayiSettings
 		});
 	});
 
+	[Setting("Restore default theme", "Appearance", 
+		"Go back to Jiayi's default theme. Again, press F5 to see this take effect.")]
+	[JsonIgnore] public (string, Action) RestoreDefaultTheme { get; set; } = ("Restore", () =>
+	{
+		var baseSettings = new JiayiSettings();
+		
+		Instance!.PrimaryBackgroundColor = baseSettings.PrimaryBackgroundColor;
+		Instance.SecondaryBackgroundColor = baseSettings.SecondaryBackgroundColor;
+		Instance.AccentColor = baseSettings.AccentColor;
+		Instance.TextColor = baseSettings.TextColor;
+		Instance.AccentTextColor = baseSettings.AccentTextColor;
+		Instance.GrayTextColor = baseSettings.GrayTextColor;
+		Instance.ShadowDistance = baseSettings.ShadowDistance;
+		Instance.MovementSpeed = baseSettings.MovementSpeed;
+		
+		Instance.Save();
+		ThemeManager.ApplyTheme();
+	});
+
 		// discord settings
 	[Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.")]
 	public bool RichPresence { get; set; } = true;

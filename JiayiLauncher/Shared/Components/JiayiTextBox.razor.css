@@ -14,6 +14,10 @@
     filter: brightness(1.5);
 }
 
+.textbox::placeholder {
+    color: var(--text-grayed);
+}
+
 .textbox:focus {
     outline: none;
     border-bottom: var(--accent) 2px solid;

@@ -28,7 +28,7 @@
 
 .mod-version {
     font-size: 0.8rem;
-    color: gray;
+    color: var(--text-grayed);
     margin-top: 0.2rem;
 }
 

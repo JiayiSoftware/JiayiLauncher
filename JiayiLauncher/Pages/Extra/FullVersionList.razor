@@ -176,11 +176,7 @@
         
         if (await PackageData.GetVersion() == ver)
         {
-            options.Add(("Okay", EventCallback.Empty));
-            
-            parameters
-                .Add(nameof(MessageBox.Buttons), options)
-                .Add(nameof(MessageBox.Message), 
+            parameters.Add(nameof(MessageBox.Message), 
                     "This is your current version. Please switch to another version before removing this one.");
             
             ModalService.Show<MessageBox>("Remove version", parameters);
@@ -235,12 +231,10 @@
                 
                 break;
             case VersionManager.SwitchResult.VersionNotFound:
-                options.Add(("Okay", EventCallback.Empty));
                 parameters.Add(nameof(MessageBox.Message), "This version has not been downloaded yet.");
                 break;
             case VersionManager.SwitchResult.UnknownError:
             default:
-                options.Add(("Okay", EventCallback.Empty));
                 parameters.Add(nameof(MessageBox.Message), "An unknown error occurred. Check the logs for more information.");
                 break;
         }

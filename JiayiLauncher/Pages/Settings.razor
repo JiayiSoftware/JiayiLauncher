@@ -33,7 +33,14 @@
             {
                 <div class="setting">
                     <div>
-                        <strong>@settingInfo.Name</strong>
+                        <div class="setting-title">
+                            <strong>@settingInfo.Name</strong>
+                            @if (settingInfo.Tooltip != string.Empty)
+                            {
+                                <span class="material-symbols-sharp tooltip" title="More info" 
+                                      @onclick="() => ShowTooltip(settingInfo.Tooltip)">help_outline</span>
+                            }
+                        </div>
                         <p class="setting-description">@settingInfo.Description</p>
                     </div>
 
@@ -75,7 +82,7 @@
                         case true when setting.PropertyType == typeof((string, Action)):
                             var (name, action) = ((string, Action))setting.GetValue(JiayiSettings.Instance)!;
                             @* ReSharper disable once AccessToModifiedClosure *@
-                            <JiayiButton OnClick="action" Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem">@name</JiayiButton>
+                            <JiayiButton OnClick="() => RunActionSetting(action, setting)" Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem">@name</JiayiButton>
                             break;
                         case true when setting.PropertyType == typeof(Color):
                             @* for now *@
@@ -91,6 +98,9 @@
 </div>
 
 @code {
+    [CascadingParameter]
+    private IModalService ModalService { get; set; } = default!;
+    
     private void ChangeStringSetting(string? value, PropertyInfo setting)
     {
         setting.SetValue(JiayiSettings.Instance, value ?? string.Empty);
@@ -99,6 +109,27 @@
     
     private void ChangeBoolSetting(bool value, PropertyInfo setting)
     {
+        var settingInfo = setting.GetCustomAttribute<SettingAttribute>();
+        if (settingInfo!.Confirm && value)
+        {
+            var options = new List<(string, EventCallback)>
+            {
+                ("Yes", new EventCallback(null, () =>
+                {
+                    setting.SetValue(JiayiSettings.Instance, value);
+                    JiayiSettings.Instance!.Save();
+                })),
+                ("No", EventCallback.Empty)
+            };
+            
+            var parameters = new ModalParameters()
+                .Add(nameof(MessageBox.Buttons), options)
+                .Add(nameof(MessageBox.Message), "Are you sure you want to enable this setting?");
+            
+            ModalService.Show<MessageBox>(settingInfo.Name, parameters);
+            return;
+        }
+        
         setting.SetValue(JiayiSettings.Instance, value);
         JiayiSettings.Instance!.Save();
     }
@@ -129,6 +160,36 @@
         var newColor = Color.FromArgb(bytes[0], bytes[1], bytes[2]);
         setting.SetValue(JiayiSettings.Instance, newColor);
         JiayiSettings.Instance!.Save();
+    }
+
+    private void RunActionSetting(Action action, PropertyInfo setting)
+    {
+        var settingInfo = setting.GetCustomAttribute<SettingAttribute>();
+        if (settingInfo!.Confirm)
+        {
+            var options = new List<(string, EventCallback)>
+            {
+                ("Yes", new EventCallback(null, action)),
+                ("No", EventCallback.Empty)
+            };
+            
+            var parameters = new ModalParameters()
+                .Add(nameof(MessageBox.Buttons), options)
+                .Add(nameof(MessageBox.Message), "Are you sure you want to do this?");
+            
+            ModalService.Show<MessageBox>(settingInfo.Name, parameters);
+            return;
+        }
+        
+        action();
+    }
+
+    private void ShowTooltip(string tt)
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Message), tt);
+        
+        ModalService.Show<MessageBox>("About this setting", parameters);
     }
 
 }

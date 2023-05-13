@@ -4,6 +4,7 @@ using DiscordRPC;
 using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Launch;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Features.Shaders;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 
@@ -32,15 +33,20 @@ public static class RichPresence
 						return f.Replace("%mod_name%", $"{Minecraft.ModsLoaded.Count} mods");
 				}
 				break;
+			
 			case true when f.Contains("%game_version%"):
 				return f.Replace("%game_version%", PackageData.GetVersion().GetAwaiter().GetResult());
+			
 			case true when f.Contains("%mod_count%"):
 				if (ModCollection.Current is null) return f.Replace("%mod_count%", "no mods");
 				var plural = ModCollection.Current.Mods.Count == 1 ? "mod" : "mods";
 				return f.Replace("%mod_count%", $"{ModCollection.Current.Mods.Count.ToString()} {plural}");
-			case true when f.Contains("%current_page%"):
-				var page = MainWindow.WebView!.Source.LocalPath;
-				return f.Replace("%current_page%", page);
+			
+			case true when f.Contains("%shader_name%"):
+				var shaderName = ShaderManager.AppliedShader == string.Empty
+					? "no shaders"
+					: ShaderManager.AppliedShader;
+				return f.Replace("%shader_name%", shaderName);
 		}
 		
 		return f;

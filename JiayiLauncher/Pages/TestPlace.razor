@@ -102,14 +102,8 @@
 
     private void GameDataPath()
     {
-        var options = new List<(string, EventCallback)>
-        {
-            ("Okay", EventCallback.Empty)
-        };
-
         var path = PackageData.GetGameDataPath();
         var parameters = new ModalParameters()
-            .Add(nameof(MessageBox.Buttons), options)
             .Add(nameof(MessageBox.Message), $"Game data path: {path}");
         
         ModalService.Show<MessageBox>("Game data path", parameters);
@@ -122,13 +116,7 @@
         var version = await VersionList.GetVersion(_versionsBox.Value);
         var url = await RequestFactory.GetDownloadUrl(version.Archs.x64!.UpdateIds[0]);
         
-        var options = new List<(string, EventCallback)>
-        {
-            ("Okay", EventCallback.Empty)
-        };
-        
         var parameters = new ModalParameters()
-            .Add(nameof(MessageBox.Buttons), options)
             .Add(nameof(MessageBox.Message), url);
         
         ModalService.Show<MessageBox>("Download URL", parameters);

@@ -5,12 +5,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.Principal;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Mods;
-using JiayiLauncher.Shared;
 using JiayiLauncher.Utils;
 using Microsoft.Win32;
 
@@ -68,7 +66,7 @@ public class JiayiSettings
 	[Setting("Accent color", "Appearance", "The accent color of the launcher.")]
 	public Color AccentColor { get; set; } = Color.Red;
 	
-	[Setting("Text color", "Appearance", "The text color of the launcher.")]
+	[Setting("Text color", "Appearance", "The color of text seen throughout the launcher.")]
 	public Color TextColor { get; set; } = Color.White;
 	
 	[Setting("Text color (on accent)", "Appearance", "The color of text on top of the accent color.")]
@@ -100,7 +98,7 @@ public class JiayiSettings
 	});
 
 	[Setting("Restore default theme", "Appearance", 
-		"Go back to Jiayi's default theme. Again, press F5 to see this take effect.")]
+		"Go back to Jiayi's default theme. Again, press F5 to see this take effect.", confirm: true)]
 	[JsonIgnore] public (string, Action) RestoreDefaultTheme { get; set; } = ("Restore", () =>
 	{
 		var baseSettings = new JiayiSettings();
@@ -118,8 +116,17 @@ public class JiayiSettings
 		ThemeManager.ApplyTheme();
 	});
 
-		// discord settings
-	[Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.")]
+	// discord settings
+	[Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.", tooltip: """
+	Available formatting strings for rich presence:
+
+	%mod_name% - the name of the mod you're playing with
+	%game_version% - your current Minecraft version
+	%mod_count% - how many mods you have in your collection
+	%shader_name% - the name of the shader you're using
+
+	Only 1 formatting string can be used per field.
+	""")]
 	public bool RichPresence { get; set; } = true;
 	
 	[Setting("Top text", "Discord", "The top-most status text.", "RichPresence")]
@@ -171,7 +178,8 @@ public class JiayiSettings
 	public int[] ModuleRequirement { get; set; } = { 150, 180, 160 };
 	
 	[Setting("Accelerate game loading", "Launch",
-		"Speed up loading times by terminating unnecessary processes. Beware of jank.")]
+		"Speed up loading times by terminating unnecessary processes. Beware of jank.", 
+		tooltip: "May cause issues related to Microsoft Store licensing (determining whether you own the game or not).")]
 	public bool AccelerateGameLoading { get; set; } = false;
 	
 	// log settings
@@ -188,7 +196,7 @@ public class JiayiSettings
 		Process.Start(info);
 	});
 
-	[Setting("Clear previous logs", "Logs", "Clear all previous log files.")]
+	[Setting("Clear previous logs", "Logs", "Clear all previous log files.", confirm: true)]
 	[JsonIgnore] public (string, Action) ClearPreviousLogs { get; set; } = ("Clear", () =>
 	{
 		var path = Path.Combine(Log.LogPath, "Previous");

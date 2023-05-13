@@ -12,6 +12,22 @@
     max-width: 45vw;
 }
 
+.setting-title {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.tooltip {
+    color: var(--text-grayed);
+    cursor: pointer;
+    transition: var(--transition-speed);
+}
+
+.tooltip:hover {
+    color: var(--text-primary);
+}
+
 .tabs {
     display: flex;
     flex-direction: row;

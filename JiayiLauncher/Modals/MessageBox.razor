@@ -1,5 +1,12 @@
 ﻿<div>
-    <p>@Message</p>
+    <p>
+        @foreach (var line in Message.Split(Environment.NewLine))
+        {
+            // since newlines just magically disappear
+            @line
+            <br>
+        }
+    </p>
     
     <div style="display: flex; gap: 0.5rem;">
         @foreach (var (name, callback) in Buttons)
@@ -17,9 +24,9 @@
     {
         ("Okay", EventCallback.Empty)
     };
-    
+
     [Parameter]
-    public string? Message { get; set; }
+    public string Message { get; set; } = string.Empty;
     
     [CascadingParameter]
     private BlazoredModalInstance Modal { get; set; } = default!;

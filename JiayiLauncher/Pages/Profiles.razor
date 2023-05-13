@@ -98,13 +98,7 @@
 
     private void HelpClicked()
     {
-        var options = new List<(string, EventCallback)>
-        {
-            ("Okay", EventCallback.Empty)
-        };
-
         var parameters = new ModalParameters()
-            .Add(nameof(MessageBox.Buttons), options)
             .Add(nameof(MessageBox.Message),
                 "Creating a profile will copy your current game data, like your worlds, resource packs, and settings.");
 

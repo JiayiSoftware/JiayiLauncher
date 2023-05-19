@@ -91,12 +91,14 @@
         if (file.FileCount == 1)
         {
             await ShaderManager.AddShader(file.File);
+            _availableExpanded = true;
         }
         else
         {
             foreach (var multipleFile in file.GetMultipleFiles())
             {
                 await ShaderManager.AddShader(multipleFile);
+                _availableExpanded = true;
             }
         }
         

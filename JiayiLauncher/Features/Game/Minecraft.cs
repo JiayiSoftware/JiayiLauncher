@@ -14,8 +14,6 @@ public static class Minecraft
 {
 	private static readonly List<Mod> _modsLoaded = new();
 	private static readonly Timer _timer = new(1000);
-	
-	private static bool _loaded;
 
 	public static List<Mod> ModsLoaded
 	{
@@ -38,37 +36,15 @@ public static class Minecraft
 		}
 	}
 
-	public static bool Loaded
-	{
-		get => IsOpen && _loaded;
-		set => _loaded = value;
-	}
-
 	public static Process Process { get; private set; } = null!;
 
 	public static async Task Open()
 	{
-		if (!IsOpen) Loaded = false;
-		
 		var minecraftApp = await PackageData.GetPackage();
 		if (minecraftApp == null) return;
 		await minecraftApp.LaunchAsync();
 
 		Process = Process.GetProcessesByName("Minecraft.Windows")[0];
-		
-		if (!JiayiSettings.Instance!.AccelerateGameLoading) return;
-		
-		// accelerate loading on a separate task
-		Task.Run(() =>
-		{
-			WaitForModules();
-			
-			while (!Loaded)
-			{
-				AccelerateGameLoading();
-				Task.Delay(100).Wait();
-			}
-		});
 	}
 
 	public static void TrackGameTime()
@@ -107,12 +83,12 @@ public static class Minecraft
 					break;
 				
 				if (Process.Modules.Count > 160) break;
+				
+				if (JiayiSettings.Instance.AccelerateGameLoading) AccelerateGameLoading();
 
 				// wait for a bit
 				Task.Delay(100).Wait();
 			}
-			
-			Loaded = true;
 		});
 	}
 

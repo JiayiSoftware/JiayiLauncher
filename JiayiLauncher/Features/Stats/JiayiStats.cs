@@ -30,9 +30,14 @@ public class JiayiStats
 		var mostPlayed = new List<Mod>(ModCollection.Current.Mods)
 			.OrderByDescending(mod => mod.PlayTime)
 			.Where(mod => mod.PlayTime != TimeSpan.Zero)
+			.Where(mod => ModCollection.Current.HasMod(mod.Path))
 			.ToList();
 
 		Instance!.MostPlayedMod = mostPlayed.Count > 0 ? mostPlayed[0] : null;
+		
+		if (Instance.MostRecentMod != null && !ModCollection.Current.HasMod(Instance.MostRecentMod.Path))
+			Instance.MostRecentMod = null;
+		
 		if (ModCollection.Current.Mods.Count == 0)
 		{
 			Instance.MostPlayedMod = null;

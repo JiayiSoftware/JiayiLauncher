@@ -5,6 +5,7 @@
 
 @using JiayiLauncher.Utils
 @using System.IO
+@using System.Reflection
 @using JiayiLauncher.Settings
 @using JiayiLauncher.Shared.Components.Toasts
 
@@ -60,8 +61,36 @@
         if (JiayiSettings.Instance!.EnableUpdater)
         {
             _updater.UpdateDownloaded += UpdateDownloaded;
+            _updater.UpdateInstalled += UpdateInstalled;
             await UpdateCheck();
         }
+    }
+
+    private void UpdateInstalled(object? sender, EventArgs e)
+    {
+        var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
+        var realVersion = $"v{version.Major}.{version.Minor}.{version.Build}";
+
+        var parameters = new ToastParameters()
+            .Add(nameof(JiayiToast.Title), "Update installed")
+            .Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
+            {
+                builder.OpenElement(0, "p");
+                builder.AddContent(1, $"Jiayi was updated to {realVersion}. You can view the changelog ");
+                builder.OpenElement(2, "a");
+                builder.AddAttribute(3, "href", 
+                    $"https://github.com/JiayiSoftware/JiayiLauncher/releases/tag/{realVersion}");
+                builder.AddAttribute(4, "style", "color: var(--text-primary);");
+                builder.AddContent(5, "on GitHub.");
+                builder.CloseElement();
+                builder.CloseElement();
+            }))
+            .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
+            {
+                ("Okay", EventCallback.Empty)
+            });
+        
+        ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
     }
 
     private async Task UpdateCheck()

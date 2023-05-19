@@ -18,6 +18,7 @@ public class Updater
 	private readonly HttpClient _client = new();
 
 	public event EventHandler? UpdateDownloaded;
+	public event EventHandler? UpdateInstalled;
 	
 	public async Task<bool> IsUpdateAvailable()
 	{
@@ -38,6 +39,7 @@ public class Updater
 		if (File.Exists(installerPath))
 		{
 			File.Delete(installerPath);
+			UpdateInstalled?.Invoke(null, EventArgs.Empty);
 		}
 		
 		return newerVersion;

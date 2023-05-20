@@ -62,9 +62,9 @@ public class JiayiSettings
 	
 	[Setting("Secondary background color", "Appearance", "The secondary background color of the launcher.")]
 	public Color SecondaryBackgroundColor { get; set; } = Color.FromArgb(30, 30, 30);
-	
+
 	[Setting("Accent color", "Appearance", "The accent color of the launcher.")]
-	public Color AccentColor { get; set; } = Color.Red;
+	public Color AccentColor { get; set; } = Color.FromArgb(220, 0, 0);
 	
 	[Setting("Text color", "Appearance", "The color of text seen throughout the launcher.")]
 	public Color TextColor { get; set; } = Color.White;

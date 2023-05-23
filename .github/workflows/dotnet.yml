@@ -20,6 +20,10 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
+    - name: Setup MSVC
+      uses: aminya/setup-cpp@v0.26.2
+      with:
+        compiler: msvc
     - name: Restore dependencies
       run: dotnet restore
     - name: Build

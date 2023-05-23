@@ -25,7 +25,7 @@ jobs:
       with:
         compiler: msvc
     - name: Setup Windows SDK
-    - uses: ChristopheLav/windows-sdk-install@v1
+      uses: ChristopheLav/windows-sdk-install@v1
       with:
         version-sdk: 22000
     - name: Restore dependencies

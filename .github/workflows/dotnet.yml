@@ -28,6 +28,7 @@ jobs:
       uses: ChristopheLav/windows-sdk-install@v1
       with:
         version-sdk: 22000
+        features: 'OptionId.DesktopCPPx64'
     - name: Restore dependencies
       run: dotnet restore
     - name: Build

@@ -24,6 +24,10 @@ jobs:
       uses: aminya/setup-cpp@v0.26.2
       with:
         compiler: msvc
+    - name: Setup Windows SDK
+    - uses: ChristopheLav/windows-sdk-install@v1
+      with:
+        version-sdk: 22000
     - name: Restore dependencies
       run: dotnet restore
     - name: Build

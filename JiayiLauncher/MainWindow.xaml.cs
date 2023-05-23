@@ -88,7 +88,7 @@ public partial class MainWindow
 		var value = true;
 		var result = DwmSetWindowAttribute(windowHelper.Handle, 20, ref value, Marshal.SizeOf(value));
 		if (result != 0) Log.Write(this, $"Failed to set dark titlebar. Error code: {result}", Log.LogLevel.Warning);
-		
+
 		var source = HwndSource.FromHwnd(windowHelper.Handle);
 		source?.AddHook(WndProc);
 		

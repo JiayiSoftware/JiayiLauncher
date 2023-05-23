@@ -31,7 +31,7 @@ public static class RequestFactory
 	{
 		try
 		{
-			var result = GetWUToken(out var token);
+			var result = GetToken(out var token);
 			
 			if (result is >= WU_ERRORS_START and <= WU_ERRORS_END)
 			{
@@ -43,7 +43,7 @@ public static class RequestFactory
 				throw new Exception($"GetWUToken failed with status {status}");
 			}
 			
-			if (result != 0) Marshal.ThrowExceptionForHR(result);
+			if (result != 0) Marshal.ThrowExceptionForHR(result & 0xFF);
 			
 			return token;
 		}

@@ -1,5 +1,7 @@
 // greets to MCMrARM and dktapps from MCLauncher
 
+#include <Unknwn.h>
+
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Windows.Security.Authentication.Web.Core.h>
@@ -38,8 +40,23 @@ extern "C" __declspec(dllexport) int __stdcall GetToken(wchar_t** outToken, HWND
     
     if (result.ResponseStatus() == WebTokenRequestStatus::UserInteractionRequired)
     {
-        // what microsoft recommends
-        result = WebAuthenticationCoreManager::RequestTokenAsync(request, account).get();
+        // boy i sure hope this isn't 0 because if so i will be very sad
+        HWND window = FindWindow(nullptr, L"Jiayi Launcher");
+
+        // regular params but they are IInspectable
+        IInspectable* requestInspectable = request.as<IInspectable>().get();
+        IInspectable* accountInspectable = account.as<IInspectable>().get();
+
+        // iid for some odd reason
+        constexpr guid iid { guid_of<Windows::Foundation::IAsyncOperation<WebTokenRequestResult>>() };
+
+        // get this instance
+        auto instance = get_activation_factory<WebAuthenticationCoreManager,
+            IWebAuthenticationCoreManagerStatics>().as<IWebAuthenticationCoreManagerInterop>();
+
+        // go
+        auto hresult = instance->RequestTokenWithWebAccountForWindowAsync(window, requestInspectable,
+            accountInspectable, iid, put_abi(result));
     }
 
     if (result.ResponseStatus() != WebTokenRequestStatus::Success)

@@ -76,7 +76,7 @@ public static class VersionManager
 		
 		var folder = Path.Combine(JiayiSettings.Instance.VersionsPath, version.Version);
 		Directory.CreateDirectory(folder);
-		ZipFile.ExtractToDirectory(filePath, folder);
+		await Task.Run(() => ZipFile.ExtractToDirectory(filePath, folder));
 		File.Delete(filePath);
 		
 		// DELETE AppxSignature.p7x so that the game can be installed with developer mode

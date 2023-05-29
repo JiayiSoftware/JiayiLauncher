@@ -63,9 +63,4 @@ public static partial class Imports
 	
 	[LibraryImport("user32.dll")]
 	public static partial nint FindWindowW([MarshalAs(UnmanagedType.LPWStr)] string? lpClassName, [MarshalAs(UnmanagedType.LPWStr)] string lpWindowName);
-	
-	// NOT a windows api function can you believe it
-	[LibraryImport("JiayiLauncher.TokenBroker.dll", EntryPoint = "GetToken")]
-    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvStdcall) })]
-    public static partial int GetToken([MarshalAs(UnmanagedType.LPWStr)] out string token);
 }

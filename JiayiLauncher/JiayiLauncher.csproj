@@ -61,10 +61,6 @@
       </Content>
       <None Remove="WUTokenHelper.dll" />
       <None Remove="CREDITS.txt" />
-      <Content Include="..\x64\Release\JiayiLauncher.TokenBroker.dll">
-        <Link>JiayiLauncher.TokenBroker.dll</Link>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <Content Include="CREDITS.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>

@@ -27,34 +27,6 @@ public static class RequestFactory
 
 	private static string GetDownloadUrl() => _downloadUrl;
 
-	private static string GetUpdateToken()
-	{
-		try
-		{
-			var result = GetToken(out var token);
-			
-			if (result is >= WU_ERRORS_START and <= WU_ERRORS_END)
-			{
-				var code = (byte)result & 0xFF;
-				var status = (WebTokenRequestStatus)Enum.ToObject(typeof(WebTokenRequestStatus), code);
-
-				if (status == WebTokenRequestStatus.Success) return token; // ????
-
-				throw new Exception($"GetWUToken failed with status {status}");
-			}
-			
-			if (result != 0) Marshal.ThrowExceptionForHR(result & 0xFF);
-			
-			return token;
-		}
-		catch (SEHException e)
-		{
-			Marshal.ThrowExceptionForHR(e.HResult);
-		}
-		
-		return string.Empty;
-	}
-
 	private static XElement BuildUpdateTickets()
 	{
 		var tickets = new XElement(_updateAuth + "WindowsUpdateTicketsToken",
@@ -64,8 +36,7 @@ public static class RequestFactory
 		tickets.Add(new XElement("TicketType",
 			new XAttribute("Name", "MSA"),
 			new XAttribute("Version", "1.0"),
-			new XAttribute("Policy", "MBI_SSL"),
-			new XElement("User", GetUpdateToken())));
+			new XAttribute("Policy", "MBI_SSL")));
 		tickets.Add(new XElement("TicketType", "",
 			new XAttribute("Name", "AAD"),
 			new XAttribute("Version", "1.0"),

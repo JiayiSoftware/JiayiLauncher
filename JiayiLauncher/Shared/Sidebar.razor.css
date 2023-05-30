@@ -88,7 +88,7 @@
 }
 
 .sidebar:hover .wordmark {
-    opacity: 100;
+    display: block;
 }
 
 .logo:hover .sticky {
@@ -151,7 +151,7 @@
 }
 
 .sidebar[data-sticky="yes"] .wordmark {
-    opacity: 100;
+    display: block;
 }
 
 .sidebar[data-sticky="yes"] main {
@@ -159,7 +159,8 @@
 }
 
 .wordmark {
-    opacity: 0;
+    display: none;
+    overflow: hidden;
     
     text-transform: uppercase;
     font-weight: 900;

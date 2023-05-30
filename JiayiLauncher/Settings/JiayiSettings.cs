@@ -183,6 +183,10 @@ public class JiayiSettings
 	public bool AccelerateGameLoading { get; set; } = false;
 	
 	// log settings
+	[Setting("Anonymize logs", "Logs", 
+		"Hides any identifying information from logs. This does not apply retroactively.")]
+	public bool AnonymizeLogs { get; set; } = true;
+	
 	[Setting("Open log folder", "Logs", "Open the log folder.")]
 	[JsonIgnore] public (string, Action) OpenLogFolder { get; set; } = ("Open", () =>
 	{

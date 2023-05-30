@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using JiayiLauncher.Settings;
 
 namespace JiayiLauncher.Utils;
 
@@ -44,7 +45,10 @@ public static class Log
 #if DEBUG
 		Debug.WriteLine(logText);
 #endif
-		
+
+		if (JiayiSettings.Instance!.AnonymizeLogs) 
+			logText = logText.Replace(Environment.UserName, "User");
+
 		_logStream ??= File.Open(Path.Combine(LogPath, "Current.log"), 
 			FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
 		

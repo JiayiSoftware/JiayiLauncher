@@ -65,7 +65,8 @@ public static class RichPresence
 		
 		_client.SkipIdenticalPresence = true;
 		_client.OnError += (_, e) => Log.Write("Discord", e.Message, Log.LogLevel.Error);
-		_client.OnReady += (_, e) => Log.Write("Discord", $"Connected to {e.User}");
+		_client.OnReady += (_, e) => Log.Write("Discord",
+			JiayiSettings.Instance.AnonymizeLogs ? "Connected to Discord" : $"Connected to {e.User}");
 		_client.OnPresenceUpdate += (_, e) 
 			=> Log.Write("Discord", $"Presence updated: {e.Presence.Details} - {e.Presence.State}");
 

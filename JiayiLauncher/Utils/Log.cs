@@ -15,6 +15,8 @@ public static class Log
 
 	public static readonly string LogPath = Path.Combine(
 		Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Logs");
+	
+	private static FileStream? _logStream;
 
 	public static void CreateLog()
 	{
@@ -43,6 +45,10 @@ public static class Log
 		Debug.WriteLine(logText);
 #endif
 		
-		File.AppendAllText(Path.Combine(LogPath, "Current.log"), logText + Environment.NewLine);
+		_logStream ??= File.Open(Path.Combine(LogPath, "Current.log"), 
+			FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+		
+		_logStream.Write(System.Text.Encoding.UTF8.GetBytes(logText + Environment.NewLine));
+		_logStream.Flush();
 	}
 }

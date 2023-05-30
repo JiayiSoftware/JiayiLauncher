@@ -1,11 +1,11 @@
 ﻿Developers:
-carlton
+carlton • DeathlyBower959
 
 Testers:
 AvoidFrankie • fizz • n3twoik • Sir Gary • SlySlacker • CheemzZ • f*ck! • hmmm_ • ItzPhoenix • Rainny. • TTF_fog • bolo
 
 Contributors (up to this release):
-GacekKosmatek • DeathlyBower959 • CuteNyami • Flash_
+GacekKosmatek • CuteNyami • Flash_
 
 VIPs (from the Discord server):
 bolo • NoSkillPureAndy • pod • rice • VastraKai • DeathlyBower959 • megahendrik (happened again) • hgrvbrrds • JayRSky

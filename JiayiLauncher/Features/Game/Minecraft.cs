@@ -82,7 +82,7 @@ public static class Minecraft
 				    && Process.Modules.Count > JiayiSettings.Instance.ModuleRequirement[2])
 					break;
 				
-				if (Process.Modules.Count > 160) break;
+				if (Process.Modules.Count > 165) break;
 				
 				if (JiayiSettings.Instance.AccelerateGameLoading) AccelerateGameLoading();
 

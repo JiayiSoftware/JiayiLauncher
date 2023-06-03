@@ -175,7 +175,7 @@ public class JiayiSettings
 	
 	[Setting("Module requirement", "Launch",
 		"The amount of loaded modules needed before Jiayi will inject.", "OverrideModuleRequirement")]
-	public int[] ModuleRequirement { get; set; } = { 150, 180, 160 };
+	public int[] ModuleRequirement { get; set; } = { 150, 185, 165 };
 	
 	[Setting("Accelerate game loading", "Launch",
 		"Speed up loading times by terminating unnecessary processes. Beware of jank.", 

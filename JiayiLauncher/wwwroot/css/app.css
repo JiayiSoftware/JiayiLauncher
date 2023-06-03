@@ -88,9 +88,11 @@ main {
     position: fixed;
     top: 50%;
     left: 50%;
+    transform-origin: top left;
     transform: translate(-50%, -50%);
     
     transition: var(--transition-speed);
+    animation: modal-enter var(--transition-speed) ease;
 }
 
 .modal h3 {
@@ -135,8 +137,22 @@ main {
         transform: translateX(40vw);
         opacity: 0;
     }
+    
     to {
         transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* let's play with modal animations */
+@keyframes modal-enter {
+    from {
+        scale: 1.2;
+        opacity: 0;
+    }
+    
+    to {
+        scale: 1;
         opacity: 1;
     }
 }

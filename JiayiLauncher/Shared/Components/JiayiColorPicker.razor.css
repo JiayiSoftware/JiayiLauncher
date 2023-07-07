@@ -13,6 +13,7 @@
     box-shadow: var(--shadow);
     filter: brightness(1);
     border: 2px solid rgba(0, 0, 0, 0.4);
+    border-radius: var(--rounding);
     
     transition-duration: var(--transition-speed);
 }

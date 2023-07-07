@@ -24,6 +24,9 @@
     align-items: center;
     
     transition: var(--transition-speed);
+    
+    border-top-left-radius: var(--rounding);
+    border-top-right-radius: var(--rounding);
 }
 
 .shader-list-toggle:hover {
@@ -53,6 +56,11 @@
     position: relative;
 }
 
+.shader:last-child {
+    border-bottom-left-radius: var(--rounding);
+    border-bottom-right-radius: var(--rounding);
+}
+
 .shader-controls {
     display: flex;
     column-gap: 0.5rem;
@@ -80,6 +88,7 @@
 
 .add-new {
     border: 2px dashed var(--text-grayed);
+    border-radius: var(--rounding);
     text-align: center;
     padding: 0.5rem;
     color: var(--text-grayed);

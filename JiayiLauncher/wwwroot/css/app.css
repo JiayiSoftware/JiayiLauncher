@@ -79,7 +79,6 @@ main {
 /* dumb stupid hacks to get modals to look right */
 
 .modal {
-    border-radius: 0;
     background-color: var(--background-primary);
     color: var(--text-primary);
     width: fit-content;
@@ -93,6 +92,8 @@ main {
     
     transition: var(--transition-speed);
     animation: modal-enter var(--transition-speed) ease;
+    
+    border-radius: var(--rounding);
 }
 
 .fade-in {

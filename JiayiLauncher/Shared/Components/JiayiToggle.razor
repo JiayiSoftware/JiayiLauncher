@@ -1,4 +1,4 @@
-﻿<label class="toggle">
+﻿<label class="toggle" style="border-color: @_borderColor">
     <input type="checkbox" checked="@Checked" @onchange="Changed">
     <span class="toggle-box"></span>
     
@@ -14,6 +14,7 @@
     public EventCallback<bool> CheckedChanged { get; set; }
     
     private string _onColor => Checked ? "var(--text-accent)" : "var(--text-primary)";
+    private string _borderColor => Checked ? "var(--border-accent)" : "var(--border-primary)";
 
     private void Changed(ChangeEventArgs obj)
     {

@@ -7,6 +7,8 @@
     transition: width var(--transition-speed) ease;
     z-index: 5;
     box-shadow: 5px 0 rgba(0, 0, 0, 0.4);
+    border-top-right-radius: var(--rounding);
+    border-bottom-right-radius: var(--rounding);
 }
 
 .sidebar-items {

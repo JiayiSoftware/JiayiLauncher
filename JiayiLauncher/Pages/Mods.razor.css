@@ -100,8 +100,10 @@
     color: var(--text-accent);
     box-shadow: var(--shadow);
     filter: brightness(1);
-    border: none;
     transition: var(--transition-speed);
+    
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-accent);
 }
 
 .add-button:hover {

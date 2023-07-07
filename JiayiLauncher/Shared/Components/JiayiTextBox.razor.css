@@ -1,6 +1,5 @@
 ﻿.textbox {
     background-color: var(--background-secondary);
-    border: var(--accent) 0 solid;
     color: var(--text-primary);
     padding: 0.5rem 1rem;
     font-family: Montserrat, sans-serif;
@@ -8,6 +7,9 @@
     transition-duration: calc(var(--transition-speed) / 2);
     box-shadow: var(--shadow);
     filter: brightness(1);
+    
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
 }
 
 .textbox:hover {

@@ -1,6 +1,5 @@
 ﻿.button {
     background-color: var(--accent);
-    border: none;
     color: var(--text-accent);
     filter: brightness(1) grayscale(0);
     padding: 1rem 1.5rem;
@@ -15,6 +14,9 @@
     box-shadow: var(--shadow);
     
     cursor: pointer;
+    
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-accent);
 
     transition: var(--transition-speed);
 }

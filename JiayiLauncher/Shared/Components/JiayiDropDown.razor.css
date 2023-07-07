@@ -13,6 +13,9 @@
     transition: var(--transition-speed);
 
     filter: brightness(1);
+    
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
 
     z-index: 2; /* Dropdown behind other elements when opened if removed */
 }

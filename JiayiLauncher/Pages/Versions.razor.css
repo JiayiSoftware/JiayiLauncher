@@ -39,6 +39,9 @@
     width: fit-content;
     max-width: 45vw;
     padding: 0.7rem;
+    
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
 }
 
 .shader-card {

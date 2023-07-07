@@ -1,8 +1,9 @@
 ﻿.toast {
     padding: 1rem;
     background-color: var(--background-secondary);
-    border-radius: 0;
+    border-radius: var(--rounding);
     color: var(--text-primary);
+    border: var(--border-thickness) solid var(--border-primary);
 }
 
 .toast-header {

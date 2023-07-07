@@ -5,6 +5,8 @@
     box-shadow: var(--shadow);
     cursor: pointer;
     transition-duration: var(--transition-speed);
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
 }
 
 .check {

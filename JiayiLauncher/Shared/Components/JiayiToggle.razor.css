@@ -15,6 +15,9 @@
     filter: brightness(1);
     cursor: pointer;
     
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
+    
     transition: var(--transition-speed);
 }
 

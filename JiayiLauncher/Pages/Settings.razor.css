@@ -38,7 +38,6 @@
 
 .tab-button {
     background-color: var(--background-secondary);
-    border: none;
     color: var(--text-primary);
     padding: 0.5rem;
     text-align: center;
@@ -53,6 +52,9 @@
     cursor: pointer;
 
     transition: var(--transition-speed);
+    
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
 }
 
 .tab-button:hover {

@@ -39,6 +39,8 @@
     margin: -0.2rem;
     
     transition: var(--transition-speed);
+    
+    border-radius: var(--rounding);
 }
 
 input:checked + .toggle-box {

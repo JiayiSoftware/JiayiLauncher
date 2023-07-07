@@ -24,30 +24,49 @@ public static class ThemeManager
 		JiayiSettings.Instance.SecondaryBackgroundColor = GetColorFromHex(styles[1]);
 		JiayiSettings.Instance.AccentColor = GetColorFromHex(styles[2]);
 		JiayiSettings.Instance.TextColor = GetColorFromHex(styles[3]);
-
-		if (styles.Count == 7)
+		JiayiSettings.Instance.AccentTextColor = GetColorFromHex(styles[4]);
+		JiayiSettings.Instance.GrayTextColor = GetColorFromHex(styles[5]);
+			
+		var shadow = styles[6].Split(' ');
+		JiayiSettings.Instance.ShadowDistance[2] = int.Parse(shadow[0].Trim('p', 'x'));
+			
+		JiayiSettings.Instance.MovementSpeed[2] = float.Parse(styles[7].Trim('s'), CultureInfo.InvariantCulture);
+		
+		// if the length of styles is 8 then stop here (old theme)
+		if (styles.Count == 8)
 		{
-			// legacy theme
-			JiayiSettings.Instance.GrayTextColor = GetColorFromHex(styles[4]);
-		
-			var shadow = styles[5].Split(' ');
-			JiayiSettings.Instance.ShadowDistance[2] = int.Parse(shadow[0].Trim('p', 'x'));
-		
-			// STUPID EDGE CASE WHERE SOME COUNTRIES REPRESENT DECIMALS WITH COMMAS I HATE IT
-			JiayiSettings.Instance.MovementSpeed[2] = float.Parse(styles[6].Trim('s'), CultureInfo.InvariantCulture);
+			JiayiSettings.Instance.Save();
+			ApplyTheme(); // writes missing properties to theme file
+			return;
+		}
+
+		if (!JiayiSettings.Instance.UseBackgroundImage)
+		{
+			JiayiSettings.Instance.BackgroundImageUrl = "";
+			JiayiSettings.Instance.BackgroundBlur[2] = 0;
+			JiayiSettings.Instance.BackgroundBrightness[2] = 0;
 		}
 		else
 		{
-			// accent text color lives at styles[4] now
-			JiayiSettings.Instance.AccentTextColor = GetColorFromHex(styles[4]);
-			
-			JiayiSettings.Instance.GrayTextColor = GetColorFromHex(styles[5]);
-			
-			var shadow = styles[6].Split(' ');
-			JiayiSettings.Instance.ShadowDistance[2] = int.Parse(shadow[0].Trim('p', 'x'));
-			
-			JiayiSettings.Instance.MovementSpeed[2] = float.Parse(styles[7].Trim('s'), CultureInfo.InvariantCulture);
+			if (styles[8] == "none")
+			{
+				JiayiSettings.Instance.BackgroundImageUrl = "";
+			}
+			else
+			{
+				// extract url from "url("...")"
+				JiayiSettings.Instance.BackgroundImageUrl = JiayiSettings.Instance.BackgroundImageUrl != ""
+					? styles[8].Replace("url(\"", "").Replace("\")", "")
+					: "";
+			}
+			JiayiSettings.Instance.BackgroundBlur[2] = int.Parse(styles[9].Trim('p', 'x'));
+			JiayiSettings.Instance.BackgroundBrightness[2] = int.Parse(styles[10].Trim('%'));
 		}
+		
+		JiayiSettings.Instance.Rounding[2] = int.Parse(styles[11].Trim('p', 'x'));
+		JiayiSettings.Instance.BorderColor = GetColorFromHex(styles[12]);
+		JiayiSettings.Instance.AccentBorderColor = GetColorFromHex(styles[13]);
+		JiayiSettings.Instance.BorderThickness[2] = int.Parse(styles[14].Trim('p', 'x'));
 		
 		JiayiSettings.Instance.Save();
 		ApplyTheme();
@@ -67,6 +86,16 @@ public static class ThemeManager
 			.AddProperty("--shadow",
 				$"{JiayiSettings.Instance.ShadowDistance[2]}px {JiayiSettings.Instance.ShadowDistance[2]}px rgba(0, 0, 0, 0.4)")
 			.AddProperty("--transition-speed", $"{JiayiSettings.Instance.MovementSpeed[2]}s")
+			.AddProperty("--background-image",
+				JiayiSettings.Instance.UseBackgroundImage
+					? $"url(\"{JiayiSettings.Instance.BackgroundImageUrl}\")"
+					: "none")
+			.AddProperty("--background-blur", $"{JiayiSettings.Instance.BackgroundBlur[2]}px")
+			.AddProperty("--background-brightness", $"{JiayiSettings.Instance.BackgroundBrightness[2]}%")
+			.AddProperty("--rounding", $"{JiayiSettings.Instance.Rounding[2]}px")
+			.AddProperty("--border-primary", GetHexForColor(JiayiSettings.Instance.BorderColor))
+			.AddProperty("--border-accent", GetHexForColor(JiayiSettings.Instance.AccentBorderColor))
+			.AddProperty("--border-thickness", $"{JiayiSettings.Instance.BorderThickness[2]}px")
 			
 			// finally
 			.Build();

@@ -80,6 +80,31 @@ public class JiayiSettings
 	
 	[Setting("UI movement speed", "Appearance", "The speed at which the UI moves.")]
 	public float[] MovementSpeed { get; set; } = { 0, 0.5f, 0.2f };
+	
+	[Setting("Use background image", "Appearance", "Use an image as the background of the launcher.")]
+	public bool UseBackgroundImage { get; set; } = false;
+	
+	[Setting("Background image URL", "Appearance", "The URL of the image to use as the background.", 
+		"UseBackgroundImage", "The URL should be a link to an image on the internet. A path to a local image will not work.")]
+	public string BackgroundImageUrl { get; set; } = string.Empty;
+	
+	[Setting("Background blur", "Appearance", "How much to blur the background by.", "UseBackgroundImage")]
+	public int[] BackgroundBlur { get; set; } = { 0, 10, 0 };
+	
+	[Setting("Background brightness", "Appearance", "How bright the background should be.", "UseBackgroundImage")]
+	public int[] BackgroundBrightness { get; set; } = { 0, 100, 100 };
+	
+	[Setting("Rounding", "Appearance", "How much to round the corners of most UI elements.")]
+	public int[] Rounding { get; set; } = { 0, 10, 5 };
+	
+	[Setting("Border color", "Appearance", "The border color seen throughout the launcher.")]
+	public Color BorderColor { get; set; } = Color.FromArgb(0, 0, 0);
+	
+	[Setting("Border color (on accent)", "Appearance", "The color of the border around the accent color.")]
+	public Color AccentBorderColor { get; set; } = Color.FromArgb(0, 0, 0);
+	
+	[Setting("Border thickness", "Appearance", "The thickness of the borders on UI elements.")]
+	public int[] BorderThickness { get; set; } = { 0, 5, 0 };
 
 	[Setting("Save theme", "Appearance",
 		"Save changes made to your theme. Hit F5 to see it in action.")]

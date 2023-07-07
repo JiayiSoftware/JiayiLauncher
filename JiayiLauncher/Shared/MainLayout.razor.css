@@ -1,0 +1,12 @@
+﻿.background-image {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: var(--background-image);
+    filter: blur(var(--background-blur)) brightness(var(--background-brightness));
+}

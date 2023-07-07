@@ -37,7 +37,10 @@ public class CssBuilder
 		    var line = lines[i];
 		    if (string.IsNullOrWhiteSpace(line)) continue;
 		    var property = line.Split(':')[0].Trim();
-		    var value = line.Split(':')[1].Trim().TrimEnd(';');
+		    
+		    //var value = line.Split(':')[1].Trim().TrimEnd(';');
+		    // in case the value here contains a url we need to join the rest of the line
+		    var value = string.Join(':', line.Split(':').Skip(1)).Trim().TrimEnd(';');
 		    builder.AddProperty(property, value);
 	    }
 	    
@@ -54,7 +57,7 @@ public class CssBuilder
     {
 	    foreach (var prop in _properties.Where(prop => prop.StartsWith(property)))
 	    {
-		    return prop.Split(':')[1].Trim().TrimEnd(';');
+		    return string.Join(':', prop.Split(':').Skip(1)).Trim().TrimEnd(';');
 	    }
 
 	    return string.Empty;

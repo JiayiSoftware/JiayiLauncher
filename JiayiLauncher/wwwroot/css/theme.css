@@ -9,7 +9,7 @@
     --text-grayed: #7E7E7E;
     --shadow: 5px 5px rgba(0, 0, 0, 0.4);
     --transition-speed: 0.2s;
-    --background-image: url(https://www.w3schools.com/howto/photographer.jpg);
+    --background-image: none;
     --background-blur: 0px;
     --background-brightness: 100%;
     --rounding: 0px;

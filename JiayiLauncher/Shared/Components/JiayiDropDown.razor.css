@@ -14,7 +14,8 @@
 
     filter: brightness(1);
     
-    border-radius: var(--rounding);
+    border-top-left-radius: var(--rounding);
+    border-top-right-radius: var(--rounding);
     border: var(--border-thickness) solid var(--border-primary);
 
     z-index: 2; /* Dropdown behind other elements when opened if removed */
@@ -39,6 +40,10 @@
     box-shadow: var(--shadow);
     
     transition: var(--transition-speed);
+    
+    border-bottom-left-radius: var(--rounding);
+    border-bottom-right-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
 }
 
 .dropdown-items[data-shown="true"] {

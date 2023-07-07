@@ -20,6 +20,7 @@ public static class VersionManager
 		Succeeded,
 		VersionNotFound,
 		DeveloperModeDisabled,
+		BackupFailed,
 		UnknownError
 	}
 	
@@ -132,9 +133,19 @@ public static class VersionManager
 				//Directory.Move(PackageData.GetGameDataPath(), JiayiSettings.Instance.VersionsPath);
 				
 				// let's try this
-				using var gameData = ApplicationDataManager.CreateForPackageFamily("Microsoft.MinecraftUWP_8wekyb3d8bbwe");
-				var gameDataPath = gameData.LocalFolder.Path;
-				Directory.Move(gameDataPath, JiayiSettings.Instance.VersionsPath);
+				var gameData = ApplicationDataManager.CreateForPackageFamily("Microsoft.MinecraftUWP_8wekyb3d8bbwe");
+				var gameDataPath = gameData.LocalFolder.Path.Replace("\\LocalState", "");
+				Log.Write(nameof(VersionManager), $"Game data is at {gameDataPath}");
+
+				try
+				{
+					Directory.Move(gameDataPath, JiayiSettings.Instance.VersionsPath);
+				}
+				catch (IOException e)
+				{
+					Log.Write(nameof(VersionManager), $"Failed to move game data: {e}", Log.LogLevel.Error);
+					return SwitchResult.BackupFailed;
+				}
 				
 				await PackageData.PackageManager.RemovePackageAsync(package.Id.FullName, 0);
 			}
@@ -156,7 +167,7 @@ public static class VersionManager
 				var path = Path.Combine(JiayiSettings.Instance.VersionsPath, "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
 				if (Directory.Exists(path))
 				{
-					var appdata = PackageData.GetGameDataPath().TrimEnd("Microsoft.MinecraftUWP_8wekyb3d8bbwe".ToCharArray());
+					var appdata = PackageData.GetGameDataPath().Replace("Microsoft.MinecraftUWP_8wekyb3d8bbwe", "");
 					Directory.Move(path, appdata);
 				}
 

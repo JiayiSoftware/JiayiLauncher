@@ -218,7 +218,6 @@
 
         switch (result)
         {
-            // stop crying rider
             case VersionManager.SwitchResult.Succeeded: break;
                 
             case VersionManager.SwitchResult.DeveloperModeDisabled:
@@ -228,10 +227,14 @@
                 parameters.Add(nameof(MessageBox.Buttons), options);
                 parameters.Add(nameof(MessageBox.Message), 
                     "You need to enable developer mode to switch versions. Do you want to enable it now?");
-                
                 break;
             case VersionManager.SwitchResult.VersionNotFound:
                 parameters.Add(nameof(MessageBox.Message), "This version has not been downloaded yet.");
+                break;
+            case VersionManager.SwitchResult.BackupFailed:
+                parameters.Add(nameof(MessageBox.Message), "Jiayi couldn't back up your game data before switching versions. " +
+                                                           "This could be because access to the game data folder was denied.\n\n" +
+                                                           "More information can be found in your log file.");
                 break;
             case VersionManager.SwitchResult.UnknownError:
             default:

@@ -129,7 +129,12 @@
             .Add(nameof(EditProfile.Profile), profile);
 
         var modal = ModalService.Show<EditProfile>("Create profile", parameters);
-        await modal.Result;
+        var result = await modal.Result;
+        if (result.Cancelled)
+        {
+            profile.Delete();
+            return;
+        }
         
         StateHasChanged();
     }

@@ -64,6 +64,6 @@
         Profile.Name = newName;
         ProfileCollection.Current!.Add(Profile);
 
-        await Modal.CloseAsync();
+        await Modal.CloseAsync(ModalResult.Ok());
     }
 }

@@ -130,22 +130,20 @@ public static class VersionManager
 				await PackageData.PackageManager.RemovePackageAsync(package.Id.FullName, RemovalOptions.PreserveApplicationData);
 			else
 			{
-				//Directory.Move(PackageData.GetGameDataPath(), JiayiSettings.Instance.VersionsPath);
+				// i hope this is the last time i have to touch this code
+				var backupPath = Path.Combine(JiayiSettings.Instance.VersionsPath, "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
+				if (Directory.Exists(backupPath))
+				{
+					Log.Write(nameof(VersionManager), "Backup found, this might mean the launcher failed to switch versions last time"
+						, Log.LogLevel.Warning);
+					Directory.Delete(backupPath, true);
+				}
 				
-				// let's try this
-				var gameData = ApplicationDataManager.CreateForPackageFamily("Microsoft.MinecraftUWP_8wekyb3d8bbwe");
-				var gameDataPath = gameData.LocalFolder.Path.Replace("\\LocalState", "");
-				Log.Write(nameof(VersionManager), $"Game data is at {gameDataPath}");
-
-				try
-				{
-					Directory.Move(gameDataPath, JiayiSettings.Instance.VersionsPath);
-				}
-				catch (IOException e)
-				{
-					Log.Write(nameof(VersionManager), $"Failed to move game data: {e}", Log.LogLevel.Error);
-					return SwitchResult.BackupFailed;
-				}
+				Log.Write(nameof(VersionManager), "Backing up game data");
+				await PackageData.BackupGameData(backupPath);
+				
+				Log.Write(nameof(VersionManager), "Removing old game data");
+				Directory.Delete(PackageData.GetGameDataPath(), true);
 				
 				await PackageData.PackageManager.RemovePackageAsync(package.Id.FullName, 0);
 			}

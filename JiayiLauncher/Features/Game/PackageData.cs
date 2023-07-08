@@ -5,6 +5,7 @@ using Windows.ApplicationModel;
 using Windows.Management.Deployment;
 using Windows.System;
 using JiayiLauncher.Settings;
+using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Game;
 
@@ -54,13 +55,6 @@ public static class PackageData
 		return $"{major}.{minor}.{build}.{revision}";
 	}
 
-	public static string GetGameDataPath()
-	{
-		// i thought i could just use the package for this but naw gotta hardcode it
-		return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-			"Packages", "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
-	}
-
 	public static async Task<InstallLocation> GetInstallLocation()
 	{
 		var package = await GetPackage();
@@ -81,5 +75,108 @@ public static class PackageData
 		
 		return installPath.Contains(JiayiSettings.Instance.VersionsPath) ? 
 			InstallLocation.FromJiayi : InstallLocation.OtherVersionManager;
+	}
+
+	public static string GetGameDataPath()
+	{
+		// i thought i could just use the package for this but naw gotta hardcode it
+		return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+			"Packages", "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
+	}
+
+	public static async Task BackupGameData(string to)
+	{
+        Directory.CreateDirectory(to);
+
+        var localState = Path.Combine(GetGameDataPath(), "LocalState");
+        var roamingState = Path.Combine(GetGameDataPath(), "RoamingState");
+
+        Directory.CreateDirectory(Path.Combine(to, "LocalState"));
+        Directory.CreateDirectory(Path.Combine(to, "RoamingState"));
+
+        var localStateFiles = Directory.GetFiles(localState, "*.*", SearchOption.AllDirectories);
+        var roamingStateFiles = Directory.GetFiles(roamingState, "*.*", SearchOption.AllDirectories);
+
+        // turn all of these paths into relative paths
+        for (var i = 0; i < localStateFiles.Length; i++)
+        {
+            localStateFiles[i] = localStateFiles[i][localState.Length..];
+
+            // remove backslash at the start to not confuse Path.Combine
+            if (localStateFiles[i][0] == '\\')
+            {
+                localStateFiles[i] = localStateFiles[i][1..];
+            }
+        }
+
+        for (var i = 0; i < roamingStateFiles.Length; i++)
+        {
+            roamingStateFiles[i] = roamingStateFiles[i][roamingState.Length..];
+
+            if (roamingStateFiles[i][0] == '\\')
+            {
+                roamingStateFiles[i] = roamingStateFiles[i][1..];
+            }
+        }
+
+        // create any missing directories
+        foreach (var file in localStateFiles)
+        {
+            var dir = Path.GetDirectoryName(file);
+            if (dir != null)
+            {
+                Directory.CreateDirectory(Path.Combine(to, "LocalState", dir));
+            }
+        }
+
+        foreach (var file in roamingStateFiles)
+        {
+            var dir = Path.GetDirectoryName(file);
+            if (dir != null)
+            {
+                Directory.CreateDirectory(Path.Combine(to, "RoamingState", dir));
+            }
+        }
+
+        await Task.Run(() =>
+        {
+	        // copy the files
+            foreach (var file in localStateFiles)
+            {
+                try
+                {
+                    // use a stream to move the file contents (File.Copy has issues because of file owner)
+                    var read = File.OpenRead(Path.Combine(localState, file));
+                    var write = File.OpenWrite(Path.Combine(to, "LocalState", file));
+                    read.CopyTo(write);
+                    
+                    read.Close();
+                    write.Close();
+                }
+                catch (Exception ex)
+                {
+                    Log.Write("PackageData", $"Failed to copy file {file}: {ex}");
+                }
+            }
+
+            foreach (var file in roamingStateFiles)
+            {
+                try
+                {
+                    var read = File.OpenRead(Path.Combine(roamingState, file));
+					var write = File.OpenWrite(Path.Combine(to, "RoamingState", file));
+					read.CopyTo(write);
+					
+					read.Close();
+					write.Close();
+                }
+                catch (Exception ex)
+                {
+                    Log.Write("PackageData", $"Failed to copy file {file}: {ex}");
+                }
+            }
+        });
+        
+        Log.Write("PackageData", $"Created backup of game data in {to}");
 	}
 }

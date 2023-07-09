@@ -130,7 +130,6 @@ public static class VersionManager
 				await PackageData.PackageManager.RemovePackageAsync(package.Id.FullName, RemovalOptions.PreserveApplicationData);
 			else
 			{
-				// i hope this is the last time i have to touch this code
 				var backupPath = Path.Combine(JiayiSettings.Instance.VersionsPath, "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
 				if (Directory.Exists(backupPath))
 				{

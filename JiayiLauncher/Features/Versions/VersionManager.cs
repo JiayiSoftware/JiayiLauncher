@@ -165,8 +165,8 @@ public static class VersionManager
 				var path = Path.Combine(JiayiSettings.Instance.VersionsPath, "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
 				if (Directory.Exists(path))
 				{
-					var appdata = PackageData.GetGameDataPath().Replace("Microsoft.MinecraftUWP_8wekyb3d8bbwe", "");
-					Directory.Move(path, appdata);
+					await PackageData.ReplaceGameData(path);
+					Directory.Delete(path, true);
 				}
 
 				return SwitchResult.Succeeded;

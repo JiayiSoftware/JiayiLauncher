@@ -57,82 +57,8 @@ public class Profile
 
     public async Task Apply()
     {
-        var localState = System.IO.Path.Combine(PackageData.GetGameDataPath(), "LocalState");
-        var roamingState = System.IO.Path.Combine(PackageData.GetGameDataPath(), "RoamingState");
-
-        // delete the existing game data
-        Directory.Delete(localState, true);
-        Directory.Delete(roamingState, true);
-
-        var profileLocalState = System.IO.Path.Combine(Path, "LocalState");
-        var profileRoamingState = System.IO.Path.Combine(Path, "RoamingState");
-
-        // copy the profile's game data
-        var localStateFiles = Directory.GetFiles(profileLocalState, "*.*", SearchOption.AllDirectories);
-        var roamingStateFiles = Directory.GetFiles(profileRoamingState, "*.*", SearchOption.AllDirectories);
-
-        for (var i = 0; i < localStateFiles.Length; i++)
-        {
-            localStateFiles[i] = localStateFiles[i][profileLocalState.Length..];
-
-            if (localStateFiles[i][0] == '\\')
-            {
-                localStateFiles[i] = localStateFiles[i][1..];
-            }
-        }
-
-        for (var i = 0; i < roamingStateFiles.Length; i++)
-        {
-            roamingStateFiles[i] = roamingStateFiles[i][profileRoamingState.Length..];
-
-            if (roamingStateFiles[i][0] == '\\')
-            {
-                roamingStateFiles[i] = roamingStateFiles[i][1..];
-            }
-        }
-
-        foreach (var file in localStateFiles)
-        {
-            var dir = System.IO.Path.GetDirectoryName(file);
-            if (dir != null)
-            {
-                Directory.CreateDirectory(System.IO.Path.Combine(localState, dir));
-            }
-        }
-
-        foreach (var file in roamingStateFiles)
-        {
-            var dir = System.IO.Path.GetDirectoryName(file);
-            if (dir != null)
-            {
-                Directory.CreateDirectory(System.IO.Path.Combine(roamingState, dir));
-            }
-        }
-
-        await Task.Run(() =>
-        {
-	        foreach (var file in localStateFiles)
-	        {
-		        var read = File.OpenRead(System.IO.Path.Combine(profileLocalState, file));
-		        var write = File.OpenWrite(System.IO.Path.Combine(localState, file));
-		        read.CopyTo(write);
-
-		        read.Close();
-		        write.Close();
-	        }
-
-	        foreach (var file in roamingStateFiles)
-	        {
-		        var read = File.OpenRead(System.IO.Path.Combine(profileRoamingState, file));
-		        var write = File.OpenWrite(System.IO.Path.Combine(roamingState, file));
-		        read.CopyTo(write);
-
-		        read.Close();
-		        write.Close();
-	        }
-        });
-        
-        Log.Write("Profile.Apply", $"Applied profile {Name}");
+	    await PackageData.ReplaceGameData(Path);
+	    Log.Write("Profile.Apply", $"Applied profile {Name}");
     }
 
     public void Delete()

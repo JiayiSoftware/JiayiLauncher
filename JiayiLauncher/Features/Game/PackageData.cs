@@ -179,4 +179,82 @@ public static class PackageData
         
         Log.Write("PackageData", $"Created backup of game data in {to}");
 	}
+
+	public static async Task ReplaceGameData(string dataPath)
+	{
+		var localState = Path.Combine(GetGameDataPath(), "LocalState");
+        var roamingState = Path.Combine(GetGameDataPath(), "RoamingState");
+
+        // delete the existing game data
+        Directory.Delete(localState, true);
+        Directory.Delete(roamingState, true);
+
+        var backupLocalState = Path.Combine(dataPath, "LocalState");
+        var backupRoamingState = Path.Combine(dataPath, "RoamingState");
+
+        // copy the backup's game data
+        var localStateFiles = Directory.GetFiles(backupLocalState, "*.*", SearchOption.AllDirectories);
+        var roamingStateFiles = Directory.GetFiles(backupRoamingState, "*.*", SearchOption.AllDirectories);
+
+        for (var i = 0; i < localStateFiles.Length; i++)
+        {
+            localStateFiles[i] = localStateFiles[i][backupLocalState.Length..];
+
+            if (localStateFiles[i][0] == '\\')
+            {
+                localStateFiles[i] = localStateFiles[i][1..];
+            }
+        }
+
+        for (var i = 0; i < roamingStateFiles.Length; i++)
+        {
+            roamingStateFiles[i] = roamingStateFiles[i][backupRoamingState.Length..];
+
+            if (roamingStateFiles[i][0] == '\\')
+            {
+                roamingStateFiles[i] = roamingStateFiles[i][1..];
+            }
+        }
+
+        foreach (var file in localStateFiles)
+        {
+            var dir = Path.GetDirectoryName(file);
+            if (dir != null)
+            {
+                Directory.CreateDirectory(Path.Combine(localState, dir));
+            }
+        }
+
+        foreach (var file in roamingStateFiles)
+        {
+            var dir = Path.GetDirectoryName(file);
+            if (dir != null)
+            {
+                Directory.CreateDirectory(Path.Combine(roamingState, dir));
+            }
+        }
+
+        await Task.Run(() =>
+        {
+	        foreach (var file in localStateFiles)
+	        {
+		        var read = File.OpenRead(Path.Combine(backupLocalState, file));
+		        var write = File.OpenWrite(Path.Combine(localState, file));
+		        read.CopyTo(write);
+
+		        read.Close();
+		        write.Close();
+	        }
+
+	        foreach (var file in roamingStateFiles)
+	        {
+		        var read = File.OpenRead(Path.Combine(backupRoamingState, file));
+		        var write = File.OpenWrite(Path.Combine(roamingState, file));
+		        read.CopyTo(write);
+
+		        read.Close();
+		        write.Close();
+	        }
+        });
+	}
 }

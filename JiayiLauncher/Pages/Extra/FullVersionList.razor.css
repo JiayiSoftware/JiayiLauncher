@@ -96,7 +96,7 @@
 @keyframes alert {
     0% {
         border: 3px solid var(--accent);
-        background-color: var(--background-secondary);
+        background-color: rgba(100, 100, 100, 0.15);
     }
     
     /* flash background */
@@ -105,7 +105,7 @@
     }
     
     25% {
-        background-color: var(--background-secondary);
+        background-color: rgba(100, 100, 100, 0.15);
     }
     
     40% {
@@ -113,7 +113,7 @@
     }
     
     55% {
-        background-color: var(--background-secondary);
+        background-color: rgba(100, 100, 100, 0.15);
     }
     
     70% {
@@ -121,17 +121,18 @@
     }
     
     85% {
-        background-color: var(--background-secondary);
+        background-color: rgba(100, 100, 100, 0.15);
     }
     
     90% {
         border: 3px solid var(--accent);
-        background-color: var(--background-secondary);
+        background-color: rgba(100, 100, 100, 0.15);
     }
     
     /* back to normal */
     100% {
-        border: 0;
+        /* accent color because it will fade to white */
+        border: 0 solid var(--accent);
         border-left: 5px solid var(--accent);
     }
 }

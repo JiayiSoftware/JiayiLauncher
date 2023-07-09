@@ -41,7 +41,7 @@
 
 /* i like css3 */
 .profile-item:nth-child(even) {
-    background-color: var(--background-secondary);
+    background-color: rgba(100, 100, 100, 0.1);
 }
 
 .profile-item {

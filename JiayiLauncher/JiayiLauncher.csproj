@@ -18,59 +18,59 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Blazored.Modal" Version="7.1.0" />
-      <PackageReference Include="Blazored.Toast" Version="4.1.0" />
-      <PackageReference Include="DiscordRichPresence" Version="1.1.3.18" />
-      <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="7.0.86" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="Octokit" Version="7.0.1" />
+        <PackageReference Include="Blazored.Modal" Version="7.1.0"/>
+        <PackageReference Include="Blazored.Toast" Version="4.1.0"/>
+        <PackageReference Include="DiscordRichPresence" Version="1.1.3.18"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="7.0.86"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="Octokit" Version="7.0.1"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Resources\Images\drag.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+        <None Update="Resources\Images\drag.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Shared\Modals\NewMod.razor" />
-      <_ContentIncludedByDefault Remove="Shared\Components\Profiles\JiayiProfileListing.razor" />
+        <_ContentIncludedByDefault Remove="Shared\Modals\NewMod.razor"/>
+        <_ContentIncludedByDefault Remove="Shared\Components\Profiles\JiayiProfileListing.razor"/>
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Modals\NewMod.razor" />
+        <AdditionalFiles Include="Modals\NewMod.razor"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="wwwroot\css\app.css">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Update="wwwroot\images\drag.svg">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Update="wwwroot\index.html">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <None Remove="WUTokenHelper.dll" />
-      <None Remove="CREDITS.txt" />
-      <Content Include="..\LICENSE">
-        <Link>LICENSE</Link>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Include="CREDITS.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Update="wwwroot\css\theme.css">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
+        <Content Update="wwwroot\css\app.css">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Update="wwwroot\images\drag.svg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Update="wwwroot\index.html">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="WUTokenHelper.dll"/>
+        <None Remove="CREDITS.txt"/>
+        <Content Include="..\LICENSE">
+            <Link>LICENSE</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="CREDITS.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Update="wwwroot\css\theme.css">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>

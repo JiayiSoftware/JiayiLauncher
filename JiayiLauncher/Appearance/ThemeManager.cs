@@ -40,29 +40,24 @@ public static class ThemeManager
 			return;
 		}
 
-		if (!JiayiSettings.Instance.UseBackgroundImage)
+		if (styles[8] == "none")
 		{
 			JiayiSettings.Instance.BackgroundImageUrl = "";
 			JiayiSettings.Instance.BackgroundBlur[2] = 0;
 			JiayiSettings.Instance.BackgroundBrightness[2] = 0;
+			JiayiSettings.Instance.UseBackgroundImage = false;
 		}
 		else
 		{
-			if (styles[8] == "none")
-			{
-				JiayiSettings.Instance.BackgroundImageUrl = "";
-			}
-			else
-			{
-				// extract url from "url("...")"
-				JiayiSettings.Instance.BackgroundImageUrl = JiayiSettings.Instance.BackgroundImageUrl != ""
-					? styles[8].Replace("url(\"", "").Replace("\")", "")
-					: "";
-			}
+			JiayiSettings.Instance.UseBackgroundImage = true;
+			// extract url from "url("...")"
+			JiayiSettings.Instance.BackgroundImageUrl = JiayiSettings.Instance.BackgroundImageUrl != ""
+				? styles[8].Replace("url(\"", "").Replace("\")", "")
+				: "";
 			JiayiSettings.Instance.BackgroundBlur[2] = int.Parse(styles[9].Trim('p', 'x'));
 			JiayiSettings.Instance.BackgroundBrightness[2] = int.Parse(styles[10].Trim('%'));
 		}
-		
+
 		JiayiSettings.Instance.Rounding[2] = int.Parse(styles[11].Trim('p', 'x'));
 		JiayiSettings.Instance.BorderColor = GetColorFromHex(styles[12]);
 		JiayiSettings.Instance.AccentBorderColor = GetColorFromHex(styles[13]);

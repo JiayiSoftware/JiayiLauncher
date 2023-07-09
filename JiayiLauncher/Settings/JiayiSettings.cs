@@ -82,7 +82,7 @@ public class JiayiSettings
 	public float[] MovementSpeed { get; set; } = { 0, 0.5f, 0.2f };
 	
 	[Setting("Use background image", "Appearance", "Use an image as the background of the launcher.")]
-	public bool UseBackgroundImage { get; set; } = false;
+	public bool UseBackgroundImage { get; set; } // = false;
 	
 	[Setting("Background image URL", "Appearance", "The URL of the image to use as the background.", 
 		"UseBackgroundImage", "The URL should be a link to an image on the internet. A path to a local image will not work.")]
@@ -104,7 +104,7 @@ public class JiayiSettings
 	public Color AccentBorderColor { get; set; } = Color.FromArgb(0, 0, 0);
 	
 	[Setting("Border thickness", "Appearance", "The thickness of the borders on UI elements.")]
-	public int[] BorderThickness { get; set; } = { 0, 5, 0 };
+	public int[] BorderThickness { get; set; } = { 0, 5, 3 };
 
 	[Setting("Save theme", "Appearance",
 		"Save changes made to your theme. Hit F5 to see it in action.")]

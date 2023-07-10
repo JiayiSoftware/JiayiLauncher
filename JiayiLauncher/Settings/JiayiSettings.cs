@@ -95,7 +95,7 @@ public class JiayiSettings
 	public int[] BackgroundBrightness { get; set; } = { 0, 100, 100 };
 	
 	[Setting("Rounding", "Appearance", "How much to round the corners of most UI elements.")]
-	public int[] Rounding { get; set; } = { 0, 10, 5 };
+	public int[] Rounding { get; set; } = { 0, 10, 0 };
 	
 	[Setting("Border color", "Appearance", "The border color seen throughout the launcher.")]
 	public Color BorderColor { get; set; } = Color.FromArgb(0, 0, 0);
@@ -104,7 +104,7 @@ public class JiayiSettings
 	public Color AccentBorderColor { get; set; } = Color.FromArgb(0, 0, 0);
 	
 	[Setting("Border thickness", "Appearance", "The thickness of the borders on UI elements.")]
-	public int[] BorderThickness { get; set; } = { 0, 5, 3 };
+	public int[] BorderThickness { get; set; } = { 0, 5, 0 };
 
 	[Setting("Save theme", "Appearance",
 		"Save changes made to your theme. Hit F5 to see it in action.")]
@@ -128,16 +128,15 @@ public class JiayiSettings
 	{
 		var baseSettings = new JiayiSettings();
 		
-		Instance!.PrimaryBackgroundColor = baseSettings.PrimaryBackgroundColor;
-		Instance.SecondaryBackgroundColor = baseSettings.SecondaryBackgroundColor;
-		Instance.AccentColor = baseSettings.AccentColor;
-		Instance.TextColor = baseSettings.TextColor;
-		Instance.AccentTextColor = baseSettings.AccentTextColor;
-		Instance.GrayTextColor = baseSettings.GrayTextColor;
-		Instance.ShadowDistance = baseSettings.ShadowDistance;
-		Instance.MovementSpeed = baseSettings.MovementSpeed;
+		var appearanceSettings = baseSettings.GetSettingsInCategory("Appearance")
+			.Select(setting => typeof(JiayiSettings).GetProperty(setting.Name));
 		
-		Instance.Save();
+		foreach (var property in appearanceSettings)
+		{
+			property?.SetValue(Instance, property.GetValue(baseSettings));
+		}
+		
+		Instance!.Save();
 		ThemeManager.ApplyTheme();
 	});
 

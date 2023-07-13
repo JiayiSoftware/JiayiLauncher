@@ -78,14 +78,16 @@ public static class Minecraft
 			while (true)
 			{
 				Process.Refresh();
-				
-				if (JiayiSettings.Instance!.OverrideModuleRequirement 
-				    && Process.Modules.Count > JiayiSettings.Instance.ModuleRequirement[2])
-					break;
 
 				try
 				{
+					if (JiayiSettings.Instance!.OverrideModuleRequirement 
+					    && Process.Modules.Count > JiayiSettings.Instance.ModuleRequirement[2])
+						break;
+					
 					if (Process.Modules.Count > 165) break;
+					
+					if (JiayiSettings.Instance.AccelerateGameLoading) AccelerateGameLoading();
 				}
 				catch (Win32Exception e)
 				{
@@ -93,7 +95,6 @@ public static class Minecraft
 					if (e.NativeErrorCode != 0) throw;
 				}
 				
-				if (JiayiSettings.Instance.AccelerateGameLoading) AccelerateGameLoading();
 
 				// wait for a bit
 				Task.Delay(100).Wait();

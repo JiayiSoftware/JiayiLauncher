@@ -69,7 +69,8 @@
                     .Add(nameof(EditMod.Mod), mod);
 
                 ModalService.Show<EditMod>("Edit mod", parameters);
-            } else if (dialog.FileNames.Length > 1)
+            }
+            else if (dialog.FileNames.Length > 1)
             {
                 var mods = ModImporter.ImportFromPaths(dialog.FileNames);
                 
@@ -104,65 +105,48 @@
         }
     }
 
-    public static string GetFinalRedirect(string url)
+    private static async Task<string> GetFinalRedirect(string url)
     {
         if (string.IsNullOrWhiteSpace(url))
             return url;
 
-        int maxRedirCount = 8;  // prevent infinite loops
-        string newUrl = url;
+        var maxRedirects = 3; // prevent infinite loops
+        var newUrl = url;
+        
+        using var handler = new HttpClientHandler { AllowAutoRedirect = false };
+        using var client = new HttpClient(handler);
+        
         do
         {
-            HttpWebRequest req = null;
-            HttpWebResponse resp = null;
-            try
+            using var message = new HttpRequestMessage(HttpMethod.Head, url);
+            var response = await client.SendAsync(message);
+            
+            switch (response.StatusCode)
             {
-                req = (HttpWebRequest)HttpWebRequest.Create(url);
-                req.Method = "HEAD";
-                req.AllowAutoRedirect = false;
-                resp = (HttpWebResponse)req.GetResponse();
-                switch (resp.StatusCode)
-                {
-                    case HttpStatusCode.OK:
-                        return newUrl;
-                    case HttpStatusCode.Redirect:
-                    case HttpStatusCode.MovedPermanently:
-                    case HttpStatusCode.RedirectKeepVerb:
-                    case HttpStatusCode.RedirectMethod:
-                        newUrl = resp.Headers["Location"];
-                        if (newUrl == null)
-                            return url;
+                case HttpStatusCode.OK:
+                    return newUrl;
+                case HttpStatusCode.Redirect:
+                case HttpStatusCode.MovedPermanently:
+                case HttpStatusCode.RedirectKeepVerb:
+                case HttpStatusCode.RedirectMethod:
+                    newUrl = response.Headers.Location?.ToString();
+                    if (newUrl == null)
+                        return url;
 
-                        if (newUrl.IndexOf("://", System.StringComparison.Ordinal) == -1)
-                        {
-                            // Doesn't have a URL Schema, meaning it's a relative or absolute URL
-                            Uri u = new Uri(new Uri(url), newUrl);
-                            newUrl = u.ToString();
-                        }
-                        break;
-                    default:
-                        return newUrl;
-                }
-                url = newUrl;
+                    if (newUrl.IndexOf("://", StringComparison.Ordinal) == -1)
+                    {
+                        // Doesn't have a URL Schema, meaning it's a relative or absolute URL
+                        var u = new Uri(new Uri(url), newUrl);
+                        newUrl = u.ToString();
+                    }
+                    break;
+                default:
+                    return newUrl;
             }
-            catch (WebException)
-            {
-                // Return the last known good URL
-                return newUrl;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (resp != null)
-                    resp.Close();
-            }
-        } while (maxRedirCount-- > 0);
+        } while (maxRedirects-- > 0);
 
         return newUrl;
-    } // totally not taken from stackoverflow (https://stackoverflow.com/a/28424940)
+    }
 
     private async Task LinkSubmitted()
     {
@@ -172,9 +156,8 @@
         var url = _urlTextBox?.Value;
         if (url is null or "") return;
 
-        if (!url.StartsWith("http"))
-            url = "https://" + url;
-        string redirect = GetFinalRedirect(url);
+        if (!url.StartsWith("http")) url = "https://" + url;
+        var redirect = await GetFinalRedirect(url);
         url = redirect;
 
         Uri uri;
@@ -185,10 +168,9 @@
         }
         catch (Exception e)
         {
-            Log.Write("Mod Link", e.Message, Log.LogLevel.Error);
+            Log.Write(this, $"GetFinalRedirect failed: {e}", Log.LogLevel.Error);
             return;
         }
-
 
         if (ModCollection.Current != null && ModCollection.Current.HasMod(url))
         {

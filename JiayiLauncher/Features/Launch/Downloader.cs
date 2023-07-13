@@ -14,12 +14,12 @@ public static class Downloader
     // a lot of using statements here, (not) sorry if that pisses you off
     public static async Task<string> DownloadMod(Mod mod)
     {
-        bool isFileName = true;
-        string fileName = string.Empty;
+        var fileName = string.Empty;
         if (mod.Path.EndsWith(".dll"))
             fileName = $"{mod.Name}.dll";
         if (mod.Path.EndsWith(".exe"))
             fileName = $"{mod.Name}.exe";
+		
         Log.Write(nameof(Downloader), $"Downloading {mod.Name}");
 
         using var response = await _client.GetAsync(mod.Path, HttpCompletionOption.ResponseHeadersRead);
@@ -27,23 +27,16 @@ public static class Downloader
 			response.IsSuccessStatusCode ? Log.LogLevel.Info : Log.LogLevel.Error);
 		if (!response.IsSuccessStatusCode) return string.Empty;
 
+		var hasFileName = true;
         if (response.Content.Headers.ContentDisposition is not { FileName: not null })
         {
             Log.Write(nameof(Downloader), "Server did not provide a file name", Log.LogLevel.Warning);
-            isFileName = false;
+            hasFileName = false;
         }
 
-        string path = string.Empty;
-        if (isFileName)
-        {
-            path = Path.Combine(ModCollection.Current!.BasePath,
-                response.Content.Headers.ContentDisposition.FileName.Replace("\"", ""));
-        }
-        else if (!isFileName)
-        {
-            path = Path.Combine(ModCollection.Current!.BasePath,
-                fileName.Replace("\"", ""));
-        }
+        var path = Path.Combine(ModCollection.Current!.BasePath, hasFileName ?
+							   	response.Content.Headers.ContentDisposition.FileName.Replace("\"", ""))
+								: fileName.Replace("\"", ""))
 
         // check if the file already exists, and if so, compare the hashes
         if (File.Exists(path))

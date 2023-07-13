@@ -10,28 +10,36 @@ namespace JiayiLauncher.Features.Launch;
 public static class Downloader
 {
 	private static readonly HttpClient _client = new();
-	
-	// a lot of using statements here, (not) sorry if that pisses you off
-	public static async Task<string> DownloadMod(Mod mod)
-	{
-		Log.Write(nameof(Downloader), $"Downloading {mod.Name}");
+
+    // a lot of using statements here, (not) sorry if that pisses you off
+    public static async Task<string> DownloadMod(Mod mod)
+    {
+        var fileName = string.Empty;
+        if (mod.Path.EndsWith(".dll"))
+            fileName = $"{mod.Name}.dll";
+        if (mod.Path.EndsWith(".exe"))
+            fileName = $"{mod.Name}.exe";
 		
-		using var response = await _client.GetAsync(mod.Path, HttpCompletionOption.ResponseHeadersRead);
+        Log.Write(nameof(Downloader), $"Downloading {mod.Name}");
+
+        using var response = await _client.GetAsync(mod.Path, HttpCompletionOption.ResponseHeadersRead);
 		Log.Write(nameof(Downloader), $"Server responded with {response.StatusCode}",
 			response.IsSuccessStatusCode ? Log.LogLevel.Info : Log.LogLevel.Error);
 		if (!response.IsSuccessStatusCode) return string.Empty;
 
-		if (response.Content.Headers.ContentDisposition is not { FileName: not null })
-		{
-			Log.Write(nameof(Downloader), "Server did not provide a file name", Log.LogLevel.Error);
-			return string.Empty;
-		}
+		var hasFileName = true;
+        if (response.Content.Headers.ContentDisposition is not { FileName: not null })
+        {
+            Log.Write(nameof(Downloader), "Server did not provide a file name", Log.LogLevel.Warning);
+            hasFileName = false;
+        }
 
-		var path = Path.Combine(ModCollection.Current!.BasePath,
-			response.Content.Headers.ContentDisposition.FileName.Replace("\"", ""));
+        var path = Path.Combine(ModCollection.Current!.BasePath, hasFileName ?
+							   	response.Content.Headers.ContentDisposition.FileName.Replace("\"", "")
+								: fileName.Replace("\"", ""));
 
-		// check if the file already exists, and if so, compare the hashes
-		if (File.Exists(path))
+        // check if the file already exists, and if so, compare the hashes
+        if (File.Exists(path))
 		{
 			Log.Write(nameof(Downloader), "File already exists, comparing hashes");
 			using var hasher = MD5.Create();

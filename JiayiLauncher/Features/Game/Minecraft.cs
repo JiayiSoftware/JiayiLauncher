@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Timers;
@@ -81,8 +82,16 @@ public static class Minecraft
 				if (JiayiSettings.Instance!.OverrideModuleRequirement 
 				    && Process.Modules.Count > JiayiSettings.Instance.ModuleRequirement[2])
 					break;
-				
-				if (Process.Modules.Count > 165) break;
+
+				try
+				{
+					if (Process.Modules.Count > 165) break;
+				}
+				catch (Win32Exception e)
+				{
+					// the operation completed successfully ????
+					if (e.NativeErrorCode != 0) throw;
+				}
 				
 				if (JiayiSettings.Instance.AccelerateGameLoading) AccelerateGameLoading();
 

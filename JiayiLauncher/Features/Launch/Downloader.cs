@@ -29,7 +29,7 @@ public static class Downloader
 
         if (response.Content.Headers.ContentDisposition is not { FileName: not null })
         {
-            Log.Write(nameof(Downloader), "Server did not provide a file name", Log.LogLevel.Error);
+            Log.Write(nameof(Downloader), "Server did not provide a file name", Log.LogLevel.Warning);
             isFileName = false;
         }
 

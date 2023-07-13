@@ -50,6 +50,8 @@ public static class Minecraft
 
 	public static void TrackGameTime()
 	{
+		if (_timer.Enabled) return; // i think this fixes duplicating game time
+		
 		_timer.Elapsed += (_, _) =>
 		{
 			if (!IsOpen)
@@ -94,7 +96,6 @@ public static class Minecraft
 					// the operation completed successfully ????
 					if (e.NativeErrorCode != 0) throw;
 				}
-				
 
 				// wait for a bit
 				Task.Delay(100).Wait();

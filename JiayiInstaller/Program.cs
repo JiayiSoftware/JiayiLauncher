@@ -9,9 +9,10 @@ Console.WindowHeight = 35;
 var arg = new Args();
 
 // flags
-var desktop = arg.GetFlag("desktop");
-var dotnet  = arg.GetFlag("install-dotnet");
-var open	= arg.GetFlag("open-immediately");
+var uninstall = arg.GetFlag("uninstall");
+var desktop   = arg.GetFlag("desktop");
+var dotnet    = arg.GetFlag("install-dotnet");
+var open	  = arg.GetFlag("open-immediately");
 
 // commands
 var version = arg.GetCommand("version");
@@ -34,7 +35,7 @@ if (!arg.Empty) goto install;
 	
 // actual installer code
 Console.Clear();
-var jiayi = """
+const string jiayi = """
 ................................................................................
 ................................................................................
 .............................................(%%%%%%(...........................
@@ -76,9 +77,37 @@ foreach (var line in jiayi.Split('\n'))
 	Thread.Sleep(50);
 }
 
-Console.WriteLine("Press any key to start the installation...");
+var str = uninstall ? "un" : "";
+
+Console.WriteLine($"Press any key to start the {str}installation...");
 Console.ReadKey(true);
 Console.Clear();
+
+if (uninstall)
+{
+	if (!Directory.Exists(path))
+	{
+		Console.WriteLine(!string.IsNullOrEmpty(arg.GetCommand("path"))
+			? "This path does not lead to a valid installation of Jiayi Launcher."
+			: "Jiayi Launcher is not installed on this computer.");
+		
+		Console.WriteLine("Press any key to exit...");
+		Console.ReadKey();
+		return;
+	}
+	
+	Console.WriteLine("Are you sure you want to uninstall Jiayi Launcher?");
+	Console.WriteLine("Press any key to continue, or close this window to cancel.");
+	Console.ReadKey(true);
+	Console.Clear();
+	
+	Console.WriteLine("Uninstalling Jiayi Launcher...");
+	Uninstaller.Uninstall(path);
+	Console.WriteLine("Jiayi Launcher has been uninstalled.");
+	Console.WriteLine("Press any key to exit...");
+	Console.ReadKey();
+	return;
+}
 
 // path
 Console.WriteLine("[1/4] Path\n");

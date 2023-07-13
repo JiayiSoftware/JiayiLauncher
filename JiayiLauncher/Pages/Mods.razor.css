@@ -101,6 +101,7 @@
     box-shadow: var(--shadow);
     filter: brightness(1);
     transition: var(--transition-speed);
+    cursor: pointer;
     
     border-radius: var(--rounding);
     border: var(--border-thickness) solid var(--border-accent);

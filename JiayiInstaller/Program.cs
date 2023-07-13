@@ -103,6 +103,17 @@ if (uninstall)
 	
 	Console.WriteLine("Uninstalling Jiayi Launcher...");
 	Uninstaller.Uninstall(path);
+	
+	// ask if they want to delete their data
+	Console.WriteLine("Would you like to delete your Jiayi Launcher data as well?");
+	Console.WriteLine("This includes your settings, installed Minecraft versions, and game data.");
+	Console.WriteLine("Press any key to delete your data, or close this window to keep it.");
+	Console.ReadKey(true);
+	
+	Console.WriteLine("Deleting Jiayi Launcher data...");
+	var dataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher");
+	if (Directory.Exists(dataPath)) Directory.Delete(dataPath, true);
+	
 	Console.WriteLine("Jiayi Launcher has been uninstalled.");
 	Console.WriteLine("Press any key to exit...");
 	Console.ReadKey();

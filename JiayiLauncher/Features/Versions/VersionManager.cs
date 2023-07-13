@@ -133,14 +133,16 @@ public static class VersionManager
 				var backupPath = Path.Combine(JiayiSettings.Instance.VersionsPath, "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
 				if (Directory.Exists(backupPath))
 				{
-					Log.Write(nameof(VersionManager), "Backup found, this might mean the launcher failed to switch versions last time"
-						, Log.LogLevel.Warning);
-					Directory.Delete(backupPath, true);
+					Log.Write(nameof(VersionManager),
+						"Backup found, this might mean the launcher failed to switch versions last time",
+						Log.LogLevel.Warning);
 				}
-				
-				Log.Write(nameof(VersionManager), "Backing up game data");
-				await PackageData.BackupGameData(backupPath);
-				
+				else
+				{
+					Log.Write(nameof(VersionManager), "Backing up game data");
+					await PackageData.BackupGameData(backupPath);
+				}
+
 				Log.Write(nameof(VersionManager), "Removing old game data");
 				Directory.Delete(PackageData.GetGameDataPath(), true);
 				

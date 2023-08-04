@@ -107,6 +107,10 @@
     padding-top: 0.3rem;
 }
 
+.manage-tip {
+    display: none !important;
+}
+
 @media only screen and (min-width: 1350px) { /* really wide but everyone has 1080p monitors now */
     .version-cards {
         width: 50%;
@@ -120,6 +124,10 @@
     
     .resize-tip {
         display: none !important;
+    }
+    
+    .manage-tip {
+        display: block !important;
     }
     
     .version-list-title {

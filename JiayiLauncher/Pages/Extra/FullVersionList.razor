@@ -53,7 +53,7 @@
                     <li class="version @alert" id="@name">
                         <div class="version-text">
                             <strong>@name</strong>
-                            <i>@GetStatus(name)</i>
+                            <i>@GetStatus(version)</i>
                         </div>
 
                         <div class="version-buttons">
@@ -68,9 +68,16 @@
                             }
                             else
                             {
-                                <JiayiButton Size="JiayiButton.ButtonSize.Small"
-                                             Disabled="@_buttonStates[i]"
-                                             OnClick="async () => await DownloadClicked(version)">Download</JiayiButton>
+                                @if (version.Archs.x64 == null || version.Archs.x64.UpdateIds.Count == 0)
+                                {
+                                    <JiayiButton Size="JiayiButton.ButtonSize.Small" Disabled="true">Download</JiayiButton>
+                                }
+                                else
+                                {
+                                    <JiayiButton Size="JiayiButton.ButtonSize.Small"
+                                                 Disabled="@_buttonStates[i]"
+                                                 OnClick="async () => await DownloadClicked(version)">Download</JiayiButton>
+                                }
                             }
                         </div>
                     </li>
@@ -156,9 +163,12 @@
         StateHasChanged();
     }
 
-    private string GetStatus(string ver)
+    private string GetStatus(MinecraftVersion ver)
     {
-        var i = _versionList?.Keys.ToList().IndexOf(ver) ?? 0;
+        if (ver.Archs.x64 == null || ver.Archs.x64.UpdateIds.Count == 0)
+            return "Not available";
+        
+        var i = _versionList?.Keys.ToList().IndexOf(ver.Version) ?? 0;
         
         if (_statuses[i] == "Downloading...")
         {

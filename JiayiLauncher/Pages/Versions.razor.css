@@ -53,6 +53,8 @@
 .version-list {
     display: none;
     width: 0;
+    opacity: 0;
+    transition: var(--transition-speed);
 }
 
 .info-card p {
@@ -105,7 +107,7 @@
     padding-top: 0.3rem;
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1350px) { /* really wide but everyone has 1080p monitors now */
     .version-cards {
         width: 50%;
     }
@@ -113,6 +115,7 @@
     .version-list {
         display: block;
         width: 50%;
+        opacity: 1;
     }
     
     .resize-tip {

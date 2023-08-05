@@ -53,7 +53,7 @@
                         case true when setting.PropertyType == typeof(string):
                             // feeling a bit silly today
                             var random = Random.Shared.Next(1, 1000);
-                            var placeholder = random == 1 ? "Nothing!" : settingInfo.Name;
+                            var placeholder = random == 1 ? "Peekaboo!" : settingInfo.Name;
                             <JiayiTextBox 
                                 Placeholder="@placeholder" 
                                 Style="width: -webkit-fill-available; max-width: 40%;" 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -24,14 +25,45 @@ public static class VersionManager
 		UnknownError
 	}
 	
-	public static int SwitchProgress { get; private set; }
+	public static int DownloadProgress { get; private set; }
 	public static event EventHandler? SwitchProgressChanged;
 
 	public static bool VersionInstalled(string ver)
 	{
 		Directory.CreateDirectory(JiayiSettings.Instance!.VersionsPath);
-		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);
+		var folders = Directory.GetDirectories(JiayiSettings.Instance.VersionsPath);
 		return folders.Any(x => x.Contains(ver));
+	}
+
+	public static List<string> GetCustomVersions()
+	{
+		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);
+		var versions = VersionList.GetVersionList().GetAwaiter().GetResult();
+
+		return folders.Select(Path.GetFileName).Where(name => versions.All(x => x != name)).ToList()!;
+	}
+
+	public static bool IsCustomVersion(string ver)
+	{
+		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);
+		var versions = VersionList.GetVersionList().GetAwaiter().GetResult();
+		
+		return folders.Any(x => x.Contains(ver)) && versions.All(x => x != ver);
+	}
+
+	public static async Task AddCustomVersion(string path)
+	{
+		// appx files are just zipped so extract it like we've just downloaded an official version
+		var folder = Path.Combine(JiayiSettings.Instance!.VersionsPath, Path.GetFileNameWithoutExtension(path));
+		Directory.CreateDirectory(folder);
+		await Task.Run(() => ZipFile.ExtractToDirectory(path, folder));
+		
+		// delete signature (most likely doesn't exist anyway)
+		var signature = Path.Combine(folder, "AppxSignature.p7x");
+		if (File.Exists(signature)) File.Delete(signature);
+		
+		// backup shaders i guess
+		await ShaderManager.BackupVanillaShaders();
 	}
 
 	public static async Task DownloadVersion(MinecraftVersion version)
@@ -55,7 +87,7 @@ public static class VersionManager
 		await using var stream = await response.Content.ReadAsStreamAsync();
 		await using var fileStream = new FileStream(filePath, FileMode.Create);
 		
-		SwitchProgress = 0;
+		DownloadProgress = 0;
 
 		while (true)
 		{
@@ -65,12 +97,12 @@ public static class VersionManager
 			await fileStream.WriteAsync(buffer.AsMemory(0, read));
 			totalRead += read;
 			
-			var oldProgress = SwitchProgress;
-			SwitchProgress = (int)(totalRead * 100 / contentLength)!;
-			if (SwitchProgress != oldProgress) SwitchProgressChanged?.Invoke(null, EventArgs.Empty);
+			var oldProgress = DownloadProgress;
+			DownloadProgress = (int)(totalRead * 100 / contentLength)!;
+			if (DownloadProgress != oldProgress) SwitchProgressChanged?.Invoke(null, EventArgs.Empty);
 		}
 		
-		SwitchProgress = 100;
+		DownloadProgress = 100;
 		
 		fileStream.Close();
 		stream.Close();
@@ -185,5 +217,12 @@ public static class VersionManager
 		}
 		
 		return SwitchResult.UnknownError;
+	}
+
+	public static string? GetVersionPath(string ver)
+	{
+		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);
+		var folder = folders.FirstOrDefault(x => x == ver);
+		return folder;
 	}
 }

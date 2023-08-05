@@ -84,7 +84,7 @@
                                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Mods");
                             JiayiSettings.Instance.Save();
                             ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
-                            mods.ForEach(mod => ModCollection.Current.Add(mod, false));
+                            mods.ForEach(mod => ModCollection.Current!.Add(mod, false));
                         })),
                         ("No", EventCallback.Empty)
                     };
@@ -113,7 +113,8 @@
         var maxRedirects = 3; // prevent infinite loops
         var newUrl = url;
         
-        using var handler = new HttpClientHandler { AllowAutoRedirect = false };
+        using var handler = new HttpClientHandler();
+        handler.AllowAutoRedirect = false;
         using var client = new HttpClient(handler);
         
         do

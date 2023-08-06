@@ -4,6 +4,7 @@
 @using System.Diagnostics
 @using System.IO
 @using JiayiLauncher.Features.Game
+@using JiayiLauncher.Shared.Components.Toasts
 @using JiayiLauncher.Utils
 @using Microsoft.Win32
 
@@ -11,6 +12,7 @@
 @inject IJSRuntime JavaScript
 
 @inject NavigationManager NavigationManager
+@inject IToastService ToastService
 
 <div class="page-title" style="display: @_showTitle">
     <h4 @onclick="BackClicked">Version Manager</h4>
@@ -312,6 +314,21 @@
         if (dialog.ShowDialog() == true)
         {
             var path = dialog.FileName;
+
+            if (!VersionManager.IsValidPackage(path))
+            {
+                var toastParams = new ToastParameters()
+                    .Add(nameof(JiayiToast.Title), "That's not a valid package.")
+                    .Add(nameof(JiayiToast.Level), ToastLevel.Error);
+                
+                ToastService.ShowToast<JiayiToast>(toastParams, settings =>
+                {
+                    settings.Timeout = 5;
+                    settings.ShowProgressBar = true;
+                });
+                
+                return;
+            }
             
             // add to list
             var versionList = await VersionList.GetFullVersionList();

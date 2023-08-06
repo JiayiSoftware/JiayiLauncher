@@ -66,6 +66,12 @@ public static class VersionManager
 		await ShaderManager.BackupVanillaShaders();
 	}
 
+	public static bool IsValidPackage(string path)
+	{
+		using var archive = ZipFile.OpenRead(path);
+		return archive.Entries.Any(x => x.Name == "AppxManifest.xml");
+	}
+
 	public static async Task DownloadVersion(MinecraftVersion version)
 	{
 		var updateId = version.Archs.x64!.UpdateIds[0];

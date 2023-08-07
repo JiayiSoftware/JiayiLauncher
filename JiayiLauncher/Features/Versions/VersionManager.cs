@@ -37,6 +37,7 @@ public static class VersionManager
 
 	public static List<string> GetCustomVersions()
 	{
+		Directory.CreateDirectory(JiayiSettings.Instance!.VersionsPath);
 		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);
 		var versions = VersionList.GetVersionList().GetAwaiter().GetResult();
 

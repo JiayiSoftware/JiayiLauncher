@@ -3,6 +3,7 @@ using System.Timers;
 using DiscordRPC;
 using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Features.Profiles;
 using JiayiLauncher.Features.Shaders;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
@@ -38,14 +39,20 @@ public static class RichPresence
 			
 			case true when f.Contains("%mod_count%"):
 				if (ModCollection.Current is null) return f.Replace("%mod_count%", "no mods");
-				var plural = ModCollection.Current.Mods.Count == 1 ? "mod" : "mods";
-				return f.Replace("%mod_count%", $"{ModCollection.Current.Mods.Count.ToString()} {plural}");
+				var modsPlural = ModCollection.Current.Mods.Count == 1 ? "mod" : "mods";
+				return f.Replace("%mod_count%", $"{ModCollection.Current.Mods.Count.ToString()} {modsPlural}");
 			
 			case true when f.Contains("%shader_name%"):
 				var shaderName = ShaderManager.AppliedShader == string.Empty
 					? "no shaders"
 					: ShaderManager.AppliedShader;
 				return f.Replace("%shader_name%", shaderName);
+			
+			case true when f.Contains("%profile_count%"):
+				if (ProfileCollection.Current is null) return f.Replace("%profile_count%", "no profiles");
+				var profilesPlural = ProfileCollection.Current.Profiles.Count == 1 ? "profile" : "profiles";
+				return f.Replace("%profile_count%",
+					$"{ProfileCollection.Current.Profiles.Count.ToString()} {profilesPlural}");
 		}
 		
 		return f;

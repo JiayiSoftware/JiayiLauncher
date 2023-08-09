@@ -162,14 +162,14 @@ public class JiayiSettings
 	[Setting("Show elapsed time", "Discord", "Show how long you've been playing for.", "RichPresence")]
 	public bool DiscordShowElapsedTime { get; set; } = true;
 	
-	[Setting("Discord app ID", "Discord", "The Discord app ID to use for rich presence. Leave this blank to use the default Jiayi app ID.", "RichPresence")]
-	public string DiscordAppId { get; set; } = string.Empty;
+	[Setting("Show download button", "Discord", "Show a button to download Jiayi.", "RichPresence")]
+	public bool DiscordShowDownloadButton { get; set; } // = false; (because advertising by default is bad)
+
+	[Setting("Large image key", "Discord", "The large image key to use for rich presence.", "RichPresence")]
+	public string DiscordLargeImageKey { get; set; } = "logo";
 	
-	[Setting("Large image key", "Discord", "The large image key to use for rich presence. Leave this blank to use the default Jiayi image.", "RichPresence")]
-	public string DiscordLargeImageKey { get; set; } = string.Empty;
-	
-	[Setting("Small image key", "Discord", "The small image key to use for rich presence. Leave this blank to use the default Jiayi image.", "RichPresence")]
-	public string DiscordSmallImageKey { get; set; } = string.Empty;
+	[Setting("Small image key", "Discord", "The small image key to use for rich presence.", "RichPresence")]
+	public string DiscordSmallImageKey { get; set; } = "minecraft";
 	
 	[Setting("Large image text", "Discord", "The large image text to use for rich presence.", "RichPresence")]
 	public string DiscordLargeImageText { get; set; } = "Jiayi Launcher";

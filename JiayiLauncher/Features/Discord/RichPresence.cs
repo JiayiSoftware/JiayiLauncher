@@ -2,7 +2,6 @@
 using System.Timers;
 using DiscordRPC;
 using JiayiLauncher.Features.Game;
-using JiayiLauncher.Features.Launch;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Shaders;
 using JiayiLauncher.Settings;
@@ -58,10 +57,7 @@ public static class RichPresence
 		
 		_startTime = DateTime.UtcNow;
 		
-		_client = new DiscordRpcClient(
-			JiayiSettings.Instance.DiscordAppId == string.Empty
-			? "858033874264260658"
-			: JiayiSettings.Instance.DiscordAppId);
+		_client = new DiscordRpcClient("1138925544172441670");
 		
 		_client.SkipIdenticalPresence = true;
 		_client.OnError += (_, e) => Log.Write("Discord", e.Message, Log.LogLevel.Error);
@@ -92,10 +88,7 @@ public static class RichPresence
 			return;
 		}
 		
-		_client ??= new DiscordRpcClient(
-			JiayiSettings.Instance.DiscordAppId == string.Empty
-			? "858033874264260658"
-			: JiayiSettings.Instance.DiscordAppId);
+		_client ??= new DiscordRpcClient("1138925544172441670");
 		
 		if (!_client.IsInitialized) _client.Initialize();
 
@@ -106,17 +99,21 @@ public static class RichPresence
 			
 			Assets = new Assets
 			{
-				LargeImageKey = JiayiSettings.Instance.DiscordLargeImageKey == string.Empty ? "logonewdiscord" : JiayiSettings.Instance.DiscordLargeImageKey,
+				LargeImageKey = JiayiSettings.Instance.DiscordLargeImageKey,
 				LargeImageText = FormatString(JiayiSettings.Instance.DiscordLargeImageText),
 				
-				SmallImageKey = JiayiSettings.Instance.DiscordSmallImageKey == string.Empty ? "minecraft" : JiayiSettings.Instance.DiscordSmallImageKey,
+				SmallImageKey = JiayiSettings.Instance.DiscordSmallImageKey,
 				SmallImageText = FormatString(JiayiSettings.Instance.DiscordSmallImageText)
 			},
 			
 			Timestamps = new Timestamps
 			{
 				Start = JiayiSettings.Instance.DiscordShowElapsedTime ? _startTime : null
-			}
+			},
+			
+			Buttons = JiayiSettings.Instance.DiscordShowDownloadButton
+				? new[] { new Button { Label = "Download Jiayi", Url = "https://jiayi.software/launcher" } }
+				: null
 		});		
 	}
 }

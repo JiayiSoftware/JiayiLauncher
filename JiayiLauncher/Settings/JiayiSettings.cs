@@ -165,6 +165,10 @@ public class JiayiSettings
 	
 	[Setting("Show download button", "Discord", "Show a button to download Jiayi.", "RichPresence")]
 	public bool DiscordShowDownloadButton { get; set; } // = false; (because advertising by default is bad)
+	
+	[Setting("Share current mod", "Discord", 
+		"Show a button for other users to add the mod you're playing with. This only works with web mods.", "RichPresence")]
+	public bool DiscordShareCurrentMod { get; set; } // = false;
 
 	[Setting("Large image key", "Discord", "The large image key to use for rich presence.", "RichPresence")]
 	public string DiscordLargeImageKey { get; set; } = "logo";

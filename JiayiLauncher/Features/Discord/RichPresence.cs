@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Timers;
 using DiscordRPC;
 using JiayiLauncher.Features.Game;
@@ -99,6 +101,23 @@ public static class RichPresence
 		
 		if (!_client.IsInitialized) _client.Initialize();
 
+		var buttons = new List<Button>();
+		
+		if (JiayiSettings.Instance.DiscordShowDownloadButton)
+		{
+			buttons.Add(new Button { Label = "Download Jiayi", Url = "https://jiayi.software/launcher" });
+		}
+
+		if (JiayiSettings.Instance.DiscordShareCurrentMod)
+		{
+			if (Minecraft.ModsLoaded.Count != 1) return;
+			
+			var mod = Minecraft.ModsLoaded.FirstOrDefault(x => x.FromInternet);
+			if (mod == null) return;
+			
+			buttons.Add(new Button { Label = "Add this mod", Url = $"jiayi://addmod/{mod.Path}" });
+		}
+
 		_client.SetPresence(new DiscordRPC.RichPresence
 		{
 			Details = FormatString(JiayiSettings.Instance.DiscordDetails),
@@ -118,9 +137,7 @@ public static class RichPresence
 				Start = JiayiSettings.Instance.DiscordShowElapsedTime ? _startTime : null
 			},
 			
-			Buttons = JiayiSettings.Instance.DiscordShowDownloadButton
-				? new[] { new Button { Label = "Download Jiayi", Url = "https://jiayi.software/launcher" } }
-				: null
+			Buttons = buttons.ToArray()
 		});		
 	}
 }

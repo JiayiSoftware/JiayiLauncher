@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Shared;
@@ -307,11 +308,50 @@ public class JiayiSettings
 		}
 	}
 	
-	public List<PropertyInfo> GetSettings() => GetType().GetProperties().Where(p => p.GetCustomAttribute<SettingAttribute>() != null).ToList();
+	public List<PropertyInfo> GetSettings() => GetType().GetProperties()
+		.Where(p => p.GetCustomAttribute<SettingAttribute>() != null).ToList();
 	
 	public PropertyInfo? GetSetting(string name) => GetSettings().FirstOrDefault(p => p.Name == name);
 	
-	public List<string> GetCategories() => GetSettings().Select(p => p.GetCustomAttribute<SettingAttribute>()!.Category).Distinct().ToList();
+	public List<string> GetCategories() => GetSettings()
+		.Select(p => p.GetCustomAttribute<SettingAttribute>()!.Category).Distinct().ToList();
 	
-	public List<PropertyInfo> GetSettingsInCategory(string category) => GetSettings().Where(p => p.GetCustomAttribute<SettingAttribute>()!.Category == category).ToList();
+	public List<PropertyInfo> GetSettingsInCategory(string category) => GetSettings()
+		.Where(p => p.GetCustomAttribute<SettingAttribute>()!.Category == category).ToList();
+	
+	public bool IsDefault(PropertyInfo property)
+	{
+		var defaultSettings = new JiayiSettings();
+        var defaultValue = property.GetValue(defaultSettings);
+        var currentValue = property.GetValue(this);
+        
+        // slider settings are a special case
+        if (property.PropertyType == typeof(int[]))
+		{
+	        var defaultSlider = (int[])defaultValue!;
+	        var currentSlider = (int[])currentValue!;
+	        return defaultSlider[2] == currentSlider[2];
+		}
+        
+        // floats too
+        if (property.PropertyType == typeof(float[]))
+        {
+	        var defaultSlider = (float[])defaultValue!;
+	        var currentSlider = (float[])currentValue!;
+	        return defaultSlider[2] == currentSlider[2];
+        }
+        
+        // i don't want people messing up their paths when clicking the reset button so ignore those
+        var setting = property.GetCustomAttribute<SettingAttribute>()!;
+        if (setting.Name.Contains("path", StringComparison.OrdinalIgnoreCase)) return true;
+        
+        return Equals(defaultValue, currentValue);
+	}
+
+	public void ResetToDefault(PropertyInfo setting)
+	{
+		var defaultSettings = new JiayiSettings();
+		setting.SetValue(this, setting.GetValue(defaultSettings));
+		Save();
+	}
 }

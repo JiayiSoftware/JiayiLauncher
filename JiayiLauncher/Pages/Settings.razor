@@ -35,9 +35,14 @@
                     <div>
                         <div class="setting-title">
                             <strong>@settingInfo.Name</strong>
+                            @if (!JiayiSettings.Instance.IsDefault(setting))
+                            {
+                                <span class="material-symbols-sharp extra-button" title="Reset to default" 
+                                      @onclick="() => JiayiSettings.Instance.ResetToDefault(setting)">undo</span>
+                            }
                             @if (settingInfo.Tooltip != string.Empty)
                             {
-                                <span class="material-symbols-sharp tooltip" title="More info" 
+                                <span class="material-symbols-sharp extra-button" title="More info" 
                                       @onclick="() => ShowTooltip(settingInfo.Tooltip)">help_outline</span>
                             }
                         </div>

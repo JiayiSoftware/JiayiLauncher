@@ -29,6 +29,8 @@
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
     
+    public static MainLayout Instance { get; private set; } = default!;
+    
     private Sidebar? _sidebar;
     private string _margin = "5.5rem";
     
@@ -53,6 +55,8 @@
     {
         if (!firstRender) return;
         
+        Instance = this;
+        
         if (_sidebar != null) _sidebar.OnToggle += ChangeMargin;
         Arguments.Changed += (_, _) => HandleArgs(Arguments.Get());
 
@@ -68,6 +72,11 @@
             _updater.UpdateInstalled += UpdateInstalled;
             await UpdateCheck();
         }
+    }
+
+    public void Reload()
+    {
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
     }
 
     private void UpdateInstalled(object? sender, EventArgs e)

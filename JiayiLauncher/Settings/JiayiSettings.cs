@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Shared;
 using JiayiLauncher.Utils;
 using Microsoft.Win32;
 
@@ -106,9 +107,12 @@ public class JiayiSettings
 	[Setting("Border thickness", "Appearance", "The thickness of the borders on UI elements.")]
 	public int[] BorderThickness { get; set; } = { 0, 5, 0 };
 
-	[Setting("Save theme", "Appearance",
-		"Save changes made to your theme. Hit F5 to see it in action.")]
-	[JsonIgnore] public (string, Action) SaveTheme { get; set; } = ("Save", ThemeManager.ApplyTheme);
+	[Setting("Save theme", "Appearance", "Save changes made to your theme.")]
+	[JsonIgnore] public (string, Action) SaveTheme { get; set; } = ("Save", () =>
+	{
+		ThemeManager.ApplyTheme();
+		MainLayout.Instance.Reload();
+	});
 
 	[Setting("Show theme", "Appearance",
 		"Reveal your theme in File Explorer. You can share this with other people or use other people's themes.")]
@@ -122,8 +126,7 @@ public class JiayiSettings
 		});
 	});
 
-	[Setting("Restore default theme", "Appearance", 
-		"Go back to Jiayi's default theme. Again, press F5 to see this take effect.", confirm: true)]
+	[Setting("Restore default theme", "Appearance", "Go back to Jiayi's default theme.", confirm: true)]
 	[JsonIgnore] public (string, Action) RestoreDefaultTheme { get; set; } = ("Restore", () =>
 	{
 		var baseSettings = new JiayiSettings();
@@ -138,6 +141,7 @@ public class JiayiSettings
 		
 		Instance!.Save();
 		ThemeManager.ApplyTheme();
+		MainLayout.Instance.Reload();
 	});
 
 	// discord settings

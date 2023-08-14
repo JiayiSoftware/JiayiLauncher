@@ -5,7 +5,6 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Windows.Management.Core;
 using Windows.Management.Deployment;
 using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Shaders;
@@ -38,7 +37,7 @@ public static class VersionManager
 	public static List<string> GetCustomVersions()
 	{
 		Directory.CreateDirectory(JiayiSettings.Instance!.VersionsPath);
-		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);
+		var folders = Directory.GetDirectories(JiayiSettings.Instance.VersionsPath);
 		var versions = VersionList.GetVersionList().GetAwaiter().GetResult();
 
 		return folders.Select(Path.GetFileName).Where(name => versions.All(x => x != name)).ToList()!;

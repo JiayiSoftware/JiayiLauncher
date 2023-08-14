@@ -14,6 +14,7 @@ public static partial class Uninstaller
 		Directory.Delete(path, true);
 		
 		// remove file associations
+		Registry.ClassesRoot.DeleteSubKey("jiayi", false);
 		Registry.ClassesRoot.DeleteSubKey(".jiayi", false);
 		Registry.ClassesRoot.DeleteSubKey("Jiayi_Mod_Collection", false);
 		Registry.CurrentUser.DeleteSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.jiayi", false);

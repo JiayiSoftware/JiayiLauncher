@@ -13,10 +13,11 @@ public class SettingAttribute : Attribute
 	[JsonIgnore] public string Dependency { get; }
 	[JsonIgnore] public string Tooltip { get; set; }
 	[JsonIgnore] public bool Confirm { get; set; }
+	[JsonIgnore] public bool CanReset { get; set; }
 	
 	public SettingAttribute(string name, string category, string description,
 		// optionals
-		string dependency = "", string tooltip = "", bool confirm = false)
+		string dependency = "", string tooltip = "", bool confirm = false, bool canReset = true)
 	{
 		Name = name;
 		Category = category;
@@ -24,5 +25,6 @@ public class SettingAttribute : Attribute
 		Dependency = dependency;
 		Tooltip = tooltip;
 		Confirm = confirm;
+		CanReset = canReset;
 	}
 }

@@ -35,7 +35,7 @@
                     <div>
                         <div class="setting-title">
                             <strong>@settingInfo.Name</strong>
-                            @if (!JiayiSettings.Instance.IsDefault(setting))
+                            @if (settingInfo.CanReset && !JiayiSettings.Instance.IsDefault(setting))
                             {
                                 <span class="material-symbols-sharp extra-button" title="Reset to default" 
                                       @onclick="() => JiayiSettings.Instance.ResetToDefault(setting)">undo</span>

@@ -27,7 +27,7 @@ public class JiayiSettings
 	private static JsonSerializerOptions? _options;
 
 	// general settings
-	[Setting("Mod folder path", "General", "The path to the folder containing your mods.")]
+	[Setting("Mod folder path", "General", "The path to the folder containing your mods.", canReset: false)]
 	public string ModCollectionPath { get; set; } = string.Empty;
 
 	// note these types of settings should probably be ignored by the json serializer
@@ -49,13 +49,13 @@ public class JiayiSettings
 		if (ModCollection.Current != null) ModCollection.Current.Export(path);
 	});
 	
-	[Setting("Profile folder path", "General", "The path to the folder containing your profiles.")]
+	[Setting("Profile folder path", "General", "The path to the folder containing your profiles.", canReset: false)]
 	public string ProfileCollectionPath { get; set; } = string.Empty;
 	
-	[Setting("Version folder path", "General", "The path to the folder containing your game installs.")]
+	[Setting("Version folder path", "General", "The path to the folder containing your game installs.", canReset: false)]
 	public string VersionsPath { get; set; } = string.Empty;
 	
-	[Setting("Shader folder path", "General", "The path to the folder containing your shaders.")]
+	[Setting("Shader folder path", "General", "The path to the folder containing your shaders.", canReset: false)]
 	public string ShadersPath { get; set; } = string.Empty;
 	
 	// appearance settings (my favorite)
@@ -69,10 +69,10 @@ public class JiayiSettings
 	public Color AccentColor { get; set; } = Color.FromArgb(220, 0, 0);
 	
 	[Setting("Text color", "Appearance", "The color of text seen throughout the launcher.")]
-	public Color TextColor { get; set; } = Color.White;
+	public Color TextColor { get; set; } = Color.FromArgb(255, 255, 255); // Color.White causes issues with the reset button
 	
 	[Setting("Text color (on accent)", "Appearance", "The color of text on top of the accent color.")]
-	public Color AccentTextColor { get; set; } = Color.White;
+	public Color AccentTextColor { get; set; } = Color.FromArgb(255, 255, 255);
 	
 	[Setting("Gray text color", "Appearance", "A gray version of the text color.")]
 	public Color GrayTextColor { get; set; } = Color.FromArgb(126, 126, 126);
@@ -340,10 +340,6 @@ public class JiayiSettings
 	        var currentSlider = (float[])currentValue!;
 	        return defaultSlider[2] == currentSlider[2];
         }
-        
-        // i don't want people messing up their paths when clicking the reset button so ignore those
-        var setting = property.GetCustomAttribute<SettingAttribute>()!;
-        if (setting.Name.Contains("path", StringComparison.OrdinalIgnoreCase)) return true;
         
         return Equals(defaultValue, currentValue);
 	}

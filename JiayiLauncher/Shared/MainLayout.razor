@@ -6,6 +6,7 @@
 @using JiayiLauncher.Utils
 @using System.IO
 @using System.Reflection
+@using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
 @using JiayiLauncher.Shared.Components.Toasts
 
@@ -171,6 +172,18 @@
 
     private void HandleArgs(string args)
     {
+        if (args.StartsWith("addmod/"))
+        {
+            var modPath = args.Replace("addmod/", "");
+            var mod = ModImporter.ImportFromPath(modPath);
+            
+            var parameters = new ModalParameters()
+                .Add(nameof(EditMod.Mod), mod)
+                .Add(nameof(EditMod.FromUrlProtocol), true);
+            
+            ModalService.Show<EditMod>("Edit mod", parameters);
+        }
+        
         if (File.Exists(args))
         {
             var parameters = new ModalParameters()

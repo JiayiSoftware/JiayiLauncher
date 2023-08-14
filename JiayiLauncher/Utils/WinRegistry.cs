@@ -22,7 +22,7 @@ public static class WinRegistry
 		
 		var userChoice =
 			Registry.CurrentUser.OpenSubKey(
-				"Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\" + extension, true);
+				@"Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" + extension, true);
 		if (userChoice != null)
 		{
 			userChoice.DeleteSubKey("UserChoice", false);
@@ -33,10 +33,20 @@ public static class WinRegistry
 		SHChangeNotify(0x08000000, 0x0000, nint.Zero, nint.Zero);
 	}
 
+	public static void RegisterUrlProtocol()
+	{
+		var protocolKey = Registry.ClassesRoot.CreateSubKey("jiayi"); // same thing as above
+		protocolKey.SetValue("", "URL: Jiayi Protocol");
+		protocolKey.SetValue("URL Protocol", "");
+		
+		protocolKey.CreateSubKey("shell").CreateSubKey("open").CreateSubKey("command")
+			.SetValue("", $"\"{Environment.ProcessPath}\" \"%1\"");
+	}
+
 	public static void EnableDeveloperMode()
 	{
 		var appModelUnlockKey = Registry.LocalMachine.OpenSubKey(
-			"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock", true);
+			@"SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", true);
 		
 		appModelUnlockKey?.SetValue("AllowDevelopmentWithoutDevLicense", 1, RegistryValueKind.DWord);
 	}
@@ -44,7 +54,7 @@ public static class WinRegistry
 	public static bool DeveloperModeEnabled()
 	{
 		var appModelUnlockKey = Registry.LocalMachine.OpenSubKey(
-			"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock", false);
+			@"SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", false);
 
 		var val = (int?)appModelUnlockKey?.GetValue("AllowDevelopmentWithoutDevLicense");
 		return val == 1;

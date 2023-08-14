@@ -26,6 +26,14 @@
             Mods will be saved to their default location, which you can change in settings
         </i>
     }
+    
+    @if (FromUrlProtocol)
+    {
+        <br>
+        <i style="color: darkred; font-size: 14px">
+            This mod came from an external app or website. Don't add mods from untrusted sources.
+        </i>
+    }
 </div>
 
 @code {
@@ -33,6 +41,9 @@
     
     [Parameter]
     public Mod? Mod { get; set; }
+    
+    [Parameter]
+    public bool FromUrlProtocol { get; set; }
     
     [CascadingParameter]
     private BlazoredModalInstance Modal { get; set; } = default!;

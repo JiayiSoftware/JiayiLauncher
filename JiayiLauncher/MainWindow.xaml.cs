@@ -24,7 +24,7 @@ namespace JiayiLauncher;
 
 public partial class MainWindow
 {
-	public static WebView2? WebView;
+	private static WebView2? _webView;
 
 	public MainWindow()
 	{
@@ -56,8 +56,9 @@ public partial class MainWindow
 		var principal = new WindowsPrincipal(identity);
 		if (!principal.IsInRole(WindowsBuiltInRole.Administrator)) return;	
 		
-		// register file associations
+		// registry stuff
 		WinRegistry.SetFileAssociation("Jiayi Mod Collection", ".jiayi");
+		WinRegistry.RegisterUrlProtocol();
 		
 		JiayiSettings.Load();
 		if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
@@ -123,7 +124,7 @@ public partial class MainWindow
 	// ReSharper disable once UnusedParameter.Local
 	private void ModifyWebView(object? _, BlazorWebViewInitializedEventArgs e)
 	{
-		WebView = e.WebView;
-		WebView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);
+		_webView = e.WebView;
+		_webView.DefaultBackgroundColor = Color.FromArgb(15, 15, 15);
 	}
 }

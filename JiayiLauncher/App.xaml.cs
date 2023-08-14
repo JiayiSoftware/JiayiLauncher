@@ -19,7 +19,11 @@ public partial class App
 	protected override void OnStartup(StartupEventArgs e)
 	{
 		_mutex = new Mutex(true, "Global\\JiayiLauncher", out var createdNew);
-		var args = Environment.GetCommandLineArgs().Skip(1);
+		var args = Environment.GetCommandLineArgs().Skip(1).ToList();
+		
+		// "jiayi://" might be in the args if the user clicked a jiayi: link
+		if (args.Any(x => x.StartsWith("jiayi://"))) 
+			args = args.Select(x => x.Replace("jiayi://", string.Empty)).ToList();
 
 		if (createdNew)
 		{

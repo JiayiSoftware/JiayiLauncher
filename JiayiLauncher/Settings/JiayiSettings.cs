@@ -207,6 +207,10 @@ public class JiayiSettings
 		tooltip: "May cause issues related to Microsoft Store licensing (determining whether you own the game or not).")]
 	public bool AccelerateGameLoading { get; set; } = false;
 	
+	[Setting("Follow redirects", "Launch", 
+		"Follow redirects when adding web mods. Change this setting if you have trouble adding some mods.")]
+	public bool FollowRedirects { get; set; } = false;
+	
 	// log settings
 	[Setting("Anonymize logs", "Logs", 
 		"Hides any identifying information from logs. This does not apply retroactively.")]

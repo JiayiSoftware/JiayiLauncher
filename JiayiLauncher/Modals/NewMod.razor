@@ -158,19 +158,25 @@
         if (url is null or "") return;
 
         if (!url.StartsWith("http")) url = "https://" + url;
-        var redirect = await GetFinalRedirect(url);
-        url = redirect;
 
-        Uri uri;
+        if (JiayiSettings.Instance!.FollowRedirects)
+        {
+            var redirect = await GetFinalRedirect(url);
+            url = redirect;
 
-        try
-        {
-            uri = new Uri(url);
-        }
-        catch (Exception e)
-        {
-            Log.Write(this, $"GetFinalRedirect failed: {e}", Log.LogLevel.Error);
-            return;
+            Uri uri;
+
+            try
+            {
+                uri = new Uri(url);
+            }
+            catch (Exception e)
+            {
+                Log.Write(this, $"GetFinalRedirect failed: {e}", Log.LogLevel.Error);
+                return;
+            }
+            
+            url = uri.AbsoluteUri;
         }
 
         if (ModCollection.Current != null && ModCollection.Current.HasMod(url))
@@ -188,7 +194,7 @@
 
             if (response.IsSuccessStatusCode)
             {
-                var fileName = uri.AbsoluteUri.Split('/')[^1];
+                var fileName = url.Split('/')[^1];
 
                 var hasContentDisposition = response.Content.Headers.ContentDisposition is { FileName: not null };
                 var isValidFileName = fileName.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 

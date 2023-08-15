@@ -154,6 +154,7 @@ public class JiayiSettings
 	%mod_count% - how many mods you have in your collection
 	%shader_name% - the name of the shader you're using
 	%profile_count% - how many profiles you have in your collection
+	%launcher_version% - the version of Jiayi you're using
 
 	Only 1 formatting string can be used per field.
 	""")]

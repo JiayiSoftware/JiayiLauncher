@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Timers;
 using DiscordRPC;
 using JiayiLauncher.Features.Game;
@@ -55,6 +56,10 @@ public static class RichPresence
 				var profilesPlural = ProfileCollection.Current.Profiles.Count == 1 ? "profile" : "profiles";
 				return f.Replace("%profile_count%",
 					$"{ProfileCollection.Current.Profiles.Count.ToString()} {profilesPlural}");
+			
+			case true when f.Contains("%launcher_version%"):
+				var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
+				return f.Replace("%launcher_version%", $"v{version.Major}.{version.Minor}.{version.Build}");
 		}
 		
 		return f;

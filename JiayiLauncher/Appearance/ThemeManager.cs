@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 
@@ -9,7 +10,8 @@ namespace JiayiLauncher.Appearance;
 
 public static class ThemeManager
 {
-	public static readonly string ThemePath = Path.Combine(Environment.CurrentDirectory, "wwwroot", "css", "theme.css");
+	public static readonly string ThemePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, 
+		"wwwroot", "css", "theme.css");
 
 	public static void LoadTheme()
 	{

@@ -57,7 +57,7 @@
                 @for (var i = 0; i < Math.Min(_amountToDisplay, versions.Count); i++)
                 {
                     var name = versions[i];
-                    var version = _versions[versions.IndexOf(name)];
+                    var version = _versions.FirstOrDefault(x => x.Version == name);
                     var alert = name == Version ? "alert" : string.Empty;
 
                     <li class="version @alert" id="@name">
@@ -78,6 +78,7 @@
                             }
                             else
                             {
+                                if (version == null) continue;
                                 if (version.Archs.x64 == null || version.Archs.x64.UpdateIds.Count == 0)
                                 {
                                     <JiayiButton Size="@JiayiButton.ButtonSize.Small" Disabled="true">Download</JiayiButton>

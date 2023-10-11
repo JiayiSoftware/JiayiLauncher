@@ -27,16 +27,17 @@
         <JiayiTextBox Style="width: 99%" Placeholder="cool-website.com/path/to/mod.dll" @ref="_urlTextBox" />
     </div>
     
-    <div class="separator">
-        <div class="separator-line"></div>
-        <p>or</p>
-        <div class="separator-line"></div>
-    </div>
-
-    <div class="ambrosial">
-        <p>Import clients from <a class="ambrosial-link" href="https://github.com/disepi/ambrosial">Ambrosial</a></p>
-        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="AmbrosialClicked">Browse</JiayiButton>
-    </div>
+    @* ambrosial is dead *@
+    @* <div class="separator"> *@
+    @*     <div class="separator-line"></div> *@
+    @*     <p>or</p> *@
+    @*     <div class="separator-line"></div> *@
+    @* </div> *@
+    @* *@
+    @* <div class="ambrosial"> *@
+    @*     <p>Import clients from <a class="ambrosial-link" href="https://github.com/disepi/ambrosial">Ambrosial</a></p> *@
+    @*     <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="AmbrosialClicked">Browse</JiayiButton> *@
+    @* </div> *@
 </div>
 
 @code {
@@ -239,9 +240,9 @@
         await LinkSubmitted();
     }
 
-    private void AmbrosialClicked()
-    {
-        NavigationManager.NavigateTo("/Ambrosial");
-    }
+    // private void AmbrosialClicked()
+    // {
+    //     NavigationManager.NavigateTo("/Ambrosial");
+    // }
 
 }

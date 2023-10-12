@@ -13,12 +13,17 @@ public static class PackageData
 {
 	public static PackageManager PackageManager { get; } = new();
 	
+	private static AppDiagnosticInfo? _minecraftApp;
+	
 	public static async Task<AppDiagnosticInfo?> GetPackage()
 	{
+		if (_minecraftApp != null) return _minecraftApp;
 		var info = 
 			await AppDiagnosticInfo.RequestInfoForPackageAsync("Microsoft.MinecraftUWP_8wekyb3d8bbwe");
 		if (info == null || info.Count == 0) return null;
-		return info[0];
+		_minecraftApp = info[0];
+		
+		return _minecraftApp;
 	}
 
 	public static async Task<string> GetVersion()

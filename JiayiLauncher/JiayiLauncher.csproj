@@ -29,6 +29,7 @@
         <PackageReference Include="Blazored.Modal" Version="7.1.0" />
         <PackageReference Include="Blazored.Toast" Version="4.1.0" />
         <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
+        <PackageReference Include="Fluxor.Blazor.Web" Version="5.9.1" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="7.0.92" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Octokit" Version="7.1.0" />

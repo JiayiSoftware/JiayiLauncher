@@ -2,12 +2,14 @@
 @page "/Dashboard"
 
 @using System.Diagnostics
-@using JiayiLauncher.Features.Game
-@using JiayiLauncher.Features.Profiles
-@using JiayiLauncher.Features.Stats
 @using JiayiLauncher.Shared.Components.Mods
+@using JiayiLauncher.State.Dashboard
 
 @inject NavigationManager NavigationManager
+@inject IDispatcher Dispatcher
+@inject IState<DashboardState> DashboardState
+
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
 <h3>Good @DetermineTimeOfDay()</h3>
 
@@ -16,13 +18,20 @@
         <div class="cards-row">
             <div class="card">
                 <h4>Total play time</h4>
-                <p>@($"{_stats.TotalPlayTime.TotalHours:F2} hours")</p>
+                @if (DashboardState.Value.Stats == null)
+                {
+                    <p>...</p>
+                }
+                else
+                {
+                    <p>@($"{DashboardState.Value.Stats.TotalPlayTime.TotalHours:F2} hours")</p>
+                }
                 <i>with Jiayi</i>
             </div>
             
             <div class="card">
                 <h4>Your current version</h4>
-                <p>@_version</p>
+                <p>@DashboardState.Value.CurrentVersion</p>
                 <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-top: 0.7rem;" OnClick="VersionClicked">
                     Switch versions
                 </JiayiButton>
@@ -30,16 +39,24 @@
             
             <div class="card">
                 <h4>Profiles</h4>
-                @if (ProfileCollection.Current == null || ProfileCollection.Current.Profiles.Count == 0)
+                
+                @if (DashboardState.Value.Profiles == null)
                 {
-                    <i>No profiles</i>
+                    <i>...</i>
                 }
                 else
                 {
-                    <p>
-                        @ProfileCollection.Current.Profiles.Count @(" ") 
-                        @Pluralize(ProfileCollection.Current.Profiles.Count, "profile")
-                    </p>
+                    if (DashboardState.Value.Profiles.Profiles.Count == 0)
+                    {
+                        <i>No profiles</i>
+                    }
+                    else
+                    {
+                        <p>
+                            @DashboardState.Value.Profiles.Profiles.Count @(" ") 
+                            @Pluralize(DashboardState.Value.Profiles.Profiles.Count, "profile")
+                        </p>
+                    }
                 }
                 
                 <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-top: 0.7rem;" OnClick="ProfileClicked">
@@ -52,28 +69,42 @@
             <div class="card">
                 <h4>Most recent mod</h4>
                 
-                @if (_stats.MostRecentMod == null)
+                @if (DashboardState.Value.Stats == null)
                 {
-                    <i>Launch a mod to see it here</i>
+                    <i>...</i>
                 }
                 else
                 {
-                    <JiayiModCard Mod="_stats.MostRecentMod" />
-                    <i>@($"{_stats.MostRecentMod.PlayTime.TotalHours:F2} hours played")</i>
+                    if (DashboardState.Value.Stats.MostRecentMod == null)
+                    {
+                        <i>Launch a mod to see it here</i>
+                    }
+                    else
+                    {
+                        <JiayiModCard Mod="DashboardState.Value.Stats.MostRecentMod" />
+                        <i>@($"{DashboardState.Value.Stats.MostRecentMod.PlayTime.TotalHours:F2} hours played")</i>
+                    }
                 }
             </div>
             
             <div class="card">
                 <h4>Most played mod</h4>
 
-                @if (_stats.MostPlayedMod == null)
+                @if (DashboardState.Value.Stats == null)
                 {
-                    <i>Launch a mod to see it here</i>
+                    <i>...</i>
                 }
                 else
                 {
-                    <JiayiModCard Mod="_stats.MostPlayedMod" />
-                    <i>@($"{_stats.MostPlayedMod.PlayTime.TotalHours:F2} hours played")</i>
+                    @if (DashboardState.Value.Stats.MostPlayedMod == null)
+                    {
+                        <i>Launch a mod to see it here</i>
+                    }
+                    else
+                    {
+                        <JiayiModCard Mod="DashboardState.Value.Stats.MostPlayedMod" />
+                        <i>@($"{DashboardState.Value.Stats.MostPlayedMod.PlayTime.TotalHours:F2} hours played")</i>
+                    }
                 }
             </div>
             
@@ -112,16 +143,12 @@
 }
 
 @code {
-    private JiayiStats _stats;
-    private string _version;
     private bool _debug => Debugger.IsAttached;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        _stats = JiayiStats.Instance!;
-        _version = await PackageData.GetVersion();
-        
-        await base.OnInitializedAsync();
+        base.OnInitialized();
+        Dispatcher.Dispatch(new LoadDashboardAction());
     }
 
     private string DetermineTimeOfDay()

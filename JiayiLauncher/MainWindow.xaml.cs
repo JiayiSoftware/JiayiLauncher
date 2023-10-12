@@ -2,12 +2,14 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Windows;
 using System.Windows.Interop;
 using Blazored.Modal;
 using Blazored.Toast;
+using Fluxor;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Discord;
 using JiayiLauncher.Features.Mods;
@@ -44,6 +46,10 @@ public partial class MainWindow
 		services.AddWpfBlazorWebView();
 		services.AddBlazoredModal();
 		services.AddBlazoredToast();
+		services.AddFluxor(options =>
+		{
+			options.ScanAssemblies(Assembly.GetExecutingAssembly());
+		});
 #if DEBUG
 		services.AddBlazorWebViewDeveloperTools();
 #endif

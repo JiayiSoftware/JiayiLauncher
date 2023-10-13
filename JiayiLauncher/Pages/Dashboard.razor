@@ -4,10 +4,11 @@
 @using System.Diagnostics
 @using JiayiLauncher.Shared.Components.Mods
 @using JiayiLauncher.State.Dashboard
+@using JiayiLauncher.State.Dashboard.Actions
 
 @inject NavigationManager NavigationManager
 @inject IDispatcher Dispatcher
-@inject IState<DashboardState> DashboardState
+@inject IState<DashboardState> State
 
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
@@ -18,20 +19,20 @@
         <div class="cards-row">
             <div class="card">
                 <h4>Total play time</h4>
-                @if (DashboardState.Value.Stats == null)
+                @if (State.Value.Stats == null)
                 {
                     <p>...</p>
                 }
                 else
                 {
-                    <p>@($"{DashboardState.Value.Stats.TotalPlayTime.TotalHours:F2} hours")</p>
+                    <p>@($"{State.Value.Stats.TotalPlayTime.TotalHours:F2} hours")</p>
                 }
                 <i>with Jiayi</i>
             </div>
             
             <div class="card">
                 <h4>Your current version</h4>
-                <p>@DashboardState.Value.CurrentVersion</p>
+                <p>@State.Value.CurrentVersion</p>
                 <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-top: 0.7rem;" OnClick="VersionClicked">
                     Switch versions
                 </JiayiButton>
@@ -40,21 +41,21 @@
             <div class="card">
                 <h4>Profiles</h4>
                 
-                @if (DashboardState.Value.Profiles == null)
+                @if (State.Value.Profiles == null)
                 {
                     <i>...</i>
                 }
                 else
                 {
-                    if (DashboardState.Value.Profiles.Profiles.Count == 0)
+                    if (State.Value.Profiles.Profiles.Count == 0)
                     {
                         <i>No profiles</i>
                     }
                     else
                     {
                         <p>
-                            @DashboardState.Value.Profiles.Profiles.Count @(" ") 
-                            @Pluralize(DashboardState.Value.Profiles.Profiles.Count, "profile")
+                            @State.Value.Profiles.Profiles.Count @(" ") 
+                            @Pluralize(State.Value.Profiles.Profiles.Count, "profile")
                         </p>
                     }
                 }
@@ -69,20 +70,20 @@
             <div class="card">
                 <h4>Most recent mod</h4>
                 
-                @if (DashboardState.Value.Stats == null)
+                @if (State.Value.Stats == null)
                 {
                     <i>...</i>
                 }
                 else
                 {
-                    if (DashboardState.Value.Stats.MostRecentMod == null)
+                    if (State.Value.Stats.MostRecentMod == null)
                     {
                         <i>Launch a mod to see it here</i>
                     }
                     else
                     {
-                        <JiayiModCard Mod="DashboardState.Value.Stats.MostRecentMod" />
-                        <i>@($"{DashboardState.Value.Stats.MostRecentMod.PlayTime.TotalHours:F2} hours played")</i>
+                        <JiayiModCard Mod="State.Value.Stats.MostRecentMod" />
+                        <i>@($"{State.Value.Stats.MostRecentMod.PlayTime.TotalHours:F2} hours played")</i>
                     }
                 }
             </div>
@@ -90,20 +91,20 @@
             <div class="card">
                 <h4>Most played mod</h4>
 
-                @if (DashboardState.Value.Stats == null)
+                @if (State.Value.Stats == null)
                 {
                     <i>...</i>
                 }
                 else
                 {
-                    @if (DashboardState.Value.Stats.MostPlayedMod == null)
+                    @if (State.Value.Stats.MostPlayedMod == null)
                     {
                         <i>Launch a mod to see it here</i>
                     }
                     else
                     {
-                        <JiayiModCard Mod="DashboardState.Value.Stats.MostPlayedMod" />
-                        <i>@($"{DashboardState.Value.Stats.MostPlayedMod.PlayTime.TotalHours:F2} hours played")</i>
+                        <JiayiModCard Mod="State.Value.Stats.MostPlayedMod" />
+                        <i>@($"{State.Value.Stats.MostPlayedMod.PlayTime.TotalHours:F2} hours played")</i>
                     }
                 }
             </div>

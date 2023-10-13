@@ -1,61 +1,55 @@
-﻿@using JiayiLauncher.Shared.Components.Mods
+﻿@page "/Mods"
+
+@using JiayiLauncher.Shared.Components.Mods
 @using System.IO
 @using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
+@using JiayiLauncher.State.Mods
+@using JiayiLauncher.State.Mods.Actions
 @using JiayiLauncher.Utils
 
-@page "/Mods"
+@inject IDispatcher Dispatcher
+@inject IState<ModsState> State
+
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
 <h3>Mods</h3>
 
 <div class="find-tools">
     <span class="material-symbols-sharp">search</span>
-    <JiayiTextBox Placeholder="Search mods" @ref="_searchBox" Changed="StateHasChanged" />
+    <JiayiTextBox Placeholder="Search mods" @ref="_searchBox" Changed="UpdateFilters" />
 
     <div class="separator"></div>
 
     <span class="material-symbols-sharp">filter_list</span>
     <p class="filter-by">Filter by:</p>
-    <JiayiFilter @ref="_localFilter" Changed="StateHasChanged">Locally stored</JiayiFilter>
-    <JiayiFilter @ref="_onlineFilter" Changed="StateHasChanged">From the web</JiayiFilter>
+    <JiayiFilter @ref="_localFilter" Changed="UpdateFilters">Locally stored</JiayiFilter>
+    <JiayiFilter @ref="_onlineFilter" Changed="UpdateFilters">From the web</JiayiFilter>
 
     <p class="invisible-normalizer">invisible</p>
 </div>
 
 <div class="mods">
     <ul class="mod-list">
-        @if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
+        @if (State.Value.ModCollectionCreated)
         {
-            _searchResults = 0;
-
-            if (ModCollection.Current == null || ModCollection.Current.BasePath != JiayiSettings.Instance.ModCollectionPath)
+            if (State.Value.ModCollection == null || State.Value.ModCollection.BasePath != JiayiSettings.Instance!.ModCollectionPath)
             {
-                ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
+                Dispatcher.Dispatch(new CreateModCollectionAction(JiayiSettings.Instance!.ModCollectionPath));
             }
             
-            foreach (var mod in ModCollection.Current!.Mods)
+            foreach (var mod in State.Value.FilteredMods)
             {
-                if (_localFilter != null && _onlineFilter != null)
-                {
-                    if (_localFilter.Checked && !_onlineFilter.Checked && mod.FromInternet)
-                        continue;
-                    if (_onlineFilter.Checked && !_localFilter.Checked && !mod.FromInternet)
-                        continue;
-                }
-
-                if (!mod.Name.ToLower().Contains(_searchBox?.Value?.ToLower() ?? "")) continue;
-
-                _searchResults++;
                 <JiayiModCard Mod="@mod" />
             }
         }
     </ul>
-    @if (_searchResults == 0 && ModCollection.Current?.Mods.Count > 0)
+    @if (State.Value.FilteredMods.Count == 0 && State.Value.ModCollection?.Mods.Count > 0)
     {
         <p style="text-align: center; margin-top: 0;">No results found.</p>
     }
     <p class="add-new" @ondragenter="OnDragEnter" @ondragleave="OnDragLeave" @ondragover="OnDragEnter" data-hovered="@(_hovered ? "yes" : "no")">
-        @if (JiayiSettings.Instance.ModCollectionPath != string.Empty)
+        @if (State.Value.ModCollectionCreated)
         {
             <label class="drag-area">
                 Drag mods, folders, or URLs here<br>
@@ -92,11 +86,12 @@
     private JiayiFilter? _localFilter;
     private JiayiFilter? _onlineFilter;
 
-    private int _searchResults;
-
     protected override void OnInitialized()
     {
+        base.OnInitialized();
+        
         Instance = this;
+        Dispatcher.Dispatch(new LoadModsAction());
     }
 
     public void Refresh() => StateHasChanged();
@@ -105,6 +100,12 @@
     {
         var modal = ModalService.Show<NewMod>("Add new mod");
         await modal.Result;
+    }
+
+    private void UpdateFilters()
+    {
+        Dispatcher.Dispatch(new FindModsAction(
+            _searchBox!.Value ?? string.Empty, _localFilter!.Checked, _onlineFilter!.Checked));
     }
 
     private void OnDragEnter(DragEventArgs obj)
@@ -135,7 +136,7 @@
             if (file.ContentType == "application/x-msdownload")
                 return true;
 
-            Log.Write("Mods", $"Invalid file: {file.Name} | Expected: .dll", Log.LogLevel.Warning);
+            Log.Write("Mods", $"Invalid file: {file.Name}, expected .dll or .exe", Log.LogLevel.Warning);
             return false;
         }).ToList().AsReadOnly();
 

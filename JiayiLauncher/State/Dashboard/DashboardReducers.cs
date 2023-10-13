@@ -2,6 +2,7 @@
 using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Profiles;
 using JiayiLauncher.Features.Stats;
+using JiayiLauncher.State.Dashboard.Actions;
 
 namespace JiayiLauncher.State.Dashboard;
 

@@ -1,14 +1,17 @@
 ﻿@inherits LayoutComponentBase
 
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 @inject IToastService ToastService
 
 @using JiayiLauncher.Utils
 @using System.IO
+@using System.Net.Http
 @using System.Reflection
 @using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
 @using JiayiLauncher.Shared.Components.Toasts
+@using Microsoft.JSInterop
 
 <BlazoredToasts Position="ToastPosition.BottomRight"
                 ShowProgressBar="true"
@@ -19,7 +22,46 @@
 
 <Sidebar @ref="_sidebar"/>
 
-<div class="background-image"></div>
+@if (JiayiSettings.Instance!.BackgroundImageUrl != string.Empty)
+{
+    var client = new HttpClient();
+    var message = new HttpRequestMessage(HttpMethod.Head, JiayiSettings.Instance.BackgroundImageUrl);
+    var response = client.Send(message);
+
+    var contentType = response.Content.Headers.ContentType?.MediaType ?? "null";
+
+    if (contentType.StartsWith("video")) 
+        _useVideo = true;
+
+    if (contentType.StartsWith("image")) 
+        _useVideo = false;
+}
+
+@if (_useVideo != null)
+{
+    if (_useVideo == true)
+    {
+        <div class="background-video">
+            <video autoplay muted loop id="bg-video">
+                <source src="@JiayiSettings.Instance.BackgroundImageUrl" type="video/mp4">
+            </video>
+        </div>
+    }
+    else
+    {
+        <div class="background-image"></div>
+    }
+}
+
+@* force video to play with javascript *@
+@if (_useVideo == true)
+{
+    <script>
+        var video = document.getElementById("bg-video");
+        video.play();
+        video.muted = true;
+    </script>
+}
 
 <main style="margin-left: @_margin" @onkeydown="KeyDown">
     @Body
@@ -33,6 +75,9 @@
     
     private Sidebar? _sidebar;
     private string _margin = "5.5rem";
+    
+    // nullable for 3 way bool
+    private bool? _useVideo;
     
     private readonly Updater _updater = new();
     

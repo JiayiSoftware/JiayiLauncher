@@ -1,5 +1,4 @@
-﻿@using JiayiLauncher.Features.Game
-@using JiayiLauncher.Features.Mods
+﻿@using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Pages
 @using JiayiLauncher.Settings
 @using System.IO
@@ -14,7 +13,22 @@
     
     <div class="edit-versions" style="margin-bottom: 1em">
         <p>Supported versions</p>
-        <JiayiDropDown Multiselect="true" Items="_supportedVersions" Name="Select versions" @ref="_versionsDropDown" SelectedItems="Mod.SupportedVersions"/>
+        <JiayiDropDown Multiselect="true" Items="_supportedVersions" Name="Select versions" SelectedItems="Mod.SupportedVersions" 
+                       @ref="_versionsDropDown"/>
+    </div>
+    
+    <div class="edit-arguments" style="margin-bottom: 1em">
+        <div class="edit-arguments-dropdown" @onclick="_ => _showArguments = !_showArguments">
+            <i>Launch arguments</i>
+            <span class="material-symbols-sharp">
+                @(_showArguments ? "expand_less" : "expand_more")
+            </span>
+        </div>
+        @if (_showArguments)
+        {
+            <JiayiTextBox Placeholder="This does not apply to internal mods" Style="margin-top: 1em; width: 100%" 
+                          @ref="_argumentsTextBox"/>
+        }
     </div>
     
     <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">Save</JiayiButton>
@@ -22,7 +36,7 @@
     @if (JiayiSettings.Instance!.ModCollectionPath == string.Empty)
     {
         <br>
-        <i style="color: var(--text-grayed); font-size: 14px">
+        <i>
             Mods will be saved to their default location, which you can change in settings
         </i>
     }
@@ -30,7 +44,7 @@
     @if (FromUrlProtocol)
     {
         <br>
-        <i style="color: darkred; font-size: 14px">
+        <i style="color: darkred;">
             This mod came from an external app or website. Don't add mods from untrusted sources.
         </i>
     }
@@ -50,6 +64,9 @@
     
     private JiayiTextBox? _nameTextBox;
     private JiayiDropDown? _versionsDropDown;
+    private JiayiTextBox? _argumentsTextBox;
+    
+    private bool _showArguments = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -73,6 +90,7 @@
 
         Mod.Name = _nameTextBox?.Value ?? Mod.Name;
         Mod.SupportedVersions = _versionsDropDown?.SelectedItems ?? Mod.SupportedVersions;
+        Mod.Arguments = _argumentsTextBox?.Value ?? Mod.Arguments;
         
         if (JiayiSettings.Instance!.ModCollectionPath == string.Empty)
         {

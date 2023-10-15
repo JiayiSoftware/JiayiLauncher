@@ -86,8 +86,8 @@ public class JiayiSettings
 	[Setting("Use background image", "Appearance", "Use an image as the background of the launcher.")]
 	public bool UseBackgroundImage { get; set; } // = false;
 	
-	[Setting("Background image URL", "Appearance", "The URL of the image to use as the background.", 
-		"UseBackgroundImage", "The URL should be a link to an image on the internet. A path to a local image will not work.")]
+	[Setting("Background image URL", "Appearance", "The URL of the image to use as the background. Videos are also supported.", 
+		"UseBackgroundImage", "The URL should be a link to an image or video on the internet. A path to a local image will not work.")]
 	public string BackgroundImageUrl { get; set; } = string.Empty;
 	
 	[Setting("Background blur", "Appearance", "How much to blur the background by.", "UseBackgroundImage")]

@@ -122,7 +122,13 @@ public static class Launcher
 				return LaunchResult.AlreadyRunning;
 			}
 
-			Process.Start(path);
+			var info = new ProcessStartInfo
+			{
+				FileName = path,
+				Arguments = mod.Arguments
+			};
+			
+			Process.Start(info);
 			LaunchProgress += 30;
 			LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 			Launching = false;

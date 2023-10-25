@@ -5,6 +5,7 @@
 @using JiayiLauncher.Features.Discord
 @using JiayiLauncher.Features.Game
 @using JiayiLauncher.Shared.Components.Toasts
+@using JiayiLauncher.Utils
 
 @inject NavigationManager NavigationManager
 @inject IToastService ToastService
@@ -37,7 +38,15 @@
             {
                 @if (Mod.FromInternet)
                 {
-                    <span class="material-symbols-sharp" title="Downloaded from the web">cloud_download</span>
+                    if (InternetManager.OfflineMode)
+                    {
+                        <span class="material-symbols-sharp" title="Internet mods are disabled in offline mode"
+                              style="color: var(--text-grayed)">cloud_off</span>
+                    }
+                    else
+                    {
+                        <span class="material-symbols-sharp" title="Downloaded from the web">cloud_download</span>
+                    }
                 }
                 else
                 {
@@ -50,11 +59,18 @@
     <div class="mod-controls">
         @if (Mod.IsValid())
         {
-            <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" Disabled="@_launching"
-                         Size="JiayiButton.ButtonSize.Small">
-                <div class="loading-bar" style="width: @Launcher.LaunchProgress%; opacity: @_showLoadingBar;"></div>
-                Launch
-            </JiayiButton>
+            if (Mod.FromInternet && InternetManager.OfflineMode)
+            {
+                <JiayiButton Size="JiayiButton.ButtonSize.Small" Disabled="true">Launch</JiayiButton>
+            }
+            else
+            {
+                <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" Disabled="@_launching"
+                             Size="JiayiButton.ButtonSize.Small">
+                    <div class="loading-bar" style="width: @Launcher.LaunchProgress%; opacity: @_showLoadingBar;"></div>
+                    Launch
+                </JiayiButton>
+            }
 
             <div class="right">
                 <span class="material-symbols-sharp" title="Edit mod" @onclick="EditClicked">edit</span>
@@ -84,8 +100,6 @@
     {
         if (Launcher.Launching) return;
 
-        Launcher.LaunchResult result;
-
         if (Minecraft.ModsLoaded.Contains(Mod))
         {
             var toastParams = new ToastParameters()
@@ -108,7 +122,7 @@
             {
                 ("Yes", new EventCallback(null, async () =>
                 {
-                    result = await Launcher.Launch(Mod);
+                    await FinishLaunch();
                 })),
                 ("No", EventCallback.Empty)
             };
@@ -121,12 +135,17 @@
             ModalService.Show<MessageBox>("Warning", parameters);
             return;
         }
+        
+        await FinishLaunch();
+    }
 
-        // we good
+    private async Task FinishLaunch()
+    {
+        var parameters = new ModalParameters();
         _launching = true;
 
         Launcher.LaunchProgressChanged += (_, _) => StateHasChanged();
-        result = await Launcher.Launch(Mod);
+        var result = await Launcher.Launch(Mod);
 
         _launching = false;
 

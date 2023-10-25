@@ -196,7 +196,8 @@ public class JiayiSettings
 	public bool AutoDownloadUpdates { get; set; } = false;
 	
 	// network settings
-	[Setting("Offline mode", "Network", "Disable access to the internet. Some launcher features may not work.", 
+	[Setting("Offline mode", "Network", 
+		"Disable access to the internet. Some launcher features may not work. Restart Jiayi for this to take full effect.", 
 		tooltip: "Features like internet mods, downloading versions, and checking for updates will not work.")]
 	public bool OfflineMode { get; set; } = false;
 	

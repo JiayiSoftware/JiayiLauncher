@@ -12,6 +12,8 @@ public static class Downloader
 	// a lot of using statements here, (not) sorry if that pisses you off
     public static async Task<string> DownloadMod(Mod mod)
     {
+	    if (InternetManager.OfflineMode) return string.Empty;
+	    
         var fileName = string.Empty;
         if (mod.Path.EndsWith(".dll"))
             fileName = $"{mod.Name}.dll";

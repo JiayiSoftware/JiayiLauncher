@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using Blazored.Modal;
@@ -13,6 +14,7 @@ using JiayiLauncher.Features.Discord;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Profiles;
 using JiayiLauncher.Features.Stats;
+using JiayiLauncher.Features.Versions;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 using Microsoft.AspNetCore.Components.WebView;
@@ -77,7 +79,8 @@ public partial class MainWindow
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Versions");
 			JiayiSettings.Instance.Save();
 		}
-		
+
+		Task.Run(VersionList.UpdateVersions);
 		RichPresence.Initialize();
 		ThemeManager.LoadTheme();
 		JiayiStats.Save();

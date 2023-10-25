@@ -114,7 +114,7 @@
         if (_versionsBox?.Value == null) return;
         
         var version = await VersionList.GetVersion(_versionsBox.Value);
-        var url = await RequestFactory.GetDownloadUrl(version.Archs.x64!.UpdateIds[0]);
+        var url = await RequestFactory.GetDownloadUrl(version.UpdateId);
         
         var parameters = new ModalParameters()
             .Add(nameof(MessageBox.Message), url);

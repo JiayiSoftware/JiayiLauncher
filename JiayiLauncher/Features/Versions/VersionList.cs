@@ -42,6 +42,13 @@ public static class VersionList
 		
 		_loaded = true;
 
+		if (InternetManager.OfflineMode)
+		{
+			Log.Write(nameof(VersionList), "Offline mode enabled, skipping version list update.");
+			if (_versions.Count == 0) _versions.AddRange(_versionDict.Keys);
+			return;
+		}
+
 		await _catalog.QueryDCATAsync(STORE_ID);
 		if (_catalog.Result == DisplayCatalogResult.Found)
 		{
@@ -76,8 +83,7 @@ public static class VersionList
 		}
 		
 		// fetch old versions regardless of result (works as a fallback)
-		var client = new HttpClient();
-		var response = await client.GetAsync(OLD_VERSIONS_DB);
+		var response = await InternetManager.Client.GetAsync(OLD_VERSIONS_DB);
 		var mrArmVersions = await response.Content.ReadAsStringAsync();
 		
 		foreach (var mrArmVersion in mrArmVersions.Split('\n'))

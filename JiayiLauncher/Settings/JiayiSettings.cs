@@ -195,6 +195,11 @@ public class JiayiSettings
 	[Setting("Automatically download updates", "Update", "Always download updates when they're available.")]
 	public bool AutoDownloadUpdates { get; set; } = false;
 	
+	// network settings
+	[Setting("Offline mode", "Network", "Disable access to the internet. Some launcher features may not work.", 
+		tooltip: "Features like internet mods, downloading versions, and checking for updates will not work.")]
+	public bool OfflineMode { get; set; } = false;
+	
 	// launch settings
 	[Setting("Use injection delay", "Launch", "Wait for a set amount of time instead of waiting for the game to load before injecting.")]
 	public bool UseInjectionDelay { get; set; } = false;

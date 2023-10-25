@@ -83,6 +83,10 @@
                                 {
                                     <JiayiButton Size="@JiayiButton.ButtonSize.Small" Disabled="true">Download</JiayiButton>
                                 }
+                                else if (InternetManager.OfflineMode)
+                                {
+                                    <JiayiButton Size="@JiayiButton.ButtonSize.Small" Disabled="true">Download</JiayiButton>
+                                }
                                 else
                                 {
                                     <JiayiButton Size="@JiayiButton.ButtonSize.Small"

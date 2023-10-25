@@ -9,9 +9,7 @@ namespace JiayiLauncher.Features.Launch;
 
 public static class Downloader
 {
-	private static readonly HttpClient _client = new();
-
-    // a lot of using statements here, (not) sorry if that pisses you off
+	// a lot of using statements here, (not) sorry if that pisses you off
     public static async Task<string> DownloadMod(Mod mod)
     {
         var fileName = string.Empty;
@@ -22,7 +20,7 @@ public static class Downloader
 		
         Log.Write(nameof(Downloader), $"Downloading {mod.Name}");
 
-        using var response = await _client.GetAsync(mod.Path, HttpCompletionOption.ResponseHeadersRead);
+        using var response = await InternetManager.Client.GetAsync(mod.Path, HttpCompletionOption.ResponseHeadersRead);
 		Log.Write(nameof(Downloader), $"Server responded with {response.StatusCode}",
 			response.IsSuccessStatusCode ? Log.LogLevel.Info : Log.LogLevel.Error);
 		if (!response.IsSuccessStatusCode) return string.Empty;

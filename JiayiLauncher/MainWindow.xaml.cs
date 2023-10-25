@@ -63,6 +63,8 @@ public partial class MainWindow
 		WinRegistry.RegisterUrlProtocol();
 		
 		JiayiSettings.Load();
+		InternetManager.CheckOnline();
+		
 		if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
 		{
 			ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);

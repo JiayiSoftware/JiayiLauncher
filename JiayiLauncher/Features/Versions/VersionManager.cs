@@ -81,8 +81,7 @@ public static class VersionManager
 
 		if (File.Exists(filePath)) File.Delete(filePath);
 
-		using var client = new HttpClient();
-		using var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+		using var response = await InternetManager.Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
 		
 		if (!response.IsSuccessStatusCode) return;
 		

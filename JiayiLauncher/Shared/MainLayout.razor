@@ -24,9 +24,8 @@
 
 @if (JiayiSettings.Instance!.BackgroundImageUrl != string.Empty)
 {
-    var client = new HttpClient();
     var message = new HttpRequestMessage(HttpMethod.Head, JiayiSettings.Instance.BackgroundImageUrl);
-    var response = client.Send(message);
+    var response = InternetManager.Client.Send(message);
 
     var contentType = response.Content.Headers.ContentType?.MediaType ?? "null";
 
@@ -101,6 +100,24 @@
         if (!firstRender) return;
         
         Instance = this;
+
+        if (InternetManager.OfflineMode)
+        {
+            var parameters = new ToastParameters()
+                .Add(nameof(JiayiToast.Title), "Offline Mode")
+                .Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
+                {
+                    builder.OpenElement(0, "p");
+                    builder.AddContent(1, "You're offline. Some features may not work.");
+                    builder.CloseElement();
+                }))
+                .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
+                {
+                    ("Okay", EventCallback.Empty)
+                });
+            
+            ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
+        }
         
         if (_sidebar != null) _sidebar.OnToggle += ChangeMargin;
         Arguments.Changed += (_, _) => HandleArgs(Arguments.Get());
@@ -153,54 +170,56 @@
 
     private async Task UpdateCheck()
     {
+        if (InternetManager.OfflineMode) return;
+        
         var result = await _updater.IsUpdateAvailable();
-            if (result)
-            {
-                var parameters = new ToastParameters()
-                    .Add(nameof(JiayiToast.Title), "Update available");
+        if (result)
+        {
+            var parameters = new ToastParameters()
+                .Add(nameof(JiayiToast.Title), "Update available");
 
-                if (JiayiSettings.Instance!.AutoDownloadUpdates)
+            if (JiayiSettings.Instance!.AutoDownloadUpdates)
+            {
+                parameters.Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
                 {
-                    parameters.Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
-                    {
-                        builder.OpenElement(0, "p");
-                        builder.AddContent(1, "Downloading update...");
-                        builder.CloseElement();
-                    }));
-                    
-                    ToastService.ShowToast<JiayiToast>(parameters, settings =>
-                    {
-                        settings.Timeout = 5;
-                        settings.ShowProgressBar = true;
-                    });
-                    
-                    await _updater.DownloadLatest();
-                }
-                else
+                    builder.OpenElement(0, "p");
+                    builder.AddContent(1, "Downloading update...");
+                    builder.CloseElement();
+                }));
+                
+                ToastService.ShowToast<JiayiToast>(parameters, settings =>
                 {
-                    parameters.Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
-                    {
-                        builder.OpenElement(0, "p");
-                        builder.AddContent(1, "An update is available. Would you like to download it?");
-                        builder.CloseElement();
-                    }))
-                        .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
-                        {
-                            ("Yes", new EventCallback(null, async () =>
-                            {
-                                await _updater.DownloadLatest();
-                            })),
-                            ("No", EventCallback.Empty),
-                            (_dontAskAgain[Random.Shared.Next(_dontAskAgain.Count - 1)], new EventCallback(null, () =>
-                            {
-                                JiayiSettings.Instance.EnableUpdater = false;
-                                JiayiSettings.Instance.Save();
-                            }))
-                        });
-                    
-                    ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
-                }
+                    settings.Timeout = 5;
+                    settings.ShowProgressBar = true;
+                });
+                
+                await _updater.DownloadLatest();
             }
+            else
+            {
+                parameters.Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
+                {
+                    builder.OpenElement(0, "p");
+                    builder.AddContent(1, "An update is available. Would you like to download it?");
+                    builder.CloseElement();
+                }))
+                    .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
+                    {
+                        ("Yes", new EventCallback(null, async () =>
+                        {
+                            await _updater.DownloadLatest();
+                        })),
+                        ("No", EventCallback.Empty),
+                        (_dontAskAgain[Random.Shared.Next(_dontAskAgain.Count - 1)], new EventCallback(null, () =>
+                        {
+                            JiayiSettings.Instance.EnableUpdater = false;
+                            JiayiSettings.Instance.Save();
+                        }))
+                    });
+                
+                ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
+            }
+        }
     }
 
     private void UpdateDownloaded(object? sender, EventArgs e)

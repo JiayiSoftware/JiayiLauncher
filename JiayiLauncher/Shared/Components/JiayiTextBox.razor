@@ -1,4 +1,5 @@
-﻿<input type="text" class="textbox" placeholder="@Placeholder" style="@Style" @bind="Value" @oninput="OnChange">
+﻿<input type="text" class="textbox" placeholder="@Placeholder" style="@Style" disabled="@Disabled" 
+       @bind="Value" @oninput="OnChange">
 
 @code {
     [Parameter]
@@ -12,6 +13,9 @@
     
     [Parameter]
     public string? Value { get; set; }
+    
+    [Parameter]
+    public bool Disabled { get; set; }
 
     private void OnChange(ChangeEventArgs obj)
     {

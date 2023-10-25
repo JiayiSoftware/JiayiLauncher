@@ -4,6 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Text.Json.Serialization;
 using JiayiLauncher.Features.Stats;
+using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Mods;
 
@@ -32,17 +33,17 @@ public class Mod
 
 	public bool IsValid()
 	{
+		if (InternetManager.OfflineMode) return true;
 		if (_response != null) return _response.IsSuccessStatusCode;
 
 		if (FromInternet)
 		{
 			// ping
-			using var client = new HttpClient();
 			using var request = new HttpRequestMessage(HttpMethod.Head, Path);
 			
 			try
 			{
-				using var response = client.Send(request);
+				using var response = InternetManager.Client.Send(request);
 				_response = response;
 				return response.IsSuccessStatusCode;
 			}

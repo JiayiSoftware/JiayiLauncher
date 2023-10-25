@@ -31,20 +31,21 @@
         if (_clients.Count == 0)
         {
             <i>No clients found</i>
-        } else
+        }
+        else
         {
             <ul class="clients">
-                @foreach (var client in _clients.Where(c => 
+                @foreach (var client in _clients.Where(c =>
                     c.FormattedName.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)
                     || c.SupportedVersion.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)
-                ))
+                    ))
                 {
                     <li class="client">
                         <div class="client-info">
                             <strong>@client.FormattedName</strong>
                             <p>Works on @client.SupportedVersion</p>
                         </div>
-                        <JiayiButton Size="JiayiButton.ButtonSize.Small" 
+                        <JiayiButton Size="JiayiButton.ButtonSize.Small"
                                      OnClick="() => ShowClientModal(client)">Import</JiayiButton>
                     </li>
                 }
@@ -53,7 +54,14 @@
     }
     else
     {
-        <i>Loading...</i>
+        if (InternetManager.OfflineMode)
+        {
+            <i>Not available while offline</i>
+        }
+        else
+        {
+            <i>Loading...</i>
+        }
     }
 </div>
 
@@ -85,8 +93,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        using var client = new HttpClient();
-        using var response = await client.GetAsync(ENDPOINT);
+        using var response = await InternetManager.Client.GetAsync(ENDPOINT);
         
         var resp = await response.Content.ReadAsStringAsync();
         var decoded = Encoding.UTF8.GetString(Convert.FromBase64String(resp));

@@ -15,8 +15,6 @@ public class Updater
 	private const string INSTALLER_URL = "https://jiyayi.mcpeplayground.com/static/JiayiInstaller.exe";
 	
 	private readonly GitHubClient _gh = new(new ProductHeaderValue("JiayiLauncher"));
-	private readonly HttpClient _client = new();
-
 	public event EventHandler? UpdateDownloaded;
 	public event EventHandler? UpdateInstalled;
 	
@@ -49,7 +47,7 @@ public class Updater
 	{
 		Log.Write(this, "Downloading latest version");
 		
-		await using var response = await _client.GetStreamAsync(INSTALLER_URL);
+		await using var response = await InternetManager.Client.GetStreamAsync(INSTALLER_URL);
 		await using var fileStream = File.Create("JiayiInstaller.exe");
 		await response.CopyToAsync(fileStream);
 		

@@ -8,6 +8,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Windows.Security.Authentication.Web.Core;
+using JiayiLauncher.Utils;
 using static JiayiLauncher.Utils.Imports;
 
 namespace JiayiLauncher.Features.Versions;
@@ -79,13 +80,12 @@ public static class RequestFactory
 				new XElement(_updateService + "deviceAttributes", "E:BranchReadinessLevel=CBB&DchuNvidiaGrfxExists=1&ProcessorIdentifier=Intel64%20Family%206%20Model%2063%20Stepping%202&CurrentBranch=rs4_release&DataVer_RS5=1942&FlightRing=Retail&AttrDataVer=57&InstallLanguage=en-US&DchuAmdGrfxExists=1&OSUILocale=en-US&InstallationType=Client&FlightingBranchName=&Version_RS5=10&UpgEx_RS5=Green&GStatus_RS5=2&OSSkuId=48&App=WU&InstallDate=1529700913&ProcessorManufacturer=GenuineIntel&AppVer=10.0.17134.471&OSArchitecture=AMD64&UpdateManagementGroup=2&IsDeviceRetailDemo=0&HidOverGattReg=C%3A%5CWINDOWS%5CSystem32%5CDriverStore%5CFileRepository%5Chidbthle.inf_amd64_467f181075371c89%5CMicrosoft.Bluetooth.Profiles.HidOverGatt.dll&IsFlightingEnabled=0&DchuIntelGrfxExists=1&TelemetryLevel=1&DefaultUserRegion=244&DeferFeatureUpdatePeriodInDays=365&Bios=Unknown&WuClientVer=10.0.17134.471&PausedFeatureStatus=1&Steam=URL%3Asteam%20protocol&Free=8to16&OSVersion=10.0.17134.472&DeviceFamily=Windows.Desktop"))));
 		var doc = new XDocument(envelope);
 		
-		using var client = new HttpClient();
 		using var request = new HttpRequestMessage(HttpMethod.Post, _downloadUrl);
 		
 		request.Content = new StringContent(doc.ToString(SaveOptions.DisableFormatting), Encoding.UTF8,
 			"application/soap+xml");
 		
-		using var response = await client.SendAsync(request);
+		using var response = await InternetManager.Client.SendAsync(request);
 		var responseString = await response.Content.ReadAsStringAsync();
 		var responseDoc = XDocument.Parse(responseString);
 		

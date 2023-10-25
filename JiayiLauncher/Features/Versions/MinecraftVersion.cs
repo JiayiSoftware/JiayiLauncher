@@ -4,24 +4,14 @@ namespace JiayiLauncher.Features.Versions;
 
 public class MinecraftVersion
 {
-	public string Version { get; set; }
-	public Architectures Archs { get; set; }
-}
-
-public class Architectures
-{
-	public Architecture? x64 { get; set; }
-}
-
-public class Architecture
-{
 	public string FileName { get; set; }
-	public Hashes Hashes { get; set; }
-	public IList<string> UpdateIds { get; set; }
-}
+	public string UpdateId { get; set; }
+	public string Version { get; set; }
 
-public class Hashes
-{
-	public string? MD5 { get; set; }
-	public string? SHA256 { get; set; }
+	public MinecraftVersion(string fileName, string updateId, string version)
+	{
+		FileName = fileName;
+		UpdateId = updateId;
+		Version = version;
+	}
 }

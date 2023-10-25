@@ -74,15 +74,14 @@ public static class VersionManager
 
 	public static async Task DownloadVersion(MinecraftVersion version)
 	{
-		var updateId = version.Archs.x64!.UpdateIds[0];
+		var updateId = version.UpdateId;
 		var url = await RequestFactory.GetDownloadUrl(updateId);
-		var fileName = version.Archs.x64.FileName;
+		var fileName = version.FileName;
 		var filePath = Path.Combine(JiayiSettings.Instance!.VersionsPath, fileName);
 
 		if (File.Exists(filePath)) File.Delete(filePath);
 
-		using var client = new HttpClient();
-		using var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+		using var response = await InternetManager.Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
 		
 		if (!response.IsSuccessStatusCode) return;
 		

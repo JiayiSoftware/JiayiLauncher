@@ -24,7 +24,15 @@
 
     <div class="url" @onkeydown="Enter">
         <p>@_urlStatus</p>
-        <JiayiTextBox Style="width: 99%" Placeholder="cool-website.com/path/to/mod.dll" @ref="_urlTextBox" />
+        
+        @if (InternetManager.OfflineMode)
+        {
+            <JiayiTextBox Style="width: 99%" Placeholder="Not available while offline" Disabled="true" @ref="_urlTextBox" />
+        }
+        else
+        {
+            <JiayiTextBox Style="width: 99%" Placeholder="cool-website.com/path/to/mod.dll" @ref="_urlTextBox" />
+        }
     </div>
     
     @* ambrosial is dead *@

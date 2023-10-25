@@ -79,7 +79,11 @@
                             else
                             {
                                 if (version == null) continue;
-                                if (version.Archs.x64 == null || version.Archs.x64.UpdateIds.Count == 0)
+                                if (version.UpdateId == string.Empty)
+                                {
+                                    <JiayiButton Size="@JiayiButton.ButtonSize.Small" Disabled="true">Download</JiayiButton>
+                                }
+                                else if (InternetManager.OfflineMode)
                                 {
                                     <JiayiButton Size="@JiayiButton.ButtonSize.Small" Disabled="true">Download</JiayiButton>
                                 }
@@ -189,8 +193,7 @@
         if (VersionManager.IsCustomVersion(ver)) return _statuses[_versionNames.IndexOf(ver)];
         
         var version = _versions[_versionNames.IndexOf(ver)];
-        if (version.Archs.x64 == null || version.Archs.x64.UpdateIds.Count == 0)
-            return "Not available";
+        if (version.UpdateId == string.Empty) return "Not available";
 
         var i = _versionNames.IndexOf(ver);
         

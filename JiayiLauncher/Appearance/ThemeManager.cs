@@ -46,7 +46,7 @@ public static class ThemeManager
 		{
 			JiayiSettings.Instance.BackgroundImageUrl = "";
 			JiayiSettings.Instance.BackgroundBlur[2] = 0;
-			JiayiSettings.Instance.BackgroundBrightness[2] = 0;
+			JiayiSettings.Instance.BackgroundBrightness[2] = 100;
 			JiayiSettings.Instance.UseBackgroundImage = false;
 		}
 		else

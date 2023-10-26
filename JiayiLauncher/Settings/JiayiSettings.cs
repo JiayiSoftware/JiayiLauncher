@@ -208,6 +208,10 @@ public class JiayiSettings
 		tooltip: "Features like internet mods, downloading versions, and checking for updates will not work.")]
 	public bool OfflineMode { get; set; } = false;
 	
+	[Setting("Follow redirects", "Network", 
+		"Follow redirects when adding web mods. Change this setting if you have trouble adding some mods.")]
+	public bool FollowRedirects { get; set; } = false;
+	
 	// launch settings
 	[Setting("Use injection delay", "Launch", "Wait for a set amount of time instead of waiting for the game to load before injecting.")]
 	public bool UseInjectionDelay { get; set; } = false;
@@ -229,10 +233,6 @@ public class JiayiSettings
 		"Speed up loading times by terminating unnecessary processes. Beware of jank.", 
 		tooltip: "May cause issues related to Microsoft Store licensing (determining whether you own the game or not).")]
 	public bool AccelerateGameLoading { get; set; } = false;
-	
-	[Setting("Follow redirects", "Launch", 
-		"Follow redirects when adding web mods. Change this setting if you have trouble adding some mods.")]
-	public bool FollowRedirects { get; set; } = false;
 	
 	// log settings
 	[Setting("Anonymize logs", "Logs", 

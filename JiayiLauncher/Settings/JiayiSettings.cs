@@ -10,6 +10,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Features.Versions;
 using JiayiLauncher.Shared;
 using JiayiLauncher.Utils;
 using Microsoft.Win32;
@@ -54,6 +55,12 @@ public class JiayiSettings
 	
 	[Setting("Version folder path", "General", "The path to the folder containing your game installs.", canReset: false)]
 	public string VersionsPath { get; set; } = string.Empty;
+	
+	[Setting("Update version list", "General", "Update the list of available versions.")]
+	[JsonIgnore] public (string, Action) UpdateVersionList { get; set; } = ("Update", () =>
+	{
+		Task.Run(() => VersionList.UpdateVersions(true));
+	});
 	
 	[Setting("Shader folder path", "General", "The path to the folder containing your shaders.", canReset: false)]
 	public string ShadersPath { get; set; } = string.Empty;

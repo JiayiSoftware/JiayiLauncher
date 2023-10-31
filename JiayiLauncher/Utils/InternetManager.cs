@@ -5,9 +5,9 @@ namespace JiayiLauncher.Utils;
 
 public static class InternetManager
 {
-	private const string IP = "https://jiayi.software";
+	private const string IP = "https://1.1.1.1";
 	
-	public static bool OfflineMode { get; set; }
+	public static bool OfflineMode { get; private set; }
 	public static HttpClient Client { get; } = new();
 
 	public static void CheckOnline()

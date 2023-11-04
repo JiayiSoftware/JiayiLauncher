@@ -88,7 +88,7 @@ public partial class MainWindow
 			JiayiSettings.Instance.Save();
 		}
 
-		Task.Run(VersionList.UpdateVersions);
+		Task.Run(() => VersionList.UpdateVersions());
 		RichPresence.Initialize();
 		ThemeManager.LoadTheme();
 		JiayiStats.Save();

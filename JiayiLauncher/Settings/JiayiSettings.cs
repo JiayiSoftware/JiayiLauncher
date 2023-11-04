@@ -10,6 +10,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Mods;
+using JiayiLauncher.Features.Versions;
 using JiayiLauncher.Shared;
 using JiayiLauncher.Utils;
 using Microsoft.Win32;
@@ -54,6 +55,12 @@ public class JiayiSettings
 	
 	[Setting("Version folder path", "General", "The path to the folder containing your game installs.", canReset: false)]
 	public string VersionsPath { get; set; } = string.Empty;
+	
+	[Setting("Update version list", "General", "Update the list of available versions.")]
+	[JsonIgnore] public (string, Action) UpdateVersionList { get; set; } = ("Update", () =>
+	{
+		Task.Run(() => VersionList.UpdateVersions(true));
+	});
 	
 	[Setting("Shader folder path", "General", "The path to the folder containing your shaders.", canReset: false)]
 	public string ShadersPath { get; set; } = string.Empty;
@@ -201,6 +208,10 @@ public class JiayiSettings
 		tooltip: "Features like internet mods, downloading versions, and checking for updates will not work.")]
 	public bool OfflineMode { get; set; } = false;
 	
+	[Setting("Follow redirects", "Network", 
+		"Follow redirects when adding web mods. Change this setting if you have trouble adding some mods.")]
+	public bool FollowRedirects { get; set; } = false;
+	
 	// launch settings
 	[Setting("Use injection delay", "Launch", "Wait for a set amount of time instead of waiting for the game to load before injecting.")]
 	public bool UseInjectionDelay { get; set; } = false;
@@ -222,10 +233,6 @@ public class JiayiSettings
 		"Speed up loading times by terminating unnecessary processes. Beware of jank.", 
 		tooltip: "May cause issues related to Microsoft Store licensing (determining whether you own the game or not).")]
 	public bool AccelerateGameLoading { get; set; } = false;
-	
-	[Setting("Follow redirects", "Launch", 
-		"Follow redirects when adding web mods. Change this setting if you have trouble adding some mods.")]
-	public bool FollowRedirects { get; set; } = false;
 	
 	// log settings
 	[Setting("Anonymize logs", "Logs", 

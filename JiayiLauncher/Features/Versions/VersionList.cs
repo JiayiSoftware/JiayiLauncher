@@ -24,8 +24,15 @@ public static class VersionList
 
 	private static bool _loaded;
 	
-	public static async Task UpdateVersions()
+	public static async Task UpdateVersions(bool clear = false)
 	{
+		if (clear)
+		{
+			_versionDict.Clear();
+			_versions.Clear();
+			_loaded = false;
+		}
+		
 		if (File.Exists(_versionsPath) && !_loaded)
 		{
 			var jsonIn = JsonConvert.DeserializeObject<SortedDictionary<string, MinecraftVersion>>(

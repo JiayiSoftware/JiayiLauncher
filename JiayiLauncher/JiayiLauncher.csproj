@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
+        <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
         <IsPackable>false</IsPackable>
@@ -29,9 +29,9 @@
         <PackageReference Include="Blazored.Modal" Version="7.1.0" />
         <PackageReference Include="Blazored.Toast" Version="4.1.0" />
         <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="7.0.96" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="8.0.3" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="Octokit" Version="8.1.1" />
+        <PackageReference Include="Octokit" Version="9.0.0" />
     </ItemGroup>
 
     <ItemGroup>

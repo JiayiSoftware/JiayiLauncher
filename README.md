@@ -31,7 +31,7 @@ You can clone the repository and build Jiayi Launcher yourself with the instruct
 
 ### Steps
 1. Clone the repository
-* ```git clone https://github.com/JiayiSoftware/JiayiLauncher.git```
+* ```git clone --recursive https://github.com/JiayiSoftware/JiayiLauncher.git```
 
 **With an IDE:**
 

@@ -26,8 +26,8 @@ You can clone the repository and build Jiayi Launcher yourself with the instruct
 ### Requirements
 * A computer running Windows 10 or later
 * [Git](https://git-scm.com/)
-* [.NET 7 SDK](https://dotnet.microsoft.com/download/dotnet/7.0)
-* Optionally, an IDE that supports .NET 7 (e.g. [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) or [JetBrains Rider](https://www.jetbrains.com/rider/))
+* [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+* Optionally, an IDE that supports .NET 8 (e.g. [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) or [~~JetBrains Rider~~](https://www.jetbrains.com/rider/) [pending support])
 
 ### Steps
 1. Clone the repository

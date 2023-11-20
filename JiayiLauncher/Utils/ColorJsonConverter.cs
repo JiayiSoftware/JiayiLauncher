@@ -17,13 +17,7 @@ public class ColorJsonConverter : JsonConverter<Color>
 			return Color.Empty;
 		}
 
-		var bytes = new byte[3];
-		for (var i = 0; i < 3; i++)
-		{
-			bytes[i] = byte.Parse(color.Substring(i * 2 + 1, 2), NumberStyles.HexNumber);
-		}
-        
-		return Color.FromArgb(bytes[0], bytes[1], bytes[2]);
+		return ColorConverters.FromHex(color);
 	}
 	
 	public override void Write(Utf8JsonWriter writer, Color value, JsonSerializerOptions options)

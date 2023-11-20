@@ -1,15 +1,23 @@
-﻿input /* type=color */ {
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    position: absolute;
-    z-index: 1;
+﻿/*input !* type=color *! {*/
+/*    opacity: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    cursor: pointer;*/
+/*    position: absolute;*/
+/*    z-index: 1;*/
+/*}*/
+
+.color-picker-container {
+    height: 2.5rem;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.color-picker {
-    width: 2.5rem;
-    height: 2.5rem;
+.color-preview {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
     box-shadow: var(--shadow);
     filter: brightness(1);
     border: 2px solid rgba(0, 0, 0, 0.4);
@@ -18,12 +26,64 @@
     transition-duration: var(--transition-speed);
 }
 
-.color-picker:hover {
+.color-preview:hover {
     filter: brightness(1.5);
 }
 
-.color-picker:active {
+.color-preview:active {
     transform: translate(5px, 5px);
     filter: brightness(0.8);
     box-shadow: none;
+}
+
+.color-picker {
+    position: relative;
+    max-width: 15.3rem;
+    min-height: 20rem;
+    border-radius: var(--rounding);
+    overflow: hidden;
+    padding: 0.5rem;
+    box-shadow: var(--shadow);
+    background-color: var(--background-primary);
+    border: 2px solid rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.color-zone {
+    position: relative;
+    width: 100%;
+    height: 55%;
+    background: black;
+}
+
+.color-hue-slider {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    height: 3rem;
+}
+
+.color-mode-select {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    height: 3rem;
+    justify-content: space-evenly;
+}
+
+.color-mode-select .material-symbols-sharp {
+    cursor: pointer;
+}
+
+input[type=number] {
+    width: 4.5rem;
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-accent);
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+    padding: 0.5rem 1rem;
+    box-shadow: var(--shadow);
+    transition-duration: var(--transition-speed);
 }

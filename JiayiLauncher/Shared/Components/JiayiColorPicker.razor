@@ -3,7 +3,7 @@
 @using JiayiLauncher.Utils
 
 <div class="color-picker-container" @onblur="Close">
-    <button class="color-preview" style="background-color: @Color" @onclick="Clicked">
+    <button class="color-preview" style="background-color: @Color.Hex" @onclick="Clicked">
         @* <input type="color" value="@Color" @onchange="OnChange"> *@
     </button>
 

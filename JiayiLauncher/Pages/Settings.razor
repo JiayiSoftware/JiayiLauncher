@@ -153,17 +153,9 @@
         JiayiSettings.Instance!.Save();
     }
 
-    private void ChangeColorSetting(object? value, PropertyInfo setting)
+    private void ChangeColorSetting(TranslatableColor value, PropertyInfo setting)
     {
-        var color = value as string ?? "#000000";
-        var bytes = new byte[3];
-        for (var i = 0; i < 3; i++)
-        {
-            bytes[i] = byte.Parse(color.Substring(i * 2 + 1, 2), NumberStyles.HexNumber);
-        }
-        
-        var newColor = Color.FromArgb(bytes[0], bytes[1], bytes[2]);
-        setting.SetValue(JiayiSettings.Instance, newColor);
+        setting.SetValue(JiayiSettings.Instance, value.Color);
         JiayiSettings.Instance!.Save();
     }
 

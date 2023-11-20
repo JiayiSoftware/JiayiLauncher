@@ -13,7 +13,7 @@ namespace JiayiLauncher.Appearance;
 
 /*public class TranslatableColor
 {
-    private Color _internal;
+    private Color Color;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TranslatableColor"/> class.
@@ -21,7 +21,7 @@ namespace JiayiLauncher.Appearance;
     /// <param name="color">The color to initialize with.</param>
     public TranslatableColor(Color color)
     {
-        _internal = color;
+        Color = color;
     }
 
     /// <summary>
@@ -58,17 +58,6 @@ namespace JiayiLauncher.Appearance;
     }
 
     /// <summary>
-    /// Sets the internal color using an instance of <see cref="Color"/>.
-    /// </summary>
-    /// <param name="color">The color to set.</param>
-    /// <returns>This <see cref="TranslatableColor"/> instance.</returns>
-    public TranslatableColor SetColor(Color color)
-    {
-        _internal = color;
-        return this;
-    }
-
-    /// <summary>
     /// Sets the internal color using RGB values and optional alpha.
     /// </summary>
     /// <param name="r">The red component (0-255).</param>
@@ -78,7 +67,7 @@ namespace JiayiLauncher.Appearance;
     /// <returns>This <see cref="TranslatableColor"/> instance.</returns>
     public TranslatableColor SetRGBA(int r, int g, int b, float a = 1)
     {
-        _internal = Color.FromArgb(
+        Color = Color.FromArgb(
             (int)(Math.Clamp(a * 255, 0, 255)),
             Math.Clamp(r, 0, 255),
             Math.Clamp(g, 0, 255),
@@ -97,7 +86,7 @@ namespace JiayiLauncher.Appearance;
     /// <returns>This <see cref="TranslatableColor"/> instance.</returns>
     public TranslatableColor SetHSLA(int h, float s, float l, float a = 1)
     {
-        _internal = FromHSLA(
+        Color = FromHSLA(
             Math.Max(h, 0),
             Math.Clamp(s, 0, 1),
             Math.Clamp(l, 0, 1),
@@ -116,17 +105,8 @@ namespace JiayiLauncher.Appearance;
         if (!IsValidHex(hex))
             return this;
 
-        _internal = HexToColor(hex);
+        Color = HexToColor(hex);
         return this;
-    }
-
-    /// <summary>
-    /// Gets the internal color.
-    /// </summary>
-    /// <returns>The internal color as a <see cref="Color"/> instance.</returns>
-    public Color GetColor()
-    {
-        return _internal;
     }
 
     /// <summary>
@@ -135,7 +115,7 @@ namespace JiayiLauncher.Appearance;
     /// <returns>The internal color as (R, G, B, A).</returns>
     public (int, int, int, float) GetRGBA()
     {
-        return (_internal.R, _internal.G, _internal.B, _internal.A / 255.0f);
+        return (Color.R, Color.G, Color.B, Color.A / 255.0f);
     }
 
     /// <summary>
@@ -144,7 +124,7 @@ namespace JiayiLauncher.Appearance;
     /// <returns>The internal color as (H, S, L, A).</returns>
     public (int, float, float, float) GetHSLA()
     {
-        float[] hsla = ToHSLA(_internal);
+        float[] hsla = ToHSLA(Color);
         return ((int)hsla[0], hsla[1], hsla[2], hsla[3]);
     }
 
@@ -154,7 +134,7 @@ namespace JiayiLauncher.Appearance;
     /// <returns>The internal color as a hex color code.</returns>
     public string GetHex()
     {
-        return ColorToHex(_internal);
+        return ColorToHex(Color);
     }
 
     #region Color Conversion
@@ -281,21 +261,21 @@ namespace JiayiLauncher.Appearance;
 
 public class TranslatableColor
 {
-    private Color _internal;
+    public Color Color;
 
     public TranslatableColor(Color color)
     {
-        _internal = color;
+        Color = color;
     }
 
     public TranslatableColor(int r, int g, int b)
     {
-        _internal = Color.FromArgb(255, Math.Clamp(r, 0, 255), Math.Clamp(g, 0, 255), Math.Clamp(b, 0, 255));
+        Color = Color.FromArgb(255, Math.Clamp(r, 0, 255), Math.Clamp(g, 0, 255), Math.Clamp(b, 0, 255));
     }
 
     public TranslatableColor(int h, float s, float l)
     {
-        _internal = ColorConverters.FromHSL(Math.Max(h, 0), Math.Clamp(s, 0, 1), Math.Clamp(l, 0, 1));
+        Color = ColorConverters.FromHSL(Math.Max(h, 0), Math.Clamp(s, 0, 1), Math.Clamp(l, 0, 1));
     }
 
     public TranslatableColor(string hex)
@@ -305,49 +285,49 @@ public class TranslatableColor
 
     public int Red
     {
-        get => _internal.R;
-        set => _internal = Color.FromArgb((int)(AlphaRGBA * 255), value, Green, Blue);
+        get => Color.R;
+        set => Color = Color.FromArgb((int)(AlphaRGBA * 255), value, Green, Blue);
     }
 
     public int Green
     {
-        get => _internal.G;
-        set => _internal = Color.FromArgb((int)(AlphaRGBA * 255), Red, value, Blue);
+        get => Color.G;
+        set => Color = Color.FromArgb((int)(AlphaRGBA * 255), Red, value, Blue);
     }
 
     public int Blue
     {
-        get => _internal.B;
-        set => _internal = Color.FromArgb((int)(AlphaRGBA * 255), Red, Green, value);
+        get => Color.B;
+        set => Color = Color.FromArgb((int)(AlphaRGBA * 255), Red, Green, value);
     }
 
     public float Hue
     {
-        get => ColorConverters.ToHsl(_internal)[0];
+        get => ColorConverters.ToHsl(Color)[0];
         set => SetHSLA((int)value, Saturation, Lightness, AlphaHSLA);
     }
 
     public float Saturation
     {
-        get => ColorConverters.ToHsl(_internal)[1];
+        get => ColorConverters.ToHsl(Color)[1];
         set => SetHSLA((int)Hue, value, Lightness, AlphaHSLA);
     }
 
     public float Lightness
     {
-        get => ColorConverters.ToHsl(_internal)[2];
+        get => ColorConverters.ToHsl(Color)[2];
         set => SetHSLA((int)Hue, Saturation, value, AlphaHSLA);
     }
 
     public float AlphaRGBA
     {
-        get => _internal.A / 255.0f;
-        set => _internal = Color.FromArgb((int)(value * 255), Red, Green, Blue);
+        get => Color.A / 255.0f;
+        set => Color = Color.FromArgb((int)(value * 255), Red, Green, Blue);
     }
 
     public float AlphaHSLA
     {
-        get => _internal.A / 255.0f;
+        get => Color.A / 255.0f;
         set => SetHSLA((int)Hue, Saturation, Lightness, value);
     }
 
@@ -355,16 +335,6 @@ public class TranslatableColor
     {
         get => $"#{Red:X2}{Green:X2}{Blue:X2}{(int)(AlphaRGBA * 255):X2}";
         set => SetHex(value);
-    }
-
-    public Color GetColor()
-    {
-        return _internal;
-    }
-
-    public void SetColor(Color color)
-    {
-        _internal = color;
     }
 
     public (int, int, int) GetRGB()
@@ -379,19 +349,19 @@ public class TranslatableColor
 
     public void SetRGBA(int r, int g, int b, float a = 1.0f)
     {
-        _internal = Color.FromArgb((int)(a * 255), Math.Clamp(r, 0, 255), Math.Clamp(g, 0, 255), Math.Clamp(b, 0, 255));
+        Color = Color.FromArgb((int)(a * 255), Math.Clamp(r, 0, 255), Math.Clamp(g, 0, 255), Math.Clamp(b, 0, 255));
     }
 
     public void SetHSLA(int h, float s, float l, float a = 1.0f)
     {
-        _internal = FromHSLA(Math.Max(h, 0), Math.Clamp(s, 0, 1), Math.Clamp(l, 0, 1), a);
+        Color = FromHSLA(Math.Max(h, 0), Math.Clamp(s, 0, 1), Math.Clamp(l, 0, 1), a);
     }
 
     private void SetHex(string hex)
     {
         if (IsValidHex(hex))
         {
-            _internal = HexToColor(hex);
+            Color = HexToColor(hex);
         }
     }
 

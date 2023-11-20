@@ -1,4 +1,5 @@
 ﻿@page "/Settings"
+@using JiayiLauncher.Appearance
 @using JiayiLauncher.Settings
 @using System.Reflection
 @using System.Drawing
@@ -92,8 +93,7 @@
                         case true when setting.PropertyType == typeof(Color):
                             @* for now *@
                             var color = (Color)setting.GetValue(JiayiSettings.Instance)!;
-                            var hex = $"#{color.R:x2}{color.G:x2}{color.B:x2}";
-                            <JiayiColorPicker Color="@hex" ColorChanged="s => ChangeColorSetting(s, setting)"/>
+                            <JiayiColorPicker Color="@(new TranslatableColor(color))" ColorChanged="s => ChangeColorSetting(s, setting)" />
                             break;
                     }
                 </div>

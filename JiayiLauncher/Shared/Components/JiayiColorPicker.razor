@@ -1,4 +1,5 @@
 ﻿@using System.Drawing
+@using JiayiLauncher.Appearance
 @using JiayiLauncher.Utils
 
 <div class="color-picker-container" @onblur="Close">
@@ -10,36 +11,36 @@
         <div class="color-zone" style="background: @_zoneBackground">
             <div class="color-pointer"></div>
         </div>
-    
+
         <div class="color-info">
             <div class="color-hue-slider" title="Hue">
                 <span class="material-symbols-sharp">invert_colors</span>
-                <JiayiSlider Max="360" Value="_hue" Style="width: 84%; height: 4rem;" Step="1" ValueChanged="_hueChanged" />
+                <JiayiSlider Max="360" Value="@((float)Math.Round(Color.Hue))" Style="width: 84%; height: 4rem;" Step="1" ValueChanged="_hueChanged" />
             </div>
-            
+
             <div class="color-values">
                 <div class="color-value" id="rgb" style="display: @(_colorMode == ColorMode.RGB ? "block" : "none")">
-                    <input type="number" min="0" max="255" step="1" value="@((int)_red)" @onchange="_redChanged">
-                    <input type="number" min="0" max="255" step="1" value="@((int)_green)" @onchange="_greenChanged">
-                    <input type="number" min="0" max="255" step="1" value="@((int)_blue)" @onchange="_blueChanged">
+                    <input type="number" min="0" max="255" step="1" value="@(Color.Red)" @onchange="_redChanged">
+                    <input type="number" min="0" max="255" step="1" value="@(Color.Green)" @onchange="_greenChanged">
+                    <input type="number" min="0" max="255" step="1" value="@(Color.Blue)" @onchange="_blueChanged">
                 </div>
-                
+
                 <div class="color-value" id="hsl" style="display: @(_colorMode == ColorMode.HSL ? "block" : "none")">
-                    <input type="number" min="0" max="360" step="1" value="@((int)_hue)" @onchange="_hueChanged2">
-                    <input type="number" min="0" max="100" step="1" value="@((int)(_saturation * 100))" @onchange="_saturationChanged">
-                    <input type="number" min="0" max="100" step="1" value="@((int)(_lightness * 100))" @onchange="_lightnessChanged">
+                    <input type="number" min="0" max="360" step="1" value="@((float)Math.Round(Color.Hue))" @onchange="_hueChanged2">
+                    <input type="number" min="0" max="1" step="1" value="@(Math.Round(Color.Saturation * 100))" @onchange="_saturationChanged">
+                    <input type="number" min="0" max="100" step="1" value="@(Math.Round(Color.Lightness * 100))" @onchange="_lightnessChanged">
                 </div>
-                
+
                 <div class="color-value" id="hex" style="display: @(_colorMode == ColorMode.HEX ? "block" : "none")">
-                    <JiayiTextBox Placeholder="#000000" Value="@Color" Style="width: 100%" Changed="HexChanged" />
+                    <JiayiTextBox Placeholder="#000000" Value="@(Color.Hex)" Style="width: 100%" Changed="HexChanged" />
                 </div>
-                
+
                 <div class="color-mode-select">
                     <span class="material-symbols-sharp" title="Previous color mode"
                           @onclick="() => _colorMode = (ColorMode)(((int)_colorMode + 2) % 3)">arrow_left</span>
-                    
+
                     <p class="color-mode">@_colorMode</p>
-                    
+
                     <span class="material-symbols-sharp" title="Next color mode"
                           @onclick="() => _colorMode = (ColorMode)(((int)_colorMode + 1) % 3)">arrow_right</span>
                 </div>
@@ -55,23 +56,21 @@
         HSL,
         HEX
     }
-    
+
     [Parameter]
-    public string Color { get; set; } = "#000000";
-    
+    public TranslatableColor Color { get; set; } = new(255, 0, 0);
+
+
     [Parameter]
-    public EventCallback<string> ColorChanged { get; set; }
-    
+    public EventCallback<TranslatableColor> ColorChanged { get; set; }
+
     private ColorMode _colorMode = ColorMode.RGB;
-    private Color _color;
-    private float _hue = 0f, _saturation = 1f, _lightness = 0.5f;
-    private float _red = 0f, _green = 0f, _blue = 0f;
-    
+
     // styles
     private string _showColorPicker = "none";
     private string _zoneBackground => "linear-gradient(to bottom, transparent, black), " +
-                                      $"linear-gradient(to right, white, hsl({_hue}, {_saturation * 100}%, {_lightness * 100}%))";
-    
+                                      $"linear-gradient(to right, white, hsl({Color.Hue}, {Color.Saturation * 100}%, {Color.Lightness * 100}%))";
+
     // debounce actions
     private Action<float> _hueChanged;
     private Action<ChangeEventArgs> _redChanged, _greenChanged, _blueChanged;
@@ -79,23 +78,14 @@
 
     protected override void OnInitialized()
     {
-        _color = ColorConverters.FromHex(Color);
-        
-        _hue = _color.GetHue();
-        _saturation = _color.GetSaturation();
-        _lightness = _color.GetBrightness();
-        
-        _red = _color.R;
-        _green = _color.G;
-        _blue = _color.B;
-        
-        _hueChanged = ((Action<float>)HueChanged).Debounce(10);
-        _redChanged = ((Action<ChangeEventArgs>)RedChanged).Debounce(10);
-        _greenChanged = ((Action<ChangeEventArgs>)GreenChanged).Debounce(10);
-        _blueChanged = ((Action<ChangeEventArgs>)BlueChanged).Debounce(10);
-        _hueChanged2 = ((Action<ChangeEventArgs>)HueChanged).Debounce(10);
-        _saturationChanged = ((Action<ChangeEventArgs>)SaturationChanged).Debounce(10);
-        _lightnessChanged = ((Action<ChangeEventArgs>)LightnessChanged).Debounce(10);
+        int debounce = 5;
+        _hueChanged = ((Action<float>)HueChanged).Debounce(debounce);
+        _redChanged = ((Action<ChangeEventArgs>)RedChanged).Debounce(debounce);
+        _greenChanged = ((Action<ChangeEventArgs>)GreenChanged).Debounce(debounce);
+        _blueChanged = ((Action<ChangeEventArgs>)BlueChanged).Debounce(debounce);
+        _hueChanged2 = ((Action<ChangeEventArgs>)HueChanged).Debounce(debounce);
+        _saturationChanged = ((Action<ChangeEventArgs>)SaturationChanged).Debounce(debounce);
+        _lightnessChanged = ((Action<ChangeEventArgs>)LightnessChanged).Debounce(debounce);
     }
 
     // private void OnChange(ChangeEventArgs obj)
@@ -110,7 +100,7 @@
         _showColorPicker = _showColorPicker == "none" ? "block" : "none";
         ColorChanged.InvokeAsync(Color);
     }
-    
+
     private void Close()
     {
         _showColorPicker = "none";
@@ -119,23 +109,9 @@
 
     private void UpdateEverything()
     {
-        // update color
-        _color = ColorConverters.FromHSL(_hue, _saturation, _lightness);
-        Color = _color.ToHex();
-        
-        // update rgb
-        _red = _color.R;
-        _green = _color.G;
-        _blue = _color.B;
-        
-        // update hsl
-        _hue = _color.GetHue();
-        _saturation = _color.GetSaturation();
-        _lightness = _color.GetBrightness();
-
         InvokeAsync(StateHasChanged); // DUMB
     }
-    
+
     private float HueToRgb(float p, float q, float t)
     {
         if (t < 0f) t += 1f;
@@ -148,71 +124,65 @@
 
     private void HueChanged(float newHue)
     {
-        _hue = newHue;
+        Color.Hue = newHue;
         UpdateEverything();
     }
-    
+
     // stupid functions
     private void RedChanged(ChangeEventArgs e)
     {
-        _red = float.Parse((string)(e.Value ?? "0"));
+        Color.Red = int.Parse((string)(e.Value ?? "0"));
         RGBChanged();
     }
-    
+
     private void GreenChanged(ChangeEventArgs e)
     {
-        _green = float.Parse((string)(e.Value ?? "0"));
+        Color.Green = int.Parse((string)(e.Value ?? "0"));
         RGBChanged();
     }
-    
+
     private void BlueChanged(ChangeEventArgs e)
     {
-        _blue = float.Parse((string)(e.Value ?? "0"));
+        Color.Blue = int.Parse((string)(e.Value ?? "0"));
         RGBChanged();
     }
-    
+
     private void HueChanged(ChangeEventArgs e)
     {
-        _hue = float.Parse((string)(e.Value ?? "0"));
-        UpdateEverything();
+        HueChanged(int.Parse((string)(e.Value ?? "0")));
     }
-    
+
     private void SaturationChanged(ChangeEventArgs e)
     {
-        _saturation = float.Parse((string)(e.Value ?? "0")) / 100f;
+        try
+        {
+            Color.Saturation = float.Parse((string)(e.Value ?? "0")) / 100f;
+        }
+        catch (FormatException fe)
+        {
+            Color.Saturation = 0;
+        }
         UpdateEverything();
     }
-    
+
     private void LightnessChanged(ChangeEventArgs e)
     {
-        _lightness = float.Parse((string)(e.Value ?? "0")) / 100f;
+        try
+        {
+            Color.Lightness = float.Parse((string)(e.Value ?? "0")) / 100f;
+        }
+        catch (FormatException fe) { }
         UpdateEverything();
     }
 
     private void RGBChanged()
     {
-        var newColor = System.Drawing.Color.FromArgb((int)_red, (int)_green, (int)_blue);
-        _hue = newColor.GetHue();
-        _saturation = newColor.GetSaturation();
-        _lightness = newColor.GetBrightness();
-        
         UpdateEverything();
     }
 
     private void HexChanged(string? obj)
     {
-        var hex = obj ?? "#000000";
-        Color = hex;
-        _color = ColorConverters.FromHex(hex);
-        
-        _hue = _color.GetHue();
-        _saturation = _color.GetSaturation();
-        _lightness = _color.GetBrightness();
-        
-        _red = _color.R;
-        _green = _color.G;
-        _blue = _color.B;
-        
+        Color.Hex = obj;
         UpdateEverything();
     }
 

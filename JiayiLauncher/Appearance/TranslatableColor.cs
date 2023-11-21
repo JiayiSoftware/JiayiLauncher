@@ -275,7 +275,7 @@ public class TranslatableColor
 
     public TranslatableColor(int h, float s, float l)
     {
-        Color = ColorConverters.FromHSL(Math.Max(h, 0), Math.Clamp(s, 0, 1), Math.Clamp(l, 0, 1));
+        Color = FromHSL(Math.Max(h, 0), Math.Clamp(s, 0, 1), Math.Clamp(l, 0, 1));
     }
 
     public TranslatableColor(string hex)
@@ -303,19 +303,19 @@ public class TranslatableColor
 
     public float Hue
     {
-        get => ColorConverters.ToHsl(Color)[0];
+        get => Color.GetHue();
         set => SetHSLA((int)value, Saturation, Lightness, AlphaHSLA);
     }
 
     public float Saturation
     {
-        get => ColorConverters.ToHsl(Color)[1];
+        get => Color.GetSaturation();
         set => SetHSLA((int)Hue, value, Lightness, AlphaHSLA);
     }
 
     public float Lightness
     {
-        get => ColorConverters.ToHsl(Color)[2];
+        get => Color.GetBrightness();
         set => SetHSLA((int)Hue, Saturation, value, AlphaHSLA);
     }
 
@@ -361,11 +361,11 @@ public class TranslatableColor
     {
         if (IsValidHex(hex))
         {
-            Color = HexToColor(hex);
+            Color = FromHex(hex);
         }
     }
 
-    private static Color HexToColor(string hex)
+    public static Color FromHex(string hex)
     {
         return Color.FromArgb(
             hex.Length == 9 ? Convert.ToInt32(hex.Substring(7, 2), 16) : 255,
@@ -375,9 +375,53 @@ public class TranslatableColor
         );
     }
 
+    public static Color FromHSL(float hue, float saturation, float lightness)
+    {
+        var c = (1 - Math.Abs(2 * lightness - 1)) * saturation;
+        var x = c * (1 - Math.Abs(hue / 60 % 2 - 1));
+        var m = lightness - c / 2;
+
+        float r, g, b;
+
+        switch (hue)
+        {
+            case < 60:
+                r = c;
+                g = x;
+                b = 0;
+                break;
+            case < 120:
+                r = x;
+                g = c;
+                b = 0;
+                break;
+            case < 180:
+                r = 0;
+                g = c;
+                b = x;
+                break;
+            case < 240:
+                r = 0;
+                g = x;
+                b = c;
+                break;
+            case < 300:
+                r = x;
+                g = 0;
+                b = c;
+                break;
+            default:
+                r = c;
+                g = 0;
+                b = x;
+                break;
+        }
+
+        return Color.FromArgb((int)((r + m) * 255), (int)((g + m) * 255), (int)((b + m) * 255));
+    }
     private static Color FromHSLA(int h, float s, float l, float a)
     {
-        Color colorWithoutAlpha = ColorConverters.FromHSL(h, s, l);
+        Color colorWithoutAlpha = FromHSL(h, s, l);
         return Color.FromArgb((int)(a * 255), colorWithoutAlpha.R, colorWithoutAlpha.G, colorWithoutAlpha.B);
     }
 

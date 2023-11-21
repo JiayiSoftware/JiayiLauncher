@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JiayiLauncher.Appearance;
+using System;
 using System.Drawing;
 using System.Globalization;
 using System.Text.Json;
@@ -17,7 +18,7 @@ public class ColorJsonConverter : JsonConverter<Color>
 			return Color.Empty;
 		}
 
-		return ColorConverters.FromHex(color);
+		return TranslatableColor.FromHex(color);
 	}
 	
 	public override void Write(Utf8JsonWriter writer, Color value, JsonSerializerOptions options)

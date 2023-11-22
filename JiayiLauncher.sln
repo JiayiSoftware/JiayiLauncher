@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JiayiLauncher", "JiayiLaunc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JiayiInstaller", "JiayiInstaller\JiayiInstaller.csproj", "{DBBA4A74-C605-452E-ACBD-DC3EE79B0303}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreLib", "StoreLib\StoreLib\StoreLib.csproj", "{33A54AFF-C6B0-4611-9833-F40635B55BBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreLib", "StoreLib\StoreLib\StoreLib.csproj", "{33A54AFF-C6B0-4611-9833-F40635B55BBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

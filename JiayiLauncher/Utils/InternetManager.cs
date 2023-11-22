@@ -1,4 +1,7 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 using JiayiLauncher.Settings;
 
 namespace JiayiLauncher.Utils;
@@ -28,4 +31,15 @@ public static class InternetManager
 			OfflineMode = true;
 		}
 	}
+
+	public static async Task DownloadFile(Uri url, string path)
+	{
+        using (var s = await Client.GetStreamAsync(url))
+        {
+            using (var fs = new FileStream(Path.Combine(path, Path.GetFileName(url.AbsoluteUri)), FileMode.CreateNew))
+            {
+                await s.CopyToAsync(fs);
+            }
+        }
+    }
 }

@@ -5,14 +5,30 @@ using System.Linq;
 
 namespace JiayiLauncher.Appearance;
 
+public class CSSProperty {
+	public string Prop;
+	public string Value;
+
+	public CSSProperty(string property, string value) { 
+		Prop = property;
+		Value = value;
+	}
+
+	public override string ToString()
+	{
+		return $"{Prop}: {Value};";
+	}
+}
+
 public class CssBuilder
 {
-    private readonly List<string> _properties = new();
+    private readonly List<CSSProperty> _properties = new();
     private readonly string _selector;
 
     public CssBuilder(string selector)
     {
         _selector = selector;
+
     }
 
     public static CssBuilder FromFile(string path, string selector)
@@ -41,23 +57,56 @@ public class CssBuilder
 		    //var value = line.Split(':')[1].Trim().TrimEnd(';');
 		    // in case the value here contains a url we need to join the rest of the line
 		    var value = string.Join(':', line.Split(':').Skip(1)).Trim().TrimEnd(';');
-		    builder.AddProperty(property, value);
+		    builder.AddProperty(new CSSProperty(property, value));
 	    }
 	    
 	    return builder;
     }
 
-    public CssBuilder AddProperty(string property, string value)
+    public CssBuilder AddProperty(CSSProperty prop)
     {
-        _properties.Add($"{property}: {value};");
+        if (GetPropertyValue(prop) != "") return SetProperty(prop);
+
+        _properties.Add(prop);
         return this;
     }
-    
-    public string GetPropertyValue(string property)
+    public CssBuilder SetProperty(CSSProperty prop)
     {
-	    foreach (var prop in _properties.Where(prop => prop.StartsWith(property)))
+        var idx = _properties.FindIndex(x => x.Prop == prop.Prop);
+        if (idx >= 0)
+        {
+            _properties[idx] = prop;
+        } else
+        {
+            AddProperty(prop);
+        }
+        return this;
+    }
+    public CssBuilder AddProperty(string property, string value)
+    {
+        var prop = new CSSProperty(property, value);
+        return AddProperty(prop);
+    }
+    public CssBuilder SetProperty(string property, string value)
+    {
+        var prop = new CSSProperty(property, value);
+        return SetProperty(prop);
+    }
+
+    public CSSProperty? GetProperty(string property)
+    {
+        var idx = _properties.FindIndex(x => x.Prop == property);
+        if (idx >= 0)
+        {
+            return _properties[idx];
+        }
+        return null;
+    }
+    public string GetPropertyValue(CSSProperty property)
+    {
+	    foreach (var prop in _properties.Where(prop => prop.Prop == property.Prop))
 	    {
-		    return string.Join(':', prop.Split(':').Skip(1)).Trim().TrimEnd(';');
+			return prop.Value;
 	    }
 
 	    return string.Empty;

@@ -1,0 +1,147 @@
+﻿@using JiayiLauncher.Appearance
+@using JiayiLauncher.Features.Mods
+@using JiayiLauncher.Pages
+@using JiayiLauncher.Features.Launch
+@using System.Diagnostics
+@using JiayiLauncher.Features.Discord
+@using JiayiLauncher.Features.Game
+@using JiayiLauncher.Settings
+@using JiayiLauncher.Shared.Components.Toasts
+@using JiayiLauncher.Utils
+@using System.Net.Http
+@using System.IO
+@using System.Net
+
+@inject NavigationManager NavigationManager
+@inject IToastService ToastService
+@inject IThemeState themeState
+
+<div class="theme-background" style='@_theme?.Replace(":root {", "").Replace("}", "").Normalize()'>
+    @if (Theme.Background != null)
+    {
+        <img class="theme-image" src="./themes/@Theme.Name/background.jpg">
+        <img class="theme-image" src="./themes/@Theme.Name/background.png">
+        <img class="theme-image" src="./themes/@Theme.Name/background.gif">
+
+
+        <video class="theme-image" autoplay muted loop>
+            <source src="./themes/@Theme.Name/background.mp4" type="video/mp4">
+            <source src="./themes/@Theme.Name/background.mov" type="video/mp4">
+            <source src="./themes/@Theme.Name/background.webm" type="video/webm">
+        </video>
+    }
+    <div class="theme-image-overlay" />
+    <div class="theme-header">
+        <strong>@Theme.Name</strong>
+        <p>by @Theme.Author</p>
+    </div>
+    <div class="theme-controls">
+        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="() => ApplyTheme()" Disabled="@Applying">Apply</JiayiButton>
+        @if (Directory.Exists(Path.Combine(ThemeState.WWWRootPath, "themes", Theme.Name)))
+        {
+            <span class="material-symbols-sharp" style="pointer-events: @(Applying ? "none" : "all"); z-index: 2; cursor: pointer;"
+                  title="Re-download theme" @onclick="() => ApplyTheme(true)">refresh</span>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public PublicTheme Theme { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback<bool> ChangeApplying { get; set; }
+    [Parameter]
+    public bool Applying { get; set; }
+
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+
+    private string _theme;
+    private bool _downloading;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Theme.Theme != null)
+        {
+            string response = InternetManager.Client.GetStringAsync(Theme.Theme).Result;
+
+            if (response != null)
+            {
+                _theme = response;
+            }
+            else
+            {
+                Log.Write("JiayiThemeCard", $"Failed to load theme: {Theme.Name}", Log.LogLevel.Error);
+            }
+        }
+
+        await base.OnInitializedAsync();
+    }
+
+
+    private enum ThemeStatus
+    {
+        ApplyTheme,
+        Ignore
+    }
+    private async Task<ThemeStatus> DownloadTheme(string themeroot, bool force)
+    {
+        if (_downloading) return ThemeStatus.Ignore;
+
+        if (Directory.Exists(themeroot))
+        {
+            if (force)
+            {
+                var parameters = new ModalParameters()
+                    .Add(nameof(MessageBox.Message), "All of your local changes will be lost.");
+                var res = ModalService.Show<Confirm>("Overwrite this theme?", parameters);
+                await res.Result.WaitAsync(new System.Threading.CancellationToken());
+                if (res.Result.Result.Cancelled) return ThemeStatus.Ignore;
+                Directory.Delete(themeroot, true);
+            }
+            else
+            {
+                return ThemeStatus.ApplyTheme;
+            }
+        }
+
+        _downloading = true;
+        Directory.CreateDirectory(themeroot); // wwwroot/themes/<theme_name>
+
+        await InternetManager.DownloadFile(Theme.Background, themeroot);
+        await InternetManager.DownloadFile(Theme.Theme, themeroot);
+
+        _downloading = false;
+
+        return ThemeStatus.ApplyTheme;
+    }
+
+    private async Task ApplyTheme(bool force = false)
+    {
+        if (Applying) return;
+
+        if (Theme.Metadata == null)
+        {
+            Log.Write("JiayiThemeCard", $"Skipping theme application: {Theme.Name}");
+            return;
+        }
+
+        await ChangeApplying.InvokeAsync(true);
+
+        var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", Theme.Name);
+        if (await DownloadTheme(themeroot, force) == ThemeStatus.Ignore)
+        {
+            await ChangeApplying.InvokeAsync(false);
+            return;
+        }
+
+        JiayiSettings.Instance!.ExternalTheme = Theme.Name;
+        var theme = CssBuilder.FromFile(Path.Combine(themeroot, "theme.css"), ":root");
+        theme.AddProperty("--background-image", $"url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.gif'), url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.png'), url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.jpg')");
+
+        themeState.ApplyTheme(theme);
+        JiayiSettings.Instance!.Save();
+        MainLayout.Instance?.Reload();
+        await ChangeApplying.InvokeAsync(false);
+    }
+}

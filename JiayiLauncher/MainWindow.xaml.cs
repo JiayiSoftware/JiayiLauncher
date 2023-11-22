@@ -16,6 +16,7 @@ using JiayiLauncher.Features.Profiles;
 using JiayiLauncher.Features.Stats;
 using JiayiLauncher.Features.Versions;
 using JiayiLauncher.Settings;
+using JiayiLauncher.Shared;
 using JiayiLauncher.Utils;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,9 +46,10 @@ public partial class MainWindow
 		var services = new ServiceCollection();
 		services.AddWpfBlazorWebView();
 		services.AddBlazoredModal();
-		services.AddBlazoredToast();
+        services.AddBlazoredToast();
+        services.AddSingleton<IThemeState, ThemeState>();
 #if DEBUG
-		services.AddBlazorWebViewDeveloperTools();
+        services.AddBlazorWebViewDeveloperTools();
 #endif
 		Resources.Add("services", services.BuildServiceProvider());
 		
@@ -84,7 +86,6 @@ public partial class MainWindow
 
 		Task.Run(() => VersionList.UpdateVersions());
 		RichPresence.Initialize();
-		ThemeManager.LoadTheme();
 		JiayiStats.Save();
 	}
 

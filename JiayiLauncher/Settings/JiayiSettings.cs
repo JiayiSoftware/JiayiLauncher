@@ -22,27 +22,23 @@ namespace JiayiLauncher.Settings;
 [Serializable]
 public class JiayiSettings
 {
-    [JsonIgnore]
-    private readonly IThemeState _themeState;
+    private ThemeState _themeState = ThemeState.Instance;
 
     [JsonConstructor]
-    // used to stop json deserialization from being shit and tring to link themeState
-    public JiayiSettings()
-    {
-        // None of this is going to work because we are manually creating an instance of JiayiSettings, resulting in a desynced themeState
-        // Yes it is registered, but you cant access it because blazor is not instanitiating it, we are. Blazor needs to instantiate it in order
-        // for it to have BLAZORS data.
-        // You can try to create a SetttingsController and SettingsState, but that means that you cant access the data inside of a normal c# file
-        // Or maybe you can, im not really sure tbh,, this shit is broken. Actually, you can access it in c# files that are behind a razor file, using
-        // [Inject], just not in individual c# files. There has to be some sort of linkage between them no?
-    }
-    public JiayiSettings(IThemeState themeState)
+    public JiayiSettings() { }
+    public JiayiSettings(ThemeState themeState)
     {
         _themeState = themeState;
     }
 
+    private string TemporaryFromHex(Color c)
+    {
+            return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+
+    }
+
     public static JiayiSettings Instance;
-    public static JiayiSettings DEFAULT => new JiayiSettings();
+    public static JiayiSettings DEFAULT => new JiayiSettings(new ThemeState());
 
     private static string _settingsPath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "settings.json");
@@ -93,23 +89,43 @@ public class JiayiSettings
     // appearance settings (my favorite)
     /* TODO: Load these properly, and sync with css variable somehow??? */
     [Setting("Primary background color", "Appearance", "The primary background color of the launcher.")]
-    public Color PrimaryBackgroundColor { get; set;} = Color.FromArgb(15, 15, 15);
+    public Color PrimaryBackgroundColor { get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--background-primary")?.Value ?? "#0f0f0f");
+        set => _themeState.UpdateTheme("--background-primary", TemporaryFromHex(value)); }
 
     [Setting("Secondary background color", "Appearance", "The secondary background color of the launcher.")]
-    public Color SecondaryBackgroundColor { get; set; } = Color.FromArgb(30, 30, 30);
+    public Color SecondaryBackgroundColor {
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--background-secondary")?.Value ?? "#1e1e1e");
+        set => _themeState.UpdateTheme("--background-secondary", TemporaryFromHex(value));
+    }
 
     [Setting("Accent color", "Appearance", "The accent color of the launcher.")]
-    public Color AccentColor { get; set; } = Color.FromArgb(220, 0, 0);
+    public Color AccentColor {
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--accent")?.Value ?? "#dc0000");
+        set => _themeState.UpdateTheme("--accent", TemporaryFromHex(value));
+    }
 
     [Setting("Text color", "Appearance", "The color of text seen throughout the launcher.")]
-    public Color TextColor { get; set; } = Color.FromArgb(255, 255, 255); // Color.White causes issues with the reset button
+    public Color TextColor
+    {
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--text-primary")?.Value ?? "#ffffff");
+        set => _themeState.UpdateTheme("--text-primary", TemporaryFromHex(value));
+    }
 
     [Setting("Text color (on accent)", "Appearance", "The color of text on top of the accent color.")]
-    public Color AccentTextColor { get; set; } = Color.FromArgb(255, 255, 255);
+    public Color AccentTextColor
+    {
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--text-accent")?.Value ?? "#ffffff");
+        set => _themeState.UpdateTheme("--text-accent", TemporaryFromHex(value));
+    }
 
     [Setting("Gray text color", "Appearance", "A gray version of the text color.")]
-    public Color GrayTextColor { get; set; } = Color.FromArgb(126, 126, 126);
+    public Color GrayTextColor
+    {
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--text-grayed")?.Value ?? "#7e7e7e");
+        set => _themeState.UpdateTheme("--text-grayed", TemporaryFromHex(value));
+    }
 
+    // Not sure how im going to do it on this
     [Setting("Shadow distance", "Appearance", "The distance of the shadows on UI elements.")]
     public int[] ShadowDistance { get; set; } = { 0, 10, 5 };
 
@@ -134,10 +150,18 @@ public class JiayiSettings
     public int[] Rounding { get; set; } = { 0, 10, 0 };
 
     [Setting("Border color", "Appearance", "The border color seen throughout the launcher.")]
-    public Color BorderColor { get; set; } = Color.FromArgb(0, 0, 0);
+    public Color BorderColor
+    {
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--border-primary")?.Value ?? "#000000");
+        set => _themeState.UpdateTheme("--border-primary", TemporaryFromHex(value));
+    }
 
     [Setting("Border color (on accent)", "Appearance", "The color of the border around the accent color.")]
-    public Color AccentBorderColor { get; set; } = Color.FromArgb(0, 0, 0);
+    public Color AccentBorderColor
+    {
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--border-accent")?.Value ?? "#000000");
+        set => _themeState.UpdateTheme("--border-accent", TemporaryFromHex(value));
+    }
 
     [Setting("Border thickness", "Appearance", "The thickness of the borders on UI elements.")]
     public int[] BorderThickness { get; set; } = { 0, 5, 0 };
@@ -167,20 +191,15 @@ public class JiayiSettings
     [JsonIgnore]
     public (string, Action) RestoreDefaultTheme { get; set; } = ("Restore", () =>
     {
-        /*var baseSettings = new JiayiSettings();
-		
-		var appearanceSettings = baseSettings.GetSettingsInCategory("Appearance")
-			.Select(setting => typeof(JiayiSettings).GetProperty(setting.Name));
-		
-		foreach (var property in appearanceSettings)
-		{
-			property?.SetValue(Instance, property.GetValue(baseSettings));
-		}
-		
-		Instance!.Save();
-		ThemeManager.ApplyTheme();
-		MainLayout.Instance.Reload();*/
-        throw new NotImplementedException();
+        var appearanceSettings = DEFAULT.GetSettingsInCategory("Appearance")
+            .Select(setting => typeof(JiayiSettings).GetProperty(setting.Name));
+
+        foreach (var property in appearanceSettings)
+        {
+            property?.SetValue(Instance, property.GetValue(DEFAULT));
+        }
+
+        Instance!.Save();
     }
     );
 

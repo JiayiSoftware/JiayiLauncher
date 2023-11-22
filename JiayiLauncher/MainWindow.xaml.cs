@@ -47,7 +47,6 @@ public partial class MainWindow
 		services.AddWpfBlazorWebView();
 		services.AddBlazoredModal();
         services.AddBlazoredToast();
-        services.AddSingleton<IThemeState, ThemeState>();
 #if DEBUG
         services.AddBlazorWebViewDeveloperTools();
 #endif
@@ -64,6 +63,7 @@ public partial class MainWindow
 		WinRegistry.SetFileAssociation("Jiayi Mod Collection", ".jiayi");
 		WinRegistry.RegisterUrlProtocol();
 		
+		ThemeState.Instance = new ThemeState(CssBuilder.FromFile(ThemeState.ThemePath, ":root"));
 		JiayiSettings.Load();
 		InternetManager.CheckOnline();
 		
@@ -83,6 +83,7 @@ public partial class MainWindow
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Versions");
 			JiayiSettings.Instance.Save();
 		}
+
 
 		Task.Run(() => VersionList.UpdateVersions());
 		RichPresence.Initialize();

@@ -6,24 +6,16 @@ using System.Reflection;
 
 namespace JiayiLauncher.Appearance;
 
-public interface IThemeState
+
+public class ThemeState
 {
-    CssBuilder ThemeCSS { get; set; }
-    event Action? OnChange;
+    public static ThemeState Instance { get; set; }
 
-    static readonly string WWWRootPath;
-    static readonly string ThemePath;
-
-    void ApplyTheme(CssBuilder css);
-    void UpdateTheme(string property, string value);
-}
-
-public class ThemeState : IThemeState
-{
     public CssBuilder ThemeCSS { get; set; }
     public event Action? OnChange;
 
-    public ThemeState() { ThemeCSS = CssBuilder.FromFile(ThemePath, ":root"); }
+    // If no CssBuilder, it sets it to an empty CssBuilder, which then ends up defaulting all the values in JiayiSettings.cs
+    public ThemeState(CssBuilder? themeCSS = null) { ThemeCSS = themeCSS ?? new CssBuilder(":root"); }
 
     public static readonly string WWWRootPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "wwwroot");
 

@@ -35,32 +35,37 @@ public class CssBuilder
     {
 	    var styles = File.ReadAllText(path);
 	    
-	    if (!styles.Contains(selector)) 
-		    throw new ArgumentException($"Selector '{selector}' was not found in this file.");
-	    
-	    // i hate windows newlines
-	    var lines = styles.Split('\n');
-	    
-	    if (lines.Any(x => x.Contains('\r')))
-		    lines = styles.Split("\r\n");
-	    
-	    var start = Array.IndexOf(lines, selector + " {");
-	    var end = Array.IndexOf(lines, "}", start);
-	    
-	    var builder = new CssBuilder(selector);
-	    for (var i = start + 1; i < end; i++)
-	    {
-		    var line = lines[i];
-		    if (string.IsNullOrWhiteSpace(line)) continue;
-		    var property = line.Split(':')[0].Trim();
-		    
-		    //var value = line.Split(':')[1].Trim().TrimEnd(';');
-		    // in case the value here contains a url we need to join the rest of the line
-		    var value = string.Join(':', line.Split(':').Skip(1)).Trim().TrimEnd(';');
-		    builder.AddProperty(new CSSProperty(property, value));
-	    }
-	    
-	    return builder;
+	    return FromText(styles, selector);
+    }
+
+    public static CssBuilder FromText(string css, string selector)
+    {
+        if (!css.Contains(selector))
+            throw new ArgumentException($"Selector '{selector}' was not found in this file.");
+
+        // i hate windows newlines
+        var lines = css.Split('\n');
+
+        if (lines.Any(x => x.Contains('\r')))
+            lines = css.Split("\r\n");
+
+        var start = Array.IndexOf(lines, selector + " {");
+        var end = Array.IndexOf(lines, "}", start);
+
+        var builder = new CssBuilder(selector);
+        for (var i = start + 1; i < end; i++)
+        {
+            var line = lines[i];
+            if (string.IsNullOrWhiteSpace(line)) continue;
+            var property = line.Split(':')[0].Trim();
+
+            //var value = line.Split(':')[1].Trim().TrimEnd(';');
+            // in case the value here contains a url we need to join the rest of the line
+            var value = string.Join(':', line.Split(':').Skip(1)).Trim().TrimEnd(';');
+            builder.AddProperty(new CSSProperty(property, value));
+        }
+
+        return builder;
     }
 
     public CssBuilder AddProperty(CSSProperty prop)

@@ -3,24 +3,24 @@
 @using JiayiLauncher.Settings
 
 
-@inject IThemeState themeState;
 <style>
-    @themeState.ThemeCSS.ToString();
+    @ThemeState.Instance?.ThemeCSS.ToString();
 </style>
 
 @code {
     protected override async Task OnInitializedAsync()
     {
+        ThemeState.Instance.OnChange += StateHasChanged;
+
         /* TODO: No local */
         if (JiayiSettings.Instance!.ExternalTheme == "local") return;
 
         var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", JiayiSettings.Instance!.ExternalTheme);
         var theme = CssBuilder.FromFile(Path.Combine(themeroot, "theme.css"), ":root");
-        
+
         theme.AddProperty("--background-image", $"url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.gif'), url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.png'), url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.jpg')");
 
-        themeState.OnChange += StateHasChanged;
-        themeState.ApplyTheme(theme);
+        ThemeState.Instance.ApplyTheme(theme);
         await base.OnInitializedAsync();
         
         // JiayiSettings.Instance!.

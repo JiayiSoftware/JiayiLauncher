@@ -14,7 +14,6 @@
 
 @inject NavigationManager NavigationManager
 @inject IToastService ToastService
-@inject IThemeState themeState
 
 <div class="theme-background" style='@_theme?.Replace(":root {", "").Replace("}", "").Normalize()'>
     @if (Theme.Background != null)
@@ -139,7 +138,7 @@
         var theme = CssBuilder.FromFile(Path.Combine(themeroot, "theme.css"), ":root");
         theme.AddProperty("--background-image", $"url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.gif'), url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.png'), url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.jpg')");
 
-        themeState.ApplyTheme(theme);
+        ThemeState.Instance.ApplyTheme(theme);
         JiayiSettings.Instance!.Save();
         MainLayout.Instance?.Reload();
         await ChangeApplying.InvokeAsync(false);

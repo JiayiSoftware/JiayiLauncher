@@ -1,134 +1,180 @@
-﻿using System;
+﻿using JiayiLauncher.Utils;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Controls.Primitives;
+using System.Xml.Linq;
 
 namespace JiayiLauncher.Appearance;
 
-public class CSSProperty {
-	public string Prop;
-	public string Value;
 
-	public CSSProperty(string property, string value) { 
-		Prop = property;
-		Value = value;
-	}
 
-	public override string ToString()
-	{
-		return $"{Prop}: {Value};";
-	}
+public class CssProperty
+{
+    public string Property { get; set; }
+    public string? Value { get; set; }
+
+    public CssProperty(string property, string? value)
+    {
+        Property = property;
+        Value = value;
+    }
+
+    public override string ToString()
+    {
+        return $"{Property}: {Value};";
+    }
+}
+
+public class CssSelector
+{
+    public string Selector { get; set; }
+    public List<CssProperty> Properties { get; set; }
+
+    public CssSelector(string selector, List<CssProperty> properties)
+    {
+        Selector = selector;
+        Properties = properties;
+    }
+
+    public CssSelector UpdateProperty(CssProperty prop)
+    {
+        var idx = Properties.FindIndex(x => x.Property == prop.Property);
+        if (idx >= 0)
+        {
+            Properties[idx] = prop;
+        }
+        else
+        {
+            Properties.Add(prop);
+        }
+        return this;
+    }
+
+    public CssProperty? GetProperty(string prop)
+    {
+        var idx = Properties.FindIndex(x => x.Property == prop);
+        if (idx >= 0)
+        {
+            return Properties[idx];
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public string? GetPropertyValue(string prop)
+    {
+        return GetProperty(prop)?.Value;
+    }
+
+    public string ToStringNoSelector()
+    {
+        return string.Join("\n", Properties.Select(prop => "\t" + prop.ToString()));
+    }
+
+    public override string ToString()
+    {
+        return $"{Selector} {{\n{ToStringNoSelector()}\n}}";
+    }
 }
 
 public class CssBuilder
 {
-    private readonly List<CSSProperty> _properties = new();
-    private readonly string _selector;
+    private List<CssSelector> _selectors;
 
-    public CssBuilder(string selector)
+    public CssBuilder(List<CssSelector>? selectors = null)
     {
-        _selector = selector;
-
+        _selectors = selectors ?? new List<CssSelector>();
     }
 
-    public static CssBuilder FromFile(string path, string selector)
+    public CssSelector? GetSelector(string selector)
     {
-	    var styles = File.ReadAllText(path);
-	    
-	    return FromText(styles, selector);
-    }
-
-    public static CssBuilder FromText(string css, string selector)
-    {
-        if (!css.Contains(selector))
-            throw new ArgumentException($"Selector '{selector}' was not found in this file.");
-
-        // i hate windows newlines
-        var lines = css.Split('\n');
-
-        if (lines.Any(x => x.Contains('\r')))
-            lines = css.Split("\r\n");
-
-        var start = Array.IndexOf(lines, selector + " {");
-        var end = Array.IndexOf(lines, "}", start);
-
-        var builder = new CssBuilder(selector);
-        for (var i = start + 1; i < end; i++)
-        {
-            var line = lines[i];
-            if (string.IsNullOrWhiteSpace(line)) continue;
-            var property = line.Split(':')[0].Trim();
-
-            //var value = line.Split(':')[1].Trim().TrimEnd(';');
-            // in case the value here contains a url we need to join the rest of the line
-            var value = string.Join(':', line.Split(':').Skip(1)).Trim().TrimEnd(';');
-            builder.AddProperty(new CSSProperty(property, value));
-        }
-
-        return builder;
-    }
-
-    public CssBuilder AddProperty(CSSProperty prop)
-    {
-        if (GetPropertyValue(prop) != "") return SetProperty(prop);
-
-        _properties.Add(prop);
-        return this;
-    }
-    public CssBuilder SetProperty(CSSProperty prop)
-    {
-        var idx = _properties.FindIndex(x => x.Prop == prop.Prop);
+        var idx = _selectors.FindIndex(x => x.Selector == selector);
         if (idx >= 0)
         {
-            _properties[idx] = prop;
-        } else
-        {
-            AddProperty(prop);
+            return _selectors[idx];
         }
+        else
+        {
+            return null;
+        }
+    }
+
+    public CssProperty? GetProperty(string selector, string prop)
+    {
+        return GetSelector(selector)?.GetProperty(prop);
+    }
+
+    public CssBuilder UpdateProperty(string selector, CssProperty prop)
+    {
+        GetSelector(selector)?.UpdateProperty(prop);
+
         return this;
     }
-    public CssBuilder AddProperty(string property, string value)
+
+    public static CssBuilder FromFile(string path)
     {
-        var prop = new CSSProperty(property, value);
-        return AddProperty(prop);
-    }
-    public CssBuilder SetProperty(string property, string value)
-    {
-        var prop = new CSSProperty(property, value);
-        return SetProperty(prop);
+        var css = File.ReadAllText(path);
+
+        return Parse(css);
     }
 
-    public CSSProperty? GetProperty(string property)
+    public static CssBuilder Parse(string cssString)
     {
-        var idx = _properties.FindIndex(x => x.Prop == property);
-        if (idx >= 0)
+        cssString = RemoveCssComments(cssString);
+
+        List<CssSelector> result = new List<CssSelector>();
+
+        string pattern = @"(?<selector>[^{]+)\s*{\s*(?<properties>[^}]+)\s*}";
+        Regex regex = new Regex(pattern, RegexOptions.IgnorePatternWhitespace);
+
+        MatchCollection matches = regex.Matches(cssString);
+
+        foreach (Match match in matches)
         {
-            return _properties[idx];
+            string selector = match.Groups["selector"].Value.Trim();
+            string propertyString = match.Groups["properties"].Value;
+
+            List<CssProperty> properties = ParseProperties(propertyString);
+
+            result.Add(new CssSelector(selector, properties));
         }
-        return null;
+
+        return new CssBuilder(result);
     }
-    public string GetPropertyValue(CSSProperty property)
+
+    private static List<CssProperty> ParseProperties(string propertyString)
     {
-	    foreach (var prop in _properties.Where(prop => prop.Prop == property.Prop))
-	    {
-			return prop.Value;
-	    }
+        List<CssProperty> properties = new List<CssProperty>();
 
-	    return string.Empty;
+        string propertyPattern = @"(?<property>[^:]+)\s*:\s*(?<value>[^;]+);+";
+        Regex propertyRegex = new Regex(propertyPattern, RegexOptions.IgnorePatternWhitespace);
+
+        MatchCollection propertyMatches = propertyRegex.Matches(propertyString);
+
+        foreach (Match propertyMatch in propertyMatches)
+        {
+            string property = propertyMatch.Groups["property"].Value.Trim();
+            string value = propertyMatch.Groups["value"].Value.Trim();
+
+            properties.Add(new CssProperty(property, value));
+        }
+
+        return properties;
     }
 
-    // i like linq extension methods
-    public List<string> GetAllPropertyValues() => _properties.Select(GetPropertyValue).ToList();
-
-    public string Build()
+    private static string RemoveCssComments(string cssString)
     {
-        var css = $"{_selector} {{\n";
-
-        css = _properties.Aggregate(css, (current, property) => current + $"\t{property}\n");
-
-        css += "}\n";
-        return css;
+        // Use regular expression to remove CSS comments
+        string commentPattern = @"/\*.*?\*/";
+        return Regex.Replace(cssString, commentPattern, string.Empty, RegexOptions.Singleline);
     }
-
-    public override string ToString() => Build();
+    public override string ToString()
+    {
+        return string.Join("\n\n", _selectors.Select(selector => selector.ToString()));
+    }
 }

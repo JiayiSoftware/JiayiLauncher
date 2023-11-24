@@ -1,4 +1,5 @@
-﻿using JiayiLauncher.Shared;
+﻿using JiayiLauncher.Settings;
+using JiayiLauncher.Shared;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.IO;
@@ -14,22 +15,28 @@ public class ThemeState
     public CssBuilder ThemeCSS { get; set; }
     public event Action? OnChange;
 
-    // If no CssBuilder, it sets it to an empty CssBuilder, which then ends up defaulting all the values in JiayiSettings.cs
-    public ThemeState(CssBuilder? themeCSS = null) { ThemeCSS = themeCSS ?? new CssBuilder(":root"); }
-
     public static readonly string WWWRootPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "wwwroot");
 
-    public static readonly string ThemePath = Path.Combine(WWWRootPath, "css", "theme.css");
+    public static string ThemePath => Path.Combine(WWWRootPath, $"themes", JiayiSettings.Instance?.Theme ?? "local-default", "theme.css");
+
+    // If no CssBuilder, it sets it to an empty CssBuilder, which then ends up defaulting all the values in JiayiSettings.cs
+    public ThemeState(CssBuilder? themeCSS = null) { ThemeCSS = themeCSS ?? new CssBuilder(); }
+
 
     public void ApplyTheme(CssBuilder css)
     {
         ThemeCSS = css;
-        OnChange?.Invoke();
+        Refresh();
     }
 
     public void UpdateTheme(string property, string value)
     {
-        ThemeCSS.SetProperty(property, value);
+        ThemeCSS.UpdateProperty(":root", new CssProperty(property, value));
+        Refresh();
+    }
+
+    public void Refresh()
+    {
         OnChange?.Invoke();
     }
 }

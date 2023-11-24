@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Mods;
@@ -15,6 +16,7 @@ using JiayiLauncher.Shared;
 using JiayiLauncher.Utils;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
 
 namespace JiayiLauncher.Settings;
 
@@ -33,8 +35,7 @@ public class JiayiSettings
 
     private string TemporaryFromHex(Color c)
     {
-            return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
-
+        return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
     }
 
     public static JiayiSettings Instance;
@@ -87,84 +88,143 @@ public class JiayiSettings
     public string ShadersPath { get; set; } = string.Empty;
 
     // appearance settings (my favorite)
-    /* TODO: Load these properly, and sync with css variable somehow??? */
+    [JsonIgnore]
     [Setting("Primary background color", "Appearance", "The primary background color of the launcher.")]
-    public Color PrimaryBackgroundColor { get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--background-primary")?.Value ?? "#0f0f0f");
-        set => _themeState.UpdateTheme("--background-primary", TemporaryFromHex(value)); }
+    public Color PrimaryBackgroundColor
+    {
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--background-primary")?.Value ?? "#0f0f0f");
+        set => _themeState.UpdateTheme("--background-primary", TemporaryFromHex(value));
+    }
 
+    [JsonIgnore]
     [Setting("Secondary background color", "Appearance", "The secondary background color of the launcher.")]
-    public Color SecondaryBackgroundColor {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--background-secondary")?.Value ?? "#1e1e1e");
+    public Color SecondaryBackgroundColor
+    {
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--background-secondary")?.Value ?? "#1e1e1e");
         set => _themeState.UpdateTheme("--background-secondary", TemporaryFromHex(value));
     }
 
+    [JsonIgnore]
     [Setting("Accent color", "Appearance", "The accent color of the launcher.")]
-    public Color AccentColor {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--accent")?.Value ?? "#dc0000");
+    public Color AccentColor
+    {
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--accent")?.Value ?? "#dc0000");
         set => _themeState.UpdateTheme("--accent", TemporaryFromHex(value));
     }
 
+    [JsonIgnore]
     [Setting("Text color", "Appearance", "The color of text seen throughout the launcher.")]
     public Color TextColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--text-primary")?.Value ?? "#ffffff");
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--text-primary")?.Value ?? "#ffffff");
         set => _themeState.UpdateTheme("--text-primary", TemporaryFromHex(value));
     }
 
+    [JsonIgnore]
     [Setting("Text color (on accent)", "Appearance", "The color of text on top of the accent color.")]
     public Color AccentTextColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--text-accent")?.Value ?? "#ffffff");
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--text-accent")?.Value ?? "#ffffff");
         set => _themeState.UpdateTheme("--text-accent", TemporaryFromHex(value));
     }
 
+    [JsonIgnore]
     [Setting("Gray text color", "Appearance", "A gray version of the text color.")]
     public Color GrayTextColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--text-grayed")?.Value ?? "#7e7e7e");
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--text-grayed")?.Value ?? "#7e7e7e");
         set => _themeState.UpdateTheme("--text-grayed", TemporaryFromHex(value));
     }
 
-    // Not sure how im going to do it on this
+    [JsonIgnore]
     [Setting("Shadow distance", "Appearance", "The distance of the shadows on UI elements.")]
-    public int[] ShadowDistance { get; set; } = { 0, 10, 5 };
+    public int[] ShadowDistance
+    {
+        get => new int[] { 0, 10, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--shadow")?.Value ?? "5", @"\d+").Value) };
+        set => _themeState.UpdateTheme("--shadow", $"{value[2]}px {value[2]}px rgba(0, 0, 0, 0.4)");
+    }
 
+    [JsonIgnore]
     [Setting("UI movement speed", "Appearance", "The speed at which the UI moves.")]
-    public float[] MovementSpeed { get; set; } = { 0, 0.5f, 0.2f };
+    public float[] MovementSpeed
+    {
+        get => new float[] { 0, 0.5f, float.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--transition-speed")?.Value ?? "0.2", @"\d*\.?\d*").Value) };
+        set => _themeState.UpdateTheme("--transition-speed", $"{value[2]}s");
+    }
 
+    [JsonIgnore]
     [Setting("Use background image", "Appearance", "Use an image as the background of the launcher.")]
-    public bool UseBackgroundImage { get; set; } // = false;
+    public bool UseBackgroundImage
+    {
+        get => !(_themeState.ThemeCSS.GetProperty(":root", "--background-image")?.Value == "none");
+        set => _themeState.UpdateTheme("--background-image", value ? $"url('')" : "none");
 
-    /* TODO: Remove this, as files will now be locally saved and uploaded to theme repo (dont fucking trust people to not use discord link) */
+    }
+
+    /* TODO: Remove this, as files will now be locally saved and uploaded to theme repo (dont fucking trust people to not use discord link), also allow using a url, idfk man*/
     [Setting("Background image URL", "Appearance", "The URL of the image to use as the background. Videos are also supported.",
         "UseBackgroundImage", "The URL should be a link to an image or video on the internet. A path to a local image will not work.")]
-    public string BackgroundImageUrl { get; set; } = string.Empty;
+    public string BackgroundImageUrl
+    {
+        get
+        {
+            if (Instance.UseBackgroundImage) return Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-image")?.Value ?? "", @"url\(\'(?<url>[^']+)\'\)").Groups["url"].Value ?? string.Empty;
+            else
+            {
+                _themeState.UpdateTheme("--background-image", $"none");
+                return string.Empty;
+            }
+        }
+        set => _themeState.UpdateTheme("--background-image", $"url('{value}')");
+    }
 
+    [JsonIgnore]
     [Setting("Background blur", "Appearance", "How much to blur the background by.", "UseBackgroundImage")]
-    public int[] BackgroundBlur { get; set; } = { 0, 10, 0 };
+    public int[] BackgroundBlur
+    {
+        get => new int[] { 0, 100, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-blur")?.Value ?? "0", @"\d+").Value) };
+        set => _themeState.UpdateTheme("--background-blur", $"{value[2]}px");
+    }
 
+    [JsonIgnore]
     [Setting("Background brightness", "Appearance", "How bright the background should be.", "UseBackgroundImage")]
-    public int[] BackgroundBrightness { get; set; } = { 0, 100, 100 };
+    public int[] BackgroundBrightness
+    {
+        get => new int[] { 0, 100, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-brightness")?.Value ?? "100", @"\d+").Value) };
+        set => _themeState.UpdateTheme("--background-brightness", $"{value[2]}%");
+    }
 
+    [JsonIgnore]
     [Setting("Rounding", "Appearance", "How much to round the corners of most UI elements.")]
-    public int[] Rounding { get; set; } = { 0, 10, 0 };
+    public int[] Rounding
+    {
+        get => new int[] { 0, 10, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--rounding")?.Value ?? "0", @"\d+").Value) };
+        set => _themeState.UpdateTheme("--rounding", $"{value[2]}px");
+    }
 
+    [JsonIgnore]
     [Setting("Border color", "Appearance", "The border color seen throughout the launcher.")]
     public Color BorderColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--border-primary")?.Value ?? "#000000");
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--border-primary")?.Value ?? "#000000");
         set => _themeState.UpdateTheme("--border-primary", TemporaryFromHex(value));
     }
 
+    [JsonIgnore]
     [Setting("Border color (on accent)", "Appearance", "The color of the border around the accent color.")]
     public Color AccentBorderColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty("--border-accent")?.Value ?? "#000000");
+        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--border-accent")?.Value ?? "#000000");
         set => _themeState.UpdateTheme("--border-accent", TemporaryFromHex(value));
     }
-
+    
+    [JsonIgnore]
     [Setting("Border thickness", "Appearance", "The thickness of the borders on UI elements.")]
-    public int[] BorderThickness { get; set; } = { 0, 5, 0 };
+    public int[] BorderThickness
+    {
+        get => new int[] { 0, 5, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--border-thickness")?.Value ?? "0", @"\d+").Value) };
+        set => _themeState.UpdateTheme("--border-thickness", $"{value[2]}px");
+    }
 
     /*[Setting("Save theme", "Appearance", "Save changes made to your theme.")]
 	[JsonIgnore] public (string, Action) SaveTheme { get; set; } = ("Save", () =>
@@ -173,9 +233,9 @@ public class JiayiSettings
 		MainLayout.Instance.Reload();
 	});*/
 
+    [JsonIgnore]
     [Setting("Show theme", "Appearance",
         "Reveal your theme in File Explorer. You can share this with other people or use other people's themes.")]
-    [JsonIgnore]
     public (string, Action) OpenTheme { get; set; } = ("Open", () =>
     {
         Process.Start(new ProcessStartInfo
@@ -187,32 +247,33 @@ public class JiayiSettings
     }
     );
 
-    [Setting("Restore default theme", "Appearance", "Go back to Jiayi's default theme.", confirm: true)]
     [JsonIgnore]
+    [Setting("Restore default theme", "Appearance", "Go back to Jiayi's default theme.", confirm: true)]
     public (string, Action) RestoreDefaultTheme { get; set; } = ("Restore", () =>
     {
         var appearanceSettings = DEFAULT.GetSettingsInCategory("Appearance")
             .Select(setting => typeof(JiayiSettings).GetProperty(setting.Name));
 
+        var defaults = DEFAULT;
+
         foreach (var property in appearanceSettings)
         {
-            property?.SetValue(Instance, property.GetValue(DEFAULT));
+            property?.SetValue(Instance, property.GetValue(defaults));
         }
-
-        Instance!.Save();
+        Instance.Save();
+        MainLayout.Instance?.Reload(); // not sure why, but it isnt detecting this state change, but it does detect ResetToDefault();
     }
     );
 
 
-    [Setting("External Theme", "Appearance", "Downloadable themes created by users like you.", canReset: false)]
     [JsonIgnore]
+    [Setting("External Themes", "Appearance", "Downloadable themes created by users like you.", canReset: false)]
     public (string, Action) OpenExternalThemePage { get; set; } = ("Open Themes", () =>
     {
         throw new NotImplementedException("OpenExternalThemePage() -> Access NavigationManager");
     }
     );
-    /* TODO: No local */
-    public string ExternalTheme { get; set; } = "local";
+    public string Theme { get; set; } = "local-default";
 
 
     // discord settings
@@ -420,6 +481,12 @@ public class JiayiSettings
             var defaultSlider = (float[])defaultValue!;
             var currentSlider = (float[])currentValue!;
             return defaultSlider[2] == currentSlider[2];
+        }
+
+        // Buttons
+        if (property.PropertyType == typeof ((string, Action)))
+        {
+            return true;
         }
 
         return Equals(defaultValue, currentValue);

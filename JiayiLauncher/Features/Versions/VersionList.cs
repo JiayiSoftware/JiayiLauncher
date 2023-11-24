@@ -26,6 +26,7 @@ public static class VersionList
 	
 	public static async Task UpdateVersions(bool clear = false)
 	{
+		// TODO: Show notification
 		if (clear)
 		{
 			_versionDict.Clear();

@@ -15,7 +15,7 @@
 @inject NavigationManager NavigationManager
 @inject IToastService ToastService
 
-<div class="theme-background" style='@_theme?.Replace(":root {", "").Replace("}", "").Normalize()'>
+<div class="theme-background" style='@_theme?.GetSelector(":root")?.ToStringNoSelector()'>
     @if (Theme.Background != null)
     {
         <img class="theme-image" src="./themes/@Theme.Name/background.jpg">
@@ -55,7 +55,7 @@
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
 
-    private string _theme;
+    private CssBuilder _theme;
     private bool _downloading;
 
     protected override async Task OnInitializedAsync()
@@ -66,7 +66,7 @@
 
             if (response != null)
             {
-                _theme = response;
+                _theme = CssBuilder.Parse(response);
             }
             else
             {
@@ -134,13 +134,12 @@
             return;
         }
 
-        JiayiSettings.Instance!.ExternalTheme = Theme.Name;
-        var theme = CssBuilder.FromFile(Path.Combine(themeroot, "theme.css"), ":root");
-        theme.AddProperty("--background-image", $"url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.gif'), url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.png'), url('./themes/{JiayiSettings.Instance!.ExternalTheme}/background.jpg')");
+        JiayiSettings.Instance!.Theme = Theme.Name;
+        var theme = CssBuilder.FromFile(Path.Combine(themeroot, "theme.css"));
+        theme.UpdateProperty(":root", new CssProperty("--background-image", $"url('./themes/{JiayiSettings.Instance!.Theme}/background.gif'), url('./themes/{JiayiSettings.Instance!.Theme}/background.png'), url('./themes/{JiayiSettings.Instance!.Theme}/background.jpg')"));
 
         ThemeState.Instance.ApplyTheme(theme);
         JiayiSettings.Instance!.Save();
-        MainLayout.Instance?.Reload();
         await ChangeApplying.InvokeAsync(false);
     }
 }

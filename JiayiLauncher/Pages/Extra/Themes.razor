@@ -23,9 +23,27 @@
 </div>
 
 <div class="themes">
+    @* Local themes *@
     <ul class="theme-list">
-        @* TODO: Add local theme saving *@
-        @* <JiayiThemeCard Theme="@localTheme" ChangeApplying="(e) => _applying = e" /> *@
+        @if (local_themes?.Count > 0)
+        {
+            foreach (var theme in local_themes)
+            {
+                @* if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue; *@
+
+                <JiayiLocalThemeCard Theme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
+            }
+        }
+        else
+        {
+            <p style="text-align: center; margin-top: 0;">TODO: Create Theme Button</p>
+        }
+    </ul>
+    <span class="material-symbols-sharp" style="pointer-events: all; cursor: pointer;" onclick="LoadThemes">refresh</span>
+    <hr style="width: 100%; border: 1px solid var(--background-secondary);" />
+
+    @* Public themes *@
+    <ul class="theme-list">
         @if (themes?.Length > 0)
         {
             _searchResults = 0;
@@ -36,11 +54,11 @@
                     if (!raw_tags.All(tag => theme.RawTags.Any(sourceTag => string.Equals(tag, sourceTag, StringComparison.OrdinalIgnoreCase)))) continue;
                 }
 
+                // TODO: Searching tags array searchs DIRECTLY for that string
                 if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase) && !theme.Tags.Contains(_searchBox?.Value ?? "", StringComparer.OrdinalIgnoreCase) && !theme.Author.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue;
 
                 _searchResults++;
-                <JiayiThemeCard Theme="@theme" ChangeApplying="(e) => 
-_applying = e" Applying="@_applying" />
+                <JiayiThemeCard Theme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
             }
         }
     </ul>
@@ -52,11 +70,7 @@ _applying = e" Applying="@_applying" />
 
 @code {
     private PublicTheme[] themes;
-    /* private PublicTheme localTheme = new()
-        {
-            Author = "you",
-            Name = "local",
-        }; */
+    private List<LocalTheme> local_themes;
 
 
     private bool _applying = false;
@@ -67,9 +81,15 @@ _applying = e" Applying="@_applying" />
 
     protected override async Task OnInitializedAsync()
     {
-        themes = PublicTheme.GetAllThemes()!;
+        LoadThemes();
 
         await base.OnInitializedAsync();
+    }
+
+    private void LoadThemes()
+    {
+        themes = PublicTheme.GetAllThemes()!;
+        local_themes = LocalTheme.GetAllThemes().ToList();
     }
 
     private void FilterChanged(string raw_tag)

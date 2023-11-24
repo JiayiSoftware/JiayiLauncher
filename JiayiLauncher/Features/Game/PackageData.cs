@@ -62,7 +62,16 @@ public static class PackageData
 		
 		if (!package.AppInfo.Package.IsDevelopmentMode) return InstallLocation.MicrosoftStore;
 		
-		var installPath = package.AppInfo.Package.InstalledLocation.Path;
+		string installPath;
+
+        try
+        {
+            installPath = package.AppInfo.Package.InstalledLocation.Path;
+        } catch (Exception ex)
+        {
+            Log.Write(nameof(PackageData), $"Failed to locate minecraft (lost path): {ex.Message}", Log.LogLevel.Error);
+            return InstallLocation.Unknown;
+        }
 
 		// inverting this if statement looks confusing, i'm not taking your suggestion rider
 		if (JiayiSettings.Instance!.VersionsPath == string.Empty)

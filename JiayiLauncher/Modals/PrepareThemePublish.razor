@@ -1,0 +1,110 @@
+﻿@using JiayiLauncher.Appearance
+@using JiayiLauncher.Features.Mods
+@using JiayiLauncher.Pages
+@using JiayiLauncher.Settings
+@using System.IO
+@using JiayiLauncher.Features.Stats
+@using JiayiLauncher.Features.Versions
+@using JiayiLauncher.Utils
+@using System.Text
+@using Newtonsoft.Json
+@using System.Diagnostics
+
+<div class="edit">
+    <div class="name">
+        <p>Theme name</p>
+        <JiayiTextBox Placeholder="@ThemeName" @ref="_nameTextBox" Length="(0,20)" />
+    </div>
+
+    <div class="edit-author" style="margin-bottom: 1em">
+        <p>Author</p>
+        <JiayiTextBox Placeholder="you" @ref="_authorTextBox" Length="(0,20)" />
+    </div>
+
+    <div class="edit-tags" style="margin-bottom: 1em">
+        <p>Tags</p>
+        <JiayiTextBox Placeholder="tag,tag,tag" @ref="_tagsTextBox" Length="(0,100)" />
+    </div>
+
+    <div class="edit-raw-tags" style="margin-bottom: 1em">
+        <p>Raw Tags</p>
+        <JiayiDropDown Multiselect="true" Items="PublicTheme.RAW_TAGS" Name="Select raw tags" SelectedItems="publicTheme.RawTags"
+                       @ref="_rawTagsDropDown" />
+    </div>
+
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">Save</JiayiButton>
+</div>
+
+@code {
+    [Parameter]
+    public string? ThemeName { get; set; }
+
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+
+    private JiayiTextBox? _nameTextBox;
+    private JiayiTextBox? _authorTextBox;
+    private JiayiTextBox? _tagsTextBox;
+    private JiayiDropDown? _rawTagsDropDown;
+
+    private Metadata publicTheme = new()
+        {
+            Author = "",
+            Tags = new(),
+            RawTags = new(),
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    private async Task SaveClicked()
+    {
+        string? name = _nameTextBox?.Value?.Trim().Truncate(20) ?? ThemeName;
+        if (name == null || name == string.Empty) return;
+
+        var dir_path = Path.Combine(ThemeState.WWWRootPath, "themes", $"{name}");
+        var all_themes = PublicTheme.GetAllThemes();
+
+        publicTheme.Author = _authorTextBox?.Value?.Trim().Truncate(20) ?? "unknown";
+        publicTheme.Tags = _tagsTextBox?.Value?.Trim().Truncate(100).Split(",").Select(x => x.ToLower()).Distinct().ToList() ?? new();
+        publicTheme.RawTags = _rawTagsDropDown?.SelectedItems.Select(x => x.ToLower()).ToList() ?? new();
+
+        if (all_themes?.FirstOrDefault(x => x.Name.ToLower() == name.ToLower(), null) != null || Directory.Exists(dir_path))
+        {
+            Log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {ThemeName}", Log.LogLevel.Warning);
+            return;
+        }
+
+        Directory.CreateDirectory(dir_path);
+        IO.CopyFilesRecursively(Path.Combine(ThemeState.WWWRootPath, "themes", $"local-{ThemeName}"), dir_path);
+
+        var meta_buffer = File.Create(Path.Combine(dir_path, "metadata.json"));
+        var meta = JsonConvert.SerializeObject(publicTheme, Formatting.Indented);
+        byte[] meta_byteArray = Encoding.UTF8.GetBytes(meta);
+        meta_buffer.Write(meta_byteArray, 0, meta_byteArray.Length);
+        meta_buffer.Close();
+
+        Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer.exe ",
+                Arguments = $"/select, \"{dir_path}\"",
+                UseShellExecute = true
+            });
+
+        await Modal.CloseAsync();
+
+        // TODO: pls help, Process.Start doesnt work
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Message), "Upload this folder as a pull request, located in the /themes folder (check the README for more information).")
+            .Add(nameof(MessageBox.Buttons), new List<(string, EventCallback)> { ("Ok", EventCallback.Empty), ("Open Repository", new EventCallback(null, async () => 
+            Process.Start("https://github.com/JiayiSoftware/jiayi-themes"))) });
+
+        var modal = ModalService.Show<MessageBox>("Publish mod", parameters);
+        await modal.Result;
+    }
+}

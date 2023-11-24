@@ -54,3 +54,18 @@
     border-color: transparent;
     padding: 1em 0;
 }
+
+.refresh {
+    pointer-events: all;
+    cursor: pointer;
+    transition: rotate ease 600ms;
+}
+
+.refresh:hover {
+    rotate: 360deg;
+}
+
+.divider {
+    width: 100%;
+    border: 1px solid var(--background-secondary);
+}

@@ -15,7 +15,7 @@
 @inject NavigationManager NavigationManager
 @inject IToastService ToastService
 
-<div class="theme-background" style='@_theme?.GetSelector(":root")?.ToStringNoSelector()'>
+<div class="theme-wrapper" style='@_theme?.GetSelector(":root")?.ToStringNoSelector()'>
     @if (Theme.Background != null)
     {
         <img class="theme-image" src="./themes/@Theme.Name/background.jpg">
@@ -31,15 +31,15 @@
     }
     <div class="theme-image-overlay" />
     <div class="theme-header">
-        <strong>@Theme.Name</strong>
+        <strong style="cursor: pointer" @onclick="OpenTheme">@Theme.Name</strong>
         <p>by @Theme.Author</p>
     </div>
-    <div class="theme-controls">
+    <div class="theme-controls" >
         <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="() => ApplyTheme()" Disabled="@Applying">Apply</JiayiButton>
         @if (Directory.Exists(Path.Combine(ThemeState.WWWRootPath, "themes", Theme.Name)))
         {
             <span class="material-symbols-sharp" style="pointer-events: @(Applying ? "none" : "all"); z-index: 2; cursor: pointer;"
-                  title="Re-download theme" @onclick="() => ApplyTheme(true)">refresh</span>
+                  title="Reinstall theme" @onclick="() => ApplyTheme(true)">download</span>
         }
     </div>
 </div>
@@ -91,11 +91,19 @@
         {
             if (force)
             {
-                var parameters = new ModalParameters()
+                var options = new List<(string, EventCallback)>();
+                var parameters = new ModalParameters();
+
+                options.Add(("Yes", EventCallback.Empty));
+                options.Add(("No", EventCallback.Empty));
+
+                parameters
+                    .Add(nameof(MessageBox.Buttons), options)
                     .Add(nameof(MessageBox.Message), "All of your local changes will be lost.");
-                var res = ModalService.Show<Confirm>("Overwrite this theme?", parameters);
-                await res.Result.WaitAsync(new System.Threading.CancellationToken());
-                if (res.Result.Result.Cancelled) return ThemeStatus.Ignore;
+
+                var modal = ModalService.Show<MessageBox>("Overwrite this theme?", parameters);
+                if ((await modal.Result).Cancelled) return ThemeStatus.Ignore;
+
                 Directory.Delete(themeroot, true);
             }
             else
@@ -109,8 +117,10 @@
 
         await InternetManager.DownloadFile(Theme.Background, themeroot);
         await InternetManager.DownloadFile(Theme.Theme, themeroot);
+        StateHasChanged();
 
         _downloading = false;
+
 
         return ThemeStatus.ApplyTheme;
     }
@@ -141,5 +151,15 @@
         ThemeState.Instance.ApplyTheme(theme);
         JiayiSettings.Instance!.Save();
         await ChangeApplying.InvokeAsync(false);
+    }
+
+    private void OpenTheme()
+    {
+        Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer.exe ",
+                Arguments = $"/select, \"{Path.Combine(ThemeState.WWWRootPath, $"themes", Theme.Name, "theme.css")}\"",
+                UseShellExecute = true
+            });
     }
 }

@@ -63,6 +63,7 @@ public partial class MainWindow
         WinRegistry.SetFileAssociation("Jiayi Mod Collection", ".jiayi");
         WinRegistry.RegisterUrlProtocol();
 
+        // TODO: Create default local-default
         ThemeState.Instance = new ThemeState(CssBuilder.FromFile(ThemeState.ThemePath));
         JiayiSettings.Load();
         InternetManager.CheckOnline();

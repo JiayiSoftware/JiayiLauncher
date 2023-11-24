@@ -15,9 +15,14 @@
 
     <span class="material-symbols-sharp">filter_list</span>
     <p class="filter-by">Filter by:</p>
-    <JiayiFilter Changed='() => FilterChanged("dark")'>Dark</JiayiFilter>
-    <JiayiFilter Changed='() => FilterChanged("light")'>Light</JiayiFilter>
-    <JiayiFilter Changed='() => FilterChanged("animated")'>Animated</JiayiFilter>
+    @foreach (var raw_tag in PublicTheme.RAW_TAGS)
+    {
+        <JiayiFilter Changed="() => FilterChanged(raw_tag.ToLower())">@raw_tag</JiayiFilter>
+    }
+
+    <div class="separator"></div>
+
+    <span class="material-symbols-sharp refresh" onclick="LoadThemes">refresh</span>
 
     <p class="invisible-normalizer">invisible</p>
 </div>
@@ -39,8 +44,8 @@
             <p style="text-align: center; margin-top: 0;">TODO: Create Theme Button</p>
         }
     </ul>
-    <span class="material-symbols-sharp" style="pointer-events: all; cursor: pointer;" onclick="LoadThemes">refresh</span>
-    <hr style="width: 100%; border: 1px solid var(--background-secondary);" />
+
+    <hr class="divider" />
 
     @* Public themes *@
     <ul class="theme-list">

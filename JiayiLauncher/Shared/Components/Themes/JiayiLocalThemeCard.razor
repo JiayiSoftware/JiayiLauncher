@@ -15,7 +15,7 @@
 @inject NavigationManager NavigationManager
 @inject IToastService ToastService
 
-<div class="theme-background" style='@_theme?.GetSelector(":root")?.ToStringNoSelector()'>
+<div class="theme-wrapper" style='@_theme?.GetSelector(":root")?.ToStringNoSelector()'>
     <img class="theme-image" src="./themes/local-@Theme.Name/background.jpg">
     <img class="theme-image" src="./themes/local-@Theme.Name/background.png">
     <img class="theme-image" src="./themes/local-@Theme.Name/background.gif">
@@ -28,10 +28,12 @@
     </video>
     <div class="theme-image-overlay" />
     <div class="theme-header">
-        <strong>@Theme.Name</strong>
+        <strong style="cursor: pointer" @onclick="OpenTheme">@Theme.Name</strong>
     </div>
     <div class="theme-controls">
         <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="() => ApplyTheme()" Disabled="@Applying">Apply</JiayiButton>
+        <span class="material-symbols-sharp" style="z-index: 2; cursor: pointer;"
+              title="Prepare theme upload" @onclick="PrepareThemeUpload">globe</span>
     </div>
 </div>
 
@@ -80,5 +82,25 @@
         ThemeState.Instance.ApplyTheme(theme);
         JiayiSettings.Instance!.Save();
         await ChangeApplying.InvokeAsync(false);
+    }
+
+
+    private void OpenTheme()
+    {
+        Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer.exe ",
+                Arguments = $"/select, \"{Path.Combine(ThemeState.WWWRootPath, $"themes", $"local-{Theme.Name}", "theme.css")}\"",
+                UseShellExecute = true
+            });
+    }
+
+    private async void PrepareThemeUpload()
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(PrepareThemePublish.ThemeName), Theme.Name);
+
+        var modal = ModalService.Show<PrepareThemePublish>("Publish theme", parameters);
+        await modal.Result;
     }
 }

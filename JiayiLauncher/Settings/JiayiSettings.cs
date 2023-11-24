@@ -26,6 +26,7 @@ public class JiayiSettings
 {
     private ThemeState _themeState = ThemeState.Instance;
 
+
     [JsonConstructor]
     public JiayiSettings() { }
     public JiayiSettings(ThemeState themeState)
@@ -267,12 +268,8 @@ public class JiayiSettings
 
 
     [JsonIgnore]
-    [Setting("External Themes", "Appearance", "Downloadable themes created by users like you.", canReset: false)]
-    public (string, Action) OpenExternalThemePage { get; set; } = ("Open Themes", () =>
-    {
-        throw new NotImplementedException("OpenExternalThemePage() -> Access NavigationManager");
-    }
-    );
+    [Setting("Themes", "Appearance", "Local and downloadable themes created by other users.", canReset: false)]
+    public (string, string) OpenExternalThemePage { get; set; } = ("Open Themes", "/themes");
     public string Theme { get; set; } = "local-default";
 
 

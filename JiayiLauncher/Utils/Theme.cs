@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using Windows.Services.Maps;
 public class LocalTheme
 {
     private static string ThemeRoot = Path.Combine(ThemeState.WWWRootPath, "themes");
@@ -60,6 +61,7 @@ public class LocalTheme
         var defaultTheme = new ThemeState().ThemeCSS.ToString();
         byte[] byteArray = Encoding.UTF8.GetBytes(defaultTheme);
         buffer.Write(byteArray, 0, byteArray.Length);
+        buffer.Close();
 
         return new LocalTheme(name);
     }
@@ -67,8 +69,20 @@ public class LocalTheme
     public string Name;
 }
 
+public class Metadata
+{
+    [JsonProperty("author")]
+    public string Author;
+    [JsonProperty("tags")]
+    public List<string> Tags;
+    [JsonProperty("raw_tags")]
+    public List<string> RawTags;
 
-public class PublicTheme
+    public static readonly List<string> RAW_TAGS = new() { "Dark", "Light", "Animated" };
+
+}
+
+public class PublicTheme : Metadata
 {
     public static PublicTheme[]? GetAllThemes()
     {
@@ -90,13 +104,7 @@ public class PublicTheme
     [JsonProperty("Name")]
     public string Name;
 
-    [JsonProperty("author")]
-    public string Author;
-    [JsonProperty("tags")]
-    public string[] Tags;
-    [JsonProperty("raw_tags")]
-    public string[] RawTags;
-
+    
     [JsonProperty("bg")]
     public Uri Background;
     [JsonProperty("meta")]

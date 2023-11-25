@@ -1,0 +1,55 @@
+﻿@using JiayiLauncher.Appearance
+@using JiayiLauncher.Features.Mods
+@using JiayiLauncher.Pages
+@using JiayiLauncher.Settings
+@using System.IO
+@using JiayiLauncher.Features.Stats
+@using JiayiLauncher.Features.Versions
+@using JiayiLauncher.Utils
+@using System.Text
+@using Newtonsoft.Json
+@using System.Diagnostics
+
+<div class="edit">
+    <div class="name" style="margin-bottom: 1em">
+        <p>Theme name</p>
+        <JiayiTextBox Placeholder="Name" @ref="_nameTextBox" Length="(0,20)" />
+    </div>
+
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">Save</JiayiButton>
+</div>
+
+@code {
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+
+    private JiayiTextBox? _nameTextBox;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    private async Task SaveClicked()
+    {
+        string? name = _nameTextBox?.Value?.Trim().Truncate(20) ?? "default";
+        if (name == null || name == string.Empty) return;
+
+        var dir_path = Path.Combine(ThemeState.WWWRootPath, "themes", $"local-{name}");
+
+        if (Directory.Exists(dir_path))
+        {
+            Log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {name}", Log.LogLevel.Warning);
+            return;
+        }
+
+        Directory.CreateDirectory(dir_path);
+        // use JiayiSettings.Instance.Theme to pull from the current theme
+        IO.CopyFilesRecursively(Path.Combine(ThemeState.WWWRootPath, "themes", "local-default"), dir_path);
+
+        await Modal.CloseAsync();
+    }
+}

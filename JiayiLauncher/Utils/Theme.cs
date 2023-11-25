@@ -1,4 +1,5 @@
 ﻿using JiayiLauncher.Appearance;
+using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 using Newtonsoft.Json;
 using System;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using Windows.Services.Maps;
+using System.Xml.Linq;
 public class LocalTheme
 {
     private static string ThemeRoot = Path.Combine(ThemeState.WWWRootPath, "themes");
@@ -64,6 +65,15 @@ public class LocalTheme
         buffer.Close();
 
         return new LocalTheme(name);
+    }
+
+    public static void SaveCurrentTheme()
+    {
+        var buffer = File.OpenWrite(Path.Combine(ThemeRoot, JiayiSettings.Instance.Theme, "theme.css"));
+        var themeCSS = ThemeState.Instance.ThemeCSS.ToString();
+        byte[] byteArray = Encoding.UTF8.GetBytes(themeCSS);
+        buffer.Write(byteArray, 0, byteArray.Length);
+        buffer.Close();
     }
 
     public string Name;

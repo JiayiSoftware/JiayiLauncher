@@ -21,25 +21,9 @@
 
 <Sidebar @ref="_sidebar" />
 
-@* TODO: Stop forcing full window refresh *@
-<div class="background-video">
-    <video autoplay muted loop id="bg-video">
-        <source src="./themes/@JiayiSettings.Instance!.Theme/background.mp4" type="video/mp4">
-        <source src="./themes/@JiayiSettings.Instance!.Theme/background.mov" type="video/mp4">
-        <source src="./themes/@JiayiSettings.Instance!.Theme/background.webm" type="video/webm">
-    </video>
-</div>
-<div class="background-image"></div>
-
-
-<script>
-    var video = document.getElementById("bg-video");
-    video.play();
-    video.muted = true;
-</script>
+<ThemeController />
 
 <main style="margin-left: @_margin" @onkeydown="KeyDown">
-    <ThemeController />
     @Body
 </main>
 

@@ -69,3 +69,34 @@
     width: 100%;
     border: 1px solid var(--background-secondary);
 }
+
+.add-button {
+    z-index: 2;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--accent);
+    color: var(--text-accent);
+    box-shadow: var(--shadow);
+    filter: brightness(1);
+    transition: var(--transition-speed);
+    cursor: pointer;
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-accent);
+}
+
+    .add-button:hover {
+        filter: brightness(1.5);
+    }
+
+    .add-button:active {
+        filter: brightness(0.8);
+        transform: translate(5px, 5px);
+        box-shadow: none;
+    }
+
+    .add-button:focus {
+        outline: none;
+    }

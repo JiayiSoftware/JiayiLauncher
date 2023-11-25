@@ -1,5 +1,6 @@
 ﻿@page "/Themes"
 @using System.Net.Http
+@using JiayiLauncher.Settings
 @using JiayiLauncher.Shared.Components.Mods
 @using JiayiLauncher.Utils
 @using Newtonsoft.Json
@@ -32,16 +33,14 @@
     <ul class="theme-list">
         @if (local_themes?.Count > 0)
         {
+            _localSearchResults = 0;
             foreach (var theme in local_themes)
             {
-                @* if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue; *@
+                if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue;
 
-                <JiayiLocalThemeCard Theme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
+                _localSearchResults++;
+                <JiayiLocalThemeCard @key="theme.Name" Theme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
             }
-        }
-        else
-        {
-            <p style="text-align: center; margin-top: 0;">TODO: Create Theme Button</p>
         }
     </ul>
 
@@ -60,10 +59,10 @@
                 }
 
                 // TODO: Searching tags array searchs DIRECTLY for that string
-                if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase) && !theme.Tags.Contains(_searchBox?.Value ?? "", StringComparer.OrdinalIgnoreCase) && !theme.Author.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue;
+                if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase) && theme.Tags.Where(x => x.StartsWith(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)).Count() <= 0 && !theme.Author.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue;
 
                 _searchResults++;
-                <JiayiThemeCard Theme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
+                <JiayiThemeCard @key="theme.Name" Theme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
             }
         }
     </ul>
@@ -71,15 +70,23 @@
     {
         <p style="text-align: center; margin-top: 0;">No results found.</p>
     }
+
+    <button class="add-button" @onclick="CreateNewTheme">
+        <span class="material-symbols-sharp">add</span>
+    </button>
 </div>
 
 @code {
     private PublicTheme[] themes;
     private List<LocalTheme> local_themes;
 
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
 
     private bool _applying = false;
+    private int _localSearchResults;
     private int _searchResults;
+
     private List<string> raw_tags = new();
     // refs
     private JiayiTextBox? _searchBox;
@@ -95,6 +102,7 @@
     {
         themes = PublicTheme.GetAllThemes()!;
         local_themes = LocalTheme.GetAllThemes().ToList();
+        StateHasChanged();
     }
 
     private void FilterChanged(string raw_tag)
@@ -109,6 +117,16 @@
         }
 
         StateHasChanged();
+    }
+
+    private async void CreateNewTheme()
+    {
+        var parameters = new ModalParameters();
+
+        var modal = ModalService.Show<NewTheme>("New Theme", parameters);
+        await modal.Result;
+
+        LoadThemes();
     }
 }
 

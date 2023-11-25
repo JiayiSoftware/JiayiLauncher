@@ -227,13 +227,6 @@ public class JiayiSettings
         set => _themeState.UpdateTheme("--border-thickness", $"{value[2]}px");
     }
 
-    /*[Setting("Save theme", "Appearance", "Save changes made to your theme.")]
-	[JsonIgnore] public (string, Action) SaveTheme { get; set; } = ("Save", () =>
-	{
-		ThemeManager.ApplyTheme();
-		MainLayout.Instance.Reload();
-	});*/
-
     [JsonIgnore]
     [Setting("Show theme", "Appearance",
         "Reveal your theme in File Explorer. You can share this with other people or use other people's themes.")]
@@ -402,6 +395,7 @@ public class JiayiSettings
 
         using var stream = File.OpenWrite(_settingsPath);
         JsonSerializer.Serialize(stream, this, _options);
+        LocalTheme.SaveCurrentTheme();
         Log.Write(this, "Saved settings.");
     }
 
@@ -440,7 +434,6 @@ public class JiayiSettings
         }
         catch (Exception e)
         {
-            // TODO: Always fails
             stream.Close();
             Instance = DEFAULT;
             Instance.Save();

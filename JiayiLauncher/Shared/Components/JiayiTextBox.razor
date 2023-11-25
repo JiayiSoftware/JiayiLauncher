@@ -1,5 +1,5 @@
 ﻿<input type="text" class="textbox" placeholder="@Placeholder" style="@Style" disabled="@Disabled"
-       min="@Length.Item1" max="@Length.Item2" minlength="@Length.Item1" maxlength="@Length.Item2"
+       min="@(Length?.Item1 ?? -1)" max="@(Length?.Item2 ?? -1)" minlength="@(Length?.Item1 ?? -1)" maxlength="@(Length?.Item2 ?? -1)"
        @bind="Value" @oninput="OnChange">
 
 @code {
@@ -19,7 +19,7 @@
     public bool Disabled { get; set; }
 
     [Parameter]
-    public (int, int) Length { get; set; }
+    public (int, int)? Length { get; set; }
 
     private void OnChange(ChangeEventArgs obj)
     {

@@ -63,7 +63,7 @@ public partial class MainWindow
         WinRegistry.SetFileAssociation("Jiayi Mod Collection", ".jiayi");
         WinRegistry.RegisterUrlProtocol();
 
-        // Theme path is local-default before settings load
+        // Theme path is local\default before settings load
         if (!File.Exists(ThemeState.ThemePath))
         {
             string theme_parent = Path.GetDirectoryName(ThemeState.ThemePath)!;
@@ -75,7 +75,7 @@ public partial class MainWindow
         // Path changes after settings load
         if (!File.Exists(ThemeState.ThemePath))
         {
-            JiayiSettings.Instance.Theme = "local-default";
+            JiayiSettings.Instance.Theme = ".local/default";
         }
 
         InternetManager.CheckOnline();

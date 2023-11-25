@@ -263,7 +263,7 @@ public class JiayiSettings
     [JsonIgnore]
     [Setting("Themes", "Appearance", "Local and downloadable themes created by other users.", canReset: false)]
     public (string, string) OpenExternalThemePage { get; set; } = ("Open Themes", "/themes");
-    public string Theme { get; set; } = "local-default";
+    public string Theme { get; set; } = ".local/default";
 
 
     // discord settings

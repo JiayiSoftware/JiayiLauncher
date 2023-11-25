@@ -24,7 +24,7 @@ public class LocalTheme
          *   - theme.css
          *   - background.<png|jpg|gif|(other common image types) ; mp4|mov|webm>
          */
-        List<LocalTheme> localThemes = new List<LocalTheme>();
+        /*List<LocalTheme> localThemes = new List<LocalTheme>();
 
         var directories = Directory.GetDirectories(ThemeRoot);
         foreach (var d in directories)
@@ -45,12 +45,28 @@ public class LocalTheme
             localThemes.Add(CreateTheme("default"));
         }
 
+        return localThemes.ToArray();*/
+        List<LocalTheme> localThemes = new List<LocalTheme>();
+
+        var directories = Directory.GetDirectories(Path.Combine(ThemeRoot, ".local"));
+        foreach (var d in directories)
+        {
+            var name = new DirectoryInfo(d).Name;
+            var theme = new LocalTheme(name);
+            localThemes.Add(theme);
+        }
+
+        if (localThemes.Count <= 0)
+        {
+            localThemes.Add(CreateTheme("default"));
+        }
+
         return localThemes.ToArray();
     }
 
     public static LocalTheme? CreateTheme(string name)
     {
-        var path = Path.Combine(ThemeRoot, $"local-{name}");
+        var path = Path.Combine(ThemeRoot, $".local\\{name}");
         if (Directory.Exists(path))
         {
             return null;

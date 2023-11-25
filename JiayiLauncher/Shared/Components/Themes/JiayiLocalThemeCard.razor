@@ -16,15 +16,15 @@
 @inject IToastService ToastService
 
 <div class="theme-wrapper" style='@_theme?.GetSelector(":root")?.ToStringNoSelector()'>
-    <img class="theme-image" src="./themes/local-@Theme.Name/background.jpg">
-    <img class="theme-image" src="./themes/local-@Theme.Name/background.png">
-    <img class="theme-image" src="./themes/local-@Theme.Name/background.gif">
+    <img class="theme-image" src="./themes/.local/@Theme.Name/background.jpg">
+    <img class="theme-image" src="./themes/.local/@Theme.Name/background.png">
+    <img class="theme-image" src="./themes/.local/@Theme.Name/background.gif">
 
 
     <video class="theme-image" autoplay muted loop>
-        <source src="./themes/local-@Theme.Name/background.mp4" type="video/mp4">
-        <source src="./themes/local-@Theme.Name/background.mov" type="video/mp4">
-        <source src="./themes/local-@Theme.Name/background.webm" type="video/webm">
+        <source src="./themes/.local/@Theme.Name/background.mp4" type="video/mp4">
+        <source src="./themes/.local/@Theme.Name/background.mov" type="video/mp4">
+        <source src="./themes/.local/@Theme.Name/background.webm" type="video/webm">
     </video>
     <div class="theme-image-overlay" />
     <div class="theme-header">
@@ -53,7 +53,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var themecss = Path.Combine(ThemeState.WWWRootPath, "themes", $"local-{Theme.Name}", "theme.css");
+        var themecss = Path.Combine(ThemeState.WWWRootPath, "themes", $".local/{Theme.Name}", "theme.css");
         var css = File.ReadAllText(themecss);
 
         _theme = CssBuilder.Parse(css);
@@ -73,7 +73,7 @@
 
         await ChangeApplying.InvokeAsync(true);
 
-        JiayiSettings.Instance!.Theme = $"local-{Theme.Name}";
+        JiayiSettings.Instance!.Theme = $".local/{Theme.Name}";
 
         var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", JiayiSettings.Instance!.Theme);
         var theme = CssBuilder.FromFile(Path.Combine(themeroot, "theme.css"));
@@ -90,7 +90,7 @@
         Process.Start(new ProcessStartInfo
             {
                 FileName = "explorer.exe ",
-                Arguments = $"/select, \"{Path.Combine(ThemeState.WWWRootPath, $"themes", $"local-{Theme.Name}", "theme.css")}\"",
+                Arguments = $"/select, \"{Path.Combine(ThemeState.WWWRootPath, $"themes", $".local/{Theme.Name}", "theme.css")}\"",
                 UseShellExecute = true
             });
     }

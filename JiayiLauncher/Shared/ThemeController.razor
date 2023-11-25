@@ -38,7 +38,13 @@
         };
 
         var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", JiayiSettings.Instance!.Theme);
-        var theme = CssBuilder.FromFile(Path.Combine(themeroot, "theme.css"));
+        var themecss = Path.Combine(themeroot, "theme.css");
+        if (!File.Exists(themecss))
+        {
+            JiayiSettings.Instance!.Theme = ".local/default";
+            LocalTheme.CreateTheme("default");
+        }
+        var theme = CssBuilder.FromFile(themecss);
 
         theme.UpdateProperty(":root", new CssProperty("--background-image", $"url('./themes/{JiayiSettings.Instance!.Theme}/background.gif'), url('./themes/{JiayiSettings.Instance!.Theme}/background.png'), url('./themes/{JiayiSettings.Instance!.Theme}/background.jpg')"));
 

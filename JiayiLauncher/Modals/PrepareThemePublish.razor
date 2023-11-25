@@ -81,7 +81,7 @@
         }
 
         Directory.CreateDirectory(dir_path);
-        IO.CopyFilesRecursively(Path.Combine(ThemeState.WWWRootPath, "themes", $"local-{ThemeName}"), dir_path);
+        IO.CopyFilesRecursively(Path.Combine(ThemeState.WWWRootPath, "themes", $".local/{ThemeName}"), dir_path);
 
         var meta_buffer = File.Create(Path.Combine(dir_path, "metadata.json"));
         var meta = JsonConvert.SerializeObject(publicTheme, Formatting.Indented);
@@ -98,11 +98,17 @@
 
         await Modal.CloseAsync();
 
+        List<(string, EventCallback)> options = new()
+        {
+            ("Ok", EventCallback.Empty),
+            ("Open Repository", new EventCallback(null, async () =>
+            Process.Start(new ProcessStartInfo { FileName = "https://github.com/JiayiSoftware/jiayi-themes", UseShellExecute = true })))
+        };
+
         // TODO: pls help, Process.Start doesnt work
         var parameters = new ModalParameters()
-            .Add(nameof(MessageBox.Message), "Upload this folder as a pull request, located in the /themes folder (check the README for more information).")
-            .Add(nameof(MessageBox.Buttons), new List<(string, EventCallback)> { ("Ok", EventCallback.Empty), ("Open Repository", new EventCallback(null, async () => 
-            Process.Start("https://github.com/JiayiSoftware/jiayi-themes"))) });
+        .Add(nameof(MessageBox.Message), "Upload this folder as a pull request, located in the /themes folder (check the README for more information).")
+        .Add(nameof(MessageBox.Buttons), options);
 
         var modal = ModalService.Show<MessageBox>("Publish mod", parameters);
         await modal.Result;

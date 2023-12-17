@@ -40,7 +40,7 @@ public static class VersionManager
 		var folders = Directory.GetDirectories(JiayiSettings.Instance.VersionsPath);
 		var versions = VersionList.GetVersionList().GetAwaiter().GetResult();
 
-		return folders.Select(Path.GetFileName).Where(name => versions.All(x => x != name)).ToList()!;
+		return folders.Select(Path.GetFileName).Where(name => versions.All(x => x != name) && name != ".backup").ToList()!;
 	}
 
 	public static bool IsCustomVersion(string ver)
@@ -167,7 +167,7 @@ public static class VersionManager
 				await PackageData.PackageManager.RemovePackageAsync(package.Id.FullName, RemovalOptions.PreserveApplicationData);
 			else
 			{
-				var backupPath = Path.Combine(JiayiSettings.Instance.VersionsPath, "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
+				var backupPath = Path.Combine(JiayiSettings.Instance.VersionsPath, ".backup");
 				if (Directory.Exists(backupPath))
 				{
 					Log.Write(nameof(VersionManager),
@@ -200,7 +200,7 @@ public static class VersionManager
 			{
 				Log.Write(nameof(VersionManager), "Package registered");
 			
-				var path = Path.Combine(JiayiSettings.Instance.VersionsPath, "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
+				var path = Path.Combine(JiayiSettings.Instance.VersionsPath, ".backup");
 				if (Directory.Exists(path))
 				{
 					await PackageData.ReplaceGameData(path);

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -50,58 +51,59 @@ public partial class MainWindow
 #if DEBUG
         services.AddBlazorWebViewDeveloperTools();
 #endif
-        Resources.Add("services", services.BuildServiceProvider());
+		Resources.Add("services", services.BuildServiceProvider());
+		
+		// startup stuff
+		
+		// user should be admin at this point but just in case
+		using var identity = WindowsIdentity.GetCurrent();
+		var principal = new WindowsPrincipal(identity);
+		if (!principal.IsInRole(WindowsBuiltInRole.Administrator)) return;	
+		
+		// registry stuff
+		WinRegistry.SetFileAssociation("Jiayi Mod Collection", ".jiayi");
+		WinRegistry.RegisterUrlProtocol();
+		
+		// Theme path is local\default before settings load
+		if (!File.Exists(ThemeState.ThemePath))
+		{
+			var themeParent = Path.GetDirectoryName(ThemeState.ThemePath)!;
+			Directory.CreateDirectory(themeParent);
+			File.Copy(Path.Combine(ThemeState.WWWRootPath, "css", "theme.css"), ThemeState.ThemePath);
+		}
+		
+		ThemeState.Instance = new ThemeState(CssBuilder.FromFile(ThemeState.ThemePath));
+		JiayiSettings.Load();
+		
+		// Path changes after settings load
+		if (!File.Exists(ThemeState.ThemePath))
+		{
+			JiayiSettings.Instance.Theme = ".local/default";
+		}
+		
+		InternetManager.CheckOnline();
+		Task.Run(async () => await VersionList.UpdateVersions());
+		
+		if (JiayiSettings.Instance.ModCollectionPath != string.Empty)
+		{
+			ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
+		}
+		
+		if (JiayiSettings.Instance.ProfileCollectionPath != string.Empty)
+		{
+			ProfileCollection.Load(JiayiSettings.Instance.ProfileCollectionPath);
+		}
 
-        // startup stuff
-
-        // user should be admin at this point but just in case
-        using var identity = WindowsIdentity.GetCurrent();
-        var principal = new WindowsPrincipal(identity);
-        if (!principal.IsInRole(WindowsBuiltInRole.Administrator)) return;
-
-        // registry stuff
-        WinRegistry.SetFileAssociation("Jiayi Mod Collection", ".jiayi");
-        WinRegistry.RegisterUrlProtocol();
-
-        // Theme path is local\default before settings load
-        if (!File.Exists(ThemeState.ThemePath))
-        {
-            string theme_parent = Path.GetDirectoryName(ThemeState.ThemePath)!;
-            Directory.CreateDirectory(theme_parent);
-            File.Copy(Path.Combine(ThemeState.WWWRootPath, "css", "theme.css"), ThemeState.ThemePath);
-        }
-        ThemeState.Instance = new ThemeState(CssBuilder.FromFile(ThemeState.ThemePath));
-        JiayiSettings.Load();
-        // Path changes after settings load
-        if (!File.Exists(ThemeState.ThemePath))
-        {
-            JiayiSettings.Instance.Theme = ".local/default";
-        }
-
-        InternetManager.CheckOnline();
-
-        if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
-        {
-            ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
-        }
-
-        if (JiayiSettings.Instance.ProfileCollectionPath != string.Empty)
-        {
-            ProfileCollection.Load(JiayiSettings.Instance.ProfileCollectionPath);
-        }
-
-        if (JiayiSettings.Instance.VersionsPath == string.Empty)
-        {
-            JiayiSettings.Instance.VersionsPath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Versions");
-            JiayiSettings.Instance.Save();
-        }
-
-
-        Task.Run(() => VersionList.UpdateVersions());
-        RichPresence.Initialize();
-        JiayiStats.Save();
-    }
+		if (JiayiSettings.Instance.VersionsPath == string.Empty)
+		{
+			JiayiSettings.Instance.VersionsPath = Path.Combine(
+				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Versions");
+			JiayiSettings.Instance.Save();
+		}
+		
+		RichPresence.Initialize();
+		JiayiStats.Save();
+	}
 
     protected override void OnSourceInitialized(EventArgs e)
     {

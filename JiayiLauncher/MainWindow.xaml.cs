@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -65,6 +66,8 @@ public partial class MainWindow
 		JiayiSettings.Load();
 		InternetManager.CheckOnline();
 		
+		Task.Run(async () => await VersionList.UpdateVersions());
+		
 		if (JiayiSettings.Instance!.ModCollectionPath != string.Empty)
 		{
 			ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
@@ -81,8 +84,7 @@ public partial class MainWindow
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Versions");
 			JiayiSettings.Instance.Save();
 		}
-
-		Task.Run(() => VersionList.UpdateVersions());
+		
 		RichPresence.Initialize();
 		ThemeManager.LoadTheme();
 		JiayiStats.Save();

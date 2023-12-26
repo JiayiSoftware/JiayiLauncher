@@ -17,7 +17,7 @@ public static class PackageData
 	{
 		var info = 
 			await AppDiagnosticInfo.RequestInfoForPackageAsync("Microsoft.MinecraftUWP_8wekyb3d8bbwe");
-		if (info == null || info.Count == 0) return null;
+		if (info == null || info.Count == 0 || !File.Exists(info[0].AppInfo.Package.InstalledPath)) return null;
 		return info[0];
 	}
 

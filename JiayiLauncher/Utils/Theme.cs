@@ -19,33 +19,6 @@ public class LocalTheme
 
     public static LocalTheme[] GetAllThemes()
     {
-        /*
-         * <name>
-         *   - theme.css
-         *   - background.<png|jpg|gif|(other common image types) ; mp4|mov|webm>
-         */
-        /*List<LocalTheme> localThemes = new List<LocalTheme>();
-
-        var directories = Directory.GetDirectories(ThemeRoot);
-        foreach (var d in directories)
-        {
-            var name = new DirectoryInfo(d).Name;
-            var matches = Regex.Match(name, "^local-(?<name>.+)$");
-            if (matches.Groups["name"].Captures.Count <= 0)
-            {
-                Log.Write(nameof(LocalTheme), $"Skipping loading theme: {name}");
-                continue;
-            }
-
-            var theme = new LocalTheme(matches.Groups["name"].Value);
-            localThemes.Add(theme);
-        }
-
-        if (localThemes.Count <= 0) {
-            localThemes.Add(CreateTheme("default"));
-        }
-
-        return localThemes.ToArray();*/
         List<LocalTheme> localThemes = new List<LocalTheme>();
 
         var directories = Directory.GetDirectories(Path.Combine(ThemeRoot, ".local"));
@@ -130,7 +103,7 @@ public class PublicTheme : Metadata
     [JsonProperty("Name")]
     public string Name;
 
-    
+
     [JsonProperty("bg")]
     public Uri Background;
     [JsonProperty("meta")]

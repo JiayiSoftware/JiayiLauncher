@@ -18,7 +18,7 @@
     <p class="filter-by">Filter by:</p>
     @foreach (var raw_tag in PublicTheme.RAW_TAGS)
     {
-        <JiayiFilter Changed="() => FilterChanged(raw_tag.ToLower())">@raw_tag</JiayiFilter>
+        <JiayiFilter Changed="() => FilterChanged(raw_tag)">@raw_tag</JiayiFilter>
     }
 
     <div class="separator"></div>

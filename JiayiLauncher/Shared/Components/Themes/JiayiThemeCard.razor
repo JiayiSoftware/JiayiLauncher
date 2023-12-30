@@ -16,7 +16,7 @@
 @inject IToastService ToastService
 
 <div class="theme-wrapper" style='@_theme?.GetSelector(":root")?.ToStringNoSelector()'>
-    
+
     <img class="theme-image" src="@Theme.Background">
     <img class="theme-image" src="./themes/@Theme.Name/background.jpg">
     <img class="theme-image" src="./themes/@Theme.Name/background.png">
@@ -38,12 +38,12 @@
         <strong style="cursor: pointer" @onclick="OpenTheme">@Theme.Name</strong>
         <p>by @Theme.Author</p>
     </div>
-    <div class="theme-controls" >
+    <div class="theme-controls">
         <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="() => ApplyTheme()" Disabled="@Applying">Apply</JiayiButton>
         @if (Directory.Exists(Path.Combine(ThemeState.WWWRootPath, "themes", Theme.Name)))
         {
             <span class="material-symbols-sharp" style="pointer-events: @(Applying ? "none" : "all"); z-index: 2; cursor: pointer;"
-                  title="Reinstall theme" @onclick="() => ApplyTheme(true)">download</span>
+                  title="Reinstall theme" @onclick="() => InstallTheme()">download</span>
         }
     </div>
 </div>
@@ -87,33 +87,56 @@
         ApplyTheme,
         Ignore
     }
-    private async Task<ThemeStatus> DownloadTheme(string themeroot, bool force)
+    private async Task<bool> InstallTheme()
     {
-        if (_downloading) return ThemeStatus.Ignore;
+        await ChangeApplying.InvokeAsync(true);
+
+        if (_downloading)
+        {
+            await ChangeApplying.InvokeAsync(false);
+            return false;
+        }
+
+        var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", Theme.Name);
 
         if (Directory.Exists(themeroot))
         {
-            if (force)
+            var options = new List<(string, EventCallback)>();
+            var parameters = new ModalParameters();
+
+            options.Add(("Yes", new EventCallback(null, async () =>
             {
-                var options = new List<(string, EventCallback)>();
-                var parameters = new ModalParameters();
-
-                options.Add(("Yes", EventCallback.Empty));
-                options.Add(("No", EventCallback.Empty));
-
-                parameters
-                    .Add(nameof(MessageBox.Buttons), options)
-                    .Add(nameof(MessageBox.Message), "All of your local changes will be lost.");
-
-                var modal = ModalService.Show<MessageBox>("Overwrite this theme?", parameters);
-                if ((await modal.Result).Cancelled) return ThemeStatus.Ignore;
-
                 Directory.Delete(themeroot, true);
-            }
-            else
+                await DownloadTheme(themeroot);
+                await ApplyTheme();
+            })));
+            options.Add(("No", new EventCallback(null, async () =>
             {
-                return ThemeStatus.ApplyTheme;
-            }
+                await ChangeApplying.InvokeAsync(false);
+            })));
+
+            parameters
+                .Add(nameof(MessageBox.Buttons), options)
+                .Add(nameof(MessageBox.Message), "All of your local changes will be lost.");
+
+            var modal = ModalService.Show<MessageBox>("Overwrite this theme?", parameters);
+            if ((await modal.Result).Cancelled)
+                await ChangeApplying.InvokeAsync(false);
+        }
+        else
+        {
+            await DownloadTheme(themeroot);
+        }
+
+        return true;
+    }
+
+    private async Task DownloadTheme(string themeroot)
+    {
+        if (_downloading)
+        {
+            await ChangeApplying.InvokeAsync(false);
+            return;
         }
 
         _downloading = true;
@@ -124,15 +147,10 @@
         StateHasChanged();
 
         _downloading = false;
-
-
-        return ThemeStatus.ApplyTheme;
     }
 
-    private async Task ApplyTheme(bool force = false)
+    private async Task ApplyTheme()
     {
-        if (Applying) return;
-
         if (Theme.Metadata == null)
         {
             Log.Write("JiayiThemeCard", $"Skipping theme application: {Theme.Name}");
@@ -142,11 +160,7 @@
         await ChangeApplying.InvokeAsync(true);
 
         var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", Theme.Name);
-        if (await DownloadTheme(themeroot, force) == ThemeStatus.Ignore)
-        {
-            await ChangeApplying.InvokeAsync(false);
-            return;
-        }
+        if (!File.Exists(Path.Combine(themeroot, "theme.css")) && !(await InstallTheme())) return;
 
         JiayiSettings.Instance!.Theme = Theme.Name;
         var theme = CssBuilder.FromFile(Path.Combine(themeroot, "theme.css"));
@@ -159,6 +173,8 @@
 
     private void OpenTheme()
     {
+        if (!Directory.Exists(Path.Combine(ThemeState.WWWRootPath, "themes", Theme.Name))) return;
+
         Process.Start(new ProcessStartInfo
             {
                 FileName = "explorer.exe ",

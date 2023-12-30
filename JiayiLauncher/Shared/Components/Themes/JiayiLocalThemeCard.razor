@@ -67,15 +67,16 @@
         Ignore
     }
 
-    private async Task ApplyTheme(bool force = false)
+    private async Task ApplyTheme()
     {
-        if (Applying) return;
-
         await ChangeApplying.InvokeAsync(true);
 
         JiayiSettings.Instance!.Theme = $".local/{Theme.Name}";
 
         var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", JiayiSettings.Instance!.Theme);
+        if (!Directory.Exists(themeroot)) LocalTheme.CreateTheme("default");
+        if (!File.Exists(Path.Combine(themeroot, "theme.css"))) LocalTheme.CreateTheme("default");
+
         var theme = CssBuilder.FromFile(Path.Combine(themeroot, "theme.css"));
         theme.UpdateProperty(":root", new CssProperty("--background-image", $"url('./themes/{JiayiSettings.Instance!.Theme}/background.gif'), url('./themes/{JiayiSettings.Instance!.Theme}/background.png'), url('./themes/{JiayiSettings.Instance!.Theme}/background.jpg')"));
 
@@ -87,10 +88,12 @@
 
     private void OpenTheme()
     {
+        if (!Directory.Exists(Path.Combine(ThemeState.WWWRootPath, "themes\\.local", Theme.Name))) return;
+
         Process.Start(new ProcessStartInfo
             {
                 FileName = "explorer.exe ",
-                Arguments = $"/select, \"{Path.Combine(ThemeState.WWWRootPath, $"themes", $".local/{Theme.Name}", "theme.css")}\"",
+                Arguments = $"/select, \"{Path.Combine(ThemeState.WWWRootPath, $"themes", $".local\\{Theme.Name}", "theme.css")}\"",
                 UseShellExecute = true
             });
     }

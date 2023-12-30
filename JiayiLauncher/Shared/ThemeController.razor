@@ -43,6 +43,9 @@
         {
             JiayiSettings.Instance!.Theme = ".local/default";
             LocalTheme.CreateTheme("default");
+            themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", JiayiSettings.Instance!.Theme);
+            themecss = Path.Combine(themeroot, "theme.css");
+
         }
         var theme = CssBuilder.FromFile(themecss);
 

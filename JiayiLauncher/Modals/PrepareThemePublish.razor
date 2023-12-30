@@ -5,11 +5,13 @@
 @using System.IO
 @using JiayiLauncher.Features.Stats
 @using JiayiLauncher.Features.Versions
+@using JiayiLauncher.Shared.Components.Toasts
 @using JiayiLauncher.Utils
 @using System.Text
 @using Newtonsoft.Json
 @using System.Diagnostics
 
+@inject IToastService ToastService;
 <div class="edit">
     <div class="name">
         <p>Theme name</p>
@@ -57,26 +59,50 @@
             RawTags = new(),
         };
 
-    protected override async Task OnInitializedAsync()
+    private void SendToast(string title)
     {
+        var toastParams = new ToastParameters()
+                .Add(nameof(JiayiToast.Title), title)
+                .Add(nameof(JiayiToast.Level), ToastLevel.Warning);
+
+        ToastService.ShowToast<JiayiToast>(toastParams, settings =>
+        {
+            settings.Timeout = 5;
+            settings.ShowProgressBar = true;
+        });
 
     }
 
     private async Task SaveClicked()
     {
         string? name = _nameTextBox?.Value?.Trim().Truncate(20) ?? ThemeName;
-        if (name == null || name == string.Empty) return;
+        if (name == null || name == string.Empty)
+        {
+            Log.Write(nameof(PrepareThemePublish), "Failed to create theme (no name)", Log.LogLevel.Warning);
+            SendToast("Failed to create theme (no name)");
 
+            return;
+        }
         var dir_path = Path.Combine(ThemeState.WWWRootPath, "themes", $"{name}");
         var all_themes = PublicTheme.GetAllThemes();
 
         publicTheme.Author = _authorTextBox?.Value?.Trim().Truncate(20) ?? "unknown";
         publicTheme.Tags = _tagsTextBox?.Value?.Trim().Truncate(100).Split(",").Select(x => x.ToLower()).Distinct().ToList() ?? new();
-        publicTheme.RawTags = _rawTagsDropDown?.SelectedItems.Select(x => x.ToLower()).ToList() ?? new();
+        publicTheme.RawTags = _rawTagsDropDown?.SelectedItems ?? new();
+
+        if (publicTheme.RawTags.Count < 1)
+        {
+            Log.Write(nameof(PrepareThemePublish), "Failed to create theme (Minimum 1 raw tag)", Log.LogLevel.Warning);
+            SendToast("Failed to create theme (Minimum 1 raw tag)");
+
+            return;
+        }
 
         if (all_themes?.FirstOrDefault(x => x.Name.ToLower() == name.ToLower(), null) != null || Directory.Exists(dir_path))
         {
             Log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {ThemeName}", Log.LogLevel.Warning);
+            SendToast($"Failed to create theme (already exists): {ThemeName}");
+
             return;
         }
 
@@ -102,7 +128,11 @@
         {
             ("Ok", EventCallback.Empty),
             ("Open Repository", new EventCallback(null, async () =>
-            Process.Start(new ProcessStartInfo { FileName = "https://github.com/JiayiSoftware/jiayi-themes", UseShellExecute = true })))
+            {
+                Process.Start(new ProcessStartInfo { FileName = "https://github.com/JiayiSoftware/jiayi-themes/fork", UseShellExecute = true });
+                Process.Start(new ProcessStartInfo { FileName = "https://github.com/JiayiSoftware/jiayi-themes/blob/main/README.md", UseShellExecute = true });
+
+            }))
         };
 
         // TODO: pls help, Process.Start doesnt work

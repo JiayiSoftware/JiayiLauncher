@@ -45,6 +45,8 @@ public static class VersionList
 					_versionDict.TryAdd(version.Key, version.Value);
 				}
 			}
+            
+			if (_versions.Count == 0) _versions.AddRange(_versionDict.Keys);
 		}
 		
 		_loaded = true;
@@ -52,7 +54,6 @@ public static class VersionList
 		if (InternetManager.OfflineMode)
 		{
 			Log.Write(nameof(VersionList), "Offline mode enabled, skipping version list update.");
-			if (_versions.Count == 0) _versions.AddRange(_versionDict.Keys);
 			return;
 		}
 
@@ -124,8 +125,10 @@ public static class VersionList
 				_versionDict[version] = newVersion;
 			}
 		}
+
+		if (_versions.Count != 0) _versions.Clear();
+		_versions.AddRange(_versionDict.Keys);
 		
-		if (_versions.Count == 0) _versions.AddRange(_versionDict.Keys);
 		Log.Write(nameof(VersionList), $"Updated version list. Found {_versions.Count} versions.");
 	}
 

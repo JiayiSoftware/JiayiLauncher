@@ -134,7 +134,7 @@ Console.Clear();
 // dotnet
 Console.WriteLine("[2/4] Installing .NET\n");
 // check if .NET is on the PATH
-Console.WriteLine("Jiayi Launcher requires .NET 7 to run.");
+Console.WriteLine("Jiayi Launcher requires .NET 8 to run.");
 var dotnetInstalled = Environment.GetEnvironmentVariable("PATH")?.Contains("dotnet") ?? false;
 if (dotnetInstalled)
 {

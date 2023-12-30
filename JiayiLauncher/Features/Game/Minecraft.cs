@@ -94,7 +94,13 @@ public static class Minecraft
 				catch (Win32Exception e)
 				{
 					// the operation completed successfully ????
-					if (e.NativeErrorCode != 0) throw;
+					if (e.NativeErrorCode != 0)
+					{
+						// check if the game is still open
+						if (!IsOpen) break;
+
+						throw; // it is still open ☹
+					}
 				}
 
 				// wait for a bit

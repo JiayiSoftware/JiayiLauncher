@@ -19,7 +19,8 @@ public static class Launcher
 		ModNotFound,
 		InjectionFailed,
 		DownloadFailed,
-		AlreadyRunning,
+		AlreadyLoaded,
+		AlreadyLaunching,
 		Success
 	}
 	
@@ -32,7 +33,7 @@ public static class Launcher
 	// the big method
 	public static async Task<LaunchResult> Launch(Mod mod)
 	{
-		if (Launching) return LaunchResult.AlreadyRunning;
+		if (Launching) return LaunchResult.AlreadyLaunching;
 		Launching = true;
 		
 		LaunchProgress = 0;
@@ -119,7 +120,7 @@ public static class Launcher
 			if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(path)).Length != 0)
 			{
 				Launching = false;
-				return LaunchResult.AlreadyRunning;
+				return LaunchResult.AlreadyLoaded;
 			}
 
 			var info = new ProcessStartInfo
@@ -144,7 +145,7 @@ public static class Launcher
 		if (Injector.IsInjected(path))
 		{
 			Launching = false;
-			return LaunchResult.AlreadyRunning;
+			return LaunchResult.AlreadyLoaded;
 		}
 
 		var injected = await Injector.Inject(path);

@@ -100,20 +100,6 @@
     {
         if (Launcher.Launching) return;
 
-        if (Minecraft.ModsLoaded.Contains(Mod))
-        {
-            var toastParams = new ToastParameters()
-                .Add(nameof(JiayiToast.Title), "This mod is already loaded!")
-                .Add(nameof(JiayiToast.Level), ToastLevel.Warning);
-            
-            ToastService.ShowToast<JiayiToast>(toastParams, settings =>
-            {
-                settings.Timeout = 5;
-                settings.ShowProgressBar = true;
-            });
-            return;
-        }
-
         var parameters = new ModalParameters();
 
         if (Minecraft.ModsLoaded.Count > 0)
@@ -161,7 +147,7 @@
                 ModalService.Show<MessageBox>("Mod not found", parameters);
                 break;
             case Launcher.LaunchResult.GameNotFound:
-                parameters.Add(nameof(MessageBox.Message), "The game was not open during launch. Turn off your antivirus in case it's terminating the game.");
+                parameters.Add(nameof(MessageBox.Message), "The game was closed during launch. Turn off your antivirus in case it's terminating the game.");
                 ModalService.Show<MessageBox>("Game closed", parameters);
                 break;
             case Launcher.LaunchResult.VersionMismatch:
@@ -188,6 +174,17 @@
                 parameters.Add(nameof(MessageBox.Message), "Your mod could not be injected. Try turning off your antivirus, and check logs for extended error information.");
                 ModalService.Show<MessageBox>("Injection failed", parameters);
                 break;
+            case Launcher.LaunchResult.AlreadyLoaded:
+                var toastParams = new ToastParameters()
+                    .Add(nameof(JiayiToast.Title), "This mod is already loaded!")
+                    .Add(nameof(JiayiToast.Level), ToastLevel.Warning);
+            
+                ToastService.ShowToast<JiayiToast>(toastParams, settings =>
+                {
+                    settings.Timeout = 5;
+                    settings.ShowProgressBar = true;
+                });
+                return;
         }
 
         StateHasChanged();

@@ -10,7 +10,7 @@ public class PublicTheme : ThemeMetadata
     public string Name;
 
     [JsonProperty("bg")]
-    public Uri Background;
+    public Uri? Background;
     
     [JsonProperty("meta")]
     public Uri Metadata;

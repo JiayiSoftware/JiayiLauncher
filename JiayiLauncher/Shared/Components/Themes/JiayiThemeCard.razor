@@ -101,7 +101,7 @@
     {
         if (PublicTheme == null && LocalTheme == null)
         {
-            Log.Write("JiayiThemeCard", "No public theme or local theme passed as a parameter");
+            Log.Write(this, "No public theme or local theme passed as a parameter", Log.LogLevel.Warning);
             return;
         }
 
@@ -124,7 +124,7 @@
             }
             else
             {
-                Log.Write("JiayiThemeCard", $"Failed to load theme: {PublicTheme!.Name}", Log.LogLevel.Error);
+                Log.Write(this, $"Failed to load theme: {PublicTheme!.Name}", Log.LogLevel.Error);
             }
         }
         await base.OnInitializedAsync();
@@ -160,9 +160,9 @@
 
             parameters
                 .Add(nameof(MessageBox.Buttons), options)
-                .Add(nameof(MessageBox.Message), "All of your local changes will be lost.");
+                .Add(nameof(MessageBox.Message), "Are you sure you want to overwrite this theme? All of your local changes will be lost.");
 
-            var modal = ModalService.Show<MessageBox>("Overwrite this theme?", parameters);
+            var modal = ModalService.Show<MessageBox>("Themes", parameters);
             if ((await modal.Result).Cancelled)
                 await ChangeApplying.InvokeAsync(false);
         }
@@ -185,7 +185,7 @@
         _downloading = true;
         Directory.CreateDirectory(themeroot); // wwwroot/themes/<theme_name>
 
-        await InternetManager.DownloadFile(PublicTheme!.Background, themeroot);
+        if (PublicTheme!.Background != null) await InternetManager.DownloadFile(PublicTheme!.Background, themeroot);
         await InternetManager.DownloadFile(PublicTheme!.Theme, themeroot);
         StateHasChanged();
 
@@ -196,7 +196,7 @@
     {
         if (PublicTheme?.Metadata == null && LocalTheme == null)
         {
-            Log.Write("JiayiThemeCard", $"Skipping theme application: {ThemeName}");
+            Log.Write(this, $"Skipping theme application: {ThemeName}");
             return;
         }
 

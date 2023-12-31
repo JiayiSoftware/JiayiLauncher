@@ -20,17 +20,17 @@
 
     <div class="edit-author" style="margin-bottom: 1em">
         <p>Author</p>
-        <JiayiTextBox Placeholder="you" @ref="_authorTextBox" Length="(0,20)" />
+        <JiayiTextBox Placeholder="Your name here" @ref="_authorTextBox" Length="(0,20)" />
     </div>
 
     <div class="edit-tags" style="margin-bottom: 1em">
         <p>Tags</p>
-        <JiayiTextBox Placeholder="tag,tag,tag" @ref="_tagsTextBox" Length="(0,100)" />
+        <JiayiTextBox Placeholder="Comma separated list" @ref="_tagsTextBox" Length="(0,100)" />
     </div>
 
     <div class="edit-raw-tags" style="margin-bottom: 1em">
         <p>Raw Tags</p>
-        <JiayiDropDown Multiselect="true" Items="PublicTheme.RAW_TAGS" Name="Select raw tags" SelectedItems="publicTheme.RawTags"
+        <JiayiDropDown Multiselect="true" Items="ThemeMetadata.RAW_TAGS" Name="Select raw tags" SelectedItems="_publicTheme.RawTags"
                        @ref="_rawTagsDropDown" />
     </div>
 
@@ -52,12 +52,12 @@
     private JiayiTextBox? _tagsTextBox;
     private JiayiDropDown? _rawTagsDropDown;
 
-    private ThemeMetadata publicTheme = new()
-        {
-            Author = "",
-            Tags = new(),
-            RawTags = new(),
-        };
+    private readonly ThemeMetadata _publicTheme = new()
+    {
+        Author = "",
+        Tags = new List<string>(),
+        RawTags = new List<string>(),
+    };
 
     private void SendToast(string title)
     {
@@ -75,22 +75,22 @@
 
     private async Task SaveClicked()
     {
-        string? name = _nameTextBox?.Value?.Trim().Truncate(20) ?? ThemeName;
-        if (name == null || name == string.Empty)
+        var name = _nameTextBox?.Value?.Trim().Truncate(20) ?? ThemeName;
+        if (string.IsNullOrEmpty(name))
         {
             Log.Write(nameof(PrepareThemePublish), "Failed to create theme (no name)", Log.LogLevel.Warning);
             SendToast("Failed to create theme (no name)");
 
             return;
         }
-        var dir_path = Path.Combine(ThemeState.WWWRootPath, "themes", $"{name}");
-        var all_themes = PublicTheme.GetAllThemes();
+        var dirPath = Path.Combine(ThemeState.WWWRootPath, "themes", $"{name}");
+        var allThemes = PublicTheme.GetAllThemes();
 
-        publicTheme.Author = _authorTextBox?.Value?.Trim().Truncate(20) ?? "unknown";
-        publicTheme.Tags = _tagsTextBox?.Value?.Trim().Truncate(100).Split(",").Select(x => x.ToLower()).Distinct().ToList() ?? new();
-        publicTheme.RawTags = _rawTagsDropDown?.SelectedItems ?? new();
+        _publicTheme.Author = _authorTextBox?.Value?.Trim().Truncate(20) ?? "unknown";
+        _publicTheme.Tags = _tagsTextBox?.Value?.Trim().Truncate(100).Split(",").Select(x => x.ToLower()).Distinct().ToList() ?? new();
+        _publicTheme.RawTags = _rawTagsDropDown?.SelectedItems ?? new();
 
-        if (publicTheme.RawTags.Count < 1)
+        if (_publicTheme.RawTags.Count < 1)
         {
             Log.Write(nameof(PrepareThemePublish), "Failed to create theme (Minimum 1 raw tag)", Log.LogLevel.Warning);
             SendToast("Failed to create theme (Minimum 1 raw tag)");
@@ -98,7 +98,7 @@
             return;
         }
 
-        if (all_themes?.FirstOrDefault(x => x.Name.ToLower() == name.ToLower(), null) != null || Directory.Exists(dir_path))
+        if (allThemes?.FirstOrDefault(x => x.Name.ToLower() == name.ToLower(), null) != null || Directory.Exists(dirPath))
         {
             Log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {ThemeName}", Log.LogLevel.Warning);
             SendToast($"Failed to create theme (already exists): {ThemeName}");
@@ -106,36 +106,34 @@
             return;
         }
 
-        Directory.CreateDirectory(dir_path);
-        IO.CopyFilesRecursively(Path.Combine(ThemeState.WWWRootPath, "themes", $".local/{ThemeName}"), dir_path);
+        Directory.CreateDirectory(dirPath);
+        IO.CopyFilesRecursively(Path.Combine(ThemeState.WWWRootPath, "themes", $".local/{ThemeName}"), dirPath);
 
-        var meta_buffer = File.Create(Path.Combine(dir_path, "metadata.json"));
-        var meta = JsonConvert.SerializeObject(publicTheme, Formatting.Indented);
-        byte[] meta_byteArray = Encoding.UTF8.GetBytes(meta);
-        meta_buffer.Write(meta_byteArray, 0, meta_byteArray.Length);
-        meta_buffer.Close();
+        var metaBuffer = File.Create(Path.Combine(dirPath, "metadata.json"));
+        var meta = JsonConvert.SerializeObject(_publicTheme, Formatting.Indented);
+        var metaByteArray = Encoding.UTF8.GetBytes(meta);
+        metaBuffer.Write(metaByteArray, 0, metaByteArray.Length);
+        metaBuffer.Close();
 
         Process.Start(new ProcessStartInfo
-            {
-                FileName = "explorer.exe ",
-                Arguments = $"/select, \"{dir_path}\"",
-                UseShellExecute = true
-            });
+        {
+            FileName = "explorer.exe ",
+            Arguments = $"/select, \"{dirPath}\"",
+            UseShellExecute = true
+        });
 
         await Modal.CloseAsync();
 
-        List<(string, EventCallback)> options = new()
-        {
+        List<(string, EventCallback)> options =
+        [
             ("Ok", EventCallback.Empty),
-            ("Open Repository", new EventCallback(null, async () =>
+            ("Open Repository", new EventCallback(null, () =>
             {
                 Process.Start(new ProcessStartInfo { FileName = "https://github.com/JiayiSoftware/jiayi-themes/fork", UseShellExecute = true });
-                Process.Start(new ProcessStartInfo { FileName = "https://github.com/JiayiSoftware/jiayi-themes/blob/main/README.md", UseShellExecute = true });
-
+                Process.Start(new ProcessStartInfo { FileName = "https://github.com/JiayiSoftware/jiayi-themes/blob/main/README.md#adding-a-new-theme", UseShellExecute = true });
             }))
-        };
+        ];
 
-        // TODO: pls help, Process.Start doesnt work
         var parameters = new ModalParameters()
         .Add(nameof(MessageBox.Message), "Upload this folder as a pull request, located in the /themes folder (check the README for more information).")
         .Add(nameof(MessageBox.Buttons), options);

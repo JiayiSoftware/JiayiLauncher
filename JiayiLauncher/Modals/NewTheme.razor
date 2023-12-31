@@ -12,7 +12,7 @@
 
 <div class="edit">
     <div class="name" style="margin-bottom: 1em">
-        <p>Theme name</p>
+        <p>Give your theme a name!</p>
         <JiayiTextBox Placeholder="Name" @ref="_nameTextBox" Length="(0,20)" />
     </div>
 
@@ -28,27 +28,22 @@
 
     private JiayiTextBox? _nameTextBox;
 
-    protected override async Task OnInitializedAsync()
-    {
-
-    }
-
     private async Task SaveClicked()
     {
-        string? name = _nameTextBox?.Value?.Trim().Truncate(20) ?? "default";
-        if (name == null || name == string.Empty) return;
+        var name = _nameTextBox?.Value?.Trim().Truncate(20) ?? "default";
+        if (name == string.Empty) return;
 
-        var dir_path = Path.Combine(ThemeState.WWWRootPath, "themes", $".local/{name}");
+        var dirPath = Path.Combine(ThemeState.WWWRootPath, "themes", $".local/{name}");
 
-        if (Directory.Exists(dir_path))
+        if (Directory.Exists(dirPath))
         {
             Log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {name}", Log.LogLevel.Warning);
             return;
         }
 
-        Directory.CreateDirectory(dir_path);
+        Directory.CreateDirectory(dirPath);
         // use JiayiSettings.Instance.Theme to pull from the current theme
-        IO.CopyFilesRecursively(Path.Combine(ThemeState.WWWRootPath, "themes", ".local/default"), dir_path);
+        IO.CopyFilesRecursively(Path.Combine(ThemeState.WWWRootPath, "themes", ".local/default"), dirPath);
 
         await Modal.CloseAsync();
     }

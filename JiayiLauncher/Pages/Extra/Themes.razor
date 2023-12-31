@@ -32,15 +32,15 @@
 <div class="themes">
     @* Local themes *@
     <ul class="theme-list">
-        @if (local_themes?.Count > 0)
+        @if (_localThemes?.Count > 0)
         {
             _localSearchResults = 0;
-            foreach (var theme in local_themes)
+            foreach (var theme in _localThemes)
             {
                 if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue;
 
                 _localSearchResults++;
-                <JiayiThemeCardV2 @key="theme.Name" LocalTheme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
+                <JiayiThemeCard @key="theme.Name" LocalTheme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
             }
         }
     </ul>
@@ -49,25 +49,26 @@
 
     @* Public themes *@
     <ul class="theme-list">
-        @if (themes?.Length > 0)
+        @if (_themes?.Length > 0)
         {
             _searchResults = 0;
-            foreach (var theme in themes)
+            foreach (var theme in _themes)
             {
-                if (raw_tags.Count > 0)
+                if (_rawTags.Count > 0)
                 {
-                    if (!raw_tags.All(tag => theme.RawTags.Any(sourceTag => string.Equals(tag, sourceTag, StringComparison.OrdinalIgnoreCase)))) continue;
+                    if (!_rawTags.All(tag => theme.RawTags.Any(sourceTag => string.Equals(tag, sourceTag, StringComparison.OrdinalIgnoreCase)))) continue;
                 }
 
-                // TODO: Searching tags array searchs DIRECTLY for that string
-                if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase) && theme.Tags.Where(x => x.StartsWith(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)).Count() <= 0 && !theme.Author.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue;
+                if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase) 
+                    && theme.Tags.Count(x => x.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) == 0 
+                    && !theme.Author.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue;
 
                 _searchResults++;
-                <JiayiThemeCardV2 @key="theme.Name" PublicTheme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
+                <JiayiThemeCard @key="theme.Name" PublicTheme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
             }
         }
     </ul>
-    @if (_searchResults == 0 && themes?.Length > 0)
+    @if (_searchResults == 0 && _themes?.Length > 0)
     {
         <p style="text-align: center; margin-top: 0;">No results found.</p>
     }
@@ -78,17 +79,17 @@
 </div>
 
 @code {
-    private PublicTheme[] themes;
-    private List<LocalTheme> local_themes;
+    private PublicTheme[] _themes = null!;
+    private List<LocalTheme> _localThemes = null!;
 
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
 
-    private bool _applying = false;
+    private bool _applying;
     private int _localSearchResults;
     private int _searchResults;
 
-    private List<string> raw_tags = new();
+    private readonly List<string> _rawTags = new();
     // refs
     private JiayiTextBox? _searchBox;
 
@@ -101,20 +102,20 @@
 
     private void LoadThemes()
     {
-        themes = PublicTheme.GetAllThemes()!;
-        local_themes = LocalTheme.GetAllThemes().ToList();
+        _themes = PublicTheme.GetAllThemes()!;
+        _localThemes = LocalTheme.GetAllThemes().ToList();
         StateHasChanged();
     }
 
-    private void FilterChanged(string raw_tag)
+    private void FilterChanged(string rawTag)
     {
-        if (raw_tags.Contains(raw_tag))
+        if (_rawTags.Contains(rawTag))
         {
-            raw_tags.Remove(raw_tag);
+            _rawTags.Remove(rawTag);
         }
         else
         {
-            raw_tags.Add(raw_tag);
+            _rawTags.Add(rawTag);
         }
 
         StateHasChanged();
@@ -124,7 +125,7 @@
     {
         var parameters = new ModalParameters();
 
-        var modal = ModalService.Show<NewTheme>("New Theme", parameters);
+        var modal = ModalService.Show<NewTheme>("Create theme", parameters);
         await modal.Result;
 
         LoadThemes();

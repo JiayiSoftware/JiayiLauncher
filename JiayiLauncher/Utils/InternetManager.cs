@@ -34,12 +34,8 @@ public static class InternetManager
 
 	public static async Task DownloadFile(Uri url, string path)
 	{
-        using (var s = await Client.GetStreamAsync(url))
-        {
-            using (var fs = new FileStream(Path.Combine(path, Path.GetFileName(url.AbsoluteUri)), FileMode.CreateNew))
-            {
-                await s.CopyToAsync(fs);
-            }
-        }
-    }
+		await using var s = await Client.GetStreamAsync(url);
+		await using var fs = new FileStream(Path.Combine(path, Path.GetFileName(url.AbsoluteUri)), FileMode.CreateNew);
+		await s.CopyToAsync(fs);
+	}
 }

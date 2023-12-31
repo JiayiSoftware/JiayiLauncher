@@ -40,7 +40,7 @@
                 if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue;
 
                 _localSearchResults++;
-                <JiayiLocalThemeCard @key="theme.Name" Theme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
+                <JiayiThemeCardV2 @key="theme.Name" LocalTheme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
             }
         }
     </ul>
@@ -63,7 +63,7 @@
                 if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase) && theme.Tags.Where(x => x.StartsWith(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)).Count() <= 0 && !theme.Author.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue;
 
                 _searchResults++;
-                <JiayiThemeCard @key="theme.Name" Theme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
+                <JiayiThemeCardV2 @key="theme.Name" PublicTheme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
             }
         }
     </ul>

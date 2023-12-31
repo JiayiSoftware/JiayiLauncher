@@ -17,39 +17,72 @@
 
 <div class="theme-wrapper" style='@_theme?.GetSelector(":root")?.ToStringNoSelector()'>
 
-    <img class="theme-image" src="@Theme.Background">
-    <img class="theme-image" src="./themes/@Theme.Name/background.jpg">
-    <img class="theme-image" src="./themes/@Theme.Name/background.png">
-    <img class="theme-image" src="./themes/@Theme.Name/background.gif">
+    @if (IsLocal)
+    {
+        <img class="theme-image" src="./themes/.local/@LocalTheme?.Name/background.jpg">
+        <img class="theme-image" src="./themes/.local/@LocalTheme?.Name/background.png">
+        <img class="theme-image" src="./themes/.local/@LocalTheme?.Name/background.gif">
+    }
+    else
+    {
+        <img class="theme-image" src="@PublicTheme?.Background">
+        <img class="theme-image" src="./themes/@PublicTheme?.Name/background.jpg">
+        <img class="theme-image" src="./themes/@PublicTheme?.Name/background.png">
+        <img class="theme-image" src="./themes/@PublicTheme?.Name/background.gif">
+    }
+
 
 
     <video class="theme-image" autoplay muted loop>
-        <source src="@Theme.Background" type="video/mp4">
-        <source src="@Theme.Background" type="video/mp4">
-        <source src="@Theme.Background" type="video/webm">
-
-        <source src="./themes/@Theme.Name/background.mp4" type="video/mp4">
-        <source src="./themes/@Theme.Name/background.mov" type="video/mp4">
-        <source src="./themes/@Theme.Name/background.webm" type="video/webm">
+        @if (IsLocal)
+        {
+            <source src="./themes/.local/@LocalTheme?.Name/background.mp4" type="video/mp4">
+            <source src="./themes/.local/@LocalTheme?.Name/background.mov" type="video/mp4">
+            <source src="./themes/.local/@LocalTheme?.Name/background.webm" type="video/webm">
+        }
+        else
+        {
+            <source src="@PublicTheme?.Background" type="video/mp4">
+            <source src="@PublicTheme?.Background" type="video/webm">
+            <source src="./themes/@PublicTheme?.Name/background.mp4" type="video/mp4">
+            <source src="./themes/@PublicTheme?.Name/background.mov" type="video/mp4">
+            <source src="./themes/@PublicTheme?.Name/background.webm" type="video/webm">
+        }
     </video>
 
     <div class="theme-image-overlay" />
     <div class="theme-header">
-        <strong style="cursor: pointer" @onclick="OpenTheme">@Theme.Name</strong>
-        <p>by @Theme.Author</p>
+        <strong style="cursor: pointer" @onclick="OpenTheme">@(PublicTheme?.Name ?? LocalTheme?.Name)</strong>
+        @if (!IsLocal)
+        {
+            <p>by @PublicTheme?.Author</p>
+        }
     </div>
     <div class="theme-controls">
         <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="() => ApplyTheme()" Disabled="@Applying">Apply</JiayiButton>
-        @if (Directory.Exists(Path.Combine(ThemeState.WWWRootPath, "themes", Theme.Name)))
+        @if (IsLocal)
         {
-            <span class="material-symbols-sharp" style="pointer-events: @(Applying ? "none" : "all"); z-index: 2; cursor: pointer;"
-                  title="Reinstall theme" @onclick="() => InstallTheme()">download</span>
+            <span class="material-symbols-sharp" style="z-index: 2; cursor: pointer;"
+                  title="Prepare theme upload" @onclick="PrepareThemeUpload">globe</span>
+
+        }
+        else
+        {
+            @if (Directory.Exists(Path.Combine(ThemeState.WWWRootPath, "themes", PublicTheme?.Name)))
+            {
+                <span class="material-symbols-sharp" style="pointer-events: @(Applying ? "none" : "all"); z-index: 2; cursor: pointer;"
+                      title="Reinstall theme" @onclick="() => InstallTheme()">download</span>
+            }
+
         }
     </div>
 </div>
 
 @code {
-    [Parameter] public PublicTheme Theme { get; set; } = null!;
+    [Parameter] public PublicTheme? PublicTheme { get; set; }
+    [Parameter] public LocalTheme? LocalTheme { get; set; }
+    public bool IsLocal { get => PublicTheme == null; }
+    public string ThemeName { get => PublicTheme?.Name ?? $".local\\{LocalTheme?.Name}"; }
 
     [Parameter]
     public EventCallback<bool> ChangeApplying { get; set; }
@@ -64,9 +97,23 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if (Theme.Theme != null)
+        if (PublicTheme == null && LocalTheme == null)
         {
-            string response = InternetManager.Client.GetStringAsync(Theme.Theme).Result;
+            Log.Write("JiayiThemeCard", "No public theme or local theme passed as a parameter");
+            return;
+        }
+
+        if (IsLocal)
+        {
+            var themecss = Path.Combine(ThemeState.WWWRootPath, "themes", $".local/{LocalTheme?.Name}", "theme.css");
+            var css = File.ReadAllText(themecss);
+
+            _theme = CssBuilder.Parse(css);
+
+        }
+        else
+        {
+            string response = InternetManager.Client.GetStringAsync(PublicTheme?.Theme).Result;
 
             if (response != null)
             {
@@ -74,10 +121,9 @@
             }
             else
             {
-                Log.Write("JiayiThemeCard", $"Failed to load theme: {Theme.Name}", Log.LogLevel.Error);
+                Log.Write("JiayiThemeCard", $"Failed to load theme: {PublicTheme?.Name}", Log.LogLevel.Error);
             }
         }
-
         await base.OnInitializedAsync();
     }
 
@@ -97,7 +143,7 @@
             return false;
         }
 
-        var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", Theme.Name);
+        var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", ThemeName);
 
         if (Directory.Exists(themeroot))
         {
@@ -142,8 +188,8 @@
         _downloading = true;
         Directory.CreateDirectory(themeroot); // wwwroot/themes/<theme_name>
 
-        await InternetManager.DownloadFile(Theme.Background, themeroot);
-        await InternetManager.DownloadFile(Theme.Theme, themeroot);
+        await InternetManager.DownloadFile(PublicTheme?.Background, themeroot);
+        await InternetManager.DownloadFile(PublicTheme?.Theme, themeroot);
         StateHasChanged();
 
         _downloading = false;
@@ -151,18 +197,26 @@
 
     private async Task ApplyTheme()
     {
-        if (Theme.Metadata == null)
+        if (PublicTheme?.Metadata == null && LocalTheme == null)
         {
-            Log.Write("JiayiThemeCard", $"Skipping theme application: {Theme.Name}");
+            Log.Write("JiayiThemeCard", $"Skipping theme application: {ThemeName}");
             return;
         }
 
         await ChangeApplying.InvokeAsync(true);
 
-        var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", Theme.Name);
-        if (!File.Exists(Path.Combine(themeroot, "theme.css")) && !(await InstallTheme())) return;
+        var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", ThemeName);
+        if (!Directory.Exists(themeroot)) LocalTheme.CreateTheme("default");
+        if (!File.Exists(Path.Combine(themeroot, "theme.css")))
+        {
+            if (IsLocal)
+            {
+                LocalTheme.CreateTheme("default");
+            }
+            else if (!(await InstallTheme())) return;
+        }
 
-        JiayiSettings.Instance!.Theme = Theme.Name;
+        JiayiSettings.Instance!.Theme = ThemeName ?? "default";
         var theme = CssBuilder.FromFile(Path.Combine(themeroot, "theme.css"));
         theme.UpdateProperty(":root", new CssProperty("--background-image", $"url('./themes/{JiayiSettings.Instance!.Theme}/background.gif'), url('./themes/{JiayiSettings.Instance!.Theme}/background.png'), url('./themes/{JiayiSettings.Instance!.Theme}/background.jpg')"));
 
@@ -171,14 +225,23 @@
         await ChangeApplying.InvokeAsync(false);
     }
 
+    private async void PrepareThemeUpload()
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(PrepareThemePublish.ThemeName), LocalTheme?.Name);
+
+        var modal = ModalService.Show<PrepareThemePublish>("Publish theme", parameters);
+        await modal.Result;
+    }
+
     private void OpenTheme()
     {
-        if (!Directory.Exists(Path.Combine(ThemeState.WWWRootPath, "themes", Theme.Name))) return;
+        if (!Directory.Exists(Path.Combine(ThemeState.WWWRootPath, "themes", ThemeName))) return;
 
         Process.Start(new ProcessStartInfo
             {
                 FileName = "explorer.exe ",
-                Arguments = $"/select, \"{Path.Combine(ThemeState.WWWRootPath, $"themes", Theme.Name, "theme.css")}\"",
+                Arguments = $"/select, \"{Path.Combine(ThemeState.WWWRootPath, "themes", ThemeName, "theme.css")}\"",
                 UseShellExecute = true
             });
     }

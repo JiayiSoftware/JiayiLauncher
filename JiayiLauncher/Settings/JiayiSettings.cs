@@ -14,9 +14,7 @@ using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Versions;
 using JiayiLauncher.Shared;
 using JiayiLauncher.Utils;
-using Microsoft.AspNetCore.Components;
 using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
 
 namespace JiayiLauncher.Settings;
 

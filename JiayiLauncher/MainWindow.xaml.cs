@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -17,7 +15,6 @@ using JiayiLauncher.Features.Profiles;
 using JiayiLauncher.Features.Stats;
 using JiayiLauncher.Features.Versions;
 using JiayiLauncher.Settings;
-using JiayiLauncher.Shared;
 using JiayiLauncher.Utils;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.DependencyInjection;

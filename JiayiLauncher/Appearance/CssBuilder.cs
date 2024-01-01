@@ -1,12 +1,7 @@
-﻿using JiayiLauncher.Utils;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows.Controls.Primitives;
-using System.Xml.Linq;
 
 namespace JiayiLauncher.Appearance;
 
@@ -57,14 +52,7 @@ public class CssSelector
     public CssProperty? GetProperty(string prop)
     {
         var idx = Properties.FindIndex(x => x.Property == prop);
-        if (idx >= 0)
-        {
-            return Properties[idx];
-        }
-        else
-        {
-            return null;
-        }
+        return idx >= 0 ? Properties[idx] : null;
     }
     public string? GetPropertyValue(string prop)
     {
@@ -73,7 +61,7 @@ public class CssSelector
 
     public string ToStringNoSelector()
     {
-        return string.Join("\n", Properties.Select(prop => "\t" + prop.ToString()));
+        return string.Join("\n", Properties.Select(prop => "\t" + prop));
     }
 
     public override string ToString()
@@ -84,7 +72,7 @@ public class CssSelector
 
 public class CssBuilder
 {
-    private List<CssSelector> _selectors;
+    private readonly List<CssSelector> _selectors;
 
     public CssBuilder(List<CssSelector>? selectors = null)
     {
@@ -94,14 +82,7 @@ public class CssBuilder
     public CssSelector? GetSelector(string selector)
     {
         var idx = _selectors.FindIndex(x => x.Selector == selector);
-        if (idx >= 0)
-        {
-            return _selectors[idx];
-        }
-        else
-        {
-            return null;
-        }
+        return idx >= 0 ? _selectors[idx] : null;
     }
 
     public CssProperty? GetProperty(string selector, string prop)
@@ -127,19 +108,19 @@ public class CssBuilder
     {
         cssString = RemoveCssComments(cssString);
 
-        List<CssSelector> result = new List<CssSelector>();
+        var result = new List<CssSelector>();
 
-        string pattern = @"(?<selector>[^{]+)\s*{\s*(?<properties>[^}]+)\s*}";
-        Regex regex = new Regex(pattern, RegexOptions.IgnorePatternWhitespace);
+        const string pattern = @"(?<selector>[^{]+)\s*{\s*(?<properties>[^}]+)\s*}";
+        var regex = new Regex(pattern, RegexOptions.IgnorePatternWhitespace);
 
-        MatchCollection matches = regex.Matches(cssString);
+        var matches = regex.Matches(cssString);
 
         foreach (Match match in matches)
         {
-            string selector = match.Groups["selector"].Value.Trim();
-            string propertyString = match.Groups["properties"].Value;
+            var selector = match.Groups["selector"].Value.Trim();
+            var propertyString = match.Groups["properties"].Value;
 
-            List<CssProperty> properties = ParseProperties(propertyString);
+            var properties = ParseProperties(propertyString);
 
             result.Add(new CssSelector(selector, properties));
         }
@@ -149,17 +130,17 @@ public class CssBuilder
 
     private static List<CssProperty> ParseProperties(string propertyString)
     {
-        List<CssProperty> properties = new List<CssProperty>();
+        var properties = new List<CssProperty>();
 
-        string propertyPattern = @"(?<property>[^:]+)\s*:\s*(?<value>[^;]+);+";
-        Regex propertyRegex = new Regex(propertyPattern, RegexOptions.IgnorePatternWhitespace);
+        const string propertyPattern = @"(?<property>[^:]+)\s*:\s*(?<value>[^;]+);+";
+        var propertyRegex = new Regex(propertyPattern, RegexOptions.IgnorePatternWhitespace);
 
-        MatchCollection propertyMatches = propertyRegex.Matches(propertyString);
+        var propertyMatches = propertyRegex.Matches(propertyString);
 
         foreach (Match propertyMatch in propertyMatches)
         {
-            string property = propertyMatch.Groups["property"].Value.Trim();
-            string value = propertyMatch.Groups["value"].Value.Trim();
+            var property = propertyMatch.Groups["property"].Value.Trim();
+            var value = propertyMatch.Groups["value"].Value.Trim();
 
             properties.Add(new CssProperty(property, value));
         }
@@ -170,7 +151,7 @@ public class CssBuilder
     private static string RemoveCssComments(string cssString)
     {
         // Use regular expression to remove CSS comments
-        string commentPattern = @"/\*.*?\*/";
+        const string commentPattern = @"/\*.*?\*/";
         return Regex.Replace(cssString, commentPattern, string.Empty, RegexOptions.Singleline);
     }
     public override string ToString()

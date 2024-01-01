@@ -1,6 +1,4 @@
 ﻿using JiayiLauncher.Settings;
-using JiayiLauncher.Shared;
-using Microsoft.AspNetCore.Components;
 using System;
 using System.IO;
 using System.Reflection;

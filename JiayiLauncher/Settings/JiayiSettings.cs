@@ -34,7 +34,7 @@ public class JiayiSettings
         _themeState = themeState;
     }
 
-    private string TemporaryFromHex(Color c)
+    private string HexToColor(Color c)
     {
         return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
     }
@@ -94,7 +94,7 @@ public class JiayiSettings
     public Color PrimaryBackgroundColor
     {
         get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--background-primary")?.Value ?? "#0f0f0f");
-        set => _themeState.UpdateTheme("--background-primary", TemporaryFromHex(value));
+        set => _themeState.UpdateTheme("--background-primary", HexToColor(value));
     }
 
     [JsonIgnore]
@@ -102,7 +102,7 @@ public class JiayiSettings
     public Color SecondaryBackgroundColor
     {
         get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--background-secondary")?.Value ?? "#1e1e1e");
-        set => _themeState.UpdateTheme("--background-secondary", TemporaryFromHex(value));
+        set => _themeState.UpdateTheme("--background-secondary", HexToColor(value));
     }
 
     [JsonIgnore]
@@ -110,7 +110,7 @@ public class JiayiSettings
     public Color AccentColor
     {
         get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--accent")?.Value ?? "#dc0000");
-        set => _themeState.UpdateTheme("--accent", TemporaryFromHex(value));
+        set => _themeState.UpdateTheme("--accent", HexToColor(value));
     }
 
     [JsonIgnore]
@@ -118,7 +118,7 @@ public class JiayiSettings
     public Color TextColor
     {
         get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--text-primary")?.Value ?? "#ffffff");
-        set => _themeState.UpdateTheme("--text-primary", TemporaryFromHex(value));
+        set => _themeState.UpdateTheme("--text-primary", HexToColor(value));
     }
 
     [JsonIgnore]
@@ -126,7 +126,7 @@ public class JiayiSettings
     public Color AccentTextColor
     {
         get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--text-accent")?.Value ?? "#ffffff");
-        set => _themeState.UpdateTheme("--text-accent", TemporaryFromHex(value));
+        set => _themeState.UpdateTheme("--text-accent", HexToColor(value));
     }
 
     [JsonIgnore]
@@ -134,7 +134,7 @@ public class JiayiSettings
     public Color GrayTextColor
     {
         get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--text-grayed")?.Value ?? "#7e7e7e");
-        set => _themeState.UpdateTheme("--text-grayed", TemporaryFromHex(value));
+        set => _themeState.UpdateTheme("--text-grayed", HexToColor(value));
     }
 
     [JsonIgnore]
@@ -208,7 +208,7 @@ public class JiayiSettings
     public Color BorderColor
     {
         get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--border-primary")?.Value ?? "#000000");
-        set => _themeState.UpdateTheme("--border-primary", TemporaryFromHex(value));
+        set => _themeState.UpdateTheme("--border-primary", HexToColor(value));
     }
 
     [JsonIgnore]
@@ -216,7 +216,7 @@ public class JiayiSettings
     public Color AccentBorderColor
     {
         get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--border-accent")?.Value ?? "#000000");
-        set => _themeState.UpdateTheme("--border-accent", TemporaryFromHex(value));
+        set => _themeState.UpdateTheme("--border-accent", HexToColor(value));
     }
     
     [JsonIgnore]

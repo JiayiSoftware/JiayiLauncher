@@ -20,6 +20,8 @@ public class LocalTheme
 	{
 		var localThemes = new List<LocalTheme>();
 
+		var path = Path.Combine(_themeRoot, ".local");
+		Directory.CreateDirectory(path); // Ensure directory exists
 		var directories = Directory.GetDirectories(Path.Combine(_themeRoot, ".local"));
 		foreach (var d in directories)
 		{

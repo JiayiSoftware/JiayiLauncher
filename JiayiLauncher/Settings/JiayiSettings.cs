@@ -399,7 +399,10 @@ public class JiayiSettings
         using var stream = File.OpenWrite(_settingsPath);
         JsonSerializer.Serialize(stream, this, _options);
         LocalTheme.SaveCurrentTheme();
+        
+        #if DEBUG
         Log.Write(this, "Saved settings.");
+        #endif
     }
 
     public static void Load()

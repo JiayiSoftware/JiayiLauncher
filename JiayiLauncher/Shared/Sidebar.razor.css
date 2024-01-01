@@ -126,8 +126,7 @@
 }
 
 .sticky:hover {
-    /* TODO: un-hardcode this */
-    background-color: rgba(255, 0, 0, 0.2);
+    background-color: color-mix(in srgb, var(--accent) 20%, var(--background-secondary));
 }
 
 /* styles when sidebar[data-sticky] is "yes" */

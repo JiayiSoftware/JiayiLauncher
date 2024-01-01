@@ -68,6 +68,7 @@
 
     protected override void OnInitialized()
     {
+        UpdateCurrentTab();
         NavigationManager.LocationChanged += (_, _) => UpdateCurrentTab();
     }
 
@@ -80,6 +81,11 @@
     private void UpdateCurrentTab()
     {
         _currentTab = NavigationManager.ToBaseRelativePath(NavigationManager.Uri).Split('/').First();
+
+        if (_currentTab == string.Empty) // dashboard
+        {
+            _currentTab = "Dashboard";
+        }
         
         foreach (var tab in _tabs)
         {

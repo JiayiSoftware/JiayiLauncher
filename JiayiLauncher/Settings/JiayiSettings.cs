@@ -24,11 +24,18 @@ namespace JiayiLauncher.Settings;
 [Serializable]
 public class JiayiSettings
 {
+    public static JiayiSettings Instance;
+    public static JiayiSettings Default => new(new ThemeState());
+    
+    private static string _settingsPath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "settings.json");
+    private static JsonSerializerOptions? _options;
+    
     private ThemeState _themeState = ThemeState.Instance;
-
 
     [JsonConstructor]
     public JiayiSettings() { }
+    
     public JiayiSettings(ThemeState themeState)
     {
         _themeState = themeState;
@@ -38,22 +45,15 @@ public class JiayiSettings
     {
         return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
     }
-
-    public static JiayiSettings Instance;
-    public static JiayiSettings DEFAULT => new JiayiSettings(new ThemeState());
-
-    private static string _settingsPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "settings.json");
-    private static JsonSerializerOptions? _options;
-
+    
     // general settings
     [Setting("Mod folder path", "General", "The path to the folder containing your mods.", canReset: false)]
     public string ModCollectionPath { get; set; } = string.Empty;
 
     // note these types of settings should probably be ignored by the json serializer
+    [JsonIgnore]
     [Setting("Export collection", "General",
         "Export your mod collection to a file. You can share this with other people.")]
-    [JsonIgnore]
     public (string, Action) ExportCollection { get; set; } = ("Export", () =>
     {
         var dialog = new SaveFileDialog
@@ -68,8 +68,7 @@ public class JiayiSettings
         var path = dialog.FileName;
 
         if (ModCollection.Current != null) ModCollection.Current.Export(path);
-    }
-    );
+    });
 
     [Setting("Profile folder path", "General", "The path to the folder containing your profiles.", canReset: false)]
     public string ProfileCollectionPath { get; set; } = string.Empty;
@@ -77,8 +76,8 @@ public class JiayiSettings
     [Setting("Version folder path", "General", "The path to the folder containing your game installs.", canReset: false)]
     public string VersionsPath { get; set; } = string.Empty;
 
-    [Setting("Update version list", "General", "Update the list of available versions.")]
     [JsonIgnore]
+    [Setting("Update version list", "General", "Update the list of available versions.")]
     public (string, Action) UpdateVersionList { get; set; } = ("Update", () =>
     {
         Task.Run(() => VersionList.UpdateVersions(true));
@@ -141,7 +140,8 @@ public class JiayiSettings
     [Setting("Shadow distance", "Appearance", "The distance of the shadows on UI elements.")]
     public int[] ShadowDistance
     {
-        get => new int[] { 0, 10, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--shadow")?.Value ?? "5", @"\d+").Value) };
+        get => [0, 10, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--shadow")?.Value ?? "5", 
+            @"\d+").Value)];
         set => _themeState.UpdateTheme("--shadow", $"{value[2]}px {value[2]}px rgba(0, 0, 0, 0.4)");
     }
 
@@ -149,7 +149,8 @@ public class JiayiSettings
     [Setting("UI movement speed", "Appearance", "The speed at which the UI moves.")]
     public float[] MovementSpeed
     {
-        get => new float[] { 0, 0.5f, float.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--transition-speed")?.Value ?? "0.2", @"\d*\.?\d*").Value) };
+        get => [0, 0.5f, float.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--transition-speed")?.Value ?? "0.2", 
+            @"\d*\.?\d*").Value)];
         set => _themeState.UpdateTheme("--transition-speed", $"{value[2]}s");
     }
 
@@ -169,12 +170,11 @@ public class JiayiSettings
     {
         get
         {
-            if (Instance.UseBackgroundImage) return Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-image")?.Value ?? "", @"url\(\'(?<url>[^']+)\'\)").Groups["url"].Value ?? string.Empty;
-            else
-            {
-                _themeState.UpdateTheme("--background-image", $"none");
-                return string.Empty;
-            }
+            if (Instance.UseBackgroundImage) 
+                return Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-image")?.Value ?? "", 
+                    @"url\(\'(?<url>[^']+)\'\)").Groups["url"].Value;
+            _themeState.UpdateTheme("--background-image", $"none");
+            return string.Empty;
         }
         set => _themeState.UpdateTheme("--background-image", $"url('{value}')");
     }
@@ -183,7 +183,8 @@ public class JiayiSettings
     [Setting("Background blur", "Appearance", "How much to blur the background by.", "UseBackgroundImage")]
     public int[] BackgroundBlur
     {
-        get => new int[] { 0, 100, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-blur")?.Value ?? "0", @"\d+").Value) };
+        get => [0, 100, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-blur")?.Value ?? "0", 
+            @"\d+").Value)];
         set => _themeState.UpdateTheme("--background-blur", $"{value[2]}px");
     }
 
@@ -191,7 +192,8 @@ public class JiayiSettings
     [Setting("Background brightness", "Appearance", "How bright the background should be.", "UseBackgroundImage")]
     public int[] BackgroundBrightness
     {
-        get => new int[] { 0, 100, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-brightness")?.Value ?? "100", @"\d+").Value) };
+        get => [0, 100, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-brightness")?.Value ?? "100"
+            , @"\d+").Value)];
         set => _themeState.UpdateTheme("--background-brightness", $"{value[2]}%");
     }
 
@@ -199,7 +201,8 @@ public class JiayiSettings
     [Setting("Rounding", "Appearance", "How much to round the corners of most UI elements.")]
     public int[] Rounding
     {
-        get => new int[] { 0, 10, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--rounding")?.Value ?? "0", @"\d+").Value) };
+        get => [0, 10, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--rounding")?.Value ?? "0", 
+            @"\d+").Value)];
         set => _themeState.UpdateTheme("--rounding", $"{value[2]}px");
     }
 
@@ -223,7 +226,8 @@ public class JiayiSettings
     [Setting("Border thickness", "Appearance", "The thickness of the borders on UI elements.")]
     public int[] BorderThickness
     {
-        get => new int[] { 0, 5, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--border-thickness")?.Value ?? "0", @"\d+").Value) };
+        get => [0, 5, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--border-thickness")?.Value ?? "0", 
+            @"\d+").Value)];
         set => _themeState.UpdateTheme("--border-thickness", $"{value[2]}px");
     }
 
@@ -245,10 +249,10 @@ public class JiayiSettings
     [Setting("Restore default theme", "Appearance", "Go back to Jiayi's default theme.", confirm: true)]
     public (string, Action) RestoreDefaultTheme { get; set; } = ("Restore", () =>
     {
-        var appearanceSettings = DEFAULT.GetSettingsInCategory("Appearance")
+        var appearanceSettings = Default.GetSettingsInCategory("Appearance")
             .Select(setting => typeof(JiayiSettings).GetProperty(setting.Name));
 
-        var defaults = DEFAULT;
+        var defaults = Default;
 
         foreach (var property in appearanceSettings)
         {
@@ -327,7 +331,8 @@ public class JiayiSettings
     public bool FollowRedirects { get; set; } = false;
 
     // launch settings
-    [Setting("Use injection delay", "Launch", "Wait for a set amount of time instead of waiting for the game to load before injecting.")]
+    [Setting("Use injection delay", "Launch", 
+        "Wait for a set amount of time instead of waiting for the game to load before injecting.")]
     public bool UseInjectionDelay { get; set; } = false;
 
     [Setting("Injection delay", "Launch", "The amount of time to wait before injecting, in seconds.",
@@ -353,8 +358,8 @@ public class JiayiSettings
         "Hides any identifying information from logs. This does not apply retroactively.")]
     public bool AnonymizeLogs { get; set; } = true;
 
-    [Setting("Open log folder", "Logs", "Open the log folder.")]
     [JsonIgnore]
+    [Setting("Open log folder", "Logs", "Open the log folder.")]
     public (string, Action) OpenLogFolder { get; set; } = ("Open", () =>
     {
         var info = new ProcessStartInfo
@@ -368,8 +373,8 @@ public class JiayiSettings
     }
     );
 
-    [Setting("Clear previous logs", "Logs", "Clear all previous log files.", confirm: true)]
     [JsonIgnore]
+    [Setting("Clear previous logs", "Logs", "Clear all previous log files.", confirm: true)]
     public (string, Action) ClearPreviousLogs { get; set; } = ("Clear", () =>
     {
         var path = Path.Combine(Log.LogPath, "Previous");
@@ -403,7 +408,7 @@ public class JiayiSettings
     {
         if (!File.Exists(_settingsPath))
         {
-            Instance = DEFAULT;
+            Instance = Default;
             Instance.Save();
             Log.Write(Instance, "Created new settings file.");
             return;
@@ -422,7 +427,7 @@ public class JiayiSettings
             var settings = JsonSerializer.Deserialize<JiayiSettings>(stream, _options);
             if (settings == null)
             {
-                Instance = DEFAULT;
+                Instance = Default;
                 Instance.Save();
                 // TODO: show a notification
                 Log.Write(Instance, "Settings file was corrupted or invalid. Created new settings file.");
@@ -435,7 +440,7 @@ public class JiayiSettings
         catch (Exception e)
         {
             stream.Close();
-            Instance = DEFAULT;
+            Instance = Default;
             Instance.Save();
             Log.Write(Instance, $"Settings file was corrupted or invalid. Created new settings file. Error: {e}");
         }
@@ -454,7 +459,7 @@ public class JiayiSettings
 
     public bool IsDefault(PropertyInfo property)
     {
-        var defaultValue = property.GetValue(DEFAULT);
+        var defaultValue = property.GetValue(Default);
         var currentValue = property.GetValue(this);
 
         // slider settings are a special case
@@ -484,7 +489,7 @@ public class JiayiSettings
 
     public void ResetToDefault(PropertyInfo setting)
     {
-        setting.SetValue(this, setting.GetValue(DEFAULT));
+        setting.SetValue(this, setting.GetValue(Default));
         Save();
     }
 }

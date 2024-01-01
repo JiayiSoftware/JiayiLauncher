@@ -1,7 +1,9 @@
 ﻿@page "/Themes"
+
 @using JiayiLauncher.Appearance
 @using JiayiLauncher.Shared.Components.Mods
 @using JiayiLauncher.Shared.Components.Themes
+
 <h3>Themes</h3>
 
 <div class="find-tools">
@@ -12,9 +14,9 @@
 
     <span class="material-symbols-sharp">filter_list</span>
     <p class="filter-by">Filter by:</p>
-    @foreach (var raw_tag in PublicTheme.RAW_TAGS)
+    @foreach (var rawTag in ThemeMetadata.RAW_TAGS)
     {
-        <JiayiFilter Changed="() => FilterChanged(raw_tag)">@raw_tag</JiayiFilter>
+        <JiayiFilter Changed="() => FilterChanged(rawTag)">@rawTag</JiayiFilter>
     }
 
     <div class="separator"></div>
@@ -29,13 +31,10 @@
     <ul class="theme-list">
         @if (_localThemes?.Count > 0)
         {
-            _localSearchResults = 0;
-            foreach (var theme in _localThemes)
+            foreach (var theme in _localThemes
+                         .Where(theme => theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)))
             {
-                if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue;
-
-                _localSearchResults++;
-                <JiayiThemeCard @key="theme.Name" LocalTheme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
+                <JiayiThemeCard @key="theme.Name" LocalTheme="@theme" ChangeApplying="e => _applying = e" Applying="@_applying" />
             }
         }
     </ul>
@@ -51,7 +50,8 @@
             {
                 if (_rawTags.Count > 0)
                 {
-                    if (!_rawTags.All(tag => theme.RawTags.Any(sourceTag => string.Equals(tag, sourceTag, StringComparison.OrdinalIgnoreCase)))) continue;
+                    if (!_rawTags.All(tag => theme.RawTags.Any(sourceTag => 
+                            string.Equals(tag, sourceTag, StringComparison.OrdinalIgnoreCase)))) continue;
                 }
 
                 if (!theme.Name.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase) 
@@ -59,10 +59,11 @@
                     && !theme.Author.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)) continue;
 
                 _searchResults++;
-                <JiayiThemeCard @key="theme.Name" PublicTheme="@theme" ChangeApplying="(e) => _applying = e" Applying="@_applying" />
+                <JiayiThemeCard @key="theme.Name" PublicTheme="@theme" ChangeApplying="e => _applying = e" Applying="@_applying" />
             }
         }
     </ul>
+    
     @if (_searchResults == 0 && _themes?.Length > 0)
     {
         <p style="text-align: center; margin-top: 0;">No results found.</p>
@@ -74,17 +75,15 @@
 </div>
 
 @code {
-    private PublicTheme[] _themes = null!;
-    private List<LocalTheme> _localThemes = null!;
-
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
-
+    
+    private PublicTheme[] _themes = null!;
+    private List<LocalTheme> _localThemes = null!;
     private bool _applying;
-    private int _localSearchResults;
     private int _searchResults;
-
     private readonly List<string> _rawTags = new();
+    
     // refs
     private JiayiTextBox? _searchBox;
 

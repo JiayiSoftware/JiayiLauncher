@@ -3,56 +3,60 @@
 @using JiayiLauncher.Settings
 @using JiayiLauncher.Utils
 
-@inject NavigationManager nav;
+@inject NavigationManager NavigationManager;
 
 <div class="background-image"></div>
 <div class="background-video">
-    <video @key='@($"background-video-refresh-{refreshFlag}")' autoplay muted loop id="bg-video">
+    <video @key='@($"background-video-refresh-{_refreshFlag}")' autoplay muted loop id="bg-video">
         <source src='@ConstructVideoURL("mp4")' type="video/mp4">
         <source src='@ConstructVideoURL("mov")' type="video/mp4">
         <source src='@ConstructVideoURL("webm")' type="video/webm">
     </video>
 </div>
-<script @key='@($"background-video-script-refresh-{refreshFlag}")'>
+<script @key='@($"background-video-script-refresh-{_refreshFlag}")'>
     var video = document.getElementById("bg-video");
     video.play();
     video.muted = true;
 </script>
 <style>
-    @ThemeState.Instance?.ThemeCSS.ToString();
+    @ThemeState.Instance.ThemeStyles.ToString();
 </style>
 
 
 @code {
-    private bool refreshFlag = false;
+    private bool _refreshFlag = false;
 
     private string ConstructVideoURL(string ext)
     {
-        return $"./themes/{JiayiSettings.Instance!.Theme}/background.{ext}";
+        return $"./themes/{JiayiSettings.Instance.Theme}/background.{ext}";
     }
+    
     protected override async Task OnInitializedAsync()
     {
         ThemeState.Instance.OnChange += () =>
         {
-            refreshFlag = !refreshFlag;
+            _refreshFlag = !_refreshFlag;
             StateHasChanged();
         };
 
-        var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", JiayiSettings.Instance!.Theme);
-        var themecss = Path.Combine(themeroot, "theme.css");
-        if (!File.Exists(themecss))
+        var themeRoot = Path.Combine(ThemeState.RootPath, "themes", JiayiSettings.Instance.Theme);
+        var themeStyles = Path.Combine(themeRoot, "theme.css");
+        if (!File.Exists(themeStyles))
         {
-            JiayiSettings.Instance!.Theme = ".local/default";
+            JiayiSettings.Instance.Theme = ".local/default";
             LocalTheme.CreateTheme("default");
-            themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", JiayiSettings.Instance!.Theme);
-            themecss = Path.Combine(themeroot, "theme.css");
+            themeRoot = Path.Combine(ThemeState.RootPath, "themes", JiayiSettings.Instance.Theme);
+            themeStyles = Path.Combine(themeRoot, "theme.css");
 
         }
-        var theme = CssBuilder.FromFile(themecss);
-
-        theme.UpdateProperty(":root", new CssProperty("--background-image", $"url('./themes/{JiayiSettings.Instance!.Theme}/background.gif'), url('./themes/{JiayiSettings.Instance!.Theme}/background.png'), url('./themes/{JiayiSettings.Instance!.Theme}/background.jpg')"));
-
+        
+        var theme = CssBuilder.FromFile(themeStyles);
+        theme.UpdateProperty(":root", new CssProperty("--background-image", 
+            $"url('./themes/{JiayiSettings.Instance.Theme}/background.gif'), " +
+            $"url('./themes/{JiayiSettings.Instance.Theme}/background.png'), " +
+            $"url('./themes/{JiayiSettings.Instance.Theme}/background.jpg')"));
         ThemeState.Instance.ApplyTheme(theme);
+        
         await base.OnInitializedAsync();
     }
 }

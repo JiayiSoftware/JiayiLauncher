@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace JiayiLauncher.Utils
+namespace JiayiLauncher.Utils;
+
+public static class Ext
 {
-    public static class Ext
+    public static string Truncate(this string value, int length)
     {
-        public static string Truncate(this string value, int length)
-        {
-            return value[..Math.Min(length, value.Length)];
-        }
+        return value[..Math.Min(length, value.Length)];
     }
 }

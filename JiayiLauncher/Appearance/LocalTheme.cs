@@ -7,7 +7,7 @@ namespace JiayiLauncher.Appearance;
 
 public class LocalTheme
 {
-	private static readonly string _themeRoot = Path.Combine(ThemeState.WWWRootPath, "themes");
+	private static readonly string _themeRoot = Path.Combine(ThemeState.RootPath, "themes");
     
 	public string Name;
 
@@ -50,8 +50,8 @@ public class LocalTheme
 		Directory.CreateDirectory(path);
 
 		var buffer = File.Create(Path.Combine(path, "theme.css"));
-		var defaultTheme = new ThemeState().ThemeCSS.ToString();
-		byte[] byteArray = Encoding.UTF8.GetBytes(defaultTheme);
+		var defaultTheme = new ThemeState().ThemeStyles.ToString();
+		var byteArray = Encoding.UTF8.GetBytes(defaultTheme);
 		buffer.Write(byteArray, 0, byteArray.Length);
 		buffer.Close();
 
@@ -61,8 +61,8 @@ public class LocalTheme
 	public static void SaveCurrentTheme()
 	{
 		var buffer = File.OpenWrite(Path.Combine(_themeRoot, JiayiSettings.Instance.Theme, "theme.css"));
-		var themeCSS = ThemeState.Instance.ThemeCSS.ToString();
-		byte[] byteArray = Encoding.UTF8.GetBytes(themeCSS);
+		var themeStyles = ThemeState.Instance.ThemeStyles.ToString();
+		var byteArray = Encoding.UTF8.GetBytes(themeStyles);
 		buffer.Write(byteArray, 0, byteArray.Length);
 		buffer.Close();
 	}

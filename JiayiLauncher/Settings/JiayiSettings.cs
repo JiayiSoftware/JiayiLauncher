@@ -90,7 +90,7 @@ public class JiayiSettings
     [Setting("Primary background color", "Appearance", "The primary background color of the launcher.")]
     public Color PrimaryBackgroundColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--background-primary")?.Value ?? "#0f0f0f");
+        get => ColorTranslator.FromHtml(_themeState.ThemeStyles.GetProperty(":root", "--background-primary")?.Value ?? "#0f0f0f");
         set => _themeState.UpdateTheme("--background-primary", HexToColor(value));
     }
 
@@ -98,7 +98,7 @@ public class JiayiSettings
     [Setting("Secondary background color", "Appearance", "The secondary background color of the launcher.")]
     public Color SecondaryBackgroundColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--background-secondary")?.Value ?? "#1e1e1e");
+        get => ColorTranslator.FromHtml(_themeState.ThemeStyles.GetProperty(":root", "--background-secondary")?.Value ?? "#1e1e1e");
         set => _themeState.UpdateTheme("--background-secondary", HexToColor(value));
     }
 
@@ -106,7 +106,7 @@ public class JiayiSettings
     [Setting("Accent color", "Appearance", "The accent color of the launcher.")]
     public Color AccentColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--accent")?.Value ?? "#dc0000");
+        get => ColorTranslator.FromHtml(_themeState.ThemeStyles.GetProperty(":root", "--accent")?.Value ?? "#dc0000");
         set => _themeState.UpdateTheme("--accent", HexToColor(value));
     }
 
@@ -114,7 +114,7 @@ public class JiayiSettings
     [Setting("Text color", "Appearance", "The color of text seen throughout the launcher.")]
     public Color TextColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--text-primary")?.Value ?? "#ffffff");
+        get => ColorTranslator.FromHtml(_themeState.ThemeStyles.GetProperty(":root", "--text-primary")?.Value ?? "#ffffff");
         set => _themeState.UpdateTheme("--text-primary", HexToColor(value));
     }
 
@@ -122,7 +122,7 @@ public class JiayiSettings
     [Setting("Text color (on accent)", "Appearance", "The color of text on top of the accent color.")]
     public Color AccentTextColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--text-accent")?.Value ?? "#ffffff");
+        get => ColorTranslator.FromHtml(_themeState.ThemeStyles.GetProperty(":root", "--text-accent")?.Value ?? "#ffffff");
         set => _themeState.UpdateTheme("--text-accent", HexToColor(value));
     }
 
@@ -130,7 +130,7 @@ public class JiayiSettings
     [Setting("Gray text color", "Appearance", "A gray version of the text color.")]
     public Color GrayTextColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--text-grayed")?.Value ?? "#7e7e7e");
+        get => ColorTranslator.FromHtml(_themeState.ThemeStyles.GetProperty(":root", "--text-grayed")?.Value ?? "#7e7e7e");
         set => _themeState.UpdateTheme("--text-grayed", HexToColor(value));
     }
 
@@ -138,7 +138,7 @@ public class JiayiSettings
     [Setting("Shadow distance", "Appearance", "The distance of the shadows on UI elements.")]
     public int[] ShadowDistance
     {
-        get => [0, 10, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--shadow")?.Value ?? "5", 
+        get => [0, 10, int.Parse(Regex.Match(_themeState.ThemeStyles.GetProperty(":root", "--shadow")?.Value ?? "5", 
             @"\d+").Value)];
         set => _themeState.UpdateTheme("--shadow", $"{value[2]}px {value[2]}px rgba(0, 0, 0, 0.4)");
     }
@@ -147,7 +147,7 @@ public class JiayiSettings
     [Setting("UI movement speed", "Appearance", "The speed at which the UI moves.")]
     public float[] MovementSpeed
     {
-        get => [0, 0.5f, float.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--transition-speed")?.Value ?? "0.2", 
+        get => [0, 0.5f, float.Parse(Regex.Match(_themeState.ThemeStyles.GetProperty(":root", "--transition-speed")?.Value ?? "0.2", 
             @"\d*\.?\d*").Value)];
         set => _themeState.UpdateTheme("--transition-speed", $"{value[2]}s");
     }
@@ -156,7 +156,7 @@ public class JiayiSettings
     [Setting("Use background image", "Appearance", "Use an image as the background of the launcher.")]
     public bool UseBackgroundImage
     {
-        get => !(_themeState.ThemeCSS.GetProperty(":root", "--background-image")?.Value == "none");
+        get => !(_themeState.ThemeStyles.GetProperty(":root", "--background-image")?.Value == "none");
         set => _themeState.UpdateTheme("--background-image", value ? $"url('')" : "none");
 
     }
@@ -169,7 +169,7 @@ public class JiayiSettings
         get
         {
             if (Instance.UseBackgroundImage) 
-                return Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-image")?.Value ?? "", 
+                return Regex.Match(_themeState.ThemeStyles.GetProperty(":root", "--background-image")?.Value ?? "", 
                     @"url\(\'(?<url>[^']+)\'\)").Groups["url"].Value;
             _themeState.UpdateTheme("--background-image", $"none");
             return string.Empty;
@@ -181,7 +181,7 @@ public class JiayiSettings
     [Setting("Background blur", "Appearance", "How much to blur the background by.", "UseBackgroundImage")]
     public int[] BackgroundBlur
     {
-        get => [0, 100, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-blur")?.Value ?? "0", 
+        get => [0, 100, int.Parse(Regex.Match(_themeState.ThemeStyles.GetProperty(":root", "--background-blur")?.Value ?? "0", 
             @"\d+").Value)];
         set => _themeState.UpdateTheme("--background-blur", $"{value[2]}px");
     }
@@ -190,7 +190,7 @@ public class JiayiSettings
     [Setting("Background brightness", "Appearance", "How bright the background should be.", "UseBackgroundImage")]
     public int[] BackgroundBrightness
     {
-        get => [0, 100, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--background-brightness")?.Value ?? "100"
+        get => [0, 100, int.Parse(Regex.Match(_themeState.ThemeStyles.GetProperty(":root", "--background-brightness")?.Value ?? "100"
             , @"\d+").Value)];
         set => _themeState.UpdateTheme("--background-brightness", $"{value[2]}%");
     }
@@ -199,7 +199,7 @@ public class JiayiSettings
     [Setting("Rounding", "Appearance", "How much to round the corners of most UI elements.")]
     public int[] Rounding
     {
-        get => [0, 10, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--rounding")?.Value ?? "0", 
+        get => [0, 10, int.Parse(Regex.Match(_themeState.ThemeStyles.GetProperty(":root", "--rounding")?.Value ?? "0", 
             @"\d+").Value)];
         set => _themeState.UpdateTheme("--rounding", $"{value[2]}px");
     }
@@ -208,7 +208,7 @@ public class JiayiSettings
     [Setting("Border color", "Appearance", "The border color seen throughout the launcher.")]
     public Color BorderColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--border-primary")?.Value ?? "#000000");
+        get => ColorTranslator.FromHtml(_themeState.ThemeStyles.GetProperty(":root", "--border-primary")?.Value ?? "#000000");
         set => _themeState.UpdateTheme("--border-primary", HexToColor(value));
     }
 
@@ -216,7 +216,7 @@ public class JiayiSettings
     [Setting("Border color (on accent)", "Appearance", "The color of the border around the accent color.")]
     public Color AccentBorderColor
     {
-        get => ColorTranslator.FromHtml(_themeState.ThemeCSS.GetProperty(":root", "--border-accent")?.Value ?? "#000000");
+        get => ColorTranslator.FromHtml(_themeState.ThemeStyles.GetProperty(":root", "--border-accent")?.Value ?? "#000000");
         set => _themeState.UpdateTheme("--border-accent", HexToColor(value));
     }
     
@@ -224,7 +224,7 @@ public class JiayiSettings
     [Setting("Border thickness", "Appearance", "The thickness of the borders on UI elements.")]
     public int[] BorderThickness
     {
-        get => [0, 5, int.Parse(Regex.Match(_themeState.ThemeCSS.GetProperty(":root", "--border-thickness")?.Value ?? "0", 
+        get => [0, 5, int.Parse(Regex.Match(_themeState.ThemeStyles.GetProperty(":root", "--border-thickness")?.Value ?? "0", 
             @"\d+").Value)];
         set => _themeState.UpdateTheme("--border-thickness", $"{value[2]}px");
     }

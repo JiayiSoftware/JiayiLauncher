@@ -78,7 +78,7 @@
 
             return;
         }
-        var dirPath = Path.Combine(ThemeState.WWWRootPath, "themes", $"{name}");
+        var dirPath = Path.Combine(ThemeState.RootPath, "themes", $"{name}");
         var allThemes = PublicTheme.GetAllThemes();
 
         _publicTheme.Author = _authorTextBox?.Value?.Trim().Truncate(20) ?? "unknown";
@@ -102,7 +102,7 @@
         }
 
         Directory.CreateDirectory(dirPath);
-        IO.CopyFilesRecursively(Path.Combine(ThemeState.WWWRootPath, "themes", $".local/{ThemeName}"), dirPath);
+        IO.CopyFilesRecursively(Path.Combine(ThemeState.RootPath, "themes", $".local/{ThemeName}"), dirPath);
 
         var metaBuffer = File.Create(Path.Combine(dirPath, "metadata.json"));
         var meta = JsonConvert.SerializeObject(_publicTheme, Formatting.Indented);

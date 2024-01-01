@@ -47,7 +47,8 @@
         }
     </video>
 
-    <div class="theme-image-overlay" />
+    <div class="theme-image-overlay"></div>
+    
     <div class="theme-header">
         <strong style="cursor: pointer" @onclick="OpenTheme">@(PublicTheme?.Name ?? LocalTheme?.Name)</strong>
         @if (!IsLocal)
@@ -55,6 +56,7 @@
             <p>by @PublicTheme?.Author</p>
         }
     </div>
+    
     <div class="theme-controls">
         <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="ApplyTheme" Disabled="@Applying">Apply</JiayiButton>
         @if (IsLocal)
@@ -65,7 +67,7 @@
         }
         else
         {
-            @if (Directory.Exists(Path.Combine(ThemeState.WWWRootPath, "themes", PublicTheme!.Name)))
+            @if (Directory.Exists(Path.Combine(ThemeState.RootPath, "themes", PublicTheme!.Name)))
             {
                 <span class="material-symbols-sharp" style="pointer-events: @(Applying ? "none" : "all"); z-index: 2; cursor: pointer;"
                       title="Reinstall theme" @onclick="InstallTheme">download</span>
@@ -93,7 +95,6 @@
     
     private bool IsLocal => PublicTheme == null;
     private string ThemeName => PublicTheme?.Name ?? $".local\\{LocalTheme?.Name}";
-
     private CssBuilder? _theme;
     private bool _downloading;
 
@@ -107,8 +108,8 @@
 
         if (IsLocal)
         {
-            var themecss = Path.Combine(ThemeState.WWWRootPath, "themes", $".local/{LocalTheme!.Name}", "theme.css");
-            var css = await File.ReadAllTextAsync(themecss);
+            var themeStyles = Path.Combine(ThemeState.RootPath, "themes", $".local/{LocalTheme!.Name}", "theme.css");
+            var css = await File.ReadAllTextAsync(themeStyles);
 
             _theme = CssBuilder.Parse(css);
 
@@ -140,19 +141,20 @@
             return false;
         }
 
-        var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", ThemeName);
+        var themeRoot = Path.Combine(ThemeState.RootPath, "themes", ThemeName);
 
-        if (Directory.Exists(themeroot))
+        if (Directory.Exists(themeRoot))
         {
             var options = new List<(string, EventCallback)>();
             var parameters = new ModalParameters();
 
             options.Add(("Yes", new EventCallback(null, async () =>
             {
-                Directory.Delete(themeroot, true);
-                await DownloadTheme(themeroot);
+                Directory.Delete(themeRoot, true);
+                await DownloadTheme(themeRoot);
                 await ApplyTheme();
             })));
+            
             options.Add(("No", new EventCallback(null, async () =>
             {
                 await ChangeApplying.InvokeAsync(false);
@@ -168,13 +170,13 @@
         }
         else
         {
-            await DownloadTheme(themeroot);
+            await DownloadTheme(themeRoot);
         }
 
         return true;
     }
 
-    private async Task DownloadTheme(string themeroot)
+    private async Task DownloadTheme(string themeRoot)
     {
         if (_downloading)
         {
@@ -183,10 +185,10 @@
         }
 
         _downloading = true;
-        Directory.CreateDirectory(themeroot); // wwwroot/themes/<theme_name>
+        Directory.CreateDirectory(themeRoot); // wwwroot/themes/<theme_name>
 
-        if (PublicTheme!.Background != null) await InternetManager.DownloadFile(PublicTheme!.Background, themeroot);
-        await InternetManager.DownloadFile(PublicTheme!.Theme, themeroot);
+        if (PublicTheme!.Background != null) await InternetManager.DownloadFile(PublicTheme!.Background, themeRoot);
+        await InternetManager.DownloadFile(PublicTheme!.Theme, themeRoot);
         StateHasChanged();
 
         _downloading = false;
@@ -202,9 +204,9 @@
 
         await ChangeApplying.InvokeAsync(true);
 
-        var themeroot = Path.Combine(ThemeState.WWWRootPath, "themes", ThemeName);
-        if (!Directory.Exists(themeroot)) LocalTheme.CreateTheme("default");
-        if (!File.Exists(Path.Combine(themeroot, "theme.css")))
+        var themeRoot = Path.Combine(ThemeState.RootPath, "themes", ThemeName);
+        if (!Directory.Exists(themeRoot)) LocalTheme.CreateTheme("default");
+        if (!File.Exists(Path.Combine(themeRoot, "theme.css")))
         {
             if (IsLocal)
             {
@@ -214,7 +216,7 @@
         }
 
         JiayiSettings.Instance.Theme = ThemeName;
-        var theme = CssBuilder.FromFile(Path.Combine(themeroot, "theme.css"));
+        var theme = CssBuilder.FromFile(Path.Combine(themeRoot, "theme.css"));
         theme.UpdateProperty(":root", new CssProperty("--background-image", 
             $"url('./themes/{JiayiSettings.Instance.Theme}/background.gif'), " +
             $"url('./themes/{JiayiSettings.Instance.Theme}/background.png'), " +
@@ -236,12 +238,12 @@
 
     private void OpenTheme()
     {
-        if (!Directory.Exists(Path.Combine(ThemeState.WWWRootPath, "themes", ThemeName))) return;
+        if (!Directory.Exists(Path.Combine(ThemeState.RootPath, "themes", ThemeName))) return;
 
         Process.Start(new ProcessStartInfo
             {
                 FileName = "explorer.exe ",
-                Arguments = $"/select, \"{Path.Combine(ThemeState.WWWRootPath, "themes", ThemeName, "theme.css")}\"",
+                Arguments = $"/select, \"{Path.Combine(ThemeState.RootPath, "themes", ThemeName, "theme.css")}\"",
                 UseShellExecute = true
             });
     }

@@ -66,7 +66,7 @@ public partial class MainWindow
 		{
 			var themeParent = Path.GetDirectoryName(ThemeState.ThemePath)!;
 			Directory.CreateDirectory(themeParent);
-			File.Copy(Path.Combine(ThemeState.WWWRootPath, "css", "theme.css"), ThemeState.ThemePath);
+			File.Copy(Path.Combine(ThemeState.RootPath, "css", "theme.css"), ThemeState.ThemePath);
 		}
 		
 		ThemeState.Instance = new ThemeState(CssBuilder.FromFile(ThemeState.ThemePath));
@@ -76,6 +76,7 @@ public partial class MainWindow
 		if (!File.Exists(ThemeState.ThemePath))
 		{
 			JiayiSettings.Instance.Theme = ".local/default";
+			JiayiSettings.Instance.Save();
 		}
 		
 		InternetManager.CheckOnline();

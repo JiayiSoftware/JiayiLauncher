@@ -25,7 +25,7 @@
         var name = _nameTextBox?.Value?.Trim().Truncate(20) ?? "default";
         if (name == string.Empty) return;
 
-        var dirPath = Path.Combine(ThemeState.WWWRootPath, "themes", $".local/{name}");
+        var dirPath = Path.Combine(ThemeState.RootPath, "themes", $".local/{name}");
 
         if (Directory.Exists(dirPath))
         {
@@ -35,7 +35,7 @@
 
         Directory.CreateDirectory(dirPath);
         // use JiayiSettings.Instance.Theme to pull from the current theme
-        IO.CopyFilesRecursively(Path.Combine(ThemeState.WWWRootPath, "themes", ".local/default"), dirPath);
+        IO.CopyFilesRecursively(Path.Combine(ThemeState.RootPath, "themes", ".local/default"), dirPath);
 
         await Modal.CloseAsync();
     }

@@ -83,7 +83,10 @@ public class ModCollection
 	    
 	    using var stream = File.OpenWrite(indexPath);
 	    JsonSerializer.Serialize(stream, this, _options);
+	    
+	    #if DEBUG
 	    Log.Write(this, "Saved mod collection.");
+	    #endif
     }
 
     public static void Load(string path)

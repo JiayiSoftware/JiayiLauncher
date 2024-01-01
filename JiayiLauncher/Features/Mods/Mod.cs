@@ -17,7 +17,9 @@ public class Mod
 	public List<string> SupportedVersions { get; set; }
 	public string Arguments { get; set; } = string.Empty;
 	public TimeSpan PlayTime { get; set; } = TimeSpan.Zero;
+	
 	[JsonIgnore] public bool FromInternet => Path.StartsWith("http");
+	[JsonIgnore] public string? RealPath;
 	
 	// for serialization
 	public Mod() { }

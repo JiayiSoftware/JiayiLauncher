@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using System.Timers;
+using JiayiLauncher.Features.Launch;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Stats;
 using JiayiLauncher.Settings;
@@ -13,18 +15,11 @@ namespace JiayiLauncher.Features.Game;
 
 public static class Minecraft
 {
-	private static readonly List<Mod> _modsLoaded = new();
 	private static readonly Timer _timer = new(1000);
+	private static bool _callbackSet;
 
-	public static List<Mod> ModsLoaded
-	{
-		get
-		{
-			if (!IsOpen) _modsLoaded.Clear();
-			return _modsLoaded;
-		}
-	}
-	
+	public static List<Mod> ModsLoaded { get; } = new();
+
 	public static bool IsOpen
 	{
 		get
@@ -48,21 +43,60 @@ public static class Minecraft
 		Process = Process.GetProcessesByName("Minecraft.Windows")[0];
 	}
 
-	public static void TrackGameTime()
+	public static void StartUpdate()
 	{
-		if (_timer.Enabled) return; // i think this fixes duplicating game time
+		if (_timer.Enabled) return;
+
+		if (_callbackSet)
+		{
+			_timer.Start();
+			return;
+		}
 		
 		_timer.Elapsed += (_, _) =>
 		{
 			if (!IsOpen)
+			{
 				_timer.Stop();
+				ModsLoaded.Clear();
+			}
 			else
 			{
 				JiayiStats.Instance!.TotalPlayTime += TimeSpan.FromSeconds(1);
 
-				foreach (var mod in _modsLoaded)
+				foreach (var mod in ModsLoaded)
 				{
 					mod.PlayTime += TimeSpan.FromSeconds(1);
+					
+					var path = mod.RealPath ?? mod.Path;
+					
+					bool external;
+					if (path.EndsWith(".exe")) external = true;
+					else if (path.EndsWith(".dll")) external = false;
+					else
+					{
+						Log.Write(nameof(Minecraft), 
+							$"Loaded mod {mod.Name} mysteriously disappeared. Removing from list.", Log.LogLevel.Warning);
+						ModsLoaded.Remove(mod);
+						break; // throws an exception if we don't break
+					}
+					
+					// check if the mod is still loaded
+					if (external)
+					{
+						if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(path)).Length != 0) continue;
+						
+						ModsLoaded.Remove(mod);
+						Log.Write(nameof(Minecraft), $"{mod.Name} is no longer loaded");
+						break;
+					}
+
+					// internal mod
+					if (Injector.IsInjected(path)) continue;
+						
+					ModsLoaded.Remove(mod);
+					Log.Write(nameof(Minecraft), $"{mod.Name} is no longer loaded");
+					break;
 				}
 			}
 			
@@ -70,6 +104,7 @@ public static class Minecraft
 			ModCollection.Current!.Save();
 		};
 		
+		_callbackSet = true;
 		_timer.Start();
 	}
 
@@ -87,6 +122,7 @@ public static class Minecraft
 					    && Process.Modules.Count > JiayiSettings.Instance.ModuleRequirement[2])
 						break;
 					
+					if (!IsOpen) break;
 					if (Process.Modules.Count > 165) break;
 					
 					if (JiayiSettings.Instance.AccelerateGameLoading) AccelerateGameLoading();

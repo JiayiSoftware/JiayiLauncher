@@ -80,6 +80,8 @@ public static class Launcher
 			LaunchProgress += 35;
 			LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		}
+		
+		mod.RealPath = path;
 
 		// either wait for the game's modules to load
 		// or if the user has injection delay enabled, wait for the time they specified
@@ -135,7 +137,7 @@ public static class Launcher
 			Launching = false;
 			
 			Minecraft.ModsLoaded.Add(mod);
-			Minecraft.TrackGameTime();
+			Minecraft.StartUpdate();
 			JiayiStats.Instance!.MostRecentMod = mod;
 			
 			return LaunchResult.Success;
@@ -156,7 +158,7 @@ public static class Launcher
 		if (injected)
 		{
 			Minecraft.ModsLoaded.Add(mod);
-			Minecraft.TrackGameTime();
+			Minecraft.StartUpdate();
 			JiayiStats.Instance!.MostRecentMod = mod;
 		}
 

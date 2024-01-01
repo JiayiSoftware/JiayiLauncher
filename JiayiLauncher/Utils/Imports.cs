@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace JiayiLauncher.Utils;
 
@@ -15,9 +14,6 @@ public static partial class Imports
 	public const uint MEM_COMMIT = 0x00001000;
 	public const uint MEM_RESERVE = 0x00002000;
 	public const uint PAGE_READWRITE = 4;
-	
-	public const int WU_ERRORS_START = unchecked((int)0x80040200);
-	public const int WU_ERRORS_END = unchecked((int)0x80040400);
 
 	// structs
 	[StructLayout(LayoutKind.Sequential)]

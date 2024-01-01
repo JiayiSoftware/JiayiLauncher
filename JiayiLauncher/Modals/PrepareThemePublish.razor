@@ -1,0 +1,139 @@
+﻿@using JiayiLauncher.Appearance
+@using System.IO
+@using JiayiLauncher.Shared.Components.Toasts
+@using JiayiLauncher.Utils
+@using System.Text
+@using Newtonsoft.Json
+@using System.Diagnostics
+
+@inject IToastService ToastService;
+<div class="edit">
+    <div class="name">
+        <p>Theme name</p>
+        <JiayiTextBox Placeholder="@ThemeName" @ref="_nameTextBox" Length="(0,20)" />
+    </div>
+
+    <div class="edit-author" style="margin-bottom: 1em">
+        <p>Author</p>
+        <JiayiTextBox Placeholder="Your name here" @ref="_authorTextBox" Length="(0,20)" />
+    </div>
+
+    <div class="edit-tags" style="margin-bottom: 1em">
+        <p>Tags</p>
+        <JiayiTextBox Placeholder="Comma separated list" @ref="_tagsTextBox" Length="(0,100)" />
+    </div>
+
+    <div class="edit-raw-tags" style="margin-bottom: 1em">
+        <p>Raw Tags</p>
+        <JiayiDropDown Multiselect="true" Items="ThemeMetadata.RAW_TAGS" Name="Select raw tags" SelectedItems="_publicTheme.RawTags"
+                       @ref="_rawTagsDropDown" />
+    </div>
+
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">Save</JiayiButton>
+</div>
+
+@code {
+    [Parameter]
+    public string? ThemeName { get; set; }
+
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+
+    private JiayiTextBox? _nameTextBox;
+    private JiayiTextBox? _authorTextBox;
+    private JiayiTextBox? _tagsTextBox;
+    private JiayiDropDown? _rawTagsDropDown;
+
+    private readonly ThemeMetadata _publicTheme = new()
+    {
+        Author = "",
+        Tags = new List<string>(),
+        RawTags = new List<string>(),
+    };
+
+    private void SendToast(string title)
+    {
+        var toastParams = new ToastParameters()
+                .Add(nameof(JiayiToast.Title), title)
+                .Add(nameof(JiayiToast.Level), ToastLevel.Warning);
+
+        ToastService.ShowToast<JiayiToast>(toastParams, settings =>
+        {
+            settings.Timeout = 5;
+            settings.ShowProgressBar = true;
+        });
+
+    }
+
+    private async Task SaveClicked()
+    {
+        var name = _nameTextBox?.Value?.Trim().Truncate(20) ?? ThemeName;
+        if (string.IsNullOrEmpty(name))
+        {
+            Log.Write(nameof(PrepareThemePublish), "Failed to create theme (no name)", Log.LogLevel.Warning);
+            SendToast("Failed to create theme (no name)");
+
+            return;
+        }
+        var dirPath = Path.Combine(ThemeState.RootPath, "themes", $"{name}");
+        var allThemes = PublicTheme.GetAllThemes();
+
+        _publicTheme.Author = _authorTextBox?.Value?.Trim().Truncate(20) ?? "unknown";
+        _publicTheme.Tags = _tagsTextBox?.Value?.Trim().Truncate(100).Split(",").Select(x => x.ToLower()).Distinct().ToList() ?? new();
+        _publicTheme.RawTags = _rawTagsDropDown?.SelectedItems ?? new();
+
+        if (_publicTheme.RawTags.Count < 1)
+        {
+            Log.Write(nameof(PrepareThemePublish), "Failed to create theme (Minimum 1 raw tag)", Log.LogLevel.Warning);
+            SendToast("Failed to create theme (Minimum 1 raw tag)");
+
+            return;
+        }
+
+        if (allThemes?.FirstOrDefault(x => x.Name.ToLower() == name.ToLower(), null) != null || Directory.Exists(dirPath))
+        {
+            Log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {ThemeName}", Log.LogLevel.Warning);
+            SendToast($"Failed to create theme (already exists): {ThemeName}");
+
+            return;
+        }
+
+        Directory.CreateDirectory(dirPath);
+        IO.CopyFilesRecursively(Path.Combine(ThemeState.RootPath, "themes", $".local/{ThemeName}"), dirPath);
+
+        var metaBuffer = File.Create(Path.Combine(dirPath, "metadata.json"));
+        var meta = JsonConvert.SerializeObject(_publicTheme, Formatting.Indented);
+        var metaByteArray = Encoding.UTF8.GetBytes(meta);
+        metaBuffer.Write(metaByteArray, 0, metaByteArray.Length);
+        metaBuffer.Close();
+
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "explorer.exe ",
+            Arguments = $"/select, \"{dirPath}\"",
+            UseShellExecute = true
+        });
+
+        await Modal.CloseAsync();
+
+        List<(string, EventCallback)> options =
+        [
+            ("Ok", EventCallback.Empty),
+            ("Open Repository", new EventCallback(null, () =>
+            {
+                Process.Start(new ProcessStartInfo { FileName = "https://github.com/JiayiSoftware/jiayi-themes/fork", UseShellExecute = true });
+                Process.Start(new ProcessStartInfo { FileName = "https://github.com/JiayiSoftware/jiayi-themes/blob/main/README.md#adding-a-new-theme", UseShellExecute = true });
+            }))
+        ];
+
+        var parameters = new ModalParameters()
+        .Add(nameof(MessageBox.Message), "Upload this folder as a pull request, located in the /themes folder (check the README for more information).")
+        .Add(nameof(MessageBox.Buttons), options);
+
+        var modal = ModalService.Show<MessageBox>("Publish mod", parameters);
+        await modal.Result;
+    }
+}

@@ -1,0 +1,62 @@
+﻿@using JiayiLauncher.Appearance
+@using System.IO
+@using JiayiLauncher.Settings
+@using JiayiLauncher.Utils
+
+@inject NavigationManager NavigationManager;
+
+<div class="background-image"></div>
+<div class="background-video">
+    <video @key='@($"background-video-refresh-{_refreshFlag}")' autoplay muted loop id="bg-video">
+        <source src='@ConstructVideoURL("mp4")' type="video/mp4">
+        <source src='@ConstructVideoURL("mov")' type="video/mp4">
+        <source src='@ConstructVideoURL("webm")' type="video/webm">
+    </video>
+</div>
+<script @key='@($"background-video-script-refresh-{_refreshFlag}")'>
+    var video = document.getElementById("bg-video");
+    video.play();
+    video.muted = true;
+</script>
+<style>
+    @ThemeState.Instance.ThemeStyles.ToString();
+</style>
+
+
+@code {
+    private bool _refreshFlag = false;
+
+    private string ConstructVideoURL(string ext)
+    {
+        return $"./themes/{JiayiSettings.Instance.Theme}/background.{ext}";
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        ThemeState.Instance.OnChange += () =>
+        {
+            _refreshFlag = !_refreshFlag;
+            StateHasChanged();
+        };
+
+        var themeRoot = Path.Combine(ThemeState.RootPath, "themes", JiayiSettings.Instance.Theme);
+        var themeStyles = Path.Combine(themeRoot, "theme.css");
+        if (!File.Exists(themeStyles))
+        {
+            JiayiSettings.Instance.Theme = ".local/default";
+            LocalTheme.CreateTheme("default");
+            themeRoot = Path.Combine(ThemeState.RootPath, "themes", JiayiSettings.Instance.Theme);
+            themeStyles = Path.Combine(themeRoot, "theme.css");
+
+        }
+        
+        var theme = CssBuilder.FromFile(themeStyles);
+        theme.UpdateProperty(":root", new CssProperty("--background-image", 
+            $"url('./themes/{JiayiSettings.Instance.Theme}/background.gif'), " +
+            $"url('./themes/{JiayiSettings.Instance.Theme}/background.png'), " +
+            $"url('./themes/{JiayiSettings.Instance.Theme}/background.jpg')"));
+        ThemeState.Instance.ApplyTheme(theme);
+        
+        await base.OnInitializedAsync();
+    }
+}

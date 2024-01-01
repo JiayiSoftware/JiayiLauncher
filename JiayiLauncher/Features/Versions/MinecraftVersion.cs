@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace JiayiLauncher.Features.Versions;
+﻿namespace JiayiLauncher.Features.Versions;
 
 public class MinecraftVersion
 {

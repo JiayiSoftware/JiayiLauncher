@@ -18,10 +18,13 @@
 
 <div style="width: 100%; display: flex; gap: 1rem; place-items: center;">
     <JiayiButton OnClick="ButtonClicked">Show a message box</JiayiButton>
+
     <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="Crash">Crash Jiayi</JiayiButton>
-    <JiayiButton OnClick="MinecraftVersion">@_minecraftVersion</JiayiButton>
+
+    <JiayiButton OnClick="MinecraftVersion">@(_minecraftVersion)</JiayiButton>
     <JiayiButton OnClick="Minecraft.Open">Open Minecraft</JiayiButton>
     <JiayiButton OnClick="GameDataPath">Game data path</JiayiButton>
+
 </div>
 
 <h4>Text boxes</h4>
@@ -33,23 +36,27 @@
 <JiayiTextBox Placeholder="Setting name" @ref="_settingName" />
 <JiayiButton OnClick="ValidSetting">@_validSetting</JiayiButton>
 
-<h4>Toggles</h4>
+    <h4>Toggles</h4>
 
-<JiayiToggle />
-<JiayiToggle Checked="true" />
+    <JiayiToggle />
+    <JiayiToggle Checked="true" />
 
-<h4>Sliders</h4>
-<JiayiSlider Value="50" />
+    <h4>Sliders</h4>
+    <JiayiSlider Value="50" />
 
-<h4>Version URLs</h4>
-<JiayiTextBox Placeholder="Minecraft version" @ref="_versionsBox" />
-<JiayiButton OnClick="VersionsClicked">Get download URL</JiayiButton>
+    <h4>Version URLs</h4>
+    <JiayiTextBox Placeholder="Minecraft version" @ref="_versionsBox" />
+    <JiayiButton OnClick="VersionsClicked">Get download URL</JiayiButton>
 
-<h4>Toasts</h4>
-<JiayiDropDown Items="@_toastTypes" Name="Toast type" @ref="_toastType" />
-<JiayiButton OnClick="ToastClicked">Show toast</JiayiButton>
+    <h4>Toasts</h4>
+    <JiayiDropDown Items="@_toastTypes" Name="Toast type" @ref="_toastType" />
+    <JiayiButton OnClick="ToastClicked">Show toast</JiayiButton>
 
-@code {
+
+    <h4>Themes Page</h4>
+    <a href="/Themes">Themes</a>
+
+    @code {
 
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
@@ -62,9 +69,9 @@
     private readonly List<string> _aLotOfItems = new() { "Bunch of items", "Testing truncating selected items", "Third option", "Fourth option", "Fifth option", "Sixth option", "Seventh option", "Eighth option", "Ninth option", "Tenth option", "Eleventh option", "Twelfth option", "Thirteenth option", "Fourteenth option", "Fifteenth option", "Sixteenth option", "Seventeenth option", "Eighteenth option", "Nineteenth option", "Twentieth option" };
 
     private JiayiTextBox? _settingName;
-    
+
     private JiayiTextBox? _versionsBox;
-    
+
     private readonly List<string> _toastTypes = new() { "Success", "Warning", "Error", "Info" };
     private JiayiDropDown? _toastType;
 
@@ -105,20 +112,20 @@
         var path = PackageData.GetGameDataPath();
         var parameters = new ModalParameters()
             .Add(nameof(MessageBox.Message), $"Game data path: {path}");
-        
+
         ModalService.Show<MessageBox>("Game data path", parameters);
     }
 
     private async Task VersionsClicked()
     {
         if (_versionsBox?.Value == null) return;
-        
+
         var version = await VersionList.GetVersion(_versionsBox.Value);
         var url = await RequestFactory.GetDownloadUrl(version.UpdateId);
-        
+
         var parameters = new ModalParameters()
             .Add(nameof(MessageBox.Message), url);
-        
+
         ModalService.Show<MessageBox>("Download URL", parameters);
     }
 
@@ -133,22 +140,21 @@
             "Info" => ToastLevel.Info,
             _ => ToastLevel.Success
         };
-        
+
         var parameters = new ToastParameters()
             .Add(nameof(JiayiToast.Title), "This is a test toast.")
-            .Add(nameof(JiayiToast.Content),  new RenderFragment(builder =>
+            .Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
             {
                 builder.OpenElement(0, "p");
                 builder.AddContent(1, "This is a toast body.");
                 builder.CloseElement();
             }))
             .Add(nameof(JiayiToast.Level), toastType);
-        
+
         ToastService.ShowToast<JiayiToast>(parameters, settings =>
         {
             settings.Timeout = 5;
             settings.ShowProgressBar = true;
         });
     }
-
 }

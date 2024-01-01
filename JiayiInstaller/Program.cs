@@ -183,7 +183,7 @@ var downloadPath = Path.Combine(Path.GetTempPath(), "JiayiLauncher.zip");
 await Download(downloadUrl, downloadPath);
 
 Console.WriteLine("Extracting...");
-ExtractAndDelete(downloadPath, path);
+await ExtractAndDelete(downloadPath, path);
 
 if (dotnet)
 {

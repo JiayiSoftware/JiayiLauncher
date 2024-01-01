@@ -1,0 +1,42 @@
+﻿@using JiayiLauncher.Appearance
+@using System.IO
+@using JiayiLauncher.Utils
+
+<div class="edit">
+    <div class="name" style="margin-bottom: 1em">
+        <p>Give your theme a name!</p>
+        <JiayiTextBox Placeholder="Name" @ref="_nameTextBox" Length="(0,20)" />
+    </div>
+
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">Save</JiayiButton>
+</div>
+
+@code {
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+
+    private JiayiTextBox? _nameTextBox;
+
+    private async Task SaveClicked()
+    {
+        var name = _nameTextBox?.Value?.Trim().Truncate(20) ?? "default";
+        if (name == string.Empty) return;
+
+        var dirPath = Path.Combine(ThemeState.RootPath, "themes", $".local/{name}");
+
+        if (Directory.Exists(dirPath))
+        {
+            Log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {name}", Log.LogLevel.Warning);
+            return;
+        }
+
+        Directory.CreateDirectory(dirPath);
+        // use JiayiSettings.Instance.Theme to pull from the current theme
+        IO.CopyFilesRecursively(Path.Combine(ThemeState.RootPath, "themes", ".local/default"), dirPath);
+
+        await Modal.CloseAsync();
+    }
+}

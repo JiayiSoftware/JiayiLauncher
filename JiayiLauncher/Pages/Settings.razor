@@ -4,6 +4,8 @@
 @using System.Drawing
 @using System.Globalization
 
+@inject NavigationManager nav;
+
 <!--suppress CssInvalidPropertyValue -->
 <h3>Settings</h3>
 
@@ -88,6 +90,11 @@
                             var (name, action) = ((string, Action))setting.GetValue(JiayiSettings.Instance)!;
                             @* ReSharper disable once AccessToModifiedClosure *@
                             <JiayiButton OnClick="() => RunActionSetting(action, setting)" Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem">@name</JiayiButton>
+                            break;
+                        case true when setting.PropertyType == typeof((string, string)):
+                            var (content, href) = ((string, string))setting.GetValue(JiayiSettings.Instance)!;
+                            @* ReSharper disable once AccessToModifiedClosure *@
+                            <a href=@href><JiayiButton Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem">@content</JiayiButton></a>
                             break;
                         case true when setting.PropertyType == typeof(Color):
                             @* for now *@

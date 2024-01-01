@@ -1,0 +1,250 @@
+﻿@using JiayiLauncher.Appearance
+@using JiayiLauncher.Features.Mods
+@using JiayiLauncher.Pages
+@using JiayiLauncher.Features.Launch
+@using System.Diagnostics
+@using JiayiLauncher.Features.Discord
+@using JiayiLauncher.Features.Game
+@using JiayiLauncher.Settings
+@using JiayiLauncher.Shared.Components.Toasts
+@using JiayiLauncher.Utils
+@using System.Net.Http
+@using System.IO
+@using System.Net
+
+@inject NavigationManager NavigationManager
+@inject IToastService ToastService
+
+<div class="theme-wrapper" style='@_theme?.GetSelector(":root")?.ToStringNoSelector()'>
+    @if (IsLocal)
+    {
+        <img class="theme-image" src="./themes/.local/@LocalTheme!.Name/background.jpg">
+        <img class="theme-image" src="./themes/.local/@LocalTheme!.Name/background.png">
+        <img class="theme-image" src="./themes/.local/@LocalTheme!.Name/background.gif">
+    }
+    else
+    {
+        <img class="theme-image" src="@PublicTheme?.Background">
+        <img class="theme-image" src="./themes/@PublicTheme!.Name/background.jpg">
+        <img class="theme-image" src="./themes/@PublicTheme!.Name/background.png">
+        <img class="theme-image" src="./themes/@PublicTheme!.Name/background.gif">
+    }
+
+    <video class="theme-image" autoplay muted loop>
+        @if (IsLocal)
+        {
+            <source src="./themes/.local/@LocalTheme!.Name/background.mp4" type="video/mp4">
+            <source src="./themes/.local/@LocalTheme!.Name/background.mov" type="video/mp4">
+            <source src="./themes/.local/@LocalTheme!.Name/background.webm" type="video/webm">
+        }
+        else
+        {
+            <source src="@PublicTheme!.Background" type="video/mp4">
+            <source src="@PublicTheme!.Background" type="video/webm">
+            <source src="./themes/@PublicTheme!.Name/background.mp4" type="video/mp4">
+            <source src="./themes/@PublicTheme!.Name/background.mov" type="video/mp4">
+            <source src="./themes/@PublicTheme!.Name/background.webm" type="video/webm">
+        }
+    </video>
+
+    <div class="theme-image-overlay"></div>
+    
+    <div class="theme-header">
+        <strong style="cursor: pointer" @onclick="OpenTheme">@(PublicTheme?.Name ?? LocalTheme?.Name)</strong>
+        @if (!IsLocal)
+        {
+            <p>by @PublicTheme?.Author</p>
+        }
+    </div>
+    
+    <div class="theme-controls">
+        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="ApplyTheme" Disabled="@Applying">Apply</JiayiButton>
+        @if (IsLocal)
+        {
+            <span class="material-symbols-sharp" style="z-index: 2; cursor: pointer;"
+                  title="Prepare theme upload" @onclick="PrepareThemeUpload">globe</span>
+
+        }
+        else
+        {
+            @if (Directory.Exists(Path.Combine(ThemeState.RootPath, "themes", PublicTheme!.Name)))
+            {
+                <span class="material-symbols-sharp" style="pointer-events: @(Applying ? "none" : "all"); z-index: 2; cursor: pointer;"
+                      title="Reinstall theme" @onclick="InstallTheme">download</span>
+            }
+
+        }
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+    
+    [Parameter]
+    public PublicTheme? PublicTheme { get; set; }
+    
+    [Parameter]
+    public LocalTheme? LocalTheme { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ChangeApplying { get; set; }
+    
+    [Parameter]
+    public bool Applying { get; set; }
+    
+    private bool IsLocal => PublicTheme == null;
+    private string ThemeName => PublicTheme?.Name ?? $".local\\{LocalTheme?.Name}";
+    private CssBuilder? _theme;
+    private bool _downloading;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (PublicTheme == null && LocalTheme == null)
+        {
+            Log.Write(this, "No public theme or local theme passed as a parameter", Log.LogLevel.Warning);
+            return;
+        }
+
+        if (IsLocal)
+        {
+            var themeStyles = Path.Combine(ThemeState.RootPath, "themes", $".local/{LocalTheme!.Name}", "theme.css");
+            var css = await File.ReadAllTextAsync(themeStyles);
+
+            _theme = CssBuilder.Parse(css);
+
+        }
+        else
+        {
+            var response = await InternetManager.Client.GetStringAsync(PublicTheme?.Theme);
+
+            // TODO: response will never be null, but it can be empty/invalid CSS
+            if (response != null)
+            {
+                _theme = CssBuilder.Parse(response);
+            }
+            else
+            {
+                Log.Write(this, $"Failed to load theme: {PublicTheme!.Name}", Log.LogLevel.Error);
+            }
+        }
+        await base.OnInitializedAsync();
+    }
+    
+    private async Task<bool> InstallTheme()
+    {
+        await ChangeApplying.InvokeAsync(true);
+
+        if (_downloading)
+        {
+            await ChangeApplying.InvokeAsync(false);
+            return false;
+        }
+
+        var themeRoot = Path.Combine(ThemeState.RootPath, "themes", ThemeName);
+
+        if (Directory.Exists(themeRoot))
+        {
+            var options = new List<(string, EventCallback)>();
+            var parameters = new ModalParameters();
+
+            options.Add(("Yes", new EventCallback(null, async () =>
+            {
+                Directory.Delete(themeRoot, true);
+                await DownloadTheme(themeRoot);
+                await ApplyTheme();
+            })));
+            
+            options.Add(("No", new EventCallback(null, async () =>
+            {
+                await ChangeApplying.InvokeAsync(false);
+            })));
+
+            parameters
+                .Add(nameof(MessageBox.Buttons), options)
+                .Add(nameof(MessageBox.Message), "Are you sure you want to overwrite this theme? All of your local changes will be lost.");
+
+            var modal = ModalService.Show<MessageBox>("Themes", parameters);
+            if ((await modal.Result).Cancelled)
+                await ChangeApplying.InvokeAsync(false);
+        }
+        else
+        {
+            await DownloadTheme(themeRoot);
+        }
+
+        return true;
+    }
+
+    private async Task DownloadTheme(string themeRoot)
+    {
+        if (_downloading)
+        {
+            await ChangeApplying.InvokeAsync(false);
+            return;
+        }
+
+        _downloading = true;
+        Directory.CreateDirectory(themeRoot); // wwwroot/themes/<theme_name>
+
+        if (PublicTheme!.Background != null) await InternetManager.DownloadFile(PublicTheme!.Background, themeRoot);
+        await InternetManager.DownloadFile(PublicTheme!.Theme, themeRoot);
+        StateHasChanged();
+
+        _downloading = false;
+    }
+
+    private async Task ApplyTheme()
+    {
+        if (PublicTheme?.Metadata == null && LocalTheme == null)
+        {
+            Log.Write(this, $"Skipping theme application: {ThemeName}");
+            return;
+        }
+
+        await ChangeApplying.InvokeAsync(true);
+
+        var themeRoot = Path.Combine(ThemeState.RootPath, "themes", ThemeName);
+        if (!Directory.Exists(themeRoot)) LocalTheme.CreateTheme("default");
+        if (!File.Exists(Path.Combine(themeRoot, "theme.css")))
+        {
+            if (IsLocal)
+            {
+                LocalTheme.CreateTheme("default");
+            }
+            else if (!await InstallTheme()) return;
+        }
+
+        JiayiSettings.Instance.Theme = ThemeName;
+        var theme = CssBuilder.FromFile(Path.Combine(themeRoot, "theme.css"));
+        theme.UpdateProperty(":root", new CssProperty("--background-image", 
+            $"url('./themes/{JiayiSettings.Instance.Theme}/background.gif'), " +
+            $"url('./themes/{JiayiSettings.Instance.Theme}/background.png'), " +
+            $"url('./themes/{JiayiSettings.Instance.Theme}/background.jpg')"));
+
+        ThemeState.Instance.ApplyTheme(theme);
+        JiayiSettings.Instance.Save();
+        await ChangeApplying.InvokeAsync(false);
+    }
+
+    private async void PrepareThemeUpload()
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(PrepareThemePublish.ThemeName), LocalTheme!.Name);
+
+        var modal = ModalService.Show<PrepareThemePublish>("Publish theme", parameters);
+        await modal.Result;
+    }
+
+    private void OpenTheme()
+    {
+        if (!Directory.Exists(Path.Combine(ThemeState.RootPath, "themes", ThemeName))) return;
+
+        Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer.exe ",
+                Arguments = $"/select, \"{Path.Combine(ThemeState.RootPath, "themes", ThemeName, "theme.css")}\"",
+                UseShellExecute = true
+            });
+    }
+}

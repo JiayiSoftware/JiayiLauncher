@@ -6,7 +6,6 @@
 
 @using JiayiLauncher.Utils
 @using System.IO
-@using System.Net.Http
 @using System.Reflection
 @using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
@@ -17,50 +16,11 @@
                 ShowProgressBar="true"
                 PauseProgressOnHover="true"
                 ShowCloseButton="true"
-                IconType="IconType.None"
-/>
+                IconType="IconType.None" />
 
-<Sidebar @ref="_sidebar"/>
+<Sidebar @ref="_sidebar" />
 
-@if (JiayiSettings.Instance!.BackgroundImageUrl != string.Empty)
-{
-    var message = new HttpRequestMessage(HttpMethod.Head, JiayiSettings.Instance.BackgroundImageUrl);
-    var response = InternetManager.Client.Send(message);
-
-    var contentType = response.Content.Headers.ContentType?.MediaType ?? "null";
-
-    if (contentType.StartsWith("video")) 
-        _useVideo = true;
-
-    if (contentType.StartsWith("image")) 
-        _useVideo = false;
-}
-
-@if (_useVideo != null)
-{
-    if (_useVideo == true)
-    {
-        <div class="background-video">
-            <video autoplay muted loop id="bg-video">
-                <source src="@JiayiSettings.Instance.BackgroundImageUrl" type="video/mp4">
-            </video>
-        </div>
-    }
-    else
-    {
-        <div class="background-image"></div>
-    }
-}
-
-@* force video to play with javascript *@
-@if (_useVideo == true)
-{
-    <script>
-        var video = document.getElementById("bg-video");
-        video.play();
-        video.muted = true;
-    </script>
-}
+<ThemeController />
 
 <main style="margin-left: @_margin" @onkeydown="KeyDown">
     @Body
@@ -69,17 +29,14 @@
 @code {
     [CascadingParameter]
     public IModalService ModalService { get; set; } = default!;
-    
+
     public static MainLayout Instance { get; private set; } = default!;
-    
+
     private Sidebar? _sidebar;
     private string _margin = "5.5rem";
-    
-    // nullable for 3 way bool
-    private bool? _useVideo;
-    
+
     private readonly Updater _updater = new();
-    
+
     // silly
     private readonly List<string> _dontAskAgain = new()
     {
@@ -98,7 +55,7 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (!firstRender) return;
-        
+
         Instance = this;
 
         if (InternetManager.OfflineMode)
@@ -112,13 +69,13 @@
                     builder.CloseElement();
                 }))
                 .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
-                {
+                                {
                     ("Okay", EventCallback.Empty)
-                });
-            
+                                });
+
             ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
         }
-        
+
         if (_sidebar != null) _sidebar.OnToggle += ChangeMargin;
         Arguments.Changed += (_, _) => HandleArgs(Arguments.Get());
 
@@ -153,7 +110,7 @@
                 builder.OpenElement(0, "p");
                 builder.AddContent(1, $"Jiayi was updated to {realVersion}. You can view the changelog ");
                 builder.OpenElement(2, "a");
-                builder.AddAttribute(3, "href", 
+                builder.AddAttribute(3, "href",
                     $"https://github.com/JiayiSoftware/JiayiLauncher/releases/tag/{realVersion}");
                 builder.AddAttribute(4, "style", "color: var(--text-primary);");
                 builder.AddContent(5, "on GitHub.");
@@ -161,17 +118,17 @@
                 builder.CloseElement();
             }))
             .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
-            {
+                            {
                 ("Okay", EventCallback.Empty)
-            });
-        
+                            });
+
         ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
     }
 
     private async Task UpdateCheck()
     {
         if (InternetManager.OfflineMode) return;
-        
+
         var result = await _updater.IsUpdateAvailable();
         if (result)
         {
@@ -186,13 +143,13 @@
                     builder.AddContent(1, "Downloading update...");
                     builder.CloseElement();
                 }));
-                
+
                 ToastService.ShowToast<JiayiToast>(parameters, settings =>
                 {
                     settings.Timeout = 5;
                     settings.ShowProgressBar = true;
                 });
-                
+
                 await _updater.DownloadLatest();
             }
             else
@@ -204,7 +161,7 @@
                     builder.CloseElement();
                 }))
                     .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
-                    {
+                                    {
                         ("Yes", new EventCallback(null, async () =>
                         {
                             await _updater.DownloadLatest();
@@ -215,8 +172,8 @@
                             JiayiSettings.Instance.EnableUpdater = false;
                             JiayiSettings.Instance.Save();
                         }))
-                    });
-                
+                                    });
+
                 ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
             }
         }
@@ -233,13 +190,13 @@
                 builder.CloseElement();
             }))
             .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
-            {
+                            {
                 ("Restart", new EventCallback(null, () =>
                 {
                     _updater.Update();
                 })),
                 ("Later", EventCallback.Empty)
-            });
+                            });
 
         ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
     }
@@ -250,19 +207,19 @@
         {
             var modPath = args.Replace("addmod/", "");
             var mod = ModImporter.ImportFromPath(modPath);
-            
+
             var parameters = new ModalParameters()
                 .Add(nameof(EditMod.Mod), mod)
                 .Add(nameof(EditMod.FromUrlProtocol), true);
-            
+
             ModalService.Show<EditMod>("Edit mod", parameters);
         }
-        
+
         if (File.Exists(args))
         {
             var parameters = new ModalParameters()
                 .Add(nameof(ImportCollection.Path), args);
-            
+
             ModalService.Show<ImportCollection>("Import collection", parameters);
         }
     }
@@ -272,7 +229,7 @@
         _margin = _margin == "5.5rem" ? "13.5rem" : "5.5rem";
         StateHasChanged();
     }
-    
+
     private List<string?> _konami = new() { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a", "Enter" };
     private string? _nextKey = "ArrowUp";
 
@@ -288,7 +245,7 @@
             _konami = new List<string?> { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a", "Enter" };
             _nextKey = _konami.FirstOrDefault();
         }
-        
+
         if (_konami.Count == 0)
         {
             _konami = new List<string?> { "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a", "Enter" };

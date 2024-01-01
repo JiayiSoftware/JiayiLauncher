@@ -14,7 +14,7 @@
     public bool Checked { get; set; }
     
     [Parameter]
-    public EventCallback Changed { get; set; }
+    public EventCallback<ChangeEventArgs> Changed { get; set; }
     
     private string _color => Checked ? "background-color: var(--accent); color: var(--text-accent); border-color: var(--border-accent)" 
         : "background-color: var(--background-secondary); color: var(--text-primary)";

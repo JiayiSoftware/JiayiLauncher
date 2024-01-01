@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace JiayiLauncher.Appearance;
 
-
 public class ThemeState
 {
     public static ThemeState Instance { get; set; }

@@ -263,11 +263,11 @@ public class JiayiSettings
 
 
     [JsonIgnore]
-    [Setting("Themes", "Appearance", "Local and downloadable themes created by other users.", canReset: false)]
+    [Setting("Themes menu", "Appearance", "Local and downloadable themes created by other users.", canReset: false)]
     public (string, string) OpenExternalThemePage { get; set; } = ("Open Themes", "/themes");
+    
     public string Theme { get; set; } = ".local/default";
-
-
+    
     // discord settings
     [Setting("Enable rich presence", "Discord", "Show what you're doing in Jiayi on Discord.", tooltip: """
 	Available formatting strings for rich presence:

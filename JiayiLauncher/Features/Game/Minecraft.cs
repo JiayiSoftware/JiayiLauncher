@@ -83,7 +83,7 @@ public static class Minecraft
 
 				try
 				{
-					if (JiayiSettings.Instance!.OverrideModuleRequirement 
+					if (JiayiSettings.Instance.OverrideModuleRequirement 
 					    && Process.Modules.Count > JiayiSettings.Instance.ModuleRequirement[2])
 						break;
 					

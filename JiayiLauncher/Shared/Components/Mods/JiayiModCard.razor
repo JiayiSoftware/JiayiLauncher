@@ -15,7 +15,7 @@
         <strong>@Mod.Name</strong>
 
         <div class="right">
-            @if (!Mod.IsValid())
+            @if (!_isValid)
             {
                 @if (Mod.FromInternet)
                 {
@@ -57,7 +57,7 @@
     </div>
     <p class="mod-version">Works on @(string.Join(", ", Mod.SupportedVersions).ToLower())</p>
     <div class="mod-controls">
-        @if (Mod.IsValid())
+        @if (_isValid)
         {
             if (Mod.FromInternet && InternetManager.OfflineMode)
             {
@@ -92,9 +92,18 @@
     public IModalService ModalService { get; set; } = default!;
 
     private bool _launching;
+    private bool _isValid = true;
     private string _showLoadingBar => _launching ? "0.2" : "0";
 
     private JiayiButton? _launchButton;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+
+        _isValid = await Mod.IsValid();
+        StateHasChanged();
+    }
 
     private async Task LaunchClicked()
     {

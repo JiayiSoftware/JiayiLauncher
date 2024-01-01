@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using JiayiLauncher.Features.Stats;
 using JiayiLauncher.Utils;
 
@@ -31,7 +32,7 @@ public class Mod
 	// for speed
 	private HttpResponseMessage? _response;
 
-	public bool IsValid()
+	public async Task<bool> IsValid()
 	{
 		if (InternetManager.OfflineMode) return true;
 		if (_response != null) return _response.IsSuccessStatusCode;
@@ -43,7 +44,7 @@ public class Mod
 			
 			try
 			{
-				using var response = InternetManager.Client.Send(request);
+				using var response = await InternetManager.Client.SendAsync(request);
 				_response = response;
 				return response.IsSuccessStatusCode;
 			}

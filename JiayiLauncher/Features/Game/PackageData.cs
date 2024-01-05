@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Marshalling;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Management.Deployment;
@@ -11,12 +13,14 @@ namespace JiayiLauncher.Features.Game;
 
 public static class PackageData
 {
+	public const string FAMILY_NAME = "Microsoft.MinecraftUWP_8wekyb3d8bbwe";
+	
 	public static PackageManager PackageManager { get; } = new();
 	
 	public static async Task<AppDiagnosticInfo?> GetPackage()
 	{
 		var info = 
-			await AppDiagnosticInfo.RequestInfoForPackageAsync("Microsoft.MinecraftUWP_8wekyb3d8bbwe");
+			await AppDiagnosticInfo.RequestInfoForPackageAsync(FAMILY_NAME);
 		if (info == null || info.Count == 0 || !Directory.Exists(info[0].AppInfo.Package.InstalledPath)) return null;
 		return info[0];
 	}
@@ -90,7 +94,19 @@ public static class PackageData
 	{
 		// i thought i could just use the package for this but naw gotta hardcode it
 		return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-			"Packages", "Microsoft.MinecraftUWP_8wekyb3d8bbwe");
+			"Packages", FAMILY_NAME);
+	}
+	
+	public static async Task MinimizeFix(bool fix)
+	{
+		var package = await GetPackage();
+		if (package == null) return;
+		
+		var debugSettings = new PackageDebugSettings();
+		if (fix)
+			debugSettings.EnableDebugging(package.AppInfo.Package.Id.FullName, null, null);
+		else 
+			debugSettings.DisableDebugging(package.AppInfo.Package.Id.FullName);
 	}
 
 	public static async Task BackupGameData(string to)

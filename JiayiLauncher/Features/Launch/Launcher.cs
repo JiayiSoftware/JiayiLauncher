@@ -40,6 +40,9 @@ public static class Launcher
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		Log.Write(nameof(Launcher), $"Launching {mod.Name}");
 		
+		// minimize fix !
+		await PackageData.MinimizeFix(JiayiSettings.Instance.MinimizeFix);
+		
 		var supported = await Minecraft.ModSupported(mod);
 		if (!supported)
 		{
@@ -85,7 +88,7 @@ public static class Launcher
 
 		// either wait for the game's modules to load
 		// or if the user has injection delay enabled, wait for the time they specified
-		if (JiayiSettings.Instance!.UseInjectionDelay)
+		if (JiayiSettings.Instance.UseInjectionDelay)
 			Task.Delay(JiayiSettings.Instance.InjectionDelay[2] * 1000).Wait();
 		else
 			await Minecraft.WaitForModules();

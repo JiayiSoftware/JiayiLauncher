@@ -10,6 +10,7 @@ using Blazored.Modal;
 using Blazored.Toast;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Discord;
+using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Profiles;
 using JiayiLauncher.Features.Stats;
@@ -101,6 +102,8 @@ public partial class MainWindow
 		
 		RichPresence.Initialize();
 		JiayiStats.Save();
+		
+		Task.Run(async () => await PackageData.MinimizeFix(true));
 	}
 
     protected override void OnSourceInitialized(EventArgs e)

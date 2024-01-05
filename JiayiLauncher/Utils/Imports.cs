@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace JiayiLauncher.Utils;
 
@@ -59,4 +60,7 @@ public static partial class Imports
 	
 	[LibraryImport("user32.dll")]
 	public static partial nint FindWindowW([MarshalAs(UnmanagedType.LPWStr)] string? lpClassName, [MarshalAs(UnmanagedType.LPWStr)] string lpWindowName);
+	
+	[LibraryImport("ole32.dll")]
+	public static partial int CoCreateInstance(ref Guid rclsid, nint pUnkOuter, uint dwClsContext, ref Guid riid, out nint ppv);
 }

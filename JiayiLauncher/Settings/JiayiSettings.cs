@@ -350,6 +350,9 @@ public class JiayiSettings
         "Speed up loading times by terminating unnecessary processes. Beware of jank.",
         tooltip: "May cause issues related to Microsoft Store licensing (determining whether you own the game or not).")]
     public bool AccelerateGameLoading { get; set; } = false;
+    
+    [Setting("Minimize fix", "Launch", "Prevents the game from suspending itself when minimized. Changes are applied upon launch.")]
+    public bool MinimizeFix { get; set; } = true;
 
     // log settings
     [Setting("Anonymize logs", "Logs",

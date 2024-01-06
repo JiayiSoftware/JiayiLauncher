@@ -156,12 +156,37 @@ public class JiayiSettings
     [Setting("Use background image", "Appearance", "Use an image as the background of the launcher.")]
     public bool UseBackgroundImage
     {
-        get => !(_themeState.ThemeStyles.GetProperty(":root", "--background-image")?.Value == "none");
+        get => _themeState.ThemeStyles.GetProperty(":root", "--background-image")?.Value != "none";
         set => _themeState.UpdateTheme("--background-image", value ? $"url('')" : "none");
 
     }
+    
+    [JsonIgnore]
+    [Setting("Select background image", "Appearance", "Select a background image from your computer.", "UseBackgroundImage")]
+    public (string, Action) SelectBackground { get; set; } = ("Select", () =>
+    {
+        var dialog = new OpenFileDialog
+        {
+            DefaultExt = "png",
+            Filter = "Image files (*.png;*.jpg;*.jpeg;*.gif;*.bmp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp" +
+                     "|Video files (*.mp4;*.mov;*.webm)|*.mp4;*.mov;*.webm",
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+            Title = "Select background image"
+        };
+        if (dialog.ShowDialog() != true) return;
 
-    /* TODO: Remove this, as files will now be locally saved and uploaded to theme repo (dont fucking trust people to not use discord link), also allow using a url, idfk man*/
+        var path = dialog.FileName;
+
+        var themeRoot = Path.Combine(ThemeState.RootPath, "themes", Instance.Theme);
+        var dest = Path.Combine(themeRoot, "background" + Path.GetExtension(path));
+        
+        File.Copy(path, dest, true);
+        
+        Instance.BackgroundImageUrl = $"./themes/{Instance.Theme}/background{Path.GetExtension(path)}";
+        Instance.Save();
+    });
+
+    /* TODO: Remove this, as files will now be locally saved and uploaded to theme repo */
     [Setting("Background image URL", "Appearance", "The URL of the image to use as the background. Videos are also supported.",
         "UseBackgroundImage", "The URL should be a link to an image or video on the internet. A path to a local image will not work.")]
     public string BackgroundImageUrl
@@ -174,8 +199,21 @@ public class JiayiSettings
             _themeState.UpdateTheme("--background-image", $"none");
             return string.Empty;
         }
-        set => _themeState.UpdateTheme("--background-image", $"url('{value}')");
+        set
+        {
+            value = value.Replace("\\", "/");
+            _themeState.UpdateTheme("--background-image", $"url('{value}')");
+        }
     }
+
+    [JsonIgnore]
+    [Setting("Generate palette from background", "Appearance",
+        "Create a color palette based on your background image. Videos are NOT supported.", "UseBackgroundImage")]
+    public (string, Action) GeneratePalette { get; set; } = ("Generate", () =>
+    {
+        if (!Instance.UseBackgroundImage) return;
+        PaletteGenerator.CreatePalette();
+    });
 
     [JsonIgnore]
     [Setting("Background blur", "Appearance", "How much to blur the background by.", "UseBackgroundImage")]

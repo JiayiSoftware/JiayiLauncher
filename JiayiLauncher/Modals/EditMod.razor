@@ -5,7 +5,7 @@
 @using JiayiLauncher.Features.Stats
 @using JiayiLauncher.Features.Versions
 
-<div class="edit">
+<div class="edit" style="overflow-y: @(_showAdvanced ? "auto" : "none")">
     <div class="edit-name">
         <p>Mod name</p>
         <JiayiTextBox Placeholder="@Mod!.Name" @ref="_nameTextBox"/>
@@ -17,17 +17,22 @@
                        @ref="_versionsDropDown"/>
     </div>
     
-    <div class="edit-arguments" style="margin-bottom: 1em">
-        <div class="edit-arguments-dropdown" @onclick="_ => _showArguments = !_showArguments">
-            <i>Launch arguments</i>
+    <div class="advanced" style="margin-bottom: 1em">
+        <div class="advanced-dropdown" @onclick="_ => _showAdvanced = !_showAdvanced">
+            <i>Advanced settings</i>
             <span class="material-symbols-sharp">
-                @(_showArguments ? "expand_less" : "expand_more")
+                @(_showAdvanced ? "expand_less" : "expand_more")
             </span>
         </div>
-        @if (_showArguments)
+        @if (_showAdvanced)
         {
-            <JiayiTextBox Placeholder="This does not apply to internal mods" Style="margin-top: 1em; width: 100%" 
+            <p>Launch arguments</p>
+            <JiayiTextBox Placeholder="This does not apply to internal mods" Style="width: 97%" 
                           @ref="_argumentsTextBox"/>
+            
+            <p>Mod data folder name</p>
+            <JiayiTextBox Placeholder="Usually in RoamingState" Style="width: 97%" 
+                          Value="@Mod!.DataFolderName" @ref="_dataFolderNameTextBox"/>
         }
     </div>
     
@@ -65,8 +70,9 @@
     private JiayiTextBox? _nameTextBox;
     private JiayiDropDown? _versionsDropDown;
     private JiayiTextBox? _argumentsTextBox;
+    private JiayiTextBox? _dataFolderNameTextBox;
     
-    private bool _showArguments = false;
+    private bool _showAdvanced;
 
     protected override async Task OnInitializedAsync()
     {
@@ -91,8 +97,9 @@
         Mod.Name = _nameTextBox?.Value ?? Mod.Name;
         Mod.SupportedVersions = _versionsDropDown?.SelectedItems ?? Mod.SupportedVersions;
         Mod.Arguments = _argumentsTextBox?.Value ?? Mod.Arguments;
+        Mod.DataFolderName = _dataFolderNameTextBox?.Value ?? Mod.DataFolderName;
         
-        if (JiayiSettings.Instance!.ModCollectionPath == string.Empty)
+        if (JiayiSettings.Instance.ModCollectionPath == string.Empty)
         {
             JiayiSettings.Instance.ModCollectionPath = 
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Mods");

@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Mods;
@@ -157,7 +158,7 @@ public class JiayiSettings
     public bool UseBackgroundImage
     {
         get => _themeState.ThemeStyles.GetProperty(":root", "--background-image")?.Value != "none";
-        set => _themeState.UpdateTheme("--background-image", value ? $"url('')" : "none");
+        set => _themeState.UpdateTheme("--background-image", value ? "url('')" : "none");
 
     }
     
@@ -196,7 +197,7 @@ public class JiayiSettings
             if (Instance.UseBackgroundImage) 
                 return Regex.Match(_themeState.ThemeStyles.GetProperty(":root", "--background-image")?.Value ?? "", 
                     @"url\(\'(?<url>[^']+)\'\)").Groups["url"].Value;
-            _themeState.UpdateTheme("--background-image", $"none");
+            _themeState.UpdateTheme("--background-image", "none");
             return string.Empty;
         }
         set
@@ -208,7 +209,8 @@ public class JiayiSettings
 
     [JsonIgnore]
     [Setting("Generate palette from background", "Appearance",
-        "Create a color palette based on your background image. Videos are NOT supported.", "UseBackgroundImage")]
+        "Create a color palette based on your background image. Videos are NOT supported.", "UseBackgroundImage",
+        "Palette generation is memory intensive and may take a while. Every generated palette is slightly different.")]
     public (string, Action) GeneratePalette { get; set; } = ("Generate", () =>
     {
         if (!Instance.UseBackgroundImage) return;

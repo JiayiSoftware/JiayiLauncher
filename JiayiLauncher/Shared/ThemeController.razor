@@ -52,10 +52,7 @@
         
         var theme = CssBuilder.FromFile(themeStyles);
         theme.UpdateProperty(":root", new CssProperty("--background-image", 
-            $"url('./themes/{JiayiSettings.Instance.Theme}/background.gif'), " +
-            $"url('./themes/{JiayiSettings.Instance.Theme}/background.png'), " +
-            $"url('./themes/{JiayiSettings.Instance.Theme}/background.jpg')"));
-        ThemeState.Instance.ApplyTheme(theme);
+            $"url('{JiayiSettings.Instance.BackgroundImageUrl}')"));
         
         await base.OnInitializedAsync();
     }

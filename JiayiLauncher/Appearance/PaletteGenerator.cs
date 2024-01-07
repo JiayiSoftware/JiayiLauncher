@@ -128,10 +128,11 @@ public static class PaletteGenerator
 		);
 		
 		var allChannelsAverage = (averageColor.R + averageColor.G + averageColor.B) / 3;
+		allChannelsAverage = Math.Clamp(allChannelsAverage + Random.Shared.Next(-20, 20), 0, 255);
 		var dark = allChannelsAverage < 200; // prefer dark
 		
 		// values and stuff
-		var accent = palette[0];
+		var accent = palette[Random.Shared.Next(0, palette.Count / 2)];
 		Color primaryBackground;
 		Color secondaryBackground;
 		

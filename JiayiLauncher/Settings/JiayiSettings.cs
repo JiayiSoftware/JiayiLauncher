@@ -187,13 +187,13 @@ public class JiayiSettings
         Instance.Save();
     });
 
-    /* TODO: Remove this, as files will now be locally saved and uploaded to theme repo */
-    [Setting("Background image URL", "Appearance", "The URL of the image to use as the background. Videos are also supported.",
-        "UseBackgroundImage", "The URL should be a link to an image or video on the internet. A path to a local image will not work.")]
+    // [Setting("Background image URL", "Appearance", "The URL of the image to use as the background. Videos are also supported.",
+    //     "UseBackgroundImage", "The URL should be a link to an image or video on the internet. A path to a local image will not work.")]
     public string BackgroundImageUrl
     {
         get
         {
+            if (Instance == null) return string.Empty;
             if (Instance.UseBackgroundImage) 
                 return Regex.Match(_themeState.ThemeStyles.GetProperty(":root", "--background-image")?.Value ?? "", 
                     @"url\(\'(?<url>[^']+)\'\)").Groups["url"].Value;
@@ -202,8 +202,13 @@ public class JiayiSettings
         }
         set
         {
+            // TODO: better fix for the launcher not loading backgrounds with the same extension
+            var needRefresh = Path.GetExtension(BackgroundImageUrl) == Path.GetExtension(value);
+            
             value = value.Replace("\\", "/");
             _themeState.UpdateTheme("--background-image", $"url('{value}')");
+            
+            if (needRefresh && MainLayout.Instance != null) MainLayout.Instance.Reload();
         }
     }
 

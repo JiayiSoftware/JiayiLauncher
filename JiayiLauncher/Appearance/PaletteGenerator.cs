@@ -21,6 +21,12 @@ public static class PaletteGenerator
 	
 	public static void CreatePalette()
 	{
+		if (!JiayiSettings.Instance.UseBackgroundImage) return;
+		
+		var extension = Path.GetExtension(JiayiSettings.Instance.BackgroundImageUrl);
+		if (string.IsNullOrEmpty(extension)) return;
+		if (extension is ".mp4" or ".webm" or ".mov") return;
+		
 		var themeRoot = Path.Combine(ThemeState.RootPath, "themes", JiayiSettings.Instance.Theme);
 		var imagePath = Path.Combine(themeRoot, $"background{Path.GetExtension(JiayiSettings.Instance.BackgroundImageUrl)}");
 		using var bitmap = new Bitmap(imagePath);

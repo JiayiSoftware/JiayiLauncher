@@ -159,7 +159,6 @@ public class JiayiSettings
     {
         get => _themeState.ThemeStyles.GetProperty(":root", "--background-image")?.Value != "none";
         set => _themeState.UpdateTheme("--background-image", value ? "url('')" : "none");
-
     }
     
     [JsonIgnore]

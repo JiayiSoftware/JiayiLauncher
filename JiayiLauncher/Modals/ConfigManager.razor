@@ -1,0 +1,68 @@
+﻿@using JiayiLauncher.Features.Mods
+@using System.IO
+
+<div class="config-manager">
+    @if (Mod!.DataFolderName == string.Empty)
+    {
+        <p>This mod doesn't have a data folder name set. <br>
+        To access the config manager, edit this mod and set the data folder name.</p>
+    }
+    else if (_configManager!.ConfigPath == string.Empty)
+    {
+        <p>The data folder you set for this mod doesn't exist. <br>
+        Make sure you have the correct data folder name set.</p>
+    }
+    else
+    {
+        <ul class="config-list">
+            @foreach (var config in _configManager!.GetConfigs())
+            {
+                <li class="config-item">
+                    <p style="margin: 0">@Path.GetFileNameWithoutExtension(config)</p>
+                    <div class="config-item-buttons">
+                        <span class="material-symbols-sharp" title="Open and edit config" 
+                              @onclick="() => _configManager!.OpenConfig(config)">edit</span>
+                        <span class="material-symbols-sharp" title="Delete config (irreversible)" style="color: darkred"
+                              @onclick="() => _configManager!.RemoveConfig(config)">delete</span>
+                    </div>
+                </li>
+            }
+        </ul>
+        
+        <label class="drag-area">
+            Click here or drop files to add configs
+            <InputFile OnChange="FileDropped" multiple />
+        </label>
+    }
+    
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="Close">Okay</JiayiButton>
+</div>
+
+@code {
+    [Parameter]
+    public Mod? Mod { get; set; }
+    
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+    
+    private ModConfigManager? _configManager;
+
+    protected override void OnInitialized()
+    {
+        _configManager = new ModConfigManager(Mod!);
+    }
+
+    private async Task Close()
+    {
+        await Modal.CloseAsync();
+    }
+
+    private async Task FileDropped(InputFileChangeEventArgs arg)
+    {
+        foreach (var file in arg.GetMultipleFiles())
+        {
+            await _configManager!.AddConfig(file);
+        }
+    }
+
+}

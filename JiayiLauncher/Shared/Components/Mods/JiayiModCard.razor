@@ -56,7 +56,7 @@
         </div>
     </div>
     <p class="mod-version">Works on @(string.Join(", ", Mod.SupportedVersions).ToLower())</p>
-    <div class="mod-controls">
+    <div class="mod-controls" style="@(_expanded ? "margin-left: -7rem" : "")">
         @if (_isValid)
         {
             if (Mod.FromInternet && InternetManager.OfflineMode)
@@ -73,6 +73,12 @@
             }
 
             <div class="right">
+                <span class="material-symbols-sharp" title="@(_expanded ? "Hide controls" : "Show controls")" 
+                      @onclick="() => _expanded = !_expanded">
+                    @(_expanded ? "remove" : "more_horiz")
+                </span>
+                
+                <span class="material-symbols-sharp" title="Manage configs" @onclick="ConfigManagerClicked">folder_managed</span>
                 <span class="material-symbols-sharp" title="Edit mod" @onclick="EditClicked">edit</span>
                 <span class="material-symbols-sharp" style="color: darkred"
                       title="Delete mod (irreversible)" @onclick="DeleteClicked">delete</span>
@@ -93,6 +99,7 @@
 
     private bool _launching;
     private bool _isValid = true;
+    private bool _expanded;
     private string _showLoadingBar => _launching ? "0.2" : "0";
 
     private JiayiButton? _launchButton;
@@ -231,4 +238,13 @@
         Mod.Delete();
         Mods.Instance?.Refresh();
     }
+
+    private void ConfigManagerClicked()
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(ConfigManager.Mod), Mod);
+        
+        ModalService.Show<ConfigManager>("Config manager", parameters);
+    }
+
 }

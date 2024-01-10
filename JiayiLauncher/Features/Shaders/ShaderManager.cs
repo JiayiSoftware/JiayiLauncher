@@ -17,6 +17,8 @@ public static class ShaderManager
 	public static string AppliedShader { get; set; } = string.Empty;
 	public static List<string> AvailableShaders => Shaders.Where(x => x != AppliedShader).ToList();
 
+	private static string[] _blockedFolders = ["iOS", "Android"];
+
 	public static async Task BackupVanillaShaders()
 	{
 		var info = await PackageData.GetPackage();
@@ -28,7 +30,7 @@ public static class ShaderManager
 		// if the shaders folder doesn't exist, there's nothing to back up
 		if (!Directory.Exists(path)) return;
 
-		if (JiayiSettings.Instance!.ShadersPath == string.Empty)
+		if (JiayiSettings.Instance.ShadersPath == string.Empty)
 		{
 			JiayiSettings.Instance.ShadersPath =
 				Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -52,7 +54,7 @@ public static class ShaderManager
 	public static async Task DeleteBackupShaders()
 	{
 		var version = await PackageData.GetVersion();
-		var path = Path.Combine(JiayiSettings.Instance!.ShadersPath, "Vanilla", version);
+		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, "Vanilla", version);
 		if (Directory.Exists(path)) Directory.Delete(path, true);
 		
 		Log.Write(nameof(ShaderManager), $"Deleted backup shaders for version {version}");
@@ -68,7 +70,7 @@ public static class ShaderManager
 		if (!Directory.Exists(path)) return;
 		
 		var version = await PackageData.GetVersion();
-		var backupPath = Path.Combine(JiayiSettings.Instance!.ShadersPath, "Vanilla", version);
+		var backupPath = Path.Combine(JiayiSettings.Instance.ShadersPath, "Vanilla", version);
 		if (!Directory.Exists(backupPath)) return;
 		
 		foreach (var file in Directory.GetFiles(backupPath))
@@ -84,7 +86,7 @@ public static class ShaderManager
 	{
 		Shaders.Clear();
 		
-		if (!Directory.Exists(JiayiSettings.Instance!.ShadersPath) 
+		if (!Directory.Exists(JiayiSettings.Instance.ShadersPath) 
 		    || !Directory.Exists(Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied")))
 		{
 			var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -96,37 +98,80 @@ public static class ShaderManager
 			
 			JiayiSettings.Instance.Save();
 		}
-
-		var files = Directory.GetFiles(JiayiSettings.Instance.ShadersPath, "*.zip");
-		Shaders.AddRange(files.Select(Path.GetFileNameWithoutExtension)!);
 		
-		var applied = Directory.GetFiles(Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied"), "*.zip");
-		AppliedShader = Path.GetFileNameWithoutExtension(applied.FirstOrDefault() ?? string.Empty);
+		var folders = Directory.GetDirectories(JiayiSettings.Instance.ShadersPath).Where(x => !x.EndsWith("Applied") && !x.EndsWith("Vanilla"));
+		Shaders.AddRange(folders.Select(Path.GetFileName)!);
 		
-		Log.Write(nameof(ShaderManager), 
-			$"Updated shaders list. Found {Shaders.Count} shaders. {AppliedShader} is currently applied.");
+		var applied = Directory.GetDirectories(Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied"));
+		AppliedShader = Path.GetFileName(applied.FirstOrDefault() ?? string.Empty);
+		
+		Log.Write(nameof(ShaderManager), AppliedShader == string.Empty
+			? $"Updated shaders list. Found {Shaders.Count} shaders. {AppliedShader} is currently applied."
+			: $"Updated shaders list. Found {Shaders.Count} shaders. No shader is currently applied.");
 	}
 
 	public static async Task AddShader(IBrowserFile file)
 	{
-		var path = Path.Combine(JiayiSettings.Instance!.ShadersPath, file.Name);
-		if (!path.EndsWith(".zip")) return;
+		var tempPath = Path.Combine(JiayiSettings.Instance.ShadersPath, "Temp");
+		if (Directory.Exists(tempPath)) Directory.Delete(tempPath, true);
+		Directory.CreateDirectory(tempPath);
 		
-		await using var stream = File.Create(path);
-		await file.OpenReadStream(524288000L).CopyToAsync(stream);
+		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, file.Name);
+		if (!path.EndsWith(".zip") && !path.EndsWith(".mcpack")) return;
+		
+		var stream = file.OpenReadStream(524288000L);
+		var zipPath = Path.Combine(tempPath, file.Name);
+		var fs = File.Create(zipPath);
+		await stream.CopyToAsync(fs);
+		stream.Close();
+		fs.Close();
+		
+		await Task.Run(() => ZipFile.ExtractToDirectory(zipPath, tempPath));
+		File.Delete(zipPath);
+		
+		var materialsFolder = FindMaterials(tempPath);
+		if (materialsFolder == null) return;
+		
+		Directory.Move(materialsFolder, Path.Combine(JiayiSettings.Instance.ShadersPath, Path.GetFileNameWithoutExtension(file.Name)));
+		Directory.Delete(tempPath, true);
 		
 		Log.Write(nameof(ShaderManager), $"Added shader {file.Name}");
 		UpdateShaders();
+	}
+
+	private static string? FindMaterials(string path)
+	{
+		var directories = Directory.GetDirectories(path, "*", SearchOption.AllDirectories).ToList();
+		for (var i = 0; i < directories.Count; i++)
+		{
+			var directory = directories[i];
+			// skip over any folders that are blocked
+			if (_blockedFolders.Any(blockedFolder => directory.Contains(blockedFolder)))
+			{
+				directories.Remove(directory);
+				i--;
+				continue;
+			}
+
+			var files = Directory.GetFiles(directory);
+			if (files.Any(x => x.EndsWith(".material.bin"))) continue; // folder has shaders
+			
+			directories.Remove(directory);
+			i--;
+		}
+
+		// there should only be one folder left
+		return directories.ElementAtOrDefault(0); // returns null if there are no folders left
 	}
 
 	public static void EnableShader(string shader)
 	{
 		if (AppliedShader != string.Empty) DisableShader(AppliedShader);
 		
-		var path = Path.Combine(JiayiSettings.Instance!.ShadersPath, shader + ".zip");
-		if (!File.Exists(path)) return;
+		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, shader);
+		if (!Directory.Exists(path)) return;
 		
-		File.Move(path, Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied", shader + ".zip"));
+		Directory.Move(path, Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied", shader));
 		
 		Log.Write(nameof(ShaderManager), $"Enabled shader {shader}");
 		UpdateShaders();
@@ -134,10 +179,10 @@ public static class ShaderManager
 	
 	public static void DisableShader(string shader)
 	{
-		var path = Path.Combine(JiayiSettings.Instance!.ShadersPath, "Applied", shader + ".zip");
-		if (!File.Exists(path)) return;
+		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied", shader);
+		if (!Directory.Exists(path)) return;
 		
-		File.Move(path, Path.Combine(JiayiSettings.Instance.ShadersPath, shader + ".zip"));
+		Directory.Move(path, Path.Combine(JiayiSettings.Instance.ShadersPath, shader));
 		
 		Log.Write(nameof(ShaderManager), $"Disabled shader {shader}");
 		UpdateShaders();
@@ -145,10 +190,10 @@ public static class ShaderManager
 	
 	public static void DeleteShader(string shader)
 	{
-		var path = Path.Combine(JiayiSettings.Instance!.ShadersPath, shader + ".zip");
-		if (!File.Exists(path)) return;
+		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, shader);
+		if (!Directory.Exists(path)) return;
 		
-		File.Delete(path);
+		Directory.Delete(path, true);
 		
 		Log.Write(nameof(ShaderManager), $"Deleted shader {shader}");
 		UpdateShaders();
@@ -158,8 +203,8 @@ public static class ShaderManager
 	{
 		if (AppliedShader == string.Empty) return;
 		
-		var path = Path.Combine(JiayiSettings.Instance!.ShadersPath, "Applied", AppliedShader + ".zip");
-		if (!File.Exists(path)) return;
+		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied", AppliedShader);
+		if (!Directory.Exists(path)) return;
 		
 		var version = await PackageData.GetVersion();
 		var backupPath = Path.Combine(JiayiSettings.Instance.ShadersPath, "Vanilla", version);
@@ -174,17 +219,20 @@ public static class ShaderManager
 		var shaderPath = Path.Combine(installPath, "data", "renderer", "materials");
 		if (!Directory.Exists(shaderPath)) return;
 		
-		var shaderFiles = Directory.GetFiles(shaderPath);
-		
-		using var zip = ZipFile.OpenRead(path);
-		
-		foreach (var file in shaderFiles)
+		var vanillaShaders = Directory.GetFiles(shaderPath);
+		var shaders = Directory.GetFiles(path);
+
+		foreach (var shader in shaders)
 		{
-			var fileName = Path.GetFileName(file);
-			if (zip.Entries.Any(x => x.Name == fileName)) File.Delete(file);
+			var fileName = Path.GetFileName(shader);
+			if (vanillaShaders.Any(x => Path.GetFileName(x) == fileName))
+			{
+				File.Delete(Path.Combine(shaderPath, fileName));
+			}
+			
+			File.Copy(shader, Path.Combine(shaderPath, fileName));
 		}
 
-		zip.ExtractToDirectory(shaderPath);
 		Log.Write(nameof(ShaderManager), $"Applied shader {AppliedShader}");
 	}
 }

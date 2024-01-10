@@ -28,6 +28,16 @@ public partial class App
 		if (createdNew)
 		{
 			Arguments.Set(string.Join(" ", args));
+			
+			DispatcherUnhandledException += (_, ex) =>
+			{
+				Log.Write(ex.Exception, ex.Exception.ToString(), Log.LogLevel.Error);
+				MessageBox.Show(
+					"Jiayi has ran into a problem and needs to close. Please send your log file to the nearest developer.",
+					"Crash", MessageBoxButton.OK, MessageBoxImage.Error
+				);
+			};
+			
 			return;
 		}
 		var argString = string.Join(" ", args);

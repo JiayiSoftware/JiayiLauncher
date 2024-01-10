@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -19,6 +20,7 @@ using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 using Microsoft.AspNetCore.Components.WebView;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.Wpf;
 using static JiayiLauncher.Utils.Imports;
 
@@ -32,15 +34,6 @@ public partial class MainWindow
     {
         InitializeComponent();
         Log.CreateLog();
-
-        AppDomain.CurrentDomain.UnhandledException += (_, args) =>
-        {
-            Log.Write(args.ExceptionObject, ((Exception)args.ExceptionObject).ToString(), Log.LogLevel.Error);
-            MessageBox.Show(
-                "Jiayi has ran into a problem and needs to close. Please send your log file to the nearest developer.",
-                "Crash", MessageBoxButton.OK, MessageBoxImage.Error
-            );
-        };
 
         var services = new ServiceCollection();
         services.AddWpfBlazorWebView();
@@ -143,8 +136,6 @@ public partial class MainWindow
         return 0;
     }
 
-    // ReSharper disable once UnusedMember.Local
-    // ReSharper disable once UnusedParameter.Local
     private void ModifyWebView(object? _, BlazorWebViewInitializedEventArgs e)
     {
         _webView = e.WebView;

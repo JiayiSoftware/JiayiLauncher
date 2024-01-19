@@ -2,76 +2,43 @@
 @using JiayiLauncher.Features.Shaders
 @using JiayiLauncher.Shared.Components.Toasts
 
+@inject NavigationManager NavigationManager
 @inject IToastService ToastService
 
-@* rider mistaking C# for javascript *@
-<!--suppress JSUndeclaredVariable, JSUnresolvedReference -->
-
-<h3>Shaders</h3>
-
-<div class="header-buttons">
-    <JiayiButton Size="JiayiButton.ButtonSize.Small" 
-                 OnClick="async () => await ApplyClicked()">Apply current shader</JiayiButton>
-    <JiayiButton Size="JiayiButton.ButtonSize.Small" 
-                 OnClick="async () => await RestoreClicked()">Restore vanilla shaders</JiayiButton>
-    
-    <p class="invisible-normalizer">invisible</p>
+<div class="page-title">
+    <h4 @onclick="BackClicked">Version Manager</h4>
+    <span class="material-symbols-sharp">arrow_right</span>
+    <h3>Shaders</h3>
 </div>
 
-<div class="shader-page">
-    <div>
-        <a class="shader-list-toggle" @onclick="() => _appliedExpanded = !_appliedExpanded">
-            Your current shader pack
-            <span class="material-symbols-sharp">
-                @(_appliedExpanded ? "expand_less" : "expand_more")
-            </span>
-        </a>
-        <ul class="shader-list" style="display: @(_appliedExpanded ? "block" : "none")">
-            @if (ShaderManager.AppliedShader == string.Empty)
-            {
-                <li class="no-shaders">
-                    <i>No shader applied</i>
-                </li>
-            }
-            else
-            {
-                <li class="shader">
-                    <strong>@ShaderManager.AppliedShader</strong>
-                    
-                    <JiayiButton Size="JiayiButton.ButtonSize.Small"
-                                 OnClick="() => DisableClicked(ShaderManager.AppliedShader)">Disable</JiayiButton>
-                </li>
-            }
-        </ul>
+<div class="shader-list">
+    <div class="current-shader">
+        <h4>Current shader</h4>
+        @if (ShaderManager.AppliedShader == string.Empty)
+        {
+            <p>No shader applied</p>
+            <i>Minecraft's vanilla shaders will be used</i>
+        }
+        else
+        {
+            <div class="shader">
+                <p>@ShaderManager.AppliedShader</p>
+            </div>
+        }
     </div>
     
-    <div>
-        <a class="shader-list-toggle" @onclick="() => _availableExpanded = !_availableExpanded">
-            Available shaders
-            <span class="material-symbols-sharp">
-                @(_availableExpanded ? "expand_less" : "expand_more")
-            </span>
-        </a>
-        <ul class="shader-list" style="display: @(_availableExpanded ? "block" : "none")">
-            @foreach (var shader in ShaderManager.AvailableShaders)
-            {
-                <li class="shader">
-                    <strong>@shader</strong>
-                    
-                    <div class="shader-controls">
-                        <span class="material-symbols-sharp" title="Delete shader (irreversible)" style="color: darkred"
-                              @onclick="() => DeleteClicked(shader)">delete</span>
-                        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="() => EnableClicked(shader)">Enable</JiayiButton>
-                    </div>
-                </li>
-            }
-        </ul>
-    </div>
+    <div class="separator"></div>
     
-    <label class="add-new" title=".zip files only">
-        Drag or click to add shaders
-        <InputFile OnChange="FileSelected" />
-    </label>
+    <div class="available-shaders">
+        <h4>Available shaders</h4>
+        
+        @foreach (var shader in ShaderManager.Shaders)
+        {
+            <div class="shader">
+                <p>@shader</p>
+            </div>
+        }
+    </div>
 </div>
 
 @code {
@@ -202,6 +169,11 @@
         await modal.Result;
         
         StateHasChanged();
+    }
+
+    private void BackClicked()
+    {
+        NavigationManager.NavigateTo("/Versions");
     }
 
 }

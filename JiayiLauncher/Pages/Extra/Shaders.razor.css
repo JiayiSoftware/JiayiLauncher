@@ -1,106 +1,22 @@
-﻿.shader-page {
+﻿.page-title {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.header-buttons {
-    display: flex;
-    align-items: center;
-    column-gap: 0.7rem;
-    margin-bottom: 1rem;
-}
-
-.shader-list-toggle {
-    text-decoration: none;
-    width: 100%;
-    padding: 0.5rem;
-    background-color: var(--background-secondary);
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    transition: var(--transition-speed);
-    
-    border-top-left-radius: var(--rounding);
-    border-top-right-radius: var(--rounding);
-}
-
-.shader-list-toggle:hover {
-    filter: brightness(1.5);
-}
-
-.shader-list-toggle:active {
-    filter: brightness(0.8);
-    transform: translate(5px, 5px);
-    box-shadow: none;
-}
-
-.shader-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.shader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-    background-color: var(--background-secondary);
-    box-shadow: var(--shadow);
-    z-index: 2;
-    position: relative;
-}
-
-.shader:last-child {
-    border-bottom-left-radius: var(--rounding);
-    border-bottom-right-radius: var(--rounding);
-}
-
-.shader-controls {
-    display: flex;
-    column-gap: 0.5rem;
+    gap: 0.5rem;
     align-items: center;
 }
 
-.shader:hover .shader-controls span {
-    opacity: 100%;
-}
-
-.shader-controls span {
-    cursor: pointer;
-    opacity: 0;
-    transition: var(--transition-speed);
-}
-
-.no-shaders i {
+.page-title span {
     color: var(--text-grayed);
-    font-size: 14px;
-    text-align: center;
-    display: block;
-    width: 100%;
-    margin: 1.5rem 0;
 }
 
-.add-new {
-    border: 2px dashed var(--text-grayed);
-    border-radius: var(--rounding);
-    text-align: center;
-    padding: 0.5rem;
+.page-title h4 {
     color: var(--text-grayed);
     cursor: pointer;
-
-    transition: var(--transition-speed);
 }
 
-.add-new:hover {
-    filter: brightness(1.5);
+.page-title h4:hover {
+    text-decoration: underline;
 }
 
-::deep input[type="file"] {
-    display: none;
+.page-title h3 {
+    color: var(--text-primary);
 }

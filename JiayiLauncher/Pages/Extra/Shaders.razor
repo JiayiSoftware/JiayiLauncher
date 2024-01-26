@@ -11,34 +11,41 @@
     <h3>Shaders</h3>
 </div>
 
-<div class="shader-list">
-    <div class="current-shader">
-        <h4>Current shader</h4>
-        @if (ShaderManager.AppliedShader == string.Empty)
-        {
-            <p>No shader applied</p>
-            <i>Minecraft's vanilla shaders will be used</i>
-        }
-        else
-        {
-            <div class="shader">
-                <p>@ShaderManager.AppliedShader</p>
-            </div>
-        }
-    </div>
+<div class="current-shader">
+    <h4>Your current shader</h4>
     
-    <div class="separator"></div>
-    
-    <div class="available-shaders">
-        <h4>Available shaders</h4>
+    @if (ShaderManager.AppliedShader == string.Empty)
+    {
+        <strong>No shader applied</strong>
+        <p>Minecraft's vanilla shaders will be used</p>
+    }
+    else
+    {
+        <div class="shader">
+            <p>@ShaderManager.AppliedShader</p>
+        </div>
         
-        @foreach (var shader in ShaderManager.Shaders)
-        {
-            <div class="shader">
-                <p>@shader</p>
-            </div>
-        }
-    </div>
+        <div class="shader-buttons">
+            <JiayiButton Size="JiayiButton.ButtonSize.Small">Disable</JiayiButton>
+            
+            <span class="material-symbols-sharp" title="Rename shader">edit</span>
+            <span class="material-symbols-sharp" title="Delete shader (irreversible)"
+                  @onclick="() => DeleteClicked(ShaderManager.AppliedShader)">delete</span>
+        </div>
+    }
+</div>
+
+<div class="separator"></div>
+
+<div class="available-shaders">
+    <h4>Available shaders</h4>
+    
+    @foreach (var shader in ShaderManager.Shaders)
+    {
+        <div class="shader">
+            <p>@shader</p>
+        </div>
+    }
 </div>
 
 @code {

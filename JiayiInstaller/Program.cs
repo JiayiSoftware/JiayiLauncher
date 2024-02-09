@@ -189,7 +189,7 @@ if (dotnet)
 {
 	Console.WriteLine("Installing .NET...");
 	const string dotnetDownloadUrl = 
-		"https://download.visualstudio.microsoft.com/download/pr/f9e3b581-059d-429f-9f0d-1d1167ff7e32/bd7661030cd5d66cd3eee0fd20b24540/windowsdesktop-runtime-8.0.0-win-x86.exe";
+		"https://download.visualstudio.microsoft.com/download/pr/f18288f6-1732-415b-b577-7fb46510479a/a98239f751a7aed31bc4aa12f348a9bf/windowsdesktop-runtime-8.0.1-win-x64.exe";
 	var dotnetDownloadPath = Path.Combine(Path.GetTempPath(), "dotnet.exe");
 	await Download(dotnetDownloadUrl, dotnetDownloadPath);
 	

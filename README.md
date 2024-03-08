@@ -16,7 +16,7 @@
 > * Easily apply Renderdragon shaders and make your game look beautiful
 
 ## Installation
-If you're a regular user, you can download the installer [here](https://jiyayi.mcpeplayground.com/static/JiayiInstaller.exe). It's about 6 MB in size.
+If you're a regular user, you can download the installer [here](https://phased.tech/download/JiayiInstaller.exe). It's about 6 MB in size.
 
 Older releases can be found in the [Releases](https://github.com/JiayiSoftware/JiayiLauncher/releases) page.
 

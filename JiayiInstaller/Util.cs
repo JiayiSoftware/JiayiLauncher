@@ -13,7 +13,7 @@ public static class Util
 		Directory.CreateDirectory(extractPath);
 		
 		// extract everything BUT wwwroot/css/theme.css
-		using var archive = ZipFile.OpenRead(zipPath);
+		var archive = ZipFile.OpenRead(zipPath);
 		foreach (var entry in archive.Entries)
 		{
 			if (entry.FullName == "wwwroot/css/theme.css") continue;
@@ -27,8 +27,12 @@ public static class Util
 			await using var stream = entry.Open();
 			await using var fileStream = File.Create(path);
 			await stream.CopyToAsync(fileStream);
+			
+			fileStream.Close();
+			stream.Close();
 		}
 		
+		archive.Dispose();
 		File.Delete(zipPath);
 	}
 

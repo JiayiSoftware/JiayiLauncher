@@ -1,0 +1,8 @@
+﻿i {
+    color: var(--text-grayed);
+    font-size: 14px;
+}
+
+.edit {
+    width: 330px;
+}

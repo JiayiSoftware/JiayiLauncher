@@ -1,0 +1,122 @@
+﻿.find-tools {
+    display: flex;
+    align-items: center;
+    column-gap: 0.7rem;
+}
+
+.find-tools .filter-by {
+    display: block;
+    transition: var(--transition-speed);
+}
+
+@media only screen and (max-width: 1000px) {
+    .find-tools .filter-by {
+        display: none;
+    }
+}
+
+.mods {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.mod-list {
+    display: grid;
+    padding: 0;
+    grid-template-columns: repeat(auto-fill, 11.5rem);
+    gap: 0.6rem;
+}
+
+.separator {
+    border-right: 1px solid rgb(50, 50, 50);
+    height: 1.5rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.add-new {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    filter: brightness(0.5);
+    text-align: center;
+    transition: var(--transition-speed);
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    padding: 1em 0;
+}
+
+::deep input[type="file"] {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    appearance: none;
+}
+
+.add-new[data-hovered="yes"] {
+    filter: brightness(1);
+    border-color: var(--accent);
+    background-color: var(--background-secondary);
+}
+
+.add-new[data-hovered="no"] {
+    filter: brightness(0.5);
+    background-color: transparent;
+}
+
+.add-new > label::before {
+    content: url("images/drag.svg");
+    display: block;
+    padding: 0.5rem;
+}
+
+.drag-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+}
+
+.add-button {
+    z-index: 2;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--accent);
+    color: var(--text-accent);
+    box-shadow: var(--shadow);
+    filter: brightness(1);
+    transition: var(--transition-speed);
+    cursor: pointer;
+    
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-accent);
+}
+
+.add-button:hover {
+    filter: brightness(1.5);
+}
+
+.add-button:active {
+    filter: brightness(0.8);
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}
+
+.add-button:focus {
+    outline: none;
+}

@@ -1,0 +1,7 @@
+
+[submodule "external/StoreLib"]
+	path = external/StoreLib
+	url = https://github.com/notcarlton/StoreLib
+[submodule "external/Pickers"]
+	path = external/Pickers
+	url = https://github.com/PavlikBender/Pickers

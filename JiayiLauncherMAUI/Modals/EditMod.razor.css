@@ -1,0 +1,35 @@
+﻿i {
+    color: var(--text-grayed);
+    font-size: 14px;
+}
+
+.edit {
+    width: 350px;
+    max-height: 300px;
+}
+
+.advanced-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    cursor: pointer;
+    
+    transition: var(--transition-speed);
+}
+
+.advanced-dropdown i {
+    transition: var(--transition-speed);
+}
+
+.advanced-dropdown .material-symbols-sharp {
+    color: var(--text-grayed);
+    transition: var(--transition-speed);
+}
+
+.advanced-dropdown:hover i {
+    color: var(--text-primary);
+}
+
+.advanced-dropdown:hover .material-symbols-sharp {
+    color: var(--text-primary);
+}

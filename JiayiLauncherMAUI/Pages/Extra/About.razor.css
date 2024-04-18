@@ -1,0 +1,25 @@
+﻿.about-page {
+    text-align: center;
+}
+
+i {
+    color: var(--text-grayed);
+    font-size: 14px;
+    font-style: italic;
+}
+
+.about-page a {
+    color: var(--text-primary);
+}
+
+.logo {
+    width: 95%;
+    max-width: 35rem;
+}
+
+.logo-stuff {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}

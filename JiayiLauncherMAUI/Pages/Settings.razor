@@ -1,0 +1,207 @@
+﻿@page "/Settings"
+@using JiayiLauncher.Settings
+@using System.Reflection
+@using System.Drawing
+@using System.Globalization
+
+@inject NavigationManager nav;
+
+<!--suppress CssInvalidPropertyValue -->
+<h3>Settings</h3>
+
+<div class="tabs">
+    <span class="material-symbols-sharp">sort</span>
+    <p>Categories:</p>
+    @foreach (var category in JiayiSettings.Instance!.GetCategories())
+    {
+        @* i sincerely hope this is the last bit of javascript i have to write for this project *@
+        <a class="tab-button" onclick="document.getElementById('@category.ToLower()').scrollIntoView({behavior: 'smooth'})">@category</a>
+    }
+    
+    <a class="tab-button" href="About">About</a>
+</div>
+
+<div class="settings-container">
+    @foreach (var category in JiayiSettings.Instance.GetCategories())
+    {
+        <h4 id="@category.ToLower()">@category</h4>
+                    
+        @foreach (var setting in JiayiSettings.Instance.GetSettingsInCategory(category))
+        {
+            var settingInfo = setting.GetCustomAttribute<SettingAttribute>();
+            var dependentSetting = JiayiSettings.Instance.GetSetting(settingInfo!.Dependency);
+            if (dependentSetting == null 
+                || (dependentSetting.PropertyType == typeof(bool) && (bool?)dependentSetting.GetValue(JiayiSettings.Instance) == true))
+            {
+                <div class="setting">
+                    <div>
+                        <div class="setting-title">
+                            <strong>@settingInfo.Name</strong>
+                            @if (settingInfo.CanReset && !JiayiSettings.Instance.IsDefault(setting))
+                            {
+                                <span class="material-symbols-sharp extra-button" title="Reset to default" 
+                                      @onclick="() => JiayiSettings.Instance.ResetToDefault(setting)">undo</span>
+                            }
+                            @if (settingInfo.Tooltip != string.Empty)
+                            {
+                                <span class="material-symbols-sharp extra-button" title="More info" 
+                                      @onclick="() => ShowTooltip(settingInfo.Tooltip)">help_outline</span>
+                            }
+                        </div>
+                        <p class="setting-description">@settingInfo.Description</p>
+                    </div>
+
+                    @switch (true)
+                    {
+                        case true when setting.PropertyType == typeof(bool):
+                            <JiayiToggle Checked="@((bool?)setting.GetValue(JiayiSettings.Instance) ?? false)"
+                                         CheckedChanged="value => ChangeBoolSetting(value, setting)"/>
+                            break;
+                        case true when setting.PropertyType == typeof(string):
+                            // feeling a bit silly today
+                            var random = Random.Shared.Next(1, 1000);
+                            var placeholder = random == 1 ? "Peekaboo!" : settingInfo.Name;
+                            <JiayiTextBox 
+                                Placeholder="@placeholder" 
+                                Style="width: -webkit-fill-available; max-width: 40%;" 
+                                Value="@((string?)setting.GetValue(JiayiSettings.Instance) ?? string.Empty)"
+                                Changed="value => ChangeStringSetting(value, setting)"/>
+                            break;
+                        case true when setting.PropertyType == typeof(int[]):
+                            var intSlider = (int[])setting.GetValue(JiayiSettings.Instance)!;
+                            <JiayiSlider 
+                                Min="@intSlider[0]" 
+                                Max="@intSlider[1]" 
+                                Value="@intSlider[2]" 
+                                Style="width: -webkit-fill-available; max-width: 40%;"
+                                ValueChanged="value => ChangeSliderSetting(intSlider, (int)value, setting)"/>
+                            break;
+                        case true when setting.PropertyType == typeof(float[]):
+                            var floatSlider = (float[])setting.GetValue(JiayiSettings.Instance)!;
+                            <JiayiSlider 
+                                Min="@floatSlider[0]" 
+                                Max="@floatSlider[1]" 
+                                Step="0.05f"
+                                Value="@floatSlider[2]" 
+                                Style="width: -webkit-fill-available; max-width: 40%;"
+                                ValueChanged="value => ChangeSliderSetting(floatSlider, value, setting)"/>
+                            break;
+                        case true when setting.PropertyType == typeof((string, Action)):
+                            var (name, action) = ((string, Action))setting.GetValue(JiayiSettings.Instance)!;
+                            @* ReSharper disable once AccessToModifiedClosure *@
+                            <JiayiButton OnClick="() => RunActionSetting(action, setting)" Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem">@name</JiayiButton>
+                            break;
+                        case true when setting.PropertyType == typeof((string, string)):
+                            var (content, href) = ((string, string))setting.GetValue(JiayiSettings.Instance)!;
+                            @* ReSharper disable once AccessToModifiedClosure *@
+                            <a href=@href><JiayiButton Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem">@content</JiayiButton></a>
+                            break;
+                        case true when setting.PropertyType == typeof(Color):
+                            @* for now *@
+                            var color = (Color)setting.GetValue(JiayiSettings.Instance)!;
+                            var hex = $"#{color.R:x2}{color.G:x2}{color.B:x2}";
+                            <JiayiColorPicker Color="@hex" ColorChanged="s => ChangeColorSetting(s, setting)"/>
+                            break;
+                    }
+                </div>
+            }
+        }
+    }
+</div>
+
+@code {
+    [CascadingParameter]
+    private IModalService ModalService { get; set; } = default!;
+    
+    private void ChangeStringSetting(string? value, PropertyInfo setting)
+    {
+        setting.SetValue(JiayiSettings.Instance, value ?? string.Empty);
+        JiayiSettings.Instance!.Save();
+    }
+    
+    private void ChangeBoolSetting(bool value, PropertyInfo setting)
+    {
+        var settingInfo = setting.GetCustomAttribute<SettingAttribute>();
+        if (settingInfo!.Confirm && value)
+        {
+            var options = new List<(string, EventCallback)>
+            {
+                ("Yes", new EventCallback(null, () =>
+                {
+                    setting.SetValue(JiayiSettings.Instance, value);
+                    JiayiSettings.Instance!.Save();
+                })),
+                ("No", EventCallback.Empty)
+            };
+            
+            var parameters = new ModalParameters()
+                .Add(nameof(MessageBox.Buttons), options)
+                .Add(nameof(MessageBox.Message), "Are you sure you want to enable this setting?");
+            
+            ModalService.Show<MessageBox>(settingInfo.Name, parameters);
+            return;
+        }
+        
+        setting.SetValue(JiayiSettings.Instance, value);
+        JiayiSettings.Instance!.Save();
+    }
+    
+    private void ChangeSliderSetting(int[] slider, int value, PropertyInfo setting)
+    {
+        slider[2] = value;
+        setting.SetValue(JiayiSettings.Instance, slider);
+        JiayiSettings.Instance!.Save();
+    }
+    
+    private void ChangeSliderSetting(float[] slider, float value, PropertyInfo setting)
+    {
+        slider[2] = value;
+        setting.SetValue(JiayiSettings.Instance, slider);
+        JiayiSettings.Instance!.Save();
+    }
+
+    private void ChangeColorSetting(object? value, PropertyInfo setting)
+    {
+        var color = value as string ?? "#000000";
+        var bytes = new byte[3];
+        for (var i = 0; i < 3; i++)
+        {
+            bytes[i] = byte.Parse(color.Substring(i * 2 + 1, 2), NumberStyles.HexNumber);
+        }
+        
+        var newColor = Color.FromArgb(bytes[0], bytes[1], bytes[2]);
+        setting.SetValue(JiayiSettings.Instance, newColor);
+        JiayiSettings.Instance!.Save();
+    }
+
+    private void RunActionSetting(Action action, PropertyInfo setting)
+    {
+        var settingInfo = setting.GetCustomAttribute<SettingAttribute>();
+        if (settingInfo!.Confirm)
+        {
+            var options = new List<(string, EventCallback)>
+            {
+                ("Yes", new EventCallback(null, action)),
+                ("No", EventCallback.Empty)
+            };
+            
+            var parameters = new ModalParameters()
+                .Add(nameof(MessageBox.Buttons), options)
+                .Add(nameof(MessageBox.Message), "Are you sure you want to do this?");
+            
+            ModalService.Show<MessageBox>(settingInfo.Name, parameters);
+            return;
+        }
+        
+        action();
+    }
+
+    private void ShowTooltip(string tt)
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Message), tt);
+        
+        ModalService.Show<MessageBox>("About this setting", parameters);
+    }
+
+}

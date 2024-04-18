@@ -1,0 +1,24 @@
+.filter {
+    display: inline-block;
+    padding: 0.5rem;
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition-duration: var(--transition-speed);
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
+}
+
+.check {
+    display: none;
+}
+
+.filter:hover {
+    filter: brightness(1.5);
+}
+
+.filter:active {
+    filter: brightness(0.8);
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}

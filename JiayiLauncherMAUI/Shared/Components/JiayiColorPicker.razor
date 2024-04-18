@@ -1,0 +1,18 @@
+﻿<label class="color-picker" style="background-color: @Color">
+    <input type="color" value="@Color" @onchange="OnChange">
+</label>
+
+@code {
+    [Parameter]
+    public string Color { get; set; } = "#000000";
+    
+    [Parameter]
+    public EventCallback<string> ColorChanged { get; set; }
+
+    private void OnChange(ChangeEventArgs obj)
+    {
+        var color = obj.Value as string ?? "#000000";
+        Color = color;
+        ColorChanged.InvokeAsync(color);
+    }
+}

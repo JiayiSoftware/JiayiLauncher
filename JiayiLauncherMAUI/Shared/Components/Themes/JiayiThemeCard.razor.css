@@ -1,0 +1,64 @@
+﻿.theme-wrapper {
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    width: 11.5rem;
+    padding: 0.5rem;
+    transition: var(--transition-speed);
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
+    border-top: 5px solid var(--accent);
+    position: relative;
+}
+
+.theme-image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.theme-image > source {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.theme-image-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(145deg, var(--background-secondary) 55%, transparent);
+
+    pointer-events: none;
+}
+
+.theme-header {
+    z-index: 1;
+    position: relative;
+    margin-bottom: 0.5em;
+}
+
+.theme-header > p {
+    margin: 0.25em 0;
+    color: var(--text-grayed);
+    width: 95%;
+    overflow: hidden;
+    /* fuck you its a real property */
+    text-wrap: nowrap;    
+}
+
+
+.theme-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.35rem;
+
+    z-index: 2;
+}

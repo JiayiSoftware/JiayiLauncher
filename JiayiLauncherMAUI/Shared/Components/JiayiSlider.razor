@@ -1,0 +1,49 @@
+﻿<div style="@Style">
+    <span class="slider-value" style="@_percentageStyle">@Value</span>
+    <input type="range" min="@Min" max="@Max" step="@Step" class="slider" @oninput="OnChanged" @bind="Value"
+           @onmousedown="() => _active = true" @onmouseup="() => _active = false" style="background: linear-gradient(to right, @_progress);">
+</div>
+
+@code {
+    [Parameter]
+    public string Style { get; set; } = "width: 100%";
+    
+    [Parameter]
+    public float Value { get; set; }
+    
+    [Parameter]
+    public float Min { get; set; }
+    
+    [Parameter]
+    public float Max { get; set; } = 100;
+    
+    [Parameter]
+    public float Step { get; set; } = 1;
+    
+    [Parameter]
+    public EventCallback<float> ValueChanged { get; set; }
+    
+    private float _percentage
+    {
+        get
+        {
+            var max = Max - Min;
+            var value = Value - Min;
+            return value * 100 / max;
+        }
+    }
+
+    // webkit doesn't support styling the slider progress so we use linear-gradient to fake it
+    private string _progress => 
+        $"var(--accent) 0%, var(--accent) {_percentage}%, var(--background-secondary) {_percentage}%, var(--background-secondary) 100%";
+
+    private bool _active;
+    private string _percentageStyle => $"opacity: {(_active ? 1 : 0)}; left: {Math.Clamp(_percentage + 2, 2, 94)}%; z-index: {(_active ? 1 : 0)}";
+
+    private void OnChanged(ChangeEventArgs obj)
+    {
+        Value = float.Parse(obj.Value?.ToString() ?? "0");
+        ValueChanged.InvokeAsync(Value);
+    }
+
+}

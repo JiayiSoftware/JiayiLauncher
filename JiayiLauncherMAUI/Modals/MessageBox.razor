@@ -1,0 +1,33 @@
+﻿<div>
+    <p>
+        @foreach (var line in Message.Split(Environment.NewLine))
+        {
+            // since newlines just magically disappear
+            @line
+            <br>
+        }
+    </p>
+    
+    <div style="display: flex; gap: 0.5rem;">
+        @foreach (var (name, callback) in Buttons)
+        {
+            <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem;" 
+                         OnClick="() => { Modal.CloseAsync(); callback.InvokeAsync(); }">@name</JiayiButton>
+        }
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public List<(string, EventCallback)> Buttons { get; set; } = new()
+    {
+        ("Okay", EventCallback.Empty)
+    };
+
+    [Parameter]
+    public string Message { get; set; } = string.Empty;
+    
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+}

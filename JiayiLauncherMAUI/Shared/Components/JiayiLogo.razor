@@ -1,0 +1,12 @@
+﻿<h2 style="font-size: @Size; text-shadow: @Shadow @Shadow rgba(0, 0, 0, 0.4); @Style" class="logo">嘉</h2>
+
+@code {
+    [Parameter]
+    public string? Size { get; set; }
+    
+    [Parameter]
+    public string? Shadow { get; set; }
+    
+    [Parameter]
+    public string? Style { get; set; }
+}

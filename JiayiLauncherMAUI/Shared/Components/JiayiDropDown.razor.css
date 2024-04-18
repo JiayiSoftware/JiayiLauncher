@@ -1,0 +1,146 @@
+﻿.dropdown {
+    position: relative;
+    width: fit-content;
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3px;
+    
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    padding: 0.5rem 0.5rem 0.5rem 0.8rem;
+    transition: var(--transition-speed);
+
+    filter: brightness(1);
+    
+    border-top-left-radius: var(--rounding);
+    border-top-right-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
+
+    z-index: 2; /* Dropdown behind other elements when opened if removed */
+}
+
+.dropdown.active, .dropdown:focus {
+    outline: none;
+}
+
+.dropdown .dropdown-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    list-style: none;
+    padding: 0 0.7rem 0.5rem 0.5rem;
+    margin: 0;
+    width: -webkit-fill-available;
+    max-height: 15rem;
+    overflow-y: scroll;
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    
+    transition: var(--transition-speed);
+    
+    border-bottom-left-radius: var(--rounding);
+    border-bottom-right-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
+}
+
+.dropdown-items[data-shown="true"] {
+    transform: translateY(0);
+    opacity: 100%;
+    visibility: visible;
+}
+
+.dropdown-items[data-shown="false"] {
+    transform: translateY(-1.8rem);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.dropdown-click {
+    cursor: pointer;
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.dropdown:has(.dropdown-click:hover) {
+    filter: brightness(1.5);
+}
+
+.dropdown:has(.dropdown-click:active) {
+    filter: brightness(0.8);
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}
+
+input[type="radio"] {
+    appearance: none;
+    cursor: pointer;
+    margin-left: 0.1rem;
+    margin-bottom: 3px; /* matches the margin of the checkbox */
+    margin-right: 0.5rem;
+    transform: translateY(5px); /* dumb hack to make it look centered */
+    border-radius: 100%;
+    height: 15px;
+    width: 15px;
+    border-color: var(--accent);
+    background-color: var(--background-primary);
+    border-width: 0;
+    border-style: solid;
+    
+    filter: brightness(1);
+    
+    transition: var(--transition-speed);
+}
+
+input[type="radio"]:checked {
+    background-color: var(--accent);
+    border-width: 2px;
+}
+
+input[type="radio"]:hover {
+    filter: brightness(1.5);
+}
+
+input[type="radio"]:active {
+    filter: brightness(0.8);
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    cursor: pointer;
+    margin-left: 0.1rem;
+    margin-right: 0.5rem;
+    transform: translateY(5px); /* dumb hack to make it look centered */
+    height: 15px;
+    width: 15px;
+    border-color: var(--accent);
+    background-color: var(--background-primary);
+    border-width: 0;
+    border-style: solid;
+    
+    filter: brightness(1);
+    
+    transition: var(--transition-speed);
+}
+
+.hack {
+    transform: translateY(-5px);
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--accent);
+    border-width: 2px;
+}
+
+input[type="checkbox"]:hover {
+    filter: brightness(1.5);
+}
+
+label {
+    cursor: pointer;
+}

@@ -1,0 +1,30 @@
+﻿.textbox {
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    transition-duration: calc(var(--transition-speed) / 2);
+    box-shadow: var(--shadow);
+    filter: brightness(1);
+    
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
+}
+
+.textbox:hover {
+    filter: brightness(1.5);
+}
+
+.textbox::placeholder {
+    color: var(--text-grayed);
+}
+
+.textbox:focus {
+    outline: none;
+    border-bottom: var(--accent) 2px solid;
+}
+
+.textbox::selection {
+    background: var(--accent);
+}

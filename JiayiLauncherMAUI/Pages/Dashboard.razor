@@ -1,0 +1,146 @@
+﻿@page "/"
+@page "/Dashboard"
+
+@using System.Diagnostics
+@using JiayiLauncher.Features.Game
+@using JiayiLauncher.Features.Profiles
+@using JiayiLauncher.Features.Stats
+@using JiayiLauncher.Shared.Components.Mods
+
+@inject NavigationManager NavigationManager
+
+<h3>Good @DetermineTimeOfDay()</h3>
+
+<div class="dashboard">
+    <div class="dashboard-cards">
+        <div class="cards-row">
+            <div class="card">
+                <h4>Total play time</h4>
+                <p>@($"{_stats.TotalPlayTime.TotalHours:F2} hours")</p>
+                <i>with Jiayi</i>
+            </div>
+            
+            <div class="card">
+                <h4>Your current version</h4>
+                <p>@_version</p>
+                <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-top: 0.7rem;" OnClick="VersionClicked">
+                    Switch versions
+                </JiayiButton>
+            </div>
+            
+            <div class="card">
+                <h4>Profiles</h4>
+                @if (ProfileCollection.Current == null || ProfileCollection.Current.Profiles.Count == 0)
+                {
+                    <i>No profiles</i>
+                }
+                else
+                {
+                    <p>
+                        @ProfileCollection.Current.Profiles.Count @(" ") 
+                        @Pluralize(ProfileCollection.Current.Profiles.Count, "profile")
+                    </p>
+                }
+                
+                <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-top: 0.7rem;" OnClick="ProfileClicked">
+                    View profiles
+                </JiayiButton>
+            </div>
+        </div>
+        
+        <div class="cards-row">
+            <div class="card">
+                <h4>Most recent mod</h4>
+                
+                @if (_stats.MostRecentMod == null)
+                {
+                    <i>Launch a mod to see it here</i>
+                }
+                else
+                {
+                    <JiayiModCard Mod="_stats.MostRecentMod" />
+                    <i>@($"{_stats.MostRecentMod.PlayTime.TotalHours:F2} hours played")</i>
+                }
+            </div>
+            
+            <div class="card">
+                <h4>Most played mod</h4>
+
+                @if (_stats.MostPlayedMod == null)
+                {
+                    <i>Launch a mod to see it here</i>
+                }
+                else
+                {
+                    <JiayiModCard Mod="_stats.MostPlayedMod" />
+                    <i>@($"{_stats.MostPlayedMod.PlayTime.TotalHours:F2} hours played")</i>
+                }
+            </div>
+            
+            <div class="card">
+                <h4>Our community</h4>
+                <div class="links">
+                    <a href="https://jiayisoftware.github.io/" title="Jiayi Software's website">
+                        <span class="material-symbols-sharp">language</span>
+                    </a>
+                    <a href="https://github.com/JiayiSoftware/JiayiLauncher" title="Jiayi Launcher on GitHub">
+                        <svg width="40px" height="40px" viewBox="0 0 40 40">
+                            <use href="images/github.svg#github" />
+                        </svg>
+                    </a>
+                    <a href="https://jiayisoftware.github.io/discord" title="Talk to us on Discord">
+                        <svg width="40px" height="40px" viewBox="0 0 40 40">
+                            <use href="images/discord.svg#discord" />
+                        </svg>
+                    </a>
+                </div>
+                <i style="max-width: 9.7rem;">
+                    Jiayi Launcher is <a href="/About">open source software</a>
+                </i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="logo">
+        <JiayiLogo Style="color: rgba(0, 0, 0, 0.2); width: 93%; text-align: center" Size="250px" Shadow="0"></JiayiLogo>
+    </div>
+</div>
+
+@if (_debug)
+{
+    <a href="/TestPlace">debug stuff</a>
+}
+
+@code {
+    private JiayiStats _stats;
+    private string _version;
+    private bool _debug => Debugger.IsAttached;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _stats = JiayiStats.Instance!;
+        _version = await PackageData.GetVersion();
+        
+        await base.OnInitializedAsync();
+    }
+
+    private string DetermineTimeOfDay()
+    {
+        var hour = DateTime.Now.Hour;
+        if (hour is >= 5 and < 12)
+        {
+            return "morning";
+        }
+        return hour is >= 12 and < 17 ? "afternoon" : "evening";
+    }
+    
+    private string Pluralize(int i, string s) => i == 1 ? s : s + "s";
+
+    private void VersionClicked() => NavigationManager.NavigateTo("/Versions");
+
+    private void ProfileClicked()
+    {
+        NavigationManager.NavigateTo("/Profiles");
+    }
+
+}

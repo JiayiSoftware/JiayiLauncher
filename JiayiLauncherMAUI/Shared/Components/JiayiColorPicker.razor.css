@@ -1,0 +1,29 @@
+﻿input /* type=color */ {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+}
+
+.color-picker {
+    width: 2.5rem;
+    height: 2.5rem;
+    box-shadow: var(--shadow);
+    filter: brightness(1);
+    border: 2px solid rgba(0, 0, 0, 0.4);
+    border-radius: var(--rounding);
+    
+    transition-duration: var(--transition-speed);
+}
+
+.color-picker:hover {
+    filter: brightness(1.5);
+}
+
+.color-picker:active {
+    transform: translate(5px, 5px);
+    filter: brightness(0.8);
+    box-shadow: none;
+}

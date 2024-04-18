@@ -1,0 +1,369 @@
+﻿@page "/Versions/Full/{version?}"
+@using JiayiLauncher.Features.Versions
+@using Microsoft.JSInterop
+@using System.Diagnostics
+@using System.IO
+@using JiayiLauncher.Features.Game
+@using JiayiLauncher.Shared.Components.Toasts
+@using JiayiLauncher.Utils
+@using Microsoft.Win32
+@using WindowsAPICodePack.Dialogs
+
+@* javascript :( *@
+@inject IJSRuntime JavaScript
+
+@inject NavigationManager NavigationManager
+@inject IToastService ToastService
+
+<div class="page-title" style="display: @_showTitle">
+    <h4 @onclick="BackClicked">Version Manager</h4>
+    <span class="material-symbols-sharp">arrow_right</span>
+    <h3>Full version list</h3>
+</div>
+
+<div class="find-tools">
+    <span class="material-symbols-sharp">search</span>
+    <JiayiTextBox Placeholder="Search versions" @ref="_searchBox" Changed="StateHasChanged" />
+    
+    <div class="separator"></div>
+    
+    <p>Show downloaded</p>
+    <JiayiToggle CheckedChanged="InstalledVersionsChecked" />
+    
+    <div class="separator"></div>
+    
+    <JiayiButton Size="JiayiButton.ButtonSize.Small"
+                 Style="color: var(--text-primary); background-color: var(--background-secondary); font-weight: normal;" OnClick="ImportClicked">
+        Import
+    </JiayiButton>
+</div>
+
+<div class="version-list-page">
+    @{
+        var versions = _versionNames.Where(
+            v => v.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)).ToList();
+
+        if (_showInstalledVersions)
+        {
+            versions = versions.Where(VersionManager.VersionInstalled).ToList();
+        }
+        
+        if (versions.Count == 0)
+        {
+            <i class="no-versions">No versions found</i>
+        }
+        else
+        {
+            <ul class="versions">
+                @for (var i = 0; i < Math.Min(_amountToDisplay, versions.Count); i++)
+                {
+                    var name = versions[i];
+                    var version = _versions.FirstOrDefault(x => x.Version == name);
+                    var alert = name == Version ? "alert" : string.Empty;
+
+                    <li class="version @alert" id="@name">
+                        <div class="version-text">
+                            <strong>@name</strong>
+                            <i>@GetStatus(name)</i>
+                        </div>
+
+                        <div class="version-buttons">
+                            @if (VersionManager.VersionInstalled(name))
+                            {
+                                <JiayiButton Size="@JiayiButton.ButtonSize.Small"
+                                             Disabled="@_buttonStates[i]"
+                                             OnClick="async () => await RemoveClicked(name)">Remove</JiayiButton>
+                                <JiayiButton Size="@JiayiButton.ButtonSize.Small"
+                                             Disabled="@_buttonStates[i]"
+                                             OnClick="async () => await SwitchClicked(name)">Switch</JiayiButton>
+                            }
+                            else
+                            {
+                                if (version == null) continue;
+                                if (version.UpdateId == string.Empty)
+                                {
+                                    <JiayiButton Size="@JiayiButton.ButtonSize.Small" Disabled="true">Download</JiayiButton>
+                                }
+                                else if (InternetManager.OfflineMode)
+                                {
+                                    <JiayiButton Size="@JiayiButton.ButtonSize.Small" Disabled="true">Download</JiayiButton>
+                                }
+                                else
+                                {
+                                    <JiayiButton Size="@JiayiButton.ButtonSize.Small"
+                                                 Disabled="@_buttonStates[i]"
+                                                 OnClick="async () => await DownloadClicked(version)">Download</JiayiButton>
+                                }
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+            
+            if (versions.Count > _amountToDisplay)
+            {
+                <div class="load-more" @onclick="() => _amountToDisplay += 10">
+                    <a>Load more</a>
+                    <span class="material-symbols-sharp">expand_more</span>
+                </div>
+            }
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string? Version { get; set; }
+    
+    [Parameter]
+    public bool ShowTitle { get; set; } = true;
+    
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+
+    private List<string> _versionNames = new();
+    private List<MinecraftVersion> _versions = new();
+    private int _amountToDisplay = 10;
+    private List<string> _statuses = new();
+    private List<bool> _buttonStates = new();
+
+    private JiayiTextBox? _searchBox;
+    private bool _showInstalledVersions;
+
+    private string _showTitle => ShowTitle ? "flex" : "none";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var versionList = await VersionList.GetFullVersionList();
+        _versionNames.AddRange(VersionManager.GetCustomVersions());
+        _versionNames.AddRange(versionList.Keys);
+        _versions = versionList.Values.ToList();
+        _statuses = new string[_versionNames.Count].ToList();
+        _buttonStates = new bool[_versionNames.Count].ToList();
+        
+        // update statuses for custom versions
+        for (var i = 0; i < VersionManager.GetCustomVersions().Count; i++)
+        {
+            _statuses[i] = "Imported";
+        }
+        
+        VersionManager.SwitchProgressChanged += (_, _) => StateHasChanged();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Version ??= "None";
+        if (Version == "None") return;
+        
+        var index = _versionNames.ToList().IndexOf(Version);
+        _amountToDisplay = index > 0 ? index + 5 : 10;
+        
+        // refresh state so js can scroll to the version
+        StateHasChanged();
+        await Task.Delay(100);
+    
+        var element = await JavaScript.InvokeAsync<IJSObjectReference>("document.getElementById", Version);
+        await element.InvokeVoidAsync("scrollIntoView", new { behavior = "smooth", block = "center" });
+    }
+
+    private void BackClicked()
+    {
+        NavigationManager.NavigateTo("/Versions");
+    }
+    
+    private int _switching = -1;
+
+    private async Task DownloadClicked(MinecraftVersion ver)
+    {
+        var i = _versionNames.IndexOf(ver.Version);
+        _switching = i;
+        
+        _statuses[i] = "Downloading...";
+        _buttonStates[i] = true;
+        
+        await VersionManager.DownloadVersion(ver);
+        
+        _statuses[i] = string.Empty;
+        _buttonStates[i] = false;
+        _switching = -1;
+        StateHasChanged();
+    }
+
+    private string GetStatus(string ver)
+    {
+        if (VersionManager.IsCustomVersion(ver)) return _statuses[_versionNames.IndexOf(ver)];
+        
+        var version = _versions[_versionNames.IndexOf(ver)];
+        if (version.UpdateId == string.Empty) return "Not available";
+
+        var i = _versionNames.IndexOf(ver);
+        
+        if (_statuses[i] == "Downloading...")
+        {
+            return VersionManager.DownloadProgress == 100 ? "Extracting..." 
+                : $"{_statuses[i]} {VersionManager.DownloadProgress}% complete";
+        }
+        
+        return _statuses[i];
+    }
+
+    private async Task RemoveClicked(string ver)
+    {
+        var options = new List<(string, EventCallback)>();
+        var parameters = new ModalParameters();
+        var package = await PackageData.GetPackage();
+        
+        if (package?.AppInfo.Package.InstalledPath == VersionManager.GetVersionPath(ver))
+        {
+            parameters.Add(nameof(MessageBox.Message), 
+                    "This is your current version. Please switch to another version before removing this one.");
+            
+            ModalService.Show<MessageBox>("Remove version", parameters);
+            return;
+        }
+
+        options.Add(("Yes", new EventCallback(null, async () =>
+        {
+            var i = _versionNames.IndexOf(ver);
+            _statuses[i] = "Removing...";
+            _buttonStates[i] = true;
+            
+            var custom = VersionManager.IsCustomVersion(ver);
+
+            await VersionManager.RemoveVersion(ver);
+
+            if (custom)
+            {
+                _versionNames.RemoveAt(i);
+                _statuses.RemoveAt(i);
+                _buttonStates.RemoveAt(i);
+            }
+            else
+            {
+                _statuses[i] = string.Empty;
+                _buttonStates[i] = false;
+            }
+            
+            StateHasChanged();
+        })));
+        options.Add(("No", EventCallback.Empty));
+
+        parameters
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), "Are you sure you want to remove this version?");
+        
+        var modal = ModalService.Show<MessageBox>("Remove version", parameters);
+        await modal.Result;
+        StateHasChanged();
+    }
+
+    private async Task SwitchClicked(string ver)
+    {
+        if (!Privileges.IsAdmin())
+        {
+            var modal = ModalService.Show<Escalate>("Additional privileges required");
+            var escalateResult = await modal.Result;
+            if (escalateResult.Cancelled) return;
+        }
+        
+        var i = _versionNames.IndexOf(ver);
+        _statuses[i] = "Switching...";
+        _buttonStates[i] = true;
+        
+        var result = await VersionManager.Switch(ver);
+        var parameters = new ModalParameters();
+        var options = new List<(string, EventCallback)>();
+
+        switch (result)
+        {
+            case VersionManager.SwitchResult.Succeeded: break;
+                
+            case VersionManager.SwitchResult.DeveloperModeDisabled:
+                options.Add(("Yes", new EventCallback(null, WinRegistry.EnableDeveloperMode)));
+                options.Add(("No", EventCallback.Empty));
+                
+                parameters.Add(nameof(MessageBox.Buttons), options);
+                parameters.Add(nameof(MessageBox.Message), 
+                    "You need to enable developer mode to switch versions. Do you want to enable it now?");
+                break;
+            case VersionManager.SwitchResult.VersionNotFound:
+                parameters.Add(nameof(MessageBox.Message), "This version has not been downloaded yet.");
+                break;
+            case VersionManager.SwitchResult.BackupFailed:
+                parameters.Add(nameof(MessageBox.Message), "Jiayi couldn't back up your game data before switching versions. " +
+                                                           "This could be because access to the game data folder was denied.\n\n" +
+                                                           "More information can be found in your log file.");
+                break;
+            case VersionManager.SwitchResult.UnknownError:
+            default:
+                parameters.Add(nameof(MessageBox.Message), "An unknown error occurred. Check the logs for more information.");
+                break;
+        }
+        
+        if (result != VersionManager.SwitchResult.Succeeded)
+        {
+            var modal = ModalService.Show<MessageBox>("Error", parameters);
+            await modal.Result;
+            StateHasChanged();
+        }
+        else
+        {
+            await Minecraft.Open();
+        }
+        
+        _statuses[i] = string.Empty;
+        _buttonStates[i] = false;
+    }
+
+    private async Task ImportClicked()
+    {
+        using var dialog = new CommonOpenFileDialog("Import version");
+        dialog.DefaultExtension = "appx";
+        dialog.Filters.Add(new CommonFileDialogFilter("APPX files", "*.appx"));
+        
+        if (dialog.ShowDialog() != CommonFileDialogResult.Ok) return;
+        var path = dialog.FileName;
+
+        if (!VersionManager.IsValidPackage(path))
+        {
+            var toastParams = new ToastParameters()
+                .Add(nameof(JiayiToast.Title), "That's not a valid package.")
+                .Add(nameof(JiayiToast.Level), ToastLevel.Error);
+                
+            ToastService.ShowToast<JiayiToast>(toastParams, settings =>
+            {
+                settings.Timeout = 5;
+                settings.ShowProgressBar = true;
+            });
+                
+            return;
+        }
+            
+        // add to list
+        var versionList = await VersionList.GetFullVersionList();
+        _versionNames.Clear();
+        _versionNames.Add(Path.GetFileNameWithoutExtension(path));
+        _versionNames.AddRange(VersionManager.GetCustomVersions());
+        _versionNames.AddRange(versionList.Keys);
+        _statuses = new string[_versionNames.Count].ToList();
+        _buttonStates = new bool[_versionNames.Count].ToList();
+            
+        var i = _versionNames.IndexOf(Path.GetFileNameWithoutExtension(path));
+        _statuses[i] = "Importing...";
+        _buttonStates[i] = true;
+            
+        await VersionManager.AddCustomVersion(path);
+            
+        _statuses[i] = "Imported";
+        _buttonStates[i] = false;
+        
+        StateHasChanged();
+    }
+
+    private void InstalledVersionsChecked(bool show)
+    {
+        _showInstalledVersions = show;
+        StateHasChanged();
+    }
+
+}

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:JiayiLauncher"
+             x:Class="JiayiLauncher.MainPage"
+             BackgroundColor="#0F0F0F">
+
+    <BlazorWebView x:Name="WebView" HostPage="wwwroot/index.html" Background="#0F0F0F">
+        <BlazorWebView.RootComponents>
+            <RootComponent Selector="#app" ComponentType="{x:Type local:Main}" />
+        </BlazorWebView.RootComponents>
+    </BlazorWebView>
+
+</ContentPage>

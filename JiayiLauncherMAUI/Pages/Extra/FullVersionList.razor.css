@@ -1,0 +1,138 @@
+﻿.page-title {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.page-title span {
+    color: var(--text-grayed);
+}
+
+.page-title h4 {
+    color: var(--text-grayed);
+    cursor: pointer;
+}
+
+.page-title h4:hover {
+    text-decoration: underline;
+}
+
+.page-title h3 {
+    color: var(--text-primary);
+}
+
+.find-tools {
+    display: flex;
+    align-items: center;
+    column-gap: 0.7rem;
+}
+
+.separator {
+    border-right: 1px solid rgb(50, 50, 50);
+    height: 1.5rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.no-versions {
+    margin-top: 2rem;
+    color: var(--text-grayed);
+    font-style: italic;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.versions {
+    list-style: none;
+    padding: 0;
+}
+
+.version {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+
+    border-left: 5px solid var(--accent);
+}
+
+.version:nth-child(even) {
+    background-color: rgba(100, 100, 100, 0.1);
+}
+
+.version-text {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.version-text i {
+    color: var(--text-grayed);
+    font-size: 14px;
+    font-style: italic;
+}
+
+.version-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.load-more {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.alert {
+    animation: alert 3s;
+}
+
+@keyframes alert {
+    0% {
+        border: 3px solid var(--accent);
+        background-color: rgba(100, 100, 100, 0.15);
+    }
+    
+    /* flash background */
+    10% {
+        background-color: var(--background-primary);
+    }
+    
+    25% {
+        background-color: rgba(100, 100, 100, 0.15);
+    }
+    
+    40% {
+        background-color: var(--background-primary);
+    }
+    
+    55% {
+        background-color: rgba(100, 100, 100, 0.15);
+    }
+    
+    70% {
+        background-color: var(--background-primary);
+    }
+    
+    85% {
+        background-color: rgba(100, 100, 100, 0.15);
+    }
+    
+    90% {
+        border: 3px solid var(--accent);
+        background-color: rgba(100, 100, 100, 0.15);
+    }
+    
+    /* back to normal */
+    100% {
+        /* accent color because it will fade to white */
+        border: 0 solid var(--accent);
+        border-left: 5px solid var(--accent);
+    }
+}

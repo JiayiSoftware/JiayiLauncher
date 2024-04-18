@@ -1,0 +1,116 @@
+﻿<div class="dropdown">
+    @if (Multiselect)
+    {
+        @if (SelectedItems.Count == 0)
+        {
+            <span class="selected" style="color: var(--text-grayed)">@Name</span>
+        }
+        else
+        {
+            var items = string.Join(", ", SelectedItems);
+            if (items.Length > 30 && SelectedItems.Count > 1)
+            {
+                // truncate at the comma and + the remaining count
+                items = items[..items.IndexOfAny(new[] { ',' }, 2)] + $", +{SelectedItems.Count - 1}";
+            }
+            <span class="selected">
+                @items
+            </span>
+        }
+    }
+    else
+    {
+        if (string.IsNullOrEmpty(SelectedItem))
+        {
+            <span class="selected" style="color: var(--text-grayed)">@Name</span>
+        }
+        else
+        {
+            <span class="selected">@SelectedItem</span>
+        }
+    }
+    <span class="material-symbols-sharp">expand_more</span>
+    
+    <span class="dropdown-click" @onclick="ToggleDropdown"></span>
+    
+    <ul class="dropdown-items" data-shown="@_showDropdown">
+        @foreach (var item in Items!)
+        {
+            @if (Multiselect)
+            {
+                <li class="hack">
+                    @* this is stupid idk why i never did this before *@
+                    <label>
+                        @if (SelectedItems.Contains(item))
+                        {
+                            <input type="checkbox" value="@item" checked @onclick="() => OnToggleMultiSelect(item)">
+                        }
+                        else
+                        {
+                            <input type="checkbox" value="@item" @onclick="() => OnToggleMultiSelect(item)">
+                        }
+                        @item
+                    </label>
+                </li>
+            }
+            else
+            {
+                <li class="hack">
+                    <label>
+                        @if (SelectedItem == item)
+                        {
+                            <input type="radio" name="@Name" value="@item" class="dropdown-item" checked @onchange="OnSelectSingle">
+                        }
+                        else
+                        {
+                            <input type="radio" name="@Name" value="@item" class="dropdown-item" @onchange="OnSelectSingle">
+                        }
+                        @item
+                    </label>
+                </li>
+            }
+        }
+    </ul>
+</div>
+    
+
+@code {
+    [Parameter]
+    public string? Name { get; set; }
+    
+    [Parameter]
+    public List<string>? Items { get; set; }
+    
+    [Parameter]
+    public bool Multiselect { get; set; }
+    
+    [Parameter]
+    public List<string> SelectedItems { get; set; } = new();
+
+    // if not multiselect
+    public string? SelectedItem { get; set; } = "";
+    
+    private string _showDropdown = "false";
+    private string _icon = "expand_more";
+    
+    private void ToggleDropdown()
+    {
+        _showDropdown = _showDropdown == "false" ? "true" : "false";
+        _icon = _icon == "expand_more" ? "expand_less" : "expand_more";
+    }
+    
+    private void OnToggleMultiSelect(string item)
+    {
+        SelectedItems = SelectedItems.Contains(item) ?
+            SelectedItems.Where(x => x != item).ToList() :
+            SelectedItems.Append(item).ToList();
+
+        StateHasChanged();
+    }
+    
+    private void OnSelectSingle(ChangeEventArgs e)
+    {
+        SelectedItem = e.Value!.ToString();
+        StateHasChanged();
+    }
+}

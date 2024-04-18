@@ -1,0 +1,167 @@
+﻿@page "/Ambrosial"
+@using System.Text
+@using System.Security.Cryptography
+@using System.IO
+@using JiayiLauncher.Features.Ambrosial
+@using Newtonsoft.Json
+@using JiayiLauncher.Features.Mods
+@using JiayiLauncher.Features.Stats
+@using JiayiLauncher.Utils;
+
+@inject NavigationManager NavigationManager
+
+<div class="page-title">
+    <h4 @onclick="BackClicked">Mods</h4>
+    <span class="material-symbols-sharp">arrow_right</span>
+    <h3>Ambrosial</h3>
+</div>
+
+<div class="find-tools">
+    <span class="material-symbols-sharp">search</span>
+    <JiayiTextBox Placeholder="Search clients" @ref="_searchBox" Changed="StateHasChanged" />
+
+    <p class="invisible-normalizer">invisible</p>
+</div>
+
+<div class="client-list-page">
+    @if (_clients != null)
+    {
+        if (_clients.Count == 0)
+        {
+            <i>No clients found</i>
+        }
+        else
+        {
+            <ul class="clients">
+                @foreach (var client in _clients.Where(c =>
+                    c.FormattedName.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)
+                    || c.SupportedVersion.Contains(_searchBox?.Value ?? "", StringComparison.OrdinalIgnoreCase)
+                    ))
+                {
+                    <li class="client">
+                        <div class="client-info">
+                            <strong>@client.FormattedName</strong>
+                            <p>Works on @client.SupportedVersion</p>
+                        </div>
+                        <JiayiButton Size="JiayiButton.ButtonSize.Small"
+                                     OnClick="() => ShowClientModal(client)">Import</JiayiButton>
+                    </li>
+                }
+            </ul>
+        }
+    }
+    else
+    {
+        if (InternetManager.OfflineMode)
+        {
+            <i>Not available while offline</i>
+        }
+        else
+        {
+            <i>Loading...</i>
+        }
+    }
+</div>
+
+@code {
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+
+    private JiayiTextBox? _searchBox;
+    private List<Client>? _clients;
+        
+    private const string ENDPOINT = "https://raw.githubusercontent.com/disepi/ambrosial/main/clientEndpoint.json";
+
+    private void BackClicked()
+    {
+        NavigationManager.NavigateTo("/Mods");
+    }
+
+    private void ShowClientModal(Client client)
+    {
+        var mod = new Mod(client.FormattedName, client.Url, new List<string> { client.SupportedVersion });
+        
+        var parameters = new ModalParameters()
+            .Add(nameof(EditMod.Mod), mod);
+        ModalService.Show<EditMod>("Edit mod", parameters);
+
+        Mods.Instance?.Refresh();
+        JiayiStats.Save();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var response = await InternetManager.Client.GetAsync(ENDPOINT);
+        
+        var resp = await response.Content.ReadAsStringAsync();
+        var decoded = Encoding.UTF8.GetString(Convert.FromBase64String(resp));
+        
+        // decrypt
+        var info = decoded.Split("[AmbrosialPacket]", StringSplitOptions.RemoveEmptyEntries);
+        var encryptedData = info[0];
+        var key = info[1];
+        var data = AmbrosialDecrypt(encryptedData, key);
+        
+        _clients = new List<Client>();
+        var receivedJson = data.Split("[<JSON_END>]").Skip(1).ToArray(); // Skip one to remove the discord link
+        
+        foreach (var item in receivedJson)
+        {
+            try
+            {
+                var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(item);
+                if (json == null) continue;
+
+                var name          = (string) json["name"];
+                var clientVersion = (string) json["clientVersion"];
+                var version       = (string) json["version"];
+                var link          = (string) json["link"];
+
+                if (name.StartsWith("Zephyr") && clientVersion == "4.42") {
+                    version = "1.19.7002.0"; // disepi mis-versioned this
+                }
+
+                _clients.Add(new Client(name, clientVersion, version, link));
+            } 
+            catch (Exception e)
+            {
+                Log.Write("Ambrosial", $"Item: {item}", Log.LogLevel.Error);
+                Log.Write("Ambrosial", e.StackTrace ?? "No stack trace available", Log.LogLevel.Error);
+            }
+        }
+    }
+
+    private static string AmbrosialDecrypt(string data, string key)
+    {
+        byte[]? decrypted; // = null;
+        var saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+        var encryptedData = Convert.FromBase64String(data);
+        var hash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(key));
+        // Cant do anything about this warning due to how ambrosial encrypts everything
+        var rfc = new Rfc2898DeriveBytes(hash, saltBytes, 1000);
+
+        using (var ms = new MemoryStream())
+        {
+            using (var aes = new RijndaelManaged()) // Same with this warning
+            {
+                aes.KeySize = 256;
+                aes.BlockSize = 128;
+                aes.Key = rfc.GetBytes(aes.KeySize / 8);
+                aes.IV = rfc.GetBytes(aes.BlockSize / 8);
+                aes.Mode = CipherMode.CBC;
+
+                using (var cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write))
+                {
+                    cs.Write(encryptedData, 0, encryptedData.Length);
+                    cs.Close();
+                }
+
+                decrypted = ms.ToArray();
+            }
+        }
+
+        return Encoding.UTF8.GetString(decrypted);
+    }
+}
+
+

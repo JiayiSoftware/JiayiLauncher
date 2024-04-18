@@ -1,0 +1,25 @@
+﻿<label class="toggle" style="border-color: @_borderColor">
+    <input type="checkbox" checked="@Checked" @onchange="Changed">
+    <span class="toggle-box"></span>
+    
+    <span class="material-symbols-sharp">close</span>
+    <span class="material-symbols-sharp" style="color: @_onColor">check</span>
+</label>
+
+@code {
+    [Parameter]
+    public bool Checked { get; set; }
+    
+    [Parameter]
+    public EventCallback<bool> CheckedChanged { get; set; }
+    
+    private string _onColor => Checked ? "var(--text-accent)" : "var(--text-primary)";
+    private string _borderColor => Checked ? "var(--border-accent)" : "var(--border-primary)";
+
+    private void Changed(ChangeEventArgs obj)
+    {
+        Checked = (bool)(obj.Value ?? false);
+        CheckedChanged.InvokeAsync(Checked);
+    }
+
+}

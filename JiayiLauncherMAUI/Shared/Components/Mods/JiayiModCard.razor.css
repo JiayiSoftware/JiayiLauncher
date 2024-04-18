@@ -1,0 +1,59 @@
+﻿.mod-background {
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    width: 11.5rem;
+    padding: 0.5rem;
+    transition: var(--transition-speed);
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
+    border-top: 5px solid var(--accent);
+    overflow: hidden;
+}
+
+.mod-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.85em;
+    transition: var(--transition-speed);
+}
+
+.mod-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.mod-header .right, .mod-controls .right {
+    display: flex;
+    gap: 0.6em;
+}
+
+.mod-version {
+    font-size: 0.8rem;
+    color: var(--text-grayed);
+    margin-top: 0.2rem;
+}
+
+.mod-background .mod-controls .right .material-symbols-sharp {
+    transition: var(--transition-speed);
+    opacity: 0;
+    cursor: pointer;
+}
+
+.mod-background:hover .mod-controls .right .material-symbols-sharp {
+    opacity: 100%;
+}
+
+/* loading */
+.loading-bar {
+    background-color: white;
+    opacity: 0.2;
+    filter: brightness(1.2);
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: calc(19px + 1rem);
+    transition: var(--transition-speed);
+}

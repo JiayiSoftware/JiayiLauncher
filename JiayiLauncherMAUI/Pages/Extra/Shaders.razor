@@ -1,0 +1,186 @@
+﻿@page "/Shaders"
+@using JiayiLauncher.Features.Shaders
+@using JiayiLauncher.Shared.Components.Toasts
+
+@inject NavigationManager NavigationManager
+@inject IToastService ToastService
+
+<div class="page-title">
+    <h4 @onclick="BackClicked">Version Manager</h4>
+    <span class="material-symbols-sharp">arrow_right</span>
+    <h3>Shaders</h3>
+</div>
+
+<div class="current-shader">
+    <h4>Your current shader</h4>
+    
+    @if (ShaderManager.AppliedShader == string.Empty)
+    {
+        <strong>No shader applied</strong>
+        <p>Minecraft's vanilla shaders will be used</p>
+    }
+    else
+    {
+        <div class="shader">
+            <p>@ShaderManager.AppliedShader</p>
+        </div>
+        
+        <div class="shader-buttons">
+            <JiayiButton Size="JiayiButton.ButtonSize.Small">Disable</JiayiButton>
+            
+            <span class="material-symbols-sharp" title="Rename shader">edit</span>
+            <span class="material-symbols-sharp" title="Delete shader (irreversible)"
+                  @onclick="() => DeleteClicked(ShaderManager.AppliedShader)">delete</span>
+        </div>
+    }
+</div>
+
+<div class="separator"></div>
+
+<div class="available-shaders">
+    <h4>Available shaders</h4>
+    
+    @foreach (var shader in ShaderManager.Shaders)
+    {
+        <div class="shader">
+            <p>@shader</p>
+        </div>
+    }
+</div>
+
+@code {
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+    
+    private bool _appliedExpanded = true;
+    private bool _availableExpanded; // false
+
+    protected override void OnInitialized()
+    {
+        ShaderManager.UpdateShaders();
+    }
+
+    private async Task FileSelected(InputFileChangeEventArgs file)
+    {
+        if (file.FileCount == 1)
+        {
+            await ShaderManager.AddShader(file.File);
+            _availableExpanded = true;
+        }
+        else
+        {
+            foreach (var multipleFile in file.GetMultipleFiles())
+            {
+                await ShaderManager.AddShader(multipleFile);
+                _availableExpanded = true;
+            }
+        }
+        
+        StateHasChanged();
+    }
+
+    private async Task DeleteClicked(string shader)
+    {
+        var options = new List<(string, EventCallback)>
+        {
+            ("Yes", new EventCallback(null, () =>
+            {
+                ShaderManager.DeleteShader(shader);
+            })),
+            ("No", EventCallback.Empty)
+        };
+        
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), "Are you sure you want to delete this shader? This action is irreversible.");
+        
+        var modal = ModalService.Show<MessageBox>("Delete shader", parameters);
+        await modal.Result;
+        
+        StateHasChanged();
+    }
+
+    private void EnableClicked(string shader)
+    {
+        ShaderManager.EnableShader(shader);
+        StateHasChanged();
+    }
+    
+    private void DisableClicked(string shader)
+    {
+        ShaderManager.DisableShader(shader);
+        StateHasChanged();
+    }
+
+    private async Task ApplyClicked()
+    {
+        var options = new List<(string, EventCallback)>
+        {
+            ("Yes", new EventCallback(null, async () =>
+            {
+                await ShaderManager.ApplyShader();
+
+                var toastParams = new ToastParameters()
+                    .Add(nameof(JiayiToast.Title), "Shader successfully applied!")
+                    .Add(nameof(JiayiToast.Level), ToastLevel.Success);
+                
+                ToastService.ShowToast<JiayiToast>(toastParams, settings =>
+                {
+                    settings.Timeout = 5;
+                    settings.ShowProgressBar = true;
+                });
+            })),
+            ("No", EventCallback.Empty)
+        };
+        
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), 
+                "Are you sure you want to apply this shader? This will replace any shaders with the ones in this pack.");
+        
+        var modal = ModalService.Show<MessageBox>("Apply shader", parameters);
+        await modal.Result;
+        
+        StateHasChanged();
+    }
+
+    private async Task RestoreClicked()
+    {
+        var options = new List<(string, EventCallback)>
+        {
+            ("Yes", new EventCallback(null, async () =>
+            {
+                if (ShaderManager.AppliedShader != string.Empty) 
+                    ShaderManager.DisableShader(ShaderManager.AppliedShader);
+                await ShaderManager.RestoreVanillaShaders();
+                
+                var toastParams = new ToastParameters()
+                    .Add(nameof(JiayiToast.Title), "Restored vanilla shaders.")
+                    .Add(nameof(JiayiToast.Level), ToastLevel.Success);
+                
+                ToastService.ShowToast<JiayiToast>(toastParams, settings =>
+                {
+                    settings.Timeout = 5;
+                    settings.ShowProgressBar = true;
+                });
+            })),
+            ("No", EventCallback.Empty)
+        };
+        
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Buttons), options)
+            .Add(nameof(MessageBox.Message), 
+                "Are you sure you want to go back to vanilla shaders? This will disable your current shader pack and restore vanilla shaders.");
+        
+        var modal = ModalService.Show<MessageBox>("Restore shaders", parameters);
+        await modal.Result;
+        
+        StateHasChanged();
+    }
+
+    private void BackClicked()
+    {
+        NavigationManager.NavigateTo("/Versions");
+    }
+
+}

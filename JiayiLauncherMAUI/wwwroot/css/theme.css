@@ -1,0 +1,19 @@
+﻿/* jiayi's base theme - keep main colors in hex or your launcher will crash */
+
+:root {
+    --background-primary: #0F0F0F;
+    --background-secondary: #1E1E1E;
+    --accent: #DC0000;
+    --text-primary: #FFFFFF;
+    --text-accent: #FFFFFF;
+    --text-grayed: #7E7E7E;
+    --shadow: 5px 5px rgba(0, 0, 0, 0.4);
+    --transition-speed: 0.2s;
+    --background-image: none;
+    --background-blur: 0px;
+    --background-brightness: 100%;
+    --rounding: 0px;
+    --border-primary: #000000;
+    --border-accent: #000000;
+    --border-thickness: 0px;
+}

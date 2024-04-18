@@ -1,0 +1,79 @@
+.dashboard-cards {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    height: fit-content;
+}
+
+.cards-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.card {
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    width: fit-content;
+    max-width: 45vw;
+    padding: 0.7rem;
+    
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
+}
+
+.card p {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.card i {
+    color: var(--text-grayed);
+    margin-top: 0.7rem;
+    display: block;
+    font-size: 14px;
+    max-width: 25vw;
+}
+
+.card a {
+    color: var(--text-primary);
+}
+
+.card i a {
+    color: var(--text-primary);
+}
+
+.card h4 {
+    margin: 0 0 0.7rem;
+    font-size: 18px;
+}
+
+.logo {
+    display: none;
+}
+
+.links {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.links a span {
+    font-size: 40px;
+}
+
+.links a svg {
+    fill: var(--text-primary);
+}
+
+@media only screen and (min-height: 700px) {
+    .logo {
+        display: block;
+    }
+}

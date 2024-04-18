@@ -1,0 +1,263 @@
+﻿@using JiayiLauncher.Utils;
+@using JiayiLauncher.Features.Mods
+@using System.IO
+@using System.Net
+@using System.Net.Http
+@using JiayiLauncher.Settings
+@using WindowsAPICodePack.Dialogs
+
+<div class="select">
+    <div class="select-file">
+        <JiayiButton OnClick="SelectFile">Select a file</JiayiButton>
+        <p>
+            .dll and .exe files only
+        </p>
+    </div>
+
+    <div class="separator">
+        <div class="separator-line"></div>
+        <p>or</p>
+        <div class="separator-line"></div>
+    </div>
+
+    <div class="url" @onkeydown="Enter">
+        <p>@_urlStatus</p>
+        
+        @if (InternetManager.OfflineMode)
+        {
+            <JiayiTextBox Style="width: 99%" Placeholder="Not available while offline" Disabled="true" @ref="_urlTextBox" />
+        }
+        else
+        {
+            <JiayiTextBox Style="width: 99%" Placeholder="cool-website.com/path/to/mod.dll" @ref="_urlTextBox" />
+        }
+    </div>
+    
+    @* ambrosial is dead *@
+    @* <div class="separator"> *@
+    @*     <div class="separator-line"></div> *@
+    @*     <p>or</p> *@
+    @*     <div class="separator-line"></div> *@
+    @* </div> *@
+    @* *@
+    @* <div class="ambrosial"> *@
+    @*     <p>Import clients from <a class="ambrosial-link" href="https://github.com/disepi/ambrosial">Ambrosial</a></p> *@
+    @*     <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="AmbrosialClicked">Browse</JiayiButton> *@
+    @* </div> *@
+</div>
+
+@code {
+    [CascadingParameter]
+    public IModalService ModalService { get; set; } = default!;
+
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+
+    private JiayiTextBox? _urlTextBox;
+    private string _urlStatus = "Enter the link to your mod";
+
+    private async Task SelectFile()
+    {
+        // var dialog = new OpenFileDialog
+        // {
+        //     Title = "Select a mod",
+        //     Filter = "Injectable libraries (*.dll)|*.dll|" +
+        //              "External clients and injectors (*.exe)|*.exe",
+        //     Multiselect = true
+        // };
+        
+        using var dialog = new CommonOpenFileDialog("Select a mod");
+        dialog.IsFolderPicker = false;
+        dialog.Multiselect = true;
+        dialog.DefaultExtension = "dll";
+        dialog.Filters.Add(new CommonFileDialogFilter("Injectable libraries", "*.dll"));
+        dialog.Filters.Add(new CommonFileDialogFilter("External clients and injectors", "*.exe"));
+        
+        if (dialog.ShowDialog() != CommonFileDialogResult.Ok) return;
+        var result = dialog.FileNames.ToList();
+
+        if (result.Count == 0) return;
+
+        if (result.Count == 1)
+        {
+            var mod = ModImporter.ImportFromPath(result[0]);
+
+            var parameters = new ModalParameters()
+                .Add(nameof(EditMod.Mod), mod);
+
+            ModalService.Show<EditMod>("Edit mod", parameters);
+        }
+        else if (result.Count > 1)
+        {
+            var mods = ModImporter.ImportFromPaths(result);
+
+            if (JiayiSettings.Instance.ModCollectionPath == string.Empty)
+            {
+                var options = new List<(string, EventCallback)>
+            {
+                ("Yes", new EventCallback(null, () =>
+                {
+                    JiayiSettings.Instance.ModCollectionPath =
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Mods");
+                    JiayiSettings.Instance.Save();
+                    ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
+                    mods.ForEach(mod => ModCollection.Current!.Add(mod, false));
+                })),
+                ("No", EventCallback.Empty)
+            };
+
+                var parameters = new ModalParameters()
+                    .Add(nameof(MessageBox.Buttons), options)
+                    .Add(nameof(MessageBox.Message),
+                        "You don't have a mod collection set up. Would you like to create one to add these mods?");
+
+                ModalService.Show<MessageBox>("No mod collection", parameters);
+                return;
+            }
+
+            mods.ForEach(mod => ModCollection.Current!.Add(mod, false));
+        }
+
+        await Modal.CloseAsync(ModalResult.Ok());
+    }
+
+    private static async Task<string> GetFinalRedirect(string url)
+    {
+        if (string.IsNullOrWhiteSpace(url))
+            return url;
+
+        var maxRedirects = 3; // prevent infinite loops
+        var newUrl = url;
+        
+        using var handler = new HttpClientHandler();
+        handler.AllowAutoRedirect = false;
+        using var client = new HttpClient(handler);
+        
+        do
+        {
+            using var message = new HttpRequestMessage(HttpMethod.Head, url);
+            var response = await client.SendAsync(message);
+            
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    return newUrl;
+                case HttpStatusCode.Redirect:
+                case HttpStatusCode.MovedPermanently:
+                case HttpStatusCode.RedirectKeepVerb:
+                case HttpStatusCode.RedirectMethod:
+                    newUrl = response.Headers.Location?.ToString();
+                    if (newUrl == null)
+                        return url;
+
+                    if (newUrl.IndexOf("://", StringComparison.Ordinal) == -1)
+                    {
+                        // Doesn't have a URL Schema, meaning it's a relative or absolute URL
+                        var u = new Uri(new Uri(url), newUrl);
+                        newUrl = u.ToString();
+                    }
+                    break;
+                default:
+                    return newUrl;
+            }
+        } while (maxRedirects-- > 0);
+
+        return newUrl;
+    }
+
+    private async Task LinkSubmitted()
+    {
+        // wait for the text box to update
+        await Task.Delay(10);
+
+        var url = _urlTextBox?.Value;
+        if (url is null or "") return;
+
+        if (!url.StartsWith("http")) url = "https://" + url;
+
+        if (JiayiSettings.Instance.FollowRedirects)
+        {
+            var redirect = await GetFinalRedirect(url);
+            url = redirect;
+
+            Uri uri;
+
+            try
+            {
+                uri = new Uri(url);
+            }
+            catch (Exception e)
+            {
+                Log.Write(this, $"GetFinalRedirect failed: {e}", Log.LogLevel.Error);
+                return;
+            }
+            
+            url = uri.AbsoluteUri;
+        }
+
+        if (ModCollection.Current != null && ModCollection.Current.HasMod(url))
+        {
+            _urlStatus = "This mod is already in your collection!";
+            return;
+        }
+
+        try
+        {
+            using var client = new HttpClient();
+
+            using var message = new HttpRequestMessage(HttpMethod.Get, url);
+            using var response = await client.SendAsync(message);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var fileName = url.Split('/')[^1];
+
+                var hasContentDisposition = response.Content.Headers.ContentDisposition is { FileName: not null };
+                var isValidFileName = fileName.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 
+                                      && (fileName.EndsWith(".exe") || fileName.EndsWith(".dll"));
+                if (!hasContentDisposition && !isValidFileName)
+                {
+                    _urlStatus = "Invalid link";
+                    return;
+                }
+
+                var name = response.Content.Headers.ContentDisposition?.FileName ?? Path.GetFileNameWithoutExtension(fileName);
+                var mod = new Mod(Path.GetFileNameWithoutExtension(name), url);
+
+                var parameters = new ModalParameters()
+                    .Add(nameof(EditMod.Mod), mod);
+
+                await Modal.CloseAsync();
+                ModalService.Show<EditMod>("Edit mod", parameters);
+
+            }
+            else
+            {
+                _urlStatus = response.StatusCode switch
+                {
+                    HttpStatusCode.NotFound => "There's nothing at this address!",
+                    HttpStatusCode.NoContent => "There's nothing at this address!",
+                    _ => "Invalid link"
+                };
+            }
+        }
+        catch
+        {
+            _urlStatus = "Invalid link";
+        }
+    }
+
+    private async Task Enter(KeyboardEventArgs obj)
+    {
+        if (obj.Key != "Enter") return;
+
+        _urlStatus = "Checking link...";
+        await LinkSubmitted();
+    }
+
+    // private void AmbrosialClicked()
+    // {
+    //     NavigationManager.NavigateTo("/Ambrosial");
+    // }
+
+}

@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+        <OutputType>Exe</OutputType>
+        <RootNamespace>JiayiLauncher</RootNamespace>
+        <UseMaui>true</UseMaui>
+        <SingleProject>true</SingleProject>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <EnableDefaultCssItems>false</EnableDefaultCssItems>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+        <!-- Display name -->
+        <ApplicationTitle>Jiayi Launcher</ApplicationTitle>
+
+        <!-- App Identifier -->
+        <ApplicationId>software.jiayi.launcher</ApplicationId>
+
+        <!-- Versions -->
+        <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+        <ApplicationVersion>1</ApplicationVersion>
+        <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
+        <AssemblyName>JiayiLauncher</AssemblyName>
+        <WindowsPackageType>None</WindowsPackageType>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU;x64</Platforms>
+        <Company>Jiayi Software</Company>
+        <Product>Jiayi Launcher</Product>
+        <AssemblyVersion>1.11.0</AssemblyVersion>
+        <FileVersion>1.11.0.0</FileVersion>
+        <NeutralLanguage>en-US</NeutralLanguage>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <MauiIcon Include="icon.svg" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Blazored.Modal" Version="7.3.1" />
+        <PackageReference Include="Blazored.Toast" Version="4.2.0" />
+        <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+        <PackageReference Include="Octokit" Version="10.0.0" />
+        <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+        <PackageReference Include="WindowsAPICodePack.Shell.CommonFileDialogs" Version="1.1.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MauiPlatformSpecificFolder Remove="Platforms\Windows\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\external\StoreLib\StoreLib\StoreLib.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="CREDITS.txt" />
+      <Content Include="CREDITS.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+</Project>

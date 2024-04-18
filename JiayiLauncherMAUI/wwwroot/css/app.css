@@ -1,0 +1,187 @@
+﻿/* REQUIRED STYLES FOR JIAYI; don't be dumb and edit this file */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+}
+
+.invisible-normalizer {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    color: var(--text-primary);
+    background-color: var(--background-primary);
+    margin: 0;
+    padding: 0;
+    transition-duration: var(--transition-speed);
+    
+    user-select: none;
+}
+
+*::-webkit-scrollbar {
+    width: 0.3rem;
+    height: 0.3rem;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--accent);
+}
+
+h1 {
+    font-weight: 900;
+}
+
+h1:focus {
+    outline: none;
+}
+
+main {
+    /*margin-left: 5.5rem;*/
+    margin-right: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: var(--transition-speed);
+}
+
+#blazor-error-ui {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: none;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+/* dumb stupid hacks to get modals to look right */
+
+.modal {
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+    width: fit-content;
+    padding: 1rem;
+    
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform-origin: top left;
+    transform: translate(-50%, -50%);
+    
+    transition: var(--transition-speed);
+    animation: modal-enter var(--transition-speed) ease;
+    
+    border-radius: var(--rounding);
+}
+
+.fade-in {
+    animation: better-fade-in var(--transition-speed) ease !important;
+}
+
+.fade-out {
+    animation: better-fade-out var(--transition-speed) ease !important;
+}
+
+.modal h3 {
+    margin-top: 0;
+}
+
+.modal button span {
+    color: var(--text-primary);
+    margin-top: 1rem;
+}
+
+.modal div:first-child {
+    padding-bottom: 0;
+}
+
+/* me when !important spam 🥶 */
+.blazored-toast {
+    border: none !important;
+    box-shadow: var(--shadow) !important;
+    border-radius: 0 !important;
+    background-color: var(--background-secondary) !important;
+    
+    animation: slide var(--transition-speed) ease !important;
+}
+
+.blazored-toast .blazored-toast-progressbar {
+    background-color: var(--background-primary) !important;
+    border-radius: 0 !important;
+    height: 3px !important;
+}
+
+.blazored-toast .blazored-toast-progressbar span {
+    background-color: var(--accent) !important;
+    border-radius: 0 !important;
+    height: 3px !important;
+    filter: none !important;
+    transition: var(--transition-speed) linear !important;
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(40vw);
+        opacity: 0;
+    }
+    
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* let's play with modal animations */
+@keyframes modal-enter {
+    from {
+        scale: 1.2;
+        opacity: 0;
+    }
+    
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+@keyframes better-fade-in {
+    from {
+        opacity: 0;
+    }
+    
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes better-fade-out {
+    from {
+        opacity: 1;
+    }
+    
+    to {
+        opacity: 0;
+    }
+}

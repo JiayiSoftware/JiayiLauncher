@@ -1,0 +1,55 @@
+﻿@page "/About"
+@using System.IO
+@using System.Reflection
+
+<h3>About</h3>
+
+<div class="about-page">
+    <i>After 2 years of development hell, we proudly present:</i>
+    
+    <div class="logo-stuff">
+        <img src="images/logo.png" alt="Jiayi Launcher logo" class="logo">
+        <i>@_version</i>
+    </div>
+    
+    <p>
+        Source available on <a href="https://github.com/JiayiSoftware/JiayiLauncher">GitHub</a> •
+        Talk to us on <a href="https://jiayisoftware.github.io/discord">Discord</a>
+    </p>
+    
+    <h4>Credits</h4>
+    @foreach(var line in _credits.Split(Environment.NewLine))
+    {
+        SetColor(line);
+        <p style="color: @_currentColor">@line</p>
+    }
+</div>
+
+@code {
+    private string _credits = string.Empty;
+    private string _currentColor = "var(--text-primary)";
+    private string _version;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var creditsPath = Path.Combine(AppContext.BaseDirectory, "CREDITS.txt");
+        _credits = await File.ReadAllTextAsync(creditsPath);
+        
+        var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
+        _version = $"v{version.Major}.{version.Minor}.{version.Build}";
+    }
+    
+    private void SetColor(string line)
+    {
+        _currentColor = true switch
+        {
+            true when line.Contains("Developer") => "red",
+            true when line.Contains("Tester") => "#e67e22",
+            true when line.Contains("Contributor") => "#2ecc71",
+            true when line.Contains("VIP") => "#f1c40f",
+            true when line.Contains("Press") => "#9b59b6",
+            true when line.Contains("greets") => "var(--text-primary)",
+            _ => _currentColor
+        };
+    }
+}

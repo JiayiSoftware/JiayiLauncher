@@ -1,0 +1,33 @@
+﻿@using JiayiLauncher.Utils
+
+<div class="escalate">
+    <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: 0.5rem; margin-bottom: 0.5rem">
+        <span class="material-symbols-sharp">security</span>
+        <p>You'll need to run Jiayi as admin to do this</p>
+        <JiayiButton OnClick="EscalateClicked">Escalate</JiayiButton>
+    </div>
+    
+    <i style="color: var(--text-grayed); font-size: 14px">
+        The launcher will restart after you escalate
+    </i>
+    
+    <br>
+    
+    <JiayiButton Style="margin-top: 1em;" Size="JiayiButton.ButtonSize.Small" OnClick="CancelClicked">Cancel</JiayiButton>
+</div>
+
+@code {
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+
+    private void EscalateClicked()
+    {
+        Privileges.Escalate();
+    }
+
+    private async Task CancelClicked()
+    {
+        await Modal.CancelAsync();
+    }
+
+}

@@ -1,0 +1,136 @@
+﻿.page-title {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.page-title h3 {
+    width: 50%;
+}
+
+.version-list-title {
+    display: none;
+}
+
+.versions-page {
+    display: flex;
+    gap: 2rem;
+}
+
+.version-cards {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    height: fit-content;
+}
+
+.cards-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.info-card {
+    background-color: var(--background-secondary);
+    box-shadow: var(--shadow);
+    width: fit-content;
+    max-width: 45vw;
+    padding: 0.7rem;
+    
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-primary);
+}
+
+.shader-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.version-list {
+    display: none;
+    width: 0;
+    opacity: 0;
+    transition: var(--transition-speed);
+}
+
+.info-card p {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.info-card h4 {
+    margin: 0 0 0.7rem;
+    font-size: 18px;
+}
+
+.info-card i {
+    color: var(--text-grayed);
+    margin-top: 0.7rem;
+    display: block;
+    font-size: 14px;
+    max-width: 25vw;
+}
+
+.popular-versions {
+    list-style: none;
+    padding: 0;
+    margin: 0.7rem 0 0;
+    border-left: 3px solid var(--background-primary);
+}
+
+.popular-version {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 0.7rem 0.3rem;
+}
+
+.popular-version-info strong {
+    font-size: 16px;
+    margin-bottom: 0.2rem;
+}
+
+.popular-version-info p {
+    color: var(--text-grayed);
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.popular-version:first-child {
+    padding-top: 0.3rem;
+}
+
+.manage-tip {
+    display: none !important;
+}
+
+@media only screen and (min-width: 1350px) { /* really wide but everyone has 1080p monitors now */
+    .version-cards {
+        width: 50%;
+    }
+    
+    .version-list {
+        display: block;
+        width: 50%;
+        opacity: 1;
+    }
+    
+    .resize-tip {
+        display: none !important;
+    }
+    
+    .manage-tip {
+        display: block !important;
+    }
+    
+    .version-list-title {
+        display: block;
+    }
+}

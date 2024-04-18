@@ -1,0 +1,45 @@
+﻿.page-title {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.page-title span {
+    color: var(--text-grayed);
+}
+
+.page-title h4 {
+    color: var(--text-grayed);
+    cursor: pointer;
+}
+
+.page-title h4:hover {
+    text-decoration: underline;
+}
+
+.page-title h3 {
+    color: var(--text-primary);
+}
+
+.separator {
+    border-top: 1px solid rgb(50, 50, 50);
+    width: 10%;
+    margin-left: 45%;
+    margin-right: 45%;
+}
+
+.current-shader {
+    height: 9rem;
+    text-align: center;
+}
+
+.shader-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.available-shaders {
+    
+}

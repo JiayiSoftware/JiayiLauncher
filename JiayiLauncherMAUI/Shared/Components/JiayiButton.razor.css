@@ -1,0 +1,47 @@
+﻿.button {
+    background-color: var(--accent);
+    color: var(--text-accent);
+    filter: brightness(1) grayscale(0);
+    padding: 1rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+    font-size: 24px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 900;
+
+    box-shadow: var(--shadow);
+    
+    cursor: pointer;
+    
+    border-radius: var(--rounding);
+    border: var(--border-thickness) solid var(--border-accent);
+
+    transition: var(--transition-speed);
+}
+
+.button:hover {
+    filter: brightness(1.5);
+}
+
+.button:active {
+    filter: brightness(0.8);
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button:disabled {
+    filter: grayscale(50%);
+    color: darkgray;
+    
+    background-color: var(--accent);
+    transform: none;
+    box-shadow: var(--shadow);
+    
+    cursor: not-allowed;
+}

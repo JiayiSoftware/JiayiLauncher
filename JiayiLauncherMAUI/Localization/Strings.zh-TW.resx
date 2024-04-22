@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <!-- STRINGS START AT LINE 93 -->
 
@@ -186,6 +186,9 @@
     </data>
     <data name="Generate" xml:space="preserve">
         <value>生成</value>
+    </data>
+    <data name="Clear" xml:space="preserve">
+        <value>清除</value>
     </data>
     <data name="Name" xml:space="preserve">
         <value>名稱</value>
@@ -1023,7 +1026,7 @@
         <value>禁用對互聯網的訪問。 某些功能可能無法使用。 重啟 嘉藝啟動器 即可完全生效。</value>
     </data>
     <data name="SettingsOfflineModeTooltip" xml:space="preserve">
-        <value>互聯網模組、下載版本和檢查更新等功能將無法使用。</value>
+        <value>互聯網mod、下載版本和檢查更新等功能將無法使用。</value>
     </data>
 
     <!-- launch settings strings -->

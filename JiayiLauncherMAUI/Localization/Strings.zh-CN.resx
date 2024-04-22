@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <!-- STRINGS START AT LINE 93 -->
 
@@ -186,6 +186,9 @@
     </data>
     <data name="Generate" xml:space="preserve">
         <value>生成</value>
+    </data>
+    <data name="Clear" xml:space="preserve">
+        <value>清除</value>
     </data>
     <data name="Name" xml:space="preserve">
         <value>名称</value>
@@ -1023,7 +1026,7 @@
         <value>禁用对互联网的访问。 某些功能可能无法使用。 重启 嘉艺启动器 即可完全生效。</value>
     </data>
     <data name="SettingsOfflineModeTooltip" xml:space="preserve">
-        <value>互联网模组、下载版本和检查更新等功能将无法使用。</value>
+        <value>互联网mod、下载版本和检查更新等功能将无法使用。</value>
     </data>
 
     <!-- launch settings strings -->

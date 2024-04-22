@@ -1,21 +1,22 @@
 ﻿@using JiayiLauncher.Features.Profiles
 @using JiayiLauncher.Settings
 @using System.IO
+@using JiayiLauncher.Localization
 @using JiayiLauncher.Utils;
 
 <div class="edit">
     <div class="edit-name" style="margin-bottom: 1em">
-        <p>Give your profile a name!</p>
+        <p>@Strings.EditProfileNameProfile</p>
         <JiayiTextBox Placeholder="@Profile!.Name" @ref="_textBox" />
     </div>
 
-    <JiayiButton OnClick="SaveClicked" Size="JiayiButton.ButtonSize.Small" Style="margin-bottom: 1em;">Save</JiayiButton>
+    <JiayiButton OnClick="SaveClicked" Size="JiayiButton.ButtonSize.Small" Style="margin-bottom: 1em;">@Strings.Save</JiayiButton>
 
     @if (JiayiSettings.Instance.ProfileCollectionPath == string.Empty)
     {
         <br>
         <i style="color: var(--text-grayed); font-size: 14px">
-            Profiles will be saved to their default location, which you can change in settings
+            @Strings.EditProfileDefaultLocationNotice
         </i>
     }
 </div>

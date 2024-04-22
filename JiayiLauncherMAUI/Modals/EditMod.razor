@@ -4,45 +4,46 @@
 @using System.IO
 @using JiayiLauncher.Features.Stats
 @using JiayiLauncher.Features.Versions
+@using JiayiLauncher.Localization
 
 <div class="edit" style="overflow-y: @(_showAdvanced ? "auto" : "none")">
     <div class="edit-name">
-        <p>Mod name</p>
+        <p>@Strings.EditModModName</p>
         <JiayiTextBox Placeholder="@Mod!.Name" @ref="_nameTextBox"/>
     </div>
     
     <div class="edit-versions" style="margin-bottom: 1em">
-        <p>Supported versions</p>
-        <JiayiDropDown Multiselect="true" Items="_supportedVersions" Name="Select versions" SelectedItems="Mod.SupportedVersions" 
+        <p>@Strings.EditModSupportedVersions</p>
+        <JiayiDropDown Multiselect="true" Items="_supportedVersions" Name="@Strings.EditModSelectVersions" SelectedItems="Mod.SupportedVersions" 
                        @ref="_versionsDropDown"/>
     </div>
     
     <div class="advanced" style="margin-bottom: 1em">
         <div class="advanced-dropdown" @onclick="_ => _showAdvanced = !_showAdvanced">
-            <i>Advanced settings</i>
+            <i>@Strings.AdvancedSettings</i>
             <span class="material-symbols-sharp">
                 @(_showAdvanced ? "expand_less" : "expand_more")
             </span>
         </div>
         @if (_showAdvanced)
         {
-            <p>Launch arguments</p>
-            <JiayiTextBox Placeholder="This does not apply to internal mods" Style="width: 97%" 
+            <p>@Strings.EditModLaunchArgs</p>
+            <JiayiTextBox Placeholder="@Strings.EditModLaunchArgsNotice" Style="width: 97%" 
                           @ref="_argumentsTextBox"/>
             
-            <p>Mod data folder name</p>
-            <JiayiTextBox Placeholder="Usually in RoamingState" Style="width: 97%" 
+            <p>@Strings.EditModDataFolder</p>
+            <JiayiTextBox Placeholder="@Strings.EditModDataFolderNotice" Style="width: 97%" 
                           Value="@Mod!.DataFolderName" @ref="_dataFolderNameTextBox"/>
         }
     </div>
     
-    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">Save</JiayiButton>
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">@Strings.Save</JiayiButton>
     
     @if (JiayiSettings.Instance!.ModCollectionPath == string.Empty)
     {
         <br>
         <i>
-            Mods will be saved to their default location, which you can change in settings
+            @Strings.EditModDefaultLocationNotice
         </i>
     }
     
@@ -50,7 +51,7 @@
     {
         <br>
         <i style="color: darkred;">
-            This mod came from an external app or website. Don't add mods from untrusted sources.
+            @Strings.EditModExternalSourceNotice
         </i>
     }
 </div>

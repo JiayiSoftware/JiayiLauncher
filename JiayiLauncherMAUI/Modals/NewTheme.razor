@@ -1,14 +1,15 @@
 ﻿@using JiayiLauncher.Appearance
 @using System.IO
+@using JiayiLauncher.Localization
 @using JiayiLauncher.Utils
 
 <div class="edit">
     <div class="name" style="margin-bottom: 1em">
-        <p>Give your theme a name!</p>
-        <JiayiTextBox Placeholder="Name" @ref="_nameTextBox" Length="(0,20)" />
+        <p>@Strings.NewThemeNameTheme</p>
+        <JiayiTextBox Placeholder="@Strings.Name" @ref="_nameTextBox" Length="(0,20)" />
     </div>
 
-    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">Save</JiayiButton>
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">@Strings.Save</JiayiButton>
 </div>
 
 @code {

@@ -53,16 +53,16 @@
         <strong style="cursor: pointer" @onclick="OpenTheme">@(PublicTheme?.Name ?? LocalTheme?.Name)</strong>
         @if (!IsLocal)
         {
-            <p>by @PublicTheme?.Author</p>
+            <p>@string.Format(Strings.ThemeCardAuthor, PublicTheme?.Author)</p>
         }
     </div>
     
     <div class="theme-controls">
-        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="ApplyTheme" Disabled="@Applying">Apply</JiayiButton>
+        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="ApplyTheme" Disabled="@Applying">@Strings.Apply</JiayiButton>
         @if (IsLocal)
         {
             <span class="material-symbols-sharp" style="z-index: 2; cursor: pointer;"
-                  title="Prepare theme upload" @onclick="PrepareThemeUpload">globe</span>
+                  title="@Strings.ThemeCardPrepareUpload" @onclick="PrepareThemeUpload">globe</span>
 
         }
         else
@@ -70,7 +70,7 @@
             @if (Directory.Exists(Path.Combine(ThemeState.RootPath, "themes", PublicTheme!.Name)))
             {
                 <span class="material-symbols-sharp" style="pointer-events: @(Applying ? "none" : "all"); z-index: 2; cursor: pointer;"
-                      title="Reinstall theme" @onclick="InstallTheme">download</span>
+                      title="@Strings.ThemeCardReinstall" @onclick="InstallTheme">download</span>
             }
 
         }
@@ -148,23 +148,23 @@
             var options = new List<(string, EventCallback)>();
             var parameters = new ModalParameters();
 
-            options.Add(("Yes", new EventCallback(null, async () =>
+            options.Add((Strings.Yes, new EventCallback(null, async () =>
             {
                 Directory.Delete(themeRoot, true);
                 await DownloadTheme(themeRoot);
                 await ApplyTheme();
             })));
             
-            options.Add(("No", new EventCallback(null, async () =>
+            options.Add((Strings.No, new EventCallback(null, async () =>
             {
                 await ChangeApplying.InvokeAsync(false);
             })));
 
             parameters
                 .Add(nameof(MessageBox.Buttons), options)
-                .Add(nameof(MessageBox.Message), "Are you sure you want to overwrite this theme? All of your local changes will be lost.");
+                .Add(nameof(MessageBox.Message), Strings.ThemeCardOverwriteConfirm);
 
-            var modal = ModalService.Show<MessageBox>("Themes", parameters);
+            var modal = ModalService.Show<MessageBox>(Strings.ThemesMenuName, parameters);
             if ((await modal.Result).Cancelled)
                 await ChangeApplying.InvokeAsync(false);
         }
@@ -232,7 +232,7 @@
         var parameters = new ModalParameters()
             .Add(nameof(PrepareThemePublish.ThemeName), LocalTheme!.Name);
 
-        var modal = ModalService.Show<PrepareThemePublish>("Publish theme", parameters);
+        var modal = ModalService.Show<PrepareThemePublish>(Strings.ThemePublishTitle, parameters);
         await modal.Result;
     }
 

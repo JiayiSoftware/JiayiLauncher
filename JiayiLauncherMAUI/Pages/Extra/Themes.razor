@@ -4,16 +4,16 @@
 @using JiayiLauncher.Shared.Components.Mods
 @using JiayiLauncher.Shared.Components.Themes
 
-<h3>Themes</h3>
+<h3>@Strings.ThemesMenuName</h3>
 
 <div class="find-tools">
     <span class="material-symbols-sharp">search</span>
-    <JiayiTextBox Placeholder="Search themes" @ref="_searchBox" Changed="StateHasChanged" />
+    <JiayiTextBox Placeholder="@Strings.ThemesMenuSearch" @ref="_searchBox" Changed="StateHasChanged" />
 
     <div class="separator"></div>
 
     <span class="material-symbols-sharp">filter_list</span>
-    <p class="filter-by">Filter by:</p>
+    <p class="filter-by">@Strings.FilterBy</p>
     @foreach (var rawTag in ThemeMetadata.RAW_TAGS)
     {
         <JiayiFilter Changed="() => FilterChanged(rawTag)">@rawTag</JiayiFilter>
@@ -21,7 +21,7 @@
 
     <div class="separator"></div>
 
-    <span class="material-symbols-sharp refresh" onclick="LoadThemes">refresh</span>
+    <span class="material-symbols-sharp refresh" title="@Strings.ThemesMenuRefresh" onclick="LoadThemes">refresh</span>
 
     <p class="invisible-normalizer">invisible</p>
 </div>
@@ -66,7 +66,7 @@
     
     @if (_searchResults == 0 && _themes?.Length > 0)
     {
-        <p style="text-align: center; margin-top: 0;">No results found.</p>
+        <p style="text-align: center; margin-top: 0;">@Strings.ThemesMenuNoThemes</p>
     }
 
     <button class="add-button" @onclick="CreateNewTheme">
@@ -119,7 +119,7 @@
     {
         var parameters = new ModalParameters();
 
-        var modal = ModalService.Show<NewTheme>("Create theme", parameters);
+        var modal = ModalService.Show<NewTheme>(Strings.NewThemeName, parameters);
         await modal.Result;
 
         LoadThemes();

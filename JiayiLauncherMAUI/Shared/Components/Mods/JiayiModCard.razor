@@ -21,7 +21,7 @@
                 {
                     <span class="material-symbols-sharp"
                           style="color: darkorange;"
-                          title="This mod is broken; it doesn't exist on the web anymore.">
+                          title="@Strings.ModCardInvalidLink">
                         error
                     </span>
                 }
@@ -29,7 +29,7 @@
                 {
                     <span class="material-symbols-sharp"
                           style="color: darkorange;"
-                          title="This mod is broken; the file is missing from the mods directory.">
+                          title="@Strings.ModCardMissingFile">
                         error
                     </span>
                 }
@@ -40,53 +40,53 @@
                 {
                     if (InternetManager.OfflineMode)
                     {
-                        <span class="material-symbols-sharp" title="Internet mods are disabled in offline mode"
+                        <span class="material-symbols-sharp" title="@Strings.ModCardOffline"
                               style="color: var(--text-grayed)">cloud_off</span>
                     }
                     else
                     {
-                        <span class="material-symbols-sharp" title="Downloaded from the web">cloud_download</span>
+                        <span class="material-symbols-sharp" title="@Strings.ModCardInternetMod">cloud_download</span>
                     }
                 }
                 else
                 {
-                    <span class="material-symbols-sharp" title="Stored locally">hard_drive_2</span>
+                    <span class="material-symbols-sharp" title="@Strings.ModCardLocalMod">hard_drive_2</span>
                 }
             }
         </div>
     </div>
-    <p class="mod-version">Works on @(string.Join(", ", Mod.SupportedVersions).ToLower())</p>
+    <p class="mod-version">@string.Format(Strings.ModCardSupportedVersions, string.Join(", ", Mod.SupportedVersions).ToLower())</p>
     <div class="mod-controls" style="@(_expanded ? "margin-left: -7rem" : "")">
         @if (_isValid)
         {
             if (Mod.FromInternet && InternetManager.OfflineMode)
             {
-                <JiayiButton Size="JiayiButton.ButtonSize.Small" Disabled="true">Launch</JiayiButton>
+                <JiayiButton Size="JiayiButton.ButtonSize.Small" Disabled="true">@Strings.Launch</JiayiButton>
             }
             else
             {
                 <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" Disabled="@_launching"
                              Size="JiayiButton.ButtonSize.Small">
                     <div class="loading-bar" style="width: @Launcher.LaunchProgress%; opacity: @_showLoadingBar;"></div>
-                    Launch
+                    @Strings.Launch
                 </JiayiButton>
             }
 
             <div class="right">
-                <span class="material-symbols-sharp" title="@(_expanded ? "Hide controls" : "Show controls")" 
+                <span class="material-symbols-sharp" title="@(_expanded ? Strings.ModCardHideControls : Strings.ModCardShowControls)" 
                       @onclick="() => _expanded = !_expanded">
                     @(_expanded ? "remove" : "more_horiz")
                 </span>
                 
-                <span class="material-symbols-sharp" title="Manage configs" @onclick="ConfigManagerClicked">folder_managed</span>
-                <span class="material-symbols-sharp" title="Edit mod" @onclick="EditClicked">edit</span>
+                <span class="material-symbols-sharp" title="@Strings.ModCardManageConfigs" @onclick="ConfigManagerClicked">folder_managed</span>
+                <span class="material-symbols-sharp" title="@Strings.ModCardEditMod" @onclick="EditClicked">edit</span>
                 <span class="material-symbols-sharp" style="color: darkred"
-                      title="Delete mod (irreversible)" @onclick="DeleteClicked">delete</span>
+                      title="@Strings.ModCardDeleteMod" @onclick="DeleteClicked">delete</span>
             </div>
         }
         else
         {
-            <JiayiButton OnClick="DeleteNoConfirm" Size="JiayiButton.ButtonSize.Small">Delete</JiayiButton>
+            <JiayiButton OnClick="DeleteNoConfirm" Size="JiayiButton.ButtonSize.Small">@Strings.Remove</JiayiButton>
         }
     </div>
 </div>
@@ -122,19 +122,19 @@
         {
             var options = new List<(string, EventCallback)>
             {
-                ("Yes", new EventCallback(null, async () =>
+                (Strings.Yes, new EventCallback(null, async () =>
                 {
                     await FinishLaunch();
                 })),
-                ("No", EventCallback.Empty)
+                (Strings.No, EventCallback.Empty)
             };
 
             parameters
                 .Add(nameof(MessageBox.Buttons), options)
                 .Add(nameof(MessageBox.Message),
-                    $"Launching more than one mod at a time can make your game unstable. Are you sure you want to launch {Mod.Name}?");
+                    string.Format(Strings.ModCardLaunchMultipleModsConfirm, Mod.Name));
 
-            ModalService.Show<MessageBox>("Warning", parameters);
+            ModalService.Show<MessageBox>(Strings.Warning, parameters);
             return;
         }
         
@@ -155,16 +155,16 @@
         {
             // only cases that are errors
             case Launcher.LaunchResult.DownloadFailed:
-                parameters.Add(nameof(MessageBox.Message), "Failed to download mod. Please try again later.");
-                ModalService.Show<MessageBox>("Download failed", parameters);
+                parameters.Add(nameof(MessageBox.Message), Strings.ModCardDownloadFailed);
+                ModalService.Show<MessageBox>(Mod.Name, parameters);
                 break;
             case Launcher.LaunchResult.ModNotFound:
-                parameters.Add(nameof(MessageBox.Message), "Your mod was deleted during launch. Try turning off your antivirus.");
-                ModalService.Show<MessageBox>("Mod not found", parameters);
+                parameters.Add(nameof(MessageBox.Message), Strings.ModCardModNotFound);
+                ModalService.Show<MessageBox>(Mod.Name, parameters);
                 break;
             case Launcher.LaunchResult.GameNotFound:
-                parameters.Add(nameof(MessageBox.Message), "The game was closed during launch. Turn off your antivirus in case it's terminating the game.");
-                ModalService.Show<MessageBox>("Game closed", parameters);
+                parameters.Add(nameof(MessageBox.Message), Strings.ModCardGameNotFound);
+                ModalService.Show<MessageBox>(Mod.Name, parameters);
                 break;
             case Launcher.LaunchResult.VersionMismatch:
                 // something different
@@ -172,27 +172,26 @@
                 
                 var buttons = new List<(string, EventCallback)>
                 {
-                    ("Yes", new EventCallback(null, () =>
+                    (Strings.Yes, new EventCallback(null, () =>
                     {
                         NavigationManager.NavigateTo($"/Versions/Full/{supportedVersion}");
                     })),
-                    ("No", EventCallback.Empty)
+                    (Strings.No, EventCallback.Empty)
                 };
 
                 parameters
                     .Add(nameof(MessageBox.Buttons), buttons)
-                    .Add(nameof(MessageBox.Message),
-                        $"{Mod.Name} doesn't support your current game version. Would you like to switch to {supportedVersion}?");
+                    .Add(nameof(MessageBox.Message), string.Format(Strings.ModCardVersionMismatch, Mod.Name, supportedVersion));
 
-                ModalService.Show<MessageBox>("Unsupported version", parameters);
+                ModalService.Show<MessageBox>(Mod.Name, parameters);
                 break;
             case Launcher.LaunchResult.InjectionFailed:
-                parameters.Add(nameof(MessageBox.Message), "Your mod could not be injected. Try turning off your antivirus, and check logs for extended error information.");
-                ModalService.Show<MessageBox>("Injection failed", parameters);
+                parameters.Add(nameof(MessageBox.Message), Strings.ModCardInjectionFailed);
+                ModalService.Show<MessageBox>(Mod.Name, parameters);
                 break;
             case Launcher.LaunchResult.AlreadyLoaded:
                 var toastParams = new ToastParameters()
-                    .Add(nameof(JiayiToast.Title), "This mod is already loaded!")
+                    .Add(nameof(JiayiToast.Title), Strings.ModCardAlreadyLoaded)
                     .Add(nameof(JiayiToast.Level), ToastLevel.Warning);
             
                 ToastService.ShowToast<JiayiToast>(toastParams, settings =>
@@ -211,26 +210,26 @@
         var parameters = new ModalParameters()
             .Add(nameof(EditMod.Mod), Mod);
 
-        ModalService.Show<EditMod>("Edit mod", parameters);
+        ModalService.Show<EditMod>(Strings.EditModName, parameters);
     }
 
     private void DeleteClicked()
     {
         var options = new List<(string, EventCallback)>
         {
-            ("Yes", new EventCallback(null, () =>
+            (Strings.Yes, new EventCallback(null, () =>
             {
                 Mod.Delete();
                 Mods.Instance?.Refresh();
             })),
-            ("No", EventCallback.Empty)
+            (Strings.No, EventCallback.Empty)
         };
 
         var parameters = new ModalParameters()
             .Add(nameof(MessageBox.Buttons), options)
-            .Add(nameof(MessageBox.Message), $"Are you sure you want to delete {Mod.Name}? This action is irreversible.");
+            .Add(nameof(MessageBox.Message), string.Format(Strings.ModCardDeleteModConfirm, Mod.Name));
 
-        ModalService.Show<MessageBox>("Delete mod", parameters);
+        ModalService.Show<MessageBox>(Mod.Name, parameters);
     }
 
     private void DeleteNoConfirm()
@@ -244,7 +243,7 @@
         var parameters = new ModalParameters()
             .Add(nameof(ConfigManager.Mod), Mod);
         
-        ModalService.Show<ConfigManager>("Config manager", parameters);
+        ModalService.Show<ConfigManager>(Strings.ConfManName, parameters);
     }
 
 }

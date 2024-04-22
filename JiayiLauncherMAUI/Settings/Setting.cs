@@ -6,13 +6,13 @@ namespace JiayiLauncher.Settings;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property)]
 public class SettingAttribute : Attribute
 {
-	[JsonIgnore] public string Name { get; }
-	[JsonIgnore] public string Category { get; }
-	[JsonIgnore] public string Description { get; }
+	[JsonIgnore] public string Name { get; set; }
+	[JsonIgnore] public string Category { get; set; }
+	[JsonIgnore] public string Description { get; set; }
 	[JsonIgnore] public string Dependency { get; }
 	[JsonIgnore] public string Tooltip { get; set; }
-	[JsonIgnore] public bool Confirm { get; set; }
-	[JsonIgnore] public bool CanReset { get; set; }
+	[JsonIgnore] public bool Confirm { get; }
+	[JsonIgnore] public bool CanReset { get; }
 	
 	public SettingAttribute(string name, string category, string description,
 		// optionals

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Globalization;
 using System.Security.Principal;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Discord;
@@ -19,6 +20,9 @@ public partial class MainPage : ContentPage
     
     public MainPage()
     {
+        // set ui culture for testing
+        CultureInfo.CurrentUICulture = new CultureInfo("en-US", false);
+        
         InitializeComponent();
         Log.CreateLog();
 

@@ -9,93 +9,97 @@
 
 @inject NavigationManager NavigationManager
 
-<h3>Good @DetermineTimeOfDay()</h3>
+<h3>@DetermineTimeOfDay()</h3>
 
 <div class="dashboard">
     <div class="dashboard-cards">
         <div class="cards-row">
             <div class="card">
-                <h4>Total play time</h4>
-                <p>@($"{_stats.TotalPlayTime.TotalHours:F2} hours")</p>
-                <i>with Jiayi</i>
+                <h4>@Strings.DashboardTotalPlaytime</h4>
+                @* <p>@($"{_stats.TotalPlayTime.TotalHours:F2} hours")</p> *@
+                <p>@string.Format(Strings.DashboardHours, $"{_stats.TotalPlayTime.TotalHours:F2}")</p>
+                <i>@Strings.DashboardWithJiayi</i>
             </div>
             
             <div class="card">
-                <h4>Your current version</h4>
+                <h4>@Strings.DashboardCurrentVersion</h4>
                 <p>@_version</p>
                 <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-top: 0.7rem;" OnClick="VersionClicked">
-                    Switch versions
+                    @Strings.DashboardSwitchVersions
                 </JiayiButton>
             </div>
             
             <div class="card">
-                <h4>Profiles</h4>
+                <h4>@Strings.DashboardProfiles</h4>
                 @if (ProfileCollection.Current == null || ProfileCollection.Current.Profiles.Count == 0)
                 {
-                    <i>No profiles</i>
+                    <i>@Strings.DashboardProfilesSaved</i>
                 }
                 else
                 {
                     <p>
-                        @ProfileCollection.Current.Profiles.Count @(" ") 
-                        @Pluralize(ProfileCollection.Current.Profiles.Count, "profile")
+                        @* @ProfileCollection.Current.Profiles.Count @(" ")  *@
+                        @* @Pluralize(ProfileCollection.Current.Profiles.Count, "profile") *@
+                        @string.Format(Strings.DashboardProfilesSaved, ProfileCollection.Current.Profiles.Count)
                     </p>
                 }
                 
                 <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-top: 0.7rem;" OnClick="ProfileClicked">
-                    View profiles
+                    @Strings.DashboardViewProfiles
                 </JiayiButton>
             </div>
         </div>
         
         <div class="cards-row">
             <div class="card">
-                <h4>Most recent mod</h4>
+                <h4>@Strings.DashboardRecentMod</h4>
                 
                 @if (_stats.MostRecentMod == null)
                 {
-                    <i>Launch a mod to see it here</i>
+                    <i>@Strings.DashboardNoMod</i>
                 }
                 else
                 {
                     <JiayiModCard Mod="_stats.MostRecentMod" />
-                    <i>@($"{_stats.MostRecentMod.PlayTime.TotalHours:F2} hours played")</i>
+                    @* <i>@($"{_stats.MostRecentMod.PlayTime.TotalHours:F2} hours played")</i> *@
+                    <i>@string.Format(Strings.DashboardHours, $"{_stats.MostRecentMod.PlayTime.TotalHours:F2}")</i>
                 }
             </div>
             
             <div class="card">
-                <h4>Most played mod</h4>
+                <h4>@Strings.DashboardPlayedMod</h4>
 
                 @if (_stats.MostPlayedMod == null)
                 {
-                    <i>Launch a mod to see it here</i>
+                    <i>@Strings.DashboardNoMod</i>
                 }
                 else
                 {
                     <JiayiModCard Mod="_stats.MostPlayedMod" />
-                    <i>@($"{_stats.MostPlayedMod.PlayTime.TotalHours:F2} hours played")</i>
+                    @* <i>@($"{_stats.MostPlayedMod.PlayTime.TotalHours:F2} hours played")</i> *@
+                    <i>@string.Format(Strings.DashboardHours, $"{_stats.MostPlayedMod.PlayTime.TotalHours:F2}")</i>
                 }
             </div>
             
             <div class="card">
-                <h4>Our community</h4>
+                <h4>@Strings.DashboardOurCommunity</h4>
                 <div class="links">
-                    <a href="https://jiayisoftware.github.io/" title="Jiayi Software's website">
+                    <a href="https://jiayisoftware.github.io/" title="@Strings.DashboardWebsite">
                         <span class="material-symbols-sharp">language</span>
                     </a>
-                    <a href="https://github.com/JiayiSoftware/JiayiLauncher" title="Jiayi Launcher on GitHub">
+                    <a href="https://github.com/JiayiSoftware/JiayiLauncher" title="@Strings.DashboardGitHub">
                         <svg width="40px" height="40px" viewBox="0 0 40 40">
                             <use href="images/github.svg#github" />
                         </svg>
                     </a>
-                    <a href="https://jiayisoftware.github.io/discord" title="Talk to us on Discord">
+                    <a href="https://jiayisoftware.github.io/discord" title="@Strings.DashboardDiscord">
                         <svg width="40px" height="40px" viewBox="0 0 40 40">
                             <use href="images/discord.svg#discord" />
                         </svg>
                     </a>
                 </div>
                 <i style="max-width: 9.7rem;">
-                    Jiayi Launcher is <a href="/About">open source software</a>
+                    @Strings.DashboardJiayiLauncherIs <a href="/About">@Strings.DashboardOSS</a>
                 </i>
             </div>
         </div>
@@ -129,9 +133,9 @@
         var hour = DateTime.Now.Hour;
         if (hour is >= 5 and < 12)
         {
-            return "morning";
+            return Strings.DashboardMorning;
         }
-        return hour is >= 12 and < 17 ? "afternoon" : "evening";
+        return hour is >= 12 and < 17 ? Strings.DashboardAfternoon : Strings.DashboardEvening;
     }
     
     private string Pluralize(int i, string s) => i == 1 ? s : s + "s";

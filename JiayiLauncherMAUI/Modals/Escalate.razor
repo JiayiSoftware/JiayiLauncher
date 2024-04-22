@@ -1,19 +1,20 @@
-﻿@using JiayiLauncher.Utils
+﻿@using JiayiLauncher.Localization
+@using JiayiLauncher.Utils
 
 <div class="escalate">
     <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: 0.5rem; margin-bottom: 0.5rem">
         <span class="material-symbols-sharp">security</span>
-        <p>You'll need to run Jiayi as admin to do this</p>
-        <JiayiButton OnClick="EscalateClicked">Escalate</JiayiButton>
+        <p>@Strings.PrivEscText</p>
+        <JiayiButton OnClick="EscalateClicked">@Strings.PrivEscButton</JiayiButton>
     </div>
     
     <i style="color: var(--text-grayed); font-size: 14px">
-        The launcher will restart after you escalate
+        @Strings.PrivEscRestartNotice
     </i>
     
     <br>
     
-    <JiayiButton Style="margin-top: 1em;" Size="JiayiButton.ButtonSize.Small" OnClick="CancelClicked">Cancel</JiayiButton>
+    <JiayiButton Style="margin-top: 1em;" Size="JiayiButton.ButtonSize.Small" OnClick="CancelClicked">@Strings.Cancel</JiayiButton>
 </div>
 
 @code {

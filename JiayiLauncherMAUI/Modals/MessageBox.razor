@@ -1,4 +1,5 @@
-﻿<div>
+﻿@using JiayiLauncher.Localization
+<div>
     <p>
         @foreach (var line in Message.Split(Environment.NewLine))
         {
@@ -22,7 +23,7 @@
     [Parameter]
     public List<(string, EventCallback)> Buttons { get; set; } = new()
     {
-        ("Okay", EventCallback.Empty)
+        (Strings.Okay, EventCallback.Empty)
     };
 
     [Parameter]

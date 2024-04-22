@@ -4,31 +4,32 @@
 @using System.Drawing
 @using System.Globalization
 
-@inject NavigationManager nav;
-
 <!--suppress CssInvalidPropertyValue -->
-<h3>Settings</h3>
+<h3>@Strings.SettingsMenuName</h3>
 
 <div class="tabs">
     <span class="material-symbols-sharp">sort</span>
-    <p>Categories:</p>
+    <p>@Strings.SettingsCategories</p>
     @foreach (var category in JiayiSettings.Instance!.GetCategories())
     {
         @* i sincerely hope this is the last bit of javascript i have to write for this project *@
-        <a class="tab-button" onclick="document.getElementById('@category.ToLower()').scrollIntoView({behavior: 'smooth'})">@category</a>
+        <a class="tab-button" onclick="document.getElementById('@category.ToLower()').scrollIntoView({behavior: 'smooth'})">
+            @JiayiSettings.Instance.GetLocalizedCategory(category)
+        </a>
     }
     
-    <a class="tab-button" href="About">About</a>
+    <a class="tab-button" href="About">@Strings.SettingsAbout</a>
 </div>
 
 <div class="settings-container">
     @foreach (var category in JiayiSettings.Instance.GetCategories())
     {
-        <h4 id="@category.ToLower()">@category</h4>
+        <h4 id="@category.ToLower()">@JiayiSettings.Instance.GetLocalizedCategory(category)</h4>
                     
         @foreach (var setting in JiayiSettings.Instance.GetSettingsInCategory(category))
         {
             var settingInfo = setting.GetCustomAttribute<SettingAttribute>();
+            var localizedSetting = JiayiSettings.Instance.GetLocalizedSetting(setting);
             var dependentSetting = JiayiSettings.Instance.GetSetting(settingInfo!.Dependency);
             if (dependentSetting == null 
                 || (dependentSetting.PropertyType == typeof(bool) && (bool?)dependentSetting.GetValue(JiayiSettings.Instance) == true))
@@ -36,19 +37,19 @@
                 <div class="setting">
                     <div>
                         <div class="setting-title">
-                            <strong>@settingInfo.Name</strong>
+                            <strong>@localizedSetting.Name</strong>
                             @if (settingInfo.CanReset && !JiayiSettings.Instance.IsDefault(setting))
                             {
-                                <span class="material-symbols-sharp extra-button" title="Reset to default" 
+                                <span class="material-symbols-sharp extra-button" title="@Strings.SettingsResetDefault" 
                                       @onclick="() => JiayiSettings.Instance.ResetToDefault(setting)">undo</span>
                             }
-                            @if (settingInfo.Tooltip != string.Empty)
+                            @if (localizedSetting.Tooltip != string.Empty)
                             {
-                                <span class="material-symbols-sharp extra-button" title="More info" 
-                                      @onclick="() => ShowTooltip(settingInfo.Tooltip)">help_outline</span>
+                                <span class="material-symbols-sharp extra-button" title="@Strings.SettingsMoreInfo" 
+                                      @onclick="() => ShowTooltip(localizedSetting.Tooltip)">help_outline</span>
                             }
                         </div>
-                        <p class="setting-description">@settingInfo.Description</p>
+                        <p class="setting-description">@localizedSetting.Description</p>
                     </div>
 
                     @switch (true)
@@ -60,7 +61,7 @@
                         case true when setting.PropertyType == typeof(string):
                             // feeling a bit silly today
                             var random = Random.Shared.Next(1, 1000);
-                            var placeholder = random == 1 ? "Peekaboo!" : settingInfo.Name;
+                            var placeholder = random == 1 ? Strings.SettingsEasterEggText : localizedSetting.Name;
                             <JiayiTextBox 
                                 Placeholder="@placeholder" 
                                 Style="width: -webkit-fill-available; max-width: 40%;" 
@@ -126,17 +127,17 @@
         {
             var options = new List<(string, EventCallback)>
             {
-                ("Yes", new EventCallback(null, () =>
+                (Strings.Yes, new EventCallback(null, () =>
                 {
                     setting.SetValue(JiayiSettings.Instance, value);
                     JiayiSettings.Instance!.Save();
                 })),
-                ("No", EventCallback.Empty)
+                (Strings.No, EventCallback.Empty)
             };
             
             var parameters = new ModalParameters()
                 .Add(nameof(MessageBox.Buttons), options)
-                .Add(nameof(MessageBox.Message), "Are you sure you want to enable this setting?");
+                .Add(nameof(MessageBox.Message), Strings.SettingsConfirmEnable);
             
             ModalService.Show<MessageBox>(settingInfo.Name, parameters);
             return;
@@ -187,7 +188,7 @@
             
             var parameters = new ModalParameters()
                 .Add(nameof(MessageBox.Buttons), options)
-                .Add(nameof(MessageBox.Message), "Are you sure you want to do this?");
+                .Add(nameof(MessageBox.Message), Strings.SettingsConfirmAction);
             
             ModalService.Show<MessageBox>(settingInfo.Name, parameters);
             return;
@@ -201,7 +202,7 @@
         var parameters = new ModalParameters()
             .Add(nameof(MessageBox.Message), tt);
         
-        ModalService.Show<MessageBox>("About this setting", parameters);
+        ModalService.Show<MessageBox>(Strings.SettingsAboutSettingTitle, parameters);
     }
 
 }

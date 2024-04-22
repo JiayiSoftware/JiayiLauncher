@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Management.Deployment;
 using Windows.System;
+using JiayiLauncher.Localization;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 
@@ -28,7 +29,7 @@ public static class PackageData
 	public static async Task<string> GetVersion()
 	{
 		var minecraftApp = await GetPackage();
-		if (minecraftApp == null) return "Unknown";
+		if (minecraftApp == null) return Strings.Unknown;
 		var version = minecraftApp.AppInfo.Package.Id.Version;
 		
 		// the game does it weird

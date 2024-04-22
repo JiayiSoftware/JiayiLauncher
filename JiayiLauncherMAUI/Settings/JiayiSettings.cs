@@ -16,6 +16,7 @@ using Blazored.Toast.Services;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Versions;
+using JiayiLauncher.Localization;
 using JiayiLauncher.Shared;
 using JiayiLauncher.Shared.Components.Toasts;
 using JiayiLauncher.Utils;
@@ -25,7 +26,6 @@ using WindowsAPICodePack.Dialogs;
 using Color = System.Drawing.Color;
 
 namespace JiayiLauncher.Settings;
-
 
 [Serializable]
 public class JiayiSettings
@@ -60,7 +60,7 @@ public class JiayiSettings
     [JsonIgnore]
     [Setting("Export collection", "General",
         "Export your mod collection to a file. You can share this with other people.")]
-    public (string, Action) ExportCollection { get; set; } = ("Export", () =>
+    public (string, Action) ExportCollection { get; set; } = (Strings.Export, () =>
     {
         // var dialog = new SaveFileDialog
         // {
@@ -75,9 +75,9 @@ public class JiayiSettings
         //
         // if (ModCollection.Current != null) ModCollection.Current.Export(path);
         
-        using var dialog = new CommonSaveFileDialog("Export mod collection");
+        using var dialog = new CommonSaveFileDialog(Strings.SettingsExportCollection);
         dialog.DefaultExtension = "jiayi";
-        dialog.Filters.Add(new CommonFileDialogFilter("Jiayi mod collection", "*.jiayi"));
+        dialog.Filters.Add(new CommonFileDialogFilter(Strings.SettingsExportCollectionFilter, "*.jiayi"));
         dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         
         if (dialog.ShowDialog() != CommonFileDialogResult.Ok) return;
@@ -94,11 +94,10 @@ public class JiayiSettings
 
     [JsonIgnore]
     [Setting("Update version list", "General", "Update the list of available versions.")]
-    public (string, Action) UpdateVersionList { get; set; } = ("Update", () =>
+    public (string, Action) UpdateVersionList { get; set; } = (Strings.Update, () =>
     {
         Task.Run(() => VersionList.UpdateVersions(true));
-    }
-    );
+    });
 
     [Setting("Shader folder path", "General", "The path to the folder containing your shaders.", canReset: false)]
     public string ShadersPath { get; set; } = string.Empty;
@@ -180,7 +179,7 @@ public class JiayiSettings
     
     [JsonIgnore]
     [Setting("Select background image", "Appearance", "Select a background image from your computer.", "UseBackgroundImage")]
-    public (string, Action) SelectBackground { get; set; } = ("Select", async () =>
+    public (string, Action) SelectBackground { get; set; } = (Strings.Select, async () =>
     {
         // var dialog = new OpenFileDialog
         // {
@@ -192,9 +191,9 @@ public class JiayiSettings
         // };
         // if (dialog.ShowDialog() != true) return;
 
-        using var dialog = new CommonOpenFileDialog("Select background image");
-        dialog.Filters.Add(new CommonFileDialogFilter("Image files", "*.png;*.jpg;*.jpeg;*.gif;*.bmp"));
-        dialog.Filters.Add(new CommonFileDialogFilter("Video files", "*.mp4;*.mov;*.webm"));
+        using var dialog = new CommonOpenFileDialog(Strings.SettingsSelectBackground);
+        dialog.Filters.Add(new CommonFileDialogFilter(Strings.SettingsSelectBackgroundImageFilter, "*.png;*.jpg;*.jpeg;*.gif;*.bmp"));
+        dialog.Filters.Add(new CommonFileDialogFilter(Strings.SettingsSelectBackgroundVideoFilter, "*.mp4;*.mov;*.webm"));
         dialog.DefaultExtension = "png";
         dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         
@@ -239,7 +238,7 @@ public class JiayiSettings
     [Setting("Generate palette from background", "Appearance",
         "Create a color palette based on your background image. Videos are NOT supported.", "UseBackgroundImage",
         "Palette generation is memory intensive and may take a while. Every generated palette is slightly different.")]
-    public (string, Action) GeneratePalette { get; set; } = ("Generate", () =>
+    public (string, Action) GeneratePalette { get; set; } = (Strings.Generate, () =>
     {
         if (!Instance!.UseBackgroundImage) return;
         PaletteGenerator.CreatePalette();
@@ -300,7 +299,7 @@ public class JiayiSettings
     [JsonIgnore]
     [Setting("Show theme", "Appearance",
         "Reveal your theme in File Explorer. You can share this with other people or use other people's themes.")]
-    public (string, Action) OpenTheme { get; set; } = ("Open", () =>
+    public (string, Action) OpenTheme { get; set; } = (Strings.Open, () =>
     {
         Process.Start(new ProcessStartInfo
         {
@@ -313,7 +312,7 @@ public class JiayiSettings
 
     [JsonIgnore]
     [Setting("Restore default theme", "Appearance", "Go back to Jiayi's default theme.", confirm: true)]
-    public (string, Action) RestoreDefaultTheme { get; set; } = ("Restore", () =>
+    public (string, Action) RestoreDefaultTheme { get; set; } = (Strings.Restore, () =>
     {
         var appearanceSettings = Default.GetSettingsInCategory("Appearance")
             .Select(setting => typeof(JiayiSettings).GetProperty(setting.Name));
@@ -332,7 +331,7 @@ public class JiayiSettings
 
     [JsonIgnore]
     [Setting("Themes menu", "Appearance", "Local and downloadable themes created by other users.", canReset: false)]
-    public (string, string) OpenExternalThemePage { get; set; } = ("Open Themes", "/themes");
+    public (string, string) ThemesMenu { get; set; } = (Strings.Open, "/themes");
     
     public string Theme { get; set; } = ".local/default";
     
@@ -352,10 +351,10 @@ public class JiayiSettings
     public bool RichPresence { get; set; } = true;
 
     [Setting("Top text", "Discord", "The top-most status text.", "RichPresence")]
-    public string DiscordDetails { get; set; } = "Playing with %mod_name%";
+    public string DiscordDetails { get; set; } = Strings.SettingsDiscordDetailsDefault;
 
     [Setting("Bottom text", "Discord", "The bottom-most status text.", "RichPresence")]
-    public string DiscordState { get; set; } = "on %game_version%";
+    public string DiscordState { get; set; } = Strings.SettingsDiscordStateDefault;
 
     [Setting("Show elapsed time", "Discord", "Show how long you've been playing for.", "RichPresence")]
     public bool DiscordShowElapsedTime { get; set; } = true;
@@ -374,10 +373,10 @@ public class JiayiSettings
     public string DiscordSmallImageKey { get; set; } = "minecraft";
 
     [Setting("Large image text", "Discord", "The large image text to use for rich presence.", "RichPresence")]
-    public string DiscordLargeImageText { get; set; } = "Jiayi Launcher";
+    public string DiscordLargeImageText { get; set; } = Strings.JiayiLauncher;
 
     [Setting("Small image text", "Discord", "The small image text to use for rich presence.", "RichPresence")]
-    public string DiscordSmallImageText { get; set; } = "Minecraft for Windows";
+    public string DiscordSmallImageText { get; set; } = Strings.MinecraftForWindows;
 
     // update settings
     [Setting("Enable the updater", "Update", "Allow the launcher to check for and download updates.")]
@@ -429,7 +428,7 @@ public class JiayiSettings
 
     [JsonIgnore]
     [Setting("Open log folder", "Logs", "Open the log folder.")]
-    public (string, Action) OpenLogFolder { get; set; } = ("Open", () =>
+    public (string, Action) OpenLogFolder { get; set; } = (Strings.Open, () =>
     {
         var info = new ProcessStartInfo
         {
@@ -444,7 +443,7 @@ public class JiayiSettings
 
     [JsonIgnore]
     [Setting("Clear previous logs", "Logs", "Clear all previous log files.", confirm: true)]
-    public (string, Action) ClearPreviousLogs { get; set; } = ("Clear", () =>
+    public (string, Action) ClearPreviousLogs { get; set; } = (Strings.Clear, () =>
     {
         var path = Path.Combine(Log.LogPath, "Previous");
         if (!Directory.Exists(path)) return;
@@ -491,21 +490,21 @@ public class JiayiSettings
         // in case of failure
         var toastParams = new ToastParameters()
             .Add(nameof(JiayiToast.Level), ToastLevel.Warning)
-            .Add(nameof(JiayiToast.Title), "Settings")
+            .Add(nameof(JiayiToast.Title), Strings.SettingsMenuName)
             .Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
             {
                 builder.OpenElement(0, "p");
-                builder.AddContent(1, "Your settings file was corrupted or invalid.");
+                builder.AddContent(1, Strings.SettingsInvalidSettingsText);
                 builder.CloseElement();
 
                 builder.OpenElement(2, "p");
                 builder.AddContent(3,
-                    "A new settings file has been created, and your previous settings have been lost.");
+                    Strings.SettingsInvalidSettingsText2);
                 builder.CloseElement();
             }))
             .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
             {
-                ("Okay", EventCallback.Empty)
+                (Strings.Okay, EventCallback.Empty)
             });
 
         try
@@ -583,6 +582,31 @@ public class JiayiSettings
         }
 
         return Equals(defaultValue, currentValue);
+    }
+    
+    public string GetLocalizedCategory(string category)
+    {
+        var strings = typeof(Strings).GetProperties(BindingFlags.NonPublic | BindingFlags.Static);
+        return strings.FirstOrDefault(s => s.Name == "Settings" + category)?.GetValue(null) as string ?? category;
+    }
+    
+    public LocalizedSetting GetLocalizedSetting(PropertyInfo property)
+    {
+        var strings = typeof(Strings).GetProperties(BindingFlags.NonPublic | BindingFlags.Static);
+
+        var attribute = property.GetCustomAttribute<SettingAttribute>();
+        var category = strings.FirstOrDefault(s => s.Name == "Settings" + attribute?.Category);
+
+        var name = strings.FirstOrDefault(s => s.Name.Contains(property.Name));
+        var description = strings.FirstOrDefault(s => s.Name.Contains(property.Name + "Desc"));
+        var tooltip = strings.FirstOrDefault(s => s.Name.Contains(property.Name + "Tooltip"));
+
+        return new LocalizedSetting(
+            name?.GetValue(null) as string ?? attribute?.Name ?? string.Empty,
+            category?.GetValue(null) as string ?? attribute?.Category ?? string.Empty,
+            description?.GetValue(null) as string ?? attribute?.Description ?? string.Empty,
+            tooltip?.GetValue(null) as string ?? attribute?.Tooltip ?? string.Empty
+        );
     }
 
     public void ResetToDefault(PropertyInfo setting)

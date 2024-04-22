@@ -1,0 +1,1233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- STRINGS START AT LINE 93 -->
+
+<!--
+    
+    嗨! 我是嘉艺启动器的汉化者: MRUIAW!
+    嘿...你找到这个文件了啊...话说你为什么要来这里呢...?
+    ...不过既然你来了, 我就告诉你一点秘密好了...
+    
+    ....hummm...在你小时候, 玩游戏, 比如说侠盗猎车手, 魂斗罗之类的游戏
+        你是否有过...比如说执行一些神奇的代码, 或者*操作*呢
+    ....还是想不到吗? 那么再给你一点提示好了...
+    ....知道那个...著名的科乐美公司吗? 或者臭名昭著, 随便你怎么说
+        对, 就是它, 我只能给你这么多提示了...应该...很明显了吧
+        ...想想它有什么因一个失误诞生出的非常著名的东西, 在整个游戏圈都非常著名的东西, 
+        你可能现在想不起来, 但你绝对听过...
+
+    哦对了, 执行完记得按 Enter 键
+    是执行完再按, 不是执行前按
+
+
+    哦还有, 你可能在设置里看到一串只有千分之一概率出现的奇怪的文字...
+    如果你看到了, 那么说明你很幸运 :3
+
+
+    爱来自MRUIAW :)
+
+-->
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+            <xsd:element name="root" msdata:IsDataSet="true">
+                <xsd:complexType>
+                    <xsd:choice maxOccurs="unbounded">
+                        <xsd:element name="metadata">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                                </xsd:sequence>
+                                <xsd:attribute name="name" use="required" type="xsd:string" />
+                                <xsd:attribute name="type" type="xsd:string" />
+                                <xsd:attribute name="mimetype" type="xsd:string" />
+                                <xsd:attribute ref="xml:space" />
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="assembly">
+                            <xsd:complexType>
+                                <xsd:attribute name="alias" type="xsd:string" />
+                                <xsd:attribute name="name" type="xsd:string" />
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="data">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                                    <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                                </xsd:sequence>
+                                <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+                                <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+                                <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+                                <xsd:attribute ref="xml:space" />
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="resheader">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                                </xsd:sequence>
+                                <xsd:attribute name="name" type="xsd:string" use="required" />
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+
+    <!-- common strings -->
+    <data name="Okay" xml:space="preserve">
+        <value>好的</value>
+    </data>
+    <data name="Yes" xml:space="preserve">
+        <value>是</value>
+    </data>
+    <data name="No" xml:space="preserve">
+        <value>否</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>取消</value>
+    </data>
+    <data name="Close" xml:space="preserve">
+        <value>关闭</value>
+    </data>
+    <data name="Open" xml:space="preserve">
+        <value>打开</value>
+    </data>
+    <data name="Save" xml:space="preserve">
+        <value>保存</value>
+    </data>
+    <data name="Export" xml:space="preserve">
+        <value>导出</value>
+    </data>
+    <data name="Import" xml:space="preserve">
+        <value>导入</value>
+    </data>
+    <data name="Imported" xml:space="preserve">
+        <value>已导入</value>
+    </data>
+    <data name="Importing" xml:space="preserve">
+        <value>正在导入...</value>
+    </data>
+    <data name="Create" xml:space="preserve">
+        <value>创建</value>
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value>下载</value>
+    </data>
+    <data name="Downloading" xml:space="preserve">
+        <value>正在下载...</value>
+    </data>
+    <data name="NotAvailable" xml:space="preserve">
+        <value>不可用</value>
+    </data>
+    <data name="Unknown" xml:space="preserve">
+        <value>未知</value>
+    </data>
+    <data name="Warning" xml:space="preserve">
+        <value>警告</value>
+    </data>
+    <data name="Error" xml:space="preserve">
+        <value>错误</value>
+    </data>
+    <data name="Launch" xml:space="preserve">
+        <value>启动</value>
+    </data>
+    <data name="Extracting" xml:space="preserve">
+        <value>解压中...</value>
+    </data>
+    <data name="CompletionPercent" xml:space="preserve">
+        <value>已完成 {0}%</value>
+    </data>
+    <data name="Remove" xml:space="preserve">
+        <value>移除</value>
+    </data>
+    <data name="Removing" xml:space="preserve">
+        <value>移除中...</value>
+    </data>
+    <data name="Switch" xml:space="preserve">
+        <value>切换</value>
+    </data>
+    <data name="Switching" xml:space="preserve">
+        <value>切换中...</value>
+    </data>
+    <data name="Apply" xml:space="preserve">
+        <value>应用</value>
+    </data>
+    <data name="View" xml:space="preserve">
+        <value>查看</value>
+    </data>
+    <data name="Restore" xml:space="preserve">
+        <value>恢复</value>
+    </data>
+    <data name="Update" xml:space="preserve">
+        <value>更新</value>
+    </data>
+    <data name="Restart" xml:space="preserve">
+        <value>重启</value>
+    </data>
+    <data name="Later" xml:space="preserve">
+        <value>稍后</value>
+    </data>
+    <data name="Generate" xml:space="preserve">
+        <value>生成</value>
+    </data>
+    <data name="Name" xml:space="preserve">
+        <value>名称</value>
+    </data>
+    <data name="FilterBy" xml:space="preserve">
+        <value>Filter by:</value>
+    </data>
+    <data name="WhatsThis" xml:space="preserve">
+        <value>这是什么?</value>
+    </data>
+    <data name="AdvancedSettings" xml:space="preserve">
+        <value>高级设置</value>
+    </data>
+    <data name="MinecraftForWindows" xml:space="preserve">
+        <value>Minecraft for Windows</value>
+    </data>
+
+    <!-- optional Jiayi Launcher string, translate if you want -->
+    <data name="JiayiLauncher" xml:space="preserve">
+        <value>Jiayi Launcher</value>
+    </data>
+
+    <!-- config manager strings -->
+    <data name="ConfManName" xml:space="preserve">
+        <value>配置管理器</value>
+    </data>
+    <data name="ConfManNoModDataFolder" xml:space="preserve">
+        <value>
+            该模组没有设置数据文件夹名称。
+            要访问配置管理器，请编辑此模组并设置数据文件夹名称。
+        </value>
+    </data>
+    <data name="ConfManInvalidDataFolder" xml:space="preserve">
+        <value>
+            您为此模组设置的数据文件夹不存在。
+            确保您设置了正确的数据文件夹名称。
+        </value>
+    </data>
+    <data name="ConfManEdit" xml:space="preserve">
+        <value>打开并编辑配置</value>
+    </data>
+    <data name="ConfManDelete" xml:space="preserve">
+        <value>删除配置 (不可逆)</value>
+    </data>
+    <data name="ConfManDragDrop" xml:space="preserve">
+        <value>单击此处或拖放文件以添加配置</value>
+    </data>
+
+    <!-- edit mod strings -->
+    <data name="EditModName" xml:space="preserve">
+        <value>编辑 mod</value>
+    </data>
+    <data name="EditModModName" xml:space="preserve">
+        <value>Mod 名称</value>
+    </data>
+    <data name="EditModSupportedVersions" xml:space="preserve">
+        <value>支持的版本</value>
+    </data>
+    <data name="EditModSelectVersions" xml:space="preserve">
+        <value>选择版本</value>
+    </data>
+    <data name="EditModLaunchArgs" xml:space="preserve">
+        <value>启动参数</value>
+    </data>
+    <data name="EditModLaunchArgsNotice" xml:space="preserve">
+        <value>这不适用于内部模组</value>
+    </data>
+    <data name="EditModDataFolder" xml:space="preserve">
+        <value>Mod 数据文件夹名称</value>
+    </data>
+    <data name="EditModDataFolderNotice" xml:space="preserve">
+        <value>通常在 RoamingState 文件夹里</value>
+    </data>
+    <data name="EditModDefaultLocationNotice" xml:space="preserve">
+        <value>Mod 将保存到默认位置，您可以在设置中更改该位置</value>
+    </data>
+    <data name="EditModExternalSourceNotice" xml:space="preserve">
+        <value>该模组来自外部应用程序或网站。 不建议添加来自不受信任来源的 Mod 。</value>
+    </data>
+
+    <!-- edit profile strings -->
+    <data name="EditProfileName" xml:space="preserve">
+        <value>编辑个人配置文件</value>
+    </data>
+    <data name="EditProfileCreateName" xml:space="preserve">
+        <value>创建个人配置文件</value>
+    </data>
+    <data name="EditProfileNameProfile" xml:space="preserve">
+        <value>为您的个人配置文件命名！</value>
+    </data>
+    <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
+        <value>个人配置文件将保存到默认位置，您可以在设置中更改该位置</value>
+    </data>
+
+    <!-- privilege escalation strings -->
+    <data name="PrivEscTitle" xml:space="preserve">
+        <value>需要管理员权限</value>
+    </data>
+    <data name="PrivEscText" xml:space="preserve">
+        <value>您需要以管理员身份运行 嘉艺启动器 才能执行此操作</value>
+    </data>
+    <data name="PrivEscRestartNotice" xml:space="preserve">
+        <value>当您提升权限后，启动器将重新启动。</value>
+    </data>
+    <data name="PrivEscButton" xml:space="preserve">
+        <value>提升权限</value>
+    </data>
+    <data name="PrivEscNotice" xml:space="preserve">
+        <value>嘉艺启动器 以管理员权限启动。</value>
+    </data>
+
+    <!-- import mod collection strings -->
+    <data name="ImportModTitle" xml:space="preserve">
+        <value>导入模组合集</value>
+    </data>
+    <data name="ImportModQuestion" xml:space="preserve">
+        <value>您想导入这个合集吗？</value>
+    </data>
+    <data name="ImportModModCount" xml:space="preserve">
+        <value>{0} mods</value>
+    </data>
+    <data name="ImportModLocalModCount" xml:space="preserve">
+        <value>{0} 本地存储</value>
+    </data>
+    <data name="ImportModInternetModCount" xml:space="preserve">
+        <value>{0} 来自网络</value>
+    </data>
+    <data name="ImportModDefaultLocationNotice" xml:space="preserve">
+        <value>该合集中的模组将保存到默认位置，您可以在设置中更改该位置</value>
+    </data>
+    <data name="ImportModMergeNotice" xml:space="preserve">
+        <value>此合集中的模组将合并到您的合集中</value>
+    </data>
+
+    <!-- new mod strings -->
+    <data name="NewModName" xml:space="preserve">
+        <value>新 mod</value>
+    </data>
+    <data name="NewModSelectFile" xml:space="preserve">
+        <value>选择一个 mod</value>
+    </data>
+    <data name="NewModFileFilter" xml:space="preserve">
+        <value>仅限 .dll 和 .exe 文件</value>
+    </data>
+    <data name="NewModOr" xml:space="preserve">
+        <value>或</value>
+    </data>
+    <data name="NewModEnterLink" xml:space="preserve">
+        <value>输入您的模组的链接</value>
+    </data>
+    <data name="NewModOfflineNotice" xml:space="preserve">
+        <value>离线时不可用</value>
+    </data>
+    <data name="NewModLinkPlaceholder" xml:space="preserve">
+        <value>cool-website.com/path/to/mod.dll</value>
+    </data>
+    <data name="NewModDllDisplayName" xml:space="preserve">
+        <value>可注入库</value>
+    </data>
+    <data name="NewModExeDisplayName" xml:space="preserve">
+        <value>外部客户端和注入器</value>
+    </data>
+    <data name="NewModCreateCollectionQuestion" xml:space="preserve">
+        <value>您还没有设置模组合集。 您想创建一个来添加这些模组吗？</value>
+    </data>
+    <data name="NewModNoCollectionTitle" xml:space="preserve">
+        <value>没有模组合集</value>
+    </data>
+    <data name="NewModAlreadyInCollection" xml:space="preserve">
+        <value>该模组已在您的合集中！</value>
+    </data>
+    <data name="NewModInvalidLink" xml:space="preserve">
+        <value>无效的链接</value>
+    </data>
+    <data name="NewModLinkNotFound" xml:space="preserve">
+        <value>这个地址没有任何内容！</value>
+    </data>
+    <data name="NewModCheckingLink" xml:space="preserve">
+        <value>正在检查链接...</value>
+    </data>
+
+    <!-- new theme strings -->
+    <data name="NewThemeName" xml:space="preserve">
+        <value>新主题</value>
+    </data>
+    <data name="NewThemeNameTheme" xml:space="preserve">
+        <value>给你的主题起个名字！</value>
+    </data>
+
+    <!-- theme publishing strings -->
+    <data name="ThemePublishTitle" xml:space="preserve">
+        <value>准备主题发布</value>
+    </data>
+    <data name="ThemePublishName" xml:space="preserve">
+        <value>主题名称</value>
+    </data>
+    <data name="ThemePublishAuthor" xml:space="preserve">
+        <value>作者</value>
+    </data>
+    <data name="ThemePublishAuthorPlaceholder" xml:space="preserve">
+        <value>你的名字在这里</value>
+    </data>
+    <data name="ThemePublishTags" xml:space="preserve">
+        <value>标签</value>
+    </data>
+    <data name="ThemePublishTagsPlaceholder" xml:space="preserve">
+        <value>以逗号分隔的列表</value>
+    </data>
+    <data name="ThemePublishRawTags" xml:space="preserve">
+        <value>类别标签</value>
+    </data>
+    <data name="ThemePublishRawTagsSelect" xml:space="preserve">
+        <value>选择类别标签</value>
+    </data>
+    <data name="ThemePublishNoName" xml:space="preserve">
+        <value>创建主题失败（无名称）</value>
+    </data>
+    <data name="ThemePublishNoRawTags" xml:space="preserve">
+        <value>无法创建主题（至少 1 个类别标签）</value>
+    </data>
+    <data name="ThemePublishAlreadyExists" xml:space="preserve">
+        <value>未能创建主题（已存在）：{0}</value>
+    </data>
+    <data name="ThemePublishOpenRepo" xml:space="preserve">
+        <value>打开存储库</value>
+    </data>
+    <data name="ThemePublishFinalize" xml:space="preserve">
+        <value>
+            您的主题位于我们刚刚打开的文件夹中。
+            要在此处查看它，请在我们的 GitHub 主题存储库上打开拉取请求。检查自述文件以获取说明。
+        </value>
+    </data>
+
+    <!-- about strings -->
+    <data name="AboutTitle" xml:space="preserve">
+        <value>关于</value>
+    </data>
+    <data name="AboutPresenting" xml:space="preserve">
+        <value>经过两年的艰苦开发，我们自豪地推出：</value>
+    </data>
+    <data name="AboutSourceAvailable" xml:space="preserve">
+        <value>源代码位于 GitHub</value>
+    </data>
+    <data name="AboutDiscord" xml:space="preserve">
+        <value>在 Discord 上与我们交谈</value>
+    </data>
+    <data name="AboutCredits" xml:space="preserve">
+        <value>制作人员</value>
+    </data>
+
+    <!-- version manager strings -->
+    <data name="VerManName" xml:space="preserve">
+        <value>版本管理器</value>
+    </data>
+    <data name="VerManCurrentVersion" xml:space="preserve">
+        <value>您当前的版本</value>
+    </data>
+    <data name="VerManResizeTip" xml:space="preserve">
+        <value>您可以调整 嘉艺启动器 的大小以在右侧查看完整列表</value>
+    </data>
+    <data name="VerManManageTip" xml:space="preserve">
+        <value>管理更多版本</value>
+    </data>
+    <data name="VerManPopularVersions" xml:space="preserve">
+        <value>热门版本</value>
+    </data>
+    <data name="VerManLatestVersion" xml:space="preserve">
+        <value>最新版本</value>
+    </data>
+    <data name="VerManPopularAmongCommunity" xml:space="preserve">
+        <value>深受社区欢迎</value>
+    </data>
+    <data name="VerManBestStableRelease" xml:space="preserve">
+        <value>没有 渲染龙 的最佳稳定版本</value>
+    </data>
+    <data name="VerManShaderManagerText" xml:space="preserve">
+        <value>轻松将渲染龙着色器应用到您的游戏中。 如果您通过 嘉艺启动器 安装游戏，效果最佳。</value>
+    </data>
+    <data name="VerManShaderManagerVerTooLow" xml:space="preserve">
+        <value>您的游戏版本没有渲染龙。 请改用着色器资源包。</value>
+    </data>
+    <data name="VerManShaderManagerMSStore" xml:space="preserve">
+        <value>您的游戏是通过 微软商店(Microsoft Store) 安装的。 嘉艺启动器 无法对其应用着色器。</value>
+    </data>
+
+    <!-- install location strings -->
+    <data name="InstallLocByJiayi" xml:space="preserve">
+        <value>由 嘉艺启动器 安装</value>
+    </data>
+    <data name="InstallLocFromStore" xml:space="preserve">
+        <value>来自微软商店</value>
+    </data>
+    <data name="InstallLocExternalManager" xml:space="preserve">
+        <value>由其它版本管理器安装</value>
+    </data>
+    <data name="InstallLocUnknown" xml:space="preserve">
+        <value>未知安装位置</value>
+    </data>
+    <data name="InstallLocNotInstalled" xml:space="preserve">
+        <value>你还没有安装游戏</value>
+    </data>
+
+    <!-- version list strings -->
+    <data name="VerListName" xml:space="preserve">
+        <value>完整版本列表</value>
+    </data>
+    <data name="VerListSearch" xml:space="preserve">
+        <value>搜索版本</value>
+    </data>
+    <data name="VerListShowDownloaded" xml:space="preserve">
+        <value>显示已下载</value>
+    </data>
+    <data name="VerListNoVersions" xml:space="preserve">
+        <value>未找到版本</value>
+    </data>
+    <data name="VerListLoadMore" xml:space="preserve">
+        <value>加载更多</value>
+    </data>
+    <data name="VerListRemove" xml:space="preserve">
+        <value>删除版本</value>
+    </data>
+    <data name="VerListRemoveConfirm" xml:space="preserve">
+        <value>您确定要删除此版本吗？</value>
+    </data>
+    <data name="VerListDevModeQuestion" xml:space="preserve">
+        <value>您需要启用开发者模式才能切换版本。 您想现在启用它吗？</value>
+    </data>
+    <data name="VerListNotFound" xml:space="preserve">
+        <value>该版本尚未下载。</value>
+    </data>
+    <data name="VerListBackupFailed" xml:space="preserve">
+        <value>
+            嘉艺启动器无法在切换版本之前备份您的游戏数据。这可能是因为对游戏数据文件夹的访问被拒绝。
+            
+            更多信息可以在您的日志文件中找到。
+        </value>
+    </data>
+    <data name="VerListUnknownError" xml:space="preserve">
+        <value>切换版本时发生未知错误。 检查您的日志文件以获取更多信息。</value>
+    </data>
+    <data name="VerListImport" xml:space="preserve">
+        <value>导入版本</value>
+    </data>
+    <data name="VerListFileFilter" xml:space="preserve">
+        <value>APPX 文件</value>
+    </data>
+    <data name="VerListInvalidPackage" xml:space="preserve">
+        <value>这不是一个有效的包。</value>
+    </data>
+
+    <!-- TODO: finish shader manager, then add strings here -->
+    
+    <!-- themes menu strings -->
+    <data name="ThemesMenuName" xml:space="preserve">
+        <value>主题</value>
+    </data>
+    <data name="ThemesMenuSearch" xml:space="preserve">
+        <value>搜索主题</value>
+    </data>
+    <data name="ThemesMenuNoThemes" xml:space="preserve">
+        <value>没有找到主题</value>
+    </data>
+    <data name="ThemesMenuRefresh" xml:space="preserve">
+        <value>刷新主题</value>
+    </data>
+
+    <!-- dashboard strings -->
+    <data name="DashboardMorning" xml:space="preserve">
+        <value>早上好</value>
+    </data>
+    <data name="DashboardAfternoon" xml:space="preserve">
+        <value>下午好</value>
+    </data>
+    <data name="DashboardEvening" xml:space="preserve">
+        <value>晚上好</value>
+    </data>
+    <data name="DashboardTotalPlaytime" xml:space="preserve">
+        <value>总游玩时间</value>
+    </data>
+    <data name="DashboardHours" xml:space="preserve">
+        <value>{0} 小时</value>
+    </data>
+    <data name="DashboardWithJiayi" xml:space="preserve">
+        <value>与嘉艺启动器</value>
+    </data>
+    <data name="DashboardCurrentVersion" xml:space="preserve">
+        <value>当前版本</value>
+    </data>
+    <data name="DashboardSwitchVersions" xml:space="preserve">
+        <value>切换版本</value>
+    </data>
+    <data name="DashboardProfiles" xml:space="preserve">
+        <value>您的个人配置文件</value>
+    </data>
+    <data name="DashboardNoProfiles" xml:space="preserve">
+        <value>无个人配置文件</value>
+    </data>
+    <data name="DashboardProfilesSaved" xml:space="preserve">
+        <value>{0} 已保存</value>
+    </data>
+    <data name="DashboardViewProfiles" xml:space="preserve">
+        <value>查看个人配置文件</value>
+    </data>
+    <data name="DashboardRecentMod" xml:space="preserve">
+        <value>最近使用的 mod</value>
+    </data>
+    <data name="DashboardNoMod" xml:space="preserve">
+        <value>启动一个 mod 并在此处查看</value>
+    </data>
+    <data name="DashboardPlayedMod" xml:space="preserve">
+        <value>最常玩的 mod</value>
+    </data>
+    <data name="DashboardOurCommunity" xml:space="preserve">
+        <value>我们的社区</value>
+    </data>
+    <data name="DashboardWebsite" xml:space="preserve">
+        <value>嘉艺软件网站</value>
+    </data>
+    <data name="DashboardDiscord" xml:space="preserve">
+        <value>在 Discord 上与我们交谈</value>
+    </data>
+    <data name="DashboardGitHub" xml:space="preserve">
+        <value>GitHub 上的嘉艺启动器</value>
+    </data>
+    <data name="DashboardJiayiLauncherIs" xml:space="preserve">
+        <value>嘉艺启动器是</value>
+    </data>
+    <data name="DashboardOSS" xml:space="preserve">
+        <value>开源软件</value>
+    </data>
+
+    <!-- mods strings -->
+    <data name="ModsMenuName" xml:space="preserve">
+        <value>Mods</value>
+    </data>
+    <data name="ModsMenuSearch" xml:space="preserve">
+        <value>搜索 mods</value>
+    </data>
+    <data name="ModsMenuLocallyStored" xml:space="preserve">
+        <value>本地存储</value>
+    </data>
+    <data name="ModsMenuFromWeb" xml:space="preserve">
+        <value>来自网络</value>
+    </data>
+    <data name="ModsMenuNoMods" xml:space="preserve">
+        <value>没有找到模组</value>
+    </data>
+    <data name="ModsMenuDragDrop" xml:space="preserve">
+        <value>
+            将模组、文件夹或链接拖至此处
+            或单击加号按钮添加模组
+        </value>
+    </data>
+    <data name="ModsMenuNoModsFolder" xml:space="preserve">
+        <value>
+            您没有设置 mods 文件夹。
+            
+            将文件夹拖到此处以使其与 嘉艺启动器 配合使用，
+            或添加 mods 以创建新文件夹。
+        </value>
+    </data>
+    <data name="ModsMenuCreateFolderQuestion" xml:space="preserve">
+        <value>由于您没有设置 mods 文件夹，嘉艺启动器将为您创建一个来添加这些 mods。 可以吗？ 它将位于您的文档文件夹中。</value>
+    </data>
+
+    <!-- profiles strings -->
+    <data name="ProfilesMenuName" xml:space="preserve">
+        <value>个人配置文件</value>
+    </data>
+    <data name="ProfilesMenuSearch" xml:space="preserve">
+        <value>搜索个人配置文件</value>
+    </data>
+    <data name="ProfilesMenuNoProfiles" xml:space="preserve">
+        <value>未找到个人配置文件</value>
+    </data>
+    <data name="ProfilesMenuBrokenProfile" xml:space="preserve">
+        <value>此配置文件已损坏； 包含游戏数据的文件夹丢失或为空。</value>
+    </data>
+    <data name="ProfilesMenuWorlds" xml:space="preserve">
+        <value>{0} 世界</value>
+    </data>
+    <data name="ProfilesMenuResourcePacks" xml:space="preserve">
+        <value>{0} 资源包</value>
+    </data>
+    <data name="ProfilesMenuBehaviorPacks" xml:space="preserve">
+        <value>{0} 行为包</value>
+    </data>
+    <data name="ProfilesMenuMyProfile" xml:space="preserve">
+        <value>我的个人配置文件</value>
+    </data>
+    <data name="ProfilesMenuEditProfile" xml:space="preserve">
+        <value>编辑个人配置文件</value>
+    </data>
+    <data name="ProfilesMenuDeleteProfile" xml:space="preserve">
+        <value>删除个人配置文件</value>
+    </data>
+    <data name="ProfilesMenuApplyProfile" xml:space="preserve">
+        <value>启用个人配置文件</value>
+    </data>
+    <data name="ProfilesMenuApplyProfileConfirm" xml:space="preserve">
+        <value>您确定要应用此配置文件吗？ 这将覆盖您当前的游戏数据。</value>
+    </data>
+    <data name="ProfilesMenuAboutProfiles" xml:space="preserve">
+        <value>创建配置文件将复制您当前的游戏数据，例如您的世界、资源包和设置。</value>
+    </data>
+    <data name="ProfilesMenuDeleteProfileConfirm" xml:space="preserve">
+        <value>您确定要删除此个人资料吗？ 这不能被撤消。</value>
+    </data>
+
+    <!-- secret strings -->
+    <data name="SecretTitle" xml:space="preserve">
+        <value>这是一个秘密标题! 你找到了彩蛋之一!</value>
+    </data>
+    <data name="SecretText" xml:space="preserve">
+        <value>由 freeminesweeper.org 提供</value>
+    </data>
+    <data name="SecretText2" xml:space="preserve">
+        <value>livesweeper：竞技扫雷</value>
+    </data>
+
+    <!-- settings page strings -->
+    <data name="SettingsMenuName" xml:space="preserve">
+        <value>设置</value>
+    </data>
+    <data name="SettingsCategories" xml:space="preserve">
+        <value>类别：</value>
+    </data>
+    <data name="SettingsGeneral" xml:space="preserve">
+        <value>一般</value>
+    </data>
+    <data name="SettingsAppearance" xml:space="preserve">
+        <value>外观</value>
+    </data>
+    <data name="SettingsUpdate" xml:space="preserve">
+        <value>更新</value>
+    </data>
+    <data name="SettingsDiscord" xml:space="preserve">
+        <value>Discord</value>
+    </data>
+    <data name="SettingsNetwork" xml:space="preserve">
+        <value>网络</value>
+    </data>
+    <data name="SettingsLaunch" xml:space="preserve">
+        <value>启动项</value>
+    </data>
+    <data name="SettingsLog" xml:space="preserve">
+        <value>日志</value>
+    </data>
+    <data name="SettingsAbout" xml:space="preserve">
+        <value>关于</value>
+    </data>
+    <data name="SettingsAboutSettingTitle" xml:space="preserve">
+        <value>关于此设置</value>
+    </data>
+    <data name="SettingsResetDefault" xml:space="preserve">
+        <value>重置为默认</value>
+    </data>
+    <data name="SettingsMoreInfo" xml:space="preserve">
+        <value>更多信息</value>
+    </data>
+    <data name="SettingsEasterEggText" xml:space="preserve">
+        <value>芝士一条千分之一概率的彩蛋! 你真的很幸运 :3          爱来自中文汉化者 MRUIAW</value>
+    </data>
+    <data name="SettingsConfirmEnable" xml:space="preserve">
+        <value>您确定要启用此设置吗？</value>
+    </data>
+    <data name="SettingsConfirmAction" xml:space="preserve">
+        <value>您确定要这样做吗？</value>
+    </data>
+    <data name="SettingsInvalidSettingsText" xml:space="preserve">
+        <value>您的设置文件已损坏或无效。</value>
+    </data>
+    <data name="SettingsInvalidSettingsText2" xml:space="preserve">
+        <value>新的设置文件已创建，并且您之前的设置已丢失。</value>
+    </data>
+
+    <!-- general settings strings -->
+    <data name="SettingsModCollectionPath" xml:space="preserve">
+        <value>Mod文件夹路径</value>
+    </data>
+    <data name="SettingsModCollectionPathDesc" xml:space="preserve">
+        <value>包含 mod 的文件夹的路径。</value>
+    </data>
+    <data name="SettingsExportCollection" xml:space="preserve">
+        <value>导出您的mods</value>
+    </data>
+    <data name="SettingsExportCollectionDesc" xml:space="preserve">
+        <value>将您的模组集合导出到文件。 您可以与其他人分享。</value>
+    </data>
+    <data name="SettingsProfileCollectionPath" xml:space="preserve">
+        <value>个人配置文件 路径</value>
+    </data>
+    <data name="SettingsProfileCollectionPathDesc" xml:space="preserve">
+        <value>包含您的个人配置文件的文件夹的路径。</value>
+    </data>
+    <data name="SettingsVersionsPath" xml:space="preserve">
+        <value>版本文件夹路径</value>
+    </data>
+    <data name="SettingsVersionsPathDesc" xml:space="preserve">
+        <value>包含游戏安装的文件夹的路径。</value>
+    </data>
+    <data name="SettingsUpdateVersionList" xml:space="preserve">
+        <value>更新版本列表</value>
+    </data>
+    <data name="SettingsUpdateVersionListDesc" xml:space="preserve">
+        <value>更新可用版本列表。</value>
+    </data>
+    <data name="SettingsShadersPath" xml:space="preserve">
+        <value>着色器文件夹路径</value>
+    </data>
+    <data name="SettingsShadersPathDesc" xml:space="preserve">
+        <value>包含着色器的文件夹的路径。</value>
+    </data>
+
+    <!-- appearance settings strings -->
+    <data name="SettingsPrimaryBackgroundColor" xml:space="preserve">
+        <value>主要背景色</value>
+    </data>
+    <data name="SettingsPrimaryBackgroundColorDesc" xml:space="preserve">
+        <value>启动器的主要背景色。</value>
+    </data>
+    <data name="SettingsSecondaryBackgroundColor" xml:space="preserve">
+        <value>第二背景色</value>
+    </data>
+    <data name="SettingsSecondaryBackgroundColorDesc" xml:space="preserve">
+        <value>启动器的第二背景色。</value>
+    </data>
+    <data name="SettingsAccentColor" xml:space="preserve">
+        <value>强调色</value>
+    </data>
+    <data name="SettingsAccentColorDesc" xml:space="preserve">
+        <value>启动器的强调色。</value>
+    </data>
+    <data name="SettingsTextColor" xml:space="preserve">
+        <value>文字颜色</value>
+    </data>
+    <data name="SettingsTextColorDesc" xml:space="preserve">
+        <value>整个启动器中看到的文本颜色。</value>
+    </data>
+    <data name="SettingsAccentTextColor" xml:space="preserve">
+        <value>文本颜色（强调色）</value>
+    </data>
+    <data name="SettingsAccentTextColorDesc" xml:space="preserve">
+        <value>文本颜色的强调色。</value>
+    </data>
+    <data name="SettingsGrayTextColor" xml:space="preserve">
+        <value>灰字文字颜色</value>
+    </data>
+    <data name="SettingsGrayTextColorDesc" xml:space="preserve">
+        <value>灰字的文本颜色。</value>
+    </data>
+    <data name="SettingsShadowDistance" xml:space="preserve">
+        <value>阴影距离</value>
+    </data>
+    <data name="SettingsShadowDistanceDesc" xml:space="preserve">
+        <value>UI 元素上的阴影距离。</value>
+    </data>
+    <data name="SettingsMovementSpeed" xml:space="preserve">
+        <value>UI 移动速度</value>
+    </data>
+    <data name="SettingsMovementSpeedDesc" xml:space="preserve">
+        <value>UI 移动的速度。</value>
+    </data>
+    <data name="SettingsUseBackgroundImage" xml:space="preserve">
+        <value>使用背景图片</value>
+    </data>
+    <data name="SettingsUseBackgroundImageDesc" xml:space="preserve">
+        <value>使用图像作为启动器的背景。</value>
+    </data>
+    <data name="SettingsSelectBackground" xml:space="preserve">
+        <value>选择背景图片</value>
+    </data>
+    <data name="SettingsSelectBackgroundDesc" xml:space="preserve">
+        <value>从您的电脑中选择背景图像。</value>
+    </data>
+    <data name="SettingsSelectBackgroundImageFilter" xml:space="preserve">
+        <value>图像文件</value>
+    </data>
+    <data name="SettingsSelectBackgroundVideoFilter" xml:space="preserve">
+        <value>视频文件</value>
+    </data>
+    <data name="SettingsGeneratePalette" xml:space="preserve">
+        <value>基于背景生成调色板</value>
+    </data>
+    <data name="SettingsGeneratePaletteDesc" xml:space="preserve">
+        <value>根据您的背景图像创建调色板。 不支持视频。</value>
+    </data>
+    <data name="SettingsGeneratePaletteTooltip" xml:space="preserve">
+        <value>调色板生成需要大量内存，可能需要一段时间。 每个生成的调色板都略有不同。</value>
+    </data>
+    <data name="SettingsBackgroundBlur" xml:space="preserve">
+        <value>背景模糊</value>
+    </data>
+    <data name="SettingsBackgroundBlurDesc" xml:space="preserve">
+        <value>背景模糊的值。</value>
+    </data>
+    <data name="SettingsBackgroundBrightness" xml:space="preserve">
+        <value>背景亮度</value>
+    </data>
+    <data name="SettingsBackgroundBrightnessDesc" xml:space="preserve">
+        <value>背景的亮度值。</value>
+    </data>
+    <data name="SettingsRounding" xml:space="preserve">
+        <value>圆角</value>
+    </data>
+    <data name="SettingsRoundingDesc" xml:space="preserve">
+        <value>大多数 UI 元素的圆角程度。</value>
+    </data>
+    <data name="SettingsBorderColor" xml:space="preserve">
+        <value>边框颜色</value>
+    </data>
+    <data name="SettingsBorderColorDesc" xml:space="preserve">
+        <value>UI 元素边框的颜色。</value>
+    </data>
+    <data name="SettingsAccentBorderColor" xml:space="preserve">
+        <value>边框颜色（强调色）</value>
+    </data>
+    <data name="SettingsAccentBorderColorDesc" xml:space="preserve">
+        <value>边框的强调色。</value>
+    </data>
+    <data name="SettingsBorderThickness" xml:space="preserve">
+        <value>边框厚度</value>
+    </data>
+    <data name="SettingsBorderThicknessDesc" xml:space="preserve">
+        <value>UI 元素上边框的厚度。</value>
+    </data>
+    <data name="SettingsOpenTheme" xml:space="preserve">
+        <value>显示主题</value>
+    </data>
+    <data name="SettingsOpenThemeDesc" xml:space="preserve">
+        <value>在文件资源管理器中显示您的主题。 您可以与其他人分享或使用其他人的主题。</value>
+    </data>
+    <data name="SettingsRestoreDefaultTheme" xml:space="preserve">
+        <value>恢复默认主题</value>
+    </data>
+    <data name="SettingsRestoreDefaultThemeDesc" xml:space="preserve">
+        <value>回到嘉艺启动器的默认主题。</value>
+    </data>
+    <data name="SettingsThemesMenu" xml:space="preserve">
+        <value>主题菜单</value>
+    </data>
+    <data name="SettingsThemesMenuDesc" xml:space="preserve">
+        <value>由社区创建的本地和可下载主题。</value>
+    </data>
+
+    <!-- discord settings strings -->
+    <data name="SettingsRichPresence" xml:space="preserve">
+        <value>启用 RPC (在线状态)</value>
+    </data>
+    <data name="SettingsRichPresenceDesc" xml:space="preserve">
+        <value>在 Discord 上展示您用嘉艺启动器正在做的事情。</value>
+    </data>
+    <data name="SettingsRichPresenceTooltip" xml:space="preserve">
+        <value>
+            用于RPC的可用格式字符串：
+        
+            %mod_name% - 您正在玩的 mod 的名称
+            %game_version% - 您当前的 Minecraft 版本
+            %mod_count% - 您的合集中有多少个 mod
+            %shader_name% - 您正在使用的着色器的名称
+            %profile_count% - 您的合集中有多少个配置文件
+            %launcher_version% - 您正在使用的嘉艺启动器版本
+            
+            每个字段只能使用 1 个格式字符串。
+        </value>
+    </data>
+    <data name="SettingsDiscordDetails" xml:space="preserve">
+        <value>顶部文本</value>
+    </data>
+    <data name="SettingsDiscordDetailsDesc" xml:space="preserve">
+        <value>最上面的状态文本。</value>
+    </data>
+    <data name="SettingsDiscordDetailsDefault" xml:space="preserve">
+        <value>正在玩 %mod_name%</value>
+    </data>
+    <data name="SettingsDiscordState" xml:space="preserve">
+        <value>底部文本</value>
+    </data>
+    <data name="SettingsDiscordStateDesc" xml:space="preserve">
+        <value>最底部的状态文本。</value>
+    </data>
+    <data name="SettingsDiscordStateDefault" xml:space="preserve">
+        <value>在 %game_version%</value>
+    </data>
+    <data name="SettingsDiscordShowElapsedTime" xml:space="preserve">
+        <value>显示经过的时间</value>
+    </data>
+    <data name="SettingsDiscordShowElapsedTimeDesc" xml:space="preserve">
+        <value>显示您嘉艺打开了多长时间</value>
+    </data>
+    <data name="SettingsLargeImageKey" xml:space="preserve">
+        <value>大图像</value>
+    </data>
+    <data name="SettingsLargeImageKeyDesc" xml:space="preserve">
+        <value>用于RPC的大图像。</value>
+    </data>
+    <data name="SettingsSmallImageKey" xml:space="preserve">
+        <value>小图像</value>
+    </data>
+    <data name="SettingsSmallImageKeyDesc" xml:space="preserve">
+        <value>用于RPC的小图像。</value>
+    </data>
+    <data name="SettingsLargeImageText" xml:space="preserve">
+        <value>大图文字</value>
+    </data>
+    <data name="SettingsLargeImageTextDesc" xml:space="preserve">
+        <value>将鼠标悬停在大图像上时显示的文本。</value>
+    </data>
+    <data name="SettingsSmallImageText" xml:space="preserve">
+        <value>小图文字</value>
+    </data>
+    <data name="SettingsSmallImageTextDesc" xml:space="preserve">
+        <value>将鼠标悬停在小图像上时显示的文本。</value>
+    </data>
+
+    <!-- update settings strings -->
+    <data name="SettingsEnableUpdater" xml:space="preserve">
+        <value>启用更新程序</value>
+    </data>
+    <data name="SettingsEnableUpdaterDesc" xml:space="preserve">
+        <value>允许启动器检查并下载更新。</value>
+    </data>
+    <data name="SettingsAutoDownloadUpdates" xml:space="preserve">
+        <value>自动下载更新</value>
+    </data>
+    <data name="SettingsAutoDownloadUpdatesDesc" xml:space="preserve">
+        <value>始终在有可用更新时下载更新。</value>
+    </data>
+
+    <!-- network settings strings -->
+    <data name="SettingsOfflineMode" xml:space="preserve">
+        <value>离线模式</value>
+    </data>
+    <data name="SettingsOfflineModeDesc" xml:space="preserve">
+        <value>禁用对互联网的访问。 某些功能可能无法使用。 重启 嘉艺启动器 即可完全生效。</value>
+    </data>
+    <data name="SettingsOfflineModeTooltip" xml:space="preserve">
+        <value>互联网模组、下载版本和检查更新等功能将无法使用。</value>
+    </data>
+
+    <!-- launch settings strings -->
+    <data name="SettingsUseInjectionDelay" xml:space="preserve">
+        <value>使用注入延迟</value>
+    </data>
+    <data name="SettingsUseInjectionDelayDesc" xml:space="preserve">
+        <value>等待一段时间，而不是等待游戏加载后再注入。</value>
+    </data>
+    <data name="SettingsInjectionDelay" xml:space="preserve">
+        <value>注入延迟</value>
+    </data>
+    <data name="SettingsInjectionDelayDesc" xml:space="preserve">
+        <value>注入前等待的时间（以秒为单位）。</value>
+    </data>
+    <data name="SettingsOverrideModuleRequirement" xml:space="preserve">
+        <value>覆盖模块要求</value>
+    </data>
+    <data name="SettingsOverrideModuleRequirementDesc" xml:space="preserve">
+        <value>
+            覆盖 嘉艺启动器 注入之前所需加载的模块数量。
+            
+            如果启动器注入太早或太晚，请尝试更改此值。
+        </value>
+    </data>
+    <data name="SettingsModuleRequirement" xml:space="preserve">
+        <value>模块要求</value>
+    </data>
+    <data name="SettingsModuleRequirementDesc" xml:space="preserve">
+        <value>嘉艺启动器 注入之前需要加载的模块数量。</value>
+    </data>
+    <data name="SettingsAccelerateGameLoading" xml:space="preserve">
+        <value>加速游戏加载</value>
+    </data>
+    <data name="SettingsAccelerateGameLoadingDesc" xml:space="preserve">
+        <value>通过终止不必要的进程来加快加载时间。 谨防卡顿。</value>
+    </data>
+    <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
+        <value>可能会导致与 Microsoft Store 许可相关的问题（确定您是否拥有该游戏）。</value>
+    </data>
+    <data name="SettingsMinimizeFix" xml:space="preserve">
+        <value>最小化修复</value>
+    </data>
+    <data name="SettingsMinimizeFixDesc" xml:space="preserve">
+        <value>防止游戏在最小化时自行挂起 (自动退出服务器)。 更改在启动时应用。</value>
+    </data>
+
+    <!-- log settings strings -->
+    <data name="SettingsAnonymizeLogs" xml:space="preserve">
+        <value>匿名日志</value>
+    </data>
+    <data name="SettingsAnonymizeLogsDesc" xml:space="preserve">
+        <value>隐藏日志中的任何识别信息。 这并不具有追溯力。</value>
+    </data>
+    <data name="SettingsOpenLogFolder" xml:space="preserve">
+        <value>打开日志文件夹</value>
+    </data>
+    <data name="SettingsOpenLogFolderDesc" xml:space="preserve">
+        <value>在文件资源管理器中打开日志文件夹。</value>
+    </data>
+    <data name="SettingsClearPreviousLogs" xml:space="preserve">
+        <value>清除以前的日志</value>
+    </data>
+    <data name="SettingsClearPreviousLogsDesc" xml:space="preserve">
+        <value>删除所有以前的日志文件。</value>
+    </data>
+
+    <!-- mod card strings -->
+    <data name="ModCardInvalidLink" xml:space="preserve">
+        <value>这个模组已损坏； 它不再存在于网络上。</value>
+    </data>
+    <data name="ModCardMissingFile" xml:space="preserve">
+        <value>这个模组已损坏； mods 目录中缺少该文件。</value>
+    </data>
+    <data name="ModCardOffline" xml:space="preserve">
+        <value>离线模式下禁用互联网模组</value>
+    </data>
+    <data name="ModCardInternetMod" xml:space="preserve">
+        <value>从网上下载</value>
+    </data>
+    <data name="ModCardLocalMod" xml:space="preserve">
+        <value>本地存储</value>
+    </data>
+    <data name="ModCardSupportedVersions" xml:space="preserve">
+        <value>支持 {0}</value>
+    </data>
+    <data name="ModCardHideControls" xml:space="preserve">
+        <value>隐藏控件</value>
+    </data>
+    <data name="ModCardShowControls" xml:space="preserve">
+        <value>显示控件</value>
+    </data>
+    <data name="ModCardManageConfigs" xml:space="preserve">
+        <value>管理配置</value>
+    </data>
+    <data name="ModCardEditMod" xml:space="preserve">
+        <value>编辑 mod</value>
+    </data>
+    <data name="ModCardDeleteMod" xml:space="preserve">
+        <value>删除 mod（不可逆）</value>
+    </data>
+    <data name="ModCardDeleteModConfirm" xml:space="preserve">
+        <value>您确定要删除 {0} 吗？ 此操作是不可逆转的。</value>
+    </data>
+    <data name="ModCardLaunchMultipleModsConfirm" xml:space="preserve">
+        <value>一次启动多个模组可能会使您的游戏不稳定。 您确定要启动 {0} 吗？</value>
+    </data>
+    <data name="ModCardDownloadFailed" xml:space="preserve">
+        <value>下载模组失败。 请稍后再试。</value>
+    </data>
+    <data name="ModCardModNotFound" xml:space="preserve">
+        <value>您的模组在启动期间已被删除。 尝试关闭防病毒软件。</value>
+    </data>
+    <data name="ModCardGameNotFound" xml:space="preserve">
+        <value>游戏在启动期间被关闭。 关闭防病毒软件，以防它终止游戏。</value>
+    </data>
+    <data name="ModCardVersionMismatch" xml:space="preserve">
+        <value>{0} 不支持您当前的游戏版本。 您想切换到 {1} 吗?</value>
+    </data>
+    <data name="ModCardInjectionFailed" xml:space="preserve">
+        <value>您的模组无法注入。 尝试关闭防病毒软件，并检查日志以获取更多错误信息。</value>
+    </data>
+    <data name="ModCardAlreadyLoaded" xml:space="preserve">
+        <value>这个模组已经加载了!</value>
+    </data>
+
+    <!-- theme card strings -->
+    <data name="ThemeCardAuthor" xml:space="preserve">
+        <value>by {0}</value>
+    </data>
+    <data name="ThemeCardPrepareUpload" xml:space="preserve">
+        <value>准备上传主题</value>
+    </data>
+    <data name="ThemeCardReinstall" xml:space="preserve">
+        <value>重新安装主题</value>
+    </data>
+    <data name="ThemeCardOverwriteConfirm" xml:space="preserve">
+        <value>您确定要覆盖此主题吗？ 您的所有本地更改都将丢失。</value>
+    </data>
+
+    <!-- don't ask again strings -->
+    <data name="DontAskAgain" xml:space="preserve">
+        <value>
+            别再问了
+            我说了不
+            闭嘴
+            真的, 不
+            别来了
+            不就是不
+            请停下
+            停下来
+            永远别了
+            操你妈
+        </value>
+    </data>
+
+    <!-- offline mode strings -->
+    <data name="OfflineMode" xml:space="preserve">
+        <value>离线模式</value>
+    </data>
+    <data name="OfflineModeDesc" xml:space="preserve">
+        <value>你已离线. 部分功能可能无法使用.</value>
+    </data>
+
+    <!-- update strings -->
+    <data name="UpdateInstalled" xml:space="preserve">
+        <value>已安装更新</value>
+    </data>
+    <data name="UpdateInstalledDesc" xml:space="preserve">
+        <value>嘉艺启动器 已更新至 {0}.</value>
+    </data>
+    <data name="UpdateInstalledDesc2" xml:space="preserve">
+        <value>您可以在 GitHub 上查看更新日志.</value>
+    </data>
+    <data name="UpdateAvailable" xml:space="preserve">
+        <value>可用更新</value>
+    </data>
+    <data name="UpdateAvailableDesc" xml:space="preserve">
+        <value>有可用的更新. 您想下载吗?</value>
+    </data>
+    <data name="UpdateDownloading" xml:space="preserve">
+        <value>正在下载更新...</value>
+    </data>
+    <data name="UpdateDownloaded" xml:space="preserve">
+        <value>已下载更新</value>
+    </data>
+    <data name="UpdateDownloadedDesc" xml:space="preserve">
+        <value>重新启动以安装更新.</value>
+    </data>
+
+    <!-- sidebar strings -->
+    <data name="SidebarDashboard" xml:space="preserve">
+        <value>仪表盘</value>
+    </data>
+    <data name="SidebarMods" xml:space="preserve">
+        <value>Mods</value>
+    </data>
+    <data name="SidebarProfiles" xml:space="preserve">
+        <value>配置</value>
+    </data>
+    <data name="SidebarVersions" xml:space="preserve">
+        <value>版本</value>
+    </data>
+    <data name="SidebarSettings" xml:space="preserve">
+        <value>设置</value>
+    </data>
+</root>

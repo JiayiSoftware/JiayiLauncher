@@ -1,7 +1,8 @@
 ﻿@using JiayiLauncher.Features.Mods
+@using JiayiLauncher.Localization
 
 <div>
-    <p>Would you like to import this collection?</p>
+    <p>@Strings.ImportModQuestion</p>
     
     @{
         var info = ModCollection.GetInfo(Path);
@@ -9,30 +10,30 @@
     
     <ul>
         <li>
-            @info.TotalMods mods
+            @string.Format(Strings.ImportModModCount, info.TotalMods)
         </li>
         <li>
-            @info.LocallyStoredMods locally stored
+            @string.Format(Strings.ModsMenuLocallyStored, info.LocallyStoredMods)
         </li>
         <li>
-            @info.InternetMods from the web
+            @string.Format(Strings.ImportModInternetModCount, info.InternetMods)
         </li>
     </ul>
     
     @if (ModCollection.Current == null)
     {
         <i>
-            The mods in this collection will be saved in their default location, which you can change in settings
+            @Strings.ImportModDefaultLocationNotice
         </i>
     }
     else
     {
-        <i>The mods in this collection will be merged with your collection</i>
+        <i>@Strings.ImportModMergeNotice</i>
     }
     
     <div style="display: flex; gap: 0.5rem; margin-top: 1em;">
-        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="ImportClicked">Import</JiayiButton>
-        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="Modal.CloseAsync">Cancel</JiayiButton>
+        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="ImportClicked">@Strings.Import</JiayiButton>
+        <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="Modal.CloseAsync">@Strings.Cancel</JiayiButton>
     </div>
 </div>
 

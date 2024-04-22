@@ -1,7 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
 @inject NavigationManager NavigationManager
-@inject IJSRuntime JSRuntime
 @inject IToastService ToastService
 
 @using JiayiLauncher.Utils
@@ -10,7 +9,6 @@
 @using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Settings
 @using JiayiLauncher.Shared.Components.Toasts
-@using Microsoft.JSInterop
 
 <BlazoredToasts Position="ToastPosition.BottomRight"
                 ShowProgressBar="true"
@@ -38,19 +36,7 @@
     private readonly Updater _updater = new();
 
     // silly
-    private readonly List<string> _dontAskAgain = new()
-    {
-        "Stop asking",
-        "I said no",
-        "Shut up",
-        "Really, no",
-        "No more",
-        "No means no",
-        "Please stop",
-        "Stop it",
-        "Never again",
-        "Suck my nuts"
-    };
+    private readonly List<string> _dontAskAgain = Strings.DontAskAgain.Split('\n').ToList();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -61,16 +47,16 @@
         if (InternetManager.OfflineMode)
         {
             var parameters = new ToastParameters()
-                .Add(nameof(JiayiToast.Title), "Offline Mode")
+                .Add(nameof(JiayiToast.Title), Strings.OfflineMode)
                 .Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
                 {
                     builder.OpenElement(0, "p");
-                    builder.AddContent(1, "You're offline. Some features may not work.");
+                    builder.AddContent(1, Strings.OfflineModeDesc);
                     builder.CloseElement();
                 }))
                 .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
                 {
-                    ("Okay", EventCallback.Empty)
+                    (Strings.Okay, EventCallback.Empty)
                 });
 
             ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
@@ -79,10 +65,10 @@
         if (Privileges.IsAdmin())
         {
             var parameters = new ToastParameters()
-                .Add(nameof(JiayiToast.Title), "Jiayi was started with admin privileges.")
+                .Add(nameof(JiayiToast.Title), Strings.PrivEscNotice)
                 .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
                 {
-                    ("Okay", EventCallback.Empty)
+                    (Strings.Okay, EventCallback.Empty)
                 });
             
             ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
@@ -116,23 +102,23 @@
         var realVersion = $"v{version.Major}.{version.Minor}.{version.Build}";
 
         var parameters = new ToastParameters()
-            .Add(nameof(JiayiToast.Title), "Update installed")
+            .Add(nameof(JiayiToast.Title), Strings.UpdateInstalled)
             .Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
             {
                 builder.OpenElement(0, "p");
-                builder.AddContent(1, $"Jiayi was updated to {realVersion}. You can view the changelog ");
+                builder.AddContent(1, string.Format(Strings.UpdateInstalledDesc, realVersion));
                 builder.OpenElement(2, "a");
                 builder.AddAttribute(3, "href",
                     $"https://github.com/JiayiSoftware/JiayiLauncher/releases/tag/{realVersion}");
                 builder.AddAttribute(4, "style", "color: var(--text-primary);");
-                builder.AddContent(5, "on GitHub.");
+                builder.AddContent(5, Strings.UpdateInstalledDesc2);
                 builder.CloseElement();
                 builder.CloseElement();
             }))
             .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
-                            {
-                ("Okay", EventCallback.Empty)
-                            });
+            {
+                (Strings.Okay, EventCallback.Empty)
+            });
 
         ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
     }
@@ -145,14 +131,14 @@
         if (result)
         {
             var parameters = new ToastParameters()
-                .Add(nameof(JiayiToast.Title), "Update available");
+                .Add(nameof(JiayiToast.Title), Strings.UpdateAvailable);
 
             if (JiayiSettings.Instance!.AutoDownloadUpdates)
             {
                 parameters.Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
                 {
                     builder.OpenElement(0, "p");
-                    builder.AddContent(1, "Downloading update...");
+                    builder.AddContent(1, Strings.UpdateDownloading);
                     builder.CloseElement();
                 }));
 
@@ -166,25 +152,26 @@
             }
             else
             {
-                parameters.Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
-                {
-                    builder.OpenElement(0, "p");
-                    builder.AddContent(1, "An update is available. Would you like to download it?");
-                    builder.CloseElement();
-                }))
+                parameters
+                    .Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
+                    {
+                        builder.OpenElement(0, "p");
+                        builder.AddContent(1, Strings.UpdateAvailableDesc);
+                        builder.CloseElement();
+                    }))
                     .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
-                                    {
-                        ("Yes", new EventCallback(null, async () =>
+                    {
+                        (Strings.Yes, new EventCallback(null, async () =>
                         {
                             await _updater.DownloadLatest();
                         })),
-                        ("No", EventCallback.Empty),
-                        (_dontAskAgain[Random.Shared.Next(_dontAskAgain.Count - 1)], new EventCallback(null, () =>
+                        (Strings.No, EventCallback.Empty),
+                        (_dontAskAgain[Random.Shared.Next(_dontAskAgain.Count)], new EventCallback(null, () =>
                         {
                             JiayiSettings.Instance.EnableUpdater = false;
                             JiayiSettings.Instance.Save();
                         }))
-                                    });
+                    });
 
                 ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
             }
@@ -194,21 +181,21 @@
     private void UpdateDownloaded(object? sender, EventArgs e)
     {
         var parameters = new ToastParameters()
-            .Add(nameof(JiayiToast.Title), "Update downloaded")
+            .Add(nameof(JiayiToast.Title), Strings.UpdateDownloaded)
             .Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
             {
                 builder.OpenElement(0, "p");
-                builder.AddContent(1, "Restart to install this update.");
+                builder.AddContent(1, Strings.UpdateDownloadedDesc);
                 builder.CloseElement();
             }))
             .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
-                            {
-                ("Restart", new EventCallback(null, () =>
+            {
+                (Strings.Restart, new EventCallback(null, () =>
                 {
                     _updater.Update();
                 })),
-                ("Later", EventCallback.Empty)
-                            });
+                (Strings.Later, EventCallback.Empty)
+            });
 
         ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
     }
@@ -224,7 +211,7 @@
                 .Add(nameof(EditMod.Mod), mod)
                 .Add(nameof(EditMod.FromUrlProtocol), true);
 
-            ModalService.Show<EditMod>("Edit mod", parameters);
+            ModalService.Show<EditMod>(Strings.EditModName, parameters);
         }
 
         if (File.Exists(args))
@@ -232,7 +219,7 @@
             var parameters = new ModalParameters()
                 .Add(nameof(ImportCollection.Path), args);
 
-            ModalService.Show<ImportCollection>("Import collection", parameters);
+            ModalService.Show<ImportCollection>(Strings.ImportModTitle, parameters);
         }
     }
 

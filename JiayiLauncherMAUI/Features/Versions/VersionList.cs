@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Blazored.Toast;
 using Blazored.Toast.Services;
+using JiayiLauncher.Localization;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Shared.Components.Toasts;
 using JiayiLauncher.Utils;
@@ -37,7 +38,7 @@ public static class VersionList
 
 			var toastParams = new ToastParameters()
 				.Add(nameof(JiayiToast.Level), ToastLevel.Info)
-				.Add(nameof(JiayiToast.Title), "Version list cleared. It will be updated shortly.");
+				.Add(nameof(JiayiToast.Title), Strings.VerListUpdatingVersions);
 			
 			BlazorBridge.ShowToast(toastParams, settings =>
 			{

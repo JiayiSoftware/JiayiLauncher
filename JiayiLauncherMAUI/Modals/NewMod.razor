@@ -3,20 +3,21 @@
 @using System.IO
 @using System.Net
 @using System.Net.Http
+@using JiayiLauncher.Localization
 @using JiayiLauncher.Settings
 @using WindowsAPICodePack.Dialogs
 
 <div class="select">
     <div class="select-file">
-        <JiayiButton OnClick="SelectFile">Select a file</JiayiButton>
+        <JiayiButton OnClick="SelectFile">@Strings.NewModSelectFile</JiayiButton>
         <p>
-            .dll and .exe files only
+            @Strings.NewModFileFilter
         </p>
     </div>
 
     <div class="separator">
         <div class="separator-line"></div>
-        <p>or</p>
+        <p>@Strings.NewModOr</p>
         <div class="separator-line"></div>
     </div>
 
@@ -25,11 +26,11 @@
         
         @if (InternetManager.OfflineMode)
         {
-            <JiayiTextBox Style="width: 99%" Placeholder="Not available while offline" Disabled="true" @ref="_urlTextBox" />
+            <JiayiTextBox Style="width: 99%" Placeholder="@Strings.NewModOfflineNotice" Disabled="true" @ref="_urlTextBox" />
         }
         else
         {
-            <JiayiTextBox Style="width: 99%" Placeholder="cool-website.com/path/to/mod.dll" @ref="_urlTextBox" />
+            <JiayiTextBox Style="width: 99%" Placeholder="@Strings.NewModLinkPlaceholder" @ref="_urlTextBox" />
         }
     </div>
     
@@ -54,7 +55,7 @@
     private BlazoredModalInstance Modal { get; set; } = default!;
 
     private JiayiTextBox? _urlTextBox;
-    private string _urlStatus = "Enter the link to your mod";
+    private string _urlStatus = Strings.NewModEnterLink;
 
     private async Task SelectFile()
     {
@@ -66,12 +67,12 @@
         //     Multiselect = true
         // };
         
-        using var dialog = new CommonOpenFileDialog("Select a mod");
+        using var dialog = new CommonOpenFileDialog(Strings.NewModSelectFile);
         dialog.IsFolderPicker = false;
         dialog.Multiselect = true;
         dialog.DefaultExtension = "dll";
-        dialog.Filters.Add(new CommonFileDialogFilter("Injectable libraries", "*.dll"));
-        dialog.Filters.Add(new CommonFileDialogFilter("External clients and injectors", "*.exe"));
+        dialog.Filters.Add(new CommonFileDialogFilter(Strings.NewModDllDisplayName, "*.dll"));
+        dialog.Filters.Add(new CommonFileDialogFilter(Strings.NewModExeDisplayName, "*.exe"));
         
         if (dialog.ShowDialog() != CommonFileDialogResult.Ok) return;
         var result = dialog.FileNames.ToList();
@@ -85,7 +86,7 @@
             var parameters = new ModalParameters()
                 .Add(nameof(EditMod.Mod), mod);
 
-            ModalService.Show<EditMod>("Edit mod", parameters);
+            ModalService.Show<EditMod>(Strings.EditModName, parameters);
         }
         else if (result.Count > 1)
         {
@@ -95,7 +96,7 @@
             {
                 var options = new List<(string, EventCallback)>
             {
-                ("Yes", new EventCallback(null, () =>
+                (Strings.Yes, new EventCallback(null, () =>
                 {
                     JiayiSettings.Instance.ModCollectionPath =
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Mods");
@@ -103,15 +104,15 @@
                     ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
                     mods.ForEach(mod => ModCollection.Current!.Add(mod, false));
                 })),
-                ("No", EventCallback.Empty)
+                (Strings.No, EventCallback.Empty)
             };
 
                 var parameters = new ModalParameters()
                     .Add(nameof(MessageBox.Buttons), options)
                     .Add(nameof(MessageBox.Message),
-                        "You don't have a mod collection set up. Would you like to create one to add these mods?");
+                        Strings.NewModCreateCollectionQuestion);
 
-                ModalService.Show<MessageBox>("No mod collection", parameters);
+                ModalService.Show<MessageBox>(Strings.NewModNoCollectionTitle, parameters);
                 return;
             }
 
@@ -197,7 +198,7 @@
 
         if (ModCollection.Current != null && ModCollection.Current.HasMod(url))
         {
-            _urlStatus = "This mod is already in your collection!";
+            _urlStatus = Strings.NewModAlreadyInCollection;
             return;
         }
 
@@ -217,7 +218,7 @@
                                       && (fileName.EndsWith(".exe") || fileName.EndsWith(".dll"));
                 if (!hasContentDisposition && !isValidFileName)
                 {
-                    _urlStatus = "Invalid link";
+                    _urlStatus = Strings.NewModInvalidLink;
                     return;
                 }
 
@@ -228,22 +229,22 @@
                     .Add(nameof(EditMod.Mod), mod);
 
                 await Modal.CloseAsync();
-                ModalService.Show<EditMod>("Edit mod", parameters);
+                ModalService.Show<EditMod>(Strings.EditModName, parameters);
 
             }
             else
             {
                 _urlStatus = response.StatusCode switch
                 {
-                    HttpStatusCode.NotFound => "There's nothing at this address!",
-                    HttpStatusCode.NoContent => "There's nothing at this address!",
-                    _ => "Invalid link"
+                    HttpStatusCode.NotFound => Strings.NewModLinkNotFound,
+                    HttpStatusCode.NoContent => Strings.NewModLinkNotFound,
+                    _ => Strings.NewModInvalidLink
                 };
             }
         }
         catch
         {
-            _urlStatus = "Invalid link";
+            _urlStatus = Strings.NewModInvalidLink;
         }
     }
 
@@ -251,7 +252,7 @@
     {
         if (obj.Key != "Enter") return;
 
-        _urlStatus = "Checking link...";
+        _urlStatus = Strings.NewModCheckingLink;
         await LinkSubmitted();
     }
 

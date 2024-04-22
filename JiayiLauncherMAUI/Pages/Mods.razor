@@ -6,18 +6,18 @@
 
 @page "/Mods"
 
-<h3>Mods</h3>
+<h3>@Strings.ModsMenuName</h3>
 
 <div class="find-tools">
     <span class="material-symbols-sharp">search</span>
-    <JiayiTextBox Placeholder="Search mods" @ref="_searchBox" Changed="StateHasChanged" />
+    <JiayiTextBox Placeholder="@Strings.ModsMenuSearch" @ref="_searchBox" Changed="StateHasChanged" />
 
     <div class="separator"></div>
 
     <span class="material-symbols-sharp">filter_list</span>
-    <p class="filter-by">Filter by:</p>
-    <JiayiFilter @ref="_localFilter" Changed="StateHasChanged">Locally stored</JiayiFilter>
-    <JiayiFilter @ref="_onlineFilter" Changed="StateHasChanged">From the web</JiayiFilter>
+    <p class="filter-by">@Strings.FilterBy</p>
+    <JiayiFilter @ref="_localFilter" Changed="StateHasChanged">@Strings.ModsMenuLocallyStored</JiayiFilter>
+    <JiayiFilter @ref="_onlineFilter" Changed="StateHasChanged">@Strings.ModsMenuFromWeb</JiayiFilter>
 
     <p class="invisible-normalizer">invisible</p>
 </div>
@@ -52,23 +52,20 @@
     </ul>
     @if (_searchResults == 0 && ModCollection.Current?.Mods.Count > 0)
     {
-        <p style="text-align: center; margin-top: 0;">No results found.</p>
+        <p style="text-align: center; margin-top: 0;">@Strings.ModsMenuNoMods</p>
     }
     <p class="add-new" @ondragenter="OnDragEnter" @ondragleave="OnDragLeave" @ondragover="OnDragEnter" data-hovered="@(_hovered ? "yes" : "no")">
         @if (JiayiSettings.Instance.ModCollectionPath != string.Empty)
         {
             <label class="drag-area">
-                Drag mods, folders, or URLs here<br>
-                or click the plus icon to add mods
+                @Strings.ModsMenuDragDrop
                 <InputFile OnChange="FileDropped" multiple @onclick:preventDefault />
             </label>
         }
         else
         {
             <label class="drag-area">
-                You don't have a mods folder set up.<br><br>
-                Drag a folder here to make it work with Jiayi,<br>
-                or add mods to create a new folder.
+                @Strings.ModsMenuNoModsFolder
                 <InputFile OnChange="FileDropped" multiple @onclick:preventDefault />
             </label>
         }
@@ -103,7 +100,7 @@
 
     private async Task ShowAddMods()
     {
-        var modal = ModalService.Show<NewMod>("Add new mod");
+        var modal = ModalService.Show<NewMod>(Strings.NewModName);
         await modal.Result;
     }
 
@@ -148,7 +145,7 @@
             var parameters = new ModalParameters()
                 .Add(nameof(EditMod.Mod), mod);
 
-            var modal = ModalService.Show<EditMod>("Edit mod", parameters);
+            var modal = ModalService.Show<EditMod>(Strings.EditModName, parameters);
             await modal.Result;
         }
         else if (files.Count > 1)
@@ -161,7 +158,7 @@
             {
                 var options = new List<(string, EventCallback)>
                 {
-                    ("Yes", new EventCallback(null, () =>
+                    (Strings.Yes, new EventCallback(null, () =>
                     {
                         JiayiSettings.Instance!.ModCollectionPath =
                             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mods");
@@ -173,14 +170,14 @@
                             ModCollection.Current!.Add(mod);
                         }
                     })),
-                    ("No", EventCallback.Empty)
+                    (Strings.No, EventCallback.Empty)
                 };
 
                 var parameters = new ModalParameters()
                     .Add(nameof(MessageBox.Buttons), options)
-                    .Add(nameof(MessageBox.Message), "Since you don't have a mods folder set up, Jiayi will make one for you to import these mods. Is that okay? It will be in your documents.");
+                    .Add(nameof(MessageBox.Message), Strings.ModsMenuCreateFolderQuestion);
 
-                var modal = ModalService.Show<MessageBox>("Import", parameters);
+                var modal = ModalService.Show<MessageBox>(Strings.Import, parameters);
                 await modal.Result;
                 Refresh();
                 return;

@@ -5,32 +5,33 @@
 @using System.Text
 @using Newtonsoft.Json
 @using System.Diagnostics
+@using JiayiLauncher.Localization
 
 @inject IToastService ToastService;
 
 <div class="edit">
     <div class="name">
-        <p>Theme name</p>
+        <p>@Strings.ThemePublishName</p>
         <JiayiTextBox Placeholder="@ThemeName" @ref="_nameTextBox" Length="(0,20)" />
     </div>
 
     <div class="edit-author" style="margin-bottom: 1em">
-        <p>Author</p>
-        <JiayiTextBox Placeholder="Your name here" @ref="_authorTextBox" Length="(0,20)" />
+        <p>@Strings.ThemePublishAuthor</p>
+        <JiayiTextBox Placeholder="@Strings.ThemePublishAuthorPlaceholder" @ref="_authorTextBox" Length="(0,20)" />
     </div>
 
     <div class="edit-tags" style="margin-bottom: 1em">
-        <p>Tags</p>
-        <JiayiTextBox Placeholder="Comma separated list" @ref="_tagsTextBox" Length="(0,100)" />
+        <p>@Strings.ThemePublishTags</p>
+        <JiayiTextBox Placeholder="@Strings.ThemePublishTagsPlaceholder" @ref="_tagsTextBox" Length="(0,100)" />
     </div>
 
     <div class="edit-raw-tags" style="margin-bottom: 1em">
-        <p>Raw tags</p>
-        <JiayiDropDown Multiselect="true" Items="ThemeMetadata.RAW_TAGS" Name="Select raw tags" SelectedItems="_publicTheme.RawTags"
+        <p>@Strings.ThemePublishRawTags</p>
+        <JiayiDropDown Multiselect="true" Items="ThemeMetadata.RAW_TAGS" Name="@Strings.ThemePublishRawTagsSelect" SelectedItems="_publicTheme.RawTags"
                        @ref="_rawTagsDropDown" />
     </div>
 
-    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">Save</JiayiButton>
+    <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="SaveClicked" Style="margin-bottom: 1em;">@Strings.Save</JiayiButton>
 </div>
 
 @code {
@@ -75,7 +76,7 @@
         if (string.IsNullOrEmpty(name))
         {
             Log.Write(nameof(PrepareThemePublish), "Failed to create theme (no name)", Log.LogLevel.Warning);
-            SendToast("Failed to create theme (no name)");
+            SendToast(Strings.ThemePublishNoName);
 
             return;
         }
@@ -89,7 +90,7 @@
         if (_publicTheme.RawTags.Count < 1)
         {
             Log.Write(nameof(PrepareThemePublish), "Failed to create theme (Minimum 1 raw tag)", Log.LogLevel.Warning);
-            SendToast("Failed to create theme (Minimum 1 raw tag)");
+            SendToast(Strings.ThemePublishNoRawTags);
 
             return;
         }
@@ -97,7 +98,7 @@
         if (allThemes?.FirstOrDefault(x => x.Name.ToLower() == name.ToLower(), null) != null || Directory.Exists(dirPath))
         {
             Log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {ThemeName}", Log.LogLevel.Warning);
-            SendToast($"Failed to create theme (already exists): {ThemeName}");
+            SendToast(string.Format(Strings.ThemePublishAlreadyExists, ThemeName));
 
             return;
         }
@@ -122,8 +123,8 @@
 
         List<(string, EventCallback)> options =
         [
-            ("Ok", EventCallback.Empty),
-            ("Open Repository", new EventCallback(null, () =>
+            (Strings.Okay, EventCallback.Empty),
+            (Strings.ThemePublishOpenRepo, new EventCallback(null, () =>
             {
                 Process.Start(new ProcessStartInfo { FileName = "https://github.com/JiayiSoftware/jiayi-themes/fork", UseShellExecute = true });
                 Process.Start(new ProcessStartInfo { FileName = "https://github.com/JiayiSoftware/jiayi-themes/blob/main/README.md#adding-a-new-theme", UseShellExecute = true });
@@ -131,10 +132,10 @@
         ];
 
         var parameters = new ModalParameters()
-        .Add(nameof(MessageBox.Message), "Upload this folder as a pull request, located in the /themes folder (check the README for more information).")
+        .Add(nameof(MessageBox.Message), Strings.ThemePublishFinalize)
         .Add(nameof(MessageBox.Buttons), options);
 
-        var modal = ModalService.Show<MessageBox>("Publish mod", parameters);
+        var modal = ModalService.Show<MessageBox>(Strings.ThemePublishName, parameters);
         await modal.Result;
     }
 }

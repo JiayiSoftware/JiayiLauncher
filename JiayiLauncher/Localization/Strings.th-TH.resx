@@ -126,7 +126,7 @@
         <value>กำลังแตกไฟล์...</value>
     </data>
     <data name="CompletionPercent" xml:space="preserve">
-        <value>{0}% เสร็จ</value>
+        <value>เสร็จแล้ว {0}%</value>
     </data>
     <data name="Remove" xml:space="preserve">
         <value>นำออก</value>

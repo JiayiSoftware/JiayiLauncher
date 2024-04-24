@@ -83,6 +83,9 @@
       <EmbeddedResource Update="Localization\Strings.en-GB.resx">
         <Generator>ResXFileCodeGenerator</Generator>
       </EmbeddedResource>
+      <EmbeddedResource Update="Localization\Strings.th-TH.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>

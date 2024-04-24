@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JiayiLauncher", "JiayiLaunc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreLib", "external\StoreLib\StoreLib\StoreLib.csproj", "{41F85BFE-5778-414E-B5D7-EB87FC9CB596}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiayiLauncher.Installer", "JiayiLauncher.Installer\JiayiLauncher.Installer.csproj", "{B392BACB-4E27-49EB-A4A5-51FE5B88F9ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,14 @@ Global
 		{41F85BFE-5778-414E-B5D7-EB87FC9CB596}.Release|Any CPU.Build.0 = Release|Any CPU
 		{41F85BFE-5778-414E-B5D7-EB87FC9CB596}.Release|x64.ActiveCfg = Release|Any CPU
 		{41F85BFE-5778-414E-B5D7-EB87FC9CB596}.Release|x64.Build.0 = Release|Any CPU
+		{B392BACB-4E27-49EB-A4A5-51FE5B88F9ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B392BACB-4E27-49EB-A4A5-51FE5B88F9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B392BACB-4E27-49EB-A4A5-51FE5B88F9ED}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B392BACB-4E27-49EB-A4A5-51FE5B88F9ED}.Debug|x64.Build.0 = Debug|Any CPU
+		{B392BACB-4E27-49EB-A4A5-51FE5B88F9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B392BACB-4E27-49EB-A4A5-51FE5B88F9ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B392BACB-4E27-49EB-A4A5-51FE5B88F9ED}.Release|x64.ActiveCfg = Release|Any CPU
+		{B392BACB-4E27-49EB-A4A5-51FE5B88F9ED}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

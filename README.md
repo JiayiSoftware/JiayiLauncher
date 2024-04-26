@@ -1,11 +1,11 @@
 <div align="center">
-  <a href="https://jiayi.software/launcher"><img src="https://github.com/JiayiSoftware/JiayiLauncher/blob/master/.github/assets/logo.png" alt="Jiayi Launcher" width="700"></a>
+  <a href="https://jiayisoftware.github.io/launcher"><img src="https://github.com/JiayiSoftware/JiayiLauncher/blob/master/.github/assets/logo.png" alt="Jiayi Launcher" width="700"></a>
 </div>
 
 ### Minecraft for Windows mod manager (Bedrock Edition)
 
 [![Build](https://github.com/JiayiSoftware/JiayiLauncher/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JiayiSoftware/JiayiLauncher/actions/workflows/dotnet.yml)
-[![Discord server](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://jiayi.software/discord)
+[![Discord server](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://jiayisoftware.github.io/discord)
 
 ## Features
 > * Simple, clean user interface

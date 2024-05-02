@@ -83,6 +83,10 @@
         }
     }
 
+    @if (_searchResults == 0 && ShaderManager.Shaders.Count > 0)
+    {
+        <p style="text-align: center; margin-top: 0;">No shaders found</p>
+    }
 </ul>
 
 <label class="drag-area" 
@@ -90,6 +94,7 @@
     Click here or drag and drop a shader pack to add it
     <InputFile OnChange="FileSelected" multiple/>
 </label>
+
 
 @code {
     [CascadingParameter]

@@ -138,6 +138,9 @@ public static class VersionManager
 	{
 		Log.Write(nameof(VersionManager), $"Switching to version {version}");
 		
+		ShaderManager.DisableShader(ShaderManager.AppliedShader);
+		await ShaderManager.RestoreVanillaShaders();
+		
 		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);
 		var folder = folders.FirstOrDefault(x => x.Contains(version));
 		if (folder == null) return SwitchResult.VersionNotFound;

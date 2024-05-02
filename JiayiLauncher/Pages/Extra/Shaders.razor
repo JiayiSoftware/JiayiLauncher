@@ -1,5 +1,6 @@
 ﻿@page "/Shaders"
 @using JiayiLauncher.Features.Shaders
+@using JiayiLauncher.Settings
 @using JiayiLauncher.Shared.Components.Toasts
 
 @inject NavigationManager NavigationManager
@@ -12,41 +13,83 @@
 </div>
 
 <div class="current-shader">
-    <h4>Your current shader</h4>
+    <h4 style="text-align: left; margin-top: 0;">Your current shader pack</h4>
     
     @if (ShaderManager.AppliedShader == string.Empty)
     {
-        <strong>No shader applied</strong>
-        <p>Minecraft's vanilla shaders will be used</p>
+        <p style="margin-bottom: 0.5rem">No shaders applied</p>
+        <i>Minecraft's vanilla shaders will be used</i>
     }
     else
     {
         <div class="shader">
-            <p>@ShaderManager.AppliedShader</p>
+            <strong>@ShaderManager.AppliedShader</strong>
+            <p>
+                Replacing @ShaderManager.GetMaterialDiff(ShaderManager.AppliedShader).Count material files
+            </p>
         </div>
         
-        <div class="shader-buttons">
-            <JiayiButton Size="JiayiButton.ButtonSize.Small">Disable</JiayiButton>
-            
-            <span class="material-symbols-sharp" title="Rename shader">edit</span>
-            <span class="material-symbols-sharp" title="Delete shader (irreversible)"
-                  @onclick="() => DeleteClicked(ShaderManager.AppliedShader)">delete</span>
-        </div>
+        <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-top: 0.5rem" 
+                     OnClick="RemoveClicked">@Strings.Remove</JiayiButton>
     }
 </div>
 
-<div class="separator"></div>
+<h4>Available shaders</h4>
 
-<div class="available-shaders">
-    <h4>Available shaders</h4>
+<div class="find-tools">
+    <span class="material-symbols-sharp">search</span>
+    <JiayiTextBox Placeholder="Search shaders" @ref="_searchBox" Changed="StateHasChanged" />
+</div>
+
+<ul class="available-shaders">
+    @* @foreach (var shader in ShaderManager.Shaders) *@
+    @* { *@
+    @*     <div class="shader"> *@
+    @*         <p>@shader</p> *@
+    @*     </div> *@
+    @* } *@
     
-    @foreach (var shader in ShaderManager.Shaders)
-    {
-        <div class="shader">
-            <p>@shader</p>
-        </div>
+    @{
+        _searchResults = 0;
+        foreach (var shader in ShaderManager.AvailableShaders)
+        {
+            if (!shader.ToLower().Contains(_searchBox?.Value?.ToLower() ?? ""))
+                continue;
+            
+            _searchResults++;
+            
+            <li class="available-shader">
+                <div class="shader-name" title="View shader materials" @onclick="() => ViewMaterialsClicked(shader)">
+                    <strong>@shader</strong>
+                    
+                    <div class="shader-count">
+                        <span class="material-symbols-sharp">folder</span>
+                        <p>
+                            @ShaderManager.GetMaterialDiff(shader).Count material files
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="modify-buttons">
+                    <span class="material-symbols-sharp modify-button"
+                          title="Rename shader" @onclick="() => RenameClicked(shader)">edit</span>
+                    <span class="material-symbols-sharp modify-button" style="color: darkred"
+                          title="Delete shader" @onclick="() => DeleteClicked(shader)">delete</span>
+
+                    <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-left: 0.2rem"
+                                 OnClick="() => ApplyClicked(shader)">@Strings.Apply</JiayiButton>
+                </div>
+            </li>
+        }
     }
-</div>
+
+</ul>
+
+<label class="drag-area" 
+       title="Any file with compressed with the zip format can be used as a shader pack, as long as it contains material files. The launcher can find shaders anywhere in the pack.">
+    Click here or drag and drop a shader pack to add it
+    <InputFile OnChange="FileSelected" multiple/>
+</label>
 
 @code {
     [CascadingParameter]
@@ -54,6 +97,9 @@
     
     private bool _appliedExpanded = true;
     private bool _availableExpanded; // false
+    
+    private JiayiTextBox? _searchBox;
+    private int _searchResults;
 
     protected override void OnInitialized()
     {
@@ -75,6 +121,17 @@
                 _availableExpanded = true;
             }
         }
+        
+        StateHasChanged();
+    }
+    
+    private async Task RenameClicked(string shader)
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(EditShader.Shader), shader);
+        
+        var modal = ModalService.Show<EditShader>("Rename shader", parameters);
+        await modal.Result;
         
         StateHasChanged();
     }
@@ -100,80 +157,18 @@
         StateHasChanged();
     }
 
-    private void EnableClicked(string shader)
+    private async Task ApplyClicked(string shader)
     {
         ShaderManager.EnableShader(shader);
-        StateHasChanged();
-    }
-    
-    private void DisableClicked(string shader)
-    {
-        ShaderManager.DisableShader(shader);
-        StateHasChanged();
-    }
-
-    private async Task ApplyClicked()
-    {
-        var options = new List<(string, EventCallback)>
-        {
-            ("Yes", new EventCallback(null, async () =>
-            {
-                await ShaderManager.ApplyShader();
-
-                var toastParams = new ToastParameters()
-                    .Add(nameof(JiayiToast.Title), "Shader successfully applied!")
-                    .Add(nameof(JiayiToast.Level), ToastLevel.Success);
-                
-                ToastService.ShowToast<JiayiToast>(toastParams, settings =>
-                {
-                    settings.Timeout = 5;
-                    settings.ShowProgressBar = true;
-                });
-            })),
-            ("No", EventCallback.Empty)
-        };
-        
-        var parameters = new ModalParameters()
-            .Add(nameof(MessageBox.Buttons), options)
-            .Add(nameof(MessageBox.Message), 
-                "Are you sure you want to apply this shader? This will replace any shaders with the ones in this pack.");
-        
-        var modal = ModalService.Show<MessageBox>("Apply shader", parameters);
-        await modal.Result;
+        await ShaderManager.ApplyShader();
         
         StateHasChanged();
     }
 
-    private async Task RestoreClicked()
+    private async Task RemoveClicked()
     {
-        var options = new List<(string, EventCallback)>
-        {
-            ("Yes", new EventCallback(null, async () =>
-            {
-                if (ShaderManager.AppliedShader != string.Empty) 
-                    ShaderManager.DisableShader(ShaderManager.AppliedShader);
-                await ShaderManager.RestoreVanillaShaders();
-                
-                var toastParams = new ToastParameters()
-                    .Add(nameof(JiayiToast.Title), "Restored vanilla shaders.")
-                    .Add(nameof(JiayiToast.Level), ToastLevel.Success);
-                
-                ToastService.ShowToast<JiayiToast>(toastParams, settings =>
-                {
-                    settings.Timeout = 5;
-                    settings.ShowProgressBar = true;
-                });
-            })),
-            ("No", EventCallback.Empty)
-        };
-        
-        var parameters = new ModalParameters()
-            .Add(nameof(MessageBox.Buttons), options)
-            .Add(nameof(MessageBox.Message), 
-                "Are you sure you want to go back to vanilla shaders? This will disable your current shader pack and restore vanilla shaders.");
-        
-        var modal = ModalService.Show<MessageBox>("Restore shaders", parameters);
-        await modal.Result;
+        ShaderManager.DisableShader(ShaderManager.AppliedShader);
+        await ShaderManager.RestoreVanillaShaders();
         
         StateHasChanged();
     }
@@ -181,6 +176,16 @@
     private void BackClicked()
     {
         NavigationManager.NavigateTo("/Versions");
+    }
+
+    private void ViewMaterialsClicked(string shader)
+    {
+        var materials = ShaderManager.GetMaterialDiff(shader);
+        
+        var parameters = new ModalParameters()
+            .Add(nameof(MessageBox.Message), $"This shader pack modifies the following material files:\n\n{string.Join("\n", materials)}");
+        
+        ModalService.Show<MessageBox>("Shader materials", parameters);
     }
 
 }

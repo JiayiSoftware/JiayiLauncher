@@ -61,9 +61,6 @@ public static class VersionManager
 		// delete signature (most likely doesn't exist anyway)
 		var signature = Path.Combine(folder, "AppxSignature.p7x");
 		if (File.Exists(signature)) File.Delete(signature);
-		
-		// backup shaders i guess
-		await ShaderManager.BackupVanillaShaders();
 	}
 
 	public static bool IsValidPackage(string path)
@@ -120,9 +117,6 @@ public static class VersionManager
 		// DELETE AppxSignature.p7x so that the game can be installed with developer mode
 		var signature = Path.Combine(folder, "AppxSignature.p7x");
 		if (File.Exists(signature)) File.Delete(signature);
-		
-		// copy shaders
-		await ShaderManager.BackupVanillaShaders();
 	}
 
 	public static async Task RemoveVersion(string ver)

@@ -163,6 +163,16 @@ public static class ShaderManager
 		// there should only be one folder left
 		return directories.ElementAtOrDefault(0); // returns null if there are no folders left
 	}
+	
+	public static void RenameShader(string shader, string newName) {
+		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, shader);
+		if (!Directory.Exists(path)) return;
+		
+		Directory.Move(path, Path.Combine(JiayiSettings.Instance.ShadersPath, newName));
+		
+		Log.Write(nameof(ShaderManager), $"Renamed shader {shader} to {newName}");
+		UpdateShaders();
+	}
 
 	public static void EnableShader(string shader)
 	{
@@ -234,5 +244,17 @@ public static class ShaderManager
 		}
 
 		Log.Write(nameof(ShaderManager), $"Applied shader {AppliedShader}");
+	}
+
+	public static List<string> GetMaterialDiff(string shader)
+	{
+		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, shader);
+		if (shader == AppliedShader) path = Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied", shader);
+		
+		if (!Directory.Exists(path)) return [];
+		
+		var shaderFiles = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
+		return shaderFiles.Select(Path.GetFileNameWithoutExtension)
+			.Select(x => x?.Replace(".material", "")).ToList()!;
 	}
 }

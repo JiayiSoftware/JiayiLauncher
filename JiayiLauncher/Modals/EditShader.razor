@@ -1,0 +1,29 @@
+﻿@using JiayiLauncher.Features.Shaders
+<div class="edit">
+    <div class="edit-name" style="margin-bottom: 1em">
+        <p>Give your shader a name!</p>
+        <JiayiTextBox Placeholder="@Shader" @ref="_textBox" />
+    </div>
+
+    <JiayiButton OnClick="SaveClicked" Size="JiayiButton.ButtonSize.Small" Style="margin-bottom: 1em;">@Strings.Save</JiayiButton>
+</div>
+
+@code {
+    [Parameter]
+    public string? Shader { get; set; }
+    
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; } = default!;
+
+    private JiayiTextBox? _textBox;
+    
+    private async Task SaveClicked()
+    {
+        if (Shader == null || _textBox?.Value == null ||  _textBox?.Value?.Trim() == string.Empty || _textBox?.Value.Length >= 256) return;
+
+        var newName = _textBox?.Value ?? Shader;
+        ShaderManager.RenameShader(Shader, newName);
+        
+        await Modal.CloseAsync(ModalResult.Ok());
+    }
+}

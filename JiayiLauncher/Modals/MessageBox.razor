@@ -1,7 +1,7 @@
 ﻿@using JiayiLauncher.Localization
 <div>
     <p>
-        @foreach (var line in Message.Split(Environment.NewLine))
+        @foreach (var line in Message.Split("\n"))
         {
             // since newlines just magically disappear
             @line

@@ -1,31 +1,29 @@
 ﻿@page "/Shaders"
+
 @using JiayiLauncher.Features.Shaders
-@using JiayiLauncher.Settings
-@using JiayiLauncher.Shared.Components.Toasts
 
 @inject NavigationManager NavigationManager
-@inject IToastService ToastService
 
 <div class="page-title">
-    <h4 @onclick="BackClicked">Version Manager</h4>
+    <h4 @onclick="BackClicked">@Strings.VerManName</h4>
     <span class="material-symbols-sharp">arrow_right</span>
-    <h3>Shaders</h3>
+    <h3>@Strings.ShaderManName</h3>
 </div>
 
 <div class="current-shader">
-    <h4 style="text-align: left; margin-top: 0;">Your current shader pack</h4>
+    <h4 style="text-align: left; margin-top: 0;">@Strings.ShaderManCurrentShader</h4>
     
     @if (ShaderManager.AppliedShader == string.Empty)
     {
-        <p style="margin-bottom: 0.5rem">No shaders applied</p>
-        <i>Minecraft's vanilla shaders will be used</i>
+        <p style="margin-bottom: 0.5rem">@Strings.ShaderManNoShader</p>
+        <i>@Strings.ShaderManUsingVanilla</i>
     }
     else
     {
         <div class="shader">
             <strong>@ShaderManager.AppliedShader</strong>
             <p>
-                Replacing @ShaderManager.GetMaterialDiff(ShaderManager.AppliedShader).Count material files
+                @string.Format(Strings.ShaderManReplacingCount, ShaderManager.GetMaterialDiff(ShaderManager.AppliedShader).Count)
             </p>
         </div>
         
@@ -34,47 +32,40 @@
     }
 </div>
 
-<h4>Available shaders</h4>
+<h4>@Strings.ShaderManAvailableShaders</h4>
 
 <div class="find-tools">
     <span class="material-symbols-sharp">search</span>
-    <JiayiTextBox Placeholder="Search shaders" @ref="_searchBox" Changed="StateHasChanged" />
+    <JiayiTextBox Placeholder="@Strings.ShaderManSearch" @ref="_searchBox" Changed="StateHasChanged" />
 </div>
 
 <ul class="available-shaders">
-    @* @foreach (var shader in ShaderManager.Shaders) *@
-    @* { *@
-    @*     <div class="shader"> *@
-    @*         <p>@shader</p> *@
-    @*     </div> *@
-    @* } *@
-    
     @{
         _searchResults = 0;
         foreach (var shader in ShaderManager.AvailableShaders)
         {
             if (!shader.ToLower().Contains(_searchBox?.Value?.ToLower() ?? ""))
                 continue;
-            
+
             _searchResults++;
-            
+
             <li class="available-shader">
-                <div class="shader-name" title="View shader materials" @onclick="() => ViewMaterialsClicked(shader)">
+                <div class="shader-name" title="@Strings.ShaderManViewMaterials" @onclick="() => ViewMaterialsClicked(shader)">
                     <strong>@shader</strong>
-                    
+
                     <div class="shader-count">
                         <span class="material-symbols-sharp">folder</span>
                         <p>
-                            @ShaderManager.GetMaterialDiff(shader).Count material files
+                            @string.Format(Strings.ShaderManMaterialCount, ShaderManager.GetMaterialDiff(shader).Count)
                         </p>
                     </div>
                 </div>
-                
+
                 <div class="modify-buttons">
                     <span class="material-symbols-sharp modify-button"
-                          title="Rename shader" @onclick="() => RenameClicked(shader)">edit</span>
+                          title="@Strings.ShaderManRename" @onclick="() => RenameClicked(shader)">edit</span>
                     <span class="material-symbols-sharp modify-button" style="color: darkred"
-                          title="Delete shader" @onclick="() => DeleteClicked(shader)">delete</span>
+                          title="@Strings.ShaderManDelete" @onclick="() => DeleteClicked(shader)">delete</span>
 
                     <JiayiButton Size="JiayiButton.ButtonSize.Small" Style="margin-left: 0.2rem"
                                  OnClick="() => ApplyClicked(shader)">@Strings.Apply</JiayiButton>
@@ -85,13 +76,13 @@
 
     @if (_searchResults == 0 && ShaderManager.Shaders.Count > 0)
     {
-        <p style="text-align: center; margin-top: 0;">No shaders found</p>
+        <p style="text-align: center; margin-top: 0;">@Strings.ShaderManNoShaders</p>
     }
 </ul>
 
 <label class="drag-area" 
-       title="Any file with compressed with the zip format can be used as a shader pack, as long as it contains material files. The launcher can find shaders anywhere in the pack.">
-    Click here or drag and drop a shader pack to add it
+       title="@Strings.ShaderManDragDropInfo">
+    @Strings.ShaderManDragDrop
     <InputFile OnChange="FileSelected" multiple/>
 </label>
 
@@ -135,7 +126,7 @@
         var parameters = new ModalParameters()
             .Add(nameof(EditShader.Shader), shader);
         
-        var modal = ModalService.Show<EditShader>("Rename shader", parameters);
+        var modal = ModalService.Show<EditShader>(Strings.EditShaderName, parameters);
         await modal.Result;
         
         StateHasChanged();
@@ -145,18 +136,18 @@
     {
         var options = new List<(string, EventCallback)>
         {
-            ("Yes", new EventCallback(null, () =>
+            (Strings.Yes, new EventCallback(null, () =>
             {
                 ShaderManager.DeleteShader(shader);
             })),
-            ("No", EventCallback.Empty)
+            (Strings.No, EventCallback.Empty)
         };
         
         var parameters = new ModalParameters()
             .Add(nameof(MessageBox.Buttons), options)
-            .Add(nameof(MessageBox.Message), "Are you sure you want to delete this shader? This action is irreversible.");
+            .Add(nameof(MessageBox.Message), Strings.ShaderManDeleteConfirm);
         
-        var modal = ModalService.Show<MessageBox>("Delete shader", parameters);
+        var modal = ModalService.Show<MessageBox>(Strings.ShaderManDelete, parameters);
         await modal.Result;
         
         StateHasChanged();
@@ -188,9 +179,9 @@
         var materials = ShaderManager.GetMaterialDiff(shader);
         
         var parameters = new ModalParameters()
-            .Add(nameof(MessageBox.Message), $"This shader pack modifies the following material files:\n\n{string.Join("\n", materials)}");
+            .Add(nameof(MessageBox.Message), string.Format(Strings.ShaderManViewMaterialsText, string.Join("\n", materials)).Trim());
         
-        ModalService.Show<MessageBox>("Shader materials", parameters);
+        ModalService.Show<MessageBox>(Strings.ShaderManMaterials, parameters);
     }
 
 }

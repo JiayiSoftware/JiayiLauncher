@@ -581,6 +581,24 @@ namespace JiayiLauncher.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rename shader.
+        /// </summary>
+        internal static string EditShaderName {
+            get {
+                return ResourceManager.GetString("EditShaderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Give your shader pack a name!.
+        /// </summary>
+        internal static string EditShaderRenameShader {
+            get {
+                return ResourceManager.GetString("EditShaderRenameShader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -2651,6 +2669,167 @@ namespace JiayiLauncher.Localization {
         internal static string SettingsVersionsPathDesc {
             get {
                 return ResourceManager.GetString("SettingsVersionsPathDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available shaders.
+        /// </summary>
+        internal static string ShaderManAvailableShaders {
+            get {
+                return ResourceManager.GetString("ShaderManAvailableShaders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your current shader pack.
+        /// </summary>
+        internal static string ShaderManCurrentShader {
+            get {
+                return ResourceManager.GetString("ShaderManCurrentShader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete shader pack.
+        /// </summary>
+        internal static string ShaderManDelete {
+            get {
+                return ResourceManager.GetString("ShaderManDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this shader pack? This action is irreversible..
+        /// </summary>
+        internal static string ShaderManDeleteConfirm {
+            get {
+                return ResourceManager.GetString("ShaderManDeleteConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here or drag and drop a shader pack to add it.
+        /// </summary>
+        internal static string ShaderManDragDrop {
+            get {
+                return ResourceManager.GetString("ShaderManDragDrop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///            Any file compressed with the zip format can be used as a shader pack, as long as it contains material files.
+        ///        
+        ///            The launcher can find shaders anywhere in the pack.
+        ///        .
+        /// </summary>
+        internal static string ShaderManDragDropInfo {
+            get {
+                return ResourceManager.GetString("ShaderManDragDropInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} material files.
+        /// </summary>
+        internal static string ShaderManMaterialCount {
+            get {
+                return ResourceManager.GetString("ShaderManMaterialCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shader materials.
+        /// </summary>
+        internal static string ShaderManMaterials {
+            get {
+                return ResourceManager.GetString("ShaderManMaterials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shader manager.
+        /// </summary>
+        internal static string ShaderManName {
+            get {
+                return ResourceManager.GetString("ShaderManName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No shaders applied.
+        /// </summary>
+        internal static string ShaderManNoShader {
+            get {
+                return ResourceManager.GetString("ShaderManNoShader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No shaders found.
+        /// </summary>
+        internal static string ShaderManNoShaders {
+            get {
+                return ResourceManager.GetString("ShaderManNoShaders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename shader pack.
+        /// </summary>
+        internal static string ShaderManRename {
+            get {
+                return ResourceManager.GetString("ShaderManRename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replacing {0} material files.
+        /// </summary>
+        internal static string ShaderManReplacingCount {
+            get {
+                return ResourceManager.GetString("ShaderManReplacingCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search shaders.
+        /// </summary>
+        internal static string ShaderManSearch {
+            get {
+                return ResourceManager.GetString("ShaderManSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minecraft&apos;s vanilla shaders will be used.
+        /// </summary>
+        internal static string ShaderManUsingVanilla {
+            get {
+                return ResourceManager.GetString("ShaderManUsingVanilla", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View shader materials.
+        /// </summary>
+        internal static string ShaderManViewMaterials {
+            get {
+                return ResourceManager.GetString("ShaderManViewMaterials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///            This shader pack modifies the following materials:
+        ///            
+        ///            {0}
+        ///        .
+        /// </summary>
+        internal static string ShaderManViewMaterialsText {
+            get {
+                return ResourceManager.GetString("ShaderManViewMaterialsText", resourceCulture);
             }
         }
         

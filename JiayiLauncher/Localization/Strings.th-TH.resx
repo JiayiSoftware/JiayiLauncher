@@ -143,6 +143,9 @@
     <data name="Apply" xml:space="preserve">
         <value>ใช้</value>
     </data>
+    <data name="Select" xml:space="preserve">
+        <value>เลือก</value>
+    </data>
     <data name="View" xml:space="preserve">
         <value>ดู</value>
     </data>
@@ -160,6 +163,9 @@
     </data>
     <data name="Generate" xml:space="preserve">
         <value>สร้าง</value>
+    </data>
+    <data name="Clear" xml:space="preserve">
+        <value>ล้าง</value>
     </data>
     <data name="Name" xml:space="preserve">
         <value>ชื่อ</value>
@@ -509,8 +515,78 @@
     <data name="VerListInvalidPackage" xml:space="preserve">
         <value>เป็นแพ็คเกจที่ไม่สามารถใช้ได้</value>
     </data>
+    <data name="VerListUpdatingVersions" xml:space="preserve">
+        <value>รายการเวอร์ชั่นถูกลบ มันจะถูกอัพเดท</value>
+    </data>
     
-    <!-- TODO: finish shader manager, then add strings here -->
+    <!-- shader manager strings -->
+    <data name="ShaderManName" xml:space="preserve">
+        <value>จัดการเชดเดอร์</value>
+    </data>
+    <data name="ShaderManCurrentShader" xml:space="preserve">
+        <value>เชดเดอร์ของคุณตอนนี้</value>
+    </data>
+    <data name="ShaderManNoShader" xml:space="preserve">
+        <value>ไม่มีเชดเดอร์ที่กำลังถูกใช้</value>
+    </data>
+    <data name="ShaderManUsingVanilla" xml:space="preserve">
+        <value>เชดเดอร์ของเกมปกติจะถูกใช้</value>
+    </data>
+    <data name="ShaderManReplacingCount" xml:space="preserve">
+        <value>กำลังถับ {0} ไฟล์วัสดุ</value>
+    </data>
+    <data name="ShaderManAvailableShaders" xml:space="preserve">
+        <value>เชดเดอร์ที่ใช้ได้</value>
+    </data>
+    <data name="ShaderManSearch" xml:space="preserve">
+        <value>ค้นหาเชดเดอร์</value>
+    </data>
+    <data name="ShaderManViewMaterials" xml:space="preserve">
+        <value>ดูวัสดุเชดเดอร์</value>
+    </data>
+    <data name="ShaderManMaterials" xml:space="preserve">
+        <value>วัสดุเชดเดอร์</value>
+    </data>
+    <data name="ShaderManViewMaterialsText" xml:space="preserve">
+        <value>
+            เชดเดอร์นี้จะเปลี่ยนวัสดุต่อไปนี้:
+            
+            {0}
+        </value>
+    </data>
+    <data name="ShaderManMaterialCount" xml:space="preserve">
+        <value>{0} ไฟล์วัสดุ</value>
+    </data>
+    <data name="ShaderManRename" xml:space="preserve">
+        <value>เปลี่ยนชื่อเชดเดอร์</value>
+    </data>
+    <data name="ShaderManDelete" xml:space="preserve">
+        <value>ลบเชดเดอร์</value>
+    </data>
+    <data name="ShaderManDeleteConfirm" xml:space="preserve">
+        <value>แน่ใจว่าจะลบเชดเดอร์นี้ ไม่สามารถเอาคืนได้</value>
+    </data>
+    <data name="ShaderManNoShaders" xml:space="preserve">
+        <value>ไม่เจอเชดเดอร์</value>
+    </data>
+    <data name="ShaderManDragDrop" xml:space="preserve">
+        <value>กดปุ่มนี้เพื่อเลือกเชดเดอร์หรือลากไฟล์เชดเดอร์มาที่นี่เพื่อที่จะใช้เชดเดอร์นั้น</value>
+    </data>
+    <data name="ShaderManDragDropInfo" xml:space="preserve">
+        <value>
+            ทุกไฟล์ที่เป็นไฟล์ซิบสามารถใช้เป็นเชดเดอร์ได้ถ้าในซิบมีไฟล์วัสดุ
+        
+            ไม่เจอไฟล์ที่ใช้ได้
+        </value>
+    </data>
+    
+    <!-- edit shader strings (only renaming atm) (Not like any more functionality is planned) -->
+    <data name="EditShaderName" xml:space="preserve">
+        <value>เปลี่ยนชื่อเชดเดอร์</value>
+    </data>
+    <data name="EditShaderRenameShader" xml:space="preserve">
+        <value>ให้เปลี่ยนชื่อเชดเดอร์</value>
+    </data>
     
     <!-- themes menu strings -->
     <data name="ThemesMenuName" xml:space="preserve">
@@ -929,29 +1005,41 @@
             ใช้ได้แค่ 1 formatting ต่อ field.
         </value>
     </data>
-    <data name="SettingsTopText" xml:space="preserve">
+    <data name="SettingsDiscordDetails" xml:space="preserve">
         <value>ข้อความบน</value>
     </data>
-    <data name="SettingsTopTextDesc" xml:space="preserve">
+    <data name="SettingsDiscordDetailsDesc" xml:space="preserve">
         <value>ข้อความสถานะบนสุด</value>
     </data>
-    <data name="SettingsTopTextDefault" xml:space="preserve">
-        <value>เล่นด้วย %mod_name%</value>
+    <data name="SettingsDiscordDetailsDefault" xml:space="preserve">
+        <value>กำลังเล่นด้วย %mod_name%</value>
     </data>
-    <data name="SettingsBottomText" xml:space="preserve">
+    <data name="SettingsDiscordState" xml:space="preserve">
         <value>ข้อความล่าง</value>
     </data>
-    <data name="SettingsBottomTextDesc" xml:space="preserve">
+    <data name="SettingsDiscordStateDesc" xml:space="preserve">
         <value>ข้อความสถานะล่างสุด</value>
     </data>
-    <data name="SettingsBottomTextDefault" xml:space="preserve">
+    <data name="SettingsDiscordStateDefault" xml:space="preserve">
         <value>บน %game_version%</value>
     </data>
-    <data name="SettingsShowElapsedTime" xml:space="preserve">
+    <data name="SettingsDiscordShowElapsedTime" xml:space="preserve">
         <value>แสดงเวลาที่ใช้ไปทั้งหมด</value>
     </data>
-    <data name="SettingsShowElapsedTimeDesc" xml:space="preserve">
+    <data name="SettingsDiscordShowElapsedTimeDesc" xml:space="preserve">
         <value>แสดงว่า Jiayi ถูกเปิดมานานเท่าไหร่</value>
+    </data>
+    <data name="SettingsDiscordShowDownloadButton" xml:space="preserve">
+        <value>แสดงปุ่มดาวน์โหลด</value>
+    </data>
+    <data name="SettingsDiscordShowDownloadButtonDesc" xml:space="preserve">
+        <value>แสดงปุ่มดาวน์โหลด Jiayi บนดิสคอร์ด</value>
+    </data>
+    <data name="SettingsDiscordShareCurrentMod" xml:space="preserve">
+        <value>แสดงมอดที่กำลังใช้</value>
+    </data>
+    <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
+        <value>แสดงปุ่มเพื่อดาวน์โหลดมอดที่กำลังใช้บนดิสคอร์ด สามารถใช้ได้แค้มอดจากเว็บไซต์</value>
     </data>
     <data name="SettingsLargeImageKey" xml:space="preserve">
         <value>Key รูปภาพใหญ่</value>
@@ -1002,7 +1090,13 @@
     <data name="SettingsOfflineModeTooltip" xml:space="preserve">
         <value>ฟีเจอร์เช่น มอดจากอินเทอร์เน็ต ดาวน์โหลดเวอร์ชั่น หรือ ตรวจสอบหาอัพเดทจะใช้ไม่ได้</value>
     </data>
-    
+    <data name="SettingsFollowRedirects" xml:space="preserve">
+        <value>ไปที่ลิ้ง</value>
+    </data>
+    <data name="SettingsFollowRedirectsDesc" xml:space="preserve">
+        <value>ไปที่ลิ้งเมื่อเพื่มมอด เปลี่ยนตั้งค่านี้ถ้าคุณมีปัญหาเมื่อเพื่มมอด</value>
+    </data>
+
     <!-- launch settings strings -->
     <data name="SettingsUseInjectionDelay" xml:space="preserve">
         <value>ให้ Inject ช้าลง</value>
@@ -1062,10 +1156,10 @@
         <value>เปิดโฟลเดอร์ Log ใน File Explorer</value>
     </data>
     <data name="SettingsClearPreviousLogs" xml:space="preserve">
-        <value>ลบไฟล์ Log ครั้งที่แล้ว</value>
+        <value>ล้างไฟล์ Log ครั้งที่แล้ว</value>
     </data>
     <data name="SettingsClearPreviousLogsDesc" xml:space="preserve">
-        <value>ลบไฟล์ Log ที่เหลือไว้ครั้งที่แล้ว</value>
+        <value>ล้างไฟล์ Log ที่เหลือไว้ครั้งที่แล้ว</value>
     </data>
     
     <!-- mod card strings -->

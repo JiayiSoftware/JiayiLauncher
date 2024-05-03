@@ -346,6 +346,9 @@
     <data name="NewModCheckingLink" xml:space="preserve">
         <value>Checking link...</value>
     </data>
+    <data name="NewModAlreadyExists" xml:space="preserve">
+        <value>This mod already exists in your collection. Do you want to replace it?</value>
+    </data>
     
     <!-- new theme strings -->
     <data name="NewThemeName" xml:space="preserve">

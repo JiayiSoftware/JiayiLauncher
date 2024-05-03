@@ -121,6 +121,15 @@ public static class VersionManager
 
 	public static async Task RemoveVersion(string ver)
 	{
+		var package = await PackageData.GetPackage();
+		if (package == null) return;
+
+		if (package.AppInfo.Package.InstalledPath == GetVersionPath(ver))
+		{
+			// remove package
+			await PackageData.PackageManager.RemovePackageAsync(package.AppInfo.Package.Id.FullName, 0);
+		}
+		
 		await Task.Run(() =>
 		{
 			var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);

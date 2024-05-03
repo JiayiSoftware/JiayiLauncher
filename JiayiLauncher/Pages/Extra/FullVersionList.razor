@@ -212,16 +212,6 @@
         var options = new List<(string, EventCallback)>();
         var parameters = new ModalParameters();
         var package = await PackageData.GetPackage();
-        
-        // TODO: remove this check and unregister the package instead
-        if (package?.AppInfo.Package.InstalledPath == VersionManager.GetVersionPath(ver))
-        {
-            parameters.Add(nameof(MessageBox.Message), 
-                    "This is your current version. Please switch to another version before removing this one.");
-            
-            ModalService.Show<MessageBox>("Remove version", parameters);
-            return;
-        }
 
         options.Add((Strings.Yes, new EventCallback(null, async () =>
         {

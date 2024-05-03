@@ -118,8 +118,7 @@
         {
             var response = await InternetManager.Client.GetStringAsync(PublicTheme?.Theme);
 
-            // TODO: response will never be null, but it can be empty/invalid CSS
-            if (response != null)
+            if (!string.IsNullOrWhiteSpace(response))
             {
                 _theme = CssBuilder.Parse(response);
             }

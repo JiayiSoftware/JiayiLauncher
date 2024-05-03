@@ -7,8 +7,12 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text.Json;
 using System.Windows;
+using Blazored.Modal;
+using JiayiLauncher.Localization;
+using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using MessageBox = JiayiLauncher.Modals.MessageBox;
 
 namespace JiayiLauncher.Features.Mods;
 
@@ -214,20 +218,26 @@ public class ModCollection
 
     public void Add(Mod mod, bool confirm = true)
     {
-	    if (HasMod(mod.Path))
+	    if (HasMod(mod.Path) && confirm)
 	    {
 		    var existing = Mods.First(m => m.Path == mod.Path);
-		    // TODO: use modal service
-		    // if (confirm && 
-		    //     MessageBox.Show("This mod already exists in your collection. Do you want to replace it?",
-			   //      "Jiayi Launcher", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-		    // {
-			   //  return;
-		    // }
-			    
-		    Mods.Remove(existing);
-		    if (!existing.FromInternet && File.Exists(existing.Path) && mod.Path != existing.Path)
-			    File.Copy(mod.Path, existing.Path, true);
+
+		    var options = new List<(string, EventCallback)>
+		    {
+			    (Strings.Yes, new EventCallback(null, () =>
+			    {
+				    Mods.Remove(existing);
+				    if (!existing.FromInternet && File.Exists(existing.Path) && mod.Path != existing.Path)
+					    File.Copy(mod.Path, existing.Path, true);
+			    })),
+			    (Strings.No, EventCallback.Empty)
+		    };
+
+		    var parameters = new ModalParameters()
+			    .Add(nameof(MessageBox.Buttons), options)
+			    .Add(nameof(MessageBox.Message), Strings.NewModAlreadyExists);
+
+		    BlazorBridge.ShowModal<MessageBox>(Strings.NewModName, parameters).Wait();
 	    }
 
 	    if (!mod.FromInternet && !mod.Path.StartsWith(BasePath))

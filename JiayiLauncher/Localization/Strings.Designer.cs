@@ -1075,6 +1075,15 @@ namespace JiayiLauncher.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This mod already exists in your collection. Do you want to replace it?.
+        /// </summary>
+        internal static string NewModAlreadyExists {
+            get {
+                return ResourceManager.GetString("NewModAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This mod is already in your collection!.
         /// </summary>
         internal static string NewModAlreadyInCollection {

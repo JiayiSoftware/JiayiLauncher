@@ -31,10 +31,6 @@ public partial class MainPage : ContentPage
             e.WebView.DefaultBackgroundColor = Windows.UI.Color.FromArgb(255, 15, 15, 15);
         };
 		
-        // TODO: the installer should be doing this
-        // WinRegistry.SetFileAssociation("Jiayi Mod Collection", ".jiayi");
-        // WinRegistry.RegisterUrlProtocol();
-		
         // Theme path is local\default before settings load
         if (!File.Exists(ThemeState.ThemePath))
         {

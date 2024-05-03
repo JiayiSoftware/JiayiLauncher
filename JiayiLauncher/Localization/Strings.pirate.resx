@@ -276,7 +276,7 @@
         <value>Import map collection</value>
     </data>
     <data name="ImportModQuestion" xml:space="preserve">
-        <value>Would ye like to import this map collection?</value>
+        <value>Would  ye like to import this map collection?</value>
     </data>
     <data name="ImportModModCount" xml:space="preserve">
         <value>{0} maps</value>
@@ -360,7 +360,7 @@
         <value>Captain's Name</value>
     </data>
     <data name="ThemePublishAuthorPlaceholder" xml:space="preserve">
-        <value> yer name here</value>
+        <value>Yer name here</value>
     </data>
     <data name="ThemePublishTags" xml:space="preserve">
         <value>Markings</value>
@@ -510,7 +510,74 @@
         <value>GARR! That's not a valid package.</value>
     </data>
     
-    <!-- TODO: finish shader manager, then add strings here -->
+    <!-- shader manager strings -->
+    <data name="ShaderManName" xml:space="preserve">
+        <value>Shader manager</value>
+    </data>
+    <data name="ShaderManCurrentShader" xml:space="preserve">
+        <value>Yer current shader pack</value>
+    </data>
+    <data name="ShaderManNoShader" xml:space="preserve">
+        <value>No shaders applied</value>
+    </data>
+    <data name="ShaderManUsingVanilla" xml:space="preserve">
+        <value>Minecraft's vanilla shaders will be used</value>
+    </data>
+    <data name="ShaderManReplacingCount" xml:space="preserve">
+        <value>Replacing {0} material files</value>
+    </data>
+    <data name="ShaderManAvailableShaders" xml:space="preserve">
+        <value>Available shaders</value>
+    </data>
+    <data name="ShaderManSearch" xml:space="preserve">
+        <value>Search shaders</value>
+    </data>
+    <data name="ShaderManViewMaterials" xml:space="preserve">
+        <value>View shader materials</value>
+    </data>
+    <data name="ShaderManMaterials" xml:space="preserve">
+        <value>Shader materials</value>
+    </data>
+    <data name="ShaderManViewMaterialsText" xml:space="preserve">
+        <value>
+            This shader pack modifies the following materials:
+            
+            {0}
+        </value>
+    </data>
+    <data name="ShaderManMaterialCount" xml:space="preserve">
+        <value>{0} material files</value>
+    </data>
+    <data name="ShaderManRename" xml:space="preserve">
+        <value>Rename shader pack</value>
+    </data>
+    <data name="ShaderManDelete" xml:space="preserve">
+        <value>Delete shader pack</value>
+    </data>
+    <data name="ShaderManDeleteConfirm" xml:space="preserve">
+        <value>Are ye sure ye be wantin' t' delete this shader pack? This here action can nay be undone.</value>
+    </data>
+    <data name="ShaderManNoShaders" xml:space="preserve">
+        <value>No shaders found</value>
+    </data>
+    <data name="ShaderManDragDrop" xml:space="preserve">
+        <value>Click here or drag and drop a shader pack to add it</value>
+    </data>
+    <data name="ShaderManDragDropInfo" xml:space="preserve">
+        <value>
+            Any file compressed with the zip format can be used as a shader pack, as long as it contains material files.
+        
+            The launcher can find shaders anywhere in the pack.
+        </value>
+    </data>
+    
+    <!-- edit shader strings (only renaming atm) (Not like any more functionality is planned) -->
+    <data name="EditShaderName" xml:space="preserve">
+        <value>Rename shader</value>
+    </data>
+    <data name="EditShaderRenameShader" xml:space="preserve">
+        <value>Give yer shader pack a name!</value>
+    </data>
     
     <!-- themes menu strings -->
     <data name="ThemesMenuName" xml:space="preserve">
@@ -528,7 +595,7 @@
     
     <!-- dashboard strings -->
     <data name="DashboardMorning" xml:space="preserve">
-        <value>Good morrow</value>
+        <value>Good morrow!</value>
     </data>
     <data name="DashboardAfternoon" xml:space="preserve">
         <value>A Hearty Afternoon!</value>

@@ -344,7 +344,10 @@
         <value>มันไม่มีอะไรเลยในที่อยู่นี้</value>
     </data>
     <data name="NewModCheckingLink" xml:space="preserve">
-        <value>กำลังเช็คลิ้ง...</value>
+        <value>กำลังเช็คลิ้ง</value>
+    </data>
+    <data name="NewModAlreadyExists" xml:space="preserve">
+        <value>คุณมีมอดนี้อยู่แล้ว ต้องการจะทับอันเก่าไหม</value>
     </data>
     
     <!-- new theme strings -->

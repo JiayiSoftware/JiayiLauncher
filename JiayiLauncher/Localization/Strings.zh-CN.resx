@@ -169,6 +169,9 @@
     <data name="Apply" xml:space="preserve">
         <value>应用</value>
     </data>
+    <data name="Select" xml:space="preserve">
+        <value>选择</value>
+    </data>
     <data name="View" xml:space="preserve">
         <value>查看</value>
     </data>
@@ -369,6 +372,9 @@
     <data name="NewModCheckingLink" xml:space="preserve">
         <value>正在检查链接...</value>
     </data>
+    <data name="NewModAlreadyExists" xml:space="preserve">
+        <value>该mod已存在于您的收藏中。你想替换它吗?</value>
+    </data>
 
     <!-- new theme strings -->
     <data name="NewThemeName" xml:space="preserve">
@@ -538,8 +544,78 @@
     <data name="VerListInvalidPackage" xml:space="preserve">
         <value>这不是一个有效的包。</value>
     </data>
+    <data name="VerListUpdatingVersions" xml:space="preserve">
+        <value>版本列表已清除。它将很快更新。</value>
+    </data>
 
-    <!-- TODO: finish shader manager, then add strings here -->
+    <!-- shader manager strings -->
+    <data name="ShaderManName" xml:space="preserve">
+        <value>着色器管理器</value>
+    </data>
+    <data name="ShaderManCurrentShader" xml:space="preserve">
+        <value>您当前的着色器包</value>
+    </data>
+    <data name="ShaderManNoShader" xml:space="preserve">
+        <value>未应用着色器</value>
+    </data>
+    <data name="ShaderManUsingVanilla" xml:space="preserve">
+        <value>将使用 Minecraft 原版着色器</value>
+    </data>
+    <data name="ShaderManReplacingCount" xml:space="preserve">
+        <value>正在替换 {0} material文件</value>
+    </data>
+    <data name="ShaderManAvailableShaders" xml:space="preserve">
+        <value>可用的着色器</value>
+    </data>
+    <data name="ShaderManSearch" xml:space="preserve">
+        <value>搜索着色器</value>
+    </data>
+    <data name="ShaderManViewMaterials" xml:space="preserve">
+        <value>查看着色器materials</value>
+    </data>
+    <data name="ShaderManMaterials" xml:space="preserve">
+        <value>着色器materials</value>
+    </data>
+    <data name="ShaderManViewMaterialsText" xml:space="preserve">
+        <value>
+            该着色器包修改了以下materials: 
+            
+            {0}
+        </value>
+    </data>
+    <data name="ShaderManMaterialCount" xml:space="preserve">
+        <value>{0} material文件</value>
+    </data>
+    <data name="ShaderManRename" xml:space="preserve">
+        <value>重命名着色器包</value>
+    </data>
+    <data name="ShaderManDelete" xml:space="preserve">
+        <value>删除着色器包</value>
+    </data>
+    <data name="ShaderManDeleteConfirm" xml:space="preserve">
+        <value>您确定要删除此着色器包吗? 此操作是不可逆的。</value>
+    </data>
+    <data name="ShaderManNoShaders" xml:space="preserve">
+        <value>未找到着色器</value>
+    </data>
+    <data name="ShaderManDragDrop" xml:space="preserve">
+        <value>单击此处或拖放着色器包进行添加</value>
+    </data>
+    <data name="ShaderManDragDropInfo" xml:space="preserve">
+        <value>
+            任何以 zip 格式压缩的文件都可以用作着色器包，只要它包含material文件即可。
+        
+            启动器可以在包中的任何位置找到着色器。
+        </value>
+    </data>
+    
+    <!-- edit shader strings (only renaming atm) (Not like any more functionality is planned) -->
+    <data name="EditShaderName" xml:space="preserve">
+        <value>重命名着色器</value>
+    </data>
+    <data name="EditShaderRenameShader" xml:space="preserve">
+        <value>给你的着色器包起一个名字！</value>
+    </data>
     
     <!-- themes menu strings -->
     <data name="ThemesMenuName" xml:space="preserve">
@@ -778,6 +854,9 @@
     <data name="SettingsExportCollectionDesc" xml:space="preserve">
         <value>将您的模组集合导出到文件。 您可以与其他人分享。</value>
     </data>
+    <data name="SettingsExportCollectionFilter" xml:space="preserve">
+        <value>嘉艺mod合集</value>
+    </data>
     <data name="SettingsProfileCollectionPath" xml:space="preserve">
         <value>个人配置文件 路径</value>
     </data>
@@ -979,6 +1058,18 @@
     <data name="SettingsDiscordShowElapsedTimeDesc" xml:space="preserve">
         <value>显示您嘉艺打开了多长时间</value>
     </data>
+    <data name="SettingsDiscordShowDownloadButton" xml:space="preserve">
+        <value>显示下载按钮</value>
+    </data>
+    <data name="SettingsDiscordShowDownloadButtonDesc" xml:space="preserve">
+        <value>在 Discord 上显示下载嘉艺的按钮。</value>
+    </data>
+    <data name="SettingsDiscordShareCurrentMod" xml:space="preserve">
+        <value>分享当前模组</value>
+    </data>
+    <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
+        <value>显示一个按钮，供其他用户添加您正在玩的模组。这仅适用于网络模组。</value>
+    </data>
     <data name="SettingsLargeImageKey" xml:space="preserve">
         <value>大图像</value>
     </data>
@@ -1027,6 +1118,12 @@
     </data>
     <data name="SettingsOfflineModeTooltip" xml:space="preserve">
         <value>互联网mod、下载版本和检查更新等功能将无法使用。</value>
+    </data>
+    <data name="SettingsFollowRedirects" xml:space="preserve">
+        <value>遵循重定向</value>
+    </data>
+    <data name="SettingsFollowRedirectsDesc" xml:space="preserve">
+        <value>添加互联网mod时遵循重定向。如果您在添加某些模组时遇到问题，请更改此设置。</value>
     </data>
 
     <!-- launch settings strings -->

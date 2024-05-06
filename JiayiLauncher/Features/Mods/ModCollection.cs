@@ -239,6 +239,13 @@ public class ModCollection
 
 		    BlazorBridge.ShowModal<MessageBox>(Strings.NewModName, parameters).Wait();
 	    }
+	    else if (HasMod(mod.Path))
+	    {
+		    var existing = Mods.First(m => m.Path == mod.Path);
+		    Mods.Remove(existing);
+		    if (!existing.FromInternet && File.Exists(existing.Path) && mod.Path != existing.Path)
+			    File.Copy(mod.Path, existing.Path, true);
+	    }
 
 	    if (!mod.FromInternet && !mod.Path.StartsWith(BasePath))
 	    {

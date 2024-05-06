@@ -1,3 +1,5 @@
+# This is the legacy branch. It's here for archival purposes. Do not use it for development, as the code is very unpredictable and does not work half the time.
+
 <div align="center">
   <a href="https://jiayisoftware.github.io/launcher"><img src="https://github.com/JiayiSoftware/JiayiLauncher/blob/master/.github/assets/logo.png" alt="Jiayi Launcher" width="700"></a>
 </div>

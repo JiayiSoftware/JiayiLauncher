@@ -26,8 +26,8 @@
         <Platforms>AnyCPU;x64</Platforms>
         <Company>Jiayi Software</Company>
         <Product>Jiayi Launcher</Product>
-        <AssemblyVersion>1.11.0</AssemblyVersion>
-        <FileVersion>1.11.0.0</FileVersion>
+        <AssemblyVersion>2.0.0</AssemblyVersion>
+        <FileVersion>2.0.0.0</FileVersion>
         <NeutralLanguage>en-US</NeutralLanguage>
     </PropertyGroup>
     

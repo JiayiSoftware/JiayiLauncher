@@ -21,7 +21,7 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         // set ui culture for testing
-        // CultureInfo.CurrentUICulture = new CultureInfo("en-US", false);
+        //CultureInfo.CurrentUICulture = new CultureInfo("es-ES", false);
         
         InitializeComponent();
         Log.CreateLog();

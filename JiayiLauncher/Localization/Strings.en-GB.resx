@@ -881,7 +881,7 @@
         <value>The colour of text on top of the accent colour.</value>
     </data>
     <data name="SettingsGrayTextColor" xml:space="preserve">
-        <value>grey text colour</value>
+        <value>Grey text colour</value>
     </data>
     <data name="SettingsGrayTextColorDesc" xml:space="preserve">
         <value>A grey version of the text colour.</value>

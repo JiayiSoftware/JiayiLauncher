@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
 using System.Security.Principal;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Discord;
@@ -25,6 +26,10 @@ public partial class MainPage : ContentPage
         
         InitializeComponent();
         Log.CreateLog();
+        
+        // log current version
+        var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
+        Log.Write("JiayiLauncher", $"Running version {version.Major}.{version.Minor}.{version.Build}");
 
         WebView.BlazorWebViewInitialized += (_, e) =>
         {

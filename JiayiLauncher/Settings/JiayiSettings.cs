@@ -597,9 +597,9 @@ public class JiayiSettings
         var attribute = property.GetCustomAttribute<SettingAttribute>();
         var category = strings.FirstOrDefault(s => s.Name == "Settings" + attribute?.Category);
 
-        var name = strings.FirstOrDefault(s => s.Name.Contains(property.Name));
-        var description = strings.FirstOrDefault(s => s.Name.Contains(property.Name + "Desc"));
-        var tooltip = strings.FirstOrDefault(s => s.Name.Contains(property.Name + "Tooltip"));
+        var name = strings.FirstOrDefault(s => s.Name.Contains("Settings" + property.Name));
+        var description = strings.FirstOrDefault(s => s.Name.Contains("Settings" + property.Name + "Desc"));
+        var tooltip = strings.FirstOrDefault(s => s.Name.Contains("Settings" + property.Name + "Tooltip"));
 
         return new LocalizedSetting(
             name?.GetValue(null) as string ?? attribute?.Name ?? string.Empty,

@@ -75,6 +75,7 @@ public partial class MainPage : ContentPage
         }
 		      
         JiayiStats.Save();
+        Task.Run(async () => await PackageData.MinimizeFix(JiayiSettings.Instance.MinimizeFix));
         RichPresence.Initialize();
     }
 }

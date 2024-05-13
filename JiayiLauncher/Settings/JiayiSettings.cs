@@ -179,18 +179,8 @@ public class JiayiSettings
     
     [JsonIgnore]
     [Setting("Select background image", "Appearance", "Select a background image from your computer.", "UseBackgroundImage")]
-    public (string, Action) SelectBackground { get; set; } = (Strings.Select, async () =>
+    public (string, Action) SelectBackground { get; set; } = (Strings.Select, () =>
     {
-        // var dialog = new OpenFileDialog
-        // {
-        //     DefaultExt = "png",
-        //     Filter = "Image files (*.png;*.jpg;*.jpeg;*.gif;*.bmp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp" +
-        //              "|Video files (*.mp4;*.mov;*.webm)|*.mp4;*.mov;*.webm",
-        //     InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-        //     Title = "Select background image"
-        // };
-        // if (dialog.ShowDialog() != true) return;
-
         using var dialog = new CommonOpenFileDialog(Strings.SettingsSelectBackground);
         dialog.Filters.Add(new CommonFileDialogFilter(Strings.SettingsSelectBackgroundImageFilter, "*.png;*.jpg;*.jpeg;*.gif;*.bmp"));
         dialog.Filters.Add(new CommonFileDialogFilter(Strings.SettingsSelectBackgroundVideoFilter, "*.mp4;*.mov;*.webm"));

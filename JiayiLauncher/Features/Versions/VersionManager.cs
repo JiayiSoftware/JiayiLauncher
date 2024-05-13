@@ -123,6 +123,13 @@ public static class VersionManager
 	{
 		var package = await PackageData.GetPackage();
 		if (package == null) return;
+		
+		// in case a shader is applied we don't want to lose the user's shaders
+		if (ShaderManager.AppliedShader != string.Empty)
+		{
+			ShaderManager.DisableShader(ShaderManager.AppliedShader);
+			await ShaderManager.RestoreVanillaShaders();
+		}
 
 		if (package.AppInfo.Package.InstalledPath == GetVersionPath(ver))
 		{
@@ -146,9 +153,12 @@ public static class VersionManager
 	public static async Task<SwitchResult> Switch(string version)
 	{
 		Log.Write(nameof(VersionManager), $"Switching to version {version}");
-		
-		ShaderManager.DisableShader(ShaderManager.AppliedShader);
-		await ShaderManager.RestoreVanillaShaders();
+
+		if (ShaderManager.AppliedShader != string.Empty)
+		{
+			ShaderManager.DisableShader(ShaderManager.AppliedShader);
+			await ShaderManager.RestoreVanillaShaders();
+		}
 		
 		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);
 		var folder = folders.FirstOrDefault(x => x.Contains(version));

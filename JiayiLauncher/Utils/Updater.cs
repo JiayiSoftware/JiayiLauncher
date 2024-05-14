@@ -10,7 +10,7 @@ namespace JiayiLauncher.Utils;
 
 public class Updater
 {
-    private const string INSTALLER_URL = "https://jiyayi.mcpeplayground.com/static/JiayiInstaller.exe";
+    private const string INSTALLER_URL = "https://phased.tech/download/JiayiInstaller.exe";
 
     private readonly GitHubClient _gh = new(new ProductHeaderValue("JiayiLauncher"));
     public event EventHandler? UpdateDownloaded;

@@ -5,9 +5,9 @@ name: .NET
 
 on:
   push:
-    branches: [ "maui" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "maui" ]
+    branches: [ "master" ]
 
 jobs:
   build:

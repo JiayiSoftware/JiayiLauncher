@@ -138,8 +138,30 @@ Console.WriteLine("Jiayi Launcher requires .NET 8 to run.");
 var dotnetInstalled = Environment.GetEnvironmentVariable("PATH")?.Contains("dotnet") ?? false;
 if (dotnetInstalled)
 {
-	Console.WriteLine("It looks like .NET is already installed on your system.");
-	Console.WriteLine("If you'd like to install it anyway, type \"install\".");
+	// Console.WriteLine("It looks like .NET is already installed on your system.");
+	// Console.WriteLine("If you'd like to install it anyway, type \"install\".");
+	
+	// run dotnet --version for the actual version
+	var process = Process.Start(new ProcessStartInfo
+	{
+		FileName = "dotnet",
+		Arguments = "--version",
+		RedirectStandardOutput = true,
+		UseShellExecute = false
+	});
+	
+	process?.WaitForExit();
+	var output = process?.StandardOutput.ReadToEnd();
+	if (output != null && output.StartsWith("8."))
+	{
+		Console.WriteLine("It looks like .NET 8 is already installed on your system.");
+		Console.WriteLine("If you'd like to install it anyway, type \"install\".");
+	}
+	else
+	{
+		Console.WriteLine("It looks like .NET is already installed on your system, but it's not .NET 8.");
+		Console.WriteLine("If you'd like to install it, type \"install\".");
+	}
 }
 else
 {

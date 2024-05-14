@@ -19,11 +19,23 @@ public static partial class Util
 	{
 		Directory.CreateDirectory(extractPath);
 		
+		// nuke the folder but leave theme related files
+		var files = Directory.GetFiles(extractPath, "*", SearchOption.AllDirectories);
+		files = files.Where(x => !x.Contains("theme.css")).Where(x => !x.Contains("themes")).ToArray();
+		foreach (var file in files) File.Delete(file);
+		
 		// extract everything BUT wwwroot/css/theme.css
 		var archive = ZipFile.OpenRead(zipPath);
 		foreach (var entry in archive.Entries)
 		{
-			if (entry.FullName == "wwwroot/css/theme.css") continue;
+			//if (entry.FullName == "wwwroot/css/theme.css") continue;
+			
+			// don't extract theme file if it already exists instead
+			if (entry.FullName == "wwwroot/css/theme.css")
+			{
+				var themePath = Path.Combine(extractPath, entry.FullName);
+				if (File.Exists(themePath)) continue;
+			}
 			
 			var path = Path.Combine(extractPath, entry.FullName);
 			Directory.CreateDirectory(Path.GetDirectoryName(path)!);

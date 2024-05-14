@@ -36,7 +36,8 @@
     private readonly Updater _updater = new();
 
     // silly
-    private readonly List<string> _dontAskAgain = Strings.DontAskAgain.Split('\n').ToList();
+    private readonly List<string> _dontAskAgain = Strings.DontAskAgain.Split('\n')
+        .Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

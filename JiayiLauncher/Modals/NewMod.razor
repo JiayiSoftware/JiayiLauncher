@@ -70,7 +70,6 @@
         using var dialog = new CommonOpenFileDialog(Strings.NewModSelectFile);
         dialog.IsFolderPicker = false;
         dialog.Multiselect = true;
-        dialog.DefaultExtension = "dll";
         dialog.Filters.Add(new CommonFileDialogFilter(Strings.NewModDllDisplayName, "*.dll"));
         dialog.Filters.Add(new CommonFileDialogFilter(Strings.NewModExeDisplayName, "*.exe"));
         

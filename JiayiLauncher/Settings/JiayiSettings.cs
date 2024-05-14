@@ -62,19 +62,6 @@ public class JiayiSettings
         "Export your mod collection to a file. You can share this with other people.")]
     public (string, Action) ExportCollection { get; set; } = (Strings.Export, () =>
     {
-        // var dialog = new SaveFileDialog
-        // {
-        //     DefaultExt = "jiayi",
-        //     Filter = "Jiayi mod collection (*.jiayi)|*.jiayi",
-        //     InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-        //     Title = "Export mod collection"
-        // };
-        // if (dialog.ShowDialog() != true) return; // this is an action why do i have to return a bool
-        //
-        // var path = dialog.FileName;
-        //
-        // if (ModCollection.Current != null) ModCollection.Current.Export(path);
-        
         using var dialog = new CommonSaveFileDialog(Strings.SettingsExportCollection);
         dialog.DefaultExtension = "jiayi";
         dialog.Filters.Add(new CommonFileDialogFilter(Strings.SettingsExportCollectionFilter, "*.jiayi"));
@@ -184,7 +171,6 @@ public class JiayiSettings
         using var dialog = new CommonOpenFileDialog(Strings.SettingsSelectBackground);
         dialog.Filters.Add(new CommonFileDialogFilter(Strings.SettingsSelectBackgroundImageFilter, "*.png;*.jpg;*.jpeg;*.gif;*.bmp"));
         dialog.Filters.Add(new CommonFileDialogFilter(Strings.SettingsSelectBackgroundVideoFilter, "*.mp4;*.mov;*.webm"));
-        dialog.DefaultExtension = "png";
         dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         
         if (dialog.ShowDialog() != CommonFileDialogResult.Ok) return;

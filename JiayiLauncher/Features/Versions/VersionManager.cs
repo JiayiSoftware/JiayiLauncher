@@ -41,6 +41,17 @@ public static class VersionManager
         Directory.CreateDirectory(JiayiSettings.Instance!.VersionsPath);
         var folders = Directory.GetDirectories(JiayiSettings.Instance.VersionsPath);
         var versions = VersionList.GetVersionList().GetAwaiter().GetResult();
+        
+        for (int i = 0; i < folders.Length; i++)
+        {
+            if (File.Exists(Path.Combine(folders[i], "AppxManifest.xml")))
+            {
+                continue; 
+            }
+            
+            folders = folders.Where((source, index) => index != i).ToArray();
+            i--;
+        }
 
         return folders.Select(Path.GetFileName).Where(name => versions.All(x => x != name) && name != ".backup")
             .ToList()!;
@@ -86,8 +97,8 @@ public static class VersionManager
         if (!response.IsSuccessStatusCode) return;
 
         var contentLength = response.Content.Headers.ContentLength ?? 0;
-        var bufferSize = 1048576; // 1 MB buffer size
-        var numberOfChunks = 8; // Number of concurrent chunks
+        var bufferSize = 1048576;
+        var numberOfChunks = 8;
         var chunkSize = contentLength / numberOfChunks;
 
         var tasks = new List<Task>();

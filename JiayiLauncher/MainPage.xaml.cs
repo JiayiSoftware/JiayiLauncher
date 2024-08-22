@@ -25,11 +25,14 @@ public partial class MainPage : ContentPage
         //CultureInfo.CurrentUICulture = new CultureInfo("es-ES", false);
         
         InitializeComponent();
-        Log.CreateLog();
+        //Log.CreateLog();
+        
+        // new singleton system
+        var log = Singletons.Add<Log>();
         
         // log current version
         var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
-        Log.Write("JiayiLauncher", $"Running version {version.Major}.{version.Minor}.{version.Build}");
+        log.Write("JiayiLauncher", $"Running version {version.Major}.{version.Minor}.{version.Build}");
 
         WebView.BlazorWebViewInitialized += (_, e) =>
         {

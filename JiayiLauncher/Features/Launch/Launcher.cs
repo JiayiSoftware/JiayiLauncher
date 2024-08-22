@@ -36,9 +36,11 @@ public static class Launcher
 		if (Launching) return LaunchResult.AlreadyLaunching;
 		Launching = true;
 		
+		var log = Singletons.Get<Log>();
+		
 		LaunchProgress = 0;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
-		Log.Write(nameof(Launcher), $"Launching {mod.Name}");
+		log.Write(nameof(Launcher), $"Launching {mod.Name}");
 		
 		// minimize fix !
 		await PackageData.MinimizeFix(JiayiSettings.Instance.MinimizeFix);
@@ -46,7 +48,7 @@ public static class Launcher
 		var supported = await Minecraft.ModSupported(mod);
 		if (!supported)
 		{
-			Log.Write(nameof(Launcher), $"{mod.Name} does not support this version of Minecraft");
+			log.Write(nameof(Launcher), $"{mod.Name} does not support this version of Minecraft");
 			Launching = false;
 			return LaunchResult.VersionMismatch;
 		}
@@ -55,7 +57,7 @@ public static class Launcher
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 
 		await Minecraft.Open();
-		Log.Write(nameof(Launcher), "Opened game, waiting to launch mod...");
+		log.Write(nameof(Launcher), "Opened game, waiting to launch mod...");
 		
 		LaunchProgress += 5;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
@@ -65,7 +67,7 @@ public static class Launcher
 		// if this is a web mod, download it in the meantime
 		if (mod.FromInternet)
 		{
-			var downloadedPath = await Downloader.DownloadMod(mod);
+			var downloadedPath = await ModDownloader.DownloadMod(mod);
 			if (downloadedPath == string.Empty)
 			{
 				Launching = false;
@@ -112,7 +114,7 @@ public static class Launcher
 			return LaunchResult.ModNotFound;
 		}
 
-		Log.Write(nameof(Launcher), external ? "Detected external mod" : "Detected internal mod");
+		log.Write(nameof(Launcher), external ? "Detected external mod" : "Detected internal mod");
 		
 		if (!File.Exists(path))
 		{

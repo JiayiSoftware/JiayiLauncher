@@ -1,11 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
 using JiayiLauncher.Settings;
 
 namespace JiayiLauncher.Utils;
 
-public static class Log
+public class Log
 {
 	public enum LogLevel
 	{
@@ -14,12 +12,12 @@ public static class Log
 		Error
 	}
 
-	public static readonly string LogPath = Path.Combine(
+	public readonly string LogPath = Path.Combine(
 		Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Logs");
 	
-	private static FileStream? _logStream;
+	private FileStream? _logStream;
 
-	public static void CreateLog()
+	public Log()
 	{
 		Directory.CreateDirectory(Path.Combine(LogPath, "Previous"));
 
@@ -33,7 +31,7 @@ public static class Log
 		File.Move(Path.Combine(LogPath, "Current.log"), Path.Combine(LogPath, "Previous", name));
 	}
 
-	public static void Write(object sender, string message, LogLevel level = LogLevel.Info)
+	public void Write(object sender, string message, LogLevel level = LogLevel.Info)
 	{
 		var logText = $"[{DateTime.Now:HH:mm:ss}]";
 		

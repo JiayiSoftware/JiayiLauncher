@@ -27,11 +27,13 @@ public static class Injector
 
 	public static async Task<bool> Inject(string path)
 	{
+		var log = Singletons.Get<Log>();
+		
 		ApplyPermissions(path);
 
 		return await Task.Run(() =>
 		{
-			Log.Write(nameof(Injector), $"Injecting {path}");
+			log.Write(nameof(Injector), $"Injecting {path}");
 
 			var process = Minecraft.Process;
 			var processHandle = OpenProcess(
@@ -41,7 +43,7 @@ public static class Injector
 			// ERROR CHECKING (i have never done this in any of the injectors i've made)
 			if (processHandle == 0)
 			{
-				Log.Write(nameof(Injector), "OpenProcess returned null", Log.LogLevel.Error);
+				log.Write(nameof(Injector), "OpenProcess returned null", Log.LogLevel.Error);
 				return false;
 			}
 
@@ -49,7 +51,7 @@ public static class Injector
 
 			if (loadLibraryAddress == 0)
 			{
-				Log.Write(nameof(Injector),
+				log.Write(nameof(Injector),
 					"Couldn't get the address of LoadLibraryA, maybe the user's antivirus is hiding it from us",
 					Log.LogLevel.Error);
 				return false;
@@ -60,7 +62,7 @@ public static class Injector
 
 			if (allocatedMemory == 0)
 			{
-				Log.Write(nameof(Injector), "Failed to allocate memory needed for injection", Log.LogLevel.Error);
+				log.Write(nameof(Injector), "Failed to allocate memory needed for injection", Log.LogLevel.Error);
 				return false;
 			}
 
@@ -69,7 +71,7 @@ public static class Injector
 
 			if (!result)
 			{
-				Log.Write(nameof(Injector), "Failed to write to allocated memory", Log.LogLevel.Error);
+				log.Write(nameof(Injector), "Failed to write to allocated memory", Log.LogLevel.Error);
 				return false;
 			}
 
@@ -77,7 +79,7 @@ public static class Injector
 
 			if (thread == 0)
 			{
-				Log.Write(nameof(Injector), "Failed to create remote thread", Log.LogLevel.Error);
+				log.Write(nameof(Injector), "Failed to create remote thread", Log.LogLevel.Error);
 				return false;
 			}
 			
@@ -88,16 +90,16 @@ public static class Injector
 				Task.Delay(1000).Wait();
 				if (!IsInjected(path))
 				{
-					Log.Write(nameof(Injector), "Every native call succeeded, but the module wasn't loaded.",
+					log.Write(nameof(Injector), "Every native call succeeded, but the module wasn't loaded.",
 						Log.LogLevel.Error);
 					return false;
 				}
 				
-				Log.Write(nameof(Injector), $"Successfully injected {path}");
+				log.Write(nameof(Injector), $"Successfully injected {path}");
 				return true;
 			}
 
-			Log.Write(nameof(Injector), "The game was terminated by the user's antivirus", Log.LogLevel.Error);
+			log.Write(nameof(Injector), "The game was terminated by the user's antivirus", Log.LogLevel.Error);
 			return false;
 		});
 	}

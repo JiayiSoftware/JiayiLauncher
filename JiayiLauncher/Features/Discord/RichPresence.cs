@@ -71,16 +71,18 @@ public static class RichPresence
 	{
 		if (!JiayiSettings.Instance!.RichPresence) return;
 		
+		var log = Singletons.Get<Log>();
+		
 		_startTime = DateTime.UtcNow;
 		
 		_client = new DiscordRpcClient("1138925544172441670");
 		
 		_client.SkipIdenticalPresence = true;
-		_client.OnError += (_, e) => Log.Write("Discord", e.Message, Log.LogLevel.Error);
-		_client.OnReady += (_, e) => Log.Write("Discord",
+		_client.OnError += (_, e) => log.Write("Discord", e.Message, Log.LogLevel.Error);
+		_client.OnReady += (_, e) => log.Write("Discord",
 			JiayiSettings.Instance.AnonymizeLogs ? "Connected to Discord" : $"Connected to {e.User}");
 		_client.OnPresenceUpdate += (_, e) 
-			=> Log.Write("Discord", $"Presence updated: {e.Presence.Details} - {e.Presence.State}");
+			=> log.Write("Discord", $"Presence updated: {e.Presence.Details} - {e.Presence.State}");
 
 		_client.Initialize();
 		

@@ -20,7 +20,7 @@ public class ModConfigManager
 		
 		// find config folder (could be Config, config, configs, configurations, etc)
 		var configFolder = Directory.GetDirectories(modDataFolder)
-			.FirstOrDefault(x => x.Contains("config", System.StringComparison.OrdinalIgnoreCase));
+			.FirstOrDefault(x => x.Contains("config", StringComparison.OrdinalIgnoreCase));
 		
 		ConfigPath = configFolder ?? string.Empty;
 	}

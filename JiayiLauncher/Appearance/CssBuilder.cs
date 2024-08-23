@@ -5,8 +5,6 @@ using System.Text.RegularExpressions;
 
 namespace JiayiLauncher.Appearance;
 
-
-
 public class CssProperty
 {
     public string Property { get; set; }

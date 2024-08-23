@@ -132,7 +132,8 @@
             if (file.ContentType == "application/x-msdownload")
                 return true;
 
-            Log.Write("Mods", $"Invalid file: {file.Name} | Expected: .dll", Log.LogLevel.Warning);
+            var log = Singletons.Get<Log>();
+            log.Write("Mods", $"Invalid file: {file.Name} | Expected: .dll", Log.LogLevel.Warning);
             return false;
         }).ToList().AsReadOnly();
 

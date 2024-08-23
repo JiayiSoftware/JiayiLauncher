@@ -18,6 +18,7 @@ public static class ShaderManager
 	public static List<string> AvailableShaders => Shaders.Where(x => x != AppliedShader).ToList();
 
 	private static string[] _blockedFolders = ["iOS", "Android"];
+	private static readonly Log _log = Singletons.Get<Log>();
 
 	public static async Task BackupVanillaShaders()
 	{
@@ -48,7 +49,7 @@ public static class ShaderManager
 			File.Copy(file, Path.Combine(backupPath, fileName), true);
 		}
 		
-		Log.Write(nameof(ShaderManager), $"Backed up vanilla shaders for version {await PackageData.GetVersion()}");
+		_log.Write(nameof(ShaderManager), $"Backed up vanilla shaders for version {await PackageData.GetVersion()}");
 	}
 	
 	public static async Task DeleteBackupShaders()
@@ -57,7 +58,7 @@ public static class ShaderManager
 		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, "Vanilla", version);
 		if (Directory.Exists(path)) Directory.Delete(path, true);
 		
-		Log.Write(nameof(ShaderManager), $"Deleted backup shaders for version {version}");
+		_log.Write(nameof(ShaderManager), $"Deleted backup shaders for version {version}");
 	}
 
 	public static async Task RestoreVanillaShaders()
@@ -79,7 +80,7 @@ public static class ShaderManager
 			File.Copy(file, Path.Combine(path, fileName), true);
 		}
 
-		Log.Write(nameof(ShaderManager), $"Restored vanilla shaders for version {version}");
+		_log.Write(nameof(ShaderManager), $"Restored vanilla shaders for version {version}");
 	}
 
 	public static void UpdateShaders()
@@ -105,7 +106,7 @@ public static class ShaderManager
 		var applied = Directory.GetDirectories(Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied"));
 		AppliedShader = Path.GetFileName(applied.FirstOrDefault() ?? string.Empty);
 		
-		Log.Write(nameof(ShaderManager), AppliedShader == string.Empty
+		_log.Write(nameof(ShaderManager), AppliedShader == string.Empty
 			? $"Updated shaders list. Found {Shaders.Count} shaders. {AppliedShader} is currently applied."
 			: $"Updated shaders list. Found {Shaders.Count} shaders. No shader is currently applied.");
 	}
@@ -135,7 +136,7 @@ public static class ShaderManager
 		Directory.Move(materialsFolder, Path.Combine(JiayiSettings.Instance.ShadersPath, Path.GetFileNameWithoutExtension(file.Name)));
 		Directory.Delete(tempPath, true);
 		
-		Log.Write(nameof(ShaderManager), $"Added shader {file.Name}");
+		_log.Write(nameof(ShaderManager), $"Added shader {file.Name}");
 		UpdateShaders();
 	}
 
@@ -170,7 +171,7 @@ public static class ShaderManager
 		
 		Directory.Move(path, Path.Combine(JiayiSettings.Instance.ShadersPath, newName));
 		
-		Log.Write(nameof(ShaderManager), $"Renamed shader {shader} to {newName}");
+		_log.Write(nameof(ShaderManager), $"Renamed shader {shader} to {newName}");
 		UpdateShaders();
 	}
 
@@ -183,7 +184,7 @@ public static class ShaderManager
 		
 		Directory.Move(path, Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied", shader));
 		
-		Log.Write(nameof(ShaderManager), $"Enabled shader {shader}");
+		_log.Write(nameof(ShaderManager), $"Enabled shader {shader}");
 		UpdateShaders();
 	}
 	
@@ -194,7 +195,7 @@ public static class ShaderManager
 		
 		Directory.Move(path, Path.Combine(JiayiSettings.Instance.ShadersPath, shader));
 		
-		Log.Write(nameof(ShaderManager), $"Disabled shader {shader}");
+		_log.Write(nameof(ShaderManager), $"Disabled shader {shader}");
 		UpdateShaders();
 	}
 	
@@ -205,7 +206,7 @@ public static class ShaderManager
 		
 		Directory.Delete(path, true);
 		
-		Log.Write(nameof(ShaderManager), $"Deleted shader {shader}");
+		_log.Write(nameof(ShaderManager), $"Deleted shader {shader}");
 		UpdateShaders();
 	}
 
@@ -243,7 +244,7 @@ public static class ShaderManager
 			File.Copy(shader, Path.Combine(shaderPath, fileName));
 		}
 
-		Log.Write(nameof(ShaderManager), $"Applied shader {AppliedShader}");
+		_log.Write(nameof(ShaderManager), $"Applied shader {AppliedShader}");
 	}
 
 	public static List<string> GetMaterialDiff(string shader)

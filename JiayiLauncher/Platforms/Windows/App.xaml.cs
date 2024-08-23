@@ -24,11 +24,21 @@ public partial class App : MauiWinUIApplication
         if (createdNew)
         {
             Arguments.Set(string.Join(" ", args));
+            
+            // list of suppressed exceptions
+            var suppressed = new List<string>
+            {
+                "TimeoutException",
+                "System.Net.Sockets.SocketException (995): The I/O operation has been aborted because of either a thread exit or an application request."
+            };
 			
             AppDomain.CurrentDomain.FirstChanceException += (_, ex) =>
             {
                 var exception = ex.Exception.ToString();
-                Log.Write(ex.Exception, exception, Log.LogLevel.Error);
+                if (suppressed.Any(exception.Contains)) return;
+                
+                var log = Singletons.Get<Log>();
+                log.Write(ex.Exception, exception, Log.LogLevel.Error);
                 
                 // TODO: show error dialog
             };

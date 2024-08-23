@@ -30,7 +30,8 @@
 
         if (Directory.Exists(dirPath))
         {
-            Log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {name}", Log.LogLevel.Warning);
+            var log = Singletons.Get<Log>();
+            log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {name}", Log.LogLevel.Warning);
             return;
         }
 

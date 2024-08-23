@@ -97,12 +97,13 @@
     private string ThemeName => PublicTheme?.Name ?? $".local\\{LocalTheme?.Name}";
     private CssBuilder? _theme;
     private bool _downloading;
+    private readonly Log _log = Singletons.Get<Log>();
 
     protected override async Task OnInitializedAsync()
     {
         if (PublicTheme == null && LocalTheme == null)
         {
-            Log.Write(this, "No public theme or local theme passed as a parameter", Log.LogLevel.Warning);
+            _log.Write(this, "No public theme or local theme passed as a parameter", Log.LogLevel.Warning);
             return;
         }
 
@@ -124,7 +125,7 @@
             }
             else
             {
-                Log.Write(this, $"Failed to load theme: {PublicTheme!.Name}", Log.LogLevel.Error);
+                _log.Write(this, $"Failed to load theme: {PublicTheme!.Name}", Log.LogLevel.Error);
             }
         }
         await base.OnInitializedAsync();
@@ -197,7 +198,7 @@
     {
         if (PublicTheme?.Metadata == null && LocalTheme == null)
         {
-            Log.Write(this, $"Skipping theme application: {ThemeName}");
+            _log.Write(this, $"Skipping theme application: {ThemeName}");
             return;
         }
 

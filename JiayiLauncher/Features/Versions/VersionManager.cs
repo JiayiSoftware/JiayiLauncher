@@ -26,6 +26,8 @@ public static class VersionManager
 	
 	public static int DownloadProgress { get; private set; }
 	public static event EventHandler? SwitchProgressChanged;
+	
+	private static readonly Log _log = Singletons.Get<Log>();
 
 	public static bool VersionInstalled(string ver)
 	{
@@ -152,7 +154,7 @@ public static class VersionManager
 	// my favorite part of this class
 	public static async Task<SwitchResult> Switch(string version)
 	{
-		Log.Write(nameof(VersionManager), $"Switching to version {version}");
+		_log.Write(nameof(VersionManager), $"Switching to version {version}");
 
 		if (ShaderManager.AppliedShader != string.Empty)
 		{
@@ -166,7 +168,7 @@ public static class VersionManager
 
 		if (!WinRegistry.DeveloperModeEnabled())
 		{
-			Log.Write(nameof(VersionManager), "Developer mode is disabled, asking user to enable", Log.LogLevel.Warning);
+			_log.Write(nameof(VersionManager), "Developer mode is disabled, asking user to enable", Log.LogLevel.Warning);
 			return SwitchResult.DeveloperModeDisabled;
 		}
 		
@@ -175,7 +177,7 @@ public static class VersionManager
 		{
 			if (package.InstalledPath.Contains(version))
 			{
-				Log.Write(nameof(VersionManager), "Version already installed");
+				_log.Write(nameof(VersionManager), "Version already installed");
 				return SwitchResult.Succeeded;
 			}
 			
@@ -186,24 +188,24 @@ public static class VersionManager
 				var backupPath = Path.Combine(JiayiSettings.Instance.VersionsPath, ".backup");
 				if (Directory.Exists(backupPath))
 				{
-					Log.Write(nameof(VersionManager),
+					_log.Write(nameof(VersionManager),
 						"Backup found, this might mean the launcher failed to switch versions last time",
 						Log.LogLevel.Warning);
 				}
 				else
 				{
-					Log.Write(nameof(VersionManager), "Backing up game data");
+					_log.Write(nameof(VersionManager), "Backing up game data");
 					await PackageData.BackupGameData(backupPath);
 				}
 
-				Log.Write(nameof(VersionManager), "Removing old game data");
+				_log.Write(nameof(VersionManager), "Removing old game data");
 				Directory.Delete(PackageData.GetGameDataPath(), true);
 				
 				await PackageData.PackageManager.RemovePackageAsync(package.Id.FullName, 0);
 			}
 		}
 		
-		Log.Write(nameof(VersionManager), "Registering package");
+		_log.Write(nameof(VersionManager), "Registering package");
 		
 		var manifest = Path.Combine(folder, "AppxManifest.xml");
 
@@ -214,7 +216,7 @@ public static class VersionManager
 
 			if (result.IsRegistered)
 			{
-				Log.Write(nameof(VersionManager), "Package registered");
+				_log.Write(nameof(VersionManager), "Package registered");
 			
 				var path = Path.Combine(JiayiSettings.Instance.VersionsPath, ".backup");
 				if (Directory.Exists(path))
@@ -230,11 +232,11 @@ public static class VersionManager
 		{
 			if (e.ToString().Contains("sideload"))
 			{
-				Log.Write(nameof(VersionManager), "Developer mode is disabled, asking user to enable", Log.LogLevel.Warning);
+				_log.Write(nameof(VersionManager), "Developer mode is disabled, asking user to enable", Log.LogLevel.Warning);
 				return SwitchResult.DeveloperModeDisabled;
 			}
 			
-			Log.Write(nameof(VersionManager), $"Unknown error: {e}");
+			_log.Write(nameof(VersionManager), $"Unknown error: {e}");
 		}
 		
 		return SwitchResult.UnknownError;

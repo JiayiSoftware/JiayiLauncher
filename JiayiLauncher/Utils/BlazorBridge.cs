@@ -10,6 +10,8 @@ namespace JiayiLauncher.Utils;
 
 public static class BlazorBridge
 {
+	private static readonly Log _log = Singletons.Get<Log>();
+	
 	public static void ShowToast(ToastParameters parameters, Action<ToastSettings> settings)
 	{
 		var mainPage = (MainPage)Application.Current!.MainPage!;
@@ -20,7 +22,7 @@ public static class BlazorBridge
 		}).Result;
 		
 		if (!dispatched) 
-			Log.Write(nameof(BlazorBridge), "Failed to dispatch toast.", Log.LogLevel.Error);
+			_log.Write(nameof(BlazorBridge), "Failed to dispatch toast.", Log.LogLevel.Error);
 	}
 
 	public static async Task<ModalResult> ShowModal<T>(string title, ModalParameters parameters) where T : IComponent
@@ -37,8 +39,7 @@ public static class BlazorBridge
 
 		if (dispatched && result != null) return result;
 		
-		Log.Write(nameof(BlazorBridge), "Failed to dispatch modal.", Log.LogLevel.Error);
+		_log.Write(nameof(BlazorBridge), "Failed to dispatch modal.", Log.LogLevel.Error);
 		return ModalResult.Cancel();
-
 	}
 }

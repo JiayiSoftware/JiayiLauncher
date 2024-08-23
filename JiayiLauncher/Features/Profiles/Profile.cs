@@ -9,6 +9,8 @@ public class Profile
 {
     public string Name { get; set; }
     public string Path { get; set; }
+    
+    private static readonly Log _log = Singletons.Get<Log>();
 
     public Profile(string name, string path)
     {
@@ -25,7 +27,7 @@ public class Profile
         await File.WriteAllTextAsync(System.IO.Path.Combine(fullPath, "README.txt"),
 	        "This folder contains the game data for this profile. Don't mess with it unless you know what you're doing.");
 
-        Log.Write("Profile.Create", $"Created profile {name} at {fullPath}");
+        _log.Write("Profile.Create", $"Created profile {name} at {fullPath}");
 
         return new Profile(name, fullPath);
     }
@@ -55,7 +57,7 @@ public class Profile
     public async Task Apply()
     {
 	    await PackageData.ReplaceGameData(Path);
-	    Log.Write("Profile.Apply", $"Applied profile {Name}");
+	    _log.Write("Profile.Apply", $"Applied profile {Name}");
     }
 
     public void Delete()
@@ -64,7 +66,7 @@ public class Profile
             Directory.Delete(Path, true);
 
         ProfileCollection.Current!.Profiles.Remove(this);
-        Log.Write("Profile.Delete", $"Deleted profile {Name}");
+        _log.Write("Profile.Delete", $"Deleted profile {Name}");
     }
 
     public bool IsValid()

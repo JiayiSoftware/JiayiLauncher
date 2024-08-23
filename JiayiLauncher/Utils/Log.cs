@@ -12,7 +12,7 @@ public class Log
 		Error
 	}
 
-	public readonly string LogPath = Path.Combine(
+	public static readonly string LogPath = Path.Combine(
 		Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Logs");
 	
 	private FileStream? _logStream;

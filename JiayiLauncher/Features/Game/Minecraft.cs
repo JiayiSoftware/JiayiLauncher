@@ -18,6 +18,7 @@ public static class Minecraft
 {
 	private static readonly Timer _timer = new(1000);
 	private static bool _callbackSet;
+	private static Log _log = Singletons.Get<Log>();
 
 	public static List<Mod> ModsLoaded { get; } = new();
 
@@ -76,7 +77,7 @@ public static class Minecraft
 					else if (path.EndsWith(".dll")) external = false;
 					else
 					{
-						Log.Write(nameof(Minecraft), 
+						_log.Write(nameof(Minecraft), 
 							$"Loaded mod {mod.Name} mysteriously disappeared. Removing from list.", Log.LogLevel.Warning);
 						ModsLoaded.Remove(mod);
 						break; // throws an exception if we don't break
@@ -88,7 +89,7 @@ public static class Minecraft
 						if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(path)).Length != 0) continue;
 						
 						ModsLoaded.Remove(mod);
-						Log.Write(nameof(Minecraft), $"{mod.Name} is no longer loaded");
+						_log.Write(nameof(Minecraft), $"{mod.Name} is no longer loaded");
 						break;
 					}
 
@@ -96,7 +97,7 @@ public static class Minecraft
 					if (Injector.IsInjected(path)) continue;
 						
 					ModsLoaded.Remove(mod);
-					Log.Write(nameof(Minecraft), $"{mod.Name} is no longer loaded");
+					_log.Write(nameof(Minecraft), $"{mod.Name} is no longer loaded");
 					break;
 				}
 			}
@@ -160,7 +161,7 @@ public static class Minecraft
 	public static async Task<bool> ModSupported(Mod mod)
 	{
 		var version = await PackageData.GetVersion();
-		Log.Write(nameof(Minecraft), $"Current game version is {version} and mod supports {string.Join(", ", mod.SupportedVersions)}");
+		_log.Write(nameof(Minecraft), $"Current game version is {version} and mod supports {string.Join(", ", mod.SupportedVersions)}");
 		return mod.SupportedVersions.Contains(version) 
 		       || mod.SupportedVersions.Contains("Any version")
 		       || mod.SupportedVersions.Contains("any version"); // for legacy support

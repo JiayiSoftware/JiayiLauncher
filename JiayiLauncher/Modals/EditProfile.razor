@@ -34,6 +34,8 @@
     {
         if (Profile == null || _textBox?.Value == null || _textBox?.Value?.Trim() == string.Empty || _textBox?.Value.Length >= 256) return;
 
+        var log = Singletons.Get<Log>();
+        
         var newName = _textBox!.Value?.Trim() ?? Profile.Name;
 
         if (Directory.Exists(Profile.Path))
@@ -42,7 +44,7 @@
             if (Directory.Exists(newPath))
             {
                 await Modal.CloseAsync(ModalResult.Cancel());
-                Log.Write("Profile", $"Directory already exists: {newPath}");
+                log.Write("Profile", $"Directory already exists: {newPath}");
                 return;
             }
 
@@ -57,7 +59,7 @@
                 }
                 catch (Exception e)
                 {
-                    Log.Write("EditProfile.SaveClicked", $"Could not move directory: {e}", Log.LogLevel.Error);
+                    log.Write("EditProfile.SaveClicked", $"Could not move directory: {e}", Log.LogLevel.Error);
                 }
             }
         }

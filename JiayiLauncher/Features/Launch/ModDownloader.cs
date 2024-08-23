@@ -7,12 +7,14 @@ using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Launch;
 
-public static class Downloader
+public static class ModDownloader
 {
 	// a lot of using statements here, (not) sorry if that pisses you off
     public static async Task<string> DownloadMod(Mod mod)
     {
 	    if (InternetManager.OfflineMode) return string.Empty;
+	    
+	    var log = Singletons.Get<Log>();
 	    
         var fileName = string.Empty;
         if (mod.Path.EndsWith(".dll"))
@@ -20,17 +22,17 @@ public static class Downloader
         if (mod.Path.EndsWith(".exe"))
             fileName = $"{mod.Name}.exe";
 		
-        Log.Write(nameof(Downloader), $"Downloading {mod.Name}");
+        log.Write(nameof(ModDownloader), $"Downloading {mod.Name}");
 
         using var response = await InternetManager.Client.GetAsync(mod.Path, HttpCompletionOption.ResponseHeadersRead);
-		Log.Write(nameof(Downloader), $"Server responded with {response.StatusCode}",
+		log.Write(nameof(ModDownloader), $"Server responded with {response.StatusCode}",
 			response.IsSuccessStatusCode ? Log.LogLevel.Info : Log.LogLevel.Error);
 		if (!response.IsSuccessStatusCode) return string.Empty;
 
 		var hasFileName = true;
         if (response.Content.Headers.ContentDisposition is not { FileName: not null })
         {
-            Log.Write(nameof(Downloader), "Server did not provide a file name", Log.LogLevel.Warning);
+            log.Write(nameof(ModDownloader), "Server did not provide a file name", Log.LogLevel.Warning);
             hasFileName = false;
         }
 
@@ -41,7 +43,7 @@ public static class Downloader
         // check if the file already exists, and if so, compare the hashes
         if (File.Exists(path))
 		{
-			Log.Write(nameof(Downloader), "File already exists, comparing hashes");
+			log.Write(nameof(ModDownloader), "File already exists, comparing hashes");
 			using var hasher = MD5.Create();
 			await using var stream = File.OpenRead(path);
 			var hash = await hasher.ComputeHashAsync(stream);
@@ -49,7 +51,7 @@ public static class Downloader
 			var otherHash = response.Content.Headers.ContentMD5;
 			if (otherHash is not null && hash == otherHash)
 			{
-				Log.Write(nameof(Downloader), "Hashes match, skipping download");
+				log.Write(nameof(ModDownloader), "Hashes match, skipping download");
 				return path;
 			}
 		}
@@ -57,9 +59,9 @@ public static class Downloader
 		await using var file = File.Create(path);
 		await using var content = await response.Content.ReadAsStreamAsync();
 		
-		Log.Write(nameof(Downloader), "Writing contents to file");
+		log.Write(nameof(ModDownloader), "Writing contents to file");
 		await content.CopyToAsync(file);
-		Log.Write(nameof(Downloader), $"Downloaded {mod.Name} to {path}");
+		log.Write(nameof(ModDownloader), $"Downloaded {mod.Name} to {path}");
 		
 		return path;
 	}

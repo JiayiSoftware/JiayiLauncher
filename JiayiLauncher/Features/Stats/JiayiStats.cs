@@ -54,11 +54,13 @@ public class JiayiStats
 
 	public static void Load()
 	{
+		var log = Singletons.Get<Log>();
+		
 		if (!File.Exists(_statsPath))
 		{
 			Instance = new JiayiStats();
 			Save();
-			Log.Write(nameof(JiayiStats), "Created new stats file.");
+			log.Write(nameof(JiayiStats), "Created new stats file.");
 			return;
 		}
 		
@@ -73,19 +75,19 @@ public class JiayiStats
 			{
 				Instance = new JiayiStats();
 				Save();
-				Log.Write(nameof(JiayiStats), "Stats file was corrupted or invalid. Created new stats file.");
+				log.Write(nameof(JiayiStats), "Stats file was corrupted or invalid. Created new stats file.");
 				return;
 			}
 			
 			Instance = stats;
-			Log.Write(nameof(JiayiStats), "Loaded stats.");
+			log.Write(nameof(JiayiStats), "Loaded stats.");
 		}
 		catch (Exception e)
 		{
 			stream.Close();
 			Instance = new JiayiStats();
 			Save();
-			Log.Write(nameof(JiayiStats), $"Stats file was corrupted or invalid. Created new stats file. Error: {e}");
+			log.Write(nameof(JiayiStats), $"Stats file was corrupted or invalid. Created new stats file. Error: {e}");
 		}
 	}
 }

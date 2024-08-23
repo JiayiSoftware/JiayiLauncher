@@ -188,7 +188,8 @@
             }
             catch (Exception e)
             {
-                Log.Write(this, $"GetFinalRedirect failed: {e}", Log.LogLevel.Error);
+                var log = Singletons.Get<Log>();
+                log.Write(this, $"GetFinalRedirect failed: {e}", Log.LogLevel.Error);
                 return;
             }
             

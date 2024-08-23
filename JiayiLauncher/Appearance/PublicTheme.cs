@@ -29,7 +29,8 @@ public class PublicTheme : ThemeMetadata
             return data;
         }
 
-        Log.Write("Theme", "Failed to retrieve public themes", Log.LogLevel.Error);
+        var log = Singletons.Get<Log>();
+        log.Write("Theme", "Failed to retrieve public themes", Log.LogLevel.Error);
         return null;
     }
 }

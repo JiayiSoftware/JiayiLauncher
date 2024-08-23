@@ -11,6 +11,7 @@ using Blazored.Modal;
 using JiayiLauncher.Localization;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
+using JsonIgnoreAttribute = System.Text.Json.Serialization.JsonIgnoreAttribute;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using MessageBox = JiayiLauncher.Modals.MessageBox;
 
@@ -19,16 +20,13 @@ namespace JiayiLauncher.Features.Mods;
 [Serializable]
 public class ModCollection
 {
-    // Help
-    /*[CascadingParameter]
-    public IModalService ModalService { get; set; } = default!;*/
+    [JsonIgnore] public static ModCollection? Current { get; private set; }
 
-    [System.Text.Json.Serialization.JsonIgnore] public string BasePath { get; private set; } = string.Empty;
+    [JsonIgnore] public string BasePath { get; private set; } = string.Empty;
     public List<Mod> Mods { get; } = new();
-
-    [System.Text.Json.Serialization.JsonIgnore] public static ModCollection? Current { get; private set; }
     
     private static JsonSerializerOptions? _options;
+    private static Log _log = Singletons.Get<Log>();
     
     // serialization thing
     public ModCollection() { }
@@ -65,14 +63,14 @@ public class ModCollection
                  select new Mod(name, file))
         {
 	        collection.Add(mod);
-	        Log.Write("ModCollection", $"Added mod {mod.Name} at {mod.Path}");
+	        _log.Write("ModCollection", $"Added mod {mod.Name} at {mod.Path}");
         }
 
         // set path in settings
         JiayiSettings.Instance!.ModCollectionPath = path;
         JiayiSettings.Instance.Save();
 
-        Log.Write("ModCollection", $"Created mod collection at {path}");
+        _log.Write("ModCollection", $"Created mod collection at {path}");
 
         collection.Save();
         return collection;
@@ -89,7 +87,7 @@ public class ModCollection
 	    JsonSerializer.Serialize(stream, this, _options);
 	    
 	    #if DEBUG
-	    Log.Write(this, "Saved mod collection.");
+	    _log.Write(this, "Saved mod collection.");
 	    #endif
     }
 
@@ -120,7 +118,7 @@ public class ModCollection
 	        
 	        if (collection == null)
 	        {
-		        Log.Write("ModCollection", $"Failed to load mod collection at {path}: index.json is invalid.");
+		        _log.Write("ModCollection", $"Failed to load mod collection at {path}: index.json is invalid.");
 		        Current = Create(path);
 		        return;
 			}
@@ -130,11 +128,11 @@ public class ModCollection
 	    }
         catch (Exception e)
 		{
-	        Log.Write("ModCollection", $"Failed to load mod collection at {path}: {e.Message}");
+	        _log.Write("ModCollection", $"Failed to load mod collection at {path}: {e.Message}");
 	        Current = Create(path);
 		}
         
-        Log.Write("ModCollection", $"Loaded mod collection at {path}");
+        _log.Write("ModCollection", $"Loaded mod collection at {path}");
     }
 
     // path is a folder here, the file name will be the collection name + .jiayi
@@ -142,7 +140,7 @@ public class ModCollection
     {
         ZipFile.CreateFromDirectory(BasePath, path);
 
-        Log.Write("ModCollection", $"Exported mod collection to {path}");
+        _log.Write("ModCollection", $"Exported mod collection to {path}");
     }
 
     public static void Import(string path)
@@ -157,7 +155,7 @@ public class ModCollection
             var index = Path.Combine(tempDir, "index.json");
             if (!File.Exists(index))
 			{
-				Log.Write("ModCollection", $"Failed to import mod collection from {path}: index.json is missing.");
+				_log.Write("ModCollection", $"Failed to import mod collection from {path}: index.json is missing.");
 				Directory.Delete(tempDir, true);
 				return;
 			}
@@ -169,7 +167,7 @@ public class ModCollection
 	            var collection = JsonConvert.DeserializeObject<ModCollection>(json);
 	            if (collection == null)
 	            {
-		            Log.Write("ModCollection", $"Failed to load mod collection at {path}: index.json is invalid.");
+		            _log.Write("ModCollection", $"Failed to load mod collection at {path}: index.json is invalid.");
 		            Current = Create(path);
 		            return;
 	            }
@@ -200,7 +198,7 @@ public class ModCollection
             }
             catch (Exception e)
             {
-	            Log.Write("ModCollection", $"Failed to load mod collection at {path}: {e.Message}");
+	            _log.Write("ModCollection", $"Failed to load mod collection at {path}: {e.Message}");
 	            Current = Create(path);
             }
 
@@ -286,7 +284,7 @@ public class ModCollection
         var index = Path.Combine(tempDir, "index.json");
         if (!File.Exists(index))
 		{
-			Log.Write("ModCollection", $"Failed to get info for mod collection at {path}: index.json is missing.");
+			_log.Write("ModCollection", $"Failed to get info for mod collection at {path}: index.json is missing.");
 			Directory.Delete(tempDir, true);
 			return new ModCollectionInfo();
 		}
@@ -298,7 +296,7 @@ public class ModCollection
 			var collection = JsonConvert.DeserializeObject<ModCollection>(json);
 	        if (collection == null)
 	        {
-		        Log.Write("ModCollection", $"Failed to get info for mod collection at {path}: index.json is invalid.");
+		        _log.Write("ModCollection", $"Failed to get info for mod collection at {path}: index.json is invalid.");
 		        Directory.Delete(tempDir, true);
 		        return new ModCollectionInfo();
 	        }
@@ -315,7 +313,7 @@ public class ModCollection
 		}
 		catch (Exception e)
 		{
-	        Log.Write("ModCollection", $"Failed to get info for mod collection at {path}: {e.Message}");
+	        _log.Write("ModCollection", $"Failed to get info for mod collection at {path}: {e.Message}");
 	        Directory.Delete(tempDir, true);
 	        return new ModCollectionInfo();
 		}

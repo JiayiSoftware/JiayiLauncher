@@ -18,6 +18,8 @@ public static class PackageData
 	
 	public static PackageManager PackageManager { get; } = new();
 	
+	private static Log _log = Singletons.Get<Log>();
+	
 	public static async Task<AppDiagnosticInfo?> GetPackage()
 	{
 		var info = 
@@ -74,7 +76,7 @@ public static class PackageData
             installPath = package.AppInfo.Package.InstalledLocation.Path;
         } catch (Exception ex)
         {
-            Log.Write(nameof(PackageData), $"Failed to locate minecraft (lost path): {ex.Message}", Log.LogLevel.Error);
+            _log.Write(nameof(PackageData), $"Failed to locate minecraft (lost path): {ex.Message}", Log.LogLevel.Error);
             return InstallLocation.Unknown;
         }
 
@@ -181,7 +183,7 @@ public static class PackageData
                 }
                 catch (Exception ex)
                 {
-                    Log.Write("PackageData", $"Failed to copy file {file}: {ex}");
+                    _log.Write("PackageData", $"Failed to copy file {file}: {ex}");
                 }
             }
 
@@ -198,12 +200,12 @@ public static class PackageData
                 }
                 catch (Exception ex)
                 {
-                    Log.Write("PackageData", $"Failed to copy file {file}: {ex}");
+                    _log.Write("PackageData", $"Failed to copy file {file}: {ex}");
                 }
             }
         });
         
-        Log.Write("PackageData", $"Created backup of game data in {to}");
+        _log.Write("PackageData", $"Created backup of game data in {to}");
 	}
 
 	public static async Task ReplaceGameData(string dataPath)

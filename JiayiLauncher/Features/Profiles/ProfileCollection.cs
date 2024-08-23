@@ -40,7 +40,9 @@ public class ProfileCollection
 		}
 		
 		Current = collection;
-		Log.Write("ProfileCollection", $"Loaded {profiles.Length} profiles from {basePath}");
+		
+		var log = Singletons.Get<Log>();
+		log.Write("ProfileCollection", $"Loaded {profiles.Length} profiles from {basePath}");
 	}
 	
 	public void Add(Profile profile)

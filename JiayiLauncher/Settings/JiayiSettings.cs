@@ -38,6 +38,7 @@ public class JiayiSettings
     private static JsonSerializerOptions? _options;
     
     private ThemeState _themeState = ThemeState.Instance;
+    private static readonly Log _log = Singletons.Get<Log>();
 
     [JsonConstructor]
     public JiayiSettings() { }
@@ -447,7 +448,7 @@ public class JiayiSettings
         LocalTheme.SaveCurrentTheme();
         
         #if DEBUG
-        Log.Write(this, "Saved settings.");
+        _log.Write(this, "Saved settings.");
         #endif
     }
 
@@ -457,7 +458,7 @@ public class JiayiSettings
         {
             Instance = Default;
             Instance.Save();
-            Log.Write(Instance, "Created new settings file.");
+            _log.Write(Instance, "Created new settings file.");
             return;
         }
 
@@ -499,12 +500,12 @@ public class JiayiSettings
                 
                 BlazorBridge.ShowToast(toastParams, toastSettings => toastSettings.DisableTimeout = true);
                 
-                Log.Write(Instance, "Settings file was corrupted or invalid. Created new settings file.", Log.LogLevel.Warning);
+                _log.Write(Instance, "Settings file was corrupted or invalid. Created new settings file.", Log.LogLevel.Warning);
                 return;
             }
 
             Instance = settings;
-            Log.Write(Instance, "Loaded settings.");
+            _log.Write(Instance, "Loaded settings.");
         }
         catch (Exception e)
         {
@@ -514,7 +515,7 @@ public class JiayiSettings
             
             BlazorBridge.ShowToast(toastParams, toastSettings => toastSettings.DisableTimeout = true);
             
-            Log.Write(Instance, $"Settings file was corrupted or invalid. Created new settings file. Error: {e}",
+            _log.Write(Instance, $"Settings file was corrupted or invalid. Created new settings file. Error: {e}",
                 Log.LogLevel.Warning);
         }
     }

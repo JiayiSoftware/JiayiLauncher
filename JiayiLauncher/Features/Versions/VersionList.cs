@@ -23,6 +23,7 @@ public static class VersionList
 	private static readonly SortedDictionary<string, MinecraftVersion> _versionDict = new(new VersionComparer());
 	private static readonly DisplayCatalogHandler _catalog = DisplayCatalogHandler.ProductionConfig();
 	private static readonly string _versionsPath = Path.Combine(JiayiSettings.Instance!.VersionsPath, "versions.json");
+	private static readonly Log _log = Singletons.Get<Log>();
 
 	private static bool _loaded;
 	
@@ -67,7 +68,7 @@ public static class VersionList
 
 		if (InternetManager.OfflineMode)
 		{
-			Log.Write(nameof(VersionList), "Offline mode enabled, skipping version list update.");
+			_log.Write(nameof(VersionList), "Offline mode enabled, skipping version list update.");
 			return;
 		}
 
@@ -89,7 +90,7 @@ public static class VersionList
 				var mcVersion = new MinecraftVersion(fileName, updateId, version);
 				if (_versionDict.TryAdd(version, mcVersion))
 				{
-					Log.Write(nameof(VersionList), $"Found new version: {version}");
+					_log.Write(nameof(VersionList), $"Found new version: {version}");
 					var jsonOut = JsonConvert.SerializeObject(_versionDict, Formatting.Indented);
 					await File.WriteAllTextAsync(_versionsPath, jsonOut);
 				}
@@ -126,7 +127,7 @@ public static class VersionList
 			var mcVersion = new MinecraftVersion(fileName, updateId, version);
 			if (_versionDict.TryAdd(version, mcVersion))
 			{
-				Log.Write(nameof(VersionList), $"Found new version: {version}");
+				_log.Write(nameof(VersionList), $"Found new version: {version}");
 				var jsonOut = JsonConvert.SerializeObject(_versionDict, Formatting.Indented);
 				await File.WriteAllTextAsync(_versionsPath, jsonOut);
 			}
@@ -143,7 +144,7 @@ public static class VersionList
 		if (_versions.Count != 0) _versions.Clear();
 		_versions.AddRange(_versionDict.Keys);
 		
-		Log.Write(nameof(VersionList), $"Updated version list. Found {_versions.Count} versions.");
+		_log.Write(nameof(VersionList), $"Updated version list. Found {_versions.Count} versions.");
 	}
 
 	public static async Task<List<string>> GetVersionList()

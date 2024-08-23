@@ -72,10 +72,12 @@
 
     private async Task SaveClicked()
     {
+        var log = Singletons.Get<Log>();
+        
         var name = _nameTextBox?.Value?.Trim().Truncate(20) ?? ThemeName;
         if (string.IsNullOrEmpty(name))
         {
-            Log.Write(nameof(PrepareThemePublish), "Failed to create theme (no name)", Log.LogLevel.Warning);
+            log.Write(nameof(PrepareThemePublish), "Failed to create theme (no name)", Log.LogLevel.Warning);
             SendToast(Strings.ThemePublishNoName);
 
             return;
@@ -89,7 +91,7 @@
 
         if (_publicTheme.RawTags.Count < 1)
         {
-            Log.Write(nameof(PrepareThemePublish), "Failed to create theme (Minimum 1 raw tag)", Log.LogLevel.Warning);
+            log.Write(nameof(PrepareThemePublish), "Failed to create theme (Minimum 1 raw tag)", Log.LogLevel.Warning);
             SendToast(Strings.ThemePublishNoRawTags);
 
             return;
@@ -97,7 +99,7 @@
 
         if (allThemes?.FirstOrDefault(x => x.Name.ToLower() == name.ToLower(), null) != null || Directory.Exists(dirPath))
         {
-            Log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {ThemeName}", Log.LogLevel.Warning);
+            log.Write(nameof(PrepareThemePublish), $"Failed to create theme (already exists): {ThemeName}", Log.LogLevel.Warning);
             SendToast(string.Format(Strings.ThemePublishAlreadyExists, ThemeName));
 
             return;

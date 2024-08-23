@@ -13,6 +13,7 @@ public class Updater
     private const string INSTALLER_URL = "https://phased.tech/download/JiayiInstaller.exe";
 
     private readonly GitHubClient _gh = new(new ProductHeaderValue("JiayiLauncher"));
+    private readonly Log _log = Singletons.Get<Log>();
     public event EventHandler? UpdateDownloaded;
     public event EventHandler? UpdateInstalled;
 
@@ -20,13 +21,13 @@ public class Updater
     {
         if (Debugger.IsAttached)
         {
-            Log.Write(nameof(Updater), "Skipping update check");
+            _log.Write(nameof(Updater), "Skipping update check");
             return false;
         }
 
         if ((await _gh.RateLimit.GetRateLimits()).Resources.Core.Remaining <= 0)
         {
-            Log.Write(nameof(Updater), "Rate limit exceeded", Log.LogLevel.Warning);
+            _log.Write(nameof(Updater), "Rate limit exceeded", Log.LogLevel.Warning);
             return false;
         }
 
@@ -55,13 +56,13 @@ public class Updater
 
     public async Task DownloadLatest()
     {
-        Log.Write(this, "Downloading latest version");
+        _log.Write(this, "Downloading latest version");
 
         await using var response = await InternetManager.Client.GetStreamAsync(INSTALLER_URL);
         await using var fileStream = File.Create("JiayiInstaller.exe");
         await response.CopyToAsync(fileStream);
 
-        Log.Write(this, "Downloaded latest version");
+        _log.Write(this, "Downloaded latest version");
         UpdateDownloaded?.Invoke(null, EventArgs.Empty);
     }
 
@@ -70,11 +71,11 @@ public class Updater
         var installer = Path.Combine(Directory.GetCurrentDirectory(), "JiayiInstaller.exe");
         if (!File.Exists(installer))
         {
-            Log.Write(this, "Failed to find installer", Log.LogLevel.Error);
+            _log.Write(this, "Failed to find installer", Log.LogLevel.Error);
             return;
         }
 
-        Log.Write(this, "Starting installer and exiting");
+        _log.Write(this, "Starting installer and exiting");
         Process.Start(new ProcessStartInfo
         {
             FileName = installer,

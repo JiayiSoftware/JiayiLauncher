@@ -125,8 +125,9 @@
             } 
             catch (Exception e)
             {
-                Log.Write("Ambrosial", $"Item: {item}", Log.LogLevel.Error);
-                Log.Write("Ambrosial", e.StackTrace ?? "No stack trace available", Log.LogLevel.Error);
+                var log = Singletons.Get<Log>();
+                log.Write("Ambrosial", $"Item: {item}", Log.LogLevel.Error);
+                log.Write("Ambrosial", e.StackTrace ?? "No stack trace available", Log.LogLevel.Error);
             }
         }
     }

@@ -14,13 +14,15 @@ public class ModConfigManager
 	public readonly string ConfigPath;
 	//private readonly string _configExtension; // maybe in the future
 	
+	private readonly Log _log = Singletons.Get<Log>();
+	
 	public ModConfigManager(Mod mod)
 	{
 		var modDataFolder = Path.Combine(PackageData.GetGameDataPath(), "RoamingState", mod.DataFolderName);
 		
 		// find config folder (could be Config, config, configs, configurations, etc)
 		var configFolder = Directory.GetDirectories(modDataFolder)
-			.FirstOrDefault(x => x.Contains("config", System.StringComparison.OrdinalIgnoreCase));
+			.FirstOrDefault(x => x.Contains("config", StringComparison.OrdinalIgnoreCase));
 		
 		ConfigPath = configFolder ?? string.Empty;
 	}
@@ -35,7 +37,7 @@ public class ModConfigManager
 		await using var stream = File.Create(filePath);
 		await file.OpenReadStream().CopyToAsync(stream);
 		
-		Log.Write(this, $"Added config {fileName}");
+		_log.Write(this, $"Added config {fileName}");
 	}
 	
 	public void RemoveConfig(string path)
@@ -47,7 +49,7 @@ public class ModConfigManager
 		
 		File.Delete(configPath);
 		
-		Log.Write(this, $"Removed config {configName}");
+		_log.Write(this, $"Removed config {configName}");
 	}
 	
 	public List<string> GetConfigs()

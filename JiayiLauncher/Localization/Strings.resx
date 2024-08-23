@@ -421,7 +421,7 @@
     
     <!-- version manager strings -->
     <data name="VerManName" xml:space="preserve">
-        <value>Version manager</value>
+        <value>Manage your game</value>
     </data>
     <data name="VerManCurrentVersion" xml:space="preserve">
         <value>Your current version</value>
@@ -1298,8 +1298,8 @@
     <data name="SidebarProfiles" xml:space="preserve">
         <value>Profiles</value>
     </data>
-    <data name="SidebarVersions" xml:space="preserve">
-        <value>Versions</value>
+    <data name="SidebarGame" xml:space="preserve">
+        <value>Game</value>
     </data>
     <data name="SidebarSettings" xml:space="preserve">
         <value>Settings</value>

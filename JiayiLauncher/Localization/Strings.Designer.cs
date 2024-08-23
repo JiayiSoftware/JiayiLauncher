@@ -2852,6 +2852,15 @@ namespace JiayiLauncher.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Game.
+        /// </summary>
+        internal static string SidebarGame {
+            get {
+                return ResourceManager.GetString("SidebarGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mods.
         /// </summary>
         internal static string SidebarMods {
@@ -2875,15 +2884,6 @@ namespace JiayiLauncher.Localization {
         internal static string SidebarSettings {
             get {
                 return ResourceManager.GetString("SidebarSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Versions.
-        /// </summary>
-        internal static string SidebarVersions {
-            get {
-                return ResourceManager.GetString("SidebarVersions", resourceCulture);
             }
         }
         
@@ -3363,7 +3363,7 @@ namespace JiayiLauncher.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version manager.
+        ///   Looks up a localized string similar to Manage your game.
         /// </summary>
         internal static string VerManName {
             get {

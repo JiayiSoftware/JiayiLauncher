@@ -93,7 +93,7 @@
         <value>Imported</value>
     </data>
   <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>Wird importiert...</value>
     </data>
   <data name="Create" xml:space="preserve">
         <value>Erstellen</value>
@@ -102,7 +102,7 @@
         <value>Lade Herunter</value>
     </data>
   <data name="Downloading" xml:space="preserve">
-        <value>Downloading...</value>
+        <value>Lädt herunter...</value>
     </data>
   <data name="NotAvailable" xml:space="preserve">
         <value>Nicht Verfügbar</value>
@@ -120,7 +120,7 @@
         <value>Starten</value>
     </data>
   <data name="Extracting" xml:space="preserve">
-        <value>Extracting...</value>
+        <value>Wird extrahiert...</value>
     </data>
   <data name="CompletionPercent" xml:space="preserve">
         <value>{0}% Fertig</value>
@@ -144,7 +144,7 @@
         <value>Select</value>
     </data>
   <data name="View" xml:space="preserve">
-        <value>View</value>
+        <value>Einsehen</value>
     </data>
   <data name="Restore" xml:space="preserve">
         <value>Wiederherstellen</value>
@@ -162,7 +162,7 @@
         <value>Generate</value>
     </data>
   <data name="Clear" xml:space="preserve">
-        <value>Clear</value>
+        <value>Leeren</value>
     </data>
   <data name="Name" xml:space="preserve">
         <value>Name</value>
@@ -185,7 +185,7 @@
     </data>
   <!-- config manager strings -->
   <data name="ConfManName" xml:space="preserve">
-        <value>Config manager</value>
+        <value>Konfigurationen</value>
     </data>
   <data name="ConfManNoModDataFolder" xml:space="preserve">
         <value>
@@ -219,7 +219,7 @@
         <value>Supported versions</value>
     </data>
   <data name="EditModSelectVersions" xml:space="preserve">
-        <value>Select versions</value>
+        <value>Markiere Versionen</value>
     </data>
   <data name="EditModLaunchArgs" xml:space="preserve">
         <value>Launch arguments</value>
@@ -234,7 +234,7 @@
         <value>Usually in RoamingState</value>
     </data>
   <data name="EditModDefaultLocationNotice" xml:space="preserve">
-        <value>Mods will be saved to their default location, which you can change in settings</value>
+        <value>Mods werden im standardmäßigen gespeichert (änderbar in den Einstellungen)</value>
     </data>
   <data name="EditModExternalSourceNotice" xml:space="preserve">
         <value>This mod came from an external app or website. Don't add mods from untrusted sources.</value>
@@ -247,7 +247,7 @@
         <value>Create profile</value>
     </data>
   <data name="EditProfileNameProfile" xml:space="preserve">
-        <value>Give your profile a name!</value>
+        <value>Gib hier den Namen für dein Profil!</value>
     </data>
   <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
         <value>Profiles will be saved to their default location, which you can change in settings</value>
@@ -285,10 +285,10 @@
         <value>{0} from the web</value>
     </data>
   <data name="ImportModDefaultLocationNotice" xml:space="preserve">
-        <value>The mods in this collection will be saved to their default location, which you can change in settings</value>
+        <value>Mods in der Sammlung werden am standardmäßigen Ort gespeichert (änderbar in den Einstellungen)</value>
     </data>
   <data name="ImportModMergeNotice" xml:space="preserve">
-        <value>The mods in this collection will be merged with your collection</value>
+        <value>Mods in dieser Sammlung werden mit deiner Sammlung gemerged</value>
     </data>
   <!-- new mod strings -->
   <data name="NewModName" xml:space="preserve">
@@ -331,33 +331,33 @@
         <value>Invalid link</value>
     </data>
   <data name="NewModLinkNotFound" xml:space="preserve">
-        <value>There's nothing at this address!</value>
+        <value>Unter diesem Link wurde nichts gefunden!</value>
     </data>
   <data name="NewModCheckingLink" xml:space="preserve">
-        <value>Checking link...</value>
+        <value>Link wird geprüft...</value>
     </data>
   <data name="NewModAlreadyExists" xml:space="preserve">
-        <value>This mod already exists in your collection. Do you want to replace it?</value>
+        <value>Die Mod existiert schon in deiner Sammlung, willst du die ersetzen?</value>
     </data>
   <!-- new theme strings -->
   <data name="NewThemeName" xml:space="preserve">
-        <value>New theme</value>
+        <value>Neues Theme</value>
     </data>
   <data name="NewThemeNameTheme" xml:space="preserve">
-        <value>Give your theme a name!</value>
+        <value>Gib hier den Namen fürs Theme!</value>
     </data>
   <!-- theme publishing strings -->
   <data name="ThemePublishTitle" xml:space="preserve">
-        <value>Prepare theme publish</value>
+        <value>Theme fürs Veröffentlichen bereitstellen</value>
     </data>
   <data name="ThemePublishName" xml:space="preserve">
-        <value>Theme name</value>
+        <value>Theme Name</value>
     </data>
   <data name="ThemePublishAuthor" xml:space="preserve">
-        <value>Author</value>
+        <value>Autor</value>
     </data>
   <data name="ThemePublishAuthorPlaceholder" xml:space="preserve">
-        <value>Your name here</value>
+        <value>Name des Autors</value>
     </data>
   <data name="ThemePublishTags" xml:space="preserve">
         <value>Tags</value>
@@ -366,22 +366,22 @@
         <value>Comma-separated list</value>
     </data>
   <data name="ThemePublishRawTags" xml:space="preserve">
-        <value>Raw tags</value>
+        <value>Raw Tags</value>
     </data>
   <data name="ThemePublishRawTagsSelect" xml:space="preserve">
         <value>Select raw tags</value>
     </data>
   <data name="ThemePublishNoName" xml:space="preserve">
-        <value>Failed to create theme (no name)</value>
+        <value>Theme konnte nicht erstellt werden (kein Name)</value>
     </data>
   <data name="ThemePublishNoRawTags" xml:space="preserve">
-        <value>Failed to create theme (minimum 1 raw tag)</value>
+        <value>Theme konnte nicht erstellt werden (mindestens 1 Raw Tag erforderlich)</value>
     </data>
   <data name="ThemePublishAlreadyExists" xml:space="preserve">
-        <value>Failed to create theme (already exists): {0}</value>
+        <value>Theme konnte nicht erstellt werden (dasselbe Theme existiert schon): {0}</value>
     </data>
   <data name="ThemePublishOpenRepo" xml:space="preserve">
-        <value>Open repository</value>
+        <value>Repository öffnen</value>
     </data>
   <data name="ThemePublishFinalize" xml:space="preserve">
         <value>
@@ -410,7 +410,7 @@
         <value>Manage your game</value>
     </data>
   <data name="VerManCurrentVersion" xml:space="preserve">
-        <value>Your current version</value>
+        <value>Derzeitige Version</value>
     </data>
   <data name="VerManResizeTip" xml:space="preserve">
         <value>You can resize Jiayi to see the full list on the right</value>
@@ -425,10 +425,10 @@
         <value>Latest version</value>
     </data>
   <data name="VerManPopularAmongCommunity" xml:space="preserve">
-        <value>Popular among the community</value>
+        <value>Populär innerhalb der Community</value>
     </data>
   <data name="VerManBestStableRelease" xml:space="preserve">
-        <value>Best stable release without RenderDragon</value>
+        <value>Bestes stable Release ohne RenderDragon</value>
     </data>
   <data name="VerManShaderManagerText" xml:space="preserve">
         <value>Easily apply RenderDragon shaders to your game. Works best if you have the game installed through Jiayi.</value>

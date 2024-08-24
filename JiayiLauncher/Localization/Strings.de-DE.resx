@@ -117,7 +117,7 @@
         <value>Fehler</value>
     </data>
   <data name="Launch" xml:space="preserve">
-        <value>Starten</value>
+        <value>Start</value>
     </data>
   <data name="Extracting" xml:space="preserve">
         <value>Extrahieren...</value>
@@ -189,8 +189,8 @@
     </data>
   <data name="ConfManNoModDataFolder" xml:space="preserve">
         <value>
-            Für diese Mod ist kein Datenordnername festgelegt.
-            Um auf den Konfigurationsmanager zuzugreifen, bearbeite diese Mod und lege den Datenordnernamen fest.
+            Für diesen Mod ist kein Datenordnername festgelegt.
+            Um auf den Konfigurationsmanager zuzugreifen, bearbeite dieser Mod und lege den Datenordnernamen fest.
         </value>
     </data>
   <data name="ConfManInvalidDataFolder" xml:space="preserve">
@@ -325,7 +325,7 @@
         <value>Keine Mod-Sammlung</value>
     </data>
   <data name="NewModAlreadyInCollection" xml:space="preserve">
-        <value>Diese Modifikation befindet sich bereits in deiner Sammlung!</value>
+        <value>Dieser Mod befindet sich bereits in deiner Sammlung!</value>
     </data>
   <data name="NewModInvalidLink" xml:space="preserve">
         <value>Ungültiger Link</value>
@@ -898,7 +898,7 @@
         <value>Palette aus dem Hintergrund generieren</value>
     </data>
   <data name="SettingsGeneratePaletteDesc" xml:space="preserve">
-        <value>Erstellt eine Farbpalette, die auf Ihrem Hintergrundbild basiert. Videos werden NICHT unterstützt.</value>
+        <value>Erstellen Sie eine Farbpalette basierend auf deinem Hintergrundbild. Videos werden NICHT unterstützt.</value>
     </data>
   <data name="SettingsGeneratePaletteTooltip" xml:space="preserve">
         <value>Die Erstellung von Paletten ist speicherintensiv und kann eine Weile dauern. Jede erzeugte Palette ist etwas anders.</value>
@@ -1121,7 +1121,7 @@
         <value>Log-Ordner öffnen</value>
     </data>
   <data name="SettingsOpenLogFolderDesc" xml:space="preserve">
-        <value>Öffnen Sie den Protokollordner im Datei-Explorer.</value>
+        <value>Öffne den Protokollordner im Datei-Explorer.</value>
     </data>
   <data name="SettingsClearPreviousLogs" xml:space="preserve">
         <value>Frühere Protokolle löschen</value>
@@ -1134,7 +1134,7 @@
         <value>Dieser Mod ist kaputt; er existiert nicht mehr im Web.</value>
     </data>
   <data name="ModCardMissingFile" xml:space="preserve">
-        <value>Diese Mod ist defekt; die Datei fehlt im Mods-Verzeichnis.</value>
+        <value>Dieser Mod ist defekt; die Datei fehlt im Mods-Verzeichnis.</value>
     </data>
   <data name="ModCardOffline" xml:space="preserve">
         <value>Internet-Mods sind im Offline-Modus deaktiviert</value>
@@ -1146,88 +1146,87 @@
         <value>Lokal gespeichert</value>
     </data>
   <data name="ModCardSupportedVersions" xml:space="preserve">
-        <value>Works on {0}</value>
+        <value>Funktioniert bei {0}</value>
     </data>
   <data name="ModCardHideControls" xml:space="preserve">
-        <value>Hide controls</value>
+        <value>Kontrollen ausblenden</value>
     </data>
   <data name="ModCardShowControls" xml:space="preserve">
-        <value>Show controls</value>
+        <value>Steuerung anzeigen</value>
     </data>
   <data name="ModCardManageConfigs" xml:space="preserve">
-        <value>Manage configs</value>
+        <value>Verwalten von Konfigurationen</value>
     </data>
   <data name="ModCardEditMod" xml:space="preserve">
-        <value>Edit mod</value>
+        <value>Mod bearbeiten</value>
     </data>
   <data name="ModCardDeleteMod" xml:space="preserve">
-        <value>Delete mod (irreversible)</value>
+        <value>Mod löschen (unumkehrbar)</value>
     </data>
   <data name="ModCardDeleteModConfirm" xml:space="preserve">
-        <value>Are you sure you want to delete {0}? This action is irreversible.</value>
+        <value>Bist du sicher, dass du {0} löschen willst? Diese Aktion ist unumkehrbar.</value>
     </data>
   <data name="ModCardLaunchMultipleModsConfirm" xml:space="preserve">
-        <value>Launching more than one mod at a time can make your game unstable. Are you sure you want to launch {0}?</value>
+        <value>Wenn du mehr als einen Mod gleichzeitig startest, kann dein Spiel instabil werden. Bist du sicher, dass du {0} starten willst?</value>
     </data>
   <data name="ModCardDownloadFailed" xml:space="preserve">
-        <value>Failed to download mod. Please try again later.</value>
+        <value>Mod-Download fehlgeschlagen. Versuche es bitte später noch einmal.</value>
     </data>
   <data name="ModCardModNotFound" xml:space="preserve">
-        <value>Your mod was deleted during launch. Try turning off your antivirus.</value>
+        <value>Dein Mod wurde beim Start gelöscht. Versuche, dein Antivirusprogramm zu deaktivieren.</value>
     </data>
   <data name="ModCardGameNotFound" xml:space="preserve">
-        <value>The game was closed during launch. Turn off your antivirus in case it's terminating the game.</value>
+        <value>Das Spiel wurde während des Starts geschlossen. Schalte dein Antivirenprogramm aus, falls es das Spiel beendet.</value>
     </data>
   <data name="ModCardVersionMismatch" xml:space="preserve">
-        <value>{0} doesn't support your current game version. Would you like to switch to {1}?</value>
+        <value>{0} unterstützt deine aktuelle Spielversion nicht. Möchtest du zu {1} wechseln?</value>
     </data>
   <data name="ModCardInjectionFailed" xml:space="preserve">
-        <value>Your mod could not be injected. Try turning off your antivirus, and check logs for extended error information.</value>
+        <value>Dein Mod konnte nicht injected werden. Versuche, dein Antivirus zu deaktivieren, und prüfe die Protokolle auf erweiterte Fehlerinformationen.</value>
     </data>
   <data name="ModCardAlreadyLoaded" xml:space="preserve">
-        <value>This mod is already loaded!</value>
+        <value>Diese Mod ist bereits geladen!</value>
     </data>
   <!-- theme card strings -->
   <data name="ThemeCardAuthor" xml:space="preserve">
-        <value>by {0}</value>
+        <value>von {0}</value>
     </data>
   <data name="ThemeCardPrepareUpload" xml:space="preserve">
-        <value>Prepare theme upload</value>
+        <value>Themenupload vorbereiten</value>
     </data>
   <data name="ThemeCardReinstall" xml:space="preserve">
-        <value>Reinstall theme</value>
+        <value>Thema erneut installieren</value>
     </data>
   <data name="ThemeCardOverwriteConfirm" xml:space="preserve">
-        <value>Are you sure you want to overwrite this theme? All of your local changes will be lost.</value>
+        <value>Bist du sicher, dass du dieses Thema überschreiben willst? Dadurch gehen alle deine lokalen Änderungen verloren.</value>
     </data>
   <!-- don't ask again strings -->
   <data name="DontAskAgain" xml:space="preserve">
-        <value>
-            Stop asking
-            I said no
-            Shut up
-            Really, no
-            No more
-            No means no
-            Please stop
-            Stop it
-            Never again
-            Suck my nuts
+        <value>            Hör auf zu fragen
+            Ich sagte nein
+            Halt die Klappe!
+            Nein Warak Nein
+            Nicht mehr.
+            Nein heißt nein
+            Bitte hör auf.
+            Hör auf!
+            Nie wieder machst du in NRW ein Auftritt 
+            Du Hund
         </value>
     </data>
   <!-- offline mode strings -->
   <data name="OfflineMode" xml:space="preserve">
-        <value>Offline Mode</value>
+        <value>Offline-Modus</value>
     </data>
   <data name="OfflineModeDesc" xml:space="preserve">
-        <value>You're offline. Some features may not work.</value>
+        <value>Du bist offline. Einige Funktionen funktionieren möglicherweise nicht.</value>
     </data>
   <!-- update strings -->
   <data name="UpdateInstalled" xml:space="preserve">
-        <value>Update installed</value>
+        <value>Update installiert</value>
     </data>
   <data name="UpdateInstalledDesc" xml:space="preserve">
-        <value>Jiayi was updated to {0}.</value>
+        <value>Jiayi wurde auf {0} aktualisiert.</value>
     </data>
   <data name="UpdateInstalledDesc2" xml:space="preserve">
         <value>Das Änderungsprotokoll kannst du auf GitHub einsehen.</value>

@@ -241,10 +241,10 @@
     </data>
   <!-- edit profile strings -->
   <data name="EditProfileName" xml:space="preserve">
-        <value>Edit profile</value>
+        <value>Profil bearbeiten</value>
     </data>
   <data name="EditProfileCreateName" xml:space="preserve">
-        <value>Create profile</value>
+        <value>Profil erstellen</value>
     </data>
   <data name="EditProfileNameProfile" xml:space="preserve">
         <value>Gib hier den Namen für dein Profil!</value>

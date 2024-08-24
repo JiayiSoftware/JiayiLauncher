@@ -72,16 +72,16 @@
         <value>Nein</value>
     </data>
   <data name="Cancel" xml:space="preserve">
-        <value>Cancel</value>
+        <value>Abbrechen</value>
     </data>
   <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Schließen</value>
     </data>
   <data name="Open" xml:space="preserve">
-        <value>Open</value>
+        <value>Öffnen</value>
     </data>
   <data name="Save" xml:space="preserve">
-        <value>Save</value>
+        <value>Speichern</value>
     </data>
   <data name="Export" xml:space="preserve">
         <value>Export</value>
@@ -96,46 +96,46 @@
         <value>Importing...</value>
     </data>
   <data name="Create" xml:space="preserve">
-        <value>Create</value>
+        <value>Erstellen</value>
     </data>
   <data name="Download" xml:space="preserve">
-        <value>Download</value>
+        <value>Lade Herunter</value>
     </data>
   <data name="Downloading" xml:space="preserve">
         <value>Downloading...</value>
     </data>
   <data name="NotAvailable" xml:space="preserve">
-        <value>Not available</value>
+        <value>Nicht Verfügbar</value>
     </data>
   <data name="Unknown" xml:space="preserve">
-        <value>Unknown</value>
+        <value>Unbekannt</value>
     </data>
   <data name="Warning" xml:space="preserve">
-        <value>Warning</value>
+        <value>Warnung</value>
     </data>
   <data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>Fehler</value>
     </data>
   <data name="Launch" xml:space="preserve">
-        <value>Launch</value>
+        <value>Starten</value>
     </data>
   <data name="Extracting" xml:space="preserve">
         <value>Extracting...</value>
     </data>
   <data name="CompletionPercent" xml:space="preserve">
-        <value>{0}% complete</value>
+        <value>{0}% Fertig</value>
     </data>
   <data name="Remove" xml:space="preserve">
-        <value>Remove</value>
+        <value>Entferne</value>
     </data>
   <data name="Removing" xml:space="preserve">
-        <value>Removing...</value>
+        <value>Entfernt...</value>
     </data>
   <data name="Switch" xml:space="preserve">
-        <value>Switch</value>
+        <value>Wechseln</value>
     </data>
   <data name="Switching" xml:space="preserve">
-        <value>Switching...</value>
+        <value>Wechselt...</value>
     </data>
   <data name="Apply" xml:space="preserve">
         <value>Apply</value>
@@ -147,16 +147,16 @@
         <value>View</value>
     </data>
   <data name="Restore" xml:space="preserve">
-        <value>Restore</value>
+        <value>Wiederherstellen</value>
     </data>
   <data name="Update" xml:space="preserve">
-        <value>Update</value>
+        <value>Aktualisieren</value>
     </data>
   <data name="Restart" xml:space="preserve">
-        <value>Restart</value>
+        <value>Neu Starten</value>
     </data>
   <data name="Later" xml:space="preserve">
-        <value>Later</value>
+        <value>Später</value>
     </data>
   <data name="Generate" xml:space="preserve">
         <value>Generate</value>

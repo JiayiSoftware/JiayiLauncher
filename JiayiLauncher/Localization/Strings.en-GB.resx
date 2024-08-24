@@ -407,7 +407,7 @@
     </data>
   <!-- version manager strings -->
   <data name="VerManName" xml:space="preserve">
-        <value>Version manager</value>
+        <value>Manage your game</value>
     </data>
   <data name="VerManCurrentVersion" xml:space="preserve">
         <value>Your current version</value>
@@ -536,7 +536,7 @@
   <data name="ShaderManViewMaterialsText" xml:space="preserve">
         <value>
             This shader pack modifies the following materials:
-
+            
             {0}
         </value>
     </data>
@@ -561,7 +561,7 @@
   <data name="ShaderManDragDropInfo" xml:space="preserve">
         <value>
             Any file compressed with the zip format can be used as a shader pack, as long as it contains material files.
-
+        
             The launcher can find shaders anywhere in the pack.
         </value>
     </data>

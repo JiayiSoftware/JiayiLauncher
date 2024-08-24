@@ -141,7 +141,7 @@
         <value>適用</value>
     </data>
   <data name="Select" xml:space="preserve">
-        <value>Select</value>
+        <value>選択</value>
     </data>
   <data name="View" xml:space="preserve">
         <value>表示</value>
@@ -181,7 +181,7 @@
     </data>
   <!-- optional Jiayi Launcher string, translate if you want -->
   <data name="JiayiLauncher" xml:space="preserve">
-        <value>Jiayi Launcher</value>
+        <value>Jiayiランチャー</value>
     </data>
   <!-- config manager strings -->
   <data name="ConfManName" xml:space="preserve">
@@ -337,7 +337,7 @@
         <value>リンクを確認中...</value>
     </data>
   <data name="NewModAlreadyExists" xml:space="preserve">
-        <value>This mod already exists in your collection. Do you want to replace it?</value>
+        <value>このModはすでにコレクションに存在します。上書きしますか？</value>
     </data>
   <!-- new theme strings -->
   <data name="NewThemeName" xml:space="preserve">
@@ -391,19 +391,19 @@
     </data>
   <!-- about strings -->
   <data name="AboutTitle" xml:space="preserve">
-        <value>About</value>
+        <value>情報</value>
     </data>
   <data name="AboutPresenting" xml:space="preserve">
-        <value>After 2 years of development hell, we proudly present:</value>
+        <value>2年に渡る地獄の開発の末に、私たちは誇りをもって公開する</value>
     </data>
   <data name="AboutSourceAvailable" xml:space="preserve">
-        <value>Source available on GitHub</value>
+        <value>ソースコードはGithubにて入手可能</value>
     </data>
   <data name="AboutDiscord" xml:space="preserve">
-        <value>Talk to us on Discord</value>
+        <value>Discordで私たちと話す</value>
     </data>
   <data name="AboutCredits" xml:space="preserve">
-        <value>Credits</value>
+        <value>クレジット表記</value>
     </data>
   <!-- version manager strings -->
   <data name="VerManName" xml:space="preserve">
@@ -1262,7 +1262,7 @@
         <value>構成</value>
     </data>
   <data name="SidebarGame" xml:space="preserve">
-        <value>Game</value>
+        <value>ゲーム</value>
     </data>
   <data name="SidebarSettings" xml:space="preserve">
         <value>設定</value>

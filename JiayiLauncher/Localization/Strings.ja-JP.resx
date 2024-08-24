@@ -1,699 +1,677 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- STRINGS START AT LINE 67 -->
-
 <root>
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-        <xsd:element name="root" msdata:IsDataSet="true">
-            <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-            <xsd:element name="root" msdata:IsDataSet="true">
-                <xsd:complexType>
-                    <xsd:choice maxOccurs="unbounded">
-                        <xsd:element name="metadata">
-                            <xsd:complexType>
-                                <xsd:sequence>
-                                    <xsd:element name="value" type="xsd:string" minOccurs="0" />
-                                </xsd:sequence>
-                                <xsd:attribute name="name" use="required" type="xsd:string" />
-                                <xsd:attribute name="type" type="xsd:string" />
-                                <xsd:attribute name="mimetype" type="xsd:string" />
-                                <xsd:attribute ref="xml:space" />
-                            </xsd:complexType>
-                        </xsd:element>
-                        <xsd:element name="assembly">
-                            <xsd:complexType>
-                                <xsd:attribute name="alias" type="xsd:string" />
-                                <xsd:attribute name="name" type="xsd:string" />
-                            </xsd:complexType>
-                        </xsd:element>
-                        <xsd:element name="data">
-                            <xsd:complexType>
-                                <xsd:sequence>
-                                    <xsd:element name="value" type="xsd:string" minOccurs="0"
-                                        msdata:Ordinal="1" />
-                                    <xsd:element name="comment" type="xsd:string" minOccurs="0"
-                                        msdata:Ordinal="2" />
-                                </xsd:sequence>
-                                <xsd:attribute name="name" type="xsd:string" use="required"
-                                    msdata:Ordinal="1" />
-                                <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-                                <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-                                <xsd:attribute ref="xml:space" />
-                            </xsd:complexType>
-                        </xsd:element>
-                        <xsd:element name="resheader">
-                            <xsd:complexType>
-                                <xsd:sequence>
-                                    <xsd:element name="value" type="xsd:string" minOccurs="0"
-                                        msdata:Ordinal="1" />
-                                </xsd:sequence>
-                                <xsd:attribute name="name" type="xsd:string" use="required" />
-                            </xsd:complexType>
-                        </xsd:element>
-                    </xsd:choice>
-                </xsd:complexType>
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+      <xsd:element name="root" msdata:IsDataSet="true">
+        <xsd:complexType>
+          <xsd:choice maxOccurs="unbounded">
+            <xsd:element name="metadata">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" use="required" type="xsd:string"/>
+                <xsd:attribute name="type" type="xsd:string"/>
+                <xsd:attribute name="mimetype" type="xsd:string"/>
+                <xsd:attribute ref="xml:space"/>
+              </xsd:complexType>
             </xsd:element>
-        </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>2.0</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0,
-            Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0,
-            Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-
-    <!-- common strings -->
-    <data name="Okay" xml:space="preserve">
+            <xsd:element name="assembly">
+              <xsd:complexType>
+                <xsd:attribute name="alias" type="xsd:string"/>
+                <xsd:attribute name="name" type="xsd:string"/>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="data">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                  <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                <xsd:attribute ref="xml:space"/>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="resheader">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string" use="required"/>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:choice>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <!-- common strings -->
+  <data name="Okay" xml:space="preserve">
         <value>OK</value>
     </data>
-    <data name="Yes" xml:space="preserve">
+  <data name="Yes" xml:space="preserve">
         <value>はい</value>
     </data>
-    <data name="No" xml:space="preserve">
+  <data name="No" xml:space="preserve">
         <value>いいえ</value>
     </data>
-    <data name="Cancel" xml:space="preserve">
+  <data name="Cancel" xml:space="preserve">
         <value>キャンセル</value>
     </data>
-    <data name="Close" xml:space="preserve">
+  <data name="Close" xml:space="preserve">
         <value>閉じる</value>
     </data>
-    <data name="Open" xml:space="preserve">
+  <data name="Open" xml:space="preserve">
         <value>開く</value>
     </data>
-    <data name="Save" xml:space="preserve">
+  <data name="Save" xml:space="preserve">
         <value>保存</value>
     </data>
-    <data name="Export" xml:space="preserve">
+  <data name="Export" xml:space="preserve">
         <value>エクスポート</value>
     </data>
-    <data name="Import" xml:space="preserve">
+  <data name="Import" xml:space="preserve">
         <value>インポート</value>
     </data>
-    <data name="Imported" xml:space="preserve">
+  <data name="Imported" xml:space="preserve">
         <value>インポート済み</value>
     </data>
-    <data name="Importing" xml:space="preserve">
+  <data name="Importing" xml:space="preserve">
         <value>インポート中...</value>
     </data>
-    <data name="Create" xml:space="preserve">
+  <data name="Create" xml:space="preserve">
         <value>作成</value>
     </data>
-    <data name="Download" xml:space="preserve">
+  <data name="Download" xml:space="preserve">
         <value>ダウンロード</value>
     </data>
-    <data name="Downloading" xml:space="preserve">
+  <data name="Downloading" xml:space="preserve">
         <value>ダウンロード中...</value>
     </data>
-    <data name="NotAvailable" xml:space="preserve">
+  <data name="NotAvailable" xml:space="preserve">
         <value>利用不可</value>
     </data>
-    <data name="Unknown" xml:space="preserve">
+  <data name="Unknown" xml:space="preserve">
         <value>不明</value>
     </data>
-    <data name="Warning" xml:space="preserve">
+  <data name="Warning" xml:space="preserve">
         <value>警告</value>
     </data>
-    <data name="Error" xml:space="preserve">
+  <data name="Error" xml:space="preserve">
         <value>エラー</value>
     </data>
-    <data name="Launch" xml:space="preserve">
+  <data name="Launch" xml:space="preserve">
         <value>起動</value>
     </data>
-    <data name="Extracting" xml:space="preserve">
+  <data name="Extracting" xml:space="preserve">
         <value>展開中...</value>
     </data>
-    <data name="CompletionPercent" xml:space="preserve">
+  <data name="CompletionPercent" xml:space="preserve">
         <value>{0}% 完了</value>
     </data>
-    <data name="Remove" xml:space="preserve">
+  <data name="Remove" xml:space="preserve">
         <value>削除</value>
     </data>
-    <data name="Removing" xml:space="preserve">
+  <data name="Removing" xml:space="preserve">
         <value>削除中...</value>
     </data>
-    <data name="Switch" xml:space="preserve">
+  <data name="Switch" xml:space="preserve">
         <value>切り替え</value>
     </data>
-    <data name="Switching" xml:space="preserve">
+  <data name="Switching" xml:space="preserve">
         <value>切り替え中...</value>
     </data>
-    <data name="Apply" xml:space="preserve">
+  <data name="Apply" xml:space="preserve">
         <value>適用</value>
     </data>
-    <data name="View" xml:space="preserve">
+  <data name="Select" xml:space="preserve">
+        <value>Select</value>
+    </data>
+  <data name="View" xml:space="preserve">
         <value>表示</value>
     </data>
-    <data name="Restore" xml:space="preserve">
+  <data name="Restore" xml:space="preserve">
         <value>復元</value>
     </data>
-    <data name="Update" xml:space="preserve">
+  <data name="Update" xml:space="preserve">
         <value>更新</value>
     </data>
-    <data name="Restart" xml:space="preserve">
+  <data name="Restart" xml:space="preserve">
         <value>再起動</value>
     </data>
-    <data name="Later" xml:space="preserve">
+  <data name="Later" xml:space="preserve">
         <value>後で</value>
     </data>
-    <data name="Generate" xml:space="preserve">
+  <data name="Generate" xml:space="preserve">
         <value>生成</value>
     </data>
-    <data name="Clear" xml:space="preserve">
+  <data name="Clear" xml:space="preserve">
         <value>クリア</value>
     </data>
-    <data name="Name" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
         <value>名前</value>
     </data>
-    <data name="FilterBy" xml:space="preserve">
+  <data name="FilterBy" xml:space="preserve">
         <value>フィルター:</value>
     </data>
-    <data name="WhatsThis" xml:space="preserve">
+  <data name="WhatsThis" xml:space="preserve">
         <value>これは何？</value>
     </data>
-    <data name="AdvancedSettings" xml:space="preserve">
+  <data name="AdvancedSettings" xml:space="preserve">
         <value>詳細設定</value>
     </data>
-    <data name="MinecraftForWindows" xml:space="preserve">
+  <data name="MinecraftForWindows" xml:space="preserve">
         <value>Minecraft Windows Edition</value>
     </data>
-
-    <!-- optional Jiayi Launcher string, translate if you want -->
-    <data name="JiayiLauncher" xml:space="preserve">
+  <!-- optional Jiayi Launcher string, translate if you want -->
+  <data name="JiayiLauncher" xml:space="preserve">
         <value>Jiayi Launcher</value>
     </data>
-
-    <!-- config manager strings -->
-    <data name="ConfManName" xml:space="preserve">
+  <!-- config manager strings -->
+  <data name="ConfManName" xml:space="preserve">
         <value>Configの設定</value>
     </data>
-    <data name="ConfManNoModDataFolder" xml:space="preserve">
+  <data name="ConfManNoModDataFolder" xml:space="preserve">
         <value>
             このModにはデータフォルダ名が設定されていません。
             この機能を使用するには、このModを編集してデータフォルダ名を設定してください。
         </value>
     </data>
-    <data name="ConfManInvalidDataFolder" xml:space="preserve">
+  <data name="ConfManInvalidDataFolder" xml:space="preserve">
         <value>
             このModのデータフォルダが存在しません。
             正しいデータフォルダ名が設定されていることを確認してください。
         </value>
     </data>
-    <data name="ConfManEdit" xml:space="preserve">
+  <data name="ConfManEdit" xml:space="preserve">
         <value>設定を開いて編集</value>
     </data>
-    <data name="ConfManDelete" xml:space="preserve">
+  <data name="ConfManDelete" xml:space="preserve">
         <value>設定を削除（元に戻せません）</value>
     </data>
-    <data name="ConfManDragDrop" xml:space="preserve">
+  <data name="ConfManDragDrop" xml:space="preserve">
         <value>ここをクリックするか、ファイルをドロップして設定を追加</value>
     </data>
-
-    <!-- edit mod strings -->
-    <data name="EditModName" xml:space="preserve">
+  <!-- edit mod strings -->
+  <data name="EditModName" xml:space="preserve">
         <value>Mod編集</value>
     </data>
-    <data name="EditModModName" xml:space="preserve">
+  <data name="EditModModName" xml:space="preserve">
         <value>Mod名</value>
     </data>
-    <data name="EditModSupportedVersions" xml:space="preserve">
+  <data name="EditModSupportedVersions" xml:space="preserve">
         <value>対応バージョン</value>
     </data>
-    <data name="EditModSelectVersions" xml:space="preserve">
+  <data name="EditModSelectVersions" xml:space="preserve">
         <value>バージョンを選択</value>
     </data>
-    <data name="EditModLaunchArgs" xml:space="preserve">
+  <data name="EditModLaunchArgs" xml:space="preserve">
         <value>起動引数</value>
     </data>
-    <data name="EditModLaunchArgsNotice" xml:space="preserve">
+  <data name="EditModLaunchArgsNotice" xml:space="preserve">
         <value>これは内部Modには適用されません</value>
     </data>
-    <data name="EditModDataFolder" xml:space="preserve">
+  <data name="EditModDataFolder" xml:space="preserve">
         <value>Modデータフォルダ名</value>
     </data>
-    <data name="EditModDataFolderNotice" xml:space="preserve">
+  <data name="EditModDataFolderNotice" xml:space="preserve">
         <value>通常はRoamingStateにあります</value>
     </data>
-    <data name="EditModDefaultLocationNotice" xml:space="preserve">
+  <data name="EditModDefaultLocationNotice" xml:space="preserve">
         <value>Modはデフォルトの場所に保存されます。設定で変更することができます</value>
     </data>
-    <data name="EditModExternalSourceNotice" xml:space="preserve">
+  <data name="EditModExternalSourceNotice" xml:space="preserve">
         <value>このModは外部のアプリやウェブサイトから取得されました。信頼できないソースからModを追加しないでください。</value>
     </data>
-
-    <!-- edit profile strings -->
-    <data name="EditProfileName" xml:space="preserve">
+  <!-- edit profile strings -->
+  <data name="EditProfileName" xml:space="preserve">
         <value>プロフィール編集</value>
     </data>
-    <data name="EditProfileCreateName" xml:space="preserve">
+  <data name="EditProfileCreateName" xml:space="preserve">
         <value>プロフィール作成</value>
     </data>
-    <data name="EditProfileNameProfile" xml:space="preserve">
+  <data name="EditProfileNameProfile" xml:space="preserve">
         <value>プロフィールに名前を付けてください！</value>
     </data>
-    <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
+  <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
         <value>プロフィールはデフォルトの場所に保存されます。設定で変更することができます</value>
     </data>
-
-    <!-- privilege escalation strings -->
-    <data name="PrivEscTitle" xml:space="preserve">
+  <!-- privilege escalation strings -->
+  <data name="PrivEscTitle" xml:space="preserve">
         <value>追加の権限が必要です</value>
     </data>
-    <data name="PrivEscText" xml:space="preserve">
+  <data name="PrivEscText" xml:space="preserve">
         <value>これを行うにはJiayiを管理者として実行する必要があります</value>
     </data>
-    <data name="PrivEscRestartNotice" xml:space="preserve">
+  <data name="PrivEscRestartNotice" xml:space="preserve">
         <value>昇格後、ランチャーが再起動します</value>
     </data>
-    <data name="PrivEscButton" xml:space="preserve">
+  <data name="PrivEscButton" xml:space="preserve">
         <value>昇格</value>
     </data>
-    <data name="PrivEscNotice" xml:space="preserve">
+  <data name="PrivEscNotice" xml:space="preserve">
         <value>Jiayiは管理者権限で起動されました。</value>
     </data>
-
-    <!-- import mod collection strings -->
-    <data name="ImportModTitle" xml:space="preserve">
+  <!-- import mod collection strings -->
+  <data name="ImportModTitle" xml:space="preserve">
         <value>Modコレクションをインポート</value>
     </data>
-    <data name="ImportModQuestion" xml:space="preserve">
+  <data name="ImportModQuestion" xml:space="preserve">
         <value>このコレクションをインポートしますか？</value>
     </data>
-    <data name="ImportModModCount" xml:space="preserve">
+  <data name="ImportModModCount" xml:space="preserve">
         <value>{0}個のMod</value>
     </data>
-    <data name="ImportModLocalModCount" xml:space="preserve">
+  <data name="ImportModLocalModCount" xml:space="preserve">
         <value>{0}個はローカルに保存されています</value>
     </data>
-    <data name="ImportModInternetModCount" xml:space="preserve">
+  <data name="ImportModInternetModCount" xml:space="preserve">
         <value>{0}個はウェブから取得されます</value>
     </data>
-    <data name="ImportModDefaultLocationNotice" xml:space="preserve">
+  <data name="ImportModDefaultLocationNotice" xml:space="preserve">
         <value>このコレクションのModはデフォルトの場所に保存されます。設定で変更することができます</value>
     </data>
-    <data name="ImportModMergeNotice" xml:space="preserve">
+  <data name="ImportModMergeNotice" xml:space="preserve">
         <value>このコレクションのModはあなたのコレクションと統合されます</value>
     </data>
-
-    <!-- new mod strings -->
-    <data name="NewModName" xml:space="preserve">
+  <!-- new mod strings -->
+  <data name="NewModName" xml:space="preserve">
         <value>新しいMod</value>
     </data>
-    <data name="NewModSelectFile" xml:space="preserve">
+  <data name="NewModSelectFile" xml:space="preserve">
         <value>Modを選択</value>
     </data>
-    <data name="NewModFileFilter" xml:space="preserve">
+  <data name="NewModFileFilter" xml:space="preserve">
         <value>.dll および .exe ファイルのみ</value>
     </data>
-    <data name="NewModOr" xml:space="preserve">
+  <data name="NewModOr" xml:space="preserve">
         <value>または</value>
     </data>
-    <data name="NewModEnterLink" xml:space="preserve">
+  <data name="NewModEnterLink" xml:space="preserve">
         <value>Modへのリンクを入力</value>
     </data>
-    <data name="NewModOfflineNotice" xml:space="preserve">
+  <data name="NewModOfflineNotice" xml:space="preserve">
         <value>オフライン時は利用できません</value>
     </data>
-    <data name="NewModLinkPlaceholder" xml:space="preserve">
+  <data name="NewModLinkPlaceholder" xml:space="preserve">
         <value>cool-website.com/path/to/mod.dll</value>
     </data>
-    <data name="NewModDllDisplayName" xml:space="preserve">
+  <data name="NewModDllDisplayName" xml:space="preserve">
         <value>インジェクタブルライブラリ</value>
     </data>
-    <data name="NewModExeDisplayName" xml:space="preserve">
+  <data name="NewModExeDisplayName" xml:space="preserve">
         <value>外部クライアントおよびインジェクタ</value>
     </data>
-    <data name="NewModCreateCollectionQuestion" xml:space="preserve">
+  <data name="NewModCreateCollectionQuestion" xml:space="preserve">
         <value>Modコレクションが設定されていません。これらのModを追加するためにコレクションを作成しますか？</value>
     </data>
-    <data name="NewModNoCollectionTitle" xml:space="preserve">
+  <data name="NewModNoCollectionTitle" xml:space="preserve">
         <value>Modコレクションがありません</value>
     </data>
-    <data name="NewModAlreadyInCollection" xml:space="preserve">
+  <data name="NewModAlreadyInCollection" xml:space="preserve">
         <value>このModはすでにコレクションにあります！</value>
     </data>
-    <data name="NewModInvalidLink" xml:space="preserve">
+  <data name="NewModInvalidLink" xml:space="preserve">
         <value>無効なリンク</value>
     </data>
-    <data name="NewModLinkNotFound" xml:space="preserve">
+  <data name="NewModLinkNotFound" xml:space="preserve">
         <value>このアドレスには何もありません！</value>
     </data>
-    <data name="NewModCheckingLink" xml:space="preserve">
+  <data name="NewModCheckingLink" xml:space="preserve">
         <value>リンクを確認中...</value>
     </data>
-
-    <!-- new theme strings -->
-    <data name="NewThemeName" xml:space="preserve">
+  <data name="NewModAlreadyExists" xml:space="preserve">
+        <value>This mod already exists in your collection. Do you want to replace it?</value>
+    </data>
+  <!-- new theme strings -->
+  <data name="NewThemeName" xml:space="preserve">
         <value>新しいテーマ</value>
     </data>
-    <data name="NewThemeNameTheme" xml:space="preserve">
+  <data name="NewThemeNameTheme" xml:space="preserve">
         <value>テーマに名前を付けてください！</value>
     </data>
-
-    <!-- theme publishing strings -->
-    <data name="ThemePublishTitle" xml:space="preserve">
+  <!-- theme publishing strings -->
+  <data name="ThemePublishTitle" xml:space="preserve">
         <value>テーマの設定</value>
     </data>
-    <data name="ThemePublishName" xml:space="preserve">
+  <data name="ThemePublishName" xml:space="preserve">
         <value>テーマ名</value>
     </data>
-    <data name="ThemePublishAuthor" xml:space="preserve">
+  <data name="ThemePublishAuthor" xml:space="preserve">
         <value>作者</value>
     </data>
-    <data name="ThemePublishAuthorPlaceholder" xml:space="preserve">
+  <data name="ThemePublishAuthorPlaceholder" xml:space="preserve">
         <value>ここに名前を入力</value>
     </data>
-    <data name="ThemePublishTags" xml:space="preserve">
+  <data name="ThemePublishTags" xml:space="preserve">
         <value>タグ</value>
     </data>
-    <data name="ThemePublishTagsPlaceholder" xml:space="preserve">
+  <data name="ThemePublishTagsPlaceholder" xml:space="preserve">
         <value>カンマ区切りのリスト</value>
     </data>
-    <data name="ThemePublishRawTags" xml:space="preserve">
+  <data name="ThemePublishRawTags" xml:space="preserve">
         <value>種類</value>
     </data>
-    <data name="ThemePublishRawTagsSelect" xml:space="preserve">
+  <data name="ThemePublishRawTagsSelect" xml:space="preserve">
         <value>種類を選択</value>
     </data>
-    <data name="ThemePublishNoName" xml:space="preserve">
+  <data name="ThemePublishNoName" xml:space="preserve">
         <value>テーマの作成に失敗しました（名前なし）</value>
     </data>
-    <data name="ThemePublishNoRawTags" xml:space="preserve">
+  <data name="ThemePublishNoRawTags" xml:space="preserve">
         <value>テーマの作成に失敗しました（種類を選択してください）</value>
     </data>
-    <data name="ThemePublishAlreadyExists" xml:space="preserve">
+  <data name="ThemePublishAlreadyExists" xml:space="preserve">
         <value>テーマ 「{0}」 の作成に失敗しました（既に存在します）</value>
     </data>
-    <data name="ThemePublishOpenRepo" xml:space="preserve">
+  <data name="ThemePublishOpenRepo" xml:space="preserve">
         <value>リポジトリを開く</value>
     </data>
-    <data name="ThemePublishFinalize" xml:space="preserve">
+  <data name="ThemePublishFinalize" xml:space="preserve">
         <value>
             テーマは開いたフォルダにあります。
             ここで表示するには、GitHubのテーマリポジトリでプルリクエストを開いてください。手順はREADMEを参照してください。
         </value>
     </data>
-
-    <!-- about strings -->
-    <data name="AboutTitle" xml:space="preserve">
+  <!-- about strings -->
+  <data name="AboutTitle" xml:space="preserve">
         <value>About</value>
     </data>
-    <data name="AboutPresenting" xml:space="preserve">
+  <data name="AboutPresenting" xml:space="preserve">
         <value>After 2 years of development hell, we proudly present:</value>
     </data>
-    <data name="AboutSourceAvailable" xml:space="preserve">
+  <data name="AboutSourceAvailable" xml:space="preserve">
         <value>Source available on GitHub</value>
     </data>
-    <data name="AboutDiscord" xml:space="preserve">
+  <data name="AboutDiscord" xml:space="preserve">
         <value>Talk to us on Discord</value>
     </data>
-    <data name="AboutCredits" xml:space="preserve">
+  <data name="AboutCredits" xml:space="preserve">
         <value>Credits</value>
     </data>
-
-    <!-- version manager strings -->
-    <data name="VerManName" xml:space="preserve">
+  <!-- version manager strings -->
+  <data name="VerManName" xml:space="preserve">
         <value>バージョンマネージャー</value>
     </data>
-    <data name="VerManCurrentVersion" xml:space="preserve">
+  <data name="VerManCurrentVersion" xml:space="preserve">
         <value>現在のバージョン</value>
     </data>
-    <data name="VerManResizeTip" xml:space="preserve">
+  <data name="VerManResizeTip" xml:space="preserve">
         <value>Jiayiをリサイズして右側に完全なリストを表示できます</value>
     </data>
-    <data name="VerManManageTip" xml:space="preserve">
+  <data name="VerManManageTip" xml:space="preserve">
         <value>他のバージョンを管理</value>
     </data>
-    <data name="VerManPopularVersions" xml:space="preserve">
+  <data name="VerManPopularVersions" xml:space="preserve">
         <value>人気のバージョン</value>
     </data>
-    <data name="VerManLatestVersion" xml:space="preserve">
+  <data name="VerManLatestVersion" xml:space="preserve">
         <value>最新バージョン</value>
     </data>
-    <data name="VerManPopularAmongCommunity" xml:space="preserve">
+  <data name="VerManPopularAmongCommunity" xml:space="preserve">
         <value>コミュニティで人気</value>
     </data>
-    <data name="VerManBestStableRelease" xml:space="preserve">
+  <data name="VerManBestStableRelease" xml:space="preserve">
         <value>非RenderDragonで一番安定</value>
     </data>
-    <data name="VerManShaderManagerText" xml:space="preserve">
+  <data name="VerManShaderManagerText" xml:space="preserve">
         <value>RenderDragonシェーダーをゲームに簡単に適用します。Jiayiを通じてゲームをインストールしている場合に最適です。</value>
     </data>
-    <data name="VerManShaderManagerVerTooLow" xml:space="preserve">
+  <data name="VerManShaderManagerVerTooLow" xml:space="preserve">
         <value>お使いのバージョンはRenderDragonを使用していません。代わりにリソースパックを使用してください。</value>
     </data>
-    <data name="VerManShaderManagerMSStore" xml:space="preserve">
+  <data name="VerManShaderManagerMSStore" xml:space="preserve">
         <value>お使いのゲームはMicrosoft Storeからインストールされています。Jiayiではシェーダーを適用できません。</value>
     </data>
-
-    <!-- install location strings -->
-    <data name="InstallLocByJiayi" xml:space="preserve">
+  <!-- install location strings -->
+  <data name="InstallLocByJiayi" xml:space="preserve">
         <value>Jiayiによってインストールされました</value>
     </data>
-    <data name="InstallLocFromStore" xml:space="preserve">
+  <data name="InstallLocFromStore" xml:space="preserve">
         <value>Microsoft Storeから</value>
     </data>
-    <data name="InstallLocExternalManager" xml:space="preserve">
+  <data name="InstallLocExternalManager" xml:space="preserve">
         <value>他のバージョンマネージャーによってインストールされました</value>
     </data>
-    <data name="InstallLocUnknown" xml:space="preserve">
+  <data name="InstallLocUnknown" xml:space="preserve">
         <value>インストール場所不明</value>
     </data>
-    <data name="InstallLocNotInstalled" xml:space="preserve">
+  <data name="InstallLocNotInstalled" xml:space="preserve">
         <value>ゲームがインストールされていません</value>
     </data>
-
-    <!-- version list strings -->
-    <data name="VerListName" xml:space="preserve">
+  <!-- version list strings -->
+  <data name="VerListName" xml:space="preserve">
         <value>すべてのバージョン一覧</value>
     </data>
-    <data name="VerListSearch" xml:space="preserve">
+  <data name="VerListSearch" xml:space="preserve">
         <value>バージョンを検索</value>
     </data>
-    <data name="VerListShowDownloaded" xml:space="preserve">
+  <data name="VerListShowDownloaded" xml:space="preserve">
         <value>ダウンロード済みのバージョンを表示</value>
     </data>
-    <data name="VerListNoVersions" xml:space="preserve">
+  <data name="VerListNoVersions" xml:space="preserve">
         <value>バージョンが見つかりません</value>
     </data>
-    <data name="VerListLoadMore" xml:space="preserve">
+  <data name="VerListLoadMore" xml:space="preserve">
         <value>さらに読み込む</value>
     </data>
-    <data name="VerListRemove" xml:space="preserve">
+  <data name="VerListRemove" xml:space="preserve">
         <value>バージョンを削除</value>
     </data>
-    <data name="VerListRemoveConfirm" xml:space="preserve">
+  <data name="VerListRemoveConfirm" xml:space="preserve">
         <value>このバージョンを削除してもよろしいですか？</value>
     </data>
-    <data name="VerListDevModeQuestion" xml:space="preserve">
+  <data name="VerListDevModeQuestion" xml:space="preserve">
         <value>バージョンを切り替えるには開発者モードを有効にする必要があります。今すぐ有効にしますか？</value>
     </data>
-    <data name="VerListNotFound" xml:space="preserve">
+  <data name="VerListNotFound" xml:space="preserve">
         <value>このバージョンはまだダウンロードされていません。</value>
     </data>
-    <data name="VerListBackupFailed" xml:space="preserve">
+  <data name="VerListBackupFailed" xml:space="preserve">
         <value>
             Jiayiはバージョンを切り替える前にゲームデータをバックアップできませんでした。これは、ゲームデータフォルダーへのアクセスが拒否されたためかもしれません。
     
             詳細はログファイルに記載されています。
         </value>
     </data>
-    <data name="VerListUnknownError" xml:space="preserve">
+  <data name="VerListUnknownError" xml:space="preserve">
         <value>バージョンを切り替える際に不明なエラーが発生しました。詳細はログファイルを確認してください。</value>
     </data>
-    <data name="VerListImport" xml:space="preserve">
+  <data name="VerListImport" xml:space="preserve">
         <value>バージョンをインポート</value>
     </data>
-    <data name="VerListFileFilter" xml:space="preserve">
+  <data name="VerListFileFilter" xml:space="preserve">
         <value>APPXファイル</value>
     </data>
-    <data name="VerListInvalidPackage" xml:space="preserve">
+  <data name="VerListInvalidPackage" xml:space="preserve">
         <value>それは有効なパッケージではありません。</value>
     </data>
-    <data name="VerListUpdatingVersions" xml:space="preserve">
+  <data name="VerListUpdatingVersions" xml:space="preserve">
         <value>バージョンリストがクリアされました。まもなく更新されます。</value>
     </data>
-
-    <!-- shader manager strings -->
-    <data name="ShaderManName" xml:space="preserve">
+  <!-- shader manager strings -->
+  <data name="ShaderManName" xml:space="preserve">
         <value>シェーダーマネージャー</value>
     </data>
-    <data name="ShaderManCurrentShader" xml:space="preserve">
+  <data name="ShaderManCurrentShader" xml:space="preserve">
         <value>現在のシェーダーパック</value>
     </data>
-    <data name="ShaderManNoShader" xml:space="preserve">
+  <data name="ShaderManNoShader" xml:space="preserve">
         <value>シェーダーが適用されていません</value>
     </data>
-    <data name="ShaderManUsingVanilla" xml:space="preserve">
+  <data name="ShaderManUsingVanilla" xml:space="preserve">
         <value>Minecraftのバニラシェーダーが使用されます</value>
     </data>
-    <data name="ShaderManReplacingCount" xml:space="preserve">
+  <data name="ShaderManReplacingCount" xml:space="preserve">
         <value>{0}のマテリアルファイルを置き換えます</value>
     </data>
-    <data name="ShaderManAvailableShaders" xml:space="preserve">
+  <data name="ShaderManAvailableShaders" xml:space="preserve">
         <value>利用可能なシェーダー</value>
     </data>
-    <data name="ShaderManSearch" xml:space="preserve">
+  <data name="ShaderManSearch" xml:space="preserve">
         <value>シェーダーを検索</value>
     </data>
-    <data name="ShaderManViewMaterials" xml:space="preserve">
+  <data name="ShaderManViewMaterials" xml:space="preserve">
         <value>シェーダーマテリアルを表示</value>
     </data>
-    <data name="ShaderManMaterials" xml:space="preserve">
+  <data name="ShaderManMaterials" xml:space="preserve">
         <value>シェーダーマテリアル</value>
     </data>
-    <data name="ShaderManViewMaterialsText" xml:space="preserve">
+  <data name="ShaderManViewMaterialsText" xml:space="preserve">
         <value>
             このシェーダーパックは以下のマテリアルを変更します：
     
             {0}
         </value>
     </data>
-    <data name="ShaderManMaterialCount" xml:space="preserve">
+  <data name="ShaderManMaterialCount" xml:space="preserve">
         <value>{0}のマテリアルファイル</value>
     </data>
-    <data name="ShaderManRename" xml:space="preserve">
+  <data name="ShaderManRename" xml:space="preserve">
         <value>シェーダーパックの名前を変更</value>
     </data>
-    <data name="ShaderManDelete" xml:space="preserve">
+  <data name="ShaderManDelete" xml:space="preserve">
         <value>シェーダーパックを削除</value>
     </data>
-    <data name="ShaderManDeleteConfirm" xml:space="preserve">
+  <data name="ShaderManDeleteConfirm" xml:space="preserve">
         <value>このシェーダーパックを削除してもよろしいですか？この操作は元に戻せません。</value>
     </data>
-    <data name="ShaderManNoShaders" xml:space="preserve">
+  <data name="ShaderManNoShaders" xml:space="preserve">
         <value>シェーダーが見つかりません</value>
     </data>
-    <data name="ShaderManDragDrop" xml:space="preserve">
+  <data name="ShaderManDragDrop" xml:space="preserve">
         <value>ここをクリックするか、シェーダーパックをドラッグ＆ドロップして追加してください</value>
     </data>
-    <data name="ShaderManDragDropInfo" xml:space="preserve">
+  <data name="ShaderManDragDropInfo" xml:space="preserve">
         <value>
             zip形式で圧縮されたファイルは、マテリアルファイルを含んでいる限りシェーダーパックとして使用できます。
     
             Jiayiはパック内のどこにでもシェーダーを見つけることができます。
         </value>
     </data>
-
-    <!-- edit shader strings (only renaming atm) (Not like any more functionality is planned) -->
-    <data name="EditShaderName" xml:space="preserve">
+  <!-- edit shader strings (only renaming atm) (Not like any more functionality is planned) -->
+  <data name="EditShaderName" xml:space="preserve">
         <value>シェーダーの名前を変更</value>
     </data>
-    <data name="EditShaderRenameShader" xml:space="preserve">
+  <data name="EditShaderRenameShader" xml:space="preserve">
         <value>シェーダーパックに名前を付けてください！</value>
     </data>
-
-    <!-- themes menu strings -->
-    <data name="ThemesMenuName" xml:space="preserve">
+  <!-- themes menu strings -->
+  <data name="ThemesMenuName" xml:space="preserve">
         <value>テーマ</value>
     </data>
-    <data name="ThemesMenuSearch" xml:space="preserve">
+  <data name="ThemesMenuSearch" xml:space="preserve">
         <value>テーマを検索</value>
     </data>
-    <data name="ThemesMenuNoThemes" xml:space="preserve">
+  <data name="ThemesMenuNoThemes" xml:space="preserve">
         <value>テーマが見つかりません</value>
     </data>
-    <data name="ThemesMenuRefresh" xml:space="preserve">
+  <data name="ThemesMenuRefresh" xml:space="preserve">
         <value>テーマを更新</value>
     </data>
-
-    <!-- dashboard strings -->
-    <data name="DashboardMorning" xml:space="preserve">
+  <!-- dashboard strings -->
+  <data name="DashboardMorning" xml:space="preserve">
         <value>おはようございます</value>
     </data>
-    <data name="DashboardAfternoon" xml:space="preserve">
+  <data name="DashboardAfternoon" xml:space="preserve">
         <value>こんにちは</value>
     </data>
-    <data name="DashboardEvening" xml:space="preserve">
+  <data name="DashboardEvening" xml:space="preserve">
         <value>こんばんは</value>
     </data>
-    <data name="DashboardTotalPlaytime" xml:space="preserve">
+  <data name="DashboardTotalPlaytime" xml:space="preserve">
         <value>プレイ時間の合計</value>
     </data>
-    <data name="DashboardHours" xml:space="preserve">
+  <data name="DashboardHours" xml:space="preserve">
         <value>{0}時間</value>
     </data>
-    <data name="DashboardWithJiayi" xml:space="preserve">
+  <data name="DashboardWithJiayi" xml:space="preserve">
         <value>Jiayiでプレイした時間</value>
     </data>
-    <data name="DashboardCurrentVersion" xml:space="preserve">
+  <data name="DashboardCurrentVersion" xml:space="preserve">
         <value>現在のバージョン</value>
     </data>
-    <data name="DashboardSwitchVersions" xml:space="preserve">
+  <data name="DashboardSwitchVersions" xml:space="preserve">
         <value>切り替え</value>
     </data>
-    <data name="DashboardProfiles" xml:space="preserve">
+  <data name="DashboardProfiles" xml:space="preserve">
         <value>構成</value>
     </data>
-    <data name="DashboardNoProfiles" xml:space="preserve">
+  <data name="DashboardNoProfiles" xml:space="preserve">
         <value>構成がありません</value>
     </data>
-    <data name="DashboardProfilesSaved" xml:space="preserve">
+  <data name="DashboardProfilesSaved" xml:space="preserve">
         <value>{0}個保存済み</value>
     </data>
-    <data name="DashboardViewProfiles" xml:space="preserve">
+  <data name="DashboardViewProfiles" xml:space="preserve">
         <value>構成の一覧</value>
     </data>
-    <data name="DashboardRecentMod" xml:space="preserve">
+  <data name="DashboardRecentMod" xml:space="preserve">
         <value>最新のMod</value>
     </data>
-    <data name="DashboardNoMod" xml:space="preserve">
+  <data name="DashboardNoMod" xml:space="preserve">
         <value>ここにModを表示するには何かModを起動してください</value>
     </data>
-    <data name="DashboardPlayedMod" xml:space="preserve">
+  <data name="DashboardPlayedMod" xml:space="preserve">
         <value>最も使用したMod</value>
     </data>
-    <data name="DashboardOurCommunity" xml:space="preserve">
+  <data name="DashboardOurCommunity" xml:space="preserve">
         <value>私たちのコミュニティ</value>
     </data>
-    <data name="DashboardWebsite" xml:space="preserve">
+  <data name="DashboardWebsite" xml:space="preserve">
         <value>Jiayi Softwareのウェブサイト</value>
     </data>
-    <data name="DashboardDiscord" xml:space="preserve">
+  <data name="DashboardDiscord" xml:space="preserve">
         <value>Discord</value>
     </data>
-    <data name="DashboardGitHub" xml:space="preserve">
+  <data name="DashboardGitHub" xml:space="preserve">
         <value>GitHubのレポジトリ</value>
     </data>
-    <data name="DashboardJiayiLauncherIs" xml:space="preserve">
+  <data name="DashboardJiayiLauncherIs" xml:space="preserve">
         <value>Jiayi Launcherは、</value>
     </data>
-    <data name="DashboardOSS" xml:space="preserve">
+  <data name="DashboardOSS" xml:space="preserve">
         <value>オープンソースソフトウェアです</value>
     </data>
-
-    <!-- mods strings -->
-    <data name="ModsMenuName" xml:space="preserve">
+  <!-- mods strings -->
+  <data name="ModsMenuName" xml:space="preserve">
         <value>Mod</value>
     </data>
-    <data name="ModsMenuSearch" xml:space="preserve">
+  <data name="ModsMenuSearch" xml:space="preserve">
         <value>Modを検索</value>
     </data>
-    <data name="ModsMenuLocallyStored" xml:space="preserve">
+  <data name="ModsMenuLocallyStored" xml:space="preserve">
         <value>ローカル</value>
     </data>
-    <data name="ModsMenuFromWeb" xml:space="preserve">
+  <data name="ModsMenuFromWeb" xml:space="preserve">
         <value>ウェブサイト</value>
     </data>
-    <data name="ModsMenuNoMods" xml:space="preserve">
+  <data name="ModsMenuNoMods" xml:space="preserve">
         <value>Modが見つかりません</value>
     </data>
-    <data name="ModsMenuDragDrop" xml:space="preserve">
+  <data name="ModsMenuDragDrop" xml:space="preserve">
         <value>
             Mod、フォルダ、またはリンクをここにドラッグ
             するか、+ボタンをクリックしてModを追加
         </value>
     </data>
-    <data name="ModsMenuNoModsFolder" xml:space="preserve">
+  <data name="ModsMenuNoModsFolder" xml:space="preserve">
         <value>
             Modフォルダが設定されていません。
             
@@ -701,301 +679,295 @@
             Modを追加して新しいフォルダを作成してください。
         </value>
     </data>
-    <data name="ModsMenuCreateFolderQuestion" xml:space="preserve">
+  <data name="ModsMenuCreateFolderQuestion" xml:space="preserve">
         <value>Modフォルダが設定されていないため、JiayiがこれらのModを追加するためのフォルダを作成します。よろしいですか？ドキュメントフォルダに作成されます。</value>
     </data>
-
-    <!-- profiles strings -->
-    <data name="ProfilesMenuName" xml:space="preserve">
+  <!-- profiles strings -->
+  <data name="ProfilesMenuName" xml:space="preserve">
         <value>構成</value>
     </data>
-    <data name="ProfilesMenuSearch" xml:space="preserve">
+  <data name="ProfilesMenuSearch" xml:space="preserve">
         <value>構成を検索</value>
     </data>
-    <data name="ProfilesMenuNoProfiles" xml:space="preserve">
+  <data name="ProfilesMenuNoProfiles" xml:space="preserve">
         <value>構成が見つかりません</value>
     </data>
-    <data name="ProfilesMenuBrokenProfile" xml:space="preserve">
+  <data name="ProfilesMenuBrokenProfile" xml:space="preserve">
         <value>この構成は壊れています。ゲームデータを含むフォルダが存在しないか空です。</value>
     </data>
-    <data name="ProfilesMenuWorlds" xml:space="preserve">
+  <data name="ProfilesMenuWorlds" xml:space="preserve">
         <value>{0}のワールド</value>
     </data>
-    <data name="ProfilesMenuResourcePacks" xml:space="preserve">
+  <data name="ProfilesMenuResourcePacks" xml:space="preserve">
         <value>{0}のリソースパック</value>
     </data>
-    <data name="ProfilesMenuBehaviorPacks" xml:space="preserve">
+  <data name="ProfilesMenuBehaviorPacks" xml:space="preserve">
         <value>{0}のビヘイビアパック</value>
     </data>
-    <data name="ProfilesMenuMyProfile" xml:space="preserve">
+  <data name="ProfilesMenuMyProfile" xml:space="preserve">
         <value>私の構成</value>
     </data>
-    <data name="ProfilesMenuEditProfile" xml:space="preserve">
+  <data name="ProfilesMenuEditProfile" xml:space="preserve">
         <value>構成を編集</value>
     </data>
-    <data name="ProfilesMenuDeleteProfile" xml:space="preserve">
+  <data name="ProfilesMenuDeleteProfile" xml:space="preserve">
         <value>構成を削除</value>
     </data>
-    <data name="ProfilesMenuApplyProfile" xml:space="preserve">
+  <data name="ProfilesMenuApplyProfile" xml:space="preserve">
         <value>構成を適用</value>
     </data>
-    <data name="ProfilesMenuApplyProfileConfirm" xml:space="preserve">
+  <data name="ProfilesMenuApplyProfileConfirm" xml:space="preserve">
         <value>この構成を適用してもよろしいですか？現在のゲームデータが上書きされます。</value>
     </data>
-    <data name="ProfilesMenuAboutProfiles" xml:space="preserve">
+  <data name="ProfilesMenuAboutProfiles" xml:space="preserve">
         <value>構成を作成すると、ワールド、リソースパック、設定などの現在のゲームデータがコピーされます。</value>
     </data>
-    <data name="ProfilesMenuDeleteProfileConfirm" xml:space="preserve">
+  <data name="ProfilesMenuDeleteProfileConfirm" xml:space="preserve">
         <value>この構成を削除してもよろしいですか？この操作は元に戻せません。</value>
     </data>
-
-    <!-- secret strings -->
-    <data name="SecretTitle" xml:space="preserve">
+  <!-- secret strings -->
+  <data name="SecretTitle" xml:space="preserve">
         <value>シークレット</value>
     </data>
-    <data name="SecretText" xml:space="preserve">
+  <data name="SecretText" xml:space="preserve">
         <value>freeminesweeper.org提供</value>
     </data>
-    <data name="SecretText2" xml:space="preserve">
+  <data name="SecretText2" xml:space="preserve">
         <value>livesweeper: 競技マインスイーパー</value>
     </data>
-
-    <!-- settings page strings -->
-    <data name="SettingsMenuName" xml:space="preserve">
+  <!-- settings page strings -->
+  <data name="SettingsMenuName" xml:space="preserve">
         <value>設定</value>
     </data>
-    <data name="SettingsCategories" xml:space="preserve">
+  <data name="SettingsCategories" xml:space="preserve">
         <value>カテゴリ:</value>
     </data>
-    <data name="SettingsGeneral" xml:space="preserve">
+  <data name="SettingsGeneral" xml:space="preserve">
         <value>一般</value>
     </data>
-    <data name="SettingsAppearance" xml:space="preserve">
+  <data name="SettingsAppearance" xml:space="preserve">
         <value>外観</value>
     </data>
-    <data name="SettingsUpdate" xml:space="preserve">
+  <data name="SettingsUpdate" xml:space="preserve">
         <value>更新</value>
     </data>
-    <data name="SettingsDiscord" xml:space="preserve">
+  <data name="SettingsDiscord" xml:space="preserve">
         <value>Discord</value>
     </data>
-    <data name="SettingsNetwork" xml:space="preserve">
+  <data name="SettingsNetwork" xml:space="preserve">
         <value>ネットワーク</value>
     </data>
-    <data name="SettingsLaunch" xml:space="preserve">
+  <data name="SettingsLaunch" xml:space="preserve">
         <value>起動</value>
     </data>
-    <data name="SettingsLog" xml:space="preserve">
+  <data name="SettingsLog" xml:space="preserve">
         <value>ログ</value>
     </data>
-    <data name="SettingsAbout" xml:space="preserve">
+  <data name="SettingsAbout" xml:space="preserve">
         <value>情報</value>
     </data>
-    <data name="SettingsAboutSettingTitle" xml:space="preserve">
+  <data name="SettingsAboutSettingTitle" xml:space="preserve">
         <value>この設定について</value>
     </data>
-    <data name="SettingsResetDefault" xml:space="preserve">
+  <data name="SettingsResetDefault" xml:space="preserve">
         <value>デフォルトにリセット</value>
     </data>
-    <data name="SettingsMoreInfo" xml:space="preserve">
+  <data name="SettingsMoreInfo" xml:space="preserve">
         <value>詳細情報</value>
     </data>
-    <data name="SettingsEasterEggText" xml:space="preserve">
+  <data name="SettingsEasterEggText" xml:space="preserve">
         <value>こんにちは！いつも n jqms がここにいました</value>
     </data>
-    <data name="SettingsConfirmEnable" xml:space="preserve">
+  <data name="SettingsConfirmEnable" xml:space="preserve">
         <value>この設定を有効にしますか？</value>
     </data>
-    <data name="SettingsConfirmAction" xml:space="preserve">
+  <data name="SettingsConfirmAction" xml:space="preserve">
         <value>この操作を行いますか？</value>
     </data>
-    <data name="SettingsInvalidSettingsText" xml:space="preserve">
+  <data name="SettingsInvalidSettingsText" xml:space="preserve">
         <value>設定ファイルが壊れているか無効です。</value>
     </data>
-    <data name="SettingsInvalidSettingsText2" xml:space="preserve">
+  <data name="SettingsInvalidSettingsText2" xml:space="preserve">
         <value>新しい設定ファイルが作成され、以前の設定は失われました。</value>
     </data>
-
-    <!-- general settings strings -->
-    <data name="SettingsModCollectionPath" xml:space="preserve">
+  <!-- general settings strings -->
+  <data name="SettingsModCollectionPath" xml:space="preserve">
         <value>Modフォルダのパス</value>
     </data>
-    <data name="SettingsModCollectionPathDesc" xml:space="preserve">
+  <data name="SettingsModCollectionPathDesc" xml:space="preserve">
         <value>Modが含まれるフォルダのパスです。</value>
     </data>
-    <data name="SettingsExportCollection" xml:space="preserve">
+  <data name="SettingsExportCollection" xml:space="preserve">
         <value>Modのエクスポート</value>
     </data>
-    <data name="SettingsExportCollectionDesc" xml:space="preserve">
+  <data name="SettingsExportCollectionDesc" xml:space="preserve">
         <value>Modコレクションをファイルにエクスポートします。これを他の人と共有できます。</value>
     </data>
-    <data name="SettingsExportCollectionFilter" xml:space="preserve">
+  <data name="SettingsExportCollectionFilter" xml:space="preserve">
         <value>Jiayi Modコレクション</value>
     </data>
-    <data name="SettingsProfileCollectionPath" xml:space="preserve">
+  <data name="SettingsProfileCollectionPath" xml:space="preserve">
         <value>構成フォルダのパス</value>
     </data>
-    <data name="SettingsProfileCollectionPathDesc" xml:space="preserve">
+  <data name="SettingsProfileCollectionPathDesc" xml:space="preserve">
         <value>あなたの構成を含むフォルダのパスです。</value>
     </data>
-    <data name="SettingsVersionsPath" xml:space="preserve">
+  <data name="SettingsVersionsPath" xml:space="preserve">
         <value>バージョンフォルダのパス</value>
     </data>
-    <data name="SettingsVersionsPathDesc" xml:space="preserve">
+  <data name="SettingsVersionsPathDesc" xml:space="preserve">
         <value>あなたのゲームインストールを含むフォルダのパスです。</value>
     </data>
-    <data name="SettingsUpdateVersionList" xml:space="preserve">
+  <data name="SettingsUpdateVersionList" xml:space="preserve">
         <value>バージョンリストの更新</value>
     </data>
-    <data name="SettingsUpdateVersionListDesc" xml:space="preserve">
+  <data name="SettingsUpdateVersionListDesc" xml:space="preserve">
         <value>利用可能なバージョンのリストを更新します。</value>
     </data>
-    <data name="SettingsShadersPath" xml:space="preserve">
+  <data name="SettingsShadersPath" xml:space="preserve">
         <value>シェーダーフォルダのパス</value>
     </data>
-    <data name="SettingsShadersPathDesc" xml:space="preserve">
+  <data name="SettingsShadersPathDesc" xml:space="preserve">
         <value>シェーダーを含むフォルダのパスです。</value>
     </data>
-
-    <!-- appearance settings strings -->
-    <data name="SettingsPrimaryBackgroundColor" xml:space="preserve">
+  <!-- appearance settings strings -->
+  <data name="SettingsPrimaryBackgroundColor" xml:space="preserve">
         <value>プライマリ背景色</value>
     </data>
-    <data name="SettingsPrimaryBackgroundColorDesc" xml:space="preserve">
+  <data name="SettingsPrimaryBackgroundColorDesc" xml:space="preserve">
         <value>ランチャーのプライマリ背景色です。</value>
     </data>
-    <data name="SettingsSecondaryBackgroundColor" xml:space="preserve">
+  <data name="SettingsSecondaryBackgroundColor" xml:space="preserve">
         <value>セカンダリ背景色</value>
     </data>
-    <data name="SettingsSecondaryBackgroundColorDesc" xml:space="preserve">
+  <data name="SettingsSecondaryBackgroundColorDesc" xml:space="preserve">
         <value>ランチャーのセカンダリ背景色です。</value>
     </data>
-    <data name="SettingsAccentColor" xml:space="preserve">
+  <data name="SettingsAccentColor" xml:space="preserve">
         <value>アクセント色</value>
     </data>
-    <data name="SettingsAccentColorDesc" xml:space="preserve">
+  <data name="SettingsAccentColorDesc" xml:space="preserve">
         <value>ランチャーのアクセント色です。</value>
     </data>
-    <data name="SettingsTextColor" xml:space="preserve">
+  <data name="SettingsTextColor" xml:space="preserve">
         <value>文字色</value>
     </data>
-    <data name="SettingsTextColorDesc" xml:space="preserve">
+  <data name="SettingsTextColorDesc" xml:space="preserve">
         <value>ランチャーの文字の色です。</value>
     </data>
-    <data name="SettingsAccentTextColor" xml:space="preserve">
+  <data name="SettingsAccentTextColor" xml:space="preserve">
         <value>文字色（アクセント）</value>
     </data>
-    <data name="SettingsAccentTextColorDesc" xml:space="preserve">
+  <data name="SettingsAccentTextColorDesc" xml:space="preserve">
         <value>アクセントカラーの上の文字色です。</value>
     </data>
-    <data name="SettingsGrayTextColor" xml:space="preserve">
+  <data name="SettingsGrayTextColor" xml:space="preserve">
         <value>灰色の文字色</value>
     </data>
-    <data name="SettingsGrayTextColorDesc" xml:space="preserve">
+  <data name="SettingsGrayTextColorDesc" xml:space="preserve">
         <value>文字色の灰色バージョンです。</value>
     </data>
-    <data name="SettingsShadowDistance" xml:space="preserve">
+  <data name="SettingsShadowDistance" xml:space="preserve">
         <value>影の距離</value>
     </data>
-    <data name="SettingsShadowDistanceDesc" xml:space="preserve">
+  <data name="SettingsShadowDistanceDesc" xml:space="preserve">
         <value>UI要素の影の距離です。</value>
     </data>
-    <data name="SettingsMovementSpeed" xml:space="preserve">
+  <data name="SettingsMovementSpeed" xml:space="preserve">
         <value>UI移動速度</value>
     </data>
-    <data name="SettingsMovementSpeedDesc" xml:space="preserve">
+  <data name="SettingsMovementSpeedDesc" xml:space="preserve">
         <value>UIの移動速度です。</value>
     </data>
-    <data name="SettingsUseBackgroundImage" xml:space="preserve">
+  <data name="SettingsUseBackgroundImage" xml:space="preserve">
         <value>背景画像を使用する</value>
     </data>
-    <data name="SettingsUseBackgroundImageDesc" xml:space="preserve">
+  <data name="SettingsUseBackgroundImageDesc" xml:space="preserve">
         <value>ランチャーの背景に画像を使用します。</value>
     </data>
-    <data name="SettingsSelectBackground" xml:space="preserve">
+  <data name="SettingsSelectBackground" xml:space="preserve">
         <value>背景画像を選択</value>
     </data>
-    <data name="SettingsSelectBackgroundDesc" xml:space="preserve">
+  <data name="SettingsSelectBackgroundDesc" xml:space="preserve">
         <value>コンピュータから背景画像を選択します。</value>
     </data>
-    <data name="SettingsSelectBackgroundImageFilter" xml:space="preserve">
+  <data name="SettingsSelectBackgroundImageFilter" xml:space="preserve">
         <value>画像ファイル</value>
     </data>
-    <data name="SettingsSelectBackgroundVideoFilter" xml:space="preserve">
+  <data name="SettingsSelectBackgroundVideoFilter" xml:space="preserve">
         <value>動画ファイル</value>
     </data>
-    <data name="SettingsGeneratePalette" xml:space="preserve">
+  <data name="SettingsGeneratePalette" xml:space="preserve">
         <value>背景からパレットを生成</value>
     </data>
-    <data name="SettingsGeneratePaletteDesc" xml:space="preserve">
+  <data name="SettingsGeneratePaletteDesc" xml:space="preserve">
         <value>背景画像に基づいてカラーパレットを作成します。動画はサポートされていません。</value>
     </data>
-    <data name="SettingsGeneratePaletteTooltip" xml:space="preserve">
+  <data name="SettingsGeneratePaletteTooltip" xml:space="preserve">
         <value>パレット生成はメモリを消費するため、時間がかかることがあります。生成されるパレットはそれぞれ微妙に異なります。</value>
     </data>
-    <data name="SettingsBackgroundBlur" xml:space="preserve">
+  <data name="SettingsBackgroundBlur" xml:space="preserve">
         <value>背景のぼかし</value>
     </data>
-    <data name="SettingsBackgroundBlurDesc" xml:space="preserve">
+  <data name="SettingsBackgroundBlurDesc" xml:space="preserve">
         <value>背景をどれだけぼかすか。</value>
     </data>
-    <data name="SettingsBackgroundBrightness" xml:space="preserve">
+  <data name="SettingsBackgroundBrightness" xml:space="preserve">
         <value>背景の明るさ</value>
     </data>
-    <data name="SettingsBackgroundBrightnessDesc" xml:space="preserve">
+  <data name="SettingsBackgroundBrightnessDesc" xml:space="preserve">
         <value>背景の明るさを設定します。</value>
     </data>
-    <data name="SettingsRounding" xml:space="preserve">
+  <data name="SettingsRounding" xml:space="preserve">
         <value>角の丸み</value>
     </data>
-    <data name="SettingsRoundingDesc" xml:space="preserve">
+  <data name="SettingsRoundingDesc" xml:space="preserve">
         <value>ほとんどのUI要素の角をどれだけ丸めるか。</value>
     </data>
-    <data name="SettingsBorderColor" xml:space="preserve">
+  <data name="SettingsBorderColor" xml:space="preserve">
         <value>境界線の色</value>
     </data>
-    <data name="SettingsBorderColorDesc" xml:space="preserve">
+  <data name="SettingsBorderColorDesc" xml:space="preserve">
         <value>UI要素の境界線の色です。</value>
     </data>
-    <data name="SettingsAccentBorderColor" xml:space="preserve">
+  <data name="SettingsAccentBorderColor" xml:space="preserve">
         <value>境界線の色（アクセント）</value>
     </data>
-    <data name="SettingsAccentBorderColorDesc" xml:space="preserve">
+  <data name="SettingsAccentBorderColorDesc" xml:space="preserve">
         <value>アクセント色の周囲の境界線の色です。</value>
     </data>
-    <data name="SettingsBorderThickness" xml:space="preserve">
+  <data name="SettingsBorderThickness" xml:space="preserve">
         <value>境界線の厚さ</value>
     </data>
-    <data name="SettingsBorderThicknessDesc" xml:space="preserve">
+  <data name="SettingsBorderThicknessDesc" xml:space="preserve">
         <value>UI要素の境界線の厚さです。</value>
     </data>
-    <data name="SettingsOpenTheme" xml:space="preserve">
+  <data name="SettingsOpenTheme" xml:space="preserve">
         <value>テーマを表示</value>
     </data>
-    <data name="SettingsOpenThemeDesc" xml:space="preserve">
+  <data name="SettingsOpenThemeDesc" xml:space="preserve">
         <value>エクスプローラーでテーマのフォルダを開きます。他の人と共有したり、他の人のテーマを使用することができます。</value>
     </data>
-    <data name="SettingsRestoreDefaultTheme" xml:space="preserve">
+  <data name="SettingsRestoreDefaultTheme" xml:space="preserve">
         <value>デフォルトテーマに戻す</value>
     </data>
-    <data name="SettingsRestoreDefaultThemeDesc" xml:space="preserve">
+  <data name="SettingsRestoreDefaultThemeDesc" xml:space="preserve">
         <value>Jiayiのデフォルトテーマに戻します。</value>
     </data>
-    <data name="SettingsThemesMenu" xml:space="preserve">
+  <data name="SettingsThemesMenu" xml:space="preserve">
         <value>テーマメニュー</value>
     </data>
-    <data name="SettingsThemesMenuDesc" xml:space="preserve">
+  <data name="SettingsThemesMenuDesc" xml:space="preserve">
         <value>コミュニティによって作成されたローカルテーマとダウンロード可能なテーマ。</value>
     </data>
-
-    <!-- discord settings strings -->
-    <data name="SettingsRichPresence" xml:space="preserve">
+  <!-- discord settings strings -->
+  <data name="SettingsRichPresence" xml:space="preserve">
         <value>RPC(リッチプリセンス)を有効にする</value>
     </data>
-    <data name="SettingsRichPresenceDesc" xml:space="preserve">
+  <data name="SettingsRichPresenceDesc" xml:space="preserve">
         <value>Discordのステータスに、Jiayiで行っていることを表示します。</value>
     </data>
-    <data name="SettingsRichPresenceTooltip" xml:space="preserve">
+  <data name="SettingsRichPresenceTooltip" xml:space="preserve">
         <value>
             RPC用の利用可能なフォーマット文字列:
     
@@ -1009,237 +981,231 @@
             各フィールドには1つのフォーマット文字列しか使用できません。
         </value>
     </data>
-    <data name="SettingsDiscordDetails" xml:space="preserve">
+  <data name="SettingsDiscordDetails" xml:space="preserve">
         <value>トップテキスト</value>
     </data>
-    <data name="SettingsDiscordDetailsDesc" xml:space="preserve">
+  <data name="SettingsDiscordDetailsDesc" xml:space="preserve">
         <value>最上位のステータステキストです。</value>
     </data>
-    <data name="SettingsDiscordDetailsDefault" xml:space="preserve">
+  <data name="SettingsDiscordDetailsDefault" xml:space="preserve">
         <value>%mod_name% と一緒に遊んでいます</value>
     </data>
-    <data name="SettingsDiscordState" xml:space="preserve">
+  <data name="SettingsDiscordState" xml:space="preserve">
         <value>ボトムテキスト</value>
     </data>
-    <data name="SettingsDiscordStateDesc" xml:space="preserve">
+  <data name="SettingsDiscordStateDesc" xml:space="preserve">
         <value>最下位のステータステキストです。</value>
     </data>
-    <data name="SettingsDiscordStateDefault" xml:space="preserve">
+  <data name="SettingsDiscordStateDefault" xml:space="preserve">
         <value>%game_version% でプレイ中</value>
     </data>
-    <data name="SettingsDiscordShowElapsedTime" xml:space="preserve">
+  <data name="SettingsDiscordShowElapsedTime" xml:space="preserve">
         <value>経過時間を表示</value>
     </data>
-    <data name="SettingsDiscordShowElapsedTimeDesc" xml:space="preserve">
+  <data name="SettingsDiscordShowElapsedTimeDesc" xml:space="preserve">
         <value>Jiayiを開いている時間を表示します。</value>
     </data>
-    <data name="SettingsDiscordShowDownloadButton" xml:space="preserve">
+  <data name="SettingsDiscordShowDownloadButton" xml:space="preserve">
         <value>ダウンロードボタンを表示</value>
     </data>
-    <data name="SettingsDiscordShowDownloadButtonDesc" xml:space="preserve">
+  <data name="SettingsDiscordShowDownloadButtonDesc" xml:space="preserve">
         <value>DiscordでJiayiをダウンロードするためのボタンを表示します。</value>
     </data>
-    <data name="SettingsDiscordShareCurrentMod" xml:space="preserve">
+  <data name="SettingsDiscordShareCurrentMod" xml:space="preserve">
         <value>現在のModを共有</value>
     </data>
-    <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
+  <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
         <value>他のユーザーが使用しているModを追加するためのボタンを表示します。これはWeb Modのみ動作します。</value>
     </data>
-    <data name="SettingsLargeImageKey" xml:space="preserve">
+  <data name="SettingsLargeImageKey" xml:space="preserve">
         <value>大きな画像のキーー</value>
     </data>
-    <data name="SettingsLargeImageKeyDesc" xml:space="preserve">
+  <data name="SettingsLargeImageKeyDesc" xml:space="preserve">
         <value>リッチプレゼンスに使用する大きな画像のキー(LargeImageKey)。</value>
     </data>
-    <data name="SettingsSmallImageKey" xml:space="preserve">
+  <data name="SettingsSmallImageKey" xml:space="preserve">
         <value>小さな画像のキー</value>
     </data>
-    <data name="SettingsSmallImageKeyDesc" xml:space="preserve">
+  <data name="SettingsSmallImageKeyDesc" xml:space="preserve">
         <value>リッチプレゼンスに使用する小さな画像のキー(SmallImageKey)。</value>
     </data>
-    <data name="SettingsLargeImageText" xml:space="preserve">
+  <data name="SettingsLargeImageText" xml:space="preserve">
         <value>大きな画像のテキスト</value>
     </data>
-    <data name="SettingsLargeImageTextDesc" xml:space="preserve">
+  <data name="SettingsLargeImageTextDesc" xml:space="preserve">
         <value>大きな画像のホバー時に表示するテキスト。</value>
     </data>
-    <data name="SettingsSmallImageText" xml:space="preserve">
+  <data name="SettingsSmallImageText" xml:space="preserve">
         <value>小さな画像のテキスト</value>
     </data>
-    <data name="SettingsSmallImageTextDesc" xml:space="preserve">
+  <data name="SettingsSmallImageTextDesc" xml:space="preserve">
         <value>小さな画像のホバー時に表示するテキスト。</value>
     </data>
-
-    <!-- update settings strings -->
-    <data name="SettingsEnableUpdater" xml:space="preserve">
+  <!-- update settings strings -->
+  <data name="SettingsEnableUpdater" xml:space="preserve">
         <value>アップデーターを有効にする</value>
     </data>
-    <data name="SettingsEnableUpdaterDesc" xml:space="preserve">
+  <data name="SettingsEnableUpdaterDesc" xml:space="preserve">
         <value>ランチャーがアップデートを確認してダウンロードすることを許可します。</value>
     </data>
-    <data name="SettingsAutoDownloadUpdates" xml:space="preserve">
+  <data name="SettingsAutoDownloadUpdates" xml:space="preserve">
         <value>自動的にアップデートをダウンロードする</value>
     </data>
-    <data name="SettingsAutoDownloadUpdatesDesc" xml:space="preserve">
+  <data name="SettingsAutoDownloadUpdatesDesc" xml:space="preserve">
         <value>利用可能な場合は常にアップデートをダウンロードします。</value>
     </data>
-
-    <!-- network settings strings -->
-    <data name="SettingsOfflineMode" xml:space="preserve">
+  <!-- network settings strings -->
+  <data name="SettingsOfflineMode" xml:space="preserve">
         <value>オフラインモード</value>
     </data>
-    <data name="SettingsOfflineModeDesc" xml:space="preserve">
+  <data name="SettingsOfflineModeDesc" xml:space="preserve">
         <value>インターネットへのアクセスを無効にします。一部の機能が動作しない場合があります。完全に有効にするには、Jiayi を再起動してください。</value>
     </data>
-    <data name="SettingsOfflineModeTooltip" xml:space="preserve">
+  <data name="SettingsOfflineModeTooltip" xml:space="preserve">
         <value>インターネットモッドの追加、バージョンのダウンロード、およびアップデートの確認などの機能は動作しません。</value>
     </data>
-    <data name="SettingsFollowRedirects" xml:space="preserve">
+  <data name="SettingsFollowRedirects" xml:space="preserve">
         <value>リダイレクトをフォローする</value>
     </data>
-    <data name="SettingsFollowRedirectsDesc" xml:space="preserve">
+  <data name="SettingsFollowRedirectsDesc" xml:space="preserve">
         <value>Web モッドの追加時にリダイレクトをフォローします。特定のモッドの追加に問題がある場合は、この設定を変更してください。</value>
     </data>
-    <!-- launch settings strings -->
-    <data name="SettingsUseInjectionDelay" xml:space="preserve">
+  <!-- launch settings strings -->
+  <data name="SettingsUseInjectionDelay" xml:space="preserve">
         <value>Inject遅延を使用する</value>
     </data>
-    <data name="SettingsUseInjectionDelayDesc" xml:space="preserve">
+  <data name="SettingsUseInjectionDelayDesc" xml:space="preserve">
         <value>ゲームの読み込みを待つ代わりに、設定された時間だけ待機してからInjectします。</value>
     </data>
-    <data name="SettingsInjectionDelay" xml:space="preserve">
+  <data name="SettingsInjectionDelay" xml:space="preserve">
         <value>Inject遅延</value>
     </data>
-    <data name="SettingsInjectionDelayDesc" xml:space="preserve">
+  <data name="SettingsInjectionDelayDesc" xml:space="preserve">
         <value>Inject前に待機する時間（秒単位）。</value>
     </data>
-    <data name="SettingsOverrideModuleRequirement" xml:space="preserve">
+  <data name="SettingsOverrideModuleRequirement" xml:space="preserve">
         <value>モジュール要件の上書き</value>
     </data>
-    <data name="SettingsOverrideModuleRequirementDesc" xml:space="preserve">
+  <data name="SettingsOverrideModuleRequirementDesc" xml:space="preserve">
         <value>
             JiayiがInjectする前に必要な読み込まれたモジュールの数を上書きします。
             
             Launcherが早すぎるか遅すぎる場合は、この値を変更してみてください。
         </value>
     </data>
-    <data name="SettingsModuleRequirement" xml:space="preserve">
+  <data name="SettingsModuleRequirement" xml:space="preserve">
         <value>モジュール要件</value>
     </data>
-    <data name="SettingsModuleRequirementDesc" xml:space="preserve">
+  <data name="SettingsModuleRequirementDesc" xml:space="preserve">
         <value>JiayiがInjectする前に必要な読み込まれたモジュールの数。</value>
     </data>
-    <data name="SettingsAccelerateGameLoading" xml:space="preserve">
+  <data name="SettingsAccelerateGameLoading" xml:space="preserve">
         <value>ゲームの読み込みを加速</value>
     </data>
-    <data name="SettingsAccelerateGameLoadingDesc" xml:space="preserve">
+  <data name="SettingsAccelerateGameLoadingDesc" xml:space="preserve">
         <value>不要なプロセスを終了することで読み込み時間を短縮します。しかし、問題が発生する可能性があります。</value>
     </data>
-    <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
+  <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
         <value>Microsoft Store のライセンスに関連する問題を引き起こす可能性があります（ゲームの所有権の判定など）。</value>
     </data>
-    <data name="SettingsMinimizeFix" xml:space="preserve">
+  <data name="SettingsMinimizeFix" xml:space="preserve">
         <value>最小化の修正</value>
     </data>
-    <data name="SettingsMinimizeFixDesc" xml:space="preserve">
+  <data name="SettingsMinimizeFixDesc" xml:space="preserve">
         <value>ゲームが最小化されたときにゲームを中断しないようにします。変更は起動時に適用されます。</value>
     </data>
-
-    <!-- log settings strings -->
-    <data name="SettingsAnonymizeLogs" xml:space="preserve">
+  <!-- log settings strings -->
+  <data name="SettingsAnonymizeLogs" xml:space="preserve">
         <value>ログの匿名化</value>
     </data>
-    <data name="SettingsAnonymizeLogsDesc" xml:space="preserve">
+  <data name="SettingsAnonymizeLogsDesc" xml:space="preserve">
         <value>ログから識別可能な情報を隠します。これは過去のログには適用されません。</value>
     </data>
-    <data name="SettingsOpenLogFolder" xml:space="preserve">
+  <data name="SettingsOpenLogFolder" xml:space="preserve">
         <value>ログフォルダを開く</value>
     </data>
-    <data name="SettingsOpenLogFolderDesc" xml:space="preserve">
+  <data name="SettingsOpenLogFolderDesc" xml:space="preserve">
         <value>ファイルエクスプローラーでログフォルダを開きます。</value>
     </data>
-    <data name="SettingsClearPreviousLogs" xml:space="preserve">
+  <data name="SettingsClearPreviousLogs" xml:space="preserve">
         <value>過去のログをクリア</value>
     </data>
-    <data name="SettingsClearPreviousLogsDesc" xml:space="preserve">
+  <data name="SettingsClearPreviousLogsDesc" xml:space="preserve">
         <value>すべての過去のログファイルを削除します。</value>
     </data>
-
-    <!-- mod card strings -->
-    <data name="ModCardInvalidLink" xml:space="preserve">
+  <!-- mod card strings -->
+  <data name="ModCardInvalidLink" xml:space="preserve">
         <value>このModは壊れています。もうウェブ上に存在しません。</value>
     </data>
-    <data name="ModCardMissingFile" xml:space="preserve">
+  <data name="ModCardMissingFile" xml:space="preserve">
         <value>このModは壊れています。Modディレクトリからファイルが見つかりません。</value>
     </data>
-    <data name="ModCardOffline" xml:space="preserve">
+  <data name="ModCardOffline" xml:space="preserve">
         <value>オフラインモードではインターネットModは無効です</value>
     </data>
-    <data name="ModCardInternetMod" xml:space="preserve">
+  <data name="ModCardInternetMod" xml:space="preserve">
         <value>ウェブからダウンロード済み</value>
     </data>
-    <data name="ModCardLocalMod" xml:space="preserve">
+  <data name="ModCardLocalMod" xml:space="preserve">
         <value>ローカルに保存済み</value>
     </data>
-    <data name="ModCardSupportedVersions" xml:space="preserve">
+  <data name="ModCardSupportedVersions" xml:space="preserve">
         <value>{0} で動作します</value>
     </data>
-    <data name="ModCardHideControls" xml:space="preserve">
+  <data name="ModCardHideControls" xml:space="preserve">
         <value>コントロールを非表示にする</value>
     </data>
-    <data name="ModCardShowControls" xml:space="preserve">
+  <data name="ModCardShowControls" xml:space="preserve">
         <value>コントロールを表示する</value>
     </data>
-    <data name="ModCardManageConfigs" xml:space="preserve">
+  <data name="ModCardManageConfigs" xml:space="preserve">
         <value>設定を管理する</value>
     </data>
-    <data name="ModCardEditMod" xml:space="preserve">
+  <data name="ModCardEditMod" xml:space="preserve">
         <value>Modを編集する</value>
     </data>
-    <data name="ModCardDeleteMod" xml:space="preserve">
+  <data name="ModCardDeleteMod" xml:space="preserve">
         <value>Modを削除する（取り消せません）</value>
     </data>
-    <data name="ModCardDeleteModConfirm" xml:space="preserve">
+  <data name="ModCardDeleteModConfirm" xml:space="preserve">
         <value>{0} を削除してもよろしいですか？この操作は取り消せません。</value>
     </data>
-    <data name="ModCardLaunchMultipleModsConfirm" xml:space="preserve">
+  <data name="ModCardLaunchMultipleModsConfirm" xml:space="preserve">
         <value>複数のModを同時に起動するとゲームが不安定になることがあります。{0} を起動してもよろしいですか？</value>
     </data>
-    <data name="ModCardDownloadFailed" xml:space="preserve">
+  <data name="ModCardDownloadFailed" xml:space="preserve">
         <value>Modのダウンロードに失敗しました。後でもう一度お試しください。</value>
     </data>
-    <data name="ModCardModNotFound" xml:space="preserve">
+  <data name="ModCardModNotFound" xml:space="preserve">
         <value>起動中にModが削除されました。ウイルス対策ソフトを無効にして再試行してください。</value>
     </data>
-    <data name="ModCardGameNotFound" xml:space="preserve">
+  <data name="ModCardGameNotFound" xml:space="preserve">
         <value>起動中にゲームが終了しました。ゲームを終了させている可能性があるウイルス対策ソフトを無効にしてください。</value>
     </data>
-    <data name="ModCardVersionMismatch" xml:space="preserve">
+  <data name="ModCardVersionMismatch" xml:space="preserve">
         <value>{0} は現在のゲームバージョンをサポートしていません。{1} に切り替えますか？</value>
     </data>
-    <data name="ModCardInjectionFailed" xml:space="preserve">
+  <data name="ModCardInjectionFailed" xml:space="preserve">
         <value>Modのインジェクションに失敗しました。ウイルス対策ソフトを無効にし、詳細なエラー情報をログで確認してください。</value>
     </data>
-    <data name="ModCardAlreadyLoaded" xml:space="preserve">
+  <data name="ModCardAlreadyLoaded" xml:space="preserve">
         <value>このModはすでに読み込まれています！</value>
     </data>
-
-    <!-- theme card strings -->
-    <data name="ThemeCardAuthor" xml:space="preserve">
+  <!-- theme card strings -->
+  <data name="ThemeCardAuthor" xml:space="preserve">
         <value>作者: {0}</value>
     </data>
-    <data name="ThemeCardPrepareUpload" xml:space="preserve">
+  <data name="ThemeCardPrepareUpload" xml:space="preserve">
         <value>テーマのアップロード準備</value>
     </data>
-    <data name="ThemeCardReinstall" xml:space="preserve">
+  <data name="ThemeCardReinstall" xml:space="preserve">
         <value>テーマの再インストール</value>
     </data>
-    <data name="ThemeCardOverwriteConfirm" xml:space="preserve">
+  <data name="ThemeCardOverwriteConfirm" xml:space="preserve">
         <value>このテーマを上書きしてもよろしいですか？すべてのローカル変更が失われます。</value>
     </data>
-
-    <!-- don't ask again strings -->
-    <data name="DontAskAgain" xml:space="preserve">
+  <!-- don't ask again strings -->
+  <data name="DontAskAgain" xml:space="preserve">
         <value>
             もう聞かないで
             聞かないでって言ったよね？
@@ -1253,56 +1219,52 @@
             このカスが
         </value>
     </data>
-
-    <!-- offline mode strings -->
-    <data name="OfflineMode" xml:space="preserve">
+  <!-- offline mode strings -->
+  <data name="OfflineMode" xml:space="preserve">
         <value>オフラインモード</value>
     </data>
-    <data name="OfflineModeDesc" xml:space="preserve">
+  <data name="OfflineModeDesc" xml:space="preserve">
         <value>オフラインです。一部の機能が動作しない場合があります。</value>
     </data>
-
-    <!-- update strings -->
-    <data name="UpdateInstalled" xml:space="preserve">
+  <!-- update strings -->
+  <data name="UpdateInstalled" xml:space="preserve">
         <value>アップデートがインストールされました</value>
     </data>
-    <data name="UpdateInstalledDesc" xml:space="preserve">
+  <data name="UpdateInstalledDesc" xml:space="preserve">
         <value>Jiayi が {0} に更新されました。</value>
     </data>
-    <data name="UpdateInstalledDesc2" xml:space="preserve">
+  <data name="UpdateInstalledDesc2" xml:space="preserve">
         <value>GitHub で変更履歴を確認できます。</value>
     </data>
-    <data name="UpdateAvailable" xml:space="preserve">
+  <data name="UpdateAvailable" xml:space="preserve">
         <value>アップデートが利用可能です</value>
     </data>
-    <data name="UpdateAvailableDesc" xml:space="preserve">
+  <data name="UpdateAvailableDesc" xml:space="preserve">
         <value>アップデートが利用可能です。ダウンロードしますか？</value>
     </data>
-    <data name="UpdateDownloading" xml:space="preserve">
+  <data name="UpdateDownloading" xml:space="preserve">
         <value>アップデートをダウンロードしています...</value>
     </data>
-    <data name="UpdateDownloaded" xml:space="preserve">
+  <data name="UpdateDownloaded" xml:space="preserve">
         <value>アップデートがダウンロードされました</value>
     </data>
-    <data name="UpdateDownloadedDesc" xml:space="preserve">
+  <data name="UpdateDownloadedDesc" xml:space="preserve">
         <value>再起動してアップデートをインストールしてください。</value>
     </data>
-
-    <!-- sidebar strings -->
-    <data name="SidebarDashboard" xml:space="preserve">
+  <!-- sidebar strings -->
+  <data name="SidebarDashboard" xml:space="preserve">
         <value>ダッシュボード</value>
     </data>
-    <data name="SidebarMods" xml:space="preserve">
+  <data name="SidebarMods" xml:space="preserve">
         <value>Mod</value>
     </data>
-    <data name="SidebarProfiles" xml:space="preserve">
+  <data name="SidebarProfiles" xml:space="preserve">
         <value>構成</value>
     </data>
-    <data name="SidebarVersions" xml:space="preserve">
-        <value>バージョン</value>
+  <data name="SidebarGame" xml:space="preserve">
+        <value>Game</value>
     </data>
-    <data name="SidebarSettings" xml:space="preserve">
+  <data name="SidebarSettings" xml:space="preserve">
         <value>設定</value>
     </data>
-
 </root>

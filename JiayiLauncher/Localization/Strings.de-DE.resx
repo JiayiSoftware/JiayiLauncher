@@ -129,7 +129,7 @@
         <value>Entferne</value>
     </data>
   <data name="Removing" xml:space="preserve">
-        <value>Entfernt...</value>
+        <value>Löschen...</value>
     </data>
   <data name="Switch" xml:space="preserve">
         <value>Wechseln</value>
@@ -144,16 +144,16 @@
         <value>Auswählen</value>
     </data>
   <data name="View" xml:space="preserve">
-        <value>Einsehen</value>
+        <value>Siehe</value>
     </data>
   <data name="Restore" xml:space="preserve">
         <value>Wiederherstellen</value>
     </data>
   <data name="Update" xml:space="preserve">
-        <value>Aktualisieren</value>
+        <value>Update</value>
     </data>
   <data name="Restart" xml:space="preserve">
-        <value>Neu Starten</value>
+        <value>Neustart</value>
     </data>
   <data name="Later" xml:space="preserve">
         <value>Später</value>
@@ -185,26 +185,28 @@
     </data>
   <!-- config manager strings -->
   <data name="ConfManName" xml:space="preserve">
-        <value>Konfigurationen</value>
+        <value>Konfigurationsmanager</value>
     </data>
   <data name="ConfManNoModDataFolder" xml:space="preserve">
         <value>
-Diese Modifikation hat keinen Namen für den Datenordner festgelegt.        
-Um auf den Konfigurations-Manager zuzugreifen, bearbeite diese Modifikation und Lege einen Namen für den Datenordner an.        </value>
+            Für diese Mod ist kein Datenordnername festgelegt.
+            Um auf den Konfigurationsmanager zuzugreifen, bearbeite diese Mod und lege den Datenordnernamen fest.
+        </value>
     </data>
   <data name="ConfManInvalidDataFolder" xml:space="preserve">
         <value>
-Der Datenordner, den du für diese Modifikation festlegegt hast, existiert nicht.        
-Stelle sicher, dass du den ricjtigen Namen für den Datenordner festgelegt hast.        </value>
+            Der Datenordner, den du für diese Mod eingestellt hast, existiert nicht.
+            Stelle sicher, dass du den richtigen Datenordnernamen eingestellt hast.
+        </value>
     </data>
   <data name="ConfManEdit" xml:space="preserve">
-        <value>Öffnen und Konfiguration öffnen</value>
+        <value>Konfiguration öffnen und bearbeiten</value>
     </data>
   <data name="ConfManDelete" xml:space="preserve">
         <value>Konfiguration Endgültig löschen</value>
     </data>
   <data name="ConfManDragDrop" xml:space="preserve">
-        <value>Klicken Sie hier oder legen Sie Dateien ab, um Konfigurationen hinzuzufügen</value>
+        <value>Klicke hier oder lege Dateien ab, um Konfigs hinzuzufügen</value>
     </data>
   <!-- edit mod strings -->
   <data name="EditModName" xml:space="preserve">
@@ -217,7 +219,7 @@ Stelle sicher, dass du den ricjtigen Namen für den Datenordner festgelegt hast.
         <value>Unterstützte Versionen</value>
     </data>
   <data name="EditModSelectVersions" xml:space="preserve">
-        <value>Markiere Versionen</value>
+        <value>Versionen auswählen</value>
     </data>
   <data name="EditModLaunchArgs" xml:space="preserve">
         <value>Argumente für den Start</value>
@@ -232,7 +234,7 @@ Stelle sicher, dass du den ricjtigen Namen für den Datenordner festgelegt hast.
         <value>Normalerweise im "RoamingState"</value>
     </data>
   <data name="EditModDefaultLocationNotice" xml:space="preserve">
-        <value>Mods werden im standardmäßigen gespeichert (änderbar in den Einstellungen)</value>
+        <value>Die Mods werden an deinem Standardspeicherort gespeichert, den du in den Einstellungen ändern kannst</value>
     </data>
   <data name="EditModExternalSourceNotice" xml:space="preserve">
         <value>Dieser Mod stammt von einer externen Anwendung oder Website. Füge keine Mods aus nicht vertrauenswürdigen Quellen hinzu.</value>
@@ -245,10 +247,10 @@ Stelle sicher, dass du den ricjtigen Namen für den Datenordner festgelegt hast.
         <value>Profil erstellen</value>
     </data>
   <data name="EditProfileNameProfile" xml:space="preserve">
-        <value>Gib hier den Namen für dein Profil!</value>
+        <value>Gib deinem Profil einen Namen!</value>
     </data>
   <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
-        <value>Die Profile werden an ihrem Standardspeicherort gespeichert, den Du in den Einstellungen ändern kannst</value>
+        <value>Die Profile werden an ihrem Standardspeicherort gespeichert, den du in den Einstellungen ändern kannst</value>
     </data>
   <!-- privilege escalation strings -->
   <data name="PrivEscTitle" xml:space="preserve">
@@ -258,10 +260,10 @@ Stelle sicher, dass du den ricjtigen Namen für den Datenordner festgelegt hast.
         <value>Du musst Jiayi als Administrator ausführen, um dies zu tun</value>
     </data>
   <data name="PrivEscRestartNotice" xml:space="preserve">
-        <value>Der Launcher wird neu gestartet, nachdem du eskaliert bist</value>
+        <value>Der Launcher wird neu gestartet, nachdem du bestätigt hast</value>
     </data>
   <data name="PrivEscButton" xml:space="preserve">
-        <value>Eskalieren</value>
+        <value>Bestätigen</value>
     </data>
   <data name="PrivEscNotice" xml:space="preserve">
         <value>Jiayi wurde mit Admin-Rechten gestartet.</value>
@@ -283,10 +285,10 @@ Stelle sicher, dass du den ricjtigen Namen für den Datenordner festgelegt hast.
         <value>{0} aus dem Web</value>
     </data>
   <data name="ImportModDefaultLocationNotice" xml:space="preserve">
-        <value>Mods in der Sammlung werden am standardmäßigen Ort gespeichert (änderbar in den Einstellungen)</value>
+        <value>Die Mods in dieser Sammlung werden an ihrem Standardspeicherort gespeichert, den du in den Einstellungen ändern kannst</value>
     </data>
   <data name="ImportModMergeNotice" xml:space="preserve">
-        <value>Mods in dieser Sammlung werden mit deiner Sammlung gemerged</value>
+        <value>Die Mods in dieser Sammlung werden mit deiner Sammlung kombiniert</value>
     </data>
   <!-- new mod strings -->
   <data name="NewModName" xml:space="preserve">
@@ -296,7 +298,7 @@ Stelle sicher, dass du den ricjtigen Namen für den Datenordner festgelegt hast.
         <value>Wähle einen Mod</value>
     </data>
   <data name="NewModFileFilter" xml:space="preserve">
-        <value>nur .dll- und .exe-Dateien</value>
+        <value>Nur .dll- und .exe-Dateien</value>
     </data>
   <data name="NewModOr" xml:space="preserve">
         <value>oder</value>
@@ -311,7 +313,7 @@ Stelle sicher, dass du den ricjtigen Namen für den Datenordner festgelegt hast.
         <value>cool-website.com/path/to/mod.dll</value>
     </data>
   <data name="NewModDllDisplayName" xml:space="preserve">
-        <value>Injizierbare Bibliotheken</value>
+        <value>Injectabare Bibliotheken</value>
     </data>
   <data name="NewModExeDisplayName" xml:space="preserve">
         <value>Externe Clients und Injektoren</value>
@@ -326,30 +328,30 @@ Stelle sicher, dass du den ricjtigen Namen für den Datenordner festgelegt hast.
         <value>Dieser Mod befindet sich bereits in deiner Sammlung!</value>
     </data>
   <data name="NewModInvalidLink" xml:space="preserve">
-        <value>Invalid link</value>
+        <value>Ungültiger Link</value>
     </data>
   <data name="NewModLinkNotFound" xml:space="preserve">
         <value>Unter diesem Link wurde nichts gefunden!</value>
     </data>
   <data name="NewModCheckingLink" xml:space="preserve">
-        <value>Link wird geprüft...</value>
+        <value>Überprüfe Link...</value>
     </data>
   <data name="NewModAlreadyExists" xml:space="preserve">
-        <value>Die Mod existiert schon in deiner Sammlung, willst du die ersetzen?</value>
+        <value>Dieser Mod existiert bereits in deiner Sammlung. Möchtest du sie ersetzen?</value>
     </data>
   <!-- new theme strings -->
   <data name="NewThemeName" xml:space="preserve">
-        <value>Neues Theme</value>
+        <value>Neues Thema</value>
     </data>
   <data name="NewThemeNameTheme" xml:space="preserve">
-        <value>Gib hier den Namen fürs Theme!</value>
+        <value>Gib deinem Thema einen Namen!</value>
     </data>
   <!-- theme publishing strings -->
   <data name="ThemePublishTitle" xml:space="preserve">
-        <value>Theme fürs Veröffentlichen bereitstellen</value>
+        <value>Thema fürs Veröffentlichen bereitstellen</value>
     </data>
   <data name="ThemePublishName" xml:space="preserve">
-        <value>Theme Name</value>
+        <value>Thema Name</value>
     </data>
   <data name="ThemePublishAuthor" xml:space="preserve">
         <value>Autor</value>
@@ -364,27 +366,27 @@ Stelle sicher, dass du den ricjtigen Namen für den Datenordner festgelegt hast.
         <value>Komma-getrennte Liste</value>
     </data>
   <data name="ThemePublishRawTags" xml:space="preserve">
-        <value>Raw Tags</value>
+        <value>Raw-Tags</value>
     </data>
   <data name="ThemePublishRawTagsSelect" xml:space="preserve">
         <value>Raw-Tags auswählen</value>
     </data>
   <data name="ThemePublishNoName" xml:space="preserve">
-        <value>Theme konnte nicht erstellt werden (kein Name)</value>
+        <value>Thema kann nicht erstellt werden (kein Name)</value>
     </data>
   <data name="ThemePublishNoRawTags" xml:space="preserve">
-        <value>Theme konnte nicht erstellt werden (mindestens 1 Raw Tag erforderlich)</value>
+        <value>Thema konnte nicht erstellt werden (mindestens 1 Raw-Tag)</value>
     </data>
   <data name="ThemePublishAlreadyExists" xml:space="preserve">
-        <value>Theme konnte nicht erstellt werden (dasselbe Theme existiert schon): {0}</value>
+        <value>Das Thema konnte nicht erstellt werden (es existiert bereits): {0}</value>
     </data>
   <data name="ThemePublishOpenRepo" xml:space="preserve">
         <value>Repository öffnen</value>
     </data>
   <data name="ThemePublishFinalize" xml:space="preserve">
-        <value>
-Dein Theme befindet sich in dem Ordner, den wir gerade geöffnet haben.
-Um es hier zu sehen, eröffne ein pull-request in unserem GitHub-Repository für Themes. Lese dir die README für Anweisungen.</value>
+        <value>            Dein Theme befindet sich in dem Ordner, den wir gerade geöffnet haben.
+            Um es hier zu sehen, öffnen Sie eine Pull-request in unserem GitHub-Repository für Themes. Lesen Sie die README für Anweisungen.
+        </value>
     </data>
   <!-- about strings -->
   <data name="AboutTitle" xml:space="preserve">
@@ -407,7 +409,7 @@ Um es hier zu sehen, eröffne ein pull-request in unserem GitHub-Repository für
         <value>Dein Spiel verwalten</value>
     </data>
   <data name="VerManCurrentVersion" xml:space="preserve">
-        <value>Derzeitige Version</value>
+        <value>Deine aktuelle Version</value>
     </data>
   <data name="VerManResizeTip" xml:space="preserve">
         <value>Du kannst die Größe von Jiayi ändern, um die vollständige Liste auf der rechten Seite zu sehen</value>
@@ -419,152 +421,150 @@ Um es hier zu sehen, eröffne ein pull-request in unserem GitHub-Repository für
         <value>Beliebte Versionen</value>
     </data>
   <data name="VerManLatestVersion" xml:space="preserve">
-        <value>Latest version</value>
+        <value>Neueste Version</value>
     </data>
   <data name="VerManPopularAmongCommunity" xml:space="preserve">
-        <value>Populär innerhalb der Community</value>
+        <value>Beliebt in der Community</value>
     </data>
   <data name="VerManBestStableRelease" xml:space="preserve">
-        <value>Bestes stable Release ohne RenderDragon</value>
+        <value>Beste stabile Version ohne RenderDragon</value>
     </data>
   <data name="VerManShaderManagerText" xml:space="preserve">
-        <value>Easily apply RenderDragon shaders to your game. Works best if you have the game installed through Jiayi.</value>
+        <value>Einfaches Anwenden von RenderDragon-Shadern auf dein Spiel. Am besten funktioniert es, wenn du das Spiel über Jiayi installiert hast.</value>
     </data>
   <data name="VerManShaderManagerVerTooLow" xml:space="preserve">
-        <value>Your game version does not have RenderDragon. Use a resource pack for shaders instead.</value>
+        <value>Deine Spielversion verfügt nicht über RenderDragon. Verwende stattdessen ein Ressourcenpaket für Shader.</value>
     </data>
   <data name="VerManShaderManagerMSStore" xml:space="preserve">
-        <value>Your game is installed through the Microsoft Store. Jiayi cannot apply shaders to it.</value>
+        <value>Dein Spiel wurde über den Microsoft Store installiert. Jiayi kann keine Shader darauf anwenden.</value>
     </data>
   <!-- install location strings -->
   <data name="InstallLocByJiayi" xml:space="preserve">
-        <value>Installed by Jiayi</value>
+        <value>Installiert von Jiayi</value>
     </data>
   <data name="InstallLocFromStore" xml:space="preserve">
-        <value>From Microsoft Store</value>
+        <value>Aus dem Microsoft Store</value>
     </data>
   <data name="InstallLocExternalManager" xml:space="preserve">
-        <value>Installed by another version manager</value>
+        <value>Von einem anderen Versionsmanager installiert</value>
     </data>
   <data name="InstallLocUnknown" xml:space="preserve">
-        <value>Unknown install location</value>
+        <value>Unbekannter Installationsort</value>
     </data>
   <data name="InstallLocNotInstalled" xml:space="preserve">
-        <value>You don't have the game installed</value>
+        <value>Du hast das Spiel nicht installiert</value>
     </data>
   <!-- version list strings -->
   <data name="VerListName" xml:space="preserve">
-        <value>Full version list</value>
+        <value>Vollständige Versionsliste</value>
     </data>
   <data name="VerListSearch" xml:space="preserve">
-        <value>Search versions</value>
+        <value>Versionen suchen</value>
     </data>
   <data name="VerListShowDownloaded" xml:space="preserve">
-        <value>Show downloaded</value>
+        <value>Heruntergeladenes anzeigen</value>
     </data>
   <data name="VerListNoVersions" xml:space="preserve">
-        <value>No versions found</value>
+        <value>Keine Version gefunden</value>
     </data>
   <data name="VerListLoadMore" xml:space="preserve">
-        <value>Load more</value>
+        <value>Mehr Anzeigen</value>
     </data>
   <data name="VerListRemove" xml:space="preserve">
-        <value>Remove version</value>
+        <value>Version entfernen</value>
     </data>
   <data name="VerListRemoveConfirm" xml:space="preserve">
-        <value>Are you sure you want to remove this version?</value>
+        <value>Bist du sicher, dass du diese Version entfernen möchtest?</value>
     </data>
   <data name="VerListDevModeQuestion" xml:space="preserve">
-        <value>You need to enable developer mode to switch versions. Do you want to enable it now?</value>
+        <value>Um die Version zu wechseln, musst du den Entwicklermodus aktivieren. Möchtest du ihn jetzt aktivieren?</value>
     </data>
   <data name="VerListNotFound" xml:space="preserve">
-        <value>This version has not been downloaded yet.</value>
+        <value>Diese Version ist noch nicht heruntergeladen worden.</value>
     </data>
   <data name="VerListBackupFailed" xml:space="preserve">
         <value>
-            Jiayi couldn't back up your game data before switching versions. This could be because access to the game data folder was denied.
+            Jiayi konnte vor dem Versionswechsel keine Sicherungskopie deiner Spieldaten erstellen. Dies könnte daran liegen, dass der Zugriff auf den Spieldatenordner verweigert wurde.
             
-            More information can be found in your log file.
+            Weitere Informationen findest du in deiner Protokolldatei.
         </value>
     </data>
   <data name="VerListUnknownError" xml:space="preserve">
-        <value>An unknown error occurred while switching versions. Check your log file for more information.</value>
+        <value>Beim Versionswechsel ist ein unbekannter Fehler aufgetreten. Prüfe deine Protokolldatei für weitere Informationen.</value>
     </data>
   <data name="VerListImport" xml:space="preserve">
-        <value>Import version</value>
+        <value>Version Importieren</value>
     </data>
   <data name="VerListFileFilter" xml:space="preserve">
-        <value>APPX files</value>
+        <value>APPX Dateien</value>
     </data>
   <data name="VerListInvalidPackage" xml:space="preserve">
-        <value>That's not a valid package.</value>
+        <value>Das ist kein gültiges Paket.</value>
     </data>
   <data name="VerListUpdatingVersions" xml:space="preserve">
-        <value>Version list cleared. It will be updated shortly.</value>
+        <value>Versionsliste geleert. Die Liste wird in Kürze aktualisiert.</value>
     </data>
   <!-- shader manager strings -->
   <data name="ShaderManName" xml:space="preserve">
-        <value>Shader manager</value>
+        <value>Shader-Manager</value>
     </data>
   <data name="ShaderManCurrentShader" xml:space="preserve">
-        <value>Your current shader pack</value>
+        <value>Dein aktuelles Shaderpack</value>
     </data>
   <data name="ShaderManNoShader" xml:space="preserve">
-        <value>No shaders applied</value>
+        <value>Keine Shader angewendet</value>
     </data>
   <data name="ShaderManUsingVanilla" xml:space="preserve">
-        <value>Minecraft's vanilla shaders will be used</value>
+        <value>Minecraft's Vanilla Shader werden verwendet</value>
     </data>
   <data name="ShaderManReplacingCount" xml:space="preserve">
-        <value>Replacing {0} material files</value>
+        <value>Ersetzen von {0} "material files"</value>
     </data>
   <data name="ShaderManAvailableShaders" xml:space="preserve">
-        <value>Available shaders</value>
+        <value>Verfügbare Shader</value>
     </data>
   <data name="ShaderManSearch" xml:space="preserve">
-        <value>Search shaders</value>
+        <value>Shader suchen</value>
     </data>
   <data name="ShaderManViewMaterials" xml:space="preserve">
-        <value>View shader materials</value>
+        <value>Shader-materials anzeigen</value>
     </data>
   <data name="ShaderManMaterials" xml:space="preserve">
         <value>Shader materials</value>
     </data>
   <data name="ShaderManViewMaterialsText" xml:space="preserve">
-        <value>
-            This shader pack modifies the following materials:
+        <value>            Dieses Shaderpack ändert die folgenden Materials:
             
             {0}
         </value>
     </data>
   <data name="ShaderManMaterialCount" xml:space="preserve">
-        <value>{0} material files</value>
+        <value>{0} material Dateien</value>
     </data>
   <data name="ShaderManRename" xml:space="preserve">
-        <value>Rename shader pack</value>
+        <value>Shaderpack umbenennen</value>
     </data>
   <data name="ShaderManDelete" xml:space="preserve">
-        <value>Delete shader pack</value>
+        <value>Shaderpack löschen</value>
     </data>
   <data name="ShaderManDeleteConfirm" xml:space="preserve">
-        <value>Are you sure you want to delete this shader pack? This action is irreversible.</value>
+        <value>Bist du sicher, dass du dieses Shader-Pack löschen willst? Diese Aktion ist nicht umkehrbar.</value>
     </data>
   <data name="ShaderManNoShaders" xml:space="preserve">
-        <value>No shaders found</value>
+        <value>Keine Shader gefunden</value>
     </data>
   <data name="ShaderManDragDrop" xml:space="preserve">
-        <value>Click here or drag and drop a shader pack to add it</value>
+        <value>Klicke hier oder ziehe ein Shaderpack per Drag &amp; Drop, um es hinzuzufügen</value>
     </data>
   <data name="ShaderManDragDropInfo" xml:space="preserve">
-        <value>
-            Any file compressed with the zip format can be used as a shader pack, as long as it contains material files.
+        <value>            Jede mit dem Zip-Format komprimierte Datei kann als Shaderpack verwendet werden, solange sie Materialdateien enthält.
         
-            The launcher can find shaders anywhere in the pack.
+            Der Launcher kann Shader überall im Pack finden.
         </value>
     </data>
   <!-- edit shader strings (only renaming atm) (Not like any more functionality is planned) -->
   <data name="EditShaderName" xml:space="preserve">
-        <value>Rename shader</value>
+        <value>Shader umbenennen</value>
     </data>
   <data name="EditShaderRenameShader" xml:space="preserve">
         <value>Give your shader pack a name!</value>
@@ -1028,42 +1028,42 @@ Um es hier zu sehen, eröffne ein pull-request in unserem GitHub-Repository für
         <value>Großer Bildtext</value>
     </data>
   <data name="SettingsLargeImageTextDesc" xml:space="preserve">
-        <value>The text to display when hovering over the large image.</value>
+        <value>Der Text, der angezeigt wird, wenn man über das große Bild fährt.</value>
     </data>
   <data name="SettingsSmallImageText" xml:space="preserve">
-        <value>Small image text</value>
+        <value>Kleiner Bildtext</value>
     </data>
   <data name="SettingsSmallImageTextDesc" xml:space="preserve">
-        <value>The text to display when hovering over the small image.</value>
+        <value>Der Text, der angezeigt wird, wenn man über das kleine Bild fährt.</value>
     </data>
   <!-- update settings strings -->
   <data name="SettingsEnableUpdater" xml:space="preserve">
-        <value>Enable the updater</value>
+        <value>Aktivieren des Updaters</value>
     </data>
   <data name="SettingsEnableUpdaterDesc" xml:space="preserve">
-        <value>Allow the launcher to check for and download updates.</value>
+        <value>Erlaubt dem Launcher, nach Updates zu suchen und diese herunterzuladen.</value>
     </data>
   <data name="SettingsAutoDownloadUpdates" xml:space="preserve">
-        <value>Automatically download updates</value>
+        <value>Automatisches Herunterladen von Updates</value>
     </data>
   <data name="SettingsAutoDownloadUpdatesDesc" xml:space="preserve">
-        <value>Always download updates when they're available.</value>
+        <value>Lade immer Updates herunter, wenn sie verfügbar sind.</value>
     </data>
   <!-- network settings strings -->
   <data name="SettingsOfflineMode" xml:space="preserve">
         <value>Offline mode</value>
     </data>
   <data name="SettingsOfflineModeDesc" xml:space="preserve">
-        <value>Disable access to the internet. Some features may not work. Restart Jiayi for this to take full effect.</value>
+        <value>Deaktiviert den Zugriff auf das Internet. Einige Funktionen funktionieren möglicherweise nicht. Starte Jiayi neu, damit dies seine volle Wirkung entfalten kann.</value>
     </data>
   <data name="SettingsOfflineModeTooltip" xml:space="preserve">
-        <value>Features like internet mods, downloading versions, and checking for updates will not work.</value>
+        <value>Funktionen wie Internet-Mods, das Herunterladen von Versionen und die Suche nach Updates funktionieren nicht.</value>
     </data>
   <data name="SettingsFollowRedirects" xml:space="preserve">
-        <value>Follow redirects</value>
+        <value>Weiterleitungen folgen</value>
     </data>
   <data name="SettingsFollowRedirectsDesc" xml:space="preserve">
-        <value>Follow redirects when adding web mods. Change this setting if you have trouble adding some mods.</value>
+        <value>Weiterleitungen beim Hinzufügen von Web-Mods folgen. Ändere diese Einstellung, wenn du Probleme beim Hinzufügen einiger Mods hast.</value>
     </data>
   <!-- launch settings strings -->
   <data name="SettingsUseInjectionDelay" xml:space="preserve">

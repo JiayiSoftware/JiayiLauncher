@@ -6,6 +6,7 @@
 
 [![Build](https://github.com/JiayiSoftware/JiayiLauncher/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JiayiSoftware/JiayiLauncher/actions/workflows/dotnet.yml)
 [![Discord server](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://jiayisoftware.github.io/discord)
+[![Crowdin](https://badges.crowdin.net/jiayilauncher/localized.svg)](https://crowdin.com/project/jiayilauncher)
 
 ## Features
 > * Simple, clean user interface

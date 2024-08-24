@@ -66,10 +66,10 @@
         <value>Okay</value>
     </data>
   <data name="Yes" xml:space="preserve">
-        <value>Yes</value>
+        <value>Ja</value>
     </data>
   <data name="No" xml:space="preserve">
-        <value>No</value>
+        <value>Nein</value>
     </data>
   <data name="Cancel" xml:space="preserve">
         <value>Cancel</value>

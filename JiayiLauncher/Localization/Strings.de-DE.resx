@@ -63,7 +63,7 @@
   </resheader>
   <!-- common strings -->
   <data name="Okay" xml:space="preserve">
-        <value>Okay</value>
+        <value>OK</value>
     </data>
   <data name="Yes" xml:space="preserve">
         <value>Ja</value>
@@ -84,13 +84,13 @@
         <value>Speichern</value>
     </data>
   <data name="Export" xml:space="preserve">
-        <value>Export</value>
+        <value>Exportieren</value>
     </data>
   <data name="Import" xml:space="preserve">
-        <value>Import</value>
+        <value>Importieren</value>
     </data>
   <data name="Imported" xml:space="preserve">
-        <value>Imported</value>
+        <value>Importiert</value>
     </data>
   <data name="Importing" xml:space="preserve">
         <value>Wird importiert...</value>
@@ -138,10 +138,10 @@
         <value>Wechselt...</value>
     </data>
   <data name="Apply" xml:space="preserve">
-        <value>Apply</value>
+        <value>Anwenden</value>
     </data>
   <data name="Select" xml:space="preserve">
-        <value>Select</value>
+        <value>Auswählen</value>
     </data>
   <data name="View" xml:space="preserve">
         <value>Einsehen</value>
@@ -159,7 +159,7 @@
         <value>Später</value>
     </data>
   <data name="Generate" xml:space="preserve">
-        <value>Generate</value>
+        <value>Generieren</value>
     </data>
   <data name="Clear" xml:space="preserve">
         <value>Leeren</value>
@@ -168,16 +168,16 @@
         <value>Name</value>
     </data>
   <data name="FilterBy" xml:space="preserve">
-        <value>Filter by:</value>
+        <value>Filtern nach:</value>
     </data>
   <data name="WhatsThis" xml:space="preserve">
-        <value>What's this?</value>
+        <value>Was ist das?</value>
     </data>
   <data name="AdvancedSettings" xml:space="preserve">
-        <value>Advanced settings</value>
+        <value>Fortgeschrittene Einstellungen</value>
     </data>
   <data name="MinecraftForWindows" xml:space="preserve">
-        <value>Minecraft for Windows</value>
+        <value>Minecraft für Windows</value>
     </data>
   <!-- optional Jiayi Launcher string, translate if you want -->
   <data name="JiayiLauncher" xml:space="preserve">
@@ -189,55 +189,53 @@
     </data>
   <data name="ConfManNoModDataFolder" xml:space="preserve">
         <value>
-            This mod doesn't have a data folder name set.
-            To access the config manager, edit this mod and set the data folder name.
-        </value>
+Diese Modifikation hat keinen Namen für den Datenordner festgelegt.        
+Um auf den Konfigurations-Manager zuzugreifen, bearbeite diese Modifikation und Lege einen Namen für den Datenordner an.        </value>
     </data>
   <data name="ConfManInvalidDataFolder" xml:space="preserve">
         <value>
-            The data folder you set for this mod doesn't exist.
-            Make sure you have the correct data folder name set.
-        </value>
+Der Datenordner, den du für diese Modifikation festlegegt hast, existiert nicht.        
+Stelle sicher, dass du den ricjtigen Namen für den Datenordner festgelegt hast.        </value>
     </data>
   <data name="ConfManEdit" xml:space="preserve">
-        <value>Open and edit config</value>
+        <value>Öffnen und Konfiguration öffnen</value>
     </data>
   <data name="ConfManDelete" xml:space="preserve">
-        <value>Delete config (irreversible)</value>
+        <value>Konfiguration Endgültig löschen</value>
     </data>
   <data name="ConfManDragDrop" xml:space="preserve">
-        <value>Click here or drop files to add configs</value>
+        <value>Klicken Sie hier oder legen Sie Dateien ab, um Konfigurationen hinzuzufügen</value>
     </data>
   <!-- edit mod strings -->
   <data name="EditModName" xml:space="preserve">
-        <value>Edit mod</value>
+        <value>Mod bearbeiten</value>
     </data>
   <data name="EditModModName" xml:space="preserve">
-        <value>Mod name</value>
+        <value>Mod Name</value>
     </data>
   <data name="EditModSupportedVersions" xml:space="preserve">
-        <value>Supported versions</value>
+        <value>Unterstützte Versionen</value>
     </data>
   <data name="EditModSelectVersions" xml:space="preserve">
         <value>Markiere Versionen</value>
     </data>
   <data name="EditModLaunchArgs" xml:space="preserve">
-        <value>Launch arguments</value>
+        <value>Argumente für den Start</value>
     </data>
   <data name="EditModLaunchArgsNotice" xml:space="preserve">
-        <value>This does not apply to internal mods</value>
+        <value>Dies gilt nicht für interne Mods</value>
     </data>
   <data name="EditModDataFolder" xml:space="preserve">
-        <value>Mod data folder name</value>
+        <value>Name des Mod-Datenordners</value>
     </data>
   <data name="EditModDataFolderNotice" xml:space="preserve">
-        <value>Usually in RoamingState</value>
+        <value>Normalerweise im "RoamingState"</value>
     </data>
   <data name="EditModDefaultLocationNotice" xml:space="preserve">
         <value>Mods werden im standardmäßigen gespeichert (änderbar in den Einstellungen)</value>
     </data>
   <data name="EditModExternalSourceNotice" xml:space="preserve">
-        <value>This mod came from an external app or website. Don't add mods from untrusted sources.</value>
+        <value>Dieser Mod stammt von einer externen Anwendung oder Website. Füge keine Mods aus nicht vertrauenswürdigen Quellen hinzu.</value>
     </data>
   <!-- edit profile strings -->
   <data name="EditProfileName" xml:space="preserve">
@@ -250,39 +248,39 @@
         <value>Gib hier den Namen für dein Profil!</value>
     </data>
   <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
-        <value>Profiles will be saved to their default location, which you can change in settings</value>
+        <value>Die Profile werden an ihrem Standardspeicherort gespeichert, den Du in den Einstellungen ändern kannst</value>
     </data>
   <!-- privilege escalation strings -->
   <data name="PrivEscTitle" xml:space="preserve">
-        <value>Additional permissions required</value>
+        <value>Zusätzliche Berechtigungen erforderlich</value>
     </data>
   <data name="PrivEscText" xml:space="preserve">
-        <value>You'll need to run Jiayi as admin to do this</value>
+        <value>Du musst Jiayi als Administrator ausführen, um dies zu tun</value>
     </data>
   <data name="PrivEscRestartNotice" xml:space="preserve">
-        <value>The launcher will restart after you escalate</value>
+        <value>Der Launcher wird neu gestartet, nachdem du eskaliert bist</value>
     </data>
   <data name="PrivEscButton" xml:space="preserve">
-        <value>Escalate</value>
+        <value>Eskalieren</value>
     </data>
   <data name="PrivEscNotice" xml:space="preserve">
-        <value>Jiayi was started with admin privileges.</value>
+        <value>Jiayi wurde mit Admin-Rechten gestartet.</value>
     </data>
   <!-- import mod collection strings -->
   <data name="ImportModTitle" xml:space="preserve">
-        <value>Import mod collection</value>
+        <value>Mod-Sammlung importieren</value>
     </data>
   <data name="ImportModQuestion" xml:space="preserve">
-        <value>Would you like to import this collection?</value>
+        <value>Möchtest du diese Sammlung importieren?</value>
     </data>
   <data name="ImportModModCount" xml:space="preserve">
-        <value>{0} mods</value>
+        <value>{0} Mods</value>
     </data>
   <data name="ImportModLocalModCount" xml:space="preserve">
-        <value>{0} locally stored</value>
+        <value>{0} lokal gespeichert</value>
     </data>
   <data name="ImportModInternetModCount" xml:space="preserve">
-        <value>{0} from the web</value>
+        <value>{0} aus dem Web</value>
     </data>
   <data name="ImportModDefaultLocationNotice" xml:space="preserve">
         <value>Mods in der Sammlung werden am standardmäßigen Ort gespeichert (änderbar in den Einstellungen)</value>
@@ -292,22 +290,22 @@
     </data>
   <!-- new mod strings -->
   <data name="NewModName" xml:space="preserve">
-        <value>New mod</value>
+        <value>Neuer Mod</value>
     </data>
   <data name="NewModSelectFile" xml:space="preserve">
-        <value>Select a mod</value>
+        <value>Wähle einen Mod</value>
     </data>
   <data name="NewModFileFilter" xml:space="preserve">
-        <value>.dll and .exe files only</value>
+        <value>nur .dll- und .exe-Dateien</value>
     </data>
   <data name="NewModOr" xml:space="preserve">
-        <value>or</value>
+        <value>oder</value>
     </data>
   <data name="NewModEnterLink" xml:space="preserve">
-        <value>Enter the link to your mod</value>
+        <value>Gib den Link zu deinem Mod ein</value>
     </data>
   <data name="NewModOfflineNotice" xml:space="preserve">
-        <value>Not available while offline</value>
+        <value>Nicht verfügbar, wenn offline</value>
     </data>
   <data name="NewModLinkPlaceholder" xml:space="preserve">
         <value>cool-website.com/path/to/mod.dll</value>

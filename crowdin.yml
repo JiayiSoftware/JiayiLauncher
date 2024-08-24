@@ -1,0 +1,3 @@
+files:
+  - source: /JiayiLauncher/Localization/Strings.resx
+    translation: /JiayiLauncher/Localization/Strings.%locale%.resx

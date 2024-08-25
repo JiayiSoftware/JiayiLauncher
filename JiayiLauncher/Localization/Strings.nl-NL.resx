@@ -219,7 +219,7 @@
         <value>Supported versions</value>
     </data>
   <data name="EditModSelectVersions" xml:space="preserve">
-        <value>Select versions</value>
+        <value>Selecteer versies</value>
     </data>
   <data name="EditModLaunchArgs" xml:space="preserve">
         <value>Launch arguments</value>

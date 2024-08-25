@@ -189,14 +189,14 @@
     </data>
   <data name="ConfManNoModDataFolder" xml:space="preserve">
         <value>
-            Für diesen Mod ist kein Datenordnername festgelegt.
-            Um auf den Konfigurationsmanager zuzugreifen, bearbeite dieser Mod und lege den Datenordnernamen fest.
+            Für diese Mod ist kein Datenordnername festgelegt.
+            Um auf den Konfigurationsmanager zuzugreifen, bearbeite diese Mod und lege den Datenordnernamen fest.
         </value>
     </data>
   <data name="ConfManInvalidDataFolder" xml:space="preserve">
         <value>
-            Der Datenordner, den du für diesen Mod eingestellt hast, existiert nicht.
-            Stelle sicher, dass du den richtigen Datenordnernamen eingestellt hast.
+            Der Datenordner, den du für diese Mod eingestellt hast, existiert nicht.
+            Stelle sicher, dass du den richtigen Datenordnernamen angegeben hast.
         </value>
     </data>
   <data name="ConfManEdit" xml:space="preserve">
@@ -237,7 +237,7 @@
         <value>Die Mods werden an deinem Standardspeicherort gespeichert, den du in den Einstellungen ändern kannst</value>
     </data>
   <data name="EditModExternalSourceNotice" xml:space="preserve">
-        <value>Dieser Mod stammt von einer externen Anwendung oder Website. Füge keine Mods aus nicht vertrauenswürdigen Quellen hinzu.</value>
+        <value>Diese Mod stammt von einer externen Anwendung oder Website. Füge keine Mods aus nicht vertrauenswürdigen Quellen hinzu.</value>
     </data>
   <!-- edit profile strings -->
   <data name="EditProfileName" xml:space="preserve">
@@ -313,7 +313,7 @@
         <value>cool-website.com/path/to/mod.dll</value>
     </data>
   <data name="NewModDllDisplayName" xml:space="preserve">
-        <value>Injectabare Bibliotheken</value>
+        <value>Injectbare Bibliotheken</value>
     </data>
   <data name="NewModExeDisplayName" xml:space="preserve">
         <value>Externe Clients und Injektoren</value>
@@ -325,7 +325,7 @@
         <value>Keine Mod-Sammlung</value>
     </data>
   <data name="NewModAlreadyInCollection" xml:space="preserve">
-        <value>Dieser Mod befindet sich bereits in deiner Sammlung!</value>
+        <value>Diese Mod befindet sich bereits in deiner Sammlung!</value>
     </data>
   <data name="NewModInvalidLink" xml:space="preserve">
         <value>Ungültiger Link</value>
@@ -337,7 +337,7 @@
         <value>Überprüfe Link...</value>
     </data>
   <data name="NewModAlreadyExists" xml:space="preserve">
-        <value>Dieser Mod existiert bereits in deiner Sammlung. Möchtest du sie ersetzen?</value>
+        <value>Diese Mod existiert bereits in deiner Sammlung. Möchtest du sie ersetzen?</value>
     </data>
   <!-- new theme strings -->
   <data name="NewThemeName" xml:space="preserve">
@@ -959,13 +959,13 @@
     </data>
   <!-- discord settings strings -->
   <data name="SettingsRichPresence" xml:space="preserve">
-        <value>Rich Presence aktivieren</value>
+        <value>Aktivitätsanzeige aktivieren</value>
     </data>
   <data name="SettingsRichPresenceDesc" xml:space="preserve">
         <value>Zeige auf Discord, was du gerade in Jiayi machst.</value>
     </data>
   <data name="SettingsRichPresenceTooltip" xml:space="preserve">
-        <value>            Verfügbare Formatierungszeichenfolgen für Rich Presence:
+        <value>            Verfügbare Formatierungszeichenfolgen für die Aktivitätsanzeige:
 
             %mod_name% - der Name des Mods, mit dem du spielst
             %game_version% - deine aktuelle Minecraft-Version
@@ -1017,13 +1017,13 @@
         <value>Schlüssel für großes Bild</value>
     </data>
   <data name="SettingsLargeImageKeyDesc" xml:space="preserve">
-        <value>Der große Bildschlüssel, der für Rich Presence verwendet wird.</value>
+        <value>Der großen Bild-ID, der für Aktivitätsanzeige verwendet wird.</value>
     </data>
   <data name="SettingsSmallImageKey" xml:space="preserve">
         <value>Schlüssel für kleines Bild</value>
     </data>
   <data name="SettingsSmallImageKeyDesc" xml:space="preserve">
-        <value>Der Schlüssel für das kleine Bild, das für Rich Presence verwendet wird.</value>
+        <value>Die kleine Bild-ID, das für Aktivitätsanzeige verwendet wird.</value>
     </data>
   <data name="SettingsLargeImageText" xml:space="preserve">
         <value>Großer Bildtext</value>

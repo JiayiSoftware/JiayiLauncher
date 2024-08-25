@@ -66,118 +66,118 @@
         <value>Okay</value>
     </data>
   <data name="Yes" xml:space="preserve">
-        <value>Yes</value>
+        <value>Да</value>
     </data>
   <data name="No" xml:space="preserve">
-        <value>No</value>
+        <value>Нет</value>
     </data>
   <data name="Cancel" xml:space="preserve">
-        <value>Cancel</value>
+        <value>Отмена</value>
     </data>
   <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Закрыть</value>
     </data>
   <data name="Open" xml:space="preserve">
-        <value>Open</value>
+        <value>Открыть</value>
     </data>
   <data name="Save" xml:space="preserve">
-        <value>Save</value>
+        <value>Сохранить</value>
     </data>
   <data name="Export" xml:space="preserve">
-        <value>Export</value>
+        <value>Экспорт</value>
     </data>
   <data name="Import" xml:space="preserve">
-        <value>Import</value>
+        <value>Импорт</value>
     </data>
   <data name="Imported" xml:space="preserve">
-        <value>Imported</value>
+        <value>Импортировано</value>
     </data>
   <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>Импортируем...</value>
     </data>
   <data name="Create" xml:space="preserve">
-        <value>Create</value>
+        <value>Создать</value>
     </data>
   <data name="Download" xml:space="preserve">
-        <value>Download</value>
+        <value>Скачать</value>
     </data>
   <data name="Downloading" xml:space="preserve">
-        <value>Downloading...</value>
+        <value>Скачиваем...</value>
     </data>
   <data name="NotAvailable" xml:space="preserve">
-        <value>Not available</value>
+        <value>Недоступно</value>
     </data>
   <data name="Unknown" xml:space="preserve">
-        <value>Unknown</value>
+        <value>Неизвестно</value>
     </data>
   <data name="Warning" xml:space="preserve">
-        <value>Warning</value>
+        <value>Предупреждение</value>
     </data>
   <data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>Ошибка</value>
     </data>
   <data name="Launch" xml:space="preserve">
-        <value>Launch</value>
+        <value>Запустить</value>
     </data>
   <data name="Extracting" xml:space="preserve">
-        <value>Extracting...</value>
+        <value>Распаковка...</value>
     </data>
   <data name="CompletionPercent" xml:space="preserve">
-        <value>{0}% complete</value>
+        <value>{0}% выполнено</value>
     </data>
   <data name="Remove" xml:space="preserve">
-        <value>Remove</value>
+        <value>Удалить</value>
     </data>
   <data name="Removing" xml:space="preserve">
-        <value>Removing...</value>
+        <value>Удаляем...</value>
     </data>
   <data name="Switch" xml:space="preserve">
-        <value>Switch</value>
+        <value>Переключиться</value>
     </data>
   <data name="Switching" xml:space="preserve">
-        <value>Switching...</value>
+        <value>Переключаем...</value>
     </data>
   <data name="Apply" xml:space="preserve">
-        <value>Apply</value>
+        <value>Применить</value>
     </data>
   <data name="Select" xml:space="preserve">
-        <value>Select</value>
+        <value>Выбрать</value>
     </data>
   <data name="View" xml:space="preserve">
         <value>View</value>
     </data>
   <data name="Restore" xml:space="preserve">
-        <value>Restore</value>
+        <value>Восстановить</value>
     </data>
   <data name="Update" xml:space="preserve">
         <value>Update</value>
     </data>
   <data name="Restart" xml:space="preserve">
-        <value>Restart</value>
+        <value>Перезапуск</value>
     </data>
   <data name="Later" xml:space="preserve">
-        <value>Later</value>
+        <value>Позже</value>
     </data>
   <data name="Generate" xml:space="preserve">
-        <value>Generate</value>
+        <value>Сгенерировать</value>
     </data>
   <data name="Clear" xml:space="preserve">
-        <value>Clear</value>
+        <value>Очистить</value>
     </data>
   <data name="Name" xml:space="preserve">
-        <value>Name</value>
+        <value>Название</value>
     </data>
   <data name="FilterBy" xml:space="preserve">
-        <value>Filter by:</value>
+        <value>Сортировать по:</value>
     </data>
   <data name="WhatsThis" xml:space="preserve">
-        <value>What's this?</value>
+        <value>Что это?</value>
     </data>
   <data name="AdvancedSettings" xml:space="preserve">
-        <value>Advanced settings</value>
+        <value>Расширенные настройки</value>
     </data>
   <data name="MinecraftForWindows" xml:space="preserve">
-        <value>Minecraft for Windows</value>
+        <value>Minecraft для Windows</value>
     </data>
   <!-- optional Jiayi Launcher string, translate if you want -->
   <data name="JiayiLauncher" xml:space="preserve">
@@ -185,76 +185,76 @@
     </data>
   <!-- config manager strings -->
   <data name="ConfManName" xml:space="preserve">
-        <value>Config manager</value>
+        <value>Менеджер конфигураций</value>
     </data>
   <data name="ConfManNoModDataFolder" xml:space="preserve">
         <value>
-            This mod doesn't have a data folder name set.
-            To access the config manager, edit this mod and set the data folder name.
+Этот мод не имеет названия папки с данными.
+            Чтобы использовать менеджер конфигураций, отредактируйте мод и впишите название папки с данными.
         </value>
     </data>
   <data name="ConfManInvalidDataFolder" xml:space="preserve">
         <value>
-            The data folder you set for this mod doesn't exist.
-            Make sure you have the correct data folder name set.
+            Папка с данными, указанная для данного мода, не существует.
+            Убедитесь, что вы верно ввели название папки с данными.
         </value>
     </data>
   <data name="ConfManEdit" xml:space="preserve">
-        <value>Open and edit config</value>
+        <value>Открыть и изменить конфигурацию</value>
     </data>
   <data name="ConfManDelete" xml:space="preserve">
-        <value>Delete config (irreversible)</value>
+        <value>Стереть конфигурацию навсегда</value>
     </data>
   <data name="ConfManDragDrop" xml:space="preserve">
-        <value>Click here or drop files to add configs</value>
+        <value>Нажмите здесь или перетащите файлы, чтобы добавить конфигурации</value>
     </data>
   <!-- edit mod strings -->
   <data name="EditModName" xml:space="preserve">
-        <value>Edit mod</value>
+        <value>Изменить мод</value>
     </data>
   <data name="EditModModName" xml:space="preserve">
-        <value>Mod name</value>
+        <value>Название мода</value>
     </data>
   <data name="EditModSupportedVersions" xml:space="preserve">
-        <value>Supported versions</value>
+        <value>Поддерживаемые версии</value>
     </data>
   <data name="EditModSelectVersions" xml:space="preserve">
-        <value>Select versions</value>
+        <value>Выбрать версию</value>
     </data>
   <data name="EditModLaunchArgs" xml:space="preserve">
-        <value>Launch arguments</value>
+        <value>Аргументы запуска</value>
     </data>
   <data name="EditModLaunchArgsNotice" xml:space="preserve">
-        <value>This does not apply to internal mods</value>
+        <value>Это не применяется к внутренним модам</value>
     </data>
   <data name="EditModDataFolder" xml:space="preserve">
-        <value>Mod data folder name</value>
+        <value>Имя папки с данными мода</value>
     </data>
   <data name="EditModDataFolderNotice" xml:space="preserve">
-        <value>Usually in RoamingState</value>
+        <value>Обычно в папке RoamingState</value>
     </data>
   <data name="EditModDefaultLocationNotice" xml:space="preserve">
-        <value>Mods will be saved to their default location, which you can change in settings</value>
+        <value>Моды будут сохранены в их стандартное расположение, которое можно изменить в настройках</value>
     </data>
   <data name="EditModExternalSourceNotice" xml:space="preserve">
-        <value>This mod came from an external app or website. Don't add mods from untrusted sources.</value>
+        <value>Этот мод был добавлен из приложения или веб-сайта. Не доверяйте модам из непроверенных источников.</value>
     </data>
   <!-- edit profile strings -->
   <data name="EditProfileName" xml:space="preserve">
-        <value>Edit profile</value>
+        <value>Изменить профиль</value>
     </data>
   <data name="EditProfileCreateName" xml:space="preserve">
-        <value>Create profile</value>
+        <value>Создать профиль</value>
     </data>
   <data name="EditProfileNameProfile" xml:space="preserve">
-        <value>Give your profile a name!</value>
+        <value>Дайте своему профилю имя!</value>
     </data>
   <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
-        <value>Profiles will be saved to their default location, which you can change in settings</value>
+        <value>Профили будут сохранены в их стандартное расположение, которое можно изменить в настройках</value>
     </data>
   <!-- privilege escalation strings -->
   <data name="PrivEscTitle" xml:space="preserve">
-        <value>Additional permissions required</value>
+        <value>Необходимы дополнительные права</value>
     </data>
   <data name="PrivEscText" xml:space="preserve">
         <value>You'll need to run Jiayi as admin to do this</value>

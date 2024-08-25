@@ -1044,28 +1044,28 @@
     <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
         <value>Show a button for other users to add the mod you're playing with. This only works with web mods.</value>
     </data>
-    <data name="SettingsDiscordLargeImageKey" xml:space="preserve">
+    <data name="SettingsLargeImageKey" xml:space="preserve">
         <value>Large image key</value>
     </data>
-    <data name="SettingsDiscordLargeImageKeyDesc" xml:space="preserve">
+    <data name="SettingsLargeImageKeyDesc" xml:space="preserve">
         <value>The large image key to use for rich presence.</value>
     </data>
-    <data name="SettingsDiscordSmallImageKey" xml:space="preserve">
+    <data name="SettingsSmallImageKey" xml:space="preserve">
         <value>Small image key</value>
     </data>
-    <data name="SettingsDiscordSmallImageKeyDesc" xml:space="preserve">
+    <data name="SettingsSmallImageKeyDesc" xml:space="preserve">
         <value>The small image key to use for rich presence.</value>
     </data>
-    <data name="SettingsDiscordLargeImageText" xml:space="preserve">
+    <data name="SettingsLargeImageText" xml:space="preserve">
         <value>Large image text</value>
     </data>
-    <data name="SettingsDiscordLargeImageTextDesc" xml:space="preserve">
+    <data name="SettingsLargeImageTextDesc" xml:space="preserve">
         <value>The text to display when hovering over the large image.</value>
     </data>
-    <data name="SettingsDiscordSmallImageText" xml:space="preserve">
+    <data name="SettingsSmallImageText" xml:space="preserve">
         <value>Small image text</value>
     </data>
-    <data name="SettingsDiscordSmallImageTextDesc" xml:space="preserve">
+    <data name="SettingsSmallImageTextDesc" xml:space="preserve">
         <value>The text to display when hovering over the small image.</value>
     </data>
     

@@ -431,13 +431,13 @@
         <value>Beste stabile Version ohne RenderDragon</value>
     </data>
   <data name="VerManShaderManagerText" xml:space="preserve">
-        <value>Einfaches Anwenden von RenderDragon-Shadern auf dein Spiel. Am besten funktioniert es, wenn du das Spiel über Jiayi installiert hast.</value>
+        <value>Einfache Anwendung von RenderDragon-Shadern auf dein Minecraft. Funktioniert am besten, wenn Minecraft über Jiayi installiert wurde.</value>
     </data>
   <data name="VerManShaderManagerVerTooLow" xml:space="preserve">
-        <value>Deine Spielversion verfügt nicht über RenderDragon. Verwende stattdessen ein Ressourcenpaket für Shader.</value>
+        <value>Deine Minecraft-Version verfügt nicht über RenderDragon. Verwende stattdessen ein Ressource Pack Shader.</value>
     </data>
   <data name="VerManShaderManagerMSStore" xml:space="preserve">
-        <value>Dein Spiel wurde über den Microsoft Store installiert. Jiayi kann keine Shader darauf anwenden.</value>
+        <value>Dein Minecraft wurde über den Microsoft Store installiert. Jiayi kann keine Shader-Packs darauf anwenden.</value>
     </data>
   <!-- install location strings -->
   <data name="InstallLocByJiayi" xml:space="preserve">
@@ -460,7 +460,7 @@
         <value>Vollständige Versionsliste</value>
     </data>
   <data name="VerListSearch" xml:space="preserve">
-        <value>Versionen suchen</value>
+        <value>Nach Versionen suchen</value>
     </data>
   <data name="VerListShowDownloaded" xml:space="preserve">
         <value>Heruntergeladenes anzeigen</value>
@@ -469,7 +469,7 @@
         <value>Keine Version gefunden</value>
     </data>
   <data name="VerListLoadMore" xml:space="preserve">
-        <value>Mehr Anzeigen</value>
+        <value>Mehr anzeigen</value>
     </data>
   <data name="VerListRemove" xml:space="preserve">
         <value>Version entfernen</value>
@@ -510,22 +510,22 @@
         <value>Shader-Manager</value>
     </data>
   <data name="ShaderManCurrentShader" xml:space="preserve">
-        <value>Dein aktuelles Shaderpack</value>
+        <value>Dein aktuelles Shader-Pack</value>
     </data>
   <data name="ShaderManNoShader" xml:space="preserve">
-        <value>Keine Shader angewendet</value>
+        <value>Keine Shader-Packs angewendet</value>
     </data>
   <data name="ShaderManUsingVanilla" xml:space="preserve">
-        <value>Minecraft's Vanilla Shader werden verwendet</value>
+        <value>Minecraft's Vanilla Shader wird verwendet. </value>
     </data>
   <data name="ShaderManReplacingCount" xml:space="preserve">
         <value>Ersetzen von {0} "material files"</value>
     </data>
   <data name="ShaderManAvailableShaders" xml:space="preserve">
-        <value>Verfügbare Shader</value>
+        <value>Verfügbare Shader-Packs</value>
     </data>
   <data name="ShaderManSearch" xml:space="preserve">
-        <value>Shader suchen</value>
+        <value>Nach Shader suchen</value>
     </data>
   <data name="ShaderManViewMaterials" xml:space="preserve">
         <value>Shader-materials anzeigen</value>
@@ -534,7 +534,7 @@
         <value>Shader materials</value>
     </data>
   <data name="ShaderManViewMaterialsText" xml:space="preserve">
-        <value>            Dieses Shaderpack ändert die folgenden Materials:
+        <value>            Dieses Shader-Pack ändert die folgenden Materials:
             
             {0}
         </value>
@@ -543,7 +543,7 @@
         <value>{0} material Dateien</value>
     </data>
   <data name="ShaderManRename" xml:space="preserve">
-        <value>Shaderpack umbenennen</value>
+        <value>Shader-Pack umbenennen</value>
     </data>
   <data name="ShaderManDelete" xml:space="preserve">
         <value>Shaderpack löschen</value>
@@ -555,10 +555,10 @@
         <value>Keine Shader gefunden</value>
     </data>
   <data name="ShaderManDragDrop" xml:space="preserve">
-        <value>Klicke hier oder ziehe ein Shaderpack per Drag &amp; Drop, um es hinzuzufügen</value>
+        <value>Klicke hier oder ziehe ein Shader-Pack per Drag &amp; Drop, um es hinzuzufügen</value>
     </data>
   <data name="ShaderManDragDropInfo" xml:space="preserve">
-        <value>            Jede mit dem Zip-Format komprimierte Datei kann als Shaderpack verwendet werden, solange sie Materialdateien enthält.
+        <value>            Jede mit dem Zip-Format komprimierte Datei kann als Shader-Pack verwendet werden, solange sie Materialdateien enthält.
         
             Der Launcher kann Shader überall im Pack finden.
         </value>
@@ -652,7 +652,7 @@
         <value>Mods</value>
     </data>
   <data name="ModsMenuSearch" xml:space="preserve">
-        <value>Mods suchen</value>
+        <value>Nach Mod suchen</value>
     </data>
   <data name="ModsMenuLocallyStored" xml:space="preserve">
         <value>Lokal gespeichert</value>
@@ -684,7 +684,7 @@
         <value>Profile</value>
     </data>
   <data name="ProfilesMenuSearch" xml:space="preserve">
-        <value>Profile suchen</value>
+        <value>Nach Profile suchen</value>
     </data>
   <data name="ProfilesMenuNoProfiles" xml:space="preserve">
         <value>Keine Profile gefunden</value>
@@ -696,10 +696,10 @@
         <value>{0} Welten</value>
     </data>
   <data name="ProfilesMenuResourcePacks" xml:space="preserve">
-        <value>{0} Ressourcenpakete</value>
+        <value>{0} Ressource-Packs</value>
     </data>
   <data name="ProfilesMenuBehaviorPacks" xml:space="preserve">
-        <value>{0} Verhaltenspacks</value>
+        <value>{0} Verhaltens-Packs</value>
     </data>
   <data name="ProfilesMenuMyProfile" xml:space="preserve">
         <value>Mein Profil</value>
@@ -770,7 +770,7 @@
         <value>Auf Standardeinstellungen zurücksetzen</value>
     </data>
   <data name="SettingsMoreInfo" xml:space="preserve">
-        <value>Mehr Info</value>
+        <value>Mehr Informationen dazu.</value>
     </data>
   <data name="SettingsEasterEggText" xml:space="preserve">
         <value>Peekaboo!</value>
@@ -822,10 +822,10 @@
         <value>Aktualisiere die Liste der verfügbaren Versionen.</value>
     </data>
   <data name="SettingsShadersPath" xml:space="preserve">
-        <value>Pfad zum Mod-Ordner</value>
+        <value>Pfad zum Shader-Ordner</value>
     </data>
   <data name="SettingsShadersPathDesc" xml:space="preserve">
-        <value>Der Pfad zu dem Ordner, der deine Shader enthält.</value>
+        <value>Der Pfad zu dem Ordner, der deine Shader-Packs enthält.</value>
     </data>
   <!-- appearance settings strings -->
   <data name="SettingsPrimaryBackgroundColor" xml:space="preserve">
@@ -1058,7 +1058,7 @@
         <value>Deaktiviert den Zugriff auf das Internet. Einige Funktionen funktionieren möglicherweise nicht. Starte Jiayi neu, damit dies seine volle Wirkung entfalten kann.</value>
     </data>
   <data name="SettingsOfflineModeTooltip" xml:space="preserve">
-        <value>Funktionen wie Internet-Mods, das Herunterladen von Versionen und die Suche nach Updates funktionieren nicht.</value>
+        <value>Funktionen wie Internet-Mods, das Herunterladen von Versionen und die Suche nach Updates funktionieren danach nicht.</value>
     </data>
   <data name="SettingsFollowRedirects" xml:space="preserve">
         <value>Weiterleitungen folgen</value>
@@ -1068,10 +1068,10 @@
     </data>
   <!-- launch settings strings -->
   <data name="SettingsUseInjectionDelay" xml:space="preserve">
-        <value>Injection verzögerung verwenden</value>
+        <value>Injection Verzögerung verwenden</value>
     </data>
   <data name="SettingsUseInjectionDelayDesc" xml:space="preserve">
-        <value>Warte eine bestimmte Zeit, anstatt zu warten, bis das Spiel geladen ist, bevor du es injectest.</value>
+        <value>Warte eine festgelegte Zeit, anstatt auf das Laden des Spiels zu warten, bevor injected wird.</value>
     </data>
   <data name="SettingsInjectionDelay" xml:space="preserve">
         <value>Verzögerung der Injection</value>
@@ -1219,7 +1219,7 @@
         <value>Offline-Modus</value>
     </data>
   <data name="OfflineModeDesc" xml:space="preserve">
-        <value>Du bist offline. Einige Funktionen funktionieren möglicherweise nicht.</value>
+        <value>Du bist offline. Einige Funktionen funktionieren möglicherweise nicht mehr.</value>
     </data>
   <!-- update strings -->
   <data name="UpdateInstalled" xml:space="preserve">

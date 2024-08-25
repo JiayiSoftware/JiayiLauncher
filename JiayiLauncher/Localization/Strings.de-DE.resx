@@ -475,7 +475,7 @@
         <value>Version entfernen</value>
     </data>
   <data name="VerListRemoveConfirm" xml:space="preserve">
-        <value>Bist du sicher, dass du diese Version entfernen möchtest?</value>
+        <value>Bist du dir sicher, dass du diese Version entfernen möchtest?</value>
     </data>
   <data name="VerListDevModeQuestion" xml:space="preserve">
         <value>Um die Version zu wechseln, musst du den Entwicklermodus aktivieren. Möchtest du ihn jetzt aktivieren?</value>
@@ -549,7 +549,7 @@
         <value>Shaderpack löschen</value>
     </data>
   <data name="ShaderManDeleteConfirm" xml:space="preserve">
-        <value>Bist du sicher, dass du dieses Shader-Pack löschen willst? Diese Aktion ist nicht umkehrbar.</value>
+        <value>Bist du dir sicher, dass du dieses Shader-Pack löschen willst? Diese Aktion ist nicht umkehrbar.</value>
     </data>
   <data name="ShaderManNoShaders" xml:space="preserve">
         <value>Keine Shader gefunden</value>
@@ -714,7 +714,7 @@
         <value>Profil anwenden</value>
     </data>
   <data name="ProfilesMenuApplyProfileConfirm" xml:space="preserve">
-        <value>Bist du sicher, dass du dieses Profil anwenden willst? Dadurch werden Ihre aktuellen Spieldaten überschrieben.</value>
+        <value>Bist du dir sicher, dass du dieses Profil anwenden willst? Dadurch werden Ihre aktuellen Spieldaten überschrieben.</value>
     </data>
   <data name="ProfilesMenuAboutProfiles" xml:space="preserve">
         <value>Beim Erstellen eines Profils werden deine aktuellen Spieldaten, wie deine Welten, Ressourcenpacks und Einstellungen, kopiert.</value>
@@ -776,10 +776,10 @@
         <value>Peekaboo!</value>
     </data>
   <data name="SettingsConfirmEnable" xml:space="preserve">
-        <value>Bist du sicher, dass du diese Einstellung aktivieren willst?</value>
+        <value>Bist du dir sicher, dass du diese Einstellung aktivieren willst?</value>
     </data>
   <data name="SettingsConfirmAction" xml:space="preserve">
-        <value>Bist du sicher, dass du das tun willst?</value>
+        <value>Bist du dir sicher, dass du das tun willst?</value>
     </data>
   <data name="SettingsInvalidSettingsText" xml:space="preserve">
         <value>Deine Einstellungsdatei war beschädigt oder ungültig.</value>
@@ -1164,7 +1164,7 @@
         <value>Mod löschen (unumkehrbar)</value>
     </data>
   <data name="ModCardDeleteModConfirm" xml:space="preserve">
-        <value>Bist du sicher, dass du {0} löschen willst? Diese Aktion ist unumkehrbar.</value>
+        <value>Bist du dir sicher, dass du {0} löschen willst? Diese Aktion ist unumkehrbar.</value>
     </data>
   <data name="ModCardLaunchMultipleModsConfirm" xml:space="preserve">
         <value>Wenn du mehr als einen Mod gleichzeitig startest, kann dein Spiel instabil werden. Bist du sicher, dass du {0} starten willst?</value>
@@ -1198,7 +1198,7 @@
         <value>Thema erneut installieren</value>
     </data>
   <data name="ThemeCardOverwriteConfirm" xml:space="preserve">
-        <value>Bist du sicher, dass du dieses Thema überschreiben willst? Dadurch gehen alle deine lokalen Änderungen verloren.</value>
+        <value>Bist du dir sicher, dass du dieses Thema überschreiben willst? Dadurch gehen alle deine lokalen Änderungen verloren.</value>
     </data>
   <!-- don't ask again strings -->
   <data name="DontAskAgain" xml:space="preserve">

@@ -222,7 +222,7 @@
         <value>Selecteer versies</value>
     </data>
   <data name="EditModLaunchArgs" xml:space="preserve">
-        <value>Launch arguments</value>
+        <value>Lanceer waardes</value>
     </data>
   <data name="EditModLaunchArgsNotice" xml:space="preserve">
         <value>This does not apply to internal mods</value>

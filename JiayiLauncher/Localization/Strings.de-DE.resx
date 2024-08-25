@@ -1013,28 +1013,28 @@
   <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
         <value>Zeige eine Schaltfläche, mit der andere Benutzer die Mod, mit der du spielst, hinzufügen können. Dies funktioniert nur mit Webmods.</value>
     </data>
-  <data name="SettingsLargeImageKey" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageKey" xml:space="preserve">
         <value>Schlüssel für großes Bild</value>
     </data>
-  <data name="SettingsLargeImageKeyDesc" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageKeyDesc" xml:space="preserve">
         <value>Der großen Bild-ID, der für Aktivitätsanzeige verwendet wird.</value>
     </data>
-  <data name="SettingsSmallImageKey" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageKey" xml:space="preserve">
         <value>Schlüssel für kleines Bild</value>
     </data>
-  <data name="SettingsSmallImageKeyDesc" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageKeyDesc" xml:space="preserve">
         <value>Die kleine Bild-ID, das für Aktivitätsanzeige verwendet wird.</value>
     </data>
-  <data name="SettingsLargeImageText" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageText" xml:space="preserve">
         <value>Großer Bildtext</value>
     </data>
-  <data name="SettingsLargeImageTextDesc" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageTextDesc" xml:space="preserve">
         <value>Der Text, der angezeigt wird, wenn man über das große Bild fährt.</value>
     </data>
-  <data name="SettingsSmallImageText" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageText" xml:space="preserve">
         <value>Kleiner Bildtext</value>
     </data>
-  <data name="SettingsSmallImageTextDesc" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageTextDesc" xml:space="preserve">
         <value>Der Text, der angezeigt wird, wenn man über das kleine Bild fährt.</value>
     </data>
   <!-- update settings strings -->

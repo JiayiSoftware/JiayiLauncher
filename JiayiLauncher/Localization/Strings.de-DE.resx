@@ -144,7 +144,7 @@
         <value>Auswählen</value>
     </data>
   <data name="View" xml:space="preserve">
-        <value>Siehe</value>
+        <value>Ansehen</value>
     </data>
   <data name="Restore" xml:space="preserve">
         <value>Wiederherstellen</value>
@@ -153,7 +153,7 @@
         <value>Update</value>
     </data>
   <data name="Restart" xml:space="preserve">
-        <value>Neustart</value>
+        <value>Neustarten</value>
     </data>
   <data name="Later" xml:space="preserve">
         <value>Später</value>
@@ -260,7 +260,7 @@
         <value>Du musst Jiayi als Administrator ausführen, um dies zu tun</value>
     </data>
   <data name="PrivEscRestartNotice" xml:space="preserve">
-        <value>Der Launcher wird neu gestartet, nachdem du bestätigt hast</value>
+        <value>Der Launcher wird mit erhöhten Berechtigungen gestartet</value>
     </data>
   <data name="PrivEscButton" xml:space="preserve">
         <value>Bestätigen</value>
@@ -627,7 +627,7 @@
         <value>Starte einen Mod, um ihn hier zu sehen</value>
     </data>
   <data name="DashboardPlayedMod" xml:space="preserve">
-        <value>Meistgespielter Mod</value>
+        <value>Meistgespielte Mod</value>
     </data>
   <data name="DashboardOurCommunity" xml:space="preserve">
         <value>Unsere Community</value>

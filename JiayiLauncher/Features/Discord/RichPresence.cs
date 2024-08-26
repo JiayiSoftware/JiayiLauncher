@@ -15,32 +15,58 @@ using Timer = System.Timers.Timer;
 
 namespace JiayiLauncher.Features.Discord;
 
-public static class RichPresence
+public class RichPresence
 {
-	private static DiscordRpcClient? _client;
-	private static DateTime? _startTime;
+	private DiscordRpcClient? _client;
+	private DateTime? _startTime;
 	
 	// a timer so presence can be updated every so often
-	private static readonly Timer _timer = new(5000);
+	private readonly Timer _timer = new(5000);
 	
-	private static string FormatString(string f)
+	private readonly Minecraft _minecraft = Singletons.Get<Minecraft>();
+	private readonly PackageData _packageData = Singletons.Get<PackageData>();
+	
+	public RichPresence()
+	{
+		if (!JiayiSettings.Instance!.RichPresence) return;
+		
+		var log = Singletons.Get<Log>();
+		
+		_startTime = DateTime.UtcNow;
+		
+		_client = new DiscordRpcClient("1138925544172441670");
+		
+		_client.SkipIdenticalPresence = true;
+		_client.OnError += (_, e) => log.Write("Discord", e.Message, Log.LogLevel.Error);
+		_client.OnReady += (_, e) => log.Write("Discord",
+			JiayiSettings.Instance.AnonymizeLogs ? "Connected to Discord" : $"Connected to {e.User}");
+		_client.OnPresenceUpdate += (_, e) 
+			=> log.Write("Discord", $"Presence updated: {e.Presence.Details} - {e.Presence.State}");
+
+		_client.Initialize();
+		
+		_timer.Elapsed += (_, _) => Update();
+		_timer.Start();
+	}
+	
+	private string FormatString(string f)
 	{
 		switch (true)
 		{
 			case true when f.Contains("%mod_name%"):
-				switch (Minecraft.ModsLoaded.Count)
+				switch (_minecraft.ModsLoaded.Count)
 				{
 					case 0:
 						return f.Replace("%mod_name%", "no mods");
 					case 1:
-						return f.Replace("%mod_name%", Minecraft.ModsLoaded[0].Name);
+						return f.Replace("%mod_name%", _minecraft.ModsLoaded[0].Name);
 					case > 1:
-						return f.Replace("%mod_name%", $"{Minecraft.ModsLoaded.Count} mods");
+						return f.Replace("%mod_name%", $"{_minecraft.ModsLoaded.Count} mods");
 				}
 				break;
 			
 			case true when f.Contains("%game_version%"):
-				return f.Replace("%game_version%", PackageData.GetVersion().Result);
+				return f.Replace("%game_version%", _packageData.GetVersion().Result);
 			
 			case true when f.Contains("%mod_count%"):
 				if (ModCollection.Current is null) return f.Replace("%mod_count%", "no mods");
@@ -66,31 +92,8 @@ public static class RichPresence
 		
 		return f;
 	}
-	
-	public static void Initialize()
-	{
-		if (!JiayiSettings.Instance!.RichPresence) return;
-		
-		var log = Singletons.Get<Log>();
-		
-		_startTime = DateTime.UtcNow;
-		
-		_client = new DiscordRpcClient("1138925544172441670");
-		
-		_client.SkipIdenticalPresence = true;
-		_client.OnError += (_, e) => log.Write("Discord", e.Message, Log.LogLevel.Error);
-		_client.OnReady += (_, e) => log.Write("Discord",
-			JiayiSettings.Instance.AnonymizeLogs ? "Connected to Discord" : $"Connected to {e.User}");
-		_client.OnPresenceUpdate += (_, e) 
-			=> log.Write("Discord", $"Presence updated: {e.Presence.Details} - {e.Presence.State}");
 
-		_client.Initialize();
-		
-		_timer.Elapsed += (_, _) => Update();
-		_timer.Start();
-	}
-
-	private static void Update()
+	private void Update()
 	{
 		if (!JiayiSettings.Instance.RichPresence)
 		{
@@ -117,9 +120,9 @@ public static class RichPresence
 
 		if (JiayiSettings.Instance.DiscordShareCurrentMod)
 		{
-			if (Minecraft.ModsLoaded.Count != 1) return;
+			if (_minecraft.ModsLoaded.Count != 1) return;
 			
-			var mod = Minecraft.ModsLoaded.FirstOrDefault(x => x.FromInternet);
+			var mod = _minecraft.ModsLoaded.FirstOrDefault(x => x.FromInternet);
 			if (mod == null) return;
 			
 			buttons.Add(new Button { Label = "Add this mod", Url = $"jiayi://addmod/{mod.Path}" });

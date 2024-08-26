@@ -18,11 +18,13 @@ public static class ShaderManager
 	public static List<string> AvailableShaders => Shaders.Where(x => x != AppliedShader).ToList();
 
 	private static string[] _blockedFolders = ["iOS", "Android"];
+	
 	private static readonly Log _log = Singletons.Get<Log>();
+	private static readonly PackageData _packageData = Singletons.Get<PackageData>();
 
 	public static async Task BackupVanillaShaders()
 	{
-		var info = await PackageData.GetPackage();
+		var info = await _packageData.GetPackage();
 		if (info == null) return;
 		
 		var installPath = info.AppInfo.Package.InstalledPath;
@@ -40,7 +42,7 @@ public static class ShaderManager
 			JiayiSettings.Instance.Save();
 		}
 		
-		var backupPath = Path.Combine(JiayiSettings.Instance.ShadersPath, "Vanilla", await PackageData.GetVersion());
+		var backupPath = Path.Combine(JiayiSettings.Instance.ShadersPath, "Vanilla", await _packageData.GetVersion());
 		Directory.CreateDirectory(backupPath);
 		
 		foreach (var file in Directory.GetFiles(path))
@@ -49,12 +51,12 @@ public static class ShaderManager
 			File.Copy(file, Path.Combine(backupPath, fileName), true);
 		}
 		
-		_log.Write(nameof(ShaderManager), $"Backed up vanilla shaders for version {await PackageData.GetVersion()}");
+		_log.Write(nameof(ShaderManager), $"Backed up vanilla shaders for version {await _packageData.GetVersion()}");
 	}
 	
 	public static async Task DeleteBackupShaders()
 	{
-		var version = await PackageData.GetVersion();
+		var version = await _packageData.GetVersion();
 		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, "Vanilla", version);
 		if (Directory.Exists(path)) Directory.Delete(path, true);
 		
@@ -63,14 +65,14 @@ public static class ShaderManager
 
 	public static async Task RestoreVanillaShaders()
 	{
-		var info = await PackageData.GetPackage();
+		var info = await _packageData.GetPackage();
 		if (info == null) return;
 		
 		var installPath = info.AppInfo.Package.InstalledPath;
 		var path = Path.Combine(installPath, "data", "renderer", "materials");
 		if (!Directory.Exists(path)) return;
 		
-		var version = await PackageData.GetVersion();
+		var version = await _packageData.GetVersion();
 		var backupPath = Path.Combine(JiayiSettings.Instance.ShadersPath, "Vanilla", version);
 		if (!Directory.Exists(backupPath)) return;
 		
@@ -217,13 +219,13 @@ public static class ShaderManager
 		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied", AppliedShader);
 		if (!Directory.Exists(path)) return;
 		
-		var version = await PackageData.GetVersion();
+		var version = await _packageData.GetVersion();
 		var backupPath = Path.Combine(JiayiSettings.Instance.ShadersPath, "Vanilla", version);
 		if (!Directory.Exists(backupPath)) await BackupVanillaShaders();
 
 		await RestoreVanillaShaders();
 		
-		var info = await PackageData.GetPackage();
+		var info = await _packageData.GetPackage();
 		if (info == null) return;
 		
 		var installPath = info.AppInfo.Package.InstalledPath;

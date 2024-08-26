@@ -28,6 +28,7 @@ public static class Injector
 	public static async Task<bool> Inject(string path)
 	{
 		var log = Singletons.Get<Log>();
+		var minecraft = Singletons.Get<Minecraft>();
 		
 		ApplyPermissions(path);
 
@@ -35,7 +36,7 @@ public static class Injector
 		{
 			log.Write(nameof(Injector), $"Injecting {path}");
 
-			var process = Minecraft.Process;
+			var process = minecraft.Process;
 			var processHandle = OpenProcess(
 				PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION
 				| PROCESS_VM_WRITE | PROCESS_VM_READ, false, process.Id);
@@ -84,7 +85,7 @@ public static class Injector
 			}
 			
 			// check if the game is open after injection because some antiviruses will close the game if they detect it
-			if (Minecraft.IsOpen)
+			if (minecraft.IsOpen)
 			{
 				// wait just a bit for the module to load
 				Task.Delay(1000).Wait();
@@ -106,7 +107,7 @@ public static class Injector
 	
 	public static bool IsInjected(string path)
 	{
-		var process = Minecraft.Process;
+		var process = Singletons.Get<Minecraft>().Process;
 		process.Refresh();
 		return process.Modules.Cast<ProcessModule>().Any(m => m.FileName == path);
 	}

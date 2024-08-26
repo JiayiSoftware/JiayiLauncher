@@ -23,7 +23,7 @@
     <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="Crash">Crash Jiayi</JiayiButton>
 
     <JiayiButton OnClick="MinecraftVersion">@(_minecraftVersion)</JiayiButton>
-    <JiayiButton OnClick="Minecraft.Open">Open Minecraft</JiayiButton>
+    <JiayiButton OnClick="_minecraft.Open">Open Minecraft</JiayiButton>
     <JiayiButton OnClick="GameDataPath">Game data path</JiayiButton>
 
 </div>
@@ -77,6 +77,9 @@
 
     private readonly List<string> _toastTypes = new() { "Success", "Warning", "Error", "Info" };
     private JiayiDropDown? _toastType;
+    
+    private readonly Minecraft _minecraft = Singletons.Get<Minecraft>();
+    private readonly PackageData _packageData = Singletons.Get<PackageData>();
 
     private void ButtonClicked()
     {
@@ -101,7 +104,7 @@
 
     private async Task MinecraftVersion()
     {
-        var version = await PackageData.GetVersion();
+        var version = await _packageData.GetVersion();
         _minecraftVersion = version;
     }
 
@@ -112,7 +115,7 @@
 
     private void GameDataPath()
     {
-        var path = PackageData.GetGameDataPath();
+        var path = _packageData.GetGameDataPath();
         var parameters = new ModalParameters()
             .Add(nameof(MessageBox.Message), $"Game data path: {path}");
 

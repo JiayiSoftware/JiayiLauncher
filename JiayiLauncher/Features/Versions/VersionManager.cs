@@ -29,6 +29,7 @@ public static class VersionManager
 	public static long BytesRead { get; private set; }
   
 	private static readonly Log _log = Singletons.Get<Log>();
+	private static readonly PackageData _packageData = Singletons.Get<PackageData>();
 
 	public static bool VersionInstalled(string ver)
 	{
@@ -171,7 +172,7 @@ public static class VersionManager
 
 	public static async Task RemoveVersion(string ver)
 	{
-		var package = await PackageData.GetPackage();
+		var package = await _packageData.GetPackage();
 		if (package == null) return;
 
 		// in case a shader is applied we don't want to lose the user's shaders
@@ -184,7 +185,7 @@ public static class VersionManager
 		if (package.AppInfo.Package.InstalledPath == GetVersionPath(ver))
 		{
 			// remove package
-			await PackageData.PackageManager.RemovePackageAsync(package.AppInfo.Package.Id.FullName, 0);
+			await _packageData.PackageManager.RemovePackageAsync(package.AppInfo.Package.Id.FullName, 0);
 		}
 
 		await Task.Run(() =>
@@ -220,7 +221,7 @@ public static class VersionManager
 			return SwitchResult.DeveloperModeDisabled;
 		}
 
-		var packages = PackageData.PackageManager.FindPackages("Microsoft.MinecraftUWP_8wekyb3d8bbwe");
+		var packages = _packageData.PackageManager.FindPackages("Microsoft.MinecraftUWP_8wekyb3d8bbwe");
 		foreach (var package in packages)
 		{
 			if (package.InstalledPath.Contains(version))
@@ -230,7 +231,7 @@ public static class VersionManager
 			}
 
 			if (package.IsDevelopmentMode)
-				await PackageData.PackageManager.RemovePackageAsync(package.Id.FullName,
+				await _packageData.PackageManager.RemovePackageAsync(package.Id.FullName,
 					RemovalOptions.PreserveApplicationData);
 			else
 			{
@@ -244,13 +245,13 @@ public static class VersionManager
 				else
 				{
 					_log.Write(nameof(VersionManager), "Backing up game data");
-					await PackageData.BackupGameData(backupPath);
+					await _packageData.BackupGameData(backupPath);
 				}
 
 				_log.Write(nameof(VersionManager), "Removing old game data");
-				Directory.Delete(PackageData.GetGameDataPath(), true);
+				Directory.Delete(_packageData.GetGameDataPath(), true);
 
-				await PackageData.PackageManager.RemovePackageAsync(package.Id.FullName, 0);
+				await _packageData.PackageManager.RemovePackageAsync(package.Id.FullName, 0);
 			}
 		}
 
@@ -260,7 +261,7 @@ public static class VersionManager
 
 		try
 		{
-			var result = await PackageData.PackageManager.RegisterPackageAsync(new Uri(manifest), null,
+			var result = await _packageData.PackageManager.RegisterPackageAsync(new Uri(manifest), null,
 				DeploymentOptions.DevelopmentMode);
 
 			if (result.IsRegistered)
@@ -271,7 +272,7 @@ public static class VersionManager
 				var path = Path.Combine(JiayiSettings.Instance.VersionsPath, ".backup");
 				if (Directory.Exists(path))
 				{
-					await PackageData.ReplaceGameData(path);
+					await _packageData.ReplaceGameData(path);
 					Directory.Delete(path, true);
 				}
 

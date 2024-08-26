@@ -37,15 +37,17 @@ public static class Launcher
 		Launching = true;
 		
 		var log = Singletons.Get<Log>();
+		var minecraft = Singletons.Get<Minecraft>();
+		var packageData = Singletons.Get<PackageData>();
 		
 		LaunchProgress = 0;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		log.Write(nameof(Launcher), $"Launching {mod.Name}");
 		
 		// minimize fix !
-		await PackageData.MinimizeFix(JiayiSettings.Instance.MinimizeFix);
+		await packageData.MinimizeFix(JiayiSettings.Instance.MinimizeFix);
 		
-		var supported = await Minecraft.ModSupported(mod);
+		var supported = await minecraft.ModSupported(mod);
 		if (!supported)
 		{
 			log.Write(nameof(Launcher), $"{mod.Name} does not support this version of Minecraft");
@@ -56,7 +58,7 @@ public static class Launcher
 		LaunchProgress += 10;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 
-		await Minecraft.Open();
+		await minecraft.Open();
 		log.Write(nameof(Launcher), "Opened game, waiting to launch mod...");
 		
 		LaunchProgress += 5;
@@ -93,12 +95,12 @@ public static class Launcher
 		if (JiayiSettings.Instance.UseInjectionDelay)
 			Task.Delay(JiayiSettings.Instance.InjectionDelay[2] * 1000).Wait();
 		else
-			await Minecraft.WaitForModules();
+			await minecraft.WaitForModules();
 		
 		LaunchProgress += 25;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		
-		if (!Minecraft.IsOpen)
+		if (!minecraft.IsOpen)
 		{
 			Launching = false;
 			return LaunchResult.GameNotFound;
@@ -141,8 +143,8 @@ public static class Launcher
 			LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 			Launching = false;
 			
-			Minecraft.ModsLoaded.Add(mod);
-			Minecraft.StartUpdate();
+			minecraft.ModsLoaded.Add(mod);
+			minecraft.StartUpdate();
 			JiayiStats.Instance!.MostRecentMod = mod;
 			
 			return LaunchResult.Success;
@@ -162,8 +164,8 @@ public static class Launcher
 		
 		if (injected)
 		{
-			Minecraft.ModsLoaded.Add(mod);
-			Minecraft.StartUpdate();
+			minecraft.ModsLoaded.Add(mod);
+			minecraft.StartUpdate();
 			JiayiStats.Instance!.MostRecentMod = mod;
 		}
 

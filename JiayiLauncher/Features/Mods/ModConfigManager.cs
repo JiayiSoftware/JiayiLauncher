@@ -15,10 +15,11 @@ public class ModConfigManager
 	//private readonly string _configExtension; // maybe in the future
 	
 	private readonly Log _log = Singletons.Get<Log>();
+	private readonly PackageData _packageData = Singletons.Get<PackageData>();
 	
 	public ModConfigManager(Mod mod)
 	{
-		var modDataFolder = Path.Combine(PackageData.GetGameDataPath(), "RoamingState", mod.DataFolderName);
+		var modDataFolder = Path.Combine(_packageData.GetGameDataPath(), "RoamingState", mod.DataFolderName);
 		
 		// find config folder (could be Config, config, configs, configurations, etc)
 		var configFolder = Directory.GetDirectories(modDataFolder)

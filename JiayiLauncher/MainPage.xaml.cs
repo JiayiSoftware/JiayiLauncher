@@ -30,6 +30,9 @@ public partial class MainPage : ContentPage
         // new singleton system
         var log = Singletons.Add<Log>();
         
+        var packageData = Singletons.Add<PackageData>();
+        Singletons.Add<Minecraft>();
+        
         // log current version
         var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);
         log.Write("JiayiLauncher", $"Running version {version.Major}.{version.Minor}.{version.Build}");
@@ -78,7 +81,9 @@ public partial class MainPage : ContentPage
         }
 		      
         JiayiStats.Save();
-        Task.Run(async () => await PackageData.MinimizeFix(JiayiSettings.Instance.MinimizeFix));
-        RichPresence.Initialize();
+        Task.Run(async () => await packageData.MinimizeFix(JiayiSettings.Instance.MinimizeFix));
+        
+        //RichPresence.Initialize();
+        Singletons.Add<RichPresence>();
     }
 }

@@ -117,8 +117,10 @@
         if (Launcher.Launching) return;
 
         var parameters = new ModalParameters();
+        
+        var minecraft = Singletons.Get<Minecraft>();
 
-        if (Minecraft.ModsLoaded.Count > 0)
+        if (minecraft.ModsLoaded.Count > 0)
         {
             var options = new List<(string, EventCallback)>
             {

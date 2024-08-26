@@ -12,15 +12,15 @@ using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Game;
 
-public static class PackageData
+public class PackageData
 {
 	public const string FAMILY_NAME = "Microsoft.MinecraftUWP_8wekyb3d8bbwe";
 	
-	public static PackageManager PackageManager { get; } = new();
+	public PackageManager PackageManager { get; } = new();
 	
-	private static Log _log = Singletons.Get<Log>();
+	private readonly Log _log = Singletons.Get<Log>();
 	
-	public static async Task<AppDiagnosticInfo?> GetPackage()
+	public async Task<AppDiagnosticInfo?> GetPackage()
 	{
 		var info = 
 			await AppDiagnosticInfo.RequestInfoForPackageAsync(FAMILY_NAME);
@@ -28,7 +28,7 @@ public static class PackageData
 		return info[0];
 	}
 
-	public static async Task<string> GetVersion()
+	public async Task<string> GetVersion()
 	{
 		var minecraftApp = await GetPackage();
 		if (minecraftApp == null) return Strings.Unknown;
@@ -54,6 +54,8 @@ public static class PackageData
 			if (version == new PackageVersion(1, 20, 1, 0))
 				return "1.20.0.1";
 			
+			// UPDATE: they did it again. i'm not hardcoding this
+			
 			// when mojang does the silly and makes the build number 1 digit
 			// the revision is literally the revision
 			revision = version.Revision.ToString()[^1];
@@ -62,7 +64,7 @@ public static class PackageData
 		return $"{major}.{minor}.{build}.{revision}";
 	}
 
-	public static async Task<InstallLocation> GetInstallLocation()
+	public async Task<InstallLocation> GetInstallLocation()
 	{
 		var package = await GetPackage();
 		if (package == null) return InstallLocation.Unknown;
@@ -93,14 +95,14 @@ public static class PackageData
 			InstallLocation.FromJiayi : InstallLocation.OtherVersionManager;
 	}
 
-	public static string GetGameDataPath()
+	public string GetGameDataPath()
 	{
 		// i thought i could just use the package for this but naw gotta hardcode it
 		return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
 			"Packages", FAMILY_NAME);
 	}
 	
-	public static async Task MinimizeFix(bool fix)
+	public async Task MinimizeFix(bool fix)
 	{
 		var package = await GetPackage();
 		if (package == null) return;
@@ -112,7 +114,7 @@ public static class PackageData
 			debugSettings.DisableDebugging(package.AppInfo.Package.Id.FullName);
 	}
 
-	public static async Task BackupGameData(string to)
+	public async Task BackupGameData(string to)
 	{
         Directory.CreateDirectory(to);
 
@@ -208,7 +210,7 @@ public static class PackageData
         _log.Write("PackageData", $"Created backup of game data in {to}");
 	}
 
-	public static async Task ReplaceGameData(string dataPath)
+	public async Task ReplaceGameData(string dataPath)
 	{
 		var localState = Path.Combine(GetGameDataPath(), "LocalState");
         var roamingState = Path.Combine(GetGameDataPath(), "RoamingState");

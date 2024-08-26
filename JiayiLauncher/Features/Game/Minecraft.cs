@@ -14,15 +14,17 @@ using Timer = System.Timers.Timer;
 
 namespace JiayiLauncher.Features.Game;
 
-public static class Minecraft
+public class Minecraft
 {
-	private static readonly Timer _timer = new(1000);
-	private static bool _callbackSet;
-	private static Log _log = Singletons.Get<Log>();
+	private readonly Timer _timer = new(1000);
+	private bool _callbackSet;
+	
+	private readonly Log _log = Singletons.Get<Log>();
+	private readonly PackageData _packageData = Singletons.Get<PackageData>();
 
-	public static List<Mod> ModsLoaded { get; } = new();
+	public List<Mod> ModsLoaded { get; } = new();
 
-	public static bool IsOpen
+	public bool IsOpen
 	{
 		get
 		{
@@ -34,18 +36,18 @@ public static class Minecraft
 		}
 	}
 
-	public static Process Process { get; private set; } = null!;
+	public Process Process { get; private set; } = null!;
 
-	public static async Task Open()
+	public async Task Open()
 	{
-		var minecraftApp = await PackageData.GetPackage();
+		var minecraftApp = await _packageData.GetPackage();
 		if (minecraftApp == null) return;
 		await minecraftApp.LaunchAsync();
 
 		Process = Process.GetProcessesByName("Minecraft.Windows")[0];
 	}
 
-	public static void StartUpdate()
+	public void StartUpdate()
 	{
 		if (_timer.Enabled) return;
 
@@ -110,7 +112,7 @@ public static class Minecraft
 		_timer.Start();
 	}
 
-	public static async Task WaitForModules()
+	public async Task WaitForModules()
 	{
 		await Task.Run(() =>
 		{
@@ -147,7 +149,7 @@ public static class Minecraft
 		});
 	}
 
-	private static void AccelerateGameLoading()
+	private void AccelerateGameLoading()
 	{
 		var brokers = Process.GetProcessesByName("RuntimeBroker");
 		if (brokers.Length <= 0) return;
@@ -158,9 +160,9 @@ public static class Minecraft
 		}
 	}
 
-	public static async Task<bool> ModSupported(Mod mod)
+	public async Task<bool> ModSupported(Mod mod)
 	{
-		var version = await PackageData.GetVersion();
+		var version = await _packageData.GetVersion();
 		_log.Write(nameof(Minecraft), $"Current game version is {version} and mod supports {string.Join(", ", mod.SupportedVersions)}");
 		return mod.SupportedVersions.Contains(version) 
 		       || mod.SupportedVersions.Contains("Any version")

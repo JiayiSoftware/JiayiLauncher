@@ -11,6 +11,7 @@ public class Profile
     public string Path { get; set; }
     
     private static readonly Log _log = Singletons.Get<Log>();
+    private static readonly PackageData _packageData = Singletons.Get<PackageData>();
 
     public Profile(string name, string path)
     {
@@ -21,7 +22,7 @@ public class Profile
     public static async Task<Profile> Create(string name, ProfileCollection collection)
     {
 	    var fullPath = System.IO.Path.Combine(collection.BasePath, name);
-        await PackageData.BackupGameData(fullPath);
+        await _packageData.BackupGameData(fullPath);
 
         // create a README.txt
         await File.WriteAllTextAsync(System.IO.Path.Combine(fullPath, "README.txt"),
@@ -56,7 +57,7 @@ public class Profile
 
     public async Task Apply()
     {
-	    await PackageData.ReplaceGameData(Path);
+	    await _packageData.ReplaceGameData(Path);
 	    _log.Write("Profile.Apply", $"Applied profile {Name}");
     }
 

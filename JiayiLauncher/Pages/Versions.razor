@@ -2,6 +2,7 @@
 @using JiayiLauncher.Features.Game
 @using JiayiLauncher.Features.Versions
 @using JiayiLauncher.Pages.Extra
+@using JiayiLauncher.Utils
 
 @inject NavigationManager NavigationManager
 
@@ -93,8 +94,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _currentVersion = await PackageData.GetVersion();
-        var location = await PackageData.GetInstallLocation();
+        var packageData = Singletons.Get<PackageData>();
+        
+        _currentVersion = await packageData.GetVersion();
+        var location = await packageData.GetInstallLocation();
 
         _installLocation = location switch {
             InstallLocation.FromJiayi => Strings.InstallLocByJiayi,

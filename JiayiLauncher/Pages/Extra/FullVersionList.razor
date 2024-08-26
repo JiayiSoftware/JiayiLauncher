@@ -211,7 +211,9 @@
     {
         var options = new List<(string, EventCallback)>();
         var parameters = new ModalParameters();
-        var package = await PackageData.GetPackage();
+        
+        var packageData = Singletons.Get<PackageData>();
+        var package = await packageData.GetPackage();
 
         options.Add((Strings.Yes, new EventCallback(null, async () =>
         {
@@ -297,7 +299,8 @@
         }
         else
         {
-            await Minecraft.Open();
+            var minecraft = Singletons.Get<Minecraft>();
+            await minecraft.Open();
         }
         
         _statuses[i] = string.Empty;

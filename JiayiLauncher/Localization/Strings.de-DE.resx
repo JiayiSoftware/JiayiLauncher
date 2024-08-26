@@ -63,7 +63,7 @@
   </resheader>
   <!-- common strings -->
   <data name="Okay" xml:space="preserve">
-        <value>Okay</value>
+        <value>OK</value>
     </data>
   <data name="Yes" xml:space="preserve">
         <value>Ja</value>
@@ -150,7 +150,7 @@
         <value>Wiederherstellen</value>
     </data>
   <data name="Update" xml:space="preserve">
-        <value>Update</value>
+        <value>Aktualisieren</value>
     </data>
   <data name="Restart" xml:space="preserve">
         <value>Neustarten</value>

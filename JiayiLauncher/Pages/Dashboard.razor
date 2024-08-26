@@ -117,14 +117,13 @@
 }
 
 @code {
-    private JiayiStats _stats;
     private string _version;
     private bool _debug => Debugger.IsAttached;
 
+    private readonly JiayiStats _stats = Singletons.Get<JiayiStats>();
+    
     protected override async Task OnInitializedAsync()
     {
-        _stats = JiayiStats.Instance!;
-        
         var packageData = Singletons.Get<PackageData>();
         _version = await packageData.GetVersion();
         

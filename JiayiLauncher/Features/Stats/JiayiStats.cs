@@ -15,15 +15,17 @@ public class JiayiStats
 	public Mod? MostPlayedMod { get; set; }
 	public Mod? MostRecentMod { get; set; }
 
-	private static string _statsPath = Path.Combine(
+	private string _statsPath = Path.Combine(
 		Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "stats.json");
-	private static JsonSerializerOptions? _options;
+	private JsonSerializerOptions? _options;
 	
-	public static JiayiStats? Instance { get; set; }
+	private bool _loaded;
+
+	public JiayiStats() => Save();
 	
-	public static void Save()
+	public void Save()
 	{
-		if (Instance == null) Load();
+		if (!_loaded) Load();
 		if (ModCollection.Current == null) return; // this func called after the attempt to load mods
 		
 		// crunch some numbers
@@ -33,15 +35,15 @@ public class JiayiStats
 			.Where(mod => ModCollection.Current.HasMod(mod.Path))
 			.ToList();
 
-		Instance!.MostPlayedMod = mostPlayed.Count > 0 ? mostPlayed[0] : null;
+		MostPlayedMod = mostPlayed.Count > 0 ? mostPlayed[0] : null;
 		
-		if (Instance.MostRecentMod != null && !ModCollection.Current.HasMod(Instance.MostRecentMod.Path))
-			Instance.MostRecentMod = null;
+		if (MostRecentMod != null && !ModCollection.Current.HasMod(MostRecentMod.Path))
+			MostRecentMod = null;
 		
 		if (ModCollection.Current.Mods.Count == 0)
 		{
-			Instance.MostPlayedMod = null;
-			Instance.MostRecentMod = null;
+			MostPlayedMod = null;
+			MostRecentMod = null;
 		}
 		
 		File.WriteAllText(_statsPath, string.Empty);
@@ -49,16 +51,16 @@ public class JiayiStats
 		_options ??= new JsonSerializerOptions { WriteIndented = true };
 		
 		using var stream = File.OpenWrite(_statsPath);
-		JsonSerializer.Serialize(stream, Instance, _options);
+		JsonSerializer.Serialize(stream, this, _options);
 	}
 
-	public static void Load()
+	public void Load()
 	{
 		var log = Singletons.Get<Log>();
 		
 		if (!File.Exists(_statsPath))
 		{
-			Instance = new JiayiStats();
+			//Instance = new JiayiStats();
 			Save();
 			log.Write(nameof(JiayiStats), "Created new stats file.");
 			return;
@@ -73,19 +75,22 @@ public class JiayiStats
 			var stats = JsonSerializer.Deserialize<JiayiStats>(stream, _options);
 			if (stats == null)
 			{
-				Instance = new JiayiStats();
 				Save();
 				log.Write(nameof(JiayiStats), "Stats file was corrupted or invalid. Created new stats file.");
 				return;
 			}
 			
-			Instance = stats;
+			//Instance = stats;
+			TotalPlayTime = stats.TotalPlayTime;
+			MostPlayedMod = stats.MostPlayedMod;
+			MostRecentMod = stats.MostRecentMod;
+			_loaded = true;
+			
 			log.Write(nameof(JiayiStats), "Loaded stats.");
 		}
 		catch (Exception e)
 		{
 			stream.Close();
-			Instance = new JiayiStats();
 			Save();
 			log.Write(nameof(JiayiStats), $"Stats file was corrupted or invalid. Created new stats file. Error: {e}");
 		}

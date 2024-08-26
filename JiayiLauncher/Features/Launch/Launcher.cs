@@ -40,6 +40,7 @@ public class Launcher
 		var minecraft = Singletons.Get<Minecraft>();
 		var packageData = Singletons.Get<PackageData>();
 		var modDownloader = Singletons.Get<ModDownloader>();
+		var stats = Singletons.Get<JiayiStats>();
 		
 		LaunchProgress = 0;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
@@ -146,7 +147,7 @@ public class Launcher
 			
 			minecraft.ModsLoaded.Add(mod);
 			minecraft.StartUpdate();
-			JiayiStats.Instance!.MostRecentMod = mod;
+			stats.MostRecentMod = mod;
 			
 			return LaunchResult.Success;
 		}
@@ -169,7 +170,7 @@ public class Launcher
 		{
 			minecraft.ModsLoaded.Add(mod);
 			minecraft.StartUpdate();
-			JiayiStats.Instance!.MostRecentMod = mod;
+			stats.MostRecentMod = mod;
 		}
 
 		return injected ? LaunchResult.Success : LaunchResult.InjectionFailed;

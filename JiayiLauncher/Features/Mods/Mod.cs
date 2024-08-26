@@ -70,6 +70,6 @@ public class Mod
 		ModCollection.Current?.Mods.Remove(this);
 		ModCollection.Current?.Save();
 		
-		JiayiStats.Save();
+		Singletons.Get<JiayiStats>().Save();
 	}
 }

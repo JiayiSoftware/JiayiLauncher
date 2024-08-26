@@ -22,6 +22,7 @@ public class Minecraft
 	private readonly Log _log = Singletons.Get<Log>();
 	private readonly PackageData _packageData = Singletons.Get<PackageData>();
 	private readonly Injector _injector = Singletons.Get<Injector>();
+	private readonly JiayiStats _stats = Singletons.Get<JiayiStats>();
 
 	public List<Mod> ModsLoaded { get; } = new();
 
@@ -67,7 +68,7 @@ public class Minecraft
 			}
 			else
 			{
-				JiayiStats.Instance!.TotalPlayTime += TimeSpan.FromSeconds(1);
+				_stats.TotalPlayTime += TimeSpan.FromSeconds(1);
 
 				foreach (var mod in ModsLoaded)
 				{
@@ -105,7 +106,7 @@ public class Minecraft
 				}
 			}
 			
-			JiayiStats.Save();
+			_stats.Save();
 			ModCollection.Current!.Save();
 		};
 		

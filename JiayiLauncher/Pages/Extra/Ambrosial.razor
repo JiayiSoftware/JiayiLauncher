@@ -86,7 +86,7 @@
         ModalService.Show<EditMod>("Edit mod", parameters);
 
         Mods.Instance?.Refresh();
-        JiayiStats.Save();
+        Singletons.Get<JiayiStats>().Save();
     }
 
     protected override async Task OnInitializedAsync()

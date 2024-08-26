@@ -5,6 +5,7 @@
 @using JiayiLauncher.Features.Stats
 @using JiayiLauncher.Features.Versions
 @using JiayiLauncher.Localization
+@using JiayiLauncher.Utils
 
 <div class="edit" style="overflow-y: @(_showAdvanced ? "auto" : "none")">
     <div class="edit-name">
@@ -115,6 +116,6 @@
         
         // update mods page and stats
         Mods.Instance?.Refresh();
-        JiayiStats.Save();
+        Singletons.Get<JiayiStats>().Save();
     }
 }

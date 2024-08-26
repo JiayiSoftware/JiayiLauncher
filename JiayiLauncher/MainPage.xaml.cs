@@ -34,6 +34,7 @@ public partial class MainPage : ContentPage
         var packageData = Singletons.Add<PackageData>();
         Singletons.Add<ShaderManager>();
         Singletons.Add<Injector>();
+        Singletons.Add<JiayiStats>();
         Singletons.Add<Minecraft>();
         Singletons.Add<Launcher>();
         Singletons.Add<ModImporter>();
@@ -84,8 +85,7 @@ public partial class MainPage : ContentPage
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "Versions");
             JiayiSettings.Instance.Save();
         }
-		      
-        JiayiStats.Save();
+        
         Task.Run(async () => await packageData.MinimizeFix(JiayiSettings.Instance.MinimizeFix));
         
         //RichPresence.Initialize();

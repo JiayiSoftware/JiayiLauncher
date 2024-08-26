@@ -5,6 +5,7 @@ using System.Security.Principal;
 using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Discord;
 using JiayiLauncher.Features.Game;
+using JiayiLauncher.Features.Launch;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Profiles;
 using JiayiLauncher.Features.Stats;
@@ -12,6 +13,7 @@ using JiayiLauncher.Features.Versions;
 using JiayiLauncher.Settings;
 using JiayiLauncher.Utils;
 using Microsoft.AspNetCore.Components.WebView.Maui;
+using Launcher = JiayiLauncher.Features.Launch.Launcher;
 
 namespace JiayiLauncher;
 
@@ -25,13 +27,13 @@ public partial class MainPage : ContentPage
         //CultureInfo.CurrentUICulture = new CultureInfo("es-ES", false);
         
         InitializeComponent();
-        //Log.CreateLog();
         
         // new singleton system
         var log = Singletons.Add<Log>();
-        
         var packageData = Singletons.Add<PackageData>();
+        Singletons.Add<Injector>();
         Singletons.Add<Minecraft>();
+        Singletons.Add<Launcher>();
         
         // log current version
         var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);

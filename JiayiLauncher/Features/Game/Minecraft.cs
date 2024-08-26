@@ -21,6 +21,7 @@ public class Minecraft
 	
 	private readonly Log _log = Singletons.Get<Log>();
 	private readonly PackageData _packageData = Singletons.Get<PackageData>();
+	private readonly Injector _injector = Singletons.Get<Injector>();
 
 	public List<Mod> ModsLoaded { get; } = new();
 
@@ -96,7 +97,7 @@ public class Minecraft
 					}
 
 					// internal mod
-					if (Injector.IsInjected(path)) continue;
+					if (_injector.IsInjected(path)) continue;
 						
 					ModsLoaded.Remove(mod);
 					_log.Write(nameof(Minecraft), $"{mod.Name} is no longer loaded");

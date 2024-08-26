@@ -12,9 +12,9 @@ using static JiayiLauncher.Utils.Imports;
 
 namespace JiayiLauncher.Features.Launch;
 
-public static class Injector
+public class Injector
 {
-	private static void ApplyPermissions(string file)
+	private void ApplyPermissions(string file)
 	{
 		var fileInfo = new FileInfo(file);
 		var fileSecurity = fileInfo.GetAccessControl();
@@ -25,7 +25,7 @@ public static class Injector
 		fileInfo.SetAccessControl(fileSecurity);
 	}
 
-	public static async Task<bool> Inject(string path)
+	public async Task<bool> Inject(string path)
 	{
 		var log = Singletons.Get<Log>();
 		var minecraft = Singletons.Get<Minecraft>();
@@ -105,7 +105,7 @@ public static class Injector
 		});
 	}
 	
-	public static bool IsInjected(string path)
+	public bool IsInjected(string path)
 	{
 		var process = Singletons.Get<Minecraft>().Process;
 		process.Refresh();

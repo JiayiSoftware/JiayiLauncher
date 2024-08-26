@@ -67,7 +67,7 @@
             {
                 <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" Disabled="@_launching"
                              Size="JiayiButton.ButtonSize.Small">
-                    <div class="loading-bar" style="width: @Launcher.LaunchProgress%; opacity: @_showLoadingBar;"></div>
+                    <div class="loading-bar" style="width: @_launcher.LaunchProgress%; opacity: @_showLoadingBar;"></div>
                     @Strings.Launch
                 </JiayiButton>
             }
@@ -103,6 +103,8 @@
     private string _showLoadingBar => _launching ? "0.2" : "0";
 
     private JiayiButton? _launchButton;
+    
+    private readonly Launcher _launcher = Singletons.Get<Launcher>();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -114,7 +116,7 @@
 
     private async Task LaunchClicked()
     {
-        if (Launcher.Launching) return;
+        if (_launcher.Launching) return;
 
         var parameters = new ModalParameters();
         
@@ -148,8 +150,8 @@
         var parameters = new ModalParameters();
         _launching = true;
 
-        Launcher.LaunchProgressChanged += (_, _) => StateHasChanged();
-        var result = await Launcher.Launch(Mod);
+        _launcher.LaunchProgressChanged += (_, _) => StateHasChanged();
+        var result = await _launcher.Launch(Mod);
 
         _launching = false;
 

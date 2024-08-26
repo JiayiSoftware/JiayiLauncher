@@ -7,10 +7,10 @@ using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Launch;
 
-public static class ModDownloader
+public class ModDownloader
 {
 	// a lot of using statements here, (not) sorry if that pisses you off
-    public static async Task<string> DownloadMod(Mod mod)
+    public async Task<string> DownloadMod(Mod mod)
     {
 	    if (InternetManager.OfflineMode) return string.Empty;
 	    

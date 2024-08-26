@@ -10,7 +10,7 @@ using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Launch;
 
-public static class Launcher
+public class Launcher
 {
 	public enum LaunchResult
 	{
@@ -24,14 +24,14 @@ public static class Launcher
 		Success
 	}
 	
-	public static bool Launching { get; private set; }
+	public bool Launching { get; private set; }
 	
-	public static int LaunchProgress { get; private set; }
+	public int LaunchProgress { get; private set; }
 	
-	public static event EventHandler? LaunchProgressChanged;
+	public event EventHandler? LaunchProgressChanged;
 
 	// the big method
-	public static async Task<LaunchResult> Launch(Mod mod)
+	public async Task<LaunchResult> Launch(Mod mod)
 	{
 		if (Launching) return LaunchResult.AlreadyLaunching;
 		Launching = true;
@@ -39,6 +39,7 @@ public static class Launcher
 		var log = Singletons.Get<Log>();
 		var minecraft = Singletons.Get<Minecraft>();
 		var packageData = Singletons.Get<PackageData>();
+		var modDownloader = Singletons.Get<ModDownloader>();
 		
 		LaunchProgress = 0;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
@@ -69,7 +70,7 @@ public static class Launcher
 		// if this is a web mod, download it in the meantime
 		if (mod.FromInternet)
 		{
-			var downloadedPath = await ModDownloader.DownloadMod(mod);
+			var downloadedPath = await modDownloader.DownloadMod(mod);
 			if (downloadedPath == string.Empty)
 			{
 				Launching = false;
@@ -149,15 +150,17 @@ public static class Launcher
 			
 			return LaunchResult.Success;
 		}
+		
+		var injector = Singletons.Get<Injector>();
 
 		// else
-		if (Injector.IsInjected(path))
+		if (injector.IsInjected(path))
 		{
 			Launching = false;
 			return LaunchResult.AlreadyLoaded;
 		}
 
-		var injected = await Injector.Inject(path);
+		var injected = await injector.Inject(path);
 		LaunchProgress += 30;
 		LaunchProgressChanged?.Invoke(null, EventArgs.Empty);
 		Launching = false;

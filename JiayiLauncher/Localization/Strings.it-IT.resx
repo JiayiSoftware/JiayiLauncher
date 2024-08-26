@@ -66,118 +66,118 @@
         <value>Okay</value>
     </data>
   <data name="Yes" xml:space="preserve">
-        <value>Yes</value>
+        <value>Sì</value>
     </data>
   <data name="No" xml:space="preserve">
         <value>No</value>
     </data>
   <data name="Cancel" xml:space="preserve">
-        <value>Cancel</value>
+        <value>Annulla</value>
     </data>
   <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Chiudo</value>
     </data>
   <data name="Open" xml:space="preserve">
-        <value>Open</value>
+        <value>Apri</value>
     </data>
   <data name="Save" xml:space="preserve">
-        <value>Save</value>
+        <value>Salva</value>
     </data>
   <data name="Export" xml:space="preserve">
-        <value>Export</value>
+        <value>Esporta</value>
     </data>
   <data name="Import" xml:space="preserve">
-        <value>Import</value>
+        <value>Importa</value>
     </data>
   <data name="Imported" xml:space="preserve">
-        <value>Imported</value>
+        <value>Importato</value>
     </data>
   <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>Importando...</value>
     </data>
   <data name="Create" xml:space="preserve">
-        <value>Create</value>
+        <value>Creare</value>
     </data>
   <data name="Download" xml:space="preserve">
-        <value>Download</value>
+        <value>Scarica</value>
     </data>
   <data name="Downloading" xml:space="preserve">
-        <value>Downloading...</value>
+        <value>Scaricando...</value>
     </data>
   <data name="NotAvailable" xml:space="preserve">
-        <value>Not available</value>
+        <value>Non disponibile</value>
     </data>
   <data name="Unknown" xml:space="preserve">
-        <value>Unknown</value>
+        <value>Sconosciuto</value>
     </data>
   <data name="Warning" xml:space="preserve">
-        <value>Warning</value>
+        <value>Avviso</value>
     </data>
   <data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>Errore</value>
     </data>
   <data name="Launch" xml:space="preserve">
-        <value>Launch</value>
+        <value>Eseguire</value>
     </data>
   <data name="Extracting" xml:space="preserve">
-        <value>Extracting...</value>
+        <value>Estraendo...</value>
     </data>
   <data name="CompletionPercent" xml:space="preserve">
-        <value>{0}% complete</value>
+        <value>{0}% completo</value>
     </data>
   <data name="Remove" xml:space="preserve">
-        <value>Remove</value>
+        <value>Rimuovere</value>
     </data>
   <data name="Removing" xml:space="preserve">
-        <value>Removing...</value>
+        <value>Rimuovendo...</value>
     </data>
   <data name="Switch" xml:space="preserve">
-        <value>Switch</value>
+        <value>Cambia</value>
     </data>
   <data name="Switching" xml:space="preserve">
-        <value>Switching...</value>
+        <value>Cambiando...</value>
     </data>
   <data name="Apply" xml:space="preserve">
-        <value>Apply</value>
+        <value>Applica</value>
     </data>
   <data name="Select" xml:space="preserve">
-        <value>Select</value>
+        <value>Scegliere</value>
     </data>
   <data name="View" xml:space="preserve">
-        <value>View</value>
+        <value>Visualizza</value>
     </data>
   <data name="Restore" xml:space="preserve">
-        <value>Restore</value>
+        <value>Ripristina</value>
     </data>
   <data name="Update" xml:space="preserve">
-        <value>Update</value>
+        <value>Aggiorna</value>
     </data>
   <data name="Restart" xml:space="preserve">
-        <value>Restart</value>
+        <value>Riavvia</value>
     </data>
   <data name="Later" xml:space="preserve">
-        <value>Later</value>
+        <value>Dopo</value>
     </data>
   <data name="Generate" xml:space="preserve">
-        <value>Generate</value>
+        <value>Generare</value>
     </data>
   <data name="Clear" xml:space="preserve">
-        <value>Clear</value>
+        <value>Pulizia</value>
     </data>
   <data name="Name" xml:space="preserve">
-        <value>Name</value>
+        <value>Nome</value>
     </data>
   <data name="FilterBy" xml:space="preserve">
-        <value>Filter by:</value>
+        <value>Filtrare da:</value>
     </data>
   <data name="WhatsThis" xml:space="preserve">
-        <value>What's this?</value>
+        <value>Cos'è?</value>
     </data>
   <data name="AdvancedSettings" xml:space="preserve">
-        <value>Advanced settings</value>
+        <value>Impostazione avanzata</value>
     </data>
   <data name="MinecraftForWindows" xml:space="preserve">
-        <value>Minecraft for Windows</value>
+        <value>Minecraft su Windows</value>
     </data>
   <!-- optional Jiayi Launcher string, translate if you want -->
   <data name="JiayiLauncher" xml:space="preserve">
@@ -185,44 +185,40 @@
     </data>
   <!-- config manager strings -->
   <data name="ConfManName" xml:space="preserve">
-        <value>Config manager</value>
+        <value>Gestore di Config.</value>
     </data>
   <data name="ConfManNoModDataFolder" xml:space="preserve">
-        <value>
-            This mod doesn't have a data folder name set.
-            To access the config manager, edit this mod and set the data folder name.
-        </value>
+        <value>Questa mod non ha un nome di cartella dati impostato.
+Per accedere al gestore di config., modificare questa mod e impostare il nome della cartella dati.</value>
     </data>
   <data name="ConfManInvalidDataFolder" xml:space="preserve">
-        <value>
-            The data folder you set for this mod doesn't exist.
-            Make sure you have the correct data folder name set.
-        </value>
+        <value>La cartella dati impostata per questa mod non esiste.
+Assicurarsi di aver impostato il nome corretto della cartella dati.</value>
     </data>
   <data name="ConfManEdit" xml:space="preserve">
-        <value>Open and edit config</value>
+        <value>Aprire e modificare configurazione</value>
     </data>
   <data name="ConfManDelete" xml:space="preserve">
-        <value>Delete config (irreversible)</value>
+        <value>Elimina configurazione (irreversibile)</value>
     </data>
   <data name="ConfManDragDrop" xml:space="preserve">
-        <value>Click here or drop files to add configs</value>
+        <value>Clicca qui o rilasciare i file per aggiungere le configurazioni</value>
     </data>
   <!-- edit mod strings -->
   <data name="EditModName" xml:space="preserve">
-        <value>Edit mod</value>
+        <value>Modificare mod</value>
     </data>
   <data name="EditModModName" xml:space="preserve">
-        <value>Mod name</value>
+        <value>Nome mod</value>
     </data>
   <data name="EditModSupportedVersions" xml:space="preserve">
-        <value>Supported versions</value>
+        <value>Versioni sopportati</value>
     </data>
   <data name="EditModSelectVersions" xml:space="preserve">
-        <value>Select versions</value>
+        <value>Scegli versioni</value>
     </data>
   <data name="EditModLaunchArgs" xml:space="preserve">
-        <value>Launch arguments</value>
+        <value>Argomenti di esecuzione</value>
     </data>
   <data name="EditModLaunchArgsNotice" xml:space="preserve">
         <value>This does not apply to internal mods</value>
@@ -381,107 +377,105 @@
         <value>Failed to create theme (already exists): {0}</value>
     </data>
   <data name="ThemePublishOpenRepo" xml:space="preserve">
-        <value>Open repository</value>
+        <value>Apri repository</value>
     </data>
   <data name="ThemePublishFinalize" xml:space="preserve">
-        <value>
-            Your theme is in the folder we just opened.
-            To see it here, open a pull request on our GitHub repository for themes. Check the README for instructions.
-        </value>
+        <value>Tuo tema si trova nella cartella che abbiamo appena aperto.
+Per vederlo qui, apri una richiesta di pull sul nostro repository GitHub per i temi. Per le istruzioni, consultare il README.</value>
     </data>
   <!-- about strings -->
   <data name="AboutTitle" xml:space="preserve">
-        <value>About</value>
+        <value>Informazione</value>
     </data>
   <data name="AboutPresenting" xml:space="preserve">
-        <value>After 2 years of development hell, we proudly present:</value>
+        <value>Dopo 2 anni di sviluppo infernale, siamo orgogliosi di presentarvi:</value>
     </data>
   <data name="AboutSourceAvailable" xml:space="preserve">
-        <value>Source available on GitHub</value>
+        <value>Codice sorgente disponibile su GitHub</value>
     </data>
   <data name="AboutDiscord" xml:space="preserve">
-        <value>Talk to us on Discord</value>
+        <value>Parlarci su Discord</value>
     </data>
   <data name="AboutCredits" xml:space="preserve">
-        <value>Credits</value>
+        <value>Crediti</value>
     </data>
   <!-- version manager strings -->
   <data name="VerManName" xml:space="preserve">
-        <value>Manage your game</value>
+        <value>Gestire tuo gioco</value>
     </data>
   <data name="VerManCurrentVersion" xml:space="preserve">
-        <value>Your current version</value>
+        <value>Tuo versione corrente</value>
     </data>
   <data name="VerManResizeTip" xml:space="preserve">
-        <value>You can resize Jiayi to see the full list on the right</value>
+        <value>Puoi ridimensionare Jiayi per vedere l'elenco completo sulla destra</value>
     </data>
   <data name="VerManManageTip" xml:space="preserve">
-        <value>Manage more versions</value>
+        <value>Gestire più versioni</value>
     </data>
   <data name="VerManPopularVersions" xml:space="preserve">
-        <value>Popular versions</value>
+        <value>Versioni popolare</value>
     </data>
   <data name="VerManLatestVersion" xml:space="preserve">
-        <value>Latest version</value>
+        <value>Ultima versione</value>
     </data>
   <data name="VerManPopularAmongCommunity" xml:space="preserve">
-        <value>Popular among the community</value>
+        <value>Popolare tra la comunità</value>
     </data>
   <data name="VerManBestStableRelease" xml:space="preserve">
-        <value>Best stable release without RenderDragon</value>
+        <value>Il miglior versione stabile senza RenderDragon</value>
     </data>
   <data name="VerManShaderManagerText" xml:space="preserve">
-        <value>Easily apply RenderDragon shaders to your game. Works best if you have the game installed through Jiayi.</value>
+        <value>Applicare facilmente gli shader di RenderDragon al gioco. Funziona meglio se il gioco è stato installato tramite Jiayi.</value>
     </data>
   <data name="VerManShaderManagerVerTooLow" xml:space="preserve">
-        <value>Your game version does not have RenderDragon. Use a resource pack for shaders instead.</value>
+        <value>La versione del gioco non dispone di RenderDragon. Utilizzare invece un pacchetto di risorse per gli shader.</value>
     </data>
   <data name="VerManShaderManagerMSStore" xml:space="preserve">
-        <value>Your game is installed through the Microsoft Store. Jiayi cannot apply shaders to it.</value>
+        <value>Il gioco è stato installato tramite il Microsoft Store. Jiayi non può applicare gli shader.</value>
     </data>
   <!-- install location strings -->
   <data name="InstallLocByJiayi" xml:space="preserve">
-        <value>Installed by Jiayi</value>
+        <value>Installato con Jiayi</value>
     </data>
   <data name="InstallLocFromStore" xml:space="preserve">
-        <value>From Microsoft Store</value>
+        <value>da Microsoft Store</value>
     </data>
   <data name="InstallLocExternalManager" xml:space="preserve">
-        <value>Installed by another version manager</value>
+        <value>Installato da un altro gestore versioni</value>
     </data>
   <data name="InstallLocUnknown" xml:space="preserve">
-        <value>Unknown install location</value>
+        <value>Percorso installazione sconosciuto</value>
     </data>
   <data name="InstallLocNotInstalled" xml:space="preserve">
-        <value>You don't have the game installed</value>
+        <value>Non hai installato il gioco</value>
     </data>
   <!-- version list strings -->
   <data name="VerListName" xml:space="preserve">
-        <value>Full version list</value>
+        <value>Elenco completo delle versioni</value>
     </data>
   <data name="VerListSearch" xml:space="preserve">
-        <value>Search versions</value>
+        <value>Cerca versioni</value>
     </data>
   <data name="VerListShowDownloaded" xml:space="preserve">
-        <value>Show downloaded</value>
+        <value>Mostra scaricati</value>
     </data>
   <data name="VerListNoVersions" xml:space="preserve">
-        <value>No versions found</value>
+        <value>Nessun versione trovato</value>
     </data>
   <data name="VerListLoadMore" xml:space="preserve">
-        <value>Load more</value>
+        <value>Carica di più</value>
     </data>
   <data name="VerListRemove" xml:space="preserve">
-        <value>Remove version</value>
+        <value>Togliere versione</value>
     </data>
   <data name="VerListRemoveConfirm" xml:space="preserve">
-        <value>Are you sure you want to remove this version?</value>
+        <value>Sei sicuro di voler rimuovere questa versione?</value>
     </data>
   <data name="VerListDevModeQuestion" xml:space="preserve">
-        <value>You need to enable developer mode to switch versions. Do you want to enable it now?</value>
+        <value>Per passare da una versione all'altra è necessario abilitare la modalità sviluppatore. Volete abilitarla ora?</value>
     </data>
   <data name="VerListNotFound" xml:space="preserve">
-        <value>This version has not been downloaded yet.</value>
+        <value>Questa versione non è ancora stata scaricata.</value>
     </data>
   <data name="VerListBackupFailed" xml:space="preserve">
         <value>
@@ -1017,28 +1011,28 @@
   <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
         <value>Show a button for other users to add the mod you're playing with. This only works with web mods.</value>
     </data>
-  <data name="SettingsLargeImageKey" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageKey" xml:space="preserve">
         <value>Large image key</value>
     </data>
-  <data name="SettingsLargeImageKeyDesc" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageKeyDesc" xml:space="preserve">
         <value>The large image key to use for rich presence.</value>
     </data>
-  <data name="SettingsSmallImageKey" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageKey" xml:space="preserve">
         <value>Small image key</value>
     </data>
-  <data name="SettingsSmallImageKeyDesc" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageKeyDesc" xml:space="preserve">
         <value>The small image key to use for rich presence.</value>
     </data>
-  <data name="SettingsLargeImageText" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageText" xml:space="preserve">
         <value>Large image text</value>
     </data>
-  <data name="SettingsLargeImageTextDesc" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageTextDesc" xml:space="preserve">
         <value>The text to display when hovering over the large image.</value>
     </data>
-  <data name="SettingsSmallImageText" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageText" xml:space="preserve">
         <value>Small image text</value>
     </data>
-  <data name="SettingsSmallImageTextDesc" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageTextDesc" xml:space="preserve">
         <value>The text to display when hovering over the small image.</value>
     </data>
   <!-- update settings strings -->

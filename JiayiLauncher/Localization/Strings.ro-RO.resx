@@ -1017,28 +1017,28 @@
   <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
         <value>Afișează un buton pentru ca alți utilizatori să adauge modul cu care joci. Acest lucru funcționează doar cu modurile web.</value>
     </data>
-  <data name="SettingsLargeImageKey" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageKey" xml:space="preserve">
         <value>Cheie imagine mare</value>
     </data>
-  <data name="SettingsLargeImageKeyDesc" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageKeyDesc" xml:space="preserve">
         <value>Cheia imaginii mari de utilizat pentru rich presence.</value>
     </data>
-  <data name="SettingsSmallImageKey" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageKey" xml:space="preserve">
         <value>Cheie imagine mică</value>
     </data>
-  <data name="SettingsSmallImageKeyDesc" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageKeyDesc" xml:space="preserve">
         <value>Cheia imaginii mici de utilizat pentru rich presence.</value>
     </data>
-  <data name="SettingsLargeImageText" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageText" xml:space="preserve">
         <value>Text imagine mare</value>
     </data>
-  <data name="SettingsLargeImageTextDesc" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageTextDesc" xml:space="preserve">
         <value>Textul de afișat când treceți cu mouse-ul peste imaginea mare.</value>
     </data>
-  <data name="SettingsSmallImageText" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageText" xml:space="preserve">
         <value>Text imagine mică</value>
     </data>
-  <data name="SettingsSmallImageTextDesc" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageTextDesc" xml:space="preserve">
         <value>Textul de afișat când treceți cu mouse-ul peste imaginea mică.</value>
     </data>
   <!-- update settings strings -->

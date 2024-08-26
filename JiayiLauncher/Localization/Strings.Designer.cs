@@ -1840,6 +1840,42 @@ namespace JiayiLauncher.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Large image key.
+        /// </summary>
+        internal static string SettingsDiscordLargeImageKey {
+            get {
+                return ResourceManager.GetString("SettingsDiscordLargeImageKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The large image key to use for rich presence..
+        /// </summary>
+        internal static string SettingsDiscordLargeImageKeyDesc {
+            get {
+                return ResourceManager.GetString("SettingsDiscordLargeImageKeyDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Large image text.
+        /// </summary>
+        internal static string SettingsDiscordLargeImageText {
+            get {
+                return ResourceManager.GetString("SettingsDiscordLargeImageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The text to display when hovering over the large image..
+        /// </summary>
+        internal static string SettingsDiscordLargeImageTextDesc {
+            get {
+                return ResourceManager.GetString("SettingsDiscordLargeImageTextDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Share current mod.
         /// </summary>
         internal static string SettingsDiscordShareCurrentMod {
@@ -1890,6 +1926,42 @@ namespace JiayiLauncher.Localization {
         internal static string SettingsDiscordShowElapsedTimeDesc {
             get {
                 return ResourceManager.GetString("SettingsDiscordShowElapsedTimeDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Small image key.
+        /// </summary>
+        internal static string SettingsDiscordSmallImageKey {
+            get {
+                return ResourceManager.GetString("SettingsDiscordSmallImageKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The small image key to use for rich presence..
+        /// </summary>
+        internal static string SettingsDiscordSmallImageKeyDesc {
+            get {
+                return ResourceManager.GetString("SettingsDiscordSmallImageKeyDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Small image text.
+        /// </summary>
+        internal static string SettingsDiscordSmallImageText {
+            get {
+                return ResourceManager.GetString("SettingsDiscordSmallImageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The text to display when hovering over the small image..
+        /// </summary>
+        internal static string SettingsDiscordSmallImageTextDesc {
+            get {
+                return ResourceManager.GetString("SettingsDiscordSmallImageTextDesc", resourceCulture);
             }
         }
         
@@ -2079,42 +2151,6 @@ namespace JiayiLauncher.Localization {
         internal static string SettingsInvalidSettingsText2 {
             get {
                 return ResourceManager.GetString("SettingsInvalidSettingsText2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Large image key.
-        /// </summary>
-        internal static string SettingsLargeImageKey {
-            get {
-                return ResourceManager.GetString("SettingsLargeImageKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The large image key to use for rich presence..
-        /// </summary>
-        internal static string SettingsLargeImageKeyDesc {
-            get {
-                return ResourceManager.GetString("SettingsLargeImageKeyDesc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Large image text.
-        /// </summary>
-        internal static string SettingsLargeImageText {
-            get {
-                return ResourceManager.GetString("SettingsLargeImageText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The text to display when hovering over the large image..
-        /// </summary>
-        internal static string SettingsLargeImageTextDesc {
-            get {
-                return ResourceManager.GetString("SettingsLargeImageTextDesc", resourceCulture);
             }
         }
         
@@ -2525,42 +2561,6 @@ namespace JiayiLauncher.Localization {
         internal static string SettingsShadowDistanceDesc {
             get {
                 return ResourceManager.GetString("SettingsShadowDistanceDesc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Small image key.
-        /// </summary>
-        internal static string SettingsSmallImageKey {
-            get {
-                return ResourceManager.GetString("SettingsSmallImageKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The small image key to use for rich presence..
-        /// </summary>
-        internal static string SettingsSmallImageKeyDesc {
-            get {
-                return ResourceManager.GetString("SettingsSmallImageKeyDesc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Small image text.
-        /// </summary>
-        internal static string SettingsSmallImageText {
-            get {
-                return ResourceManager.GetString("SettingsSmallImageText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The text to display when hovering over the small image..
-        /// </summary>
-        internal static string SettingsSmallImageTextDesc {
-            get {
-                return ResourceManager.GetString("SettingsSmallImageTextDesc", resourceCulture);
             }
         }
         

@@ -66,118 +66,118 @@
         <value>Okay</value>
     </data>
   <data name="Yes" xml:space="preserve">
-        <value>Yes</value>
+        <value>Да</value>
     </data>
   <data name="No" xml:space="preserve">
-        <value>No</value>
+        <value>Нет</value>
     </data>
   <data name="Cancel" xml:space="preserve">
-        <value>Cancel</value>
+        <value>Отмена</value>
     </data>
   <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Закрыть</value>
     </data>
   <data name="Open" xml:space="preserve">
-        <value>Open</value>
+        <value>Открыть</value>
     </data>
   <data name="Save" xml:space="preserve">
-        <value>Save</value>
+        <value>Сохранить</value>
     </data>
   <data name="Export" xml:space="preserve">
-        <value>Export</value>
+        <value>Экспорт</value>
     </data>
   <data name="Import" xml:space="preserve">
-        <value>Import</value>
+        <value>Импорт</value>
     </data>
   <data name="Imported" xml:space="preserve">
-        <value>Imported</value>
+        <value>Импортировано</value>
     </data>
   <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>Импортируем...</value>
     </data>
   <data name="Create" xml:space="preserve">
-        <value>Create</value>
+        <value>Создать</value>
     </data>
   <data name="Download" xml:space="preserve">
-        <value>Download</value>
+        <value>Скачать</value>
     </data>
   <data name="Downloading" xml:space="preserve">
-        <value>Downloading...</value>
+        <value>Скачиваем...</value>
     </data>
   <data name="NotAvailable" xml:space="preserve">
-        <value>Not available</value>
+        <value>Недоступно</value>
     </data>
   <data name="Unknown" xml:space="preserve">
-        <value>Unknown</value>
+        <value>Неизвестно</value>
     </data>
   <data name="Warning" xml:space="preserve">
-        <value>Warning</value>
+        <value>Предупреждение</value>
     </data>
   <data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>Ошибка</value>
     </data>
   <data name="Launch" xml:space="preserve">
-        <value>Launch</value>
+        <value>Запустить</value>
     </data>
   <data name="Extracting" xml:space="preserve">
-        <value>Extracting...</value>
+        <value>Распаковка...</value>
     </data>
   <data name="CompletionPercent" xml:space="preserve">
-        <value>{0}% complete</value>
+        <value>{0}% выполнено</value>
     </data>
   <data name="Remove" xml:space="preserve">
-        <value>Remove</value>
+        <value>Удалить</value>
     </data>
   <data name="Removing" xml:space="preserve">
-        <value>Removing...</value>
+        <value>Удаляем...</value>
     </data>
   <data name="Switch" xml:space="preserve">
-        <value>Switch</value>
+        <value>Переключиться</value>
     </data>
   <data name="Switching" xml:space="preserve">
-        <value>Switching...</value>
+        <value>Переключаем...</value>
     </data>
   <data name="Apply" xml:space="preserve">
-        <value>Apply</value>
+        <value>Применить</value>
     </data>
   <data name="Select" xml:space="preserve">
-        <value>Select</value>
+        <value>Выбрать</value>
     </data>
   <data name="View" xml:space="preserve">
         <value>View</value>
     </data>
   <data name="Restore" xml:space="preserve">
-        <value>Restore</value>
+        <value>Восстановить</value>
     </data>
   <data name="Update" xml:space="preserve">
         <value>Update</value>
     </data>
   <data name="Restart" xml:space="preserve">
-        <value>Restart</value>
+        <value>Перезапуск</value>
     </data>
   <data name="Later" xml:space="preserve">
-        <value>Later</value>
+        <value>Позже</value>
     </data>
   <data name="Generate" xml:space="preserve">
-        <value>Generate</value>
+        <value>Сгенерировать</value>
     </data>
   <data name="Clear" xml:space="preserve">
-        <value>Clear</value>
+        <value>Очистить</value>
     </data>
   <data name="Name" xml:space="preserve">
-        <value>Name</value>
+        <value>Название</value>
     </data>
   <data name="FilterBy" xml:space="preserve">
-        <value>Filter by:</value>
+        <value>Сортировать по:</value>
     </data>
   <data name="WhatsThis" xml:space="preserve">
-        <value>What's this?</value>
+        <value>Что это?</value>
     </data>
   <data name="AdvancedSettings" xml:space="preserve">
-        <value>Advanced settings</value>
+        <value>Расширенные настройки</value>
     </data>
   <data name="MinecraftForWindows" xml:space="preserve">
-        <value>Minecraft for Windows</value>
+        <value>Minecraft для Windows</value>
     </data>
   <!-- optional Jiayi Launcher string, translate if you want -->
   <data name="JiayiLauncher" xml:space="preserve">
@@ -185,188 +185,188 @@
     </data>
   <!-- config manager strings -->
   <data name="ConfManName" xml:space="preserve">
-        <value>Config manager</value>
+        <value>Менеджер конфигураций</value>
     </data>
   <data name="ConfManNoModDataFolder" xml:space="preserve">
         <value>
-            This mod doesn't have a data folder name set.
-            To access the config manager, edit this mod and set the data folder name.
+Этот мод не имеет названия папки с данными.
+            Чтобы использовать менеджер конфигураций, отредактируйте мод и впишите название папки с данными.
         </value>
     </data>
   <data name="ConfManInvalidDataFolder" xml:space="preserve">
         <value>
-            The data folder you set for this mod doesn't exist.
-            Make sure you have the correct data folder name set.
+            Папка с данными, указанная для данного мода, не существует.
+            Убедитесь, что вы верно ввели название папки с данными.
         </value>
     </data>
   <data name="ConfManEdit" xml:space="preserve">
-        <value>Open and edit config</value>
+        <value>Открыть и изменить конфигурацию</value>
     </data>
   <data name="ConfManDelete" xml:space="preserve">
-        <value>Delete config (irreversible)</value>
+        <value>Стереть конфигурацию навсегда</value>
     </data>
   <data name="ConfManDragDrop" xml:space="preserve">
-        <value>Click here or drop files to add configs</value>
+        <value>Нажмите здесь или перетащите файлы, чтобы добавить конфигурации</value>
     </data>
   <!-- edit mod strings -->
   <data name="EditModName" xml:space="preserve">
-        <value>Edit mod</value>
+        <value>Изменить мод</value>
     </data>
   <data name="EditModModName" xml:space="preserve">
-        <value>Mod name</value>
+        <value>Название мода</value>
     </data>
   <data name="EditModSupportedVersions" xml:space="preserve">
-        <value>Supported versions</value>
+        <value>Поддерживаемые версии</value>
     </data>
   <data name="EditModSelectVersions" xml:space="preserve">
-        <value>Select versions</value>
+        <value>Выбрать версию</value>
     </data>
   <data name="EditModLaunchArgs" xml:space="preserve">
-        <value>Launch arguments</value>
+        <value>Аргументы запуска</value>
     </data>
   <data name="EditModLaunchArgsNotice" xml:space="preserve">
-        <value>This does not apply to internal mods</value>
+        <value>Это не применяется к внутренним модам</value>
     </data>
   <data name="EditModDataFolder" xml:space="preserve">
-        <value>Mod data folder name</value>
+        <value>Имя папки с данными мода</value>
     </data>
   <data name="EditModDataFolderNotice" xml:space="preserve">
-        <value>Usually in RoamingState</value>
+        <value>Обычно в папке RoamingState</value>
     </data>
   <data name="EditModDefaultLocationNotice" xml:space="preserve">
-        <value>Mods will be saved to their default location, which you can change in settings</value>
+        <value>Моды будут сохранены в их стандартное расположение, которое можно изменить в настройках</value>
     </data>
   <data name="EditModExternalSourceNotice" xml:space="preserve">
-        <value>This mod came from an external app or website. Don't add mods from untrusted sources.</value>
+        <value>Этот мод был добавлен из приложения или веб-сайта. Не доверяйте модам из непроверенных источников.</value>
     </data>
   <!-- edit profile strings -->
   <data name="EditProfileName" xml:space="preserve">
-        <value>Edit profile</value>
+        <value>Изменить профиль</value>
     </data>
   <data name="EditProfileCreateName" xml:space="preserve">
-        <value>Create profile</value>
+        <value>Создать профиль</value>
     </data>
   <data name="EditProfileNameProfile" xml:space="preserve">
-        <value>Give your profile a name!</value>
+        <value>Дайте своему профилю имя!</value>
     </data>
   <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
-        <value>Profiles will be saved to their default location, which you can change in settings</value>
+        <value>Профили будут сохранены в их стандартное расположение, которое можно изменить в настройках</value>
     </data>
   <!-- privilege escalation strings -->
   <data name="PrivEscTitle" xml:space="preserve">
-        <value>Additional permissions required</value>
+        <value>Необходимы дополнительные права</value>
     </data>
   <data name="PrivEscText" xml:space="preserve">
-        <value>You'll need to run Jiayi as admin to do this</value>
+        <value>Чтобы выполнить это, вам необходимо запустить приложение от имени администратора</value>
     </data>
   <data name="PrivEscRestartNotice" xml:space="preserve">
-        <value>The launcher will restart after you escalate</value>
+        <value>Приложение будет перезагружено после предоставления прав</value>
     </data>
   <data name="PrivEscButton" xml:space="preserve">
-        <value>Escalate</value>
+        <value>Предоставить</value>
     </data>
   <data name="PrivEscNotice" xml:space="preserve">
-        <value>Jiayi was started with admin privileges.</value>
+        <value>Приложение запущено от имени администратора.</value>
     </data>
   <!-- import mod collection strings -->
   <data name="ImportModTitle" xml:space="preserve">
-        <value>Import mod collection</value>
+        <value>Импортировать связку модов</value>
     </data>
   <data name="ImportModQuestion" xml:space="preserve">
-        <value>Would you like to import this collection?</value>
+        <value>Вы хотите импортировать эту связку модов?</value>
     </data>
   <data name="ImportModModCount" xml:space="preserve">
-        <value>{0} mods</value>
+        <value>{0} мод(ов)</value>
     </data>
   <data name="ImportModLocalModCount" xml:space="preserve">
-        <value>{0} locally stored</value>
+        <value>{0} хранится локально</value>
     </data>
   <data name="ImportModInternetModCount" xml:space="preserve">
-        <value>{0} from the web</value>
+        <value>{0} из интернета</value>
     </data>
   <data name="ImportModDefaultLocationNotice" xml:space="preserve">
-        <value>The mods in this collection will be saved to their default location, which you can change in settings</value>
+        <value>Моды в этой связке будут сохранены в их стандартное расположение, которое можно изменить в настройках</value>
     </data>
   <data name="ImportModMergeNotice" xml:space="preserve">
-        <value>The mods in this collection will be merged with your collection</value>
+        <value>Моды из этой связки будут совмещены с вашей связкой</value>
     </data>
   <!-- new mod strings -->
   <data name="NewModName" xml:space="preserve">
-        <value>New mod</value>
+        <value>Новый мод</value>
     </data>
   <data name="NewModSelectFile" xml:space="preserve">
-        <value>Select a mod</value>
+        <value>Выбрать мод</value>
     </data>
   <data name="NewModFileFilter" xml:space="preserve">
-        <value>.dll and .exe files only</value>
+        <value>Только .dll или .exe</value>
     </data>
   <data name="NewModOr" xml:space="preserve">
-        <value>or</value>
+        <value>или</value>
     </data>
   <data name="NewModEnterLink" xml:space="preserve">
-        <value>Enter the link to your mod</value>
+        <value>Ссылка на ваш мод</value>
     </data>
   <data name="NewModOfflineNotice" xml:space="preserve">
-        <value>Not available while offline</value>
+        <value>Не доступно без интернета</value>
     </data>
   <data name="NewModLinkPlaceholder" xml:space="preserve">
-        <value>cool-website.com/path/to/mod.dll</value>
+        <value>веб.сайт/путь/до/мода.dll</value>
     </data>
   <data name="NewModDllDisplayName" xml:space="preserve">
-        <value>Injectable libraries</value>
+        <value>Библиотеки (DLL моды)</value>
     </data>
   <data name="NewModExeDisplayName" xml:space="preserve">
-        <value>External clients and injectors</value>
+        <value>Внешние клиенты и инжекторы</value>
     </data>
   <data name="NewModCreateCollectionQuestion" xml:space="preserve">
-        <value>You don't have a mod collection set up. Would you like to create one to add these mods?</value>
+        <value>У вас не создана связка модов. Хотите создать её, чтобы добавить эти моды?</value>
     </data>
   <data name="NewModNoCollectionTitle" xml:space="preserve">
-        <value>No mod collection</value>
+        <value>Нет связки модов</value>
     </data>
   <data name="NewModAlreadyInCollection" xml:space="preserve">
-        <value>This mod is already in your collection!</value>
+        <value>Этот мод уже в связке!</value>
     </data>
   <data name="NewModInvalidLink" xml:space="preserve">
-        <value>Invalid link</value>
+        <value>Неверная ссылка</value>
     </data>
   <data name="NewModLinkNotFound" xml:space="preserve">
-        <value>There's nothing at this address!</value>
+        <value>По этому адресу ничего нет!</value>
     </data>
   <data name="NewModCheckingLink" xml:space="preserve">
-        <value>Checking link...</value>
+        <value>Проверяем ссылку...</value>
     </data>
   <data name="NewModAlreadyExists" xml:space="preserve">
-        <value>This mod already exists in your collection. Do you want to replace it?</value>
+        <value>Этот мод уже в связке. Хотите его заменить?</value>
     </data>
   <!-- new theme strings -->
   <data name="NewThemeName" xml:space="preserve">
-        <value>New theme</value>
+        <value>Новая тема</value>
     </data>
   <data name="NewThemeNameTheme" xml:space="preserve">
-        <value>Give your theme a name!</value>
+        <value>Дайте название своей теме!</value>
     </data>
   <!-- theme publishing strings -->
   <data name="ThemePublishTitle" xml:space="preserve">
-        <value>Prepare theme publish</value>
+        <value>Подготовка к публикации темы</value>
     </data>
   <data name="ThemePublishName" xml:space="preserve">
-        <value>Theme name</value>
+        <value>Название темы</value>
     </data>
   <data name="ThemePublishAuthor" xml:space="preserve">
-        <value>Author</value>
+        <value>Автор</value>
     </data>
   <data name="ThemePublishAuthorPlaceholder" xml:space="preserve">
-        <value>Your name here</value>
+        <value>Ваше имя</value>
     </data>
   <data name="ThemePublishTags" xml:space="preserve">
-        <value>Tags</value>
+        <value>Теги</value>
     </data>
   <data name="ThemePublishTagsPlaceholder" xml:space="preserve">
-        <value>Comma-separated list</value>
+        <value>Список через запятую</value>
     </data>
   <data name="ThemePublishRawTags" xml:space="preserve">
-        <value>Raw tags</value>
+        <value>Сырые теги</value>
     </data>
   <data name="ThemePublishRawTagsSelect" xml:space="preserve">
         <value>Select raw tags</value>
@@ -522,175 +522,175 @@
         <value>Replacing {0} material files</value>
     </data>
   <data name="ShaderManAvailableShaders" xml:space="preserve">
-        <value>Available shaders</value>
+        <value>Доступные шейдеры</value>
     </data>
   <data name="ShaderManSearch" xml:space="preserve">
-        <value>Search shaders</value>
+        <value>Поиск шейдеров</value>
     </data>
   <data name="ShaderManViewMaterials" xml:space="preserve">
-        <value>View shader materials</value>
+        <value>Посмотреть материалы шейдеров</value>
     </data>
   <data name="ShaderManMaterials" xml:space="preserve">
-        <value>Shader materials</value>
+        <value>Материалы шейдеров</value>
     </data>
   <data name="ShaderManViewMaterialsText" xml:space="preserve">
         <value>
-            This shader pack modifies the following materials:
+            Этот пакет шейдеров модифицирует следующие материалы:
             
             {0}
         </value>
     </data>
   <data name="ShaderManMaterialCount" xml:space="preserve">
-        <value>{0} material files</value>
+        <value>{0} файл(ов) материала</value>
     </data>
   <data name="ShaderManRename" xml:space="preserve">
-        <value>Rename shader pack</value>
+        <value>Переименовать пакет шейдеров</value>
     </data>
   <data name="ShaderManDelete" xml:space="preserve">
-        <value>Delete shader pack</value>
+        <value>Удалить пакет шейдеров</value>
     </data>
   <data name="ShaderManDeleteConfirm" xml:space="preserve">
-        <value>Are you sure you want to delete this shader pack? This action is irreversible.</value>
+        <value>Вы действительно хотите удалить этот пакет шейдеров? Это действие невозможно отменить.</value>
     </data>
   <data name="ShaderManNoShaders" xml:space="preserve">
-        <value>No shaders found</value>
+        <value>Шейдеры не найдены</value>
     </data>
   <data name="ShaderManDragDrop" xml:space="preserve">
-        <value>Click here or drag and drop a shader pack to add it</value>
+        <value>Нажмите здесь или перетащите пакет шейдеров, чтобы добавить его</value>
     </data>
   <data name="ShaderManDragDropInfo" xml:space="preserve">
         <value>
-            Any file compressed with the zip format can be used as a shader pack, as long as it contains material files.
+            Любой ZIP архив может быть использован в качестве пакета шейдеров, если он содержит файлы материала.
         
-            The launcher can find shaders anywhere in the pack.
+            Лаунчер найдёт шейдеры в любом месте этого пакета.
         </value>
     </data>
   <!-- edit shader strings (only renaming atm) (Not like any more functionality is planned) -->
   <data name="EditShaderName" xml:space="preserve">
-        <value>Rename shader</value>
+        <value>Переименовать шейдер</value>
     </data>
   <data name="EditShaderRenameShader" xml:space="preserve">
-        <value>Give your shader pack a name!</value>
+        <value>Дайте своему пакету шейдеров название!</value>
     </data>
   <!-- themes menu strings -->
   <data name="ThemesMenuName" xml:space="preserve">
-        <value>Themes</value>
+        <value>Темы</value>
     </data>
   <data name="ThemesMenuSearch" xml:space="preserve">
-        <value>Search themes</value>
+        <value>Поиск тем</value>
     </data>
   <data name="ThemesMenuNoThemes" xml:space="preserve">
-        <value>No themes found</value>
+        <value>Темы не найдены</value>
     </data>
   <data name="ThemesMenuRefresh" xml:space="preserve">
-        <value>Refresh themes</value>
+        <value>Обновить список тем</value>
     </data>
   <!-- dashboard strings -->
   <data name="DashboardMorning" xml:space="preserve">
-        <value>Good morning</value>
+        <value>Доброе утро</value>
     </data>
   <data name="DashboardAfternoon" xml:space="preserve">
-        <value>Good afternoon</value>
+        <value>Добрый день</value>
     </data>
   <data name="DashboardEvening" xml:space="preserve">
-        <value>Good evening</value>
+        <value>Добрый вечер</value>
     </data>
   <data name="DashboardTotalPlaytime" xml:space="preserve">
-        <value>Total play time</value>
+        <value>Общее время игры</value>
     </data>
   <data name="DashboardHours" xml:space="preserve">
-        <value>{0} hours</value>
+        <value>{0} час(ов)</value>
     </data>
   <data name="DashboardWithJiayi" xml:space="preserve">
-        <value>with Jiayi</value>
+        <value>с Jiayi</value>
     </data>
   <data name="DashboardCurrentVersion" xml:space="preserve">
-        <value>Your current version</value>
+        <value>Ваша версия</value>
     </data>
   <data name="DashboardSwitchVersions" xml:space="preserve">
-        <value>Switch versions</value>
+        <value>Выбрать версию</value>
     </data>
   <data name="DashboardProfiles" xml:space="preserve">
-        <value>Your profiles</value>
+        <value>Ваши профили</value>
     </data>
   <data name="DashboardNoProfiles" xml:space="preserve">
-        <value>No profiles</value>
+        <value>Нет профилей</value>
     </data>
   <data name="DashboardProfilesSaved" xml:space="preserve">
-        <value>{0} saved</value>
+        <value>{0} профиль(ей) сохранено</value>
     </data>
   <data name="DashboardViewProfiles" xml:space="preserve">
-        <value>View profiles</value>
+        <value>Просмотр профилей</value>
     </data>
   <data name="DashboardRecentMod" xml:space="preserve">
-        <value>Most recent mod</value>
+        <value>Последний мод</value>
     </data>
   <data name="DashboardNoMod" xml:space="preserve">
-        <value>Launch a mod to see it here</value>
+        <value>Запустите мод, чтобы увидеть его здесь</value>
     </data>
   <data name="DashboardPlayedMod" xml:space="preserve">
-        <value>Most played mod</value>
+        <value>Самый частый мод</value>
     </data>
   <data name="DashboardOurCommunity" xml:space="preserve">
-        <value>Our community</value>
+        <value>Наше сообщество</value>
     </data>
   <data name="DashboardWebsite" xml:space="preserve">
-        <value>Jiayi Software's website</value>
+        <value>Веб-сайт Jiayi Software</value>
     </data>
   <data name="DashboardDiscord" xml:space="preserve">
-        <value>Talk to us on Discord</value>
+        <value>Присоединяйтесь к нашему Discord</value>
     </data>
   <data name="DashboardGitHub" xml:space="preserve">
-        <value>Jiayi Launcher on GitHub</value>
+        <value>Jiayi Launcher на GitHub</value>
     </data>
   <data name="DashboardJiayiLauncherIs" xml:space="preserve">
-        <value>Jiayi Launcher is</value>
+        <value>Jiayi Launcher - это</value>
     </data>
   <data name="DashboardOSS" xml:space="preserve">
-        <value>open source software</value>
+        <value>проект с открытым исходным кодом </value>
     </data>
   <!-- mods strings -->
   <data name="ModsMenuName" xml:space="preserve">
-        <value>Mods</value>
+        <value>Моды</value>
     </data>
   <data name="ModsMenuSearch" xml:space="preserve">
-        <value>Search mods</value>
+        <value>Поиск модов</value>
     </data>
   <data name="ModsMenuLocallyStored" xml:space="preserve">
-        <value>Locally stored</value>
+        <value>Хранится локально</value>
     </data>
   <data name="ModsMenuFromWeb" xml:space="preserve">
-        <value>From the web</value>
+        <value>Из интернета</value>
     </data>
   <data name="ModsMenuNoMods" xml:space="preserve">
-        <value>No mods found</value>
+        <value>Моды не найдены</value>
     </data>
   <data name="ModsMenuDragDrop" xml:space="preserve">
         <value>
-            Drag mods, folders, or links here
-            or click the plus button to add mods
+            Перетащить соды, папки или ссылки сюда
+            или нажмите на кнопку (+), чтобы добавить моды
         </value>
     </data>
   <data name="ModsMenuNoModsFolder" xml:space="preserve">
         <value>
-            You don't have a mods folder set up.
+            Папка с модами не установлена.
             
-            Drag a folder here to make it work with Jiayi,
-            or add mods to create a new folder.
+            Перетащите папку сюда, чтобы она заработала с Jiayi,
+            или добавьте моды, чтобы создать новую папку.
         </value>
     </data>
   <data name="ModsMenuCreateFolderQuestion" xml:space="preserve">
-        <value>Since you don't have a mods folder set up, Jiayi will make one for you to add these mods. Is that okay? It will be in your documents folder.</value>
+        <value>Из-за того, что папка с модами не настроена, Jiayi создаст её, чтобы добавить эти моды. Всё верно? Этот будет в папке Документы.</value>
     </data>
   <!-- profiles strings -->
   <data name="ProfilesMenuName" xml:space="preserve">
-        <value>Profiles</value>
+        <value>Профили</value>
     </data>
   <data name="ProfilesMenuSearch" xml:space="preserve">
-        <value>Search profiles</value>
+        <value>Поиск профилей</value>
     </data>
   <data name="ProfilesMenuNoProfiles" xml:space="preserve">
-        <value>No profiles found</value>
+        <value>Профили не найдены</value>
     </data>
   <data name="ProfilesMenuBrokenProfile" xml:space="preserve">
         <value>This profile is broken; the folder containing its game data is missing or empty.</value>
@@ -847,10 +847,10 @@
         <value>Accent color</value>
     </data>
   <data name="SettingsAccentColorDesc" xml:space="preserve">
-        <value>The accent color of the launcher.</value>
+        <value>Акцентный цвет лаунчера.</value>
     </data>
   <data name="SettingsTextColor" xml:space="preserve">
-        <value>Text color</value>
+        <value>Цвет текста</value>
     </data>
   <data name="SettingsTextColorDesc" xml:space="preserve">
         <value>The color of text seen throughout the launcher.</value>
@@ -1017,28 +1017,28 @@
   <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
         <value>Show a button for other users to add the mod you're playing with. This only works with web mods.</value>
     </data>
-  <data name="SettingsLargeImageKey" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageKey" xml:space="preserve">
         <value>Large image key</value>
     </data>
-  <data name="SettingsLargeImageKeyDesc" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageKeyDesc" xml:space="preserve">
         <value>The large image key to use for rich presence.</value>
     </data>
-  <data name="SettingsSmallImageKey" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageKey" xml:space="preserve">
         <value>Small image key</value>
     </data>
-  <data name="SettingsSmallImageKeyDesc" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageKeyDesc" xml:space="preserve">
         <value>The small image key to use for rich presence.</value>
     </data>
-  <data name="SettingsLargeImageText" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageText" xml:space="preserve">
         <value>Large image text</value>
     </data>
-  <data name="SettingsLargeImageTextDesc" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageTextDesc" xml:space="preserve">
         <value>The text to display when hovering over the large image.</value>
     </data>
-  <data name="SettingsSmallImageText" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageText" xml:space="preserve">
         <value>Small image text</value>
     </data>
-  <data name="SettingsSmallImageTextDesc" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageTextDesc" xml:space="preserve">
         <value>The text to display when hovering over the small image.</value>
     </data>
   <!-- update settings strings -->

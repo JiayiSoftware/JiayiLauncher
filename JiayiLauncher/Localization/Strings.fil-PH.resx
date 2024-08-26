@@ -66,10 +66,10 @@
         <value>Okay</value>
     </data>
   <data name="Yes" xml:space="preserve">
-        <value>Yes</value>
+        <value>Oo</value>
     </data>
   <data name="No" xml:space="preserve">
-        <value>No</value>
+        <value>Hindi</value>
     </data>
   <data name="Cancel" xml:space="preserve">
         <value>Cancel</value>
@@ -111,13 +111,13 @@
         <value>Unknown</value>
     </data>
   <data name="Warning" xml:space="preserve">
-        <value>Warning</value>
+        <value>Paalala</value>
     </data>
   <data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>Babala</value>
     </data>
   <data name="Launch" xml:space="preserve">
-        <value>Launch</value>
+        <value>I-launch</value>
     </data>
   <data name="Extracting" xml:space="preserve">
         <value>Extracting...</value>
@@ -126,10 +126,10 @@
         <value>{0}% complete</value>
     </data>
   <data name="Remove" xml:space="preserve">
-        <value>Remove</value>
+        <value>Tanggalin</value>
     </data>
   <data name="Removing" xml:space="preserve">
-        <value>Removing...</value>
+        <value>Tinatanggal...</value>
     </data>
   <data name="Switch" xml:space="preserve">
         <value>Switch</value>
@@ -141,13 +141,13 @@
         <value>Apply</value>
     </data>
   <data name="Select" xml:space="preserve">
-        <value>Select</value>
+        <value>Pumili</value>
     </data>
   <data name="View" xml:space="preserve">
         <value>View</value>
     </data>
   <data name="Restore" xml:space="preserve">
-        <value>Restore</value>
+        <value>Ibalik</value>
     </data>
   <data name="Update" xml:space="preserve">
         <value>Update</value>
@@ -156,7 +156,7 @@
         <value>Restart</value>
     </data>
   <data name="Later" xml:space="preserve">
-        <value>Later</value>
+        <value>Mamaya</value>
     </data>
   <data name="Generate" xml:space="preserve">
         <value>Generate</value>
@@ -165,19 +165,19 @@
         <value>Clear</value>
     </data>
   <data name="Name" xml:space="preserve">
-        <value>Name</value>
+        <value>Pangalan</value>
     </data>
   <data name="FilterBy" xml:space="preserve">
         <value>Filter by:</value>
     </data>
   <data name="WhatsThis" xml:space="preserve">
-        <value>What's this?</value>
+        <value>Ano ito?</value>
     </data>
   <data name="AdvancedSettings" xml:space="preserve">
         <value>Advanced settings</value>
     </data>
   <data name="MinecraftForWindows" xml:space="preserve">
-        <value>Minecraft for Windows</value>
+        <value>Minecraft para sa Windows</value>
     </data>
   <!-- optional Jiayi Launcher string, translate if you want -->
   <data name="JiayiLauncher" xml:space="preserve">
@@ -189,8 +189,8 @@
     </data>
   <data name="ConfManNoModDataFolder" xml:space="preserve">
         <value>
-            This mod doesn't have a data folder name set.
-            To access the config manager, edit this mod and set the data folder name.
+			Ang mod na ito ay walang nakalaan na pangalan para sa data folder.
+			Para magka-access sa tagapamahala ng mga config, i-edit and mod na ito at pangalanan ang data folder.
         </value>
     </data>
   <data name="ConfManInvalidDataFolder" xml:space="preserve">
@@ -200,26 +200,26 @@
         </value>
     </data>
   <data name="ConfManEdit" xml:space="preserve">
-        <value>Open and edit config</value>
+        <value>Buksan at i-edit ang config</value>
     </data>
   <data name="ConfManDelete" xml:space="preserve">
-        <value>Delete config (irreversible)</value>
+        <value>Burahin ang config (hindi na maaaring ibalik)</value>
     </data>
   <data name="ConfManDragDrop" xml:space="preserve">
-        <value>Click here or drop files to add configs</value>
+        <value>Pumindot dito o mag-drop ng mga file para magdagdag ng mga config</value>
     </data>
   <!-- edit mod strings -->
   <data name="EditModName" xml:space="preserve">
-        <value>Edit mod</value>
+        <value>I-edit ang mod</value>
     </data>
   <data name="EditModModName" xml:space="preserve">
-        <value>Mod name</value>
+        <value>Pangalan ng Mod</value>
     </data>
   <data name="EditModSupportedVersions" xml:space="preserve">
-        <value>Supported versions</value>
+        <value>Mga suportadong bersyon</value>
     </data>
   <data name="EditModSelectVersions" xml:space="preserve">
-        <value>Select versions</value>
+        <value>Pumili ng bersyon</value>
     </data>
   <data name="EditModLaunchArgs" xml:space="preserve">
         <value>Launch arguments</value>
@@ -231,33 +231,33 @@
         <value>Mod data folder name</value>
     </data>
   <data name="EditModDataFolderNotice" xml:space="preserve">
-        <value>Usually in RoamingState</value>
+        <value>Kadalasang nasa RoamingState</value>
     </data>
   <data name="EditModDefaultLocationNotice" xml:space="preserve">
-        <value>Mods will be saved to their default location, which you can change in settings</value>
+        <value>Ise-save ang mga mod sa kanilang default na lokasyon, na maaari mong baguhin sa mga setting</value>
     </data>
   <data name="EditModExternalSourceNotice" xml:space="preserve">
-        <value>This mod came from an external app or website. Don't add mods from untrusted sources.</value>
+        <value>Ang mod na ito ay galing sa panlabas na aplikasyon o website. Huwag magdagdag ng mga mods na galing sa mga hindi mapagkakatiwalaan na pinagmulan.</value>
     </data>
   <!-- edit profile strings -->
   <data name="EditProfileName" xml:space="preserve">
-        <value>Edit profile</value>
+        <value>I-edit ang profile</value>
     </data>
   <data name="EditProfileCreateName" xml:space="preserve">
-        <value>Create profile</value>
+        <value>Gumawa ng bagong profile</value>
     </data>
   <data name="EditProfileNameProfile" xml:space="preserve">
-        <value>Give your profile a name!</value>
+        <value>Bigyan mo ng pangalan ang iyong profile!</value>
     </data>
   <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
         <value>Profiles will be saved to their default location, which you can change in settings</value>
     </data>
   <!-- privilege escalation strings -->
   <data name="PrivEscTitle" xml:space="preserve">
-        <value>Additional permissions required</value>
+        <value>Karagdagang permiso ay kinakailangan</value>
     </data>
   <data name="PrivEscText" xml:space="preserve">
-        <value>You'll need to run Jiayi as admin to do this</value>
+        <value>Kailangan mong buksan ang Jiayi bilang admin para gawin ito</value>
     </data>
   <data name="PrivEscRestartNotice" xml:space="preserve">
         <value>The launcher will restart after you escalate</value>
@@ -279,10 +279,10 @@
         <value>{0} mods</value>
     </data>
   <data name="ImportModLocalModCount" xml:space="preserve">
-        <value>{0} locally stored</value>
+        <value>{0} lokal na nakaimbak</value>
     </data>
   <data name="ImportModInternetModCount" xml:space="preserve">
-        <value>{0} from the web</value>
+        <value>{0} mula sa web</value>
     </data>
   <data name="ImportModDefaultLocationNotice" xml:space="preserve">
         <value>The mods in this collection will be saved to their default location, which you can change in settings</value>
@@ -292,16 +292,16 @@
     </data>
   <!-- new mod strings -->
   <data name="NewModName" xml:space="preserve">
-        <value>New mod</value>
+        <value>Bagong mod</value>
     </data>
   <data name="NewModSelectFile" xml:space="preserve">
-        <value>Select a mod</value>
+        <value>Pumili ng mod</value>
     </data>
   <data name="NewModFileFilter" xml:space="preserve">
-        <value>.dll and .exe files only</value>
+        <value>.dll at .exe files lang</value>
     </data>
   <data name="NewModOr" xml:space="preserve">
-        <value>or</value>
+        <value>o</value>
     </data>
   <data name="NewModEnterLink" xml:space="preserve">
         <value>Enter the link to your mod</value>
@@ -341,26 +341,26 @@
     </data>
   <!-- new theme strings -->
   <data name="NewThemeName" xml:space="preserve">
-        <value>New theme</value>
+        <value>Bagong tema</value>
     </data>
   <data name="NewThemeNameTheme" xml:space="preserve">
-        <value>Give your theme a name!</value>
+        <value>Bigyan mo ng bagong pangalan ang iyong tema!</value>
     </data>
   <!-- theme publishing strings -->
   <data name="ThemePublishTitle" xml:space="preserve">
         <value>Prepare theme publish</value>
     </data>
   <data name="ThemePublishName" xml:space="preserve">
-        <value>Theme name</value>
+        <value>Pangalan ng theme</value>
     </data>
   <data name="ThemePublishAuthor" xml:space="preserve">
-        <value>Author</value>
+        <value>Pangalan ng may-ari</value>
     </data>
   <data name="ThemePublishAuthorPlaceholder" xml:space="preserve">
-        <value>Your name here</value>
+        <value>Pangalan mo dito</value>
     </data>
   <data name="ThemePublishTags" xml:space="preserve">
-        <value>Tags</value>
+        <value>Mga tag</value>
     </data>
   <data name="ThemePublishTagsPlaceholder" xml:space="preserve">
         <value>Comma-separated list</value>
@@ -385,13 +385,13 @@
     </data>
   <data name="ThemePublishFinalize" xml:space="preserve">
         <value>
-            Your theme is in the folder we just opened.
-            To see it here, open a pull request on our GitHub repository for themes. Check the README for instructions.
+			Ang iyong tema ay nasa folder na ating binuksan.
+			Para makita dito, gumawa ng pull request sa ating Github repository para sa mga tema. Bagsahin ang README para sa mga tagubilin.
         </value>
     </data>
   <!-- about strings -->
   <data name="AboutTitle" xml:space="preserve">
-        <value>About</value>
+        <value>Tungkol dito</value>
     </data>
   <data name="AboutPresenting" xml:space="preserve">
         <value>After 2 years of development hell, we proudly present:</value>
@@ -407,7 +407,7 @@
     </data>
   <!-- version manager strings -->
   <data name="VerManName" xml:space="preserve">
-        <value>Manage your game</value>
+        <value>Version manager</value>
     </data>
   <data name="VerManCurrentVersion" xml:space="preserve">
         <value>Your current version</value>
@@ -1017,28 +1017,28 @@
   <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
         <value>Show a button for other users to add the mod you're playing with. This only works with web mods.</value>
     </data>
-  <data name="SettingsLargeImageKey" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageKey" xml:space="preserve">
         <value>Large image key</value>
     </data>
-  <data name="SettingsLargeImageKeyDesc" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageKeyDesc" xml:space="preserve">
         <value>The large image key to use for rich presence.</value>
     </data>
-  <data name="SettingsSmallImageKey" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageKey" xml:space="preserve">
         <value>Small image key</value>
     </data>
-  <data name="SettingsSmallImageKeyDesc" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageKeyDesc" xml:space="preserve">
         <value>The small image key to use for rich presence.</value>
     </data>
-  <data name="SettingsLargeImageText" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageText" xml:space="preserve">
         <value>Large image text</value>
     </data>
-  <data name="SettingsLargeImageTextDesc" xml:space="preserve">
+  <data name="SettingsDiscordLargeImageTextDesc" xml:space="preserve">
         <value>The text to display when hovering over the large image.</value>
     </data>
-  <data name="SettingsSmallImageText" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageText" xml:space="preserve">
         <value>Small image text</value>
     </data>
-  <data name="SettingsSmallImageTextDesc" xml:space="preserve">
+  <data name="SettingsDiscordSmallImageTextDesc" xml:space="preserve">
         <value>The text to display when hovering over the small image.</value>
     </data>
   <!-- update settings strings -->

@@ -63,121 +63,121 @@
   </resheader>
   <!-- common strings -->
   <data name="Okay" xml:space="preserve">
-        <value>Okay</value>
+        <value>Tamam</value>
     </data>
   <data name="Yes" xml:space="preserve">
-        <value>Ja</value>
+        <value>Evet</value>
     </data>
   <data name="No" xml:space="preserve">
-        <value>Nein</value>
+        <value>Hayır</value>
     </data>
   <data name="Cancel" xml:space="preserve">
-        <value>Abbrechen</value>
+        <value>İptal</value>
     </data>
   <data name="Close" xml:space="preserve">
-        <value>Schließen</value>
+        <value>Kapat</value>
     </data>
   <data name="Open" xml:space="preserve">
-        <value>Öffnen</value>
+        <value>Aç</value>
     </data>
   <data name="Save" xml:space="preserve">
-        <value>Speichern</value>
+        <value>Kaydet</value>
     </data>
   <data name="Export" xml:space="preserve">
-        <value>Exportieren</value>
+        <value>Dışa Aktar</value>
     </data>
   <data name="Import" xml:space="preserve">
-        <value>Importieren</value>
+        <value>İçe Aktar</value>
     </data>
   <data name="Imported" xml:space="preserve">
-        <value>Importiert</value>
+        <value>İçe Aktarıldı</value>
     </data>
   <data name="Importing" xml:space="preserve">
-        <value>Importieren...</value>
+        <value>İçe Aktarılıyor...</value>
     </data>
   <data name="Create" xml:space="preserve">
-        <value>Erstellen</value>
+        <value>Oluştur</value>
     </data>
   <data name="Download" xml:space="preserve">
-        <value>Herunterladen</value>
+        <value>İndir</value>
     </data>
   <data name="Downloading" xml:space="preserve">
-        <value>Herunterladen...</value>
+        <value>İndiriliyor...</value>
     </data>
   <data name="NotAvailable" xml:space="preserve">
-        <value>Nicht Verfügbar</value>
+        <value>Not available</value>
     </data>
   <data name="Unknown" xml:space="preserve">
-        <value>Unbekannt</value>
+        <value>Bilinmeyen</value>
     </data>
   <data name="Warning" xml:space="preserve">
-        <value>Warnung</value>
+        <value>Uyarı</value>
     </data>
   <data name="Error" xml:space="preserve">
-        <value>Fehler</value>
+        <value>Hata</value>
     </data>
   <data name="Launch" xml:space="preserve">
-        <value>Start</value>
+        <value>Launch</value>
     </data>
   <data name="Extracting" xml:space="preserve">
-        <value>Extrahieren...</value>
+        <value>Extracting...</value>
     </data>
   <data name="CompletionPercent" xml:space="preserve">
-        <value>{0}% vollständig</value>
+        <value>{0}% complete</value>
     </data>
   <data name="Remove" xml:space="preserve">
-        <value>Entfernen</value>
+        <value>Kaldır</value>
     </data>
   <data name="Removing" xml:space="preserve">
-        <value>Löschen...</value>
+        <value>Kaldırıyor...</value>
     </data>
   <data name="Switch" xml:space="preserve">
-        <value>Wechseln</value>
+        <value>Switch</value>
     </data>
   <data name="Switching" xml:space="preserve">
-        <value>Wechselt...</value>
+        <value>Switching...</value>
     </data>
   <data name="Apply" xml:space="preserve">
-        <value>Anwenden</value>
+        <value>Apply</value>
     </data>
   <data name="Select" xml:space="preserve">
-        <value>Auswählen</value>
+        <value>Select</value>
     </data>
   <data name="View" xml:space="preserve">
-        <value>Ansehen</value>
+        <value>View</value>
     </data>
   <data name="Restore" xml:space="preserve">
-        <value>Wiederherstellen</value>
+        <value>Restore</value>
     </data>
   <data name="Update" xml:space="preserve">
         <value>Update</value>
     </data>
   <data name="Restart" xml:space="preserve">
-        <value>Neustarten</value>
+        <value>Yeniden Başlat</value>
     </data>
   <data name="Later" xml:space="preserve">
-        <value>Später</value>
+        <value>Sonra</value>
     </data>
   <data name="Generate" xml:space="preserve">
-        <value>Generieren</value>
+        <value>Generate</value>
     </data>
   <data name="Clear" xml:space="preserve">
-        <value>Leeren</value>
+        <value>Clear</value>
     </data>
   <data name="Name" xml:space="preserve">
-        <value>Name</value>
+        <value>İsim</value>
     </data>
   <data name="FilterBy" xml:space="preserve">
-        <value>Filtern nach:</value>
+        <value>Filter by:</value>
     </data>
   <data name="WhatsThis" xml:space="preserve">
-        <value>Was ist das?</value>
+        <value>What's this?</value>
     </data>
   <data name="AdvancedSettings" xml:space="preserve">
-        <value>Erweiterte Einstellungen</value>
+        <value>Advanced settings</value>
     </data>
   <data name="MinecraftForWindows" xml:space="preserve">
-        <value>Minecraft für Windows</value>
+        <value>Minecraft for Windows</value>
     </data>
   <!-- optional Jiayi Launcher string, translate if you want -->
   <data name="JiayiLauncher" xml:space="preserve">
@@ -185,565 +185,568 @@
     </data>
   <!-- config manager strings -->
   <data name="ConfManName" xml:space="preserve">
-        <value>Konfigurationsmanager</value>
+        <value>Config manager</value>
     </data>
   <data name="ConfManNoModDataFolder" xml:space="preserve">
         <value>
-            Für diese Mod ist kein Datenordnername festgelegt.
-            Um auf den Konfigurationsmanager zuzugreifen, bearbeite diese Mod und lege den Datenordnernamen fest.
+            This mod doesn't have a data folder name set.
+            To access the config manager, edit this mod and set the data folder name.
         </value>
     </data>
   <data name="ConfManInvalidDataFolder" xml:space="preserve">
         <value>
-            Der Datenordner, den du für diese Mod eingestellt hast, existiert nicht.
-            Stelle sicher, dass du den richtigen Datenordnernamen angegeben hast.
+            The data folder you set for this mod doesn't exist.
+            Make sure you have the correct data folder name set.
         </value>
     </data>
   <data name="ConfManEdit" xml:space="preserve">
-        <value>Konfiguration öffnen und bearbeiten</value>
+        <value>Open and edit config</value>
     </data>
   <data name="ConfManDelete" xml:space="preserve">
-        <value>Konfiguration löschen (nicht umkehrbar)</value>
+        <value>Delete config (irreversible)</value>
     </data>
   <data name="ConfManDragDrop" xml:space="preserve">
-        <value>Klicke hier oder lege Dateien ab, um Konfigs hinzuzufügen</value>
+        <value>Click here or drop files to add configs</value>
     </data>
   <!-- edit mod strings -->
   <data name="EditModName" xml:space="preserve">
-        <value>Mod bearbeiten</value>
+        <value>Edit mod</value>
     </data>
   <data name="EditModModName" xml:space="preserve">
-        <value>Mod Name</value>
+        <value>Mod name</value>
     </data>
   <data name="EditModSupportedVersions" xml:space="preserve">
-        <value>Unterstützte Versionen</value>
+        <value>Supported versions</value>
     </data>
   <data name="EditModSelectVersions" xml:space="preserve">
-        <value>Versionen auswählen</value>
+        <value>Select versions</value>
     </data>
   <data name="EditModLaunchArgs" xml:space="preserve">
-        <value>Argumente für den Start</value>
+        <value>Launch arguments</value>
     </data>
   <data name="EditModLaunchArgsNotice" xml:space="preserve">
-        <value>Dies gilt nicht für interne Mods</value>
+        <value>This does not apply to internal mods</value>
     </data>
   <data name="EditModDataFolder" xml:space="preserve">
-        <value>Name des Mod-Datenordners</value>
+        <value>Mod data folder name</value>
     </data>
   <data name="EditModDataFolderNotice" xml:space="preserve">
-        <value>Normalerweise im "RoamingState"</value>
+        <value>Usually in RoamingState</value>
     </data>
   <data name="EditModDefaultLocationNotice" xml:space="preserve">
-        <value>Die Mods werden an deinem Standardspeicherort gespeichert, den du in den Einstellungen ändern kannst</value>
+        <value>Mods will be saved to their default location, which you can change in settings</value>
     </data>
   <data name="EditModExternalSourceNotice" xml:space="preserve">
-        <value>Diese Mod stammt von einer externen Anwendung oder Website. Füge keine Mods aus nicht vertrauenswürdigen Quellen hinzu.</value>
+        <value>This mod came from an external app or website. Don't add mods from untrusted sources.</value>
     </data>
   <!-- edit profile strings -->
   <data name="EditProfileName" xml:space="preserve">
-        <value>Profil bearbeiten</value>
+        <value>Edit profile</value>
     </data>
   <data name="EditProfileCreateName" xml:space="preserve">
-        <value>Profil erstellen</value>
+        <value>Create profile</value>
     </data>
   <data name="EditProfileNameProfile" xml:space="preserve">
-        <value>Gib deinem Profil einen Namen!</value>
+        <value>Give your profile a name!</value>
     </data>
   <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
-        <value>Die Profile werden an ihrem Standardspeicherort gespeichert, den du in den Einstellungen ändern kannst</value>
+        <value>Profiles will be saved to their default location, which you can change in settings</value>
     </data>
   <!-- privilege escalation strings -->
   <data name="PrivEscTitle" xml:space="preserve">
-        <value>Zusätzliche Berechtigungen erforderlich</value>
+        <value>Additional permissions required</value>
     </data>
   <data name="PrivEscText" xml:space="preserve">
-        <value>Du musst Jiayi als Administrator ausführen, um dies zu tun</value>
+        <value>You'll need to run Jiayi as admin to do this</value>
     </data>
   <data name="PrivEscRestartNotice" xml:space="preserve">
-        <value>Der Launcher wird mit erhöhten Berechtigungen gestartet</value>
+        <value>The launcher will restart after you escalate</value>
     </data>
   <data name="PrivEscButton" xml:space="preserve">
-        <value>Bestätigen</value>
+        <value>Escalate</value>
     </data>
   <data name="PrivEscNotice" xml:space="preserve">
-        <value>Jiayi wurde mit Admin-Rechten gestartet.</value>
+        <value>Jiayi was started with admin privileges.</value>
     </data>
   <!-- import mod collection strings -->
   <data name="ImportModTitle" xml:space="preserve">
-        <value>Mod-Sammlung importieren</value>
+        <value>Import mod collection</value>
     </data>
   <data name="ImportModQuestion" xml:space="preserve">
-        <value>Möchtest du diese Sammlung importieren?</value>
+        <value>Would you like to import this collection?</value>
     </data>
   <data name="ImportModModCount" xml:space="preserve">
-        <value>{0} Mods</value>
+        <value>{0} mods</value>
     </data>
   <data name="ImportModLocalModCount" xml:space="preserve">
-        <value>{0} lokal gespeichert</value>
+        <value>{0} locally stored</value>
     </data>
   <data name="ImportModInternetModCount" xml:space="preserve">
-        <value>{0} aus dem Web</value>
+        <value>{0} from the web</value>
     </data>
   <data name="ImportModDefaultLocationNotice" xml:space="preserve">
-        <value>Die Mods in dieser Sammlung werden an ihrem Standardspeicherort gespeichert, den du in den Einstellungen ändern kannst</value>
+        <value>The mods in this collection will be saved to their default location, which you can change in settings</value>
     </data>
   <data name="ImportModMergeNotice" xml:space="preserve">
-        <value>Die Mods in dieser Sammlung werden mit deiner Sammlung kombiniert</value>
+        <value>The mods in this collection will be merged with your collection</value>
     </data>
   <!-- new mod strings -->
   <data name="NewModName" xml:space="preserve">
-        <value>Neue Mod</value>
+        <value>New mod</value>
     </data>
   <data name="NewModSelectFile" xml:space="preserve">
-        <value>Wähle einen Mod</value>
+        <value>Select a mod</value>
     </data>
   <data name="NewModFileFilter" xml:space="preserve">
-        <value>Nur .dll- und .exe-Dateien</value>
+        <value>.dll and .exe files only</value>
     </data>
   <data name="NewModOr" xml:space="preserve">
-        <value>oder</value>
+        <value>or</value>
     </data>
   <data name="NewModEnterLink" xml:space="preserve">
-        <value>Gib den Link zu deinem Mod ein</value>
+        <value>Enter the link to your mod</value>
     </data>
   <data name="NewModOfflineNotice" xml:space="preserve">
-        <value>Nicht verfügbar, wenn offline</value>
+        <value>Not available while offline</value>
     </data>
   <data name="NewModLinkPlaceholder" xml:space="preserve">
         <value>cool-website.com/path/to/mod.dll</value>
     </data>
   <data name="NewModDllDisplayName" xml:space="preserve">
-        <value>Injectbare Bibliotheken</value>
+        <value>Injectable libraries</value>
     </data>
   <data name="NewModExeDisplayName" xml:space="preserve">
-        <value>Externe Clients und Injektoren</value>
+        <value>External clients and injectors</value>
     </data>
   <data name="NewModCreateCollectionQuestion" xml:space="preserve">
-        <value>Du hast noch keine Mod-Sammlung eingerichtet. Möchtest du eine erstellen, um diese Mods hinzuzufügen?</value>
+        <value>You don't have a mod collection set up. Would you like to create one to add these mods?</value>
     </data>
   <data name="NewModNoCollectionTitle" xml:space="preserve">
-        <value>Keine Mod-Sammlung</value>
+        <value>No mod collection</value>
     </data>
   <data name="NewModAlreadyInCollection" xml:space="preserve">
-        <value>Diese Mod befindet sich bereits in deiner Sammlung!</value>
+        <value>This mod is already in your collection!</value>
     </data>
   <data name="NewModInvalidLink" xml:space="preserve">
-        <value>Ungültiger Link</value>
+        <value>Invalid link</value>
     </data>
   <data name="NewModLinkNotFound" xml:space="preserve">
-        <value>Unter diesem Link wurde nichts gefunden!</value>
+        <value>There's nothing at this address!</value>
     </data>
   <data name="NewModCheckingLink" xml:space="preserve">
-        <value>Überprüfe Link...</value>
+        <value>Checking link...</value>
     </data>
   <data name="NewModAlreadyExists" xml:space="preserve">
-        <value>Diese Mod existiert bereits in deiner Sammlung. Möchtest du sie ersetzen?</value>
+        <value>This mod already exists in your collection. Do you want to replace it?</value>
     </data>
   <!-- new theme strings -->
   <data name="NewThemeName" xml:space="preserve">
-        <value>Neues Thema</value>
+        <value>New theme</value>
     </data>
   <data name="NewThemeNameTheme" xml:space="preserve">
-        <value>Gib deinem Thema einen Namen!</value>
+        <value>Give your theme a name!</value>
     </data>
   <!-- theme publishing strings -->
   <data name="ThemePublishTitle" xml:space="preserve">
-        <value>Thema fürs Veröffentlichen bereitstellen</value>
+        <value>Prepare theme publish</value>
     </data>
   <data name="ThemePublishName" xml:space="preserve">
-        <value>Thema Name</value>
+        <value>Theme name</value>
     </data>
   <data name="ThemePublishAuthor" xml:space="preserve">
-        <value>Autor</value>
+        <value>Author</value>
     </data>
   <data name="ThemePublishAuthorPlaceholder" xml:space="preserve">
-        <value>Name des Autors</value>
+        <value>Your name here</value>
     </data>
   <data name="ThemePublishTags" xml:space="preserve">
         <value>Tags</value>
     </data>
   <data name="ThemePublishTagsPlaceholder" xml:space="preserve">
-        <value>Komma-getrennte Liste</value>
+        <value>Comma-separated list</value>
     </data>
   <data name="ThemePublishRawTags" xml:space="preserve">
-        <value>Raw-Tags</value>
+        <value>Raw tags</value>
     </data>
   <data name="ThemePublishRawTagsSelect" xml:space="preserve">
-        <value>Raw-Tags auswählen</value>
+        <value>Select raw tags</value>
     </data>
   <data name="ThemePublishNoName" xml:space="preserve">
-        <value>Thema kann nicht erstellt werden (kein Name)</value>
+        <value>Failed to create theme (no name)</value>
     </data>
   <data name="ThemePublishNoRawTags" xml:space="preserve">
-        <value>Thema konnte nicht erstellt werden (mindestens 1 Raw-Tag)</value>
+        <value>Failed to create theme (minimum 1 raw tag)</value>
     </data>
   <data name="ThemePublishAlreadyExists" xml:space="preserve">
-        <value>Das Thema konnte nicht erstellt werden (es existiert bereits): {0}</value>
+        <value>Failed to create theme (already exists): {0}</value>
     </data>
   <data name="ThemePublishOpenRepo" xml:space="preserve">
-        <value>Repository öffnen</value>
+        <value>Open repository</value>
     </data>
   <data name="ThemePublishFinalize" xml:space="preserve">
         <value>
-            Dein Thema befindet sich in dem Ordner, den wir gerade geöffnet haben.
-            Um es hier zu sehen, eröffne ein pull-request in unserem GitHub-Repository für Themes. Lese dir die README für Anweisungen.
+            Your theme is in the folder we just opened.
+            To see it here, open a pull request on our GitHub repository for themes. Check the README for instructions.
         </value>
     </data>
   <!-- about strings -->
   <data name="AboutTitle" xml:space="preserve">
-        <value>Über uns</value>
+        <value>About</value>
     </data>
   <data name="AboutPresenting" xml:space="preserve">
-        <value>Nach 2 Jahren Entwicklungshölle präsentieren wir dir mit Stolz:</value>
+        <value>After 2 years of development hell, we proudly present:</value>
     </data>
   <data name="AboutSourceAvailable" xml:space="preserve">
-        <value>Quellcode verfügbar auf GitHub</value>
+        <value>Source available on GitHub</value>
     </data>
   <data name="AboutDiscord" xml:space="preserve">
-        <value>Sprich mit uns auf Discord</value>
+        <value>Talk to us on Discord</value>
     </data>
   <data name="AboutCredits" xml:space="preserve">
         <value>Credits</value>
     </data>
   <!-- version manager strings -->
   <data name="VerManName" xml:space="preserve">
-        <value>Dein Spiel verwalten</value>
+        <value>Manage your game</value>
     </data>
   <data name="VerManCurrentVersion" xml:space="preserve">
-        <value>Deine aktuelle Version</value>
+        <value>Your current version</value>
     </data>
   <data name="VerManResizeTip" xml:space="preserve">
-        <value>Du kannst die Größe von Jiayi ändern, um die vollständige Liste auf der rechten Seite zu sehen</value>
+        <value>You can resize Jiayi to see the full list on the right</value>
     </data>
   <data name="VerManManageTip" xml:space="preserve">
-        <value>Weitere Versionen verwalten</value>
+        <value>Manage more versions</value>
     </data>
   <data name="VerManPopularVersions" xml:space="preserve">
-        <value>Beliebte Versionen</value>
+        <value>Popular versions</value>
     </data>
   <data name="VerManLatestVersion" xml:space="preserve">
-        <value>Neueste Version</value>
+        <value>Latest version</value>
     </data>
   <data name="VerManPopularAmongCommunity" xml:space="preserve">
-        <value>Beliebt in der Community</value>
+        <value>Popular among the community</value>
     </data>
   <data name="VerManBestStableRelease" xml:space="preserve">
-        <value>Beste stabile Version ohne RenderDragon</value>
+        <value>Best stable release without RenderDragon</value>
     </data>
   <data name="VerManShaderManagerText" xml:space="preserve">
-        <value>Einfache Anwendung von RenderDragon-Shadern auf dein Minecraft. Funktioniert am besten, wenn Minecraft über Jiayi installiert wurde.</value>
+        <value>Easily apply RenderDragon shaders to your game. Works best if you have the game installed through Jiayi.</value>
     </data>
   <data name="VerManShaderManagerVerTooLow" xml:space="preserve">
-        <value>Deine Minecraft-Version verfügt nicht über RenderDragon. Verwende stattdessen ein Ressource Pack Shader.</value>
+        <value>Your game version does not have RenderDragon. Use a resource pack for shaders instead.</value>
     </data>
   <data name="VerManShaderManagerMSStore" xml:space="preserve">
-        <value>Dein Minecraft wurde über den Microsoft Store installiert. Jiayi kann keine Shader-Packs darauf anwenden.</value>
+        <value>Your game is installed through the Microsoft Store. Jiayi cannot apply shaders to it.</value>
     </data>
   <!-- install location strings -->
   <data name="InstallLocByJiayi" xml:space="preserve">
-        <value>Installiert von Jiayi</value>
+        <value>Installed by Jiayi</value>
     </data>
   <data name="InstallLocFromStore" xml:space="preserve">
-        <value>Aus dem Microsoft Store</value>
+        <value>From Microsoft Store</value>
     </data>
   <data name="InstallLocExternalManager" xml:space="preserve">
-        <value>Von einem anderen Versionsmanager installiert</value>
+        <value>Installed by another version manager</value>
     </data>
   <data name="InstallLocUnknown" xml:space="preserve">
-        <value>Unbekannter Installationsort</value>
+        <value>Unknown install location</value>
     </data>
   <data name="InstallLocNotInstalled" xml:space="preserve">
-        <value>Du hast das Spiel nicht installiert</value>
+        <value>You don't have the game installed</value>
     </data>
   <!-- version list strings -->
   <data name="VerListName" xml:space="preserve">
-        <value>Vollständige Versionsliste</value>
+        <value>Full version list</value>
     </data>
   <data name="VerListSearch" xml:space="preserve">
-        <value>Nach Versionen suchen</value>
+        <value>Search versions</value>
     </data>
   <data name="VerListShowDownloaded" xml:space="preserve">
-        <value>Heruntergeladenes anzeigen</value>
+        <value>Show downloaded</value>
     </data>
   <data name="VerListNoVersions" xml:space="preserve">
-        <value>Keine Version gefunden</value>
+        <value>No versions found</value>
     </data>
   <data name="VerListLoadMore" xml:space="preserve">
-        <value>Mehr anzeigen</value>
+        <value>Load more</value>
     </data>
   <data name="VerListRemove" xml:space="preserve">
-        <value>Version entfernen</value>
+        <value>Remove version</value>
     </data>
   <data name="VerListRemoveConfirm" xml:space="preserve">
-        <value>Bist du dir sicher, dass du diese Version entfernen möchtest?</value>
+        <value>Are you sure you want to remove this version?</value>
     </data>
   <data name="VerListDevModeQuestion" xml:space="preserve">
-        <value>Um die Version zu wechseln, musst du den Entwicklermodus aktivieren. Möchtest du ihn jetzt aktivieren?</value>
+        <value>You need to enable developer mode to switch versions. Do you want to enable it now?</value>
     </data>
   <data name="VerListNotFound" xml:space="preserve">
-        <value>Diese Version ist noch nicht heruntergeladen worden.</value>
+        <value>This version has not been downloaded yet.</value>
     </data>
   <data name="VerListBackupFailed" xml:space="preserve">
         <value>
-            Jiayi konnte vor dem Versionswechsel keine Sicherungskopie deiner Spieldaten erstellen. Dies könnte daran liegen, dass der Zugriff auf den Spieldatenordner verweigert wurde.
+            Jiayi couldn't back up your game data before switching versions. This could be because access to the game data folder was denied.
             
-            Weitere Informationen findest du in deiner Protokolldatei.
+            More information can be found in your log file.
         </value>
     </data>
   <data name="VerListUnknownError" xml:space="preserve">
-        <value>Beim Versionswechsel ist ein unbekannter Fehler aufgetreten. Prüfe deine Protokolldatei für weitere Informationen.</value>
+        <value>An unknown error occurred while switching versions. Check your log file for more information.</value>
     </data>
   <data name="VerListImport" xml:space="preserve">
-        <value>Version Importieren</value>
+        <value>Import version</value>
     </data>
   <data name="VerListFileFilter" xml:space="preserve">
-        <value>APPX Dateien</value>
+        <value>APPX files</value>
     </data>
   <data name="VerListInvalidPackage" xml:space="preserve">
-        <value>Das ist kein gültiges Paket.</value>
+        <value>That's not a valid package.</value>
     </data>
   <data name="VerListUpdatingVersions" xml:space="preserve">
-        <value>Versionsliste geleert. Die Liste wird in Kürze aktualisiert.</value>
+        <value>Version list cleared. It will be updated shortly.</value>
     </data>
   <!-- shader manager strings -->
   <data name="ShaderManName" xml:space="preserve">
-        <value>Shader-Manager</value>
+        <value>Shader manager</value>
     </data>
   <data name="ShaderManCurrentShader" xml:space="preserve">
-        <value>Dein aktuelles Shader-Pack</value>
+        <value>Your current shader pack</value>
     </data>
   <data name="ShaderManNoShader" xml:space="preserve">
-        <value>Keine Shader-Packs angewendet</value>
+        <value>No shaders applied</value>
     </data>
   <data name="ShaderManUsingVanilla" xml:space="preserve">
-        <value>Minecraft's Vanilla Shader wird verwendet. </value>
+        <value>Minecraft's vanilla shaders will be used</value>
     </data>
   <data name="ShaderManReplacingCount" xml:space="preserve">
-        <value>Ersetzen von {0} "material files"</value>
+        <value>Replacing {0} material files</value>
     </data>
   <data name="ShaderManAvailableShaders" xml:space="preserve">
-        <value>Verfügbare Shader-Packs</value>
+        <value>Available shaders</value>
     </data>
   <data name="ShaderManSearch" xml:space="preserve">
-        <value>Nach Shader suchen</value>
+        <value>Search shaders</value>
     </data>
   <data name="ShaderManViewMaterials" xml:space="preserve">
-        <value>Shader-materials anzeigen</value>
+        <value>View shader materials</value>
     </data>
   <data name="ShaderManMaterials" xml:space="preserve">
         <value>Shader materials</value>
     </data>
   <data name="ShaderManViewMaterialsText" xml:space="preserve">
-        <value>            Dieses Shader-Pack ändert die folgenden Materials:
+        <value>
+            This shader pack modifies the following materials:
             
             {0}
         </value>
     </data>
   <data name="ShaderManMaterialCount" xml:space="preserve">
-        <value>{0} material Dateien</value>
+        <value>{0} material files</value>
     </data>
   <data name="ShaderManRename" xml:space="preserve">
-        <value>Shader-Pack umbenennen</value>
+        <value>Rename shader pack</value>
     </data>
   <data name="ShaderManDelete" xml:space="preserve">
-        <value>Shaderpack löschen</value>
+        <value>Delete shader pack</value>
     </data>
   <data name="ShaderManDeleteConfirm" xml:space="preserve">
-        <value>Bist du dir sicher, dass du dieses Shader-Pack löschen willst? Diese Aktion ist nicht umkehrbar.</value>
+        <value>Are you sure you want to delete this shader pack? This action is irreversible.</value>
     </data>
   <data name="ShaderManNoShaders" xml:space="preserve">
-        <value>Keine Shader gefunden</value>
+        <value>No shaders found</value>
     </data>
   <data name="ShaderManDragDrop" xml:space="preserve">
-        <value>Klicke hier oder ziehe ein Shader-Pack per Drag &amp; Drop, um es hinzuzufügen</value>
+        <value>Click here or drag and drop a shader pack to add it</value>
     </data>
   <data name="ShaderManDragDropInfo" xml:space="preserve">
-        <value>            Jede mit dem Zip-Format komprimierte Datei kann als Shader-Pack verwendet werden, solange sie Materialdateien enthält.
+        <value>
+            Any file compressed with the zip format can be used as a shader pack, as long as it contains material files.
         
-            Der Launcher kann Shader überall im Pack finden.
+            The launcher can find shaders anywhere in the pack.
         </value>
     </data>
   <!-- edit shader strings (only renaming atm) (Not like any more functionality is planned) -->
   <data name="EditShaderName" xml:space="preserve">
-        <value>Shader umbenennen</value>
+        <value>Rename shader</value>
     </data>
   <data name="EditShaderRenameShader" xml:space="preserve">
-        <value>Gib deinem Shader-Pack einen Namen!</value>
+        <value>Give your shader pack a name!</value>
     </data>
   <!-- themes menu strings -->
   <data name="ThemesMenuName" xml:space="preserve">
-        <value>Themen</value>
+        <value>Themes</value>
     </data>
   <data name="ThemesMenuSearch" xml:space="preserve">
-        <value>Themen suchen</value>
+        <value>Search themes</value>
     </data>
   <data name="ThemesMenuNoThemes" xml:space="preserve">
-        <value>Keine Themen gefunden</value>
+        <value>No themes found</value>
     </data>
   <data name="ThemesMenuRefresh" xml:space="preserve">
-        <value>Themen aktualisieren</value>
+        <value>Refresh themes</value>
     </data>
   <!-- dashboard strings -->
   <data name="DashboardMorning" xml:space="preserve">
-        <value>Guten Morgen</value>
+        <value>Good morning</value>
     </data>
   <data name="DashboardAfternoon" xml:space="preserve">
-        <value>Mahlzeit</value>
+        <value>Good afternoon</value>
     </data>
   <data name="DashboardEvening" xml:space="preserve">
-        <value>Guten Abend</value>
+        <value>Good evening</value>
     </data>
   <data name="DashboardTotalPlaytime" xml:space="preserve">
-        <value>Gesamte Spielzeit</value>
+        <value>Total play time</value>
     </data>
   <data name="DashboardHours" xml:space="preserve">
-        <value>{0} Stunden</value>
+        <value>{0} hours</value>
     </data>
   <data name="DashboardWithJiayi" xml:space="preserve">
-        <value>mit Jiayi</value>
+        <value>with Jiayi</value>
     </data>
   <data name="DashboardCurrentVersion" xml:space="preserve">
-        <value>Deine aktuelle Version</value>
+        <value>Your current version</value>
     </data>
   <data name="DashboardSwitchVersions" xml:space="preserve">
-        <value>Versionen wechseln</value>
+        <value>Switch versions</value>
     </data>
   <data name="DashboardProfiles" xml:space="preserve">
-        <value>Deine Profile</value>
+        <value>Your profiles</value>
     </data>
   <data name="DashboardNoProfiles" xml:space="preserve">
-        <value>Keine Profile</value>
+        <value>No profiles</value>
     </data>
   <data name="DashboardProfilesSaved" xml:space="preserve">
-        <value>{0} gespeichert</value>
+        <value>{0} saved</value>
     </data>
   <data name="DashboardViewProfiles" xml:space="preserve">
-        <value>Profile anzeigen</value>
+        <value>View profiles</value>
     </data>
   <data name="DashboardRecentMod" xml:space="preserve">
-        <value>Die neuste Mod</value>
+        <value>Most recent mod</value>
     </data>
   <data name="DashboardNoMod" xml:space="preserve">
-        <value>Starte einen Mod, um ihn hier zu sehen</value>
+        <value>Launch a mod to see it here</value>
     </data>
   <data name="DashboardPlayedMod" xml:space="preserve">
-        <value>Meistgespielte Mod</value>
+        <value>Most played mod</value>
     </data>
   <data name="DashboardOurCommunity" xml:space="preserve">
-        <value>Unsere Community</value>
+        <value>Our community</value>
     </data>
   <data name="DashboardWebsite" xml:space="preserve">
-        <value>Jiayi Software's Webseite</value>
+        <value>Jiayi Software's website</value>
     </data>
   <data name="DashboardDiscord" xml:space="preserve">
-        <value>Sprich mit uns auf Discord</value>
+        <value>Talk to us on Discord</value>
     </data>
   <data name="DashboardGitHub" xml:space="preserve">
-        <value>Jiayi Launcher auf GitHub</value>
+        <value>Jiayi Launcher on GitHub</value>
     </data>
   <data name="DashboardJiayiLauncherIs" xml:space="preserve">
-        <value>Jiayi Launcher ist ein</value>
+        <value>Jiayi Launcher is</value>
     </data>
   <data name="DashboardOSS" xml:space="preserve">
-        <value>Open-Source-Software</value>
+        <value>open source software</value>
     </data>
   <!-- mods strings -->
   <data name="ModsMenuName" xml:space="preserve">
         <value>Mods</value>
     </data>
   <data name="ModsMenuSearch" xml:space="preserve">
-        <value>Nach Mod suchen</value>
+        <value>Search mods</value>
     </data>
   <data name="ModsMenuLocallyStored" xml:space="preserve">
-        <value>Lokal gespeichert</value>
+        <value>Locally stored</value>
     </data>
   <data name="ModsMenuFromWeb" xml:space="preserve">
-        <value>Aus dem Web</value>
+        <value>From the web</value>
     </data>
   <data name="ModsMenuNoMods" xml:space="preserve">
-        <value>Keine Mods gefunden</value>
+        <value>No mods found</value>
     </data>
   <data name="ModsMenuDragDrop" xml:space="preserve">
         <value>
-            Ziehe Mods, Ordner oder Links hierher
-            oder klicke auf den Plus-Button, um Mods hinzuzufügen
+            Drag mods, folders, or links here
+            or click the plus button to add mods
         </value>
     </data>
   <data name="ModsMenuNoModsFolder" xml:space="preserve">
-        <value>            Du hast keinen Mods-Ordner eingerichtet.
+        <value>
+            You don't have a mods folder set up.
             
-            Ziehe einen Ordner hierher, damit er mit Jiayi funktioniert,
-            oder füge Mods hinzu, um einen neuen Ordner zu erstellen.
+            Drag a folder here to make it work with Jiayi,
+            or add mods to create a new folder.
         </value>
     </data>
   <data name="ModsMenuCreateFolderQuestion" xml:space="preserve">
-        <value>Da du keinen Mods-Ordner eingerichtet hast, wird Jiayi einen für dich erstellen, um diese Mods hinzuzufügen. Ist das in Ordnung? Es befindet sich in deinem Dokumentenordner.</value>
+        <value>Since you don't have a mods folder set up, Jiayi will make one for you to add these mods. Is that okay? It will be in your documents folder.</value>
     </data>
   <!-- profiles strings -->
   <data name="ProfilesMenuName" xml:space="preserve">
-        <value>Profile</value>
+        <value>Profiles</value>
     </data>
   <data name="ProfilesMenuSearch" xml:space="preserve">
-        <value>Nach Profile suchen</value>
+        <value>Search profiles</value>
     </data>
   <data name="ProfilesMenuNoProfiles" xml:space="preserve">
-        <value>Keine Profile gefunden</value>
+        <value>No profiles found</value>
     </data>
   <data name="ProfilesMenuBrokenProfile" xml:space="preserve">
-        <value>Dieses Profil ist defekt; der Ordner mit seinen Spieldaten fehlt oder ist leer.</value>
+        <value>This profile is broken; the folder containing its game data is missing or empty.</value>
     </data>
   <data name="ProfilesMenuWorlds" xml:space="preserve">
-        <value>{0} Welten</value>
+        <value>{0} worlds</value>
     </data>
   <data name="ProfilesMenuResourcePacks" xml:space="preserve">
-        <value>{0} Ressource-Packs</value>
+        <value>{0} resource packs</value>
     </data>
   <data name="ProfilesMenuBehaviorPacks" xml:space="preserve">
-        <value>{0} Verhaltens-Packs</value>
+        <value>{0} behavior packs</value>
     </data>
   <data name="ProfilesMenuMyProfile" xml:space="preserve">
-        <value>Mein Profil</value>
+        <value>My profile</value>
     </data>
   <data name="ProfilesMenuEditProfile" xml:space="preserve">
-        <value>Profil bearbeiten</value>
+        <value>Edit profile</value>
     </data>
   <data name="ProfilesMenuDeleteProfile" xml:space="preserve">
-        <value>Profil löschen</value>
+        <value>Delete profile</value>
     </data>
   <data name="ProfilesMenuApplyProfile" xml:space="preserve">
-        <value>Profil anwenden</value>
+        <value>Apply profile</value>
     </data>
   <data name="ProfilesMenuApplyProfileConfirm" xml:space="preserve">
-        <value>Bist du dir sicher, dass du dieses Profil anwenden willst? Dadurch werden Ihre aktuellen Spieldaten überschrieben.</value>
+        <value>Are you sure you want to apply this profile? This will overwrite your current game data.</value>
     </data>
   <data name="ProfilesMenuAboutProfiles" xml:space="preserve">
-        <value>Beim Erstellen eines Profils werden deine aktuellen Spieldaten, wie deine Welten, Ressourcenpacks und Einstellungen, kopiert.</value>
+        <value>Creating a profile will copy your current game data, like your worlds, resource packs, and settings.</value>
     </data>
   <data name="ProfilesMenuDeleteProfileConfirm" xml:space="preserve">
-        <value>Bist du sicher, dass du dieses Profil löschen möchtest? Dies kann nicht rückgängig gemacht werden.</value>
+        <value>Are you sure you want to delete this profile? This cannot be undone.</value>
     </data>
   <!-- secret strings -->
   <data name="SecretTitle" xml:space="preserve">
-        <value>Geheim</value>
+        <value>Secret</value>
     </data>
   <data name="SecretText" xml:space="preserve">
-        <value>bereitgestellt von freeminesweeper.org</value>
+        <value>provided by freeminesweeper.org</value>
     </data>
   <data name="SecretText2" xml:space="preserve">
-        <value>livesweeper: wettbewerbsfähiges Minesweeper</value>
+        <value>livesweeper: competitive minesweeper</value>
     </data>
   <!-- settings page strings -->
   <data name="SettingsMenuName" xml:space="preserve">
-        <value>Einstellungen</value>
+        <value>Settings</value>
     </data>
   <data name="SettingsCategories" xml:space="preserve">
-        <value>Kategorien:</value>
+        <value>Categories:</value>
     </data>
   <data name="SettingsGeneral" xml:space="preserve">
-        <value>Allgemein</value>
+        <value>General</value>
     </data>
   <data name="SettingsAppearance" xml:space="preserve">
-        <value>Erscheinungsbild</value>
+        <value>Appearance</value>
     </data>
   <data name="SettingsUpdate" xml:space="preserve">
         <value>Update</value>
@@ -752,499 +755,501 @@
         <value>Discord</value>
     </data>
   <data name="SettingsNetwork" xml:space="preserve">
-        <value>Netzwerk</value>
+        <value>Network</value>
     </data>
   <data name="SettingsLaunch" xml:space="preserve">
-        <value>Start</value>
+        <value>Launch</value>
     </data>
   <data name="SettingsLog" xml:space="preserve">
         <value>Log</value>
     </data>
   <data name="SettingsAbout" xml:space="preserve">
-        <value>Über uns</value>
+        <value>About</value>
     </data>
   <data name="SettingsAboutSettingTitle" xml:space="preserve">
-        <value>Über diese Einstellung</value>
+        <value>About this setting</value>
     </data>
   <data name="SettingsResetDefault" xml:space="preserve">
-        <value>Auf Standardeinstellungen zurücksetzen</value>
+        <value>Reset to default</value>
     </data>
   <data name="SettingsMoreInfo" xml:space="preserve">
-        <value>Mehr Informationen dazu.</value>
+        <value>More info</value>
     </data>
   <data name="SettingsEasterEggText" xml:space="preserve">
         <value>Peekaboo!</value>
     </data>
   <data name="SettingsConfirmEnable" xml:space="preserve">
-        <value>Bist du dir sicher, dass du diese Einstellung aktivieren willst?</value>
+        <value>Are you sure you want to enable this setting?</value>
     </data>
   <data name="SettingsConfirmAction" xml:space="preserve">
-        <value>Bist du dir sicher, dass du das tun willst?</value>
+        <value>Are you sure you want do this?</value>
     </data>
   <data name="SettingsInvalidSettingsText" xml:space="preserve">
-        <value>Deine Einstellungsdatei war beschädigt oder ungültig.</value>
+        <value>Your settings file was corrupted or invalid.</value>
     </data>
   <data name="SettingsInvalidSettingsText2" xml:space="preserve">
-        <value>Es wurde eine neue Einstellungsdatei erstellt, und deine vorherigen Einstellungen sind verloren gegangen.</value>
+        <value>A new settings file has been created, and your previous settings have been lost.</value>
     </data>
   <!-- general settings strings -->
   <data name="SettingsModCollectionPath" xml:space="preserve">
-        <value>Pfad zum Mod-Ordner</value>
+        <value>Mod folder path</value>
     </data>
   <data name="SettingsModCollectionPathDesc" xml:space="preserve">
-        <value>Der Pfad zu dem Ordner, der die Mods enthält.</value>
+        <value>The path to the folder containing your mods.</value>
     </data>
   <data name="SettingsExportCollection" xml:space="preserve">
-        <value>Exportiere deine Mods</value>
+        <value>Export your mods</value>
     </data>
   <data name="SettingsExportCollectionDesc" xml:space="preserve">
-        <value>Exportiere deine Mod-Sammlung in eine Datei. Du kannst diese mit anderen Personen teilen.</value>
+        <value>Export your mod collection to a file. You can share this with other people.</value>
     </data>
   <data name="SettingsExportCollectionFilter" xml:space="preserve">
-        <value>Jiayi Mod Kollektion</value>
+        <value>Jiayi mod collection</value>
     </data>
   <data name="SettingsProfileCollectionPath" xml:space="preserve">
-        <value>Pfad zum Profilordner</value>
+        <value>Profile folder path</value>
     </data>
   <data name="SettingsProfileCollectionPathDesc" xml:space="preserve">
-        <value>Der Pfad zu dem Ordner, der die Mods enthält.</value>
+        <value>The path to the folder containing your profiles.</value>
     </data>
   <data name="SettingsVersionsPath" xml:space="preserve">
-        <value>Pfad zum Versionsordner</value>
+        <value>Version folder path</value>
     </data>
   <data name="SettingsVersionsPathDesc" xml:space="preserve">
-        <value>Pfad zum Versionsordner.</value>
+        <value>The path to the folder containing your game installs.</value>
     </data>
   <data name="SettingsUpdateVersionList" xml:space="preserve">
-        <value>Versionsliste aktualisieren</value>
+        <value>Update version list</value>
     </data>
   <data name="SettingsUpdateVersionListDesc" xml:space="preserve">
-        <value>Aktualisiere die Liste der verfügbaren Versionen.</value>
+        <value>Update the list of available versions.</value>
     </data>
   <data name="SettingsShadersPath" xml:space="preserve">
-        <value>Pfad zum Shader-Ordner</value>
+        <value>Shader folder path</value>
     </data>
   <data name="SettingsShadersPathDesc" xml:space="preserve">
-        <value>Der Pfad zu dem Ordner, der deine Shader-Packs enthält.</value>
+        <value>The path to the folder containing your shaders.</value>
     </data>
   <!-- appearance settings strings -->
   <data name="SettingsPrimaryBackgroundColor" xml:space="preserve">
-        <value>Primäre Hintergrundfarbe</value>
+        <value>Primary background color</value>
     </data>
   <data name="SettingsPrimaryBackgroundColorDesc" xml:space="preserve">
-        <value>Die primäre Hintergrundfarbe des Launcher.</value>
+        <value>The primary background color of the launcher.</value>
     </data>
   <data name="SettingsSecondaryBackgroundColor" xml:space="preserve">
-        <value>Sekundäre Hintergrundfarbe</value>
+        <value>Secondary background color</value>
     </data>
   <data name="SettingsSecondaryBackgroundColorDesc" xml:space="preserve">
-        <value>Die sekundäre Hintergrundfarbe des Launcher.</value>
+        <value>The secondary background color of the launcher.</value>
     </data>
   <data name="SettingsAccentColor" xml:space="preserve">
-        <value>Akzentfarbe</value>
+        <value>Accent color</value>
     </data>
   <data name="SettingsAccentColorDesc" xml:space="preserve">
-        <value>Die Akzentfarbe des Launcher.</value>
+        <value>The accent color of the launcher.</value>
     </data>
   <data name="SettingsTextColor" xml:space="preserve">
-        <value>Textfarbe</value>
+        <value>Text color</value>
     </data>
   <data name="SettingsTextColorDesc" xml:space="preserve">
-        <value>Die Farbe des Textes, der im gesamten Launcher zu sehen ist.</value>
+        <value>The color of text seen throughout the launcher.</value>
     </data>
   <data name="SettingsAccentTextColor" xml:space="preserve">
-        <value>Textfarbe (bei Akzent)</value>
+        <value>Text color (on accent)</value>
     </data>
   <data name="SettingsAccentTextColorDesc" xml:space="preserve">
-        <value>Die Farbe des Textes, der über der Akzentfarbe liegt.</value>
+        <value>The color of text on top of the accent color.</value>
     </data>
   <data name="SettingsGrayTextColor" xml:space="preserve">
-        <value>Graue Textfarbe</value>
+        <value>Gray text color</value>
     </data>
   <data name="SettingsGrayTextColorDesc" xml:space="preserve">
-        <value>Eine graue Version der Textfarbe.</value>
+        <value>A gray version of the text color.</value>
     </data>
   <data name="SettingsShadowDistance" xml:space="preserve">
-        <value>Schattenabstand</value>
+        <value>Shadow distance</value>
     </data>
   <data name="SettingsShadowDistanceDesc" xml:space="preserve">
-        <value>Der Abstand des Schattens auf UI-Elementen.</value>
+        <value>The distance of the shadows on UI elements.</value>
     </data>
   <data name="SettingsMovementSpeed" xml:space="preserve">
-        <value>Geschwindigkeit der UI-Bewegung</value>
+        <value>UI movement speed</value>
     </data>
   <data name="SettingsMovementSpeedDesc" xml:space="preserve">
-        <value>Die Geschwindigkeit, mit der sich die Benutzeroberfläche bewegt.</value>
+        <value>The speed at which the UI moves.</value>
     </data>
   <data name="SettingsUseBackgroundImage" xml:space="preserve">
-        <value>Hintergrundbild verwenden</value>
+        <value>Use background image</value>
     </data>
   <data name="SettingsUseBackgroundImageDesc" xml:space="preserve">
-        <value>Verwende ein Bild als Hintergrund für den Launcher.</value>
+        <value>Use an image as the background of the launcher.</value>
     </data>
   <data name="SettingsSelectBackground" xml:space="preserve">
-        <value>Hintergrundbild auswählen</value>
+        <value>Select background image</value>
     </data>
   <data name="SettingsSelectBackgroundDesc" xml:space="preserve">
-        <value>Wähle ein Hintergrundbild von deinem Computer aus.</value>
+        <value>Select a background image from your computer.</value>
     </data>
   <data name="SettingsSelectBackgroundImageFilter" xml:space="preserve">
-        <value>Bilddateien</value>
+        <value>Image files</value>
     </data>
   <data name="SettingsSelectBackgroundVideoFilter" xml:space="preserve">
-        <value>Video-Dateien</value>
+        <value>Video files</value>
     </data>
   <data name="SettingsGeneratePalette" xml:space="preserve">
-        <value>Palette aus dem Hintergrund generieren</value>
+        <value>Generate palette from background</value>
     </data>
   <data name="SettingsGeneratePaletteDesc" xml:space="preserve">
-        <value>Erstellen Sie eine Farbpalette basierend auf deinem Hintergrundbild. Videos werden NICHT unterstützt.</value>
+        <value>Create a color palette based on your background image. Videos are NOT supported.</value>
     </data>
   <data name="SettingsGeneratePaletteTooltip" xml:space="preserve">
-        <value>Die Erstellung von Paletten ist speicherintensiv und kann eine Weile dauern. Jede erzeugte Palette ist etwas anders.</value>
+        <value>Palette generation is memory intensive and may take a while. Every generated palette is slightly different.</value>
     </data>
   <data name="SettingsBackgroundBlur" xml:space="preserve">
-        <value>Hintergrund Unschärfe</value>
+        <value>Background blur</value>
     </data>
   <data name="SettingsBackgroundBlurDesc" xml:space="preserve">
-        <value>Wie stark soll der Hintergrund unscharf sein.</value>
+        <value>How much to blur the background by.</value>
     </data>
   <data name="SettingsBackgroundBrightness" xml:space="preserve">
-        <value>Hintergrund-Helligkeit</value>
+        <value>Background brightness</value>
     </data>
   <data name="SettingsBackgroundBrightnessDesc" xml:space="preserve">
-        <value>Wie hell der Hintergrund sein soll.</value>
+        <value>How bright the background should be.</value>
     </data>
   <data name="SettingsRounding" xml:space="preserve">
-        <value>Rundung</value>
+        <value>Rounding</value>
     </data>
   <data name="SettingsRoundingDesc" xml:space="preserve">
-        <value>Wie stark die Ecken der meisten UI-Elemente abgerundet werden sollen.</value>
+        <value>How much to round the corners of most UI elements.</value>
     </data>
   <data name="SettingsBorderColor" xml:space="preserve">
-        <value>Farbe der Umrandung</value>
+        <value>Border color</value>
     </data>
   <data name="SettingsBorderColorDesc" xml:space="preserve">
-        <value>Die Farbe der Ränder von UI-Elementen.</value>
+        <value>The color of the borders on UI elements.</value>
     </data>
   <data name="SettingsAccentBorderColor" xml:space="preserve">
-        <value>Farbe der Umrandung (bei Akzent)</value>
+        <value>Border color (on accent)</value>
     </data>
   <data name="SettingsAccentBorderColorDesc" xml:space="preserve">
-        <value>Die Farbe der Ränder um die Akzentfarbe.</value>
+        <value>The color of the borders around the accent color.</value>
     </data>
   <data name="SettingsBorderThickness" xml:space="preserve">
-        <value>Dicke des Randes</value>
+        <value>Border thickness</value>
     </data>
   <data name="SettingsBorderThicknessDesc" xml:space="preserve">
-        <value>Die Dicke der Ränder von UI-Elementen.</value>
+        <value>The thickness of borders on UI elements.</value>
     </data>
   <data name="SettingsOpenTheme" xml:space="preserve">
-        <value>Thema anzeigen</value>
+        <value>Show theme</value>
     </data>
   <data name="SettingsOpenThemeDesc" xml:space="preserve">
-        <value>Zeige dein Thema im Datei-Explorer. Du kannst es mit anderen Personen teilen oder die Designs anderer Personen verwenden.</value>
+        <value>Reveal your theme in File Explorer. You can share this with other people or use other people's themes.</value>
     </data>
   <data name="SettingsRestoreDefaultTheme" xml:space="preserve">
-        <value>Standardthema wiederherstellen</value>
+        <value>Restore default theme</value>
     </data>
   <data name="SettingsRestoreDefaultThemeDesc" xml:space="preserve">
-        <value>Zurück zum Standardthema von Jiayi wechseln.</value>
+        <value>Go back to Jiayi's default theme.</value>
     </data>
   <data name="SettingsThemesMenu" xml:space="preserve">
-        <value>Menü der Themen</value>
+        <value>Themes menu</value>
     </data>
   <data name="SettingsThemesMenuDesc" xml:space="preserve">
-        <value>Lokale und herunterladbare Themen, die von der Communtiy erstellt wurden.</value>
+        <value>Local and downloadable themes created by the community.</value>
     </data>
   <!-- discord settings strings -->
   <data name="SettingsRichPresence" xml:space="preserve">
-        <value>Aktivitätsanzeige aktivieren</value>
+        <value>Enable rich presence</value>
     </data>
   <data name="SettingsRichPresenceDesc" xml:space="preserve">
-        <value>Zeige auf Discord, was du gerade in Jiayi machst.</value>
+        <value>Show what you're doing in Jiayi on Discord.</value>
     </data>
   <data name="SettingsRichPresenceTooltip" xml:space="preserve">
-        <value>            Verfügbare Formatierungszeichenfolgen für die Aktivitätsanzeige:
+        <value>
+            Available formatting strings for rich presence:
 
-            %mod_name% - der Name des Mods, mit dem du spielst
-            %game_version% - deine aktuelle Minecraft-Version
-            %mod_count% - wie viele Mods du in deiner Sammlung hast
-            %shader_name% - der Name des Shaders, den du benutzt
-            %profile_count% - wie viele Profile du in deiner Sammlung hast
-            %launcher_version% - die Version von Jiayi, die du verwendest
+            %mod_name% - the name of the mod you're playing with
+            %game_version% - your current Minecraft version
+            %mod_count% - how many mods you have in your collection
+            %shader_name% - the name of the shader you're using
+            %profile_count% - how many profiles you have in your collection
+            %launcher_version% - the version of Jiayi you're using
 
-            Es kann nur 1 Formatierungszeichenfolge pro Feld verwendet werden.
+            Only 1 formatting string can be used per field.
         </value>
     </data>
   <data name="SettingsDiscordDetails" xml:space="preserve">
-        <value>Oberer Text</value>
+        <value>Top text</value>
     </data>
   <data name="SettingsDiscordDetailsDesc" xml:space="preserve">
-        <value>Der oberste Statustext.</value>
+        <value>The top-most status text.</value>
     </data>
   <data name="SettingsDiscordDetailsDefault" xml:space="preserve">
-        <value>Spielt mit %mod_name%</value>
+        <value>Playing with %mod_name%</value>
     </data>
   <data name="SettingsDiscordState" xml:space="preserve">
-        <value>Unterer Text</value>
+        <value>Bottom text</value>
     </data>
   <data name="SettingsDiscordStateDesc" xml:space="preserve">
-        <value>Der unterste Statustext.</value>
+        <value>The bottom-most status text.</value>
     </data>
   <data name="SettingsDiscordStateDefault" xml:space="preserve">
-        <value>auf %game_version%</value>
+        <value>on %game_version%</value>
     </data>
   <data name="SettingsDiscordShowElapsedTime" xml:space="preserve">
-        <value>Anzeige der verstrichenen Zeit</value>
+        <value>Show elapsed time</value>
     </data>
   <data name="SettingsDiscordShowElapsedTimeDesc" xml:space="preserve">
-        <value>Zeige, wie lange du Jiayi schon geöffnet hast.</value>
+        <value>Show how long you've had Jiayi open for.</value>
     </data>
   <data name="SettingsDiscordShowDownloadButton" xml:space="preserve">
-        <value>Schaltfläche „Download“ anzeigen</value>
+        <value>Show download button</value>
     </data>
   <data name="SettingsDiscordShowDownloadButtonDesc" xml:space="preserve">
-        <value>Zeige einen Button, um Jiayi auf Discord herunterzuladen.</value>
+        <value>Show a button to download Jiayi on Discord.</value>
     </data>
   <data name="SettingsDiscordShareCurrentMod" xml:space="preserve">
-        <value>Aktuellen Mod teilen</value>
+        <value>Share current mod</value>
     </data>
   <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
-        <value>Zeige eine Schaltfläche, mit der andere Benutzer die Mod, mit der du spielst, hinzufügen können. Dies funktioniert nur mit Webmods.</value>
+        <value>Show a button for other users to add the mod you're playing with. This only works with web mods.</value>
     </data>
   <data name="SettingsDiscordLargeImageKey" xml:space="preserve">
-        <value>Schlüssel für großes Bild</value>
+        <value>Large image key</value>
     </data>
   <data name="SettingsDiscordLargeImageKeyDesc" xml:space="preserve">
-        <value>Der großen Bild-ID, der für Aktivitätsanzeige verwendet wird.</value>
+        <value>The large image key to use for rich presence.</value>
     </data>
   <data name="SettingsDiscordSmallImageKey" xml:space="preserve">
-        <value>Schlüssel für kleines Bild</value>
+        <value>Small image key</value>
     </data>
   <data name="SettingsDiscordSmallImageKeyDesc" xml:space="preserve">
-        <value>Die kleine Bild-ID, das für Aktivitätsanzeige verwendet wird.</value>
+        <value>The small image key to use for rich presence.</value>
     </data>
   <data name="SettingsDiscordLargeImageText" xml:space="preserve">
-        <value>Großer Bildtext</value>
+        <value>Large image text</value>
     </data>
   <data name="SettingsDiscordLargeImageTextDesc" xml:space="preserve">
-        <value>Der Text, der angezeigt wird, wenn man über das große Bild fährt.</value>
+        <value>The text to display when hovering over the large image.</value>
     </data>
   <data name="SettingsDiscordSmallImageText" xml:space="preserve">
-        <value>Kleiner Bildtext</value>
+        <value>Small image text</value>
     </data>
   <data name="SettingsDiscordSmallImageTextDesc" xml:space="preserve">
-        <value>Der Text, der angezeigt wird, wenn man über das kleine Bild fährt.</value>
+        <value>The text to display when hovering over the small image.</value>
     </data>
   <!-- update settings strings -->
   <data name="SettingsEnableUpdater" xml:space="preserve">
-        <value>Aktivieren des Updaters</value>
+        <value>Enable the updater</value>
     </data>
   <data name="SettingsEnableUpdaterDesc" xml:space="preserve">
-        <value>Erlaubt dem Launcher, nach Updates zu suchen und diese herunterzuladen.</value>
+        <value>Allow the launcher to check for and download updates.</value>
     </data>
   <data name="SettingsAutoDownloadUpdates" xml:space="preserve">
-        <value>Automatisches Herunterladen von Updates</value>
+        <value>Automatically download updates</value>
     </data>
   <data name="SettingsAutoDownloadUpdatesDesc" xml:space="preserve">
-        <value>Lade immer Updates herunter, wenn sie verfügbar sind.</value>
+        <value>Always download updates when they're available.</value>
     </data>
   <!-- network settings strings -->
   <data name="SettingsOfflineMode" xml:space="preserve">
-        <value>Offline Mode</value>
+        <value>Offline mode</value>
     </data>
   <data name="SettingsOfflineModeDesc" xml:space="preserve">
-        <value>Deaktiviert den Zugriff auf das Internet. Einige Funktionen funktionieren möglicherweise nicht. Starte Jiayi neu, damit dies seine volle Wirkung entfalten kann.</value>
+        <value>Disable access to the internet. Some features may not work. Restart Jiayi for this to take full effect.</value>
     </data>
   <data name="SettingsOfflineModeTooltip" xml:space="preserve">
-        <value>Funktionen wie Internet-Mods, das Herunterladen von Versionen und die Suche nach Updates funktionieren danach nicht.</value>
+        <value>Features like internet mods, downloading versions, and checking for updates will not work.</value>
     </data>
   <data name="SettingsFollowRedirects" xml:space="preserve">
-        <value>Weiterleitungen folgen</value>
+        <value>Follow redirects</value>
     </data>
   <data name="SettingsFollowRedirectsDesc" xml:space="preserve">
-        <value>Weiterleitungen beim Hinzufügen von Webmods folgen. Ändere diese Einstellung, wenn du Probleme beim Hinzufügen einiger Mods hast.</value>
+        <value>Follow redirects when adding web mods. Change this setting if you have trouble adding some mods.</value>
     </data>
   <!-- launch settings strings -->
   <data name="SettingsUseInjectionDelay" xml:space="preserve">
-        <value>Injection Verzögerung verwenden</value>
+        <value>Use injection delay</value>
     </data>
   <data name="SettingsUseInjectionDelayDesc" xml:space="preserve">
-        <value>Warte eine festgelegte Zeit, anstatt auf das Laden des Spiels zu warten, bevor injected wird.</value>
+        <value>Wait for a set amount of time instead of waiting for the game to load before injecting.</value>
     </data>
   <data name="SettingsInjectionDelay" xml:space="preserve">
-        <value>Verzögerung der Injection</value>
+        <value>Injection delay</value>
     </data>
   <data name="SettingsInjectionDelayDesc" xml:space="preserve">
-        <value>Die Zeit, die vor dem injecting gewartet werden soll, in Sekunden.</value>
+        <value>The amount of time to wait before injecting, in seconds.</value>
     </data>
   <data name="SettingsOverrideModuleRequirement" xml:space="preserve">
-        <value>Modulanforderung überschreiben</value>
+        <value>Override module requirement</value>
     </data>
   <data name="SettingsOverrideModuleRequirementDesc" xml:space="preserve">
         <value>
-            Überschreibt die Anzahl der geladenen Module, die benötigt werden, bevor Jiayi injecten kann.
+            Override the amount of loaded modules needed before Jiayi will inject.
             
-            Wenn der Launcher zu früh oder zu spät injectet, versuche den Wert zu ändern.
+            If the launcher injects too early or too late, try changing this value.
         </value>
     </data>
   <data name="SettingsModuleRequirement" xml:space="preserve">
-        <value>Modul-Anforderung</value>
+        <value>Module requirement</value>
     </data>
   <data name="SettingsModuleRequirementDesc" xml:space="preserve">
-        <value>Die Anzahl der geladenen Module, die benötigt werden, bevor Jiayi injecten kann.</value>
+        <value>The amount of loaded modules needed before Jiayi will inject.</value>
     </data>
   <data name="SettingsAccelerateGameLoading" xml:space="preserve">
-        <value>Laden des Spiels beschleunigen</value>
+        <value>Accelerate game loading</value>
     </data>
   <data name="SettingsAccelerateGameLoadingDesc" xml:space="preserve">
-        <value>Beschleunigung der Ladezeiten durch Beendigung unnötiger Prozesse. Vorsicht vor Jank.</value>
+        <value>Speed up loading times by terminating unnecessary processes. Beware of jank.</value>
     </data>
   <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
-        <value>Es kann zu Problemen im Zusammenhang mit der Microsoft Store-Lizenzierung kommen (Feststellung, ob du das Spiel besitzt oder nicht).</value>
+        <value>May cause issues related to Microsoft Store licensing (determining whether you own the game or not).</value>
     </data>
   <data name="SettingsMinimizeFix" xml:space="preserve">
-        <value>Minimierungsfix</value>
+        <value>Minimize fix</value>
     </data>
   <data name="SettingsMinimizeFixDesc" xml:space="preserve">
-        <value>Verhindert, dass das Spiel beim Minimieren in den Ruhezustand versetzt wird. Änderungen werden beim Starten des Spiels angewendet.</value>
+        <value>Prevents the game from suspending itself when minimized. Changes are applied on launch.</value>
     </data>
   <!-- log settings strings -->
   <data name="SettingsAnonymizeLogs" xml:space="preserve">
-        <value>Anonymisierung von Protokollen</value>
+        <value>Anonymize logs</value>
     </data>
   <data name="SettingsAnonymizeLogsDesc" xml:space="preserve">
-        <value>Blendet alle identifizierenden Informationen aus den Protokollen aus. Dies gilt nicht rückwirkend.</value>
+        <value>Hides any identifying information from logs. This does not apply retroactively.</value>
     </data>
   <data name="SettingsOpenLogFolder" xml:space="preserve">
-        <value>Log-Ordner öffnen</value>
+        <value>Open log folder</value>
     </data>
   <data name="SettingsOpenLogFolderDesc" xml:space="preserve">
-        <value>Öffne den Protokollordner im Datei-Explorer.</value>
+        <value>Open the log folder in File Explorer.</value>
     </data>
   <data name="SettingsClearPreviousLogs" xml:space="preserve">
-        <value>Frühere Protokolle löschen</value>
+        <value>Clear previous logs</value>
     </data>
   <data name="SettingsClearPreviousLogsDesc" xml:space="preserve">
-        <value>Alle früheren Protokolldateien löschen.</value>
+        <value>Delete all previous log files.</value>
     </data>
   <!-- mod card strings -->
   <data name="ModCardInvalidLink" xml:space="preserve">
-        <value>Dieser Mod ist kaputt; er existiert nicht mehr im Web.</value>
+        <value>This mod is broken; it doesn't exist on the web anymore.</value>
     </data>
   <data name="ModCardMissingFile" xml:space="preserve">
-        <value>Dieser Mod ist defekt; die Datei fehlt im Mods-Verzeichnis.</value>
+        <value>This mod is broken; the file is missing from the mods directory.</value>
     </data>
   <data name="ModCardOffline" xml:space="preserve">
-        <value>Internet-Mods sind im Offline-Modus deaktiviert</value>
+        <value>Internet mods are disabled in offline mode</value>
     </data>
   <data name="ModCardInternetMod" xml:space="preserve">
-        <value>Aus dem Web heruntergeladen</value>
+        <value>Downloaded from the web</value>
     </data>
   <data name="ModCardLocalMod" xml:space="preserve">
-        <value>Lokal gespeichert</value>
+        <value>Locally stored</value>
     </data>
   <data name="ModCardSupportedVersions" xml:space="preserve">
-        <value>Funktioniert bei {0}</value>
+        <value>Works on {0}</value>
     </data>
   <data name="ModCardHideControls" xml:space="preserve">
-        <value>Kontrollen ausblenden</value>
+        <value>Hide controls</value>
     </data>
   <data name="ModCardShowControls" xml:space="preserve">
-        <value>Steuerung anzeigen</value>
+        <value>Show controls</value>
     </data>
   <data name="ModCardManageConfigs" xml:space="preserve">
-        <value>Verwalten von Konfigurationen</value>
+        <value>Manage configs</value>
     </data>
   <data name="ModCardEditMod" xml:space="preserve">
-        <value>Mod bearbeiten</value>
+        <value>Edit mod</value>
     </data>
   <data name="ModCardDeleteMod" xml:space="preserve">
-        <value>Mod löschen (unumkehrbar)</value>
+        <value>Delete mod (irreversible)</value>
     </data>
   <data name="ModCardDeleteModConfirm" xml:space="preserve">
-        <value>Bist du dir sicher, dass du {0} löschen willst? Diese Aktion ist unumkehrbar.</value>
+        <value>Are you sure you want to delete {0}? This action is irreversible.</value>
     </data>
   <data name="ModCardLaunchMultipleModsConfirm" xml:space="preserve">
-        <value>Wenn du mehr als einen Mod gleichzeitig startest, kann dein Spiel instabil werden. Bist du sicher, dass du {0} starten willst?</value>
+        <value>Launching more than one mod at a time can make your game unstable. Are you sure you want to launch {0}?</value>
     </data>
   <data name="ModCardDownloadFailed" xml:space="preserve">
-        <value>Mod-Download fehlgeschlagen. Versuche es bitte später noch einmal.</value>
+        <value>Failed to download mod. Please try again later.</value>
     </data>
   <data name="ModCardModNotFound" xml:space="preserve">
-        <value>Dein Mod wurde beim Start gelöscht. Versuche, dein Antivirusprogramm zu deaktivieren.</value>
+        <value>Your mod was deleted during launch. Try turning off your antivirus.</value>
     </data>
   <data name="ModCardGameNotFound" xml:space="preserve">
-        <value>Das Spiel wurde während des Starts geschlossen. Schalte dein Antivirenprogramm aus, falls es das Spiel beendet.</value>
+        <value>The game was closed during launch. Turn off your antivirus in case it's terminating the game.</value>
     </data>
   <data name="ModCardVersionMismatch" xml:space="preserve">
-        <value>{0} unterstützt deine aktuelle Spielversion nicht. Möchtest du zu {1} wechseln?</value>
+        <value>{0} doesn't support your current game version. Would you like to switch to {1}?</value>
     </data>
   <data name="ModCardInjectionFailed" xml:space="preserve">
-        <value>Dein Mod konnte nicht injected werden. Versuche, dein Antivirus zu deaktivieren, und prüfe die Protokolle auf erweiterte Fehlerinformationen.</value>
+        <value>Your mod could not be injected. Try turning off your antivirus, and check logs for extended error information.</value>
     </data>
   <data name="ModCardAlreadyLoaded" xml:space="preserve">
-        <value>Diese Mod ist bereits geladen!</value>
+        <value>This mod is already loaded!</value>
     </data>
   <!-- theme card strings -->
   <data name="ThemeCardAuthor" xml:space="preserve">
-        <value>von {0}</value>
+        <value>by {0}</value>
     </data>
   <data name="ThemeCardPrepareUpload" xml:space="preserve">
-        <value>Themenupload vorbereiten</value>
+        <value>Prepare theme upload</value>
     </data>
   <data name="ThemeCardReinstall" xml:space="preserve">
-        <value>Thema erneut installieren</value>
+        <value>Reinstall theme</value>
     </data>
   <data name="ThemeCardOverwriteConfirm" xml:space="preserve">
-        <value>Bist du dir sicher, dass du dieses Thema überschreiben willst? Dadurch gehen alle deine lokalen Änderungen verloren.</value>
+        <value>Are you sure you want to overwrite this theme? All of your local changes will be lost.</value>
     </data>
   <!-- don't ask again strings -->
   <data name="DontAskAgain" xml:space="preserve">
-        <value>            Hör auf zu fragen
-            Ich sagte nein
-            Halt die Klappe!
-            Nein Warak Nein
-            Nicht mehr.
-            Nein heißt nein
-            Bitte hör auf.
-            Hör auf!
-            Nie wieder machst du in NRW ein Auftritt 
-            Du Hund
+        <value>
+            Stop asking
+            I said no
+            Shut up
+            Really, no
+            No more
+            No means no
+            Please stop
+            Stop it
+            Never again
+            Suck my nuts
         </value>
     </data>
   <!-- offline mode strings -->
   <data name="OfflineMode" xml:space="preserve">
-        <value>Offline-Modus</value>
+        <value>Offline Mode</value>
     </data>
   <data name="OfflineModeDesc" xml:space="preserve">
-        <value>Du bist offline. Einige Funktionen funktionieren möglicherweise nicht mehr.</value>
+        <value>You're offline. Some features may not work.</value>
     </data>
   <!-- update strings -->
   <data name="UpdateInstalled" xml:space="preserve">
-        <value>Update installiert</value>
+        <value>Update installed</value>
     </data>
   <data name="UpdateInstalledDesc" xml:space="preserve">
-        <value>Jiayi wurde auf {0} aktualisiert.</value>
+        <value>Jiayi was updated to {0}.</value>
     </data>
   <data name="UpdateInstalledDesc2" xml:space="preserve">
-        <value>Das Änderungsprotokoll kannst du auf GitHub einsehen.</value>
+        <value>You can view the changelog on GitHub.</value>
     </data>
   <data name="UpdateAvailable" xml:space="preserve">
-        <value>Update verfügbar</value>
+        <value>Update available</value>
     </data>
   <data name="UpdateAvailableDesc" xml:space="preserve">
-        <value>Ein Update ist verfügbar. Möchtest du es herunterladen?</value>
+        <value>An update is available. Would you like to download it?</value>
     </data>
   <data name="UpdateDownloading" xml:space="preserve">
-        <value>Update wird heruntergeladen...</value>
+        <value>Downloading update...</value>
     </data>
   <data name="UpdateDownloaded" xml:space="preserve">
-        <value>Update heruntergeladen</value>
+        <value>Update downloaded</value>
     </data>
   <data name="UpdateDownloadedDesc" xml:space="preserve">
-        <value>Starte neu, um das Update zu installieren.</value>
+        <value>Restart to install the update.</value>
     </data>
   <!-- sidebar strings -->
   <data name="SidebarDashboard" xml:space="preserve">
@@ -1254,12 +1259,12 @@
         <value>Mods</value>
     </data>
   <data name="SidebarProfiles" xml:space="preserve">
-        <value>Profile</value>
+        <value>Profiles</value>
     </data>
   <data name="SidebarGame" xml:space="preserve">
-        <value>Spiel</value>
+        <value>Game</value>
     </data>
   <data name="SidebarSettings" xml:space="preserve">
-        <value>Einstellungen</value>
+        <value>Settings</value>
     </data>
 </root>

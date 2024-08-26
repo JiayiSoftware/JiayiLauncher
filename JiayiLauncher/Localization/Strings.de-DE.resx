@@ -63,7 +63,7 @@
   </resheader>
   <!-- common strings -->
   <data name="Okay" xml:space="preserve">
-        <value>OK</value>
+        <value>Okay</value>
     </data>
   <data name="Yes" xml:space="preserve">
         <value>Ja</value>

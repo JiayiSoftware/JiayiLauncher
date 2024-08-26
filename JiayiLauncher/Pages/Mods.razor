@@ -122,6 +122,8 @@
     // TODO: Support for importing a list of urls/folder (as dragging a folder just creates file)
     private async Task FileDropped(InputFileChangeEventArgs obj)
     {
+        var modImporter = Singletons.Get<ModImporter>();
+        
         _hovered = false;
 
         var files = obj.GetMultipleFiles(50);
@@ -141,7 +143,7 @@
         {
             var file = files[0];
 
-            var mod = await ModImporter.ImportFromBrowserFile(file);
+            var mod = await modImporter.ImportFromBrowserFile(file);
 
             var parameters = new ModalParameters()
                 .Add(nameof(EditMod.Mod), mod);
@@ -151,7 +153,7 @@
         }
         else if (files.Count > 1)
         {
-            var mods = await ModImporter.ImportFromBrowserFiles(files);
+            var mods = await modImporter.ImportFromBrowserFiles(files);
 
             // don't bother showing the edit mod modal
 

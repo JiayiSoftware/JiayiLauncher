@@ -11,18 +11,18 @@ using Microsoft.AspNetCore.Components.Forms;
 
 namespace JiayiLauncher.Features.Shaders;
 
-public static class ShaderManager
+public class ShaderManager
 {
-	public static List<string> Shaders { get; } = new();
-	public static string AppliedShader { get; set; } = string.Empty;
-	public static List<string> AvailableShaders => Shaders.Where(x => x != AppliedShader).ToList();
+	public List<string> Shaders { get; } = new();
+	public string AppliedShader { get; set; } = string.Empty;
+	public List<string> AvailableShaders => Shaders.Where(x => x != AppliedShader).ToList();
 
-	private static string[] _blockedFolders = ["iOS", "Android"];
+	private readonly string[] _blockedFolders = ["iOS", "Android"];
 	
-	private static readonly Log _log = Singletons.Get<Log>();
-	private static readonly PackageData _packageData = Singletons.Get<PackageData>();
+	private readonly Log _log = Singletons.Get<Log>();
+	private readonly PackageData _packageData = Singletons.Get<PackageData>();
 
-	public static async Task BackupVanillaShaders()
+	public async Task BackupVanillaShaders()
 	{
 		var info = await _packageData.GetPackage();
 		if (info == null) return;
@@ -54,7 +54,7 @@ public static class ShaderManager
 		_log.Write(nameof(ShaderManager), $"Backed up vanilla shaders for version {await _packageData.GetVersion()}");
 	}
 	
-	public static async Task DeleteBackupShaders()
+	public async Task DeleteBackupShaders()
 	{
 		var version = await _packageData.GetVersion();
 		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, "Vanilla", version);
@@ -63,7 +63,7 @@ public static class ShaderManager
 		_log.Write(nameof(ShaderManager), $"Deleted backup shaders for version {version}");
 	}
 
-	public static async Task RestoreVanillaShaders()
+	public async Task RestoreVanillaShaders()
 	{
 		var info = await _packageData.GetPackage();
 		if (info == null) return;
@@ -85,7 +85,7 @@ public static class ShaderManager
 		_log.Write(nameof(ShaderManager), $"Restored vanilla shaders for version {version}");
 	}
 
-	public static void UpdateShaders()
+	public void UpdateShaders()
 	{
 		Shaders.Clear();
 		
@@ -113,7 +113,7 @@ public static class ShaderManager
 			: $"Updated shaders list. Found {Shaders.Count} shaders. No shader is currently applied.");
 	}
 
-	public static async Task AddShader(IBrowserFile file)
+	public async Task AddShader(IBrowserFile file)
 	{
 		var tempPath = Path.Combine(JiayiSettings.Instance.ShadersPath, "Temp");
 		if (Directory.Exists(tempPath)) Directory.Delete(tempPath, true);
@@ -142,7 +142,7 @@ public static class ShaderManager
 		UpdateShaders();
 	}
 
-	private static string? FindMaterials(string path)
+	private string? FindMaterials(string path)
 	{
 		var directories = Directory.GetDirectories(path, "*", SearchOption.AllDirectories).ToList();
 		for (var i = 0; i < directories.Count; i++)
@@ -167,7 +167,7 @@ public static class ShaderManager
 		return directories.ElementAtOrDefault(0); // returns null if there are no folders left
 	}
 	
-	public static void RenameShader(string shader, string newName) {
+	public void RenameShader(string shader, string newName) {
 		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, shader);
 		if (!Directory.Exists(path)) return;
 		
@@ -177,7 +177,7 @@ public static class ShaderManager
 		UpdateShaders();
 	}
 
-	public static void EnableShader(string shader)
+	public void EnableShader(string shader)
 	{
 		if (AppliedShader != string.Empty) DisableShader(AppliedShader);
 		
@@ -190,7 +190,7 @@ public static class ShaderManager
 		UpdateShaders();
 	}
 	
-	public static void DisableShader(string shader)
+	public void DisableShader(string shader)
 	{
 		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied", shader);
 		if (!Directory.Exists(path)) return;
@@ -201,7 +201,7 @@ public static class ShaderManager
 		UpdateShaders();
 	}
 	
-	public static void DeleteShader(string shader)
+	public void DeleteShader(string shader)
 	{
 		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, shader);
 		if (!Directory.Exists(path)) return;
@@ -212,7 +212,7 @@ public static class ShaderManager
 		UpdateShaders();
 	}
 
-	public static async Task ApplyShader()
+	public async Task ApplyShader()
 	{
 		if (AppliedShader == string.Empty) return;
 		
@@ -249,7 +249,7 @@ public static class ShaderManager
 		_log.Write(nameof(ShaderManager), $"Applied shader {AppliedShader}");
 	}
 
-	public static List<string> GetMaterialDiff(string shader)
+	public List<string> GetMaterialDiff(string shader)
 	{
 		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, shader);
 		if (shader == AppliedShader) path = Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied", shader);

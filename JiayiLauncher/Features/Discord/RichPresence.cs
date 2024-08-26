@@ -25,6 +25,7 @@ public class RichPresence
 	
 	private readonly Minecraft _minecraft = Singletons.Get<Minecraft>();
 	private readonly PackageData _packageData = Singletons.Get<PackageData>();
+	private readonly ShaderManager _shaderManager = Singletons.Get<ShaderManager>();
 	
 	public RichPresence()
 	{
@@ -74,9 +75,9 @@ public class RichPresence
 				return f.Replace("%mod_count%", $"{ModCollection.Current.Mods.Count.ToString()} {modsPlural}");
 			
 			case true when f.Contains("%shader_name%"):
-				var shaderName = ShaderManager.AppliedShader == string.Empty
+				var shaderName = _shaderManager.AppliedShader == string.Empty
 					? "no shaders"
-					: ShaderManager.AppliedShader;
+					: _shaderManager.AppliedShader;
 				return f.Replace("%shader_name%", shaderName);
 			
 			case true when f.Contains("%profile_count%"):

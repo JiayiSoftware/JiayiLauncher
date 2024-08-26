@@ -206,7 +206,9 @@
         if (args.StartsWith("addmod/"))
         {
             var modPath = args.Replace("addmod/", "");
-            var mod = ModImporter.ImportFromPath(modPath);
+            
+            var modImporter = Singletons.Get<ModImporter>();
+            var mod = modImporter.ImportFromPath(modPath);
 
             var parameters = new ModalParameters()
                 .Add(nameof(EditMod.Mod), mod)

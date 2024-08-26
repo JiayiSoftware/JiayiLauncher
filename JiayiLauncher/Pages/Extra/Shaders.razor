@@ -1,6 +1,7 @@
 ﻿@page "/Shaders"
 
 @using JiayiLauncher.Features.Shaders
+@using JiayiLauncher.Utils
 
 @inject NavigationManager NavigationManager
 
@@ -13,7 +14,7 @@
 <div class="current-shader">
     <h4 style="text-align: left; margin-top: 0;">@Strings.ShaderManCurrentShader</h4>
     
-    @if (ShaderManager.AppliedShader == string.Empty)
+    @if (_shaderManager.AppliedShader == string.Empty)
     {
         <p style="margin-bottom: 0.5rem">@Strings.ShaderManNoShader</p>
         <i>@Strings.ShaderManUsingVanilla</i>
@@ -21,9 +22,9 @@
     else
     {
         <div class="shader">
-            <strong>@ShaderManager.AppliedShader</strong>
+            <strong>@_shaderManager.AppliedShader</strong>
             <p>
-                @string.Format(Strings.ShaderManReplacingCount, ShaderManager.GetMaterialDiff(ShaderManager.AppliedShader).Count)
+                @string.Format(Strings.ShaderManReplacingCount, _shaderManager.GetMaterialDiff(_shaderManager.AppliedShader).Count)
             </p>
         </div>
         
@@ -42,7 +43,7 @@
 <ul class="available-shaders">
     @{
         _searchResults = 0;
-        foreach (var shader in ShaderManager.AvailableShaders)
+        foreach (var shader in _shaderManager.AvailableShaders)
         {
             if (!shader.ToLower().Contains(_searchBox?.Value?.ToLower() ?? ""))
                 continue;
@@ -56,7 +57,7 @@
                     <div class="shader-count">
                         <span class="material-symbols-sharp">folder</span>
                         <p>
-                            @string.Format(Strings.ShaderManMaterialCount, ShaderManager.GetMaterialDiff(shader).Count)
+                            @string.Format(Strings.ShaderManMaterialCount, _shaderManager.GetMaterialDiff(shader).Count)
                         </p>
                     </div>
                 </div>
@@ -74,7 +75,7 @@
         }
     }
 
-    @if (_searchResults == 0 && ShaderManager.Shaders.Count > 0)
+    @if (_searchResults == 0 && _shaderManager.Shaders.Count > 0)
     {
         <p style="text-align: center; margin-top: 0;">@Strings.ShaderManNoShaders</p>
     }
@@ -96,24 +97,26 @@
     
     private JiayiTextBox? _searchBox;
     private int _searchResults;
+    
+    private readonly ShaderManager _shaderManager = Singletons.Get<ShaderManager>();
 
     protected override void OnInitialized()
     {
-        ShaderManager.UpdateShaders();
+        _shaderManager.UpdateShaders();
     }
 
     private async Task FileSelected(InputFileChangeEventArgs file)
     {
         if (file.FileCount == 1)
         {
-            await ShaderManager.AddShader(file.File);
+            await _shaderManager.AddShader(file.File);
             _availableExpanded = true;
         }
         else
         {
             foreach (var multipleFile in file.GetMultipleFiles())
             {
-                await ShaderManager.AddShader(multipleFile);
+                await _shaderManager.AddShader(multipleFile);
                 _availableExpanded = true;
             }
         }
@@ -138,7 +141,7 @@
         {
             (Strings.Yes, new EventCallback(null, () =>
             {
-                ShaderManager.DeleteShader(shader);
+                _shaderManager.DeleteShader(shader);
             })),
             (Strings.No, EventCallback.Empty)
         };
@@ -155,16 +158,16 @@
 
     private async Task ApplyClicked(string shader)
     {
-        ShaderManager.EnableShader(shader);
-        await ShaderManager.ApplyShader();
+        _shaderManager.EnableShader(shader);
+        await _shaderManager.ApplyShader();
         
         StateHasChanged();
     }
 
     private async Task RemoveClicked()
     {
-        ShaderManager.DisableShader(ShaderManager.AppliedShader);
-        await ShaderManager.RestoreVanillaShaders();
+        _shaderManager.DisableShader(_shaderManager.AppliedShader);
+        await _shaderManager.RestoreVanillaShaders();
         
         StateHasChanged();
     }
@@ -176,7 +179,7 @@
 
     private void ViewMaterialsClicked(string shader)
     {
-        var materials = ShaderManager.GetMaterialDiff(shader);
+        var materials = _shaderManager.GetMaterialDiff(shader);
         
         var parameters = new ModalParameters()
             .Add(nameof(MessageBox.Message), string.Format(Strings.ShaderManViewMaterialsText, string.Join("\n", materials)).Trim());

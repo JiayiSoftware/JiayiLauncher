@@ -1,4 +1,5 @@
 ﻿@using JiayiLauncher.Features.Shaders
+@using JiayiLauncher.Utils
 
 <div class="edit">
     <div class="edit-name" style="margin-bottom: 1em">
@@ -22,8 +23,9 @@
     {
         if (Shader == null || _textBox?.Value == null ||  _textBox?.Value?.Trim() == string.Empty || _textBox?.Value.Length >= 256) return;
 
+        var shaderManager = Singletons.Get<ShaderManager>();
         var newName = _textBox?.Value ?? Shader;
-        ShaderManager.RenameShader(Shader, newName);
+        shaderManager.RenameShader(Shader, newName);
         
         await Modal.CloseAsync(ModalResult.Ok());
     }

@@ -77,10 +77,12 @@
         var result = dialog.FileNames.ToList();
 
         if (result.Count == 0) return;
+        
+        var modImporter = Singletons.Get<ModImporter>();
 
         if (result.Count == 1)
         {
-            var mod = ModImporter.ImportFromPath(result[0]);
+            var mod = modImporter.ImportFromPath(result[0]);
 
             var parameters = new ModalParameters()
                 .Add(nameof(EditMod.Mod), mod);
@@ -89,7 +91,7 @@
         }
         else if (result.Count > 1)
         {
-            var mods = ModImporter.ImportFromPaths(result);
+            var mods = modImporter.ImportFromPaths(result);
 
             if (JiayiSettings.Instance.ModCollectionPath == string.Empty)
             {

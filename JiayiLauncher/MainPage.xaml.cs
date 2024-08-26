@@ -8,6 +8,7 @@ using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Launch;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Profiles;
+using JiayiLauncher.Features.Shaders;
 using JiayiLauncher.Features.Stats;
 using JiayiLauncher.Features.Versions;
 using JiayiLauncher.Settings;
@@ -31,9 +32,11 @@ public partial class MainPage : ContentPage
         // new singleton system
         var log = Singletons.Add<Log>();
         var packageData = Singletons.Add<PackageData>();
+        Singletons.Add<ShaderManager>();
         Singletons.Add<Injector>();
         Singletons.Add<Minecraft>();
         Singletons.Add<Launcher>();
+        Singletons.Add<ModImporter>();
         
         // log current version
         var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 0, 0);

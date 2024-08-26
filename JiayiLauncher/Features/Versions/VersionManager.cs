@@ -30,6 +30,7 @@ public static class VersionManager
   
 	private static readonly Log _log = Singletons.Get<Log>();
 	private static readonly PackageData _packageData = Singletons.Get<PackageData>();
+	private static readonly ShaderManager _shaderManager = Singletons.Get<ShaderManager>();
 
 	public static bool VersionInstalled(string ver)
 	{
@@ -176,10 +177,10 @@ public static class VersionManager
 		if (package == null) return;
 
 		// in case a shader is applied we don't want to lose the user's shaders
-		if (ShaderManager.AppliedShader != string.Empty)
+		if (_shaderManager.AppliedShader != string.Empty)
 		{
-			ShaderManager.DisableShader(ShaderManager.AppliedShader);
-			await ShaderManager.RestoreVanillaShaders();
+			_shaderManager.DisableShader(_shaderManager.AppliedShader);
+			await _shaderManager.RestoreVanillaShaders();
 		}
 
 		if (package.AppInfo.Package.InstalledPath == GetVersionPath(ver))
@@ -197,7 +198,7 @@ public static class VersionManager
 			Directory.Delete(folder, true);
 		});
 
-		await ShaderManager.DeleteBackupShaders();
+		await _shaderManager.DeleteBackupShaders();
 	}
 
 	// my favorite part of this class
@@ -205,10 +206,10 @@ public static class VersionManager
 	{
 		_log.Write(nameof(VersionManager), $"Switching to version {version}");
 
-		if (ShaderManager.AppliedShader != string.Empty)
+		if (_shaderManager.AppliedShader != string.Empty)
 		{
-			ShaderManager.DisableShader(ShaderManager.AppliedShader);
-			await ShaderManager.RestoreVanillaShaders();
+			_shaderManager.DisableShader(_shaderManager.AppliedShader);
+			await _shaderManager.RestoreVanillaShaders();
 		}
 
 		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);

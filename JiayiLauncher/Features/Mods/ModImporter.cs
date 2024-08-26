@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace JiayiLauncher.Features.Mods;
 
-public static class ModImporter
+public class ModImporter
 {
-    public static Mod ImportFromPath(string path)
+    public Mod ImportFromPath(string path)
     {
         var name = Path.GetFileNameWithoutExtension(path);
         return new Mod(name, path);
     }
     
-    public static List<Mod> ImportFromPaths(IEnumerable<string> paths)
+    public List<Mod> ImportFromPaths(IEnumerable<string> paths)
     {
         var list = new List<Mod>();
         foreach (var path in paths)
@@ -26,7 +26,7 @@ public static class ModImporter
         return list;
     }
 
-    public static async Task<Mod> ImportFromBrowserFile(IBrowserFile file)
+    public async Task<Mod> ImportFromBrowserFile(IBrowserFile file)
     {
         // var path = Path.Combine(Path.GetTempPath(), file.Name);
         // await using var stream = File.Create(path);
@@ -35,7 +35,7 @@ public static class ModImporter
         return await ImportFromStream(file.OpenReadStream(524288000L), file.Name);
     }
 
-    public static async Task<List<Mod>> ImportFromBrowserFiles(IEnumerable<IBrowserFile> files)
+    public async Task<List<Mod>> ImportFromBrowserFiles(IEnumerable<IBrowserFile> files)
     {
         var mods = new List<Mod>();
         foreach (var file in files)
@@ -46,7 +46,7 @@ public static class ModImporter
         return mods;
     }
     
-    public static async Task<Mod> ImportFromStream(Stream stream, string name)
+    public async Task<Mod> ImportFromStream(Stream stream, string name)
     {
         var path = Path.Combine(Path.GetTempPath(), name);
         await using var file = File.Create(path);

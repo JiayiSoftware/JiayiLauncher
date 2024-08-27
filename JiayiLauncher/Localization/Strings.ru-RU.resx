@@ -63,7 +63,7 @@
   </resheader>
   <!-- common strings -->
   <data name="Okay" xml:space="preserve">
-        <value>Okay</value>
+        <value>ОК</value>
     </data>
   <data name="Yes" xml:space="preserve">
         <value>Да</value>
@@ -144,13 +144,13 @@
         <value>Выбрать</value>
     </data>
   <data name="View" xml:space="preserve">
-        <value>View</value>
+        <value>Открыть</value>
     </data>
   <data name="Restore" xml:space="preserve">
         <value>Восстановить</value>
     </data>
   <data name="Update" xml:space="preserve">
-        <value>Update</value>
+        <value>Обновления</value>
     </data>
   <data name="Restart" xml:space="preserve">
         <value>Перезапуск</value>
@@ -369,19 +369,19 @@
         <value>Сырые теги</value>
     </data>
   <data name="ThemePublishRawTagsSelect" xml:space="preserve">
-        <value>Select raw tags</value>
+        <value>Выбрать исходный тег</value>
     </data>
   <data name="ThemePublishNoName" xml:space="preserve">
-        <value>Failed to create theme (no name)</value>
+        <value>Ошибка: Нет названия</value>
     </data>
   <data name="ThemePublishNoRawTags" xml:space="preserve">
-        <value>Failed to create theme (minimum 1 raw tag)</value>
+        <value>Ошибка: Выберите исходный тег</value>
     </data>
   <data name="ThemePublishAlreadyExists" xml:space="preserve">
-        <value>Failed to create theme (already exists): {0}</value>
+        <value>Ошибка: Тема уже существует ({0})</value>
     </data>
   <data name="ThemePublishOpenRepo" xml:space="preserve">
-        <value>Open repository</value>
+        <value>Открыть репозиторий</value>
     </data>
   <data name="ThemePublishFinalize" xml:space="preserve">
         <value>

@@ -41,6 +41,8 @@ public partial class MainPage : ContentPage
         }
 		      
         ThemeState.Instance = new ThemeState(CssBuilder.FromFile(ThemeState.ThemePath));
+        
+        // not making this a singleton because of how it's used
         JiayiSettings.Load();
         
         var packageData = Singletons.Add<PackageData>();

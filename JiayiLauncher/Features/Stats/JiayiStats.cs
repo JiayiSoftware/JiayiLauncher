@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Utils;
 
@@ -15,14 +16,21 @@ public class JiayiStats
 	public Mod? MostPlayedMod { get; set; }
 	public Mod? MostRecentMod { get; set; }
 
+	[JsonIgnore]
 	private string _statsPath = Path.Combine(
 		Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "JiayiLauncher", "stats.json");
+	
+	[JsonIgnore]
 	private JsonSerializerOptions? _options;
 	
+	[JsonIgnore]
 	private bool _loaded;
 
-	public JiayiStats() => Save();
-	
+	public JiayiStats()
+	{
+		Save();
+	}
+
 	public void Save()
 	{
 		if (!_loaded) Load();
@@ -60,7 +68,7 @@ public class JiayiStats
 		
 		if (!File.Exists(_statsPath))
 		{
-			//Instance = new JiayiStats();
+			_loaded = true;
 			Save();
 			log.Write(nameof(JiayiStats), "Created new stats file.");
 			return;

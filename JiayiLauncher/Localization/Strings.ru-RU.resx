@@ -385,22 +385,22 @@
     </data>
   <data name="ThemePublishFinalize" xml:space="preserve">
         <value>
-            Your theme is in the folder we just opened.
-            To see it here, open a pull request on our GitHub repository for themes. Check the README for instructions.
+            Ваша тема в папке, которую мы открыли.
+            Чтобы увидеть её здесь, откройте rull request в нашем GitHub репозитории. Там же будут инструкции.
         </value>
     </data>
   <!-- about strings -->
   <data name="AboutTitle" xml:space="preserve">
-        <value>About</value>
+        <value>О нас</value>
     </data>
   <data name="AboutPresenting" xml:space="preserve">
-        <value>After 2 years of development hell, we proudly present:</value>
+        <value>После двух лет производственного ада, мы с гордостью представляем:</value>
     </data>
   <data name="AboutSourceAvailable" xml:space="preserve">
-        <value>Source available on GitHub</value>
+        <value>Исходный код на GitHub</value>
     </data>
   <data name="AboutDiscord" xml:space="preserve">
-        <value>Talk to us on Discord</value>
+        <value>Наш сервер в Discord</value>
     </data>
   <data name="AboutCredits" xml:space="preserve">
         <value>Credits</value>

@@ -84,7 +84,7 @@ public class JiayiSettings
     [Setting("Update version list", "General", "Update the list of available versions.")]
     public (string, Action) UpdateVersionList { get; set; } = (Strings.Update, () =>
     {
-        Task.Run(() => VersionList.UpdateVersions(true));
+        Task.Run(() => Singletons.Get<VersionList>().UpdateVersions(true));
     });
 
     [Setting("Shader folder path", "General", "The path to the folder containing your shaders.", canReset: false)]

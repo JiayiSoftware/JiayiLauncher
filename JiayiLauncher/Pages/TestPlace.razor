@@ -126,7 +126,7 @@
     {
         if (_versionsBox?.Value == null) return;
 
-        var version = await VersionList.GetVersion(_versionsBox.Value);
+        var version = await Singletons.Get<VersionList>().GetVersion(_versionsBox.Value);
         var url = await RequestFactory.GetDownloadUrl(version.UpdateId);
 
         var parameters = new ModalParameters()

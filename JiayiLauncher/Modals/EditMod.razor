@@ -78,7 +78,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _supportedVersions.AddRange(await VersionList.GetVersionList());
+        _supportedVersions.AddRange(await Singletons.Get<VersionList>().GetVersionList());
     }
 
     private async Task SaveClicked()

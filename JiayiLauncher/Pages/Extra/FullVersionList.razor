@@ -44,7 +44,7 @@
 
         if (_showInstalledVersions)
         {
-            versions = versions.Where(VersionManager.VersionInstalled).ToList();
+            versions = versions.Where(_versionManager.VersionInstalled).ToList();
         }
         
         if (versions.Count == 0)
@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="version-buttons">
-                            @if (VersionManager.VersionInstalled(name))
+                            @if (_versionManager.VersionInstalled(name))
                             {
                                 <JiayiButton Size="@JiayiButton.ButtonSize.Small"
                                              Disabled="@_buttonStates[i]"
@@ -128,25 +128,27 @@
 
     private JiayiTextBox? _searchBox;
     private bool _showInstalledVersions;
-
     private string _showTitle => ShowTitle ? "flex" : "none";
+    
+    private readonly VersionList _versionList = Singletons.Get<VersionList>();
+    private readonly VersionManager _versionManager = Singletons.Get<VersionManager>();
 
     protected override async Task OnInitializedAsync()
     {
-        var versionList = await VersionList.GetFullVersionList();
-        _versionNames.AddRange(VersionManager.GetCustomVersions());
+        var versionList = await _versionList.GetFullVersionList();
+        _versionNames.AddRange(_versionManager.GetCustomVersions());
         _versionNames.AddRange(versionList.Keys);
         _versions = versionList.Values.ToList();
         _statuses = new string[_versionNames.Count].ToList();
         _buttonStates = new bool[_versionNames.Count].ToList();
         
         // update statuses for custom versions
-        for (var i = 0; i < VersionManager.GetCustomVersions().Count; i++)
+        for (var i = 0; i < _versionManager.GetCustomVersions().Count; i++)
         {
             _statuses[i] = Strings.Imported;
         }
         
-        VersionManager.SwitchProgressChanged += (_, _) => StateHasChanged();
+        _versionManager.SwitchProgressChanged += (_, _) => StateHasChanged();
     }
 
     protected override async Task OnParametersSetAsync()
@@ -180,7 +182,7 @@
         _statuses[i] = Strings.Downloading;
         _buttonStates[i] = true;
         
-        await VersionManager.DownloadVersion(ver);
+        await _versionManager.DownloadVersion(ver);
         
         _statuses[i] = string.Empty;
         _buttonStates[i] = false;
@@ -190,7 +192,7 @@
 
     private string GetStatus(string ver)
     {
-        if (VersionManager.IsCustomVersion(ver)) return _statuses[_versionNames.IndexOf(ver)];
+        if (_versionManager.IsCustomVersion(ver)) return _statuses[_versionNames.IndexOf(ver)];
         
         var version = _versions[_versionNames.IndexOf(ver)];
         if (version.UpdateId == string.Empty) return Strings.NotAvailable;
@@ -199,9 +201,9 @@
         
         if (_statuses[i] == Strings.Downloading)
         {
-            return VersionManager.DownloadProgress == 100 ? Strings.Extracting
+            return _versionManager.DownloadProgress == 100 ? Strings.Extracting
                 //: $"{_statuses[i]} {VersionManager.DownloadProgress}% complete";
-                : string.Format($"{_statuses[i]} {Strings.CompletionPercent}", VersionManager.DownloadProgress);
+                : string.Format($"{_statuses[i]} {Strings.CompletionPercent}", _versionManager.DownloadProgress);
         }
         
         return _statuses[i];
@@ -221,9 +223,9 @@
             _statuses[i] = Strings.Removing;
             _buttonStates[i] = true;
             
-            var custom = VersionManager.IsCustomVersion(ver);
+            var custom = _versionManager.IsCustomVersion(ver);
 
-            await VersionManager.RemoveVersion(ver);
+            await _versionManager.RemoveVersion(ver);
 
             if (custom)
             {
@@ -263,7 +265,7 @@
         _statuses[i] = Strings.Switching;
         _buttonStates[i] = true;
         
-        var result = await VersionManager.Switch(ver);
+        var result = await _versionManager.Switch(ver);
         var parameters = new ModalParameters();
         var options = new List<(string, EventCallback)>();
 
@@ -316,7 +318,7 @@
         if (dialog.ShowDialog() != CommonFileDialogResult.Ok) return;
         var path = dialog.FileName;
 
-        if (!VersionManager.IsValidPackage(path))
+        if (!_versionManager.IsValidPackage(path))
         {
             var toastParams = new ToastParameters()
                 .Add(nameof(JiayiToast.Title), Strings.VerListInvalidPackage)
@@ -332,10 +334,10 @@
         }
             
         // add to list
-        var versionList = await VersionList.GetFullVersionList();
+        var versionList = await _versionList.GetFullVersionList();
         _versionNames.Clear();
         _versionNames.Add(Path.GetFileNameWithoutExtension(path));
-        _versionNames.AddRange(VersionManager.GetCustomVersions());
+        _versionNames.AddRange(_versionManager.GetCustomVersions());
         _versionNames.AddRange(versionList.Keys);
         _statuses = new string[_versionNames.Count].ToList();
         _buttonStates = new bool[_versionNames.Count].ToList();
@@ -344,7 +346,7 @@
         _statuses[i] = Strings.Importing;
         _buttonStates[i] = true;
             
-        await VersionManager.AddCustomVersion(path);
+        await _versionManager.AddCustomVersion(path);
             
         _statuses[i] = Strings.Imported;
         _buttonStates[i] = false;

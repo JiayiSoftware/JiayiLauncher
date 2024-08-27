@@ -14,20 +14,20 @@ using StoreLib.Services;
 
 namespace JiayiLauncher.Features.Versions;
 
-public static class VersionList
+public class VersionList
 {
 	private const string STORE_ID = "9NBLGGH2JHXJ";
 	private const string OLD_VERSIONS_DB = "https://raw.githubusercontent.com/MCMrARM/mc-w10-versiondb/master/versions.txt";
 	
-	private static readonly List<string> _versions = new();
-	private static readonly SortedDictionary<string, MinecraftVersion> _versionDict = new(new VersionComparer());
-	private static readonly DisplayCatalogHandler _catalog = DisplayCatalogHandler.ProductionConfig();
-	private static readonly string _versionsPath = Path.Combine(JiayiSettings.Instance!.VersionsPath, "versions.json");
-	private static readonly Log _log = Singletons.Get<Log>();
+	private readonly List<string> _versions = new();
+	private readonly SortedDictionary<string, MinecraftVersion> _versionDict = new(new VersionComparer());
+	private readonly DisplayCatalogHandler _catalog = DisplayCatalogHandler.ProductionConfig();
+	private readonly string _versionsPath = Path.Combine(JiayiSettings.Instance!.VersionsPath, "versions.json");
+	private readonly Log _log = Singletons.Get<Log>();
 
-	private static bool _loaded;
+	private bool _loaded;
 	
-	public static async Task UpdateVersions(bool clear = false)
+	public async Task UpdateVersions(bool clear = false)
 	{
         Directory.CreateDirectory(JiayiSettings.Instance!.VersionsPath);
         
@@ -147,7 +147,7 @@ public static class VersionList
 		_log.Write(nameof(VersionList), $"Updated version list. Found {_versions.Count} versions.");
 	}
 
-	public static async Task<List<string>> GetVersionList()
+	public async Task<List<string>> GetVersionList()
 	{
 		if (_versions.Count > 0) return _versions;
 
@@ -155,7 +155,7 @@ public static class VersionList
 		return _versions;
 	}
 
-	public static async Task<SortedDictionary<string, MinecraftVersion>> GetFullVersionList()
+	public async Task<SortedDictionary<string, MinecraftVersion>> GetFullVersionList()
 	{
 		if (_versionDict.Count > 0) return _versionDict;
 		
@@ -163,7 +163,7 @@ public static class VersionList
 		return _versionDict;
 	}
 
-	public static async Task<MinecraftVersion> GetVersion(string version)
+	public async Task<MinecraftVersion> GetVersion(string version)
 	{
 		if (_versionDict.TryGetValue(version, out var mcVersion)) return mcVersion;
 		
@@ -173,7 +173,7 @@ public static class VersionList
 		return _versionDict[version];
 	}
 	
-	public static bool CompareVersions(string left, string right)
+	public bool CompareVersions(string left, string right)
 	{
 		var leftVersion = left.Split('.');
 		var rightVersion = right.Split('.');
@@ -187,7 +187,7 @@ public static class VersionList
 		return false;
 	}
 	
-	private static string ParseVersion(string fileName)
+	private string ParseVersion(string fileName)
 	{
 		var name = Path.GetFileNameWithoutExtension(fileName);
 		var rawVer = name.Split("_")[1];

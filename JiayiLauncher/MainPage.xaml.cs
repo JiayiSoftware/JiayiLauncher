@@ -31,8 +31,22 @@ public partial class MainPage : ContentPage
         
         // new singleton system
         var log = Singletons.Add<Log>();
+        
+        // Theme path is local\default before settings load
+        if (!File.Exists(ThemeState.ThemePath))
+        {
+            var themeParent = Path.GetDirectoryName(ThemeState.ThemePath)!;
+            Directory.CreateDirectory(themeParent);
+            File.Copy(Path.Combine(ThemeState.RootPath, "css", "theme.css"), ThemeState.ThemePath);
+        }
+		      
+        ThemeState.Instance = new ThemeState(CssBuilder.FromFile(ThemeState.ThemePath));
+        JiayiSettings.Load();
+        
         var packageData = Singletons.Add<PackageData>();
+        var versionList = Singletons.Add<VersionList>();
         Singletons.Add<ShaderManager>();
+        Singletons.Add<VersionManager>();
         Singletons.Add<Injector>();
         Singletons.Add<JiayiStats>();
         Singletons.Add<Minecraft>();
@@ -47,17 +61,6 @@ public partial class MainPage : ContentPage
         {
             e.WebView.DefaultBackgroundColor = Windows.UI.Color.FromArgb(255, 15, 15, 15);
         };
-		
-        // Theme path is local\default before settings load
-        if (!File.Exists(ThemeState.ThemePath))
-        {
-            var themeParent = Path.GetDirectoryName(ThemeState.ThemePath)!;
-            Directory.CreateDirectory(themeParent);
-            File.Copy(Path.Combine(ThemeState.RootPath, "css", "theme.css"), ThemeState.ThemePath);
-        }
-		      
-        ThemeState.Instance = new ThemeState(CssBuilder.FromFile(ThemeState.ThemePath));
-        JiayiSettings.Load();
 		      
         // Path changes after settings load
         if (!File.Exists(ThemeState.ThemePath))
@@ -67,7 +70,7 @@ public partial class MainPage : ContentPage
         }
 		      
         InternetManager.CheckOnline();
-        Task.Run(async () => await VersionList.UpdateVersions());
+        Task.Run(async () => await versionList.UpdateVersions());
 		      
         if (JiayiSettings.Instance.ModCollectionPath != string.Empty)
         {

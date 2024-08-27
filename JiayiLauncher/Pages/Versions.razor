@@ -95,6 +95,7 @@
     protected override async Task OnInitializedAsync()
     {
         var packageData = Singletons.Get<PackageData>();
+        var versionList = Singletons.Get<VersionList>();
         
         _currentVersion = await packageData.GetVersion();
         var location = await packageData.GetInstallLocation();
@@ -113,12 +114,12 @@
             _shadersDisabled = true;
         }
 
-        var versions = await VersionList.GetVersionList();
+        var versions = await versionList.GetVersionList();
         // shave the last 2 characters off the version name as they're not shown in game
         _latestVersion = versions[0][..^2];
         _popularVersions.Add(versions[0]);
         
-        if (_currentVersion != Strings.Unknown && VersionList.CompareVersions("1.16.200.2", _currentVersion))
+        if (_currentVersion != Strings.Unknown && versionList.CompareVersions("1.16.200.2", _currentVersion))
         {
             _shaderText = Strings.VerManShaderManagerVerTooLow;
             _shadersDisabled = true;

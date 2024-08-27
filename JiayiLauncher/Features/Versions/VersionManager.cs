@@ -13,7 +13,7 @@ using JiayiLauncher.Utils;
 
 namespace JiayiLauncher.Features.Versions;
 
-public static class VersionManager
+public class VersionManager
 {
 	public enum SwitchResult
 	{
@@ -24,26 +24,27 @@ public static class VersionManager
 		UnknownError
 	}
 
-	public static int DownloadProgress { get; private set; }
-	public static event EventHandler? SwitchProgressChanged;
-	public static long BytesRead { get; private set; }
+	public int DownloadProgress { get; private set; }
+	public event EventHandler? SwitchProgressChanged;
+	public long BytesRead { get; private set; }
   
-	private static readonly Log _log = Singletons.Get<Log>();
-	private static readonly PackageData _packageData = Singletons.Get<PackageData>();
-	private static readonly ShaderManager _shaderManager = Singletons.Get<ShaderManager>();
+	private readonly Log _log = Singletons.Get<Log>();
+	private readonly PackageData _packageData = Singletons.Get<PackageData>();
+	private readonly ShaderManager _shaderManager = Singletons.Get<ShaderManager>();
+	private readonly VersionList _versionList = Singletons.Get<VersionList>();
 
-	public static bool VersionInstalled(string ver)
+	public bool VersionInstalled(string ver)
 	{
 		Directory.CreateDirectory(JiayiSettings.Instance!.VersionsPath);
 		var folders = Directory.GetDirectories(JiayiSettings.Instance.VersionsPath);
 		return folders.Any(x => x.Contains(ver));
 	}
 
-	public static List<string> GetCustomVersions()
+	public List<string> GetCustomVersions()
 	{
 		Directory.CreateDirectory(JiayiSettings.Instance!.VersionsPath);
 		var folders = Directory.GetDirectories(JiayiSettings.Instance.VersionsPath);
-		var versions = VersionList.GetVersionList().GetAwaiter().GetResult();
+		var versions = _versionList.GetVersionList().GetAwaiter().GetResult();
 		
 		for (int i = 0; i < folders.Length; i++)
 		{
@@ -60,15 +61,15 @@ public static class VersionManager
 			.ToList()!;
 	}
 
-	public static bool IsCustomVersion(string ver)
+	public bool IsCustomVersion(string ver)
 	{
 		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);
-		var versions = VersionList.GetVersionList().GetAwaiter().GetResult();
+		var versions = _versionList.GetVersionList().GetAwaiter().GetResult();
 
 		return folders.Any(x => x.Contains(ver)) && versions.All(x => x != ver);
 	}
 
-	public static async Task AddCustomVersion(string path)
+	public async Task AddCustomVersion(string path)
 	{
 		// appx files are just zipped so extract it like we've just downloaded an official version
 		var folder = Path.Combine(JiayiSettings.Instance!.VersionsPath, Path.GetFileNameWithoutExtension(path));
@@ -80,13 +81,13 @@ public static class VersionManager
 		if (File.Exists(signature)) File.Delete(signature);
 	}
 
-	public static bool IsValidPackage(string path)
+	public bool IsValidPackage(string path)
 	{
 		using var archive = ZipFile.OpenRead(path);
 		return archive.Entries.Any(x => x.Name == "AppxManifest.xml");
 	}
 
-	public static async Task DownloadVersion(MinecraftVersion version)
+	public async Task DownloadVersion(MinecraftVersion version)
 	{
 		var updateId = version.UpdateId;
 		var url = await RequestFactory.GetDownloadUrl(updateId);
@@ -142,7 +143,7 @@ public static class VersionManager
 		if (File.Exists(signature)) File.Delete(signature);
 	}
 	
-	private static async Task DownloadChunk(string url, string filePath, long start, long end, int bufferSize, long totalRead, long contentLength, object progressLock)
+	private async Task DownloadChunk(string url, string filePath, long start, long end, int bufferSize, long totalRead, long contentLength, object progressLock)
 	{
 		var request = new HttpRequestMessage(HttpMethod.Get, url);
 		request.Headers.Range = new System.Net.Http.Headers.RangeHeaderValue(start, end);
@@ -170,8 +171,7 @@ public static class VersionManager
 		}
 	}
 
-
-	public static async Task RemoveVersion(string ver)
+	public async Task RemoveVersion(string ver)
 	{
 		var package = await _packageData.GetPackage();
 		if (package == null) return;
@@ -202,7 +202,7 @@ public static class VersionManager
 	}
 
 	// my favorite part of this class
-	public static async Task<SwitchResult> Switch(string version)
+	public async Task<SwitchResult> Switch(string version)
 	{
 		_log.Write(nameof(VersionManager), $"Switching to version {version}");
 
@@ -294,7 +294,7 @@ public static class VersionManager
 		return SwitchResult.UnknownError;
 	}
 
-	public static string? GetVersionPath(string ver)
+	public string? GetVersionPath(string ver)
 	{
 		var folders = Directory.GetDirectories(JiayiSettings.Instance!.VersionsPath);
 		var folder = folders.FirstOrDefault(x => x == ver);

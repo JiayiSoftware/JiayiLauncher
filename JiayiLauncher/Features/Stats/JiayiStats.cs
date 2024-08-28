@@ -88,7 +88,6 @@ public class JiayiStats
 				return;
 			}
 			
-			//Instance = stats;
 			TotalPlayTime = stats.TotalPlayTime;
 			MostPlayedMod = stats.MostPlayedMod;
 			MostRecentMod = stats.MostRecentMod;

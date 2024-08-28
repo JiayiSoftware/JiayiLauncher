@@ -65,7 +65,7 @@ public partial class App : MauiWinUIApplication
             var pCds = Marshal.AllocHGlobal(Marshal.SizeOf<CopyData>());
             Marshal.StructureToPtr(cds, pCds, false);
 
-            SendMessage(hWnd, 0x004A, 0, pCds.ToInt64());
+            SendMessage(hWnd, 0x004A, 0, pCds);
         }
 		
         Marshal.FreeHGlobal(ptr);

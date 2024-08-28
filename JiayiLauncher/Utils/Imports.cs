@@ -51,8 +51,8 @@ public static partial class Imports
 		nint lpStartAddress, nint lpParameter, uint dwCreationFlags, nint lpThreadId);
 	
 	// because LibraryImport just dies when it comes to this function
-	[DllImport("user32.dll")]
-	public static extern int SendMessage(nint hWnd, int Msg, int wParam, long lParam);
+	[LibraryImport("user32.dll")]
+	public static partial int SendMessage(nint hWnd, uint Msg, nuint wParam, nint lParam);
 	
 	[LibraryImport("user32.dll")]
 	public static partial nint FindWindowW([MarshalAs(UnmanagedType.LPWStr)] string? lpClassName, [MarshalAs(UnmanagedType.LPWStr)] string lpWindowName);
@@ -61,8 +61,12 @@ public static partial class Imports
 	public static partial int CoCreateInstance(ref Guid rclsid, nint pUnkOuter, uint dwClsContext, ref Guid riid, out nint ppv);
 	
 	[LibraryImport("user32.dll")]
-	public static partial IntPtr SetWindowLongPtrA(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+	public static partial nint SetWindowLongPtrA(nint hWnd, int nIndex, nint dwNewLong);
 	
 	[LibraryImport("user32.dll")]
-	public static partial int CallWindowProcA(IntPtr lpPrevWndFunc, IntPtr hWnd, uint Msg, UIntPtr wParam, IntPtr lParam);
+	public static partial int CallWindowProcA(nint lpPrevWndFunc, nint hWnd, uint Msg, nuint wParam, nint lParam);
+	
+	[LibraryImport("user32.dll")]
+	[return: MarshalAs(UnmanagedType.Bool)]
+	public static partial bool SetForegroundWindow(nint hWnd);
 }

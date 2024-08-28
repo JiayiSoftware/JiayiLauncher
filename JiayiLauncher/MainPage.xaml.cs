@@ -23,8 +23,9 @@ public partial class MainPage : ContentPage
 {
     public BlazorWebView BlazorWebView => WebView;
     
-    private static IntPtr _originalWndProc;
-    private delegate int WndProc(IntPtr hWnd, uint msg, UIntPtr wParam, IntPtr lParam);
+    private static nint _originalWndProc;
+    private nint _windowHandle;
+    private delegate int WndProc(nint hWnd, uint msg, nuint wParam, nint lParam);
     
     public MainPage()
     {
@@ -62,6 +63,7 @@ public partial class MainPage : ContentPage
         Singletons.Add<Launcher>();
         Singletons.Add<ModImporter>();
         Singletons.Add<RichPresence>();
+        Singletons.Add(this);
 
         WebView.BlazorWebViewInitialized += (_, e) =>
         {
@@ -70,10 +72,10 @@ public partial class MainPage : ContentPage
             // technically the window is created when this event is fired so
             
             // set window hook manually because maui doesn't support it
-            var hWnd = Imports.FindWindowW(null, "Jiayi Launcher");
-            if (hWnd == IntPtr.Zero) return;
+            _windowHandle = Imports.FindWindowW(null, "Jiayi Launcher");
+            if (_windowHandle == nint.Zero) return;
 		
-            _originalWndProc = Imports.SetWindowLongPtrA(hWnd, -4, 
+            _originalWndProc = Imports.SetWindowLongPtrA(_windowHandle, -4, 
                 Marshal.GetFunctionPointerForDelegate<WndProc>(WndProcHook));
             
             var log = Singletons.Get<Log>();
@@ -103,15 +105,29 @@ public partial class MainPage : ContentPage
         Task.Run(async () => await packageData.MinimizeFix(JiayiSettings.Instance.MinimizeFix));
     }
     
-    private static int WndProcHook(IntPtr hWnd, uint msg, UIntPtr wParam, IntPtr lParam)
+    public void ActivateWindow()
+    {
+        Imports.SetForegroundWindow(_windowHandle);
+    }
+    
+    private static int WndProcHook(nint hWnd, uint msg, nuint wParam, nint lParam)
     {
         if (msg == Imports.WM_COPYDATA)
         {
             var cds = Marshal.PtrToStructure<Imports.CopyData>(lParam);
             var args = Marshal.PtrToStringUni(cds.lpData, (int)cds.cbData / 2);
             Singletons.Get<Arguments>().Set(args);
+            
+            Singletons.Get<MainPage>().ActivateWindow();
         }
 		
         return Imports.CallWindowProcA(_originalWndProc, hWnd, msg, wParam, lParam);
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        Window.MinimumWidth = 750;
+        Window.MinimumHeight = 420; // funny number huh
     }
 }

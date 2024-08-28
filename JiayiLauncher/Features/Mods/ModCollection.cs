@@ -26,7 +26,9 @@ public class ModCollection
     public List<Mod> Mods { get; } = new();
     
     private static JsonSerializerOptions? _options;
+    
     private static Log _log = Singletons.Get<Log>();
+    private static BlazorBridge _blazor = Singletons.Get<BlazorBridge>();
     
     // serialization thing
     public ModCollection() { }
@@ -235,7 +237,7 @@ public class ModCollection
 			    .Add(nameof(MessageBox.Buttons), options)
 			    .Add(nameof(MessageBox.Message), Strings.NewModAlreadyExists);
 
-		    BlazorBridge.ShowModal<MessageBox>(Strings.NewModName, parameters).Wait();
+		    _blazor.ShowModal<MessageBox>(Strings.NewModName, parameters).Wait();
 	    }
 	    else if (HasMod(mod.Path))
 	    {

@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Components;
 
 namespace JiayiLauncher.Utils;
 
-public static class BlazorBridge
+public class BlazorBridge
 {
-	private static readonly Log _log = Singletons.Get<Log>();
+	private readonly Log _log = Singletons.Get<Log>();
 	
-	public static void ShowToast(ToastParameters parameters, Action<ToastSettings> settings)
+	public void ShowToast(ToastParameters parameters, Action<ToastSettings> settings)
 	{
 		var mainPage = (MainPage)Application.Current!.MainPage!;
 		var dispatched = mainPage.BlazorWebView.TryDispatchAsync(sp =>
@@ -25,7 +25,7 @@ public static class BlazorBridge
 			_log.Write(nameof(BlazorBridge), "Failed to dispatch toast.", Log.LogLevel.Error);
 	}
 
-	public static async Task<ModalResult> ShowModal<T>(string title, ModalParameters parameters) where T : IComponent
+	public async Task<ModalResult> ShowModal<T>(string title, ModalParameters parameters) where T : IComponent
 	{
 		var mainPage = (MainPage)Application.Current!.MainPage!;
 		ModalResult? result = null;

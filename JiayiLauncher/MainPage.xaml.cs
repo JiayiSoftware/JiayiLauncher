@@ -33,7 +33,8 @@ public partial class MainPage : ContentPage
         //CultureInfo.CurrentUICulture = new CultureInfo("es-ES", false);
         
         InitializeComponent();
-        
+        Singletons.Add<BlazorBridge>();
+
         // Theme path is local\default before settings load
         if (!File.Exists(ThemeState.ThemePath))
         {

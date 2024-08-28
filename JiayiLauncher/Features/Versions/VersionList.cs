@@ -23,7 +23,9 @@ public class VersionList
 	private readonly SortedDictionary<string, MinecraftVersion> _versionDict = new(new VersionComparer());
 	private readonly DisplayCatalogHandler _catalog = DisplayCatalogHandler.ProductionConfig();
 	private readonly string _versionsPath = Path.Combine(JiayiSettings.Instance!.VersionsPath, "versions.json");
+	
 	private readonly Log _log = Singletons.Get<Log>();
+	private readonly BlazorBridge _blazor = Singletons.Get<BlazorBridge>();
 
 	private bool _loaded;
 	
@@ -41,7 +43,7 @@ public class VersionList
 				.Add(nameof(JiayiToast.Level), ToastLevel.Info)
 				.Add(nameof(JiayiToast.Title), Strings.VerListUpdatingVersions);
 			
-			BlazorBridge.ShowToast(toastParams, settings =>
+			_blazor.ShowToast(toastParams, settings =>
 			{
 				settings.Timeout = 5;
 				settings.ShowProgressBar = true;

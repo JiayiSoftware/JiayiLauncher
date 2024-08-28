@@ -484,6 +484,8 @@ public class JiayiSettings
                 (Strings.Okay, EventCallback.Empty)
             });
 
+        var blazor = Singletons.Get<BlazorBridge>();
+        
         try
         {
             _options ??= new JsonSerializerOptions
@@ -498,7 +500,7 @@ public class JiayiSettings
                 Instance = Default;
                 Instance.Save();
                 
-                BlazorBridge.ShowToast(toastParams, toastSettings => toastSettings.DisableTimeout = true);
+                blazor.ShowToast(toastParams, toastSettings => toastSettings.DisableTimeout = true);
                 
                 _log.Write(Instance, "Settings file was corrupted or invalid. Created new settings file.", Log.LogLevel.Warning);
                 return;
@@ -513,7 +515,7 @@ public class JiayiSettings
             Instance = Default;
             Instance.Save();
             
-            BlazorBridge.ShowToast(toastParams, toastSettings => toastSettings.DisableTimeout = true);
+            blazor.ShowToast(toastParams, toastSettings => toastSettings.DisableTimeout = true);
             
             _log.Write(Instance, $"Settings file was corrupted or invalid. Created new settings file. Error: {e}",
                 Log.LogLevel.Warning);

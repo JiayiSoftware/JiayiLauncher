@@ -13,7 +13,10 @@ public class Updater
     private const string INSTALLER_URL = "https://phased.tech/download/JiayiInstaller.exe";
 
     private readonly GitHubClient _gh = new(new ProductHeaderValue("JiayiLauncher"));
+    
     private readonly Log _log = Singletons.Get<Log>();
+    private readonly InternetManager _internet = Singletons.Get<InternetManager>();
+    
     public event EventHandler? UpdateDownloaded;
     public event EventHandler? UpdateInstalled;
 
@@ -58,7 +61,7 @@ public class Updater
     {
         _log.Write(this, "Downloading latest version");
 
-        await using var response = await InternetManager.Client.GetStreamAsync(INSTALLER_URL);
+        await using var response = await _internet.Client.GetStreamAsync(INSTALLER_URL);
         await using var fileStream = File.Create("JiayiInstaller.exe");
         await response.CopyToAsync(fileStream);
 

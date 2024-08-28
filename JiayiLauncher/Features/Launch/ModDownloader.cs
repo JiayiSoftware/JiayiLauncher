@@ -12,7 +12,9 @@ public class ModDownloader
 	// a lot of using statements here, (not) sorry if that pisses you off
     public async Task<string> DownloadMod(Mod mod)
     {
-	    if (InternetManager.OfflineMode) return string.Empty;
+	    var internet = Singletons.Get<InternetManager>();
+		
+	    if (internet.OfflineMode) return string.Empty;
 	    
 	    var log = Singletons.Get<Log>();
 	    
@@ -24,7 +26,7 @@ public class ModDownloader
 		
         log.Write(nameof(ModDownloader), $"Downloading {mod.Name}");
 
-        using var response = await InternetManager.Client.GetAsync(mod.Path, HttpCompletionOption.ResponseHeadersRead);
+        using var response = await internet.Client.GetAsync(mod.Path, HttpCompletionOption.ResponseHeadersRead);
 		log.Write(nameof(ModDownloader), $"Server responded with {response.StatusCode}",
 			response.IsSuccessStatusCode ? Log.LogLevel.Info : Log.LogLevel.Error);
 		if (!response.IsSuccessStatusCode) return string.Empty;

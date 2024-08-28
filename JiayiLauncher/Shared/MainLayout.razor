@@ -34,6 +34,7 @@
     private string _margin = "5.5rem";
 
     private readonly Updater _updater = new();
+    private readonly InternetManager _internet = Singletons.Get<InternetManager>();
 
     // silly
     private readonly List<string> _dontAskAgain = Strings.DontAskAgain.Split('\n')
@@ -45,7 +46,7 @@
 
         Instance = this;
 
-        if (InternetManager.OfflineMode)
+        if (_internet.OfflineMode)
         {
             var parameters = new ToastParameters()
                 .Add(nameof(JiayiToast.Title), Strings.OfflineMode)
@@ -128,7 +129,7 @@
 
     private async Task UpdateCheck()
     {
-        if (InternetManager.OfflineMode) return;
+        if (_internet.OfflineMode) return;
 
         var result = await _updater.IsUpdateAvailable();
         if (result)

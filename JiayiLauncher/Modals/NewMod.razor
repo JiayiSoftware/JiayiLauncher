@@ -24,7 +24,7 @@
     <div class="url" @onkeydown="Enter">
         <p>@_urlStatus</p>
         
-        @if (InternetManager.OfflineMode)
+        @if (Singletons.Get<InternetManager>().OfflineMode)
         {
             <JiayiTextBox Style="width: 99%" Placeholder="@Strings.NewModOfflineNotice" Disabled="true" @ref="_urlTextBox" />
         }

@@ -37,7 +37,9 @@ public class Mod
 
 	public async Task<bool> IsValid()
 	{
-		if (InternetManager.OfflineMode) return true;
+		var internet = Singletons.Get<InternetManager>();
+		
+		if (internet.OfflineMode) return true;
 		if (_response != null) return _response.IsSuccessStatusCode;
 
 		if (FromInternet)
@@ -47,7 +49,7 @@ public class Mod
 			
 			try
 			{
-				using var response = await InternetManager.Client.SendAsync(request);
+				using var response = await internet.Client.SendAsync(request);
 				_response = response;
 				return response.IsSuccessStatusCode;
 			}

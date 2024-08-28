@@ -52,7 +52,7 @@
     }
     else
     {
-        if (InternetManager.OfflineMode)
+        if (_internet.OfflineMode)
         {
             <i>Not available while offline</i>
         }
@@ -69,6 +69,8 @@
 
     private JiayiTextBox? _searchBox;
     private List<Client>? _clients;
+    
+    private readonly InternetManager _internet = Singletons.Get<InternetManager>();
         
     private const string ENDPOINT = "https://raw.githubusercontent.com/disepi/ambrosial/main/clientEndpoint.json";
 
@@ -91,7 +93,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        using var response = await InternetManager.Client.GetAsync(ENDPOINT);
+        using var response = await _internet.Client.GetAsync(ENDPOINT);
         
         var resp = await response.Content.ReadAsStringAsync();
         var decoded = Encoding.UTF8.GetString(Convert.FromBase64String(resp));

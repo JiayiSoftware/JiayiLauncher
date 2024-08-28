@@ -26,6 +26,7 @@ public class VersionList
 	
 	private readonly Log _log = Singletons.Get<Log>();
 	private readonly BlazorBridge _blazor = Singletons.Get<BlazorBridge>();
+	private readonly InternetManager _internet = Singletons.Get<InternetManager>();
 
 	private bool _loaded;
 	
@@ -68,7 +69,7 @@ public class VersionList
 		
 		_loaded = true;
 
-		if (InternetManager.OfflineMode)
+		if (_internet.OfflineMode)
 		{
 			_log.Write(nameof(VersionList), "Offline mode enabled, skipping version list update.");
 			return;
@@ -108,7 +109,7 @@ public class VersionList
 		}
 		
 		// fetch old versions regardless of result (works as a fallback)
-		var response = await InternetManager.Client.GetAsync(OLD_VERSIONS_DB);
+		var response = await _internet.Client.GetAsync(OLD_VERSIONS_DB);
 		var mrArmVersions = await response.Content.ReadAsStringAsync();
 		
 		foreach (var mrArmVersion in mrArmVersions.Split('\n'))

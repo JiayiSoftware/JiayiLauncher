@@ -82,7 +82,8 @@ public static class RequestFactory
 		request.Content = new StringContent(doc.ToString(SaveOptions.DisableFormatting), Encoding.UTF8,
 			"application/soap+xml");
 		
-		using var response = await InternetManager.Client.SendAsync(request);
+		var internet = Singletons.Get<InternetManager>();
+		using var response = await internet.Client.SendAsync(request);
 		var responseString = await response.Content.ReadAsStringAsync();
 		var responseDoc = XDocument.Parse(responseString);
 		

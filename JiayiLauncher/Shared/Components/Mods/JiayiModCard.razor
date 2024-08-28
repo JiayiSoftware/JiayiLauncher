@@ -38,7 +38,7 @@
             {
                 @if (Mod.FromInternet)
                 {
-                    if (InternetManager.OfflineMode)
+                    if (_internet.OfflineMode)
                     {
                         <span class="material-symbols-sharp" title="@Strings.ModCardOffline"
                               style="color: var(--text-grayed)">cloud_off</span>
@@ -59,7 +59,7 @@
     <div class="mod-controls" style="@(_expanded ? "margin-left: -7rem" : "")">
         @if (_isValid)
         {
-            if (Mod.FromInternet && InternetManager.OfflineMode)
+            if (Mod.FromInternet && _internet.OfflineMode)
             {
                 <JiayiButton Size="JiayiButton.ButtonSize.Small" Disabled="true">@Strings.Launch</JiayiButton>
             }
@@ -105,6 +105,7 @@
     private JiayiButton? _launchButton;
     
     private readonly Launcher _launcher = Singletons.Get<Launcher>();
+    private readonly InternetManager _internet = Singletons.Get<InternetManager>();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

@@ -83,7 +83,7 @@
                                 {
                                     <JiayiButton Size="@JiayiButton.ButtonSize.Small" Disabled="true">@Strings.Download</JiayiButton>
                                 }
-                                else if (InternetManager.OfflineMode)
+                                else if (_internet.OfflineMode)
                                 {
                                     <JiayiButton Size="@JiayiButton.ButtonSize.Small" Disabled="true">@Strings.Download</JiayiButton>
                                 }
@@ -132,6 +132,7 @@
     
     private readonly VersionList _versionList = Singletons.Get<VersionList>();
     private readonly VersionManager _versionManager = Singletons.Get<VersionManager>();
+    private readonly InternetManager _internet = Singletons.Get<InternetManager>();
 
     protected override async Task OnInitializedAsync()
     {

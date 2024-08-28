@@ -55,6 +55,7 @@ public partial class MainPage : ContentPage
         
         // add the rest of the singletons
         var packageData = Singletons.Add<PackageData>();
+        var internetManager = Singletons.Add<InternetManager>();
         var versionList = Singletons.Add<VersionList>();
         Singletons.Add<ShaderManager>();
         Singletons.Add<VersionManager>();
@@ -82,8 +83,6 @@ public partial class MainPage : ContentPage
             var log = Singletons.Get<Log>();
             log.Write("MainPage", "Window hook set");
         };
-		      
-        InternetManager.CheckOnline();
         Task.Run(async () => await versionList.UpdateVersions());
 		      
         if (JiayiSettings.Instance.ModCollectionPath != string.Empty)

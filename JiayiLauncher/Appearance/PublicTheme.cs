@@ -20,8 +20,10 @@ public class PublicTheme : ThemeMetadata
     
     public static PublicTheme[]? GetAllThemes()
     {
+        var internet = Singletons.Get<InternetManager>();
+        
         const string url = "https://raw.githubusercontent.com/JiayiSoftware/jiayi-themes/main/all_themes.json";
-        var response = InternetManager.Client.GetStringAsync(url).Result;
+        var response = internet.Client.GetStringAsync(url).Result;
         var data = JsonConvert.DeserializeObject<PublicTheme[]>(response);
 
         if (data != null)

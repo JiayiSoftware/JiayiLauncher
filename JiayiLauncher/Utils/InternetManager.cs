@@ -6,14 +6,20 @@ using JiayiLauncher.Settings;
 
 namespace JiayiLauncher.Utils;
 
-public static class InternetManager
+public class InternetManager
 {
 	private const string IP = "https://1.1.1.1";
 	
-	public static bool OfflineMode { get; private set; }
-	public static HttpClient Client { get; } = new();
+	public bool OfflineMode { get; private set; }
+	public HttpClient Client { get; } = new();
+	
+	public InternetManager()
+	{
+		Client.Timeout = TimeSpan.FromSeconds(5);
+		CheckOnline();
+	}
 
-	public static void CheckOnline()
+	private void CheckOnline()
 	{
 		if (JiayiSettings.Instance.OfflineMode)
 		{
@@ -32,7 +38,7 @@ public static class InternetManager
 		}
 	}
 
-	public static async Task DownloadFile(Uri url, string path)
+	public async Task DownloadFile(Uri url, string path)
 	{
 		await using var s = await Client.GetStreamAsync(url);
 		await using var fs = new FileStream(Path.Combine(path, Path.GetFileName(url.AbsoluteUri)), FileMode.CreateNew);

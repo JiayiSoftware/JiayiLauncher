@@ -97,7 +97,9 @@
     private string ThemeName => PublicTheme?.Name ?? $".local\\{LocalTheme?.Name}";
     private CssBuilder? _theme;
     private bool _downloading;
+    
     private readonly Log _log = Singletons.Get<Log>();
+    private readonly InternetManager _internet = Singletons.Get<InternetManager>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -117,7 +119,7 @@
         }
         else
         {
-            var response = await InternetManager.Client.GetStringAsync(PublicTheme?.Theme);
+            var response = await _internet.Client.GetStringAsync(PublicTheme?.Theme);
 
             if (!string.IsNullOrWhiteSpace(response))
             {
@@ -187,8 +189,8 @@
         _downloading = true;
         Directory.CreateDirectory(themeRoot); // wwwroot/themes/<theme_name>
 
-        if (PublicTheme!.Background != null) await InternetManager.DownloadFile(PublicTheme!.Background, themeRoot);
-        await InternetManager.DownloadFile(PublicTheme!.Theme, themeRoot);
+        if (PublicTheme!.Background != null) await _internet.DownloadFile(PublicTheme!.Background, themeRoot);
+        await _internet.DownloadFile(PublicTheme!.Theme, themeRoot);
         StateHasChanged();
 
         _downloading = false;

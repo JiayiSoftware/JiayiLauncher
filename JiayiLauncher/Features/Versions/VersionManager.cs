@@ -32,6 +32,7 @@ public class VersionManager
 	private readonly PackageData _packageData = Singletons.Get<PackageData>();
 	private readonly ShaderManager _shaderManager = Singletons.Get<ShaderManager>();
 	private readonly VersionList _versionList = Singletons.Get<VersionList>();
+	private readonly InternetManager _internet = Singletons.Get<InternetManager>();
 
 	public bool VersionInstalled(string ver)
 	{
@@ -96,7 +97,7 @@ public class VersionManager
 
 		if (File.Exists(filePath)) File.Delete(filePath);
 
-		using var response = await InternetManager.Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+		using var response = await _internet.Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
 
 		if (!response.IsSuccessStatusCode) return;
 
@@ -148,7 +149,7 @@ public class VersionManager
 		var request = new HttpRequestMessage(HttpMethod.Get, url);
 		request.Headers.Range = new System.Net.Http.Headers.RangeHeaderValue(start, end);
 
-		using var response = await InternetManager.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+		using var response = await _internet.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 		response.EnsureSuccessStatusCode();
 
 		await using var stream = await response.Content.ReadAsStreamAsync();

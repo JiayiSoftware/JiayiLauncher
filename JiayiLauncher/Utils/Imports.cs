@@ -15,6 +15,8 @@ public static partial class Imports
 	public const uint MEM_COMMIT = 0x00001000;
 	public const uint MEM_RESERVE = 0x00002000;
 	public const uint PAGE_READWRITE = 4;
+	
+	public const uint WM_COPYDATA = 0x004A;
 
 	// structs
 	[StructLayout(LayoutKind.Sequential)]
@@ -48,12 +50,6 @@ public static partial class Imports
 	public static partial nint CreateRemoteThread(nint hProcess, nint lpThreadAttributes, uint dwStackSize,
 		nint lpStartAddress, nint lpParameter, uint dwCreationFlags, nint lpThreadId);
 	
-	[LibraryImport("dwmapi.dll")]
-	public static partial int DwmSetWindowAttribute(nint hWnd, int attr, [MarshalAs(UnmanagedType.Bool)] ref bool attrValue, int attrSize);
-	
-	[LibraryImport("shell32.dll", SetLastError = true)]
-	public static partial void SHChangeNotify(uint eventId, uint flags, nint item1, nint item2);
-	
 	// because LibraryImport just dies when it comes to this function
 	[DllImport("user32.dll")]
 	public static extern int SendMessage(nint hWnd, int Msg, int wParam, long lParam);
@@ -63,4 +59,10 @@ public static partial class Imports
 	
 	[LibraryImport("ole32.dll")]
 	public static partial int CoCreateInstance(ref Guid rclsid, nint pUnkOuter, uint dwClsContext, ref Guid riid, out nint ppv);
+	
+	[LibraryImport("user32.dll")]
+	public static partial IntPtr SetWindowLongPtrA(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+	
+	[LibraryImport("user32.dll")]
+	public static partial int CallWindowProcA(IntPtr lpPrevWndFunc, IntPtr hWnd, uint Msg, UIntPtr wParam, IntPtr lParam);
 }

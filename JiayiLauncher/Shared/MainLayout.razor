@@ -76,12 +76,14 @@
         }
 
         if (_sidebar != null) _sidebar.OnToggle += ChangeMargin;
-        Arguments.Changed += (_, _) => HandleArgs(Arguments.Get());
+        
+        var args = Singletons.Get<Arguments>();
+        args.Changed += (_, _) => HandleArgs(args.Get());
 
         // handle arguments here because it's actually the best place to do it
-        if (Arguments.Get() != string.Empty)
+        if (args.Get() != string.Empty)
         {
-            HandleArgs(Arguments.Get());
+            HandleArgs(args.Get());
         }
 
         if (JiayiSettings.Instance!.EnableUpdater)

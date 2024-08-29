@@ -108,7 +108,7 @@ public class ShaderManager
 		var applied = Directory.GetDirectories(Path.Combine(JiayiSettings.Instance.ShadersPath, "Applied"));
 		AppliedShader = Path.GetFileName(applied.FirstOrDefault() ?? string.Empty);
 		
-		_log.Write(nameof(ShaderManager), AppliedShader == string.Empty
+		_log.Write(nameof(ShaderManager), AppliedShader != string.Empty
 			? $"Updated shaders list. Found {Shaders.Count} shaders. {AppliedShader} is currently applied."
 			: $"Updated shaders list. Found {Shaders.Count} shaders. No shader is currently applied.");
 	}

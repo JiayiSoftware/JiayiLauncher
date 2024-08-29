@@ -19,7 +19,6 @@ public class ThemeState
     // If no CssBuilder, it sets it to an empty CssBuilder, which then ends up defaulting all the values in JiayiSettings.cs
     public ThemeState(CssBuilder? themeStyles = null) { ThemeStyles = themeStyles ?? new CssBuilder(); }
 
-
     public void ApplyTheme(CssBuilder css)
     {
         ThemeStyles = css;

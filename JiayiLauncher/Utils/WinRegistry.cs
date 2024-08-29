@@ -5,9 +5,9 @@ using static JiayiLauncher.Utils.Imports;
 
 namespace JiayiLauncher.Utils;
 
-public static class WinRegistry
+public class WinRegistry
 {
-	public static void EnableDeveloperMode()
+	public void EnableDeveloperMode()
 	{
 		var appModelUnlockKey = Registry.LocalMachine.OpenSubKey(
 			@"SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", true);
@@ -15,7 +15,7 @@ public static class WinRegistry
 		appModelUnlockKey?.SetValue("AllowDevelopmentWithoutDevLicense", 1, RegistryValueKind.DWord);
 	}
 
-	public static bool DeveloperModeEnabled()
+	public bool DeveloperModeEnabled()
 	{
 		var appModelUnlockKey = Registry.LocalMachine.OpenSubKey(
 			@"SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", false);

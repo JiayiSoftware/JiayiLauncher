@@ -4,16 +4,16 @@ using System.Reflection;
 
 namespace JiayiLauncher.Utils;
 
-public static class Privileges
+public class Privileges
 {
-	public static bool IsAdmin()
+	public bool IsAdmin()
 	{
 		using var identity = WindowsIdentity.GetCurrent();
 		var principal = new WindowsPrincipal(identity);
 		return principal.IsInRole(WindowsBuiltInRole.Administrator);
 	}
 	
-	public static void Escalate()
+	public void Escalate()
 	{
 		if (IsAdmin()) return;
 		

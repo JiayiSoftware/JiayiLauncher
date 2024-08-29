@@ -33,6 +33,7 @@ public class VersionManager
 	private readonly ShaderManager _shaderManager = Singletons.Get<ShaderManager>();
 	private readonly VersionList _versionList = Singletons.Get<VersionList>();
 	private readonly InternetManager _internet = Singletons.Get<InternetManager>();
+	private readonly WinRegistry _winRegistry = Singletons.Get<WinRegistry>();
 
 	public bool VersionInstalled(string ver)
 	{
@@ -217,7 +218,7 @@ public class VersionManager
 		var folder = folders.FirstOrDefault(x => x.Contains(version));
 		if (folder == null) return SwitchResult.VersionNotFound;
 
-		if (!WinRegistry.DeveloperModeEnabled())
+		if (!_winRegistry.DeveloperModeEnabled())
 		{
 			_log.Write(nameof(VersionManager), "Developer mode is disabled, asking user to enable", Log.LogLevel.Warning);
 			return SwitchResult.DeveloperModeDisabled;

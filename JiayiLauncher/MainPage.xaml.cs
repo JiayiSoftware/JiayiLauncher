@@ -54,9 +54,11 @@ public partial class MainPage : ContentPage
         }
         
         // add the rest of the singletons
+        Singletons.Add<InternetManager>();
         var packageData = Singletons.Add<PackageData>();
-        var internetManager = Singletons.Add<InternetManager>();
         var versionList = Singletons.Add<VersionList>();
+        Singletons.Add<Privileges>();
+        Singletons.Add<WinRegistry>();
         Singletons.Add<ShaderManager>();
         Singletons.Add<VersionManager>();
         Singletons.Add<Injector>();

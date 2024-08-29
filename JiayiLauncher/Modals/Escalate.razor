@@ -23,7 +23,7 @@
 
     private void EscalateClicked()
     {
-        Privileges.Escalate();
+        Singletons.Get<Privileges>().Escalate();
     }
 
     private async Task CancelClicked()

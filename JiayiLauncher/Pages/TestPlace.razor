@@ -80,6 +80,7 @@
     
     private readonly Minecraft _minecraft = Singletons.Get<Minecraft>();
     private readonly PackageData _packageData = Singletons.Get<PackageData>();
+    private readonly Privileges _privileges = Singletons.Get<Privileges>();
 
     private void ButtonClicked()
     {
@@ -171,7 +172,7 @@
 
     private void EscalateImmediately()
     {
-        Privileges.Escalate();
+        _privileges.Escalate();
     }
 
 }

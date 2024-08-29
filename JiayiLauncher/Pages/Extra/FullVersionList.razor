@@ -133,6 +133,8 @@
     private readonly VersionList _versionList = Singletons.Get<VersionList>();
     private readonly VersionManager _versionManager = Singletons.Get<VersionManager>();
     private readonly InternetManager _internet = Singletons.Get<InternetManager>();
+    private readonly Privileges _privileges = Singletons.Get<Privileges>();
+    private readonly WinRegistry _winRegistry = Singletons.Get<WinRegistry>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -255,7 +257,7 @@
 
     private async Task SwitchClicked(string ver)
     {
-        if (!Privileges.IsAdmin())
+        if (!_privileges.IsAdmin())
         {
             var modal = ModalService.Show<Escalate>(Strings.PrivEscTitle);
             var escalateResult = await modal.Result;
@@ -275,7 +277,7 @@
             case VersionManager.SwitchResult.Succeeded: break;
                 
             case VersionManager.SwitchResult.DeveloperModeDisabled:
-                options.Add((Strings.Yes, new EventCallback(null, WinRegistry.EnableDeveloperMode)));
+                options.Add((Strings.Yes, new EventCallback(null, _winRegistry.EnableDeveloperMode)));
                 options.Add((Strings.No, EventCallback.Empty));
                 
                 parameters.Add(nameof(MessageBox.Buttons), options);

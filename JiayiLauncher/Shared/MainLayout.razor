@@ -35,6 +35,7 @@
 
     private readonly Updater _updater = new();
     private readonly InternetManager _internet = Singletons.Get<InternetManager>();
+    private readonly Privileges _privileges = Singletons.Get<Privileges>();
 
     // silly
     private readonly List<string> _dontAskAgain = Strings.DontAskAgain.Split('\n')
@@ -64,7 +65,7 @@
             ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
         }
 
-        if (Privileges.IsAdmin())
+        if (_privileges.IsAdmin())
         {
             var parameters = new ToastParameters()
                 .Add(nameof(JiayiToast.Title), Strings.PrivEscNotice)

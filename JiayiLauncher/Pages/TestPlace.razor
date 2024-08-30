@@ -19,6 +19,7 @@
 
 <div style="width: 100%; display: flex; gap: 1rem; place-items: center;">
     <JiayiButton OnClick="ButtonClicked">Show a message box</JiayiButton>
+    <JiayiButton OnClick="ShowMauiMessageBox">Show a Maui message box</JiayiButton>
 
     <JiayiButton Size="JiayiButton.ButtonSize.Small" OnClick="Crash">Crash Jiayi</JiayiButton>
 
@@ -96,6 +97,15 @@
             .Add(nameof(MessageBox.Message), "This is a test message box.");
 
         ModalService.Show<MessageBox>("Test message box", parameters);
+    }
+
+    private async Task ShowMauiMessageBox()
+    {
+        await MainThread.InvokeOnMainThreadAsync(async () =>
+        {
+            var mainPage = Singletons.Get<MainPage>();
+            await mainPage.DisplayAlert("This is a test", "This is a test message box.", "Okay");
+        });
     }
 
     private static void Crash()

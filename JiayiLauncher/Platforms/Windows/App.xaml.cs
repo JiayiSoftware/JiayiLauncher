@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using Blazored.Toast;
 using Blazored.Toast.Services;
@@ -35,6 +36,7 @@ public partial class App : MauiWinUIApplication
             {
                 "TimeoutException",
                 "Object name: 'System.Net.Sockets.NetworkStream'.",
+                "at WinRT.ExceptionHelpers.<ThrowExceptionForHR>g__Throw|39_0(Int32 hr)",
                 "System.Net.Sockets.SocketException (995): The I/O operation has been aborted because of either a thread exit or an application request."
             };
 			
@@ -44,8 +46,24 @@ public partial class App : MauiWinUIApplication
                 if (suppressed.Any(exception.Contains)) return;
                 
                 log.Write(ex.Exception, exception, Log.LogLevel.Error);
+
+                var windowHandle = FindWindowW(null, "Jiayi Launcher");
+                var result = MessageBoxW(
+                    windowHandle, 
+                    """
+                    Jiayi has ran into an issue and needs to close. Please send your log file to the nearest developer.
+
+                    Would you like to open the log folder? Your log file is saved as 'Current.log'.
+                    """, 
+                    "Crash", 
+                    0x00000004 | 0x00000010);
                 
-                // TODO: show error dialog
+                if (result == 6) // yes
+                {
+                    Process.Start("explorer.exe", Log.LogPath);
+                }
+                
+                Microsoft.Maui.Controls.Application.Current!.Quit();
             };
 			
             return;

@@ -69,4 +69,7 @@ public static partial class Imports
 	[LibraryImport("user32.dll")]
 	[return: MarshalAs(UnmanagedType.Bool)]
 	public static partial bool SetForegroundWindow(nint hWnd);
+	
+	[LibraryImport("user32.dll")]
+	public static partial int MessageBoxW(nint hWnd, [MarshalAs(UnmanagedType.LPWStr)] string lpText, [MarshalAs(UnmanagedType.LPWStr)] string lpCaption, uint uType);
 }

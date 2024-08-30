@@ -3,6 +3,7 @@
 @using System.Reflection
 @using System.Drawing
 @using System.Globalization
+@using JiayiLauncher.Settings.SpecialTypes
 
 <!--suppress CssInvalidPropertyValue -->
 <h3>@Strings.SettingsMenuName</h3>
@@ -103,6 +104,12 @@
                             var hex = $"#{color.R:x2}{color.G:x2}{color.B:x2}";
                             <JiayiColorPicker Color="@hex" ColorChanged="s => ChangeColorSetting(s, setting)"/>
                             break;
+                        case true when setting.PropertyType == typeof(ModeSetting):
+                            var modeSetting = (ModeSetting)setting.GetValue(JiayiSettings.Instance)!;
+                            <JiayiDropDown Name="@localizedSetting.Name" Items="@modeSetting.AvailableModes"
+                                           SelectedItem="@modeSetting.AvailableModes[modeSetting.Mode]"
+                                           OnChange="mode => ChangeModeSetting(mode, setting)"/>
+                            break;
                     }
                 </div>
             }
@@ -172,6 +179,14 @@
         
         var newColor = Color.FromArgb(bytes[0], bytes[1], bytes[2]);
         setting.SetValue(JiayiSettings.Instance, newColor);
+        JiayiSettings.Instance!.Save();
+    }
+    
+    private void ChangeModeSetting(JiayiDropDown value, PropertyInfo setting)
+    {
+        var modeSetting = (ModeSetting)setting.GetValue(JiayiSettings.Instance)!;
+        modeSetting.Mode = modeSetting.AvailableModes.IndexOf(value.SelectedItem!);
+        setting.SetValue(JiayiSettings.Instance, modeSetting);
         JiayiSettings.Instance!.Save();
     }
 

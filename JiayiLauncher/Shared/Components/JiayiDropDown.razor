@@ -88,7 +88,11 @@
     public List<string> SelectedItems { get; set; } = new();
 
     // if not multiselect
+    [Parameter]
     public string? SelectedItem { get; set; } = "";
+
+    [Parameter]
+    public EventCallback<JiayiDropDown> OnChange { get; set; }
     
     private string _showDropdown = "false";
     private string _icon = "expand_more";
@@ -104,13 +108,15 @@
         SelectedItems = SelectedItems.Contains(item) ?
             SelectedItems.Where(x => x != item).ToList() :
             SelectedItems.Append(item).ToList();
-
+        
+        OnChange.InvokeAsync(this);
         StateHasChanged();
     }
     
     private void OnSelectSingle(ChangeEventArgs e)
     {
         SelectedItem = e.Value!.ToString();
+        OnChange.InvokeAsync(this);
         StateHasChanged();
     }
 }

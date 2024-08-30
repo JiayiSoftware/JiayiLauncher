@@ -14,7 +14,13 @@ public class BlazorBridge
 	
 	public void ShowToast(ToastParameters parameters, Action<ToastSettings> settings)
 	{
-		var mainPage = (MainPage)Application.Current!.MainPage!;
+		var mainPage = (MainPage?)Application.Current!.MainPage;
+		if (mainPage == null)
+		{
+			_log.Write(nameof(BlazorBridge), "MainPage was null", Log.LogLevel.Error);
+			return;
+		}
+		
 		var dispatched = mainPage.BlazorWebView.TryDispatchAsync(sp =>
 		{
 			var toastService = sp.GetRequiredService<IToastService>();
@@ -27,7 +33,13 @@ public class BlazorBridge
 
 	public async Task<ModalResult> ShowModal<T>(string title, ModalParameters parameters) where T : IComponent
 	{
-		var mainPage = (MainPage)Application.Current!.MainPage!;
+		var mainPage = (MainPage?)Application.Current!.MainPage;
+		if (mainPage == null)
+		{
+			_log.Write(nameof(BlazorBridge), "MainPage was null", Log.LogLevel.Error);
+			return ModalResult.Cancel();
+		}
+		
 		ModalResult? result = null;
 		
 		var dispatched = await mainPage.BlazorWebView.TryDispatchAsync(async sp =>

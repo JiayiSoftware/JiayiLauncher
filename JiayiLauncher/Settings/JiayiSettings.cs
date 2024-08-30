@@ -17,6 +17,7 @@ using JiayiLauncher.Appearance;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Versions;
 using JiayiLauncher.Localization;
+using JiayiLauncher.Settings.SpecialTypes;
 using JiayiLauncher.Shared;
 using JiayiLauncher.Shared.Components.Toasts;
 using JiayiLauncher.Utils;
@@ -54,6 +55,34 @@ public class JiayiSettings
     }
     
     // general settings
+    [Setting("Language", "General", "The language used throughout the launcher. Restart Jiayi for this to take full effect.", 
+        tooltip: "All languages are community-contributed, and some may be incomplete. " +
+                 "If you'd like to help translate the launcher, visit Jiayi Launcher's GitHub repository.")]
+    public ModeSetting Language { get; set; } = new(0, 
+    [
+        "Use system language",
+        // "Arabic",
+        // "Chinese (Simplified)",
+        // "Chinese (Traditional)",
+        // "Dutch",
+        // "English (US)",
+        // "English (UK)",
+        // "Filipino",
+        // "French",
+        // "German",
+        // "Hindi",
+        // "Italian",
+        // "Japanese",
+        // "Macedonian",
+        // "Pirate Speak",
+        // "Romanian",
+        // "Russian",
+        // "Spanish",
+        // "Thai",
+        // "Turkish",
+        // "Ukrainian"
+    ]);
+    
     [Setting("Mod folder path", "General", "The path to the folder containing your mods.", canReset: false)]
     public string ModCollectionPath { get; set; } = string.Empty;
 
@@ -507,6 +536,15 @@ public class JiayiSettings
             }
 
             Instance = settings;
+            
+            // set available modes for all mode settings
+            foreach (var setting in Instance.GetSettings().Where(s => s.PropertyType == typeof(ModeSetting)))
+            {
+                var modeSetting = (ModeSetting)setting.GetValue(Instance)!;
+                var defaultSetting = (ModeSetting)setting.GetValue(Default)!;
+                modeSetting.AvailableModes = defaultSetting.AvailableModes;
+            }
+            
             _log.Write(Instance, "Loaded settings.");
         }
         catch (Exception e)

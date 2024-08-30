@@ -71,10 +71,10 @@
       <EmbeddedResource Update="Localization\Strings.es.resx">
         <Generator>ResXFileCodeGenerator</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="Localization\Strings.zh-CN.resx">
+      <EmbeddedResource Update="Localization\Strings.zh-Hans.resx">
         <Generator>ResXFileCodeGenerator</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="Localization\Strings.zh-TW.resx">
+      <EmbeddedResource Update="Localization\Strings.zh-Hant.resx">
         <Generator>ResXFileCodeGenerator</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Localization\Strings.ro-RO.resx">

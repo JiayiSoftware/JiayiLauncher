@@ -1,0 +1,1270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- STRINGS START AT LINE 67 -->
+<root>
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+      <xsd:element name="root" msdata:IsDataSet="true">
+        <xsd:complexType>
+          <xsd:choice maxOccurs="unbounded">
+            <xsd:element name="metadata">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" use="required" type="xsd:string"/>
+                <xsd:attribute name="type" type="xsd:string"/>
+                <xsd:attribute name="mimetype" type="xsd:string"/>
+                <xsd:attribute ref="xml:space"/>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="assembly">
+              <xsd:complexType>
+                <xsd:attribute name="alias" type="xsd:string"/>
+                <xsd:attribute name="name" type="xsd:string"/>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="data">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                  <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                <xsd:attribute ref="xml:space"/>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="resheader">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string" use="required"/>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:choice>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <!-- common strings -->
+  <data name="Okay" xml:space="preserve">
+        <value>好的</value>
+    </data>
+  <data name="Yes" xml:space="preserve">
+        <value>是</value>
+    </data>
+  <data name="No" xml:space="preserve">
+        <value>否</value>
+    </data>
+  <data name="Cancel" xml:space="preserve">
+        <value>取消</value>
+    </data>
+  <data name="Close" xml:space="preserve">
+        <value>關閉</value>
+    </data>
+  <data name="Open" xml:space="preserve">
+        <value>打開</value>
+    </data>
+  <data name="Save" xml:space="preserve">
+        <value>保存</value>
+    </data>
+  <data name="Export" xml:space="preserve">
+        <value>導出</value>
+    </data>
+  <data name="Import" xml:space="preserve">
+        <value>導入</value>
+    </data>
+  <data name="Imported" xml:space="preserve">
+        <value>已導入</value>
+    </data>
+  <data name="Importing" xml:space="preserve">
+        <value>正在導入...</value>
+    </data>
+  <data name="Create" xml:space="preserve">
+        <value>創建</value>
+    </data>
+  <data name="Download" xml:space="preserve">
+        <value>下載</value>
+    </data>
+  <data name="Downloading" xml:space="preserve">
+        <value>正在下載...</value>
+    </data>
+  <data name="NotAvailable" xml:space="preserve">
+        <value>不可用</value>
+    </data>
+  <data name="Unknown" xml:space="preserve">
+        <value>未知</value>
+    </data>
+  <data name="Warning" xml:space="preserve">
+        <value>警告</value>
+    </data>
+  <data name="Error" xml:space="preserve">
+        <value>錯誤</value>
+    </data>
+  <data name="Launch" xml:space="preserve">
+        <value>啟動</value>
+    </data>
+  <data name="Extracting" xml:space="preserve">
+        <value>解壓中...</value>
+    </data>
+  <data name="CompletionPercent" xml:space="preserve">
+        <value>已完成 {0}%</value>
+    </data>
+  <data name="Remove" xml:space="preserve">
+        <value>移除</value>
+    </data>
+  <data name="Removing" xml:space="preserve">
+        <value>移除中...</value>
+    </data>
+  <data name="Switch" xml:space="preserve">
+        <value>切換</value>
+    </data>
+  <data name="Switching" xml:space="preserve">
+        <value>切換中...</value>
+    </data>
+  <data name="Apply" xml:space="preserve">
+        <value>應用</value>
+    </data>
+  <data name="Select" xml:space="preserve">
+        <value>選擇</value>
+    </data>
+  <data name="View" xml:space="preserve">
+        <value>查看</value>
+    </data>
+  <data name="Restore" xml:space="preserve">
+        <value>恢復</value>
+    </data>
+  <data name="Update" xml:space="preserve">
+        <value>更新</value>
+    </data>
+  <data name="Restart" xml:space="preserve">
+        <value>重啟</value>
+    </data>
+  <data name="Later" xml:space="preserve">
+        <value>稍後</value>
+    </data>
+  <data name="Generate" xml:space="preserve">
+        <value>生成</value>
+    </data>
+  <data name="Clear" xml:space="preserve">
+        <value>清除</value>
+    </data>
+  <data name="Name" xml:space="preserve">
+        <value>名稱</value>
+    </data>
+  <data name="FilterBy" xml:space="preserve">
+        <value>Filter by:</value>
+    </data>
+  <data name="WhatsThis" xml:space="preserve">
+        <value>這是什麽?</value>
+    </data>
+  <data name="AdvancedSettings" xml:space="preserve">
+        <value>高級設置</value>
+    </data>
+  <data name="MinecraftForWindows" xml:space="preserve">
+        <value>Minecraft for Windows</value>
+    </data>
+  <!-- optional Jiayi Launcher string, translate if you want -->
+  <data name="JiayiLauncher" xml:space="preserve">
+        <value>Jiayi Launcher</value>
+    </data>
+  <!-- config manager strings -->
+  <data name="ConfManName" xml:space="preserve">
+        <value>配置管理器</value>
+    </data>
+  <data name="ConfManNoModDataFolder" xml:space="preserve">
+        <value>
+            該模組沒有設置數據文件夾名稱。
+            要訪問配置管理器，請編輯此模組並設置數據文件夾名稱。
+        </value>
+    </data>
+  <data name="ConfManInvalidDataFolder" xml:space="preserve">
+        <value>
+            您為此模組設置的數據文件夾不存在。
+            確保您設置了正確的數據文件夾名稱。
+        </value>
+    </data>
+  <data name="ConfManEdit" xml:space="preserve">
+        <value>打開並編輯配置</value>
+    </data>
+  <data name="ConfManDelete" xml:space="preserve">
+        <value>刪除配置 (不可逆)</value>
+    </data>
+  <data name="ConfManDragDrop" xml:space="preserve">
+        <value>單擊此處或拖放文件以添加配置</value>
+    </data>
+  <!-- edit mod strings -->
+  <data name="EditModName" xml:space="preserve">
+        <value>編輯 mod</value>
+    </data>
+  <data name="EditModModName" xml:space="preserve">
+        <value>Mod 名稱</value>
+    </data>
+  <data name="EditModSupportedVersions" xml:space="preserve">
+        <value>支持的版本</value>
+    </data>
+  <data name="EditModSelectVersions" xml:space="preserve">
+        <value>選擇版本</value>
+    </data>
+  <data name="EditModLaunchArgs" xml:space="preserve">
+        <value>啟動參數</value>
+    </data>
+  <data name="EditModLaunchArgsNotice" xml:space="preserve">
+        <value>這不適用於內部模組</value>
+    </data>
+  <data name="EditModDataFolder" xml:space="preserve">
+        <value>Mod 數據文件夾名稱</value>
+    </data>
+  <data name="EditModDataFolderNotice" xml:space="preserve">
+        <value>通常在 RoamingState 文件夾裏</value>
+    </data>
+  <data name="EditModDefaultLocationNotice" xml:space="preserve">
+        <value>Mod 將保存到默認位置，您可以在設置中更改該位置</value>
+    </data>
+  <data name="EditModExternalSourceNotice" xml:space="preserve">
+        <value>該模組來自外部應用程序或網站。 不建議添加來自不受信任來源的 Mod 。</value>
+    </data>
+  <!-- edit profile strings -->
+  <data name="EditProfileName" xml:space="preserve">
+        <value>編輯個人配置文件</value>
+    </data>
+  <data name="EditProfileCreateName" xml:space="preserve">
+        <value>創建個人配置文件</value>
+    </data>
+  <data name="EditProfileNameProfile" xml:space="preserve">
+        <value>為您的個人配置文件命名！</value>
+    </data>
+  <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
+        <value>個人配置文件將保存到默認位置，您可以在設置中更改該位置</value>
+    </data>
+  <!-- privilege escalation strings -->
+  <data name="PrivEscTitle" xml:space="preserve">
+        <value>需要管理員權限</value>
+    </data>
+  <data name="PrivEscText" xml:space="preserve">
+        <value>您需要以管理員身份運行 嘉藝啟動器 才能執行此操作</value>
+    </data>
+  <data name="PrivEscRestartNotice" xml:space="preserve">
+        <value>當您提升權限後，啟動器將重新啟動。</value>
+    </data>
+  <data name="PrivEscButton" xml:space="preserve">
+        <value>提升權限</value>
+    </data>
+  <data name="PrivEscNotice" xml:space="preserve">
+        <value>嘉藝啟動器 以管理員權限啟動。</value>
+    </data>
+  <!-- import mod collection strings -->
+  <data name="ImportModTitle" xml:space="preserve">
+        <value>導入模組合集</value>
+    </data>
+  <data name="ImportModQuestion" xml:space="preserve">
+        <value>您想導入這個合集嗎？</value>
+    </data>
+  <data name="ImportModModCount" xml:space="preserve">
+        <value>{0} mods</value>
+    </data>
+  <data name="ImportModLocalModCount" xml:space="preserve">
+        <value>{0} 本地存儲</value>
+    </data>
+  <data name="ImportModInternetModCount" xml:space="preserve">
+        <value>{0} 來自網絡</value>
+    </data>
+  <data name="ImportModDefaultLocationNotice" xml:space="preserve">
+        <value>該合集中的模組將保存到默認位置，您可以在設置中更改該位置</value>
+    </data>
+  <data name="ImportModMergeNotice" xml:space="preserve">
+        <value>此合集中的模組將合並到您的合集中</value>
+    </data>
+  <!-- new mod strings -->
+  <data name="NewModName" xml:space="preserve">
+        <value>新 mod</value>
+    </data>
+  <data name="NewModSelectFile" xml:space="preserve">
+        <value>選擇一個 mod</value>
+    </data>
+  <data name="NewModFileFilter" xml:space="preserve">
+        <value>僅限 .dll 和 .exe 文件</value>
+    </data>
+  <data name="NewModOr" xml:space="preserve">
+        <value>或</value>
+    </data>
+  <data name="NewModEnterLink" xml:space="preserve">
+        <value>輸入您的模組的鏈接</value>
+    </data>
+  <data name="NewModOfflineNotice" xml:space="preserve">
+        <value>離線時不可用</value>
+    </data>
+  <data name="NewModLinkPlaceholder" xml:space="preserve">
+        <value>cool-website.com/path/to/mod.dll</value>
+    </data>
+  <data name="NewModDllDisplayName" xml:space="preserve">
+        <value>可註入庫</value>
+    </data>
+  <data name="NewModExeDisplayName" xml:space="preserve">
+        <value>外部客戶端和註入器</value>
+    </data>
+  <data name="NewModCreateCollectionQuestion" xml:space="preserve">
+        <value>您還沒有設置模組合集。 您想創建一個來添加這些模組嗎？</value>
+    </data>
+  <data name="NewModNoCollectionTitle" xml:space="preserve">
+        <value>沒有模組合集</value>
+    </data>
+  <data name="NewModAlreadyInCollection" xml:space="preserve">
+        <value>該模組已在您的合集中！</value>
+    </data>
+  <data name="NewModInvalidLink" xml:space="preserve">
+        <value>無效的鏈接</value>
+    </data>
+  <data name="NewModLinkNotFound" xml:space="preserve">
+        <value>這個地址沒有任何內容！</value>
+    </data>
+  <data name="NewModCheckingLink" xml:space="preserve">
+        <value>正在檢查鏈接...</value>
+    </data>
+  <data name="NewModAlreadyExists" xml:space="preserve">
+        <value>該mod已存在於您的收藏中。你想替換它嗎?</value>
+    </data>
+  <!-- new theme strings -->
+  <data name="NewThemeName" xml:space="preserve">
+        <value>新主題</value>
+    </data>
+  <data name="NewThemeNameTheme" xml:space="preserve">
+        <value>給你的主題起個名字！</value>
+    </data>
+  <!-- theme publishing strings -->
+  <data name="ThemePublishTitle" xml:space="preserve">
+        <value>準備主題發布</value>
+    </data>
+  <data name="ThemePublishName" xml:space="preserve">
+        <value>主題名稱</value>
+    </data>
+  <data name="ThemePublishAuthor" xml:space="preserve">
+        <value>作者</value>
+    </data>
+  <data name="ThemePublishAuthorPlaceholder" xml:space="preserve">
+        <value>你的名字在這裏</value>
+    </data>
+  <data name="ThemePublishTags" xml:space="preserve">
+        <value>標簽</value>
+    </data>
+  <data name="ThemePublishTagsPlaceholder" xml:space="preserve">
+        <value>以逗號分隔的列表</value>
+    </data>
+  <data name="ThemePublishRawTags" xml:space="preserve">
+        <value>類別標簽</value>
+    </data>
+  <data name="ThemePublishRawTagsSelect" xml:space="preserve">
+        <value>選擇類別標簽</value>
+    </data>
+  <data name="ThemePublishNoName" xml:space="preserve">
+        <value>創建主題失敗（無名稱）</value>
+    </data>
+  <data name="ThemePublishNoRawTags" xml:space="preserve">
+        <value>無法創建主題（至少 1 個類別標簽）</value>
+    </data>
+  <data name="ThemePublishAlreadyExists" xml:space="preserve">
+        <value>未能創建主題（已存在）：{0}</value>
+    </data>
+  <data name="ThemePublishOpenRepo" xml:space="preserve">
+        <value>打開存儲庫</value>
+    </data>
+  <data name="ThemePublishFinalize" xml:space="preserve">
+        <value>
+            您的主題位於我們剛剛打開的文件夾中。
+            要在此處查看它，請在我們的 GitHub 主題存儲庫上打開拉取請求。檢查自述文件以獲取說明。
+        </value>
+    </data>
+  <!-- about strings -->
+  <data name="AboutTitle" xml:space="preserve">
+        <value>關於</value>
+    </data>
+  <data name="AboutPresenting" xml:space="preserve">
+        <value>經過兩年的艱苦開發，我們自豪地推出：</value>
+    </data>
+  <data name="AboutSourceAvailable" xml:space="preserve">
+        <value>源代碼位於 GitHub</value>
+    </data>
+  <data name="AboutDiscord" xml:space="preserve">
+        <value>在 Discord 上與我們交談</value>
+    </data>
+  <data name="AboutCredits" xml:space="preserve">
+        <value>製作人員</value>
+    </data>
+  <!-- version manager strings -->
+  <data name="VerManName" xml:space="preserve">
+        <value>版本管理器</value>
+    </data>
+  <data name="VerManCurrentVersion" xml:space="preserve">
+        <value>您當前的版本</value>
+    </data>
+  <data name="VerManResizeTip" xml:space="preserve">
+        <value>您可以調整 嘉藝啟動器 的大小以在右側查看完整列表</value>
+    </data>
+  <data name="VerManManageTip" xml:space="preserve">
+        <value>管理更多版本</value>
+    </data>
+  <data name="VerManPopularVersions" xml:space="preserve">
+        <value>熱門版本</value>
+    </data>
+  <data name="VerManLatestVersion" xml:space="preserve">
+        <value>最新版本</value>
+    </data>
+  <data name="VerManPopularAmongCommunity" xml:space="preserve">
+        <value>深受社區歡迎</value>
+    </data>
+  <data name="VerManBestStableRelease" xml:space="preserve">
+        <value>沒有 渲染龍 的最佳穩定版本</value>
+    </data>
+  <data name="VerManShaderManagerText" xml:space="preserve">
+        <value>輕松將渲染龍著色器應用到您的遊戲中。 如果您通過 嘉藝啟動器 安裝遊戲，效果最佳。</value>
+    </data>
+  <data name="VerManShaderManagerVerTooLow" xml:space="preserve">
+        <value>您的遊戲版本沒有渲染龍。 請改用著色器資源包。</value>
+    </data>
+  <data name="VerManShaderManagerMSStore" xml:space="preserve">
+        <value>您的遊戲是通過 微軟商店(Microsoft Store) 安裝的。 嘉藝啟動器 無法對其應用著色器。</value>
+    </data>
+  <!-- install location strings -->
+  <data name="InstallLocByJiayi" xml:space="preserve">
+        <value>由 嘉藝啟動器 安裝</value>
+    </data>
+  <data name="InstallLocFromStore" xml:space="preserve">
+        <value>來自微軟商店</value>
+    </data>
+  <data name="InstallLocExternalManager" xml:space="preserve">
+        <value>由其它版本管理器安裝</value>
+    </data>
+  <data name="InstallLocUnknown" xml:space="preserve">
+        <value>未知安裝位置</value>
+    </data>
+  <data name="InstallLocNotInstalled" xml:space="preserve">
+        <value>你還沒有安裝遊戲</value>
+    </data>
+  <!-- version list strings -->
+  <data name="VerListName" xml:space="preserve">
+        <value>完整版本列表</value>
+    </data>
+  <data name="VerListSearch" xml:space="preserve">
+        <value>搜索版本</value>
+    </data>
+  <data name="VerListShowDownloaded" xml:space="preserve">
+        <value>顯示已下載</value>
+    </data>
+  <data name="VerListNoVersions" xml:space="preserve">
+        <value>未找到版本</value>
+    </data>
+  <data name="VerListLoadMore" xml:space="preserve">
+        <value>加載更多</value>
+    </data>
+  <data name="VerListRemove" xml:space="preserve">
+        <value>刪除版本</value>
+    </data>
+  <data name="VerListRemoveConfirm" xml:space="preserve">
+        <value>您確定要刪除此版本嗎？</value>
+    </data>
+  <data name="VerListDevModeQuestion" xml:space="preserve">
+        <value>您需要啟用開發者模式才能切換版本。 您想現在啟用它嗎？</value>
+    </data>
+  <data name="VerListNotFound" xml:space="preserve">
+        <value>該版本尚未下載。</value>
+    </data>
+  <data name="VerListBackupFailed" xml:space="preserve">
+        <value>
+            嘉藝啟動器無法在切換版本之前備份您的遊戲數據。這可能是因為對遊戲數據文件夾的訪問被拒絕。
+            
+            更多信息可以在您的日誌文件中找到。
+        </value>
+    </data>
+  <data name="VerListUnknownError" xml:space="preserve">
+        <value>切換版本時發生未知錯誤。 檢查您的日誌文件以獲取更多信息。</value>
+    </data>
+  <data name="VerListImport" xml:space="preserve">
+        <value>導入版本</value>
+    </data>
+  <data name="VerListFileFilter" xml:space="preserve">
+        <value>APPX 文件</value>
+    </data>
+  <data name="VerListInvalidPackage" xml:space="preserve">
+        <value>這不是一個有效的包。</value>
+    </data>
+  <data name="VerListUpdatingVersions" xml:space="preserve">
+        <value>版本列表已清除。它將很快更新。</value>
+    </data>
+  <!-- shader manager strings -->
+  <data name="ShaderManName" xml:space="preserve">
+        <value>著色器管理器</value>
+    </data>
+  <data name="ShaderManCurrentShader" xml:space="preserve">
+        <value>您當前的著色器包</value>
+    </data>
+  <data name="ShaderManNoShader" xml:space="preserve">
+        <value>未應用著色器</value>
+    </data>
+  <data name="ShaderManUsingVanilla" xml:space="preserve">
+        <value>將使用 Minecraft 原版著色器</value>
+    </data>
+  <data name="ShaderManReplacingCount" xml:space="preserve">
+        <value>正在替換 {0} material文件</value>
+    </data>
+  <data name="ShaderManAvailableShaders" xml:space="preserve">
+        <value>可用的著色器</value>
+    </data>
+  <data name="ShaderManSearch" xml:space="preserve">
+        <value>搜索著色器</value>
+    </data>
+  <data name="ShaderManViewMaterials" xml:space="preserve">
+        <value>查看著色器materials</value>
+    </data>
+  <data name="ShaderManMaterials" xml:space="preserve">
+        <value>著色器materials</value>
+    </data>
+  <data name="ShaderManViewMaterialsText" xml:space="preserve">
+        <value>
+            該著色器包修改了以下materials: 
+            
+            {0}
+        </value>
+    </data>
+  <data name="ShaderManMaterialCount" xml:space="preserve">
+        <value>{0} material文件</value>
+    </data>
+  <data name="ShaderManRename" xml:space="preserve">
+        <value>重命名著色器包</value>
+    </data>
+  <data name="ShaderManDelete" xml:space="preserve">
+        <value>刪除著色器包</value>
+    </data>
+  <data name="ShaderManDeleteConfirm" xml:space="preserve">
+        <value>您確定要刪除此著色器包嗎? 此操作是不可逆的。</value>
+    </data>
+  <data name="ShaderManNoShaders" xml:space="preserve">
+        <value>未找到著色器</value>
+    </data>
+  <data name="ShaderManDragDrop" xml:space="preserve">
+        <value>單擊此處或拖放著色器包進行添加</value>
+    </data>
+  <data name="ShaderManDragDropInfo" xml:space="preserve">
+        <value>
+            任何以 zip 格式壓縮的文件都可以用作著色器包，只要它包含material文件即可。
+        
+            啟動器可以在包中的任何位置找到著色器。
+        </value>
+    </data>
+  <!-- edit shader strings (only renaming atm) (Not like any more functionality is planned) -->
+  <data name="EditShaderName" xml:space="preserve">
+        <value>重命名著色器</value>
+    </data>
+  <data name="EditShaderRenameShader" xml:space="preserve">
+        <value>給你的著色器包起一個名字！</value>
+    </data>
+  <!-- themes menu strings -->
+  <data name="ThemesMenuName" xml:space="preserve">
+        <value>主題</value>
+    </data>
+  <data name="ThemesMenuSearch" xml:space="preserve">
+        <value>搜索主題</value>
+    </data>
+  <data name="ThemesMenuNoThemes" xml:space="preserve">
+        <value>沒有找到主題</value>
+    </data>
+  <data name="ThemesMenuRefresh" xml:space="preserve">
+        <value>刷新主題</value>
+    </data>
+  <!-- dashboard strings -->
+  <data name="DashboardMorning" xml:space="preserve">
+        <value>早上好</value>
+    </data>
+  <data name="DashboardAfternoon" xml:space="preserve">
+        <value>下午好</value>
+    </data>
+  <data name="DashboardEvening" xml:space="preserve">
+        <value>晚上好</value>
+    </data>
+  <data name="DashboardTotalPlaytime" xml:space="preserve">
+        <value>總遊玩時間</value>
+    </data>
+  <data name="DashboardHours" xml:space="preserve">
+        <value>{0} 小時</value>
+    </data>
+  <data name="DashboardWithJiayi" xml:space="preserve">
+        <value>與嘉藝啟動器</value>
+    </data>
+  <data name="DashboardCurrentVersion" xml:space="preserve">
+        <value>當前版本</value>
+    </data>
+  <data name="DashboardSwitchVersions" xml:space="preserve">
+        <value>切換版本</value>
+    </data>
+  <data name="DashboardProfiles" xml:space="preserve">
+        <value>您的個人配置文件</value>
+    </data>
+  <data name="DashboardNoProfiles" xml:space="preserve">
+        <value>無個人配置文件</value>
+    </data>
+  <data name="DashboardProfilesSaved" xml:space="preserve">
+        <value>{0} 已保存</value>
+    </data>
+  <data name="DashboardViewProfiles" xml:space="preserve">
+        <value>查看個人配置文件</value>
+    </data>
+  <data name="DashboardRecentMod" xml:space="preserve">
+        <value>最近使用的 mod</value>
+    </data>
+  <data name="DashboardNoMod" xml:space="preserve">
+        <value>啟動一個 mod 並在此處查看</value>
+    </data>
+  <data name="DashboardPlayedMod" xml:space="preserve">
+        <value>最常玩的 mod</value>
+    </data>
+  <data name="DashboardOurCommunity" xml:space="preserve">
+        <value>我們的社區</value>
+    </data>
+  <data name="DashboardWebsite" xml:space="preserve">
+        <value>嘉藝軟件網站</value>
+    </data>
+  <data name="DashboardDiscord" xml:space="preserve">
+        <value>在 Discord 上與我們交談</value>
+    </data>
+  <data name="DashboardGitHub" xml:space="preserve">
+        <value>GitHub 上的嘉藝啟動器</value>
+    </data>
+  <data name="DashboardJiayiLauncherIs" xml:space="preserve">
+        <value>嘉藝啟動器是</value>
+    </data>
+  <data name="DashboardOSS" xml:space="preserve">
+        <value>開源軟件</value>
+    </data>
+  <!-- mods strings -->
+  <data name="ModsMenuName" xml:space="preserve">
+        <value>Mods</value>
+    </data>
+  <data name="ModsMenuSearch" xml:space="preserve">
+        <value>搜索 mods</value>
+    </data>
+  <data name="ModsMenuLocallyStored" xml:space="preserve">
+        <value>本地存儲</value>
+    </data>
+  <data name="ModsMenuFromWeb" xml:space="preserve">
+        <value>來自網絡</value>
+    </data>
+  <data name="ModsMenuNoMods" xml:space="preserve">
+        <value>沒有找到模組</value>
+    </data>
+  <data name="ModsMenuDragDrop" xml:space="preserve">
+        <value>
+            將模組、文件夾或鏈接拖至此處
+            或單擊加號按鈕添加模組
+        </value>
+    </data>
+  <data name="ModsMenuNoModsFolder" xml:space="preserve">
+        <value>
+            您沒有設置 mods 文件夾。
+            
+            將文件夾拖到此處以使其與 嘉藝啟動器 配合使用，
+            或添加 mods 以創建新文件夾。
+        </value>
+    </data>
+  <data name="ModsMenuCreateFolderQuestion" xml:space="preserve">
+        <value>由於您沒有設置 mods 文件夾，嘉藝啟動器將為您創建一個來添加這些 mods。 可以嗎？ 它將位於您的文檔文件夾中。</value>
+    </data>
+  <!-- profiles strings -->
+  <data name="ProfilesMenuName" xml:space="preserve">
+        <value>個人配置文件</value>
+    </data>
+  <data name="ProfilesMenuSearch" xml:space="preserve">
+        <value>搜索個人配置文件</value>
+    </data>
+  <data name="ProfilesMenuNoProfiles" xml:space="preserve">
+        <value>未找到個人配置文件</value>
+    </data>
+  <data name="ProfilesMenuBrokenProfile" xml:space="preserve">
+        <value>此配置文件已損壞； 包含遊戲數據的文件夾丟失或為空。</value>
+    </data>
+  <data name="ProfilesMenuWorlds" xml:space="preserve">
+        <value>{0} 世界</value>
+    </data>
+  <data name="ProfilesMenuResourcePacks" xml:space="preserve">
+        <value>{0} 資源包</value>
+    </data>
+  <data name="ProfilesMenuBehaviorPacks" xml:space="preserve">
+        <value>{0} 行為包</value>
+    </data>
+  <data name="ProfilesMenuMyProfile" xml:space="preserve">
+        <value>我的個人配置文件</value>
+    </data>
+  <data name="ProfilesMenuEditProfile" xml:space="preserve">
+        <value>編輯個人配置文件</value>
+    </data>
+  <data name="ProfilesMenuDeleteProfile" xml:space="preserve">
+        <value>刪除個人配置文件</value>
+    </data>
+  <data name="ProfilesMenuApplyProfile" xml:space="preserve">
+        <value>啟用個人配置文件</value>
+    </data>
+  <data name="ProfilesMenuApplyProfileConfirm" xml:space="preserve">
+        <value>您確定要應用此配置文件嗎？ 這將覆蓋您當前的遊戲數據。</value>
+    </data>
+  <data name="ProfilesMenuAboutProfiles" xml:space="preserve">
+        <value>創建配置文件將復製您當前的遊戲數據，例如您的世界、資源包和設置。</value>
+    </data>
+  <data name="ProfilesMenuDeleteProfileConfirm" xml:space="preserve">
+        <value>您確定要刪除此個人資料嗎？ 這不能被撤消。</value>
+    </data>
+  <!-- secret strings -->
+  <data name="SecretTitle" xml:space="preserve">
+        <value>這是一個秘密標題! 你找到了彩蛋之一!</value>
+    </data>
+  <data name="SecretText" xml:space="preserve">
+        <value>由 freeminesweeper.org 提供</value>
+    </data>
+  <data name="SecretText2" xml:space="preserve">
+        <value>livesweeper：競技掃雷</value>
+    </data>
+  <!-- settings page strings -->
+  <data name="SettingsMenuName" xml:space="preserve">
+        <value>設置</value>
+    </data>
+  <data name="SettingsCategories" xml:space="preserve">
+        <value>類別：</value>
+    </data>
+  <data name="SettingsGeneral" xml:space="preserve">
+        <value>一般</value>
+    </data>
+  <data name="SettingsAppearance" xml:space="preserve">
+        <value>外觀</value>
+    </data>
+  <data name="SettingsUpdate" xml:space="preserve">
+        <value>更新</value>
+    </data>
+  <data name="SettingsDiscord" xml:space="preserve">
+        <value>Discord</value>
+    </data>
+  <data name="SettingsNetwork" xml:space="preserve">
+        <value>網絡</value>
+    </data>
+  <data name="SettingsLaunch" xml:space="preserve">
+        <value>啟動項</value>
+    </data>
+  <data name="SettingsLog" xml:space="preserve">
+        <value>日誌</value>
+    </data>
+  <data name="SettingsAbout" xml:space="preserve">
+        <value>關於</value>
+    </data>
+  <data name="SettingsAboutSettingTitle" xml:space="preserve">
+        <value>關於此設置</value>
+    </data>
+  <data name="SettingsResetDefault" xml:space="preserve">
+        <value>重置為默認</value>
+    </data>
+  <data name="SettingsMoreInfo" xml:space="preserve">
+        <value>更多信息</value>
+    </data>
+  <data name="SettingsEasterEggText" xml:space="preserve">
+        <value>芝士一條千分之一概率的彩蛋! 你真的很幸運 :3          愛來自中文漢化者 MRUIAW</value>
+    </data>
+  <data name="SettingsConfirmEnable" xml:space="preserve">
+        <value>您確定要啟用此設置嗎？</value>
+    </data>
+  <data name="SettingsConfirmAction" xml:space="preserve">
+        <value>您確定要這樣做嗎？</value>
+    </data>
+  <data name="SettingsInvalidSettingsText" xml:space="preserve">
+        <value>您的設置文件已損壞或無效。</value>
+    </data>
+  <data name="SettingsInvalidSettingsText2" xml:space="preserve">
+        <value>新的設置文件已創建，並且您之前的設置已丟失。</value>
+    </data>
+  <!-- general settings strings -->
+  <data name="SettingsModCollectionPath" xml:space="preserve">
+        <value>Mod文件夾路徑</value>
+    </data>
+  <data name="SettingsModCollectionPathDesc" xml:space="preserve">
+        <value>包含 mod 的文件夾的路徑。</value>
+    </data>
+  <data name="SettingsExportCollection" xml:space="preserve">
+        <value>導出您的mods</value>
+    </data>
+  <data name="SettingsExportCollectionDesc" xml:space="preserve">
+        <value>將您的模組集合導出到文件。 您可以與其他人分享。</value>
+    </data>
+  <data name="SettingsExportCollectionFilter" xml:space="preserve">
+        <value>嘉藝mod合集</value>
+    </data>
+  <data name="SettingsProfileCollectionPath" xml:space="preserve">
+        <value>個人配置文件 路徑</value>
+    </data>
+  <data name="SettingsProfileCollectionPathDesc" xml:space="preserve">
+        <value>包含您的個人配置文件的文件夾的路徑。</value>
+    </data>
+  <data name="SettingsVersionsPath" xml:space="preserve">
+        <value>版本文件夾路徑</value>
+    </data>
+  <data name="SettingsVersionsPathDesc" xml:space="preserve">
+        <value>包含遊戲安裝的文件夾的路徑。</value>
+    </data>
+  <data name="SettingsUpdateVersionList" xml:space="preserve">
+        <value>更新版本列表</value>
+    </data>
+  <data name="SettingsUpdateVersionListDesc" xml:space="preserve">
+        <value>更新可用版本列表。</value>
+    </data>
+  <data name="SettingsShadersPath" xml:space="preserve">
+        <value>著色器文件夾路徑</value>
+    </data>
+  <data name="SettingsShadersPathDesc" xml:space="preserve">
+        <value>包含著色器的文件夾的路徑。</value>
+    </data>
+  <!-- appearance settings strings -->
+  <data name="SettingsPrimaryBackgroundColor" xml:space="preserve">
+        <value>主要背景色</value>
+    </data>
+  <data name="SettingsPrimaryBackgroundColorDesc" xml:space="preserve">
+        <value>啟動器的主要背景色。</value>
+    </data>
+  <data name="SettingsSecondaryBackgroundColor" xml:space="preserve">
+        <value>第二背景色</value>
+    </data>
+  <data name="SettingsSecondaryBackgroundColorDesc" xml:space="preserve">
+        <value>啟動器的第二背景色。</value>
+    </data>
+  <data name="SettingsAccentColor" xml:space="preserve">
+        <value>強調色</value>
+    </data>
+  <data name="SettingsAccentColorDesc" xml:space="preserve">
+        <value>啟動器的強調色。</value>
+    </data>
+  <data name="SettingsTextColor" xml:space="preserve">
+        <value>文字顏色</value>
+    </data>
+  <data name="SettingsTextColorDesc" xml:space="preserve">
+        <value>整個啟動器中看到的文本顏色。</value>
+    </data>
+  <data name="SettingsAccentTextColor" xml:space="preserve">
+        <value>文本顏色（強調色）</value>
+    </data>
+  <data name="SettingsAccentTextColorDesc" xml:space="preserve">
+        <value>文本顏色的強調色。</value>
+    </data>
+  <data name="SettingsGrayTextColor" xml:space="preserve">
+        <value>灰字文字顏色</value>
+    </data>
+  <data name="SettingsGrayTextColorDesc" xml:space="preserve">
+        <value>灰字的文本顏色。</value>
+    </data>
+  <data name="SettingsShadowDistance" xml:space="preserve">
+        <value>陰影距離</value>
+    </data>
+  <data name="SettingsShadowDistanceDesc" xml:space="preserve">
+        <value>UI 元素上的陰影距離。</value>
+    </data>
+  <data name="SettingsMovementSpeed" xml:space="preserve">
+        <value>UI 移動速度</value>
+    </data>
+  <data name="SettingsMovementSpeedDesc" xml:space="preserve">
+        <value>UI 移動的速度。</value>
+    </data>
+  <data name="SettingsUseBackgroundImage" xml:space="preserve">
+        <value>使用背景圖片</value>
+    </data>
+  <data name="SettingsUseBackgroundImageDesc" xml:space="preserve">
+        <value>使用圖像作為啟動器的背景。</value>
+    </data>
+  <data name="SettingsSelectBackground" xml:space="preserve">
+        <value>選擇背景圖片</value>
+    </data>
+  <data name="SettingsSelectBackgroundDesc" xml:space="preserve">
+        <value>從您的電腦中選擇背景圖像。</value>
+    </data>
+  <data name="SettingsSelectBackgroundImageFilter" xml:space="preserve">
+        <value>圖像文件</value>
+    </data>
+  <data name="SettingsSelectBackgroundVideoFilter" xml:space="preserve">
+        <value>視頻文件</value>
+    </data>
+  <data name="SettingsGeneratePalette" xml:space="preserve">
+        <value>基於背景生成調色板</value>
+    </data>
+  <data name="SettingsGeneratePaletteDesc" xml:space="preserve">
+        <value>根據您的背景圖像創建調色板。 不支持視頻。</value>
+    </data>
+  <data name="SettingsGeneratePaletteTooltip" xml:space="preserve">
+        <value>調色板生成需要大量內存，可能需要一段時間。 每個生成的調色板都略有不同。</value>
+    </data>
+  <data name="SettingsBackgroundBlur" xml:space="preserve">
+        <value>背景模糊</value>
+    </data>
+  <data name="SettingsBackgroundBlurDesc" xml:space="preserve">
+        <value>背景模糊的值。</value>
+    </data>
+  <data name="SettingsBackgroundBrightness" xml:space="preserve">
+        <value>背景亮度</value>
+    </data>
+  <data name="SettingsBackgroundBrightnessDesc" xml:space="preserve">
+        <value>背景的亮度值。</value>
+    </data>
+  <data name="SettingsRounding" xml:space="preserve">
+        <value>圓角</value>
+    </data>
+  <data name="SettingsRoundingDesc" xml:space="preserve">
+        <value>大多數 UI 元素的圓角程度。</value>
+    </data>
+  <data name="SettingsBorderColor" xml:space="preserve">
+        <value>邊框顏色</value>
+    </data>
+  <data name="SettingsBorderColorDesc" xml:space="preserve">
+        <value>UI 元素邊框的顏色。</value>
+    </data>
+  <data name="SettingsAccentBorderColor" xml:space="preserve">
+        <value>邊框顏色（強調色）</value>
+    </data>
+  <data name="SettingsAccentBorderColorDesc" xml:space="preserve">
+        <value>邊框的強調色。</value>
+    </data>
+  <data name="SettingsBorderThickness" xml:space="preserve">
+        <value>邊框厚度</value>
+    </data>
+  <data name="SettingsBorderThicknessDesc" xml:space="preserve">
+        <value>UI 元素上邊框的厚度。</value>
+    </data>
+  <data name="SettingsOpenTheme" xml:space="preserve">
+        <value>顯示主題</value>
+    </data>
+  <data name="SettingsOpenThemeDesc" xml:space="preserve">
+        <value>在文件資源管理器中顯示您的主題。 您可以與其他人分享或使用其他人的主題。</value>
+    </data>
+  <data name="SettingsRestoreDefaultTheme" xml:space="preserve">
+        <value>恢復默認主題</value>
+    </data>
+  <data name="SettingsRestoreDefaultThemeDesc" xml:space="preserve">
+        <value>回到嘉藝啟動器的默認主題。</value>
+    </data>
+  <data name="SettingsThemesMenu" xml:space="preserve">
+        <value>主題菜單</value>
+    </data>
+  <data name="SettingsThemesMenuDesc" xml:space="preserve">
+        <value>由社區創建的本地和可下載主題。</value>
+    </data>
+  <!-- discord settings strings -->
+  <data name="SettingsRichPresence" xml:space="preserve">
+        <value>啟用 RPC (在線狀態)</value>
+    </data>
+  <data name="SettingsRichPresenceDesc" xml:space="preserve">
+        <value>在 Discord 上展示您用嘉藝啟動器正在做的事情。</value>
+    </data>
+  <data name="SettingsRichPresenceTooltip" xml:space="preserve">
+        <value>
+            用於RPC的可用格式字符串：
+        
+            %mod_name% - 您正在玩的 mod 的名稱
+            %game_version% - 您當前的 Minecraft 版本
+            %mod_count% - 您的合集中有多少個 mod
+            %shader_name% - 您正在使用的著色器的名稱
+            %profile_count% - 您的合集中有多少個配置文件
+            %launcher_version% - 您正在使用的嘉藝啟動器版本
+            
+            每個字段只能使用 1 個格式字符串。
+        </value>
+    </data>
+  <data name="SettingsDiscordDetails" xml:space="preserve">
+        <value>頂部文本</value>
+    </data>
+  <data name="SettingsDiscordDetailsDesc" xml:space="preserve">
+        <value>最上面的狀態文本。</value>
+    </data>
+  <data name="SettingsDiscordDetailsDefault" xml:space="preserve">
+        <value>正在玩 %mod_name%</value>
+    </data>
+  <data name="SettingsDiscordState" xml:space="preserve">
+        <value>底部文本</value>
+    </data>
+  <data name="SettingsDiscordStateDesc" xml:space="preserve">
+        <value>最底部的狀態文本。</value>
+    </data>
+  <data name="SettingsDiscordStateDefault" xml:space="preserve">
+        <value>在 %game_version%</value>
+    </data>
+  <data name="SettingsDiscordShowElapsedTime" xml:space="preserve">
+        <value>顯示經過的時間</value>
+    </data>
+  <data name="SettingsDiscordShowElapsedTimeDesc" xml:space="preserve">
+        <value>顯示您嘉藝打開了多長時間</value>
+    </data>
+  <data name="SettingsDiscordShowDownloadButton" xml:space="preserve">
+        <value>顯示下載按鈕</value>
+    </data>
+  <data name="SettingsDiscordShowDownloadButtonDesc" xml:space="preserve">
+        <value>在 Discord 上顯示下載嘉藝的按鈕。</value>
+    </data>
+  <data name="SettingsDiscordShareCurrentMod" xml:space="preserve">
+        <value>分享當前模組</value>
+    </data>
+  <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
+        <value>顯示一個按鈕，供其他用戶添加您正在玩的模組。這僅適用於網絡模組。</value>
+    </data>
+  <data name="SettingsDiscordLargeImageKey" xml:space="preserve">
+        <value>大圖像</value>
+    </data>
+  <data name="SettingsDiscordLargeImageKeyDesc" xml:space="preserve">
+        <value>用於RPC的大圖像。</value>
+    </data>
+  <data name="SettingsDiscordSmallImageKey" xml:space="preserve">
+        <value>小圖像</value>
+    </data>
+  <data name="SettingsDiscordSmallImageKeyDesc" xml:space="preserve">
+        <value>用於RPC的小圖像。</value>
+    </data>
+  <data name="SettingsDiscordLargeImageText" xml:space="preserve">
+        <value>大圖文字</value>
+    </data>
+  <data name="SettingsDiscordLargeImageTextDesc" xml:space="preserve">
+        <value>將鼠標懸停在大圖像上時顯示的文本。</value>
+    </data>
+  <data name="SettingsDiscordSmallImageText" xml:space="preserve">
+        <value>小圖文字</value>
+    </data>
+  <data name="SettingsDiscordSmallImageTextDesc" xml:space="preserve">
+        <value>將鼠標懸停在小圖像上時顯示的文本。</value>
+    </data>
+  <!-- update settings strings -->
+  <data name="SettingsEnableUpdater" xml:space="preserve">
+        <value>啟用更新程序</value>
+    </data>
+  <data name="SettingsEnableUpdaterDesc" xml:space="preserve">
+        <value>允許啟動器檢查並下載更新。</value>
+    </data>
+  <data name="SettingsAutoDownloadUpdates" xml:space="preserve">
+        <value>自動下載更新</value>
+    </data>
+  <data name="SettingsAutoDownloadUpdatesDesc" xml:space="preserve">
+        <value>始終在有可用更新時下載更新。</value>
+    </data>
+  <!-- network settings strings -->
+  <data name="SettingsOfflineMode" xml:space="preserve">
+        <value>離線模式</value>
+    </data>
+  <data name="SettingsOfflineModeDesc" xml:space="preserve">
+        <value>禁用對互聯網的訪問。 某些功能可能無法使用。 重啟 嘉藝啟動器 即可完全生效。</value>
+    </data>
+  <data name="SettingsOfflineModeTooltip" xml:space="preserve">
+        <value>互聯網mod、下載版本和檢查更新等功能將無法使用。</value>
+    </data>
+  <data name="SettingsFollowRedirects" xml:space="preserve">
+        <value>遵循重定向</value>
+    </data>
+  <data name="SettingsFollowRedirectsDesc" xml:space="preserve">
+        <value>添加互聯網mod時遵循重定向。如果您在添加某些模組時遇到問題，請更改此設置。</value>
+    </data>
+  <!-- launch settings strings -->
+  <data name="SettingsUseInjectionDelay" xml:space="preserve">
+        <value>使用註入延遲</value>
+    </data>
+  <data name="SettingsUseInjectionDelayDesc" xml:space="preserve">
+        <value>等待一段時間，而不是等待遊戲加載後再註入。</value>
+    </data>
+  <data name="SettingsInjectionDelay" xml:space="preserve">
+        <value>註入延遲</value>
+    </data>
+  <data name="SettingsInjectionDelayDesc" xml:space="preserve">
+        <value>註入前等待的時間（以秒為單位）。</value>
+    </data>
+  <data name="SettingsOverrideModuleRequirement" xml:space="preserve">
+        <value>覆蓋模塊要求</value>
+    </data>
+  <data name="SettingsOverrideModuleRequirementDesc" xml:space="preserve">
+        <value>
+            覆蓋 嘉藝啟動器 註入之前所需加載的模塊數量。
+            
+            如果啟動器註入太早或太晚，請嘗試更改此值。
+        </value>
+    </data>
+  <data name="SettingsModuleRequirement" xml:space="preserve">
+        <value>模塊要求</value>
+    </data>
+  <data name="SettingsModuleRequirementDesc" xml:space="preserve">
+        <value>嘉藝啟動器 註入之前需要加載的模塊數量。</value>
+    </data>
+  <data name="SettingsAccelerateGameLoading" xml:space="preserve">
+        <value>加速遊戲加載</value>
+    </data>
+  <data name="SettingsAccelerateGameLoadingDesc" xml:space="preserve">
+        <value>通過終止不必要的進程來加快加載時間。 謹防卡頓。</value>
+    </data>
+  <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
+        <value>可能會導致與 Microsoft Store 許可相關的問題（確定您是否擁有該遊戲）。</value>
+    </data>
+  <data name="SettingsMinimizeFix" xml:space="preserve">
+        <value>最小化修復</value>
+    </data>
+  <data name="SettingsMinimizeFixDesc" xml:space="preserve">
+        <value>防止遊戲在最小化時自行掛起 (自動退出服務器)。 更改在啟動時應用。</value>
+    </data>
+  <!-- log settings strings -->
+  <data name="SettingsAnonymizeLogs" xml:space="preserve">
+        <value>匿名日誌</value>
+    </data>
+  <data name="SettingsAnonymizeLogsDesc" xml:space="preserve">
+        <value>隱藏日誌中的任何識別信息。 這並不具有追溯力。</value>
+    </data>
+  <data name="SettingsOpenLogFolder" xml:space="preserve">
+        <value>打開日誌文件夾</value>
+    </data>
+  <data name="SettingsOpenLogFolderDesc" xml:space="preserve">
+        <value>在文件資源管理器中打開日誌文件夾。</value>
+    </data>
+  <data name="SettingsClearPreviousLogs" xml:space="preserve">
+        <value>清除以前的日誌</value>
+    </data>
+  <data name="SettingsClearPreviousLogsDesc" xml:space="preserve">
+        <value>刪除所有以前的日誌文件。</value>
+    </data>
+  <!-- mod card strings -->
+  <data name="ModCardInvalidLink" xml:space="preserve">
+        <value>這個模組已損壞； 它不再存在於網絡上。</value>
+    </data>
+  <data name="ModCardMissingFile" xml:space="preserve">
+        <value>這個模組已損壞； mods 目錄中缺少該文件。</value>
+    </data>
+  <data name="ModCardOffline" xml:space="preserve">
+        <value>離線模式下禁用互聯網模組</value>
+    </data>
+  <data name="ModCardInternetMod" xml:space="preserve">
+        <value>從網上下載</value>
+    </data>
+  <data name="ModCardLocalMod" xml:space="preserve">
+        <value>本地存儲</value>
+    </data>
+  <data name="ModCardSupportedVersions" xml:space="preserve">
+        <value>支持 {0}</value>
+    </data>
+  <data name="ModCardHideControls" xml:space="preserve">
+        <value>隱藏控件</value>
+    </data>
+  <data name="ModCardShowControls" xml:space="preserve">
+        <value>顯示控件</value>
+    </data>
+  <data name="ModCardManageConfigs" xml:space="preserve">
+        <value>管理配置</value>
+    </data>
+  <data name="ModCardEditMod" xml:space="preserve">
+        <value>編輯 mod</value>
+    </data>
+  <data name="ModCardDeleteMod" xml:space="preserve">
+        <value>刪除 mod（不可逆）</value>
+    </data>
+  <data name="ModCardDeleteModConfirm" xml:space="preserve">
+        <value>您確定要刪除 {0} 嗎？ 此操作是不可逆轉的。</value>
+    </data>
+  <data name="ModCardLaunchMultipleModsConfirm" xml:space="preserve">
+        <value>一次啟動多個模組可能會使您的遊戲不穩定。 您確定要啟動 {0} 嗎？</value>
+    </data>
+  <data name="ModCardDownloadFailed" xml:space="preserve">
+        <value>下載模組失敗。 請稍後再試。</value>
+    </data>
+  <data name="ModCardModNotFound" xml:space="preserve">
+        <value>您的模組在啟動期間已被刪除。 嘗試關閉防病毒軟件。</value>
+    </data>
+  <data name="ModCardGameNotFound" xml:space="preserve">
+        <value>遊戲在啟動期間被關閉。 關閉防病毒軟件，以防它終止遊戲。</value>
+    </data>
+  <data name="ModCardVersionMismatch" xml:space="preserve">
+        <value>{0} 不支持您當前的遊戲版本。 您想切換到 {1} 嗎?</value>
+    </data>
+  <data name="ModCardInjectionFailed" xml:space="preserve">
+        <value>您的模組無法註入。 嘗試關閉防病毒軟件，並檢查日誌以獲取更多錯誤信息。</value>
+    </data>
+  <data name="ModCardAlreadyLoaded" xml:space="preserve">
+        <value>這個模組已經加載了!</value>
+    </data>
+  <!-- theme card strings -->
+  <data name="ThemeCardAuthor" xml:space="preserve">
+        <value>by {0}</value>
+    </data>
+  <data name="ThemeCardPrepareUpload" xml:space="preserve">
+        <value>準備上傳主題</value>
+    </data>
+  <data name="ThemeCardReinstall" xml:space="preserve">
+        <value>重新安裝主題</value>
+    </data>
+  <data name="ThemeCardOverwriteConfirm" xml:space="preserve">
+        <value>您確定要覆蓋此主題嗎？ 您的所有本地更改都將丟失。</value>
+    </data>
+  <!-- don't ask again strings -->
+  <data name="DontAskAgain" xml:space="preserve">
+        <value>
+            別再問了
+            我說了不
+            閉嘴
+            真的, 不
+            別來了
+            不就是不
+            請停下
+            停下來
+            永遠別了
+            操你媽
+        </value>
+    </data>
+  <!-- offline mode strings -->
+  <data name="OfflineMode" xml:space="preserve">
+        <value>離線模式</value>
+    </data>
+  <data name="OfflineModeDesc" xml:space="preserve">
+        <value>你已離線. 部分功能可能無法使用.</value>
+    </data>
+  <!-- update strings -->
+  <data name="UpdateInstalled" xml:space="preserve">
+        <value>已安裝更新</value>
+    </data>
+  <data name="UpdateInstalledDesc" xml:space="preserve">
+        <value>嘉藝啟動器 已更新至 {0}.</value>
+    </data>
+  <data name="UpdateInstalledDesc2" xml:space="preserve">
+        <value>您可以在 GitHub 上查看更新日誌.</value>
+    </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+        <value>可用更新</value>
+    </data>
+  <data name="UpdateAvailableDesc" xml:space="preserve">
+        <value>有可用的更新. 您想下載嗎?</value>
+    </data>
+  <data name="UpdateDownloading" xml:space="preserve">
+        <value>正在下載更新...</value>
+    </data>
+  <data name="UpdateDownloaded" xml:space="preserve">
+        <value>已下載更新</value>
+    </data>
+  <data name="UpdateDownloadedDesc" xml:space="preserve">
+        <value>重新啟動以安裝更新.</value>
+    </data>
+  <!-- sidebar strings -->
+  <data name="SidebarDashboard" xml:space="preserve">
+        <value>儀表盤</value>
+    </data>
+  <data name="SidebarMods" xml:space="preserve">
+        <value>Mods</value>
+    </data>
+  <data name="SidebarProfiles" xml:space="preserve">
+        <value>配置</value>
+    </data>
+  <data name="SidebarGame" xml:space="preserve">
+        <value>Game</value>
+    </data>
+  <data name="SidebarSettings" xml:space="preserve">
+        <value>設置</value>
+    </data>
+</root>

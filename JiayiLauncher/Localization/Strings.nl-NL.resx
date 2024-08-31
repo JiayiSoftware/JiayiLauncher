@@ -63,121 +63,121 @@
   </resheader>
   <!-- common strings -->
   <data name="Okay" xml:space="preserve">
-        <value>Okay</value>
+        <value>Oké</value>
     </data>
   <data name="Yes" xml:space="preserve">
-        <value>Yes</value>
+        <value>Ja</value>
     </data>
   <data name="No" xml:space="preserve">
-        <value>No</value>
+        <value>Nee</value>
     </data>
   <data name="Cancel" xml:space="preserve">
-        <value>Cancel</value>
+        <value>Annuleren</value>
     </data>
   <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>Sluiten</value>
     </data>
   <data name="Open" xml:space="preserve">
         <value>Open</value>
     </data>
   <data name="Save" xml:space="preserve">
-        <value>Save</value>
+        <value>Opslaan</value>
     </data>
   <data name="Export" xml:space="preserve">
-        <value>Export</value>
+        <value>Exporteren</value>
     </data>
   <data name="Import" xml:space="preserve">
-        <value>Import</value>
+        <value>Importeren</value>
     </data>
   <data name="Imported" xml:space="preserve">
-        <value>Imported</value>
+        <value>Geïmporteerd</value>
     </data>
   <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>Importeren...</value>
     </data>
   <data name="Create" xml:space="preserve">
-        <value>Create</value>
+        <value>Maken</value>
     </data>
   <data name="Download" xml:space="preserve">
         <value>Download</value>
     </data>
   <data name="Downloading" xml:space="preserve">
-        <value>Downloading...</value>
+        <value>Downloaden...</value>
     </data>
   <data name="NotAvailable" xml:space="preserve">
-        <value>Not available</value>
+        <value>Niet beschikbaar</value>
     </data>
   <data name="Unknown" xml:space="preserve">
-        <value>Unknown</value>
+        <value>Onbekend</value>
     </data>
   <data name="Warning" xml:space="preserve">
-        <value>Warning</value>
+        <value>Waarschuwing</value>
     </data>
   <data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>Fout</value>
     </data>
   <data name="Launch" xml:space="preserve">
-        <value>Launch</value>
+        <value>Lanceren</value>
     </data>
   <data name="Extracting" xml:space="preserve">
-        <value>Extracting...</value>
+        <value>Uitpakken...</value>
     </data>
   <data name="CompletionPercent" xml:space="preserve">
-        <value>{0}% complete</value>
+        <value>{0}% compleet</value>
     </data>
   <data name="Remove" xml:space="preserve">
-        <value>Remove</value>
+        <value>Verwijder</value>
     </data>
   <data name="Removing" xml:space="preserve">
-        <value>Removing...</value>
+        <value>Verwijderen...</value>
     </data>
   <data name="Switch" xml:space="preserve">
-        <value>Switch</value>
+        <value>Verander</value>
     </data>
   <data name="Switching" xml:space="preserve">
-        <value>Switching...</value>
+        <value>Veranderen...</value>
     </data>
   <data name="Apply" xml:space="preserve">
-        <value>Apply</value>
+        <value>Toepassen</value>
     </data>
   <data name="Select" xml:space="preserve">
-        <value>Select</value>
+        <value>Selecteren</value>
     </data>
   <data name="View" xml:space="preserve">
-        <value>View</value>
+        <value>Bekijken</value>
     </data>
   <data name="Restore" xml:space="preserve">
-        <value>Restore</value>
+        <value>Herstellen</value>
     </data>
   <data name="Update" xml:space="preserve">
-        <value>Update</value>
+        <value>Bijwerken</value>
     </data>
   <data name="Restart" xml:space="preserve">
-        <value>Restart</value>
+        <value>Opnieuw opstarten</value>
     </data>
   <data name="Later" xml:space="preserve">
         <value>Later</value>
     </data>
   <data name="Generate" xml:space="preserve">
-        <value>Generate</value>
+        <value>Genereer</value>
     </data>
   <data name="Clear" xml:space="preserve">
-        <value>Clear</value>
+        <value>Wis</value>
     </data>
   <data name="Name" xml:space="preserve">
-        <value>Name</value>
+        <value>Naam</value>
     </data>
   <data name="FilterBy" xml:space="preserve">
-        <value>Filter by:</value>
+        <value>Filter op:</value>
     </data>
   <data name="WhatsThis" xml:space="preserve">
-        <value>What's this?</value>
+        <value>Wat is dit?</value>
     </data>
   <data name="AdvancedSettings" xml:space="preserve">
-        <value>Advanced settings</value>
+        <value>Geavanceerde instellingen</value>
     </data>
   <data name="MinecraftForWindows" xml:space="preserve">
-        <value>Minecraft for Windows</value>
+        <value>Minecraft voor Windows</value>
     </data>
   <!-- optional Jiayi Launcher string, translate if you want -->
   <data name="JiayiLauncher" xml:space="preserve">
@@ -185,38 +185,38 @@
     </data>
   <!-- config manager strings -->
   <data name="ConfManName" xml:space="preserve">
-        <value>Config manager</value>
+        <value>Configuratie beheerder</value>
     </data>
   <data name="ConfManNoModDataFolder" xml:space="preserve">
         <value>
-            This mod doesn't have a data folder name set.
-            To access the config manager, edit this mod and set the data folder name.
-        </value>
+Deze modificatie heeft nog geen data map naam ingesteld gekregen.
+
+Om toegang te krijgen tot de configuratie beheerder moet  eerst deze modificatie gewijzigd worden en de data map naam worden ingesteld.        </value>
     </data>
   <data name="ConfManInvalidDataFolder" xml:space="preserve">
         <value>
-            The data folder you set for this mod doesn't exist.
-            Make sure you have the correct data folder name set.
-        </value>
+De data map die jij hebt ingesteld voor deze modificatie bestaat niet.
+
+Zorg dat je de goede data map naam hebt ingesteld.        </value>
     </data>
   <data name="ConfManEdit" xml:space="preserve">
-        <value>Open and edit config</value>
+        <value>Open en bewerk de configuratie</value>
     </data>
   <data name="ConfManDelete" xml:space="preserve">
-        <value>Delete config (irreversible)</value>
+        <value>Verwijder configuratie (onomkeerbaar)</value>
     </data>
   <data name="ConfManDragDrop" xml:space="preserve">
-        <value>Click here or drop files to add configs</value>
+        <value>Click hier of sleep bestanden om configuraties toe te voegen</value>
     </data>
   <!-- edit mod strings -->
   <data name="EditModName" xml:space="preserve">
-        <value>Edit mod</value>
+        <value>Bewerk modificatie</value>
     </data>
   <data name="EditModModName" xml:space="preserve">
-        <value>Mod name</value>
+        <value>Modificatie naam</value>
     </data>
   <data name="EditModSupportedVersions" xml:space="preserve">
-        <value>Supported versions</value>
+        <value>Ondersteunde versies</value>
     </data>
   <data name="EditModSelectVersions" xml:space="preserve">
         <value>Selecteer versies</value>
@@ -228,7 +228,7 @@
         <value>This does not apply to internal mods</value>
     </data>
   <data name="EditModDataFolder" xml:space="preserve">
-        <value>Mod data folder name</value>
+        <value>Modificatie data map naam</value>
     </data>
   <data name="EditModDataFolderNotice" xml:space="preserve">
         <value>Usually in RoamingState</value>
@@ -316,7 +316,7 @@
         <value>Injectable libraries</value>
     </data>
   <data name="NewModExeDisplayName" xml:space="preserve">
-        <value>External clients and injectors</value>
+        <value>Externe cliënten en injectoren</value>
     </data>
   <data name="NewModCreateCollectionQuestion" xml:space="preserve">
         <value>You don't have a mod collection set up. Would you like to create one to add these mods?</value>

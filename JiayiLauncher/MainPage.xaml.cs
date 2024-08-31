@@ -55,31 +55,32 @@ public partial class MainPage : ContentPage
             JiayiSettings.Instance.Save();
         }
         
+        // load languages
+        var rm = new ResourceManager(typeof(Strings));
+        var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+        var supportedCultures = new List<CultureInfo>();
+
+        foreach (var cultureInfo in cultures)
+        {
+            try
+            {
+                if (cultureInfo.Equals(CultureInfo.InvariantCulture)) continue;
+                    
+                var resourceSet = rm.GetResourceSet(cultureInfo, true, false);
+                if (resourceSet != null) supportedCultures.Add(cultureInfo);
+            }
+            catch (CultureNotFoundException)
+            {
+                // ignored
+            }
+        }
+            
+        // add languages to languages
+        JiayiSettings.Instance.Language.AvailableModes.AddRange(supportedCultures.Select(x => x.EnglishName));
+        
         // set language
         if (JiayiSettings.Instance.Language.Mode != "Use system language")
         {
-            var rm = new ResourceManager(typeof(Strings));
-            var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
-            var supportedCultures = new List<CultureInfo>();
-
-            foreach (var cultureInfo in cultures)
-            {
-                try
-                {
-                    if (cultureInfo.Equals(CultureInfo.InvariantCulture)) continue;
-                    
-                    var resourceSet = rm.GetResourceSet(cultureInfo, true, false);
-                    if (resourceSet != null) supportedCultures.Add(cultureInfo);
-                }
-                catch (CultureNotFoundException)
-                {
-                    // ignored
-                }
-            }
-            
-            // add languages to languages
-            JiayiSettings.Instance.Language.AvailableModes.AddRange(supportedCultures.Select(x => x.EnglishName));
-            
             var lang = JiayiSettings.Instance.Language.Mode;
             var culture = supportedCultures.FirstOrDefault(x => x.EnglishName.Contains(lang));
             if (culture != null) CultureInfo.CurrentUICulture = culture;

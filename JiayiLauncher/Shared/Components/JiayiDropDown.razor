@@ -1,4 +1,4 @@
-﻿<div class="dropdown">
+﻿<div class="dropdown" style="@Style">
     @if (Multiselect)
     {
         @if (SelectedItems.Count == 0)
@@ -77,6 +77,9 @@
 @code {
     [Parameter]
     public string? Name { get; set; }
+    
+    [Parameter]
+    public string? Style { get; set; }
     
     [Parameter]
     public List<string>? Items { get; set; }

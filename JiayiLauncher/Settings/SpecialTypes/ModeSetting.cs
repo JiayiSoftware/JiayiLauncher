@@ -5,18 +5,18 @@ namespace JiayiLauncher.Settings.SpecialTypes;
 [Serializable]
 public class ModeSetting
 {
-	public int Mode { get; set; }
+	public string Mode { get; set; }
 	
 	[JsonIgnore]
 	public List<string> AvailableModes { get; set; }
 
 	public ModeSetting()
 	{
-		Mode = 0;
+		Mode = string.Empty;
 		AvailableModes = new();
 	}
 	
-	public ModeSetting(int defaultMode, List<string> availableModes)
+	public ModeSetting(string defaultMode, List<string> availableModes)
 	{
 		Mode = defaultMode;
 		AvailableModes = availableModes;
@@ -41,6 +41,6 @@ public class ModeSetting
 
 	public override int GetHashCode()
 	{
-		return Mode;
+		return HashCode.Combine(Mode);
 	}
 }

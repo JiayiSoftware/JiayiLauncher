@@ -58,7 +58,7 @@ public class JiayiSettings
     [Setting("Language", "General", "The language used throughout the launcher. Restart Jiayi for this to take full effect.", 
         tooltip: "All languages are community-contributed, and some may be incomplete. " +
                  "If you'd like to help translate the launcher, visit Jiayi Launcher's GitHub repository.")]
-    public ModeSetting Language { get; set; } = new(0, 
+    public ModeSetting Language { get; set; } = new("Use system language",
     [
         "Use system language",
         // "Arabic",

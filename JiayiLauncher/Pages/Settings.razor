@@ -107,7 +107,8 @@
                         case true when setting.PropertyType == typeof(ModeSetting):
                             var modeSetting = (ModeSetting)setting.GetValue(JiayiSettings.Instance)!;
                             <JiayiDropDown Name="@localizedSetting.Name" Items="@modeSetting.AvailableModes"
-                                           SelectedItem="@modeSetting.AvailableModes[modeSetting.Mode]"
+                                           SelectedItem="@modeSetting.Mode"
+                                           Style="width: -webkit-fill-available; max-width: 40%;"
                                            OnChange="mode => ChangeModeSetting(mode, setting)"/>
                             break;
                     }
@@ -185,7 +186,7 @@
     private void ChangeModeSetting(JiayiDropDown value, PropertyInfo setting)
     {
         var modeSetting = (ModeSetting)setting.GetValue(JiayiSettings.Instance)!;
-        modeSetting.Mode = modeSetting.AvailableModes.IndexOf(value.SelectedItem!);
+        modeSetting.Mode = value.SelectedItem!;
         setting.SetValue(JiayiSettings.Instance, modeSetting);
         JiayiSettings.Instance!.Save();
     }

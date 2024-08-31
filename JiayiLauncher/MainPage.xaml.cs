@@ -56,7 +56,7 @@ public partial class MainPage : ContentPage
         }
         
         // set language
-        if (JiayiSettings.Instance.Language.Mode != 0) // 0 is default (auto)
+        if (JiayiSettings.Instance.Language.Mode != "Use system language")
         {
             var rm = new ResourceManager(typeof(Strings));
             var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
@@ -80,7 +80,7 @@ public partial class MainPage : ContentPage
             // add languages to languages
             JiayiSettings.Instance.Language.AvailableModes.AddRange(supportedCultures.Select(x => x.EnglishName));
             
-            var lang = JiayiSettings.Instance.Language.AvailableModes[JiayiSettings.Instance.Language.Mode];
+            var lang = JiayiSettings.Instance.Language.Mode;
             var culture = supportedCultures.FirstOrDefault(x => x.EnglishName.Contains(lang));
             if (culture != null) CultureInfo.CurrentUICulture = culture;
         }

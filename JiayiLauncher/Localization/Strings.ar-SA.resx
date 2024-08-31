@@ -63,79 +63,79 @@
   </resheader>
   <!-- common strings -->
   <data name="Okay" xml:space="preserve">
-        <value>Okay</value>
+        <value>تمام</value>
     </data>
   <data name="Yes" xml:space="preserve">
-        <value>Yes</value>
+        <value>نعم</value>
     </data>
   <data name="No" xml:space="preserve">
-        <value>No</value>
+        <value>لا</value>
     </data>
   <data name="Cancel" xml:space="preserve">
-        <value>Cancel</value>
+        <value>إلغاء</value>
     </data>
   <data name="Close" xml:space="preserve">
-        <value>Close</value>
+        <value>إغلاق</value>
     </data>
   <data name="Open" xml:space="preserve">
-        <value>Open</value>
+        <value>افتح</value>
     </data>
   <data name="Save" xml:space="preserve">
-        <value>Save</value>
+        <value>حفظ</value>
     </data>
   <data name="Export" xml:space="preserve">
-        <value>Export</value>
+        <value>يصدّر</value>
     </data>
   <data name="Import" xml:space="preserve">
-        <value>Import</value>
+        <value>يستورد</value>
     </data>
   <data name="Imported" xml:space="preserve">
-        <value>Imported</value>
+        <value>مستورد</value>
     </data>
   <data name="Importing" xml:space="preserve">
-        <value>Importing...</value>
+        <value>استيراد...</value>
     </data>
   <data name="Create" xml:space="preserve">
-        <value>Create</value>
+        <value>صنع</value>
     </data>
   <data name="Download" xml:space="preserve">
-        <value>Download</value>
+        <value>تحميل</value>
     </data>
   <data name="Downloading" xml:space="preserve">
-        <value>Downloading...</value>
+        <value>يجري التحميل...</value>
     </data>
   <data name="NotAvailable" xml:space="preserve">
-        <value>Not available</value>
+        <value>ليس موجود</value>
     </data>
   <data name="Unknown" xml:space="preserve">
-        <value>Unknown</value>
+        <value>غير معروف</value>
     </data>
   <data name="Warning" xml:space="preserve">
-        <value>Warning</value>
+        <value>تحذير</value>
     </data>
   <data name="Error" xml:space="preserve">
-        <value>Error</value>
+        <value>خطأ</value>
     </data>
   <data name="Launch" xml:space="preserve">
-        <value>Launch</value>
+        <value>إطلاق </value>
     </data>
   <data name="Extracting" xml:space="preserve">
-        <value>Extracting...</value>
+        <value>استخراج...</value>
     </data>
   <data name="CompletionPercent" xml:space="preserve">
-        <value>{0}% complete</value>
+        <value>{0}% مكتمل</value>
     </data>
   <data name="Remove" xml:space="preserve">
-        <value>Remove</value>
+        <value>مسح</value>
     </data>
   <data name="Removing" xml:space="preserve">
-        <value>Removing...</value>
+        <value>يجري المسح...</value>
     </data>
   <data name="Switch" xml:space="preserve">
-        <value>Switch</value>
+        <value>تبديل</value>
     </data>
   <data name="Switching" xml:space="preserve">
-        <value>Switching...</value>
+        <value>يتم التبديل...</value>
     </data>
   <data name="Apply" xml:space="preserve">
         <value>Apply</value>

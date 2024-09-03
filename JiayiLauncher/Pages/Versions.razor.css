@@ -44,6 +44,17 @@
     border: var(--border-thickness) solid var(--border-primary);
 }
 
+.info-card .install-location {
+    display: flex;
+    margin-top: 0.7rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-card .install-location span {
+    cursor: pointer;
+}
+
 .shader-card {
     display: flex;
     flex-direction: column;
@@ -70,7 +81,6 @@
 
 .info-card i {
     color: var(--text-grayed);
-    margin-top: 0.7rem;
     display: block;
     font-size: 14px;
     max-width: 25vw;
@@ -107,7 +117,12 @@
     padding-top: 0.3rem;
 }
 
+.resize-tip {
+    margin-top: 0.7rem;
+}
+
 .manage-tip {
+    margin-top: 0.7rem;
     display: none !important;
 }
 

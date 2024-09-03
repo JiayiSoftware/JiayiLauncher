@@ -1,0 +1,22 @@
+﻿.page-title {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.page-title span {
+    color: var(--text-grayed);
+}
+
+.page-title h4 {
+    color: var(--text-grayed);
+    cursor: pointer;
+}
+
+.page-title h4:hover {
+    text-decoration: underline;
+}
+
+.page-title h3 {
+    color: var(--text-primary);
+}

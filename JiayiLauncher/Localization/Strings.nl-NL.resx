@@ -225,142 +225,142 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Lanceer waardes</value>
     </data>
   <data name="EditModLaunchArgsNotice" xml:space="preserve">
-        <value>This does not apply to internal mods</value>
+        <value>Dit geld niet voor interne modificaties</value>
     </data>
   <data name="EditModDataFolder" xml:space="preserve">
         <value>Modificatie data map naam</value>
     </data>
   <data name="EditModDataFolderNotice" xml:space="preserve">
-        <value>Usually in RoamingState</value>
+        <value>Meestal in RoamingStatus</value>
     </data>
   <data name="EditModDefaultLocationNotice" xml:space="preserve">
-        <value>Mods will be saved to their default location, which you can change in settings</value>
+        <value>Modificaties worden opgeslagen in hun standaardlocatie, die veranderd kan worden in instellingen</value>
     </data>
   <data name="EditModExternalSourceNotice" xml:space="preserve">
-        <value>This mod came from an external app or website. Don't add mods from untrusted sources.</value>
+        <value>Deze modificatie kwam van een externe applicatie of website. Voeg geen modificaties toe van onvertrouwde bronnen.</value>
     </data>
   <!-- edit profile strings -->
   <data name="EditProfileName" xml:space="preserve">
-        <value>Edit profile</value>
+        <value>Bewerk profiel</value>
     </data>
   <data name="EditProfileCreateName" xml:space="preserve">
-        <value>Create profile</value>
+        <value>Maak profiel</value>
     </data>
   <data name="EditProfileNameProfile" xml:space="preserve">
-        <value>Give your profile a name!</value>
+        <value>Geef je profiel een naam!</value>
     </data>
   <data name="EditProfileDefaultLocationNotice" xml:space="preserve">
-        <value>Profiles will be saved to their default location, which you can change in settings</value>
+        <value>Profielen worden opgeslagen in hun standaardlocatie, die veranderd kan worden in instellingen</value>
     </data>
   <!-- privilege escalation strings -->
   <data name="PrivEscTitle" xml:space="preserve">
-        <value>Additional permissions required</value>
+        <value>Aanvullende bemachtigingen vereist</value>
     </data>
   <data name="PrivEscText" xml:space="preserve">
-        <value>You'll need to run Jiayi as admin to do this</value>
+        <value>Je zult Jiayi moeten lanceren als beheerder om dit te kunnen uitvoeren</value>
     </data>
   <data name="PrivEscRestartNotice" xml:space="preserve">
-        <value>The launcher will restart after you escalate</value>
+        <value>De launcher start opnieuw op nadat je geëscaleerd hebt</value>
     </data>
   <data name="PrivEscButton" xml:space="preserve">
-        <value>Escalate</value>
+        <value>Escaleren</value>
     </data>
   <data name="PrivEscNotice" xml:space="preserve">
-        <value>Jiayi was started with admin privileges.</value>
+        <value>Jiayi was opgestart met beheerders bemachtigingen</value>
     </data>
   <!-- import mod collection strings -->
   <data name="ImportModTitle" xml:space="preserve">
-        <value>Import mod collection</value>
+        <value>Modificatie verzameling importeren</value>
     </data>
   <data name="ImportModQuestion" xml:space="preserve">
-        <value>Would you like to import this collection?</value>
+        <value>Wil je deze verzameling importeren?</value>
     </data>
   <data name="ImportModModCount" xml:space="preserve">
-        <value>{0} mods</value>
+        <value>modificaties</value>
     </data>
   <data name="ImportModLocalModCount" xml:space="preserve">
-        <value>{0} locally stored</value>
+        <value>{0} lokaal opgeslagen</value>
     </data>
   <data name="ImportModInternetModCount" xml:space="preserve">
-        <value>{0} from the web</value>
+        <value>{0} van het internet</value>
     </data>
   <data name="ImportModDefaultLocationNotice" xml:space="preserve">
-        <value>The mods in this collection will be saved to their default location, which you can change in settings</value>
+        <value>De modificaties in deze verzameling worden opgeslagen in hun standaardlocatie, die veranderd kan worden in instellingen</value>
     </data>
   <data name="ImportModMergeNotice" xml:space="preserve">
-        <value>The mods in this collection will be merged with your collection</value>
+        <value>De modificaties in deze verzameling worden samengevoegd met je verzameling</value>
     </data>
   <!-- new mod strings -->
   <data name="NewModName" xml:space="preserve">
-        <value>New mod</value>
+        <value>Nieuwe modificatie</value>
     </data>
   <data name="NewModSelectFile" xml:space="preserve">
-        <value>Select a mod</value>
+        <value>Selecteer een modificatie</value>
     </data>
   <data name="NewModFileFilter" xml:space="preserve">
-        <value>.dll and .exe files only</value>
+        <value>Alleen .dll en .exe bestanden</value>
     </data>
   <data name="NewModOr" xml:space="preserve">
-        <value>or</value>
+        <value>of</value>
     </data>
   <data name="NewModEnterLink" xml:space="preserve">
-        <value>Enter the link to your mod</value>
+        <value>Voer de link in van je modificatie</value>
     </data>
   <data name="NewModOfflineNotice" xml:space="preserve">
-        <value>Not available while offline</value>
+        <value>Niet beschikbaar als je offline bent</value>
     </data>
   <data name="NewModLinkPlaceholder" xml:space="preserve">
-        <value>cool-website.com/path/to/mod.dll</value>
+        <value>coole-website.com/pad/naar/modificatie.dll</value>
     </data>
   <data name="NewModDllDisplayName" xml:space="preserve">
-        <value>Injectable libraries</value>
+        <value>Injecteerbare bibliotheken</value>
     </data>
   <data name="NewModExeDisplayName" xml:space="preserve">
         <value>Externe cliënten en injectoren</value>
     </data>
   <data name="NewModCreateCollectionQuestion" xml:space="preserve">
-        <value>You don't have a mod collection set up. Would you like to create one to add these mods?</value>
+        <value>Je hebt nog geen modificatie verzameling gemaakt. Wil je een maken om deze modificaties aan toe te voegen?</value>
     </data>
   <data name="NewModNoCollectionTitle" xml:space="preserve">
-        <value>No mod collection</value>
+        <value>Geen modificatie verzameling</value>
     </data>
   <data name="NewModAlreadyInCollection" xml:space="preserve">
-        <value>This mod is already in your collection!</value>
+        <value>Deze modificatie zit al in je verzameling!</value>
     </data>
   <data name="NewModInvalidLink" xml:space="preserve">
-        <value>Invalid link</value>
+        <value>Ongeldige koppeling</value>
     </data>
   <data name="NewModLinkNotFound" xml:space="preserve">
-        <value>There's nothing at this address!</value>
+        <value>Dit adres is leeg!</value>
     </data>
   <data name="NewModCheckingLink" xml:space="preserve">
-        <value>Checking link...</value>
+        <value>Koppeling controleren...</value>
     </data>
   <data name="NewModAlreadyExists" xml:space="preserve">
-        <value>This mod already exists in your collection. Do you want to replace it?</value>
+        <value>Deze modificatie bestaat al in je verzameling. Wil je het vervangen?</value>
     </data>
   <!-- new theme strings -->
   <data name="NewThemeName" xml:space="preserve">
-        <value>New theme</value>
+        <value>Nieuw thema</value>
     </data>
   <data name="NewThemeNameTheme" xml:space="preserve">
-        <value>Give your theme a name!</value>
+        <value>Geeft je thema een naam!</value>
     </data>
   <!-- theme publishing strings -->
   <data name="ThemePublishTitle" xml:space="preserve">
-        <value>Prepare theme publish</value>
+        <value>Thema publicatie voorbereiden</value>
     </data>
   <data name="ThemePublishName" xml:space="preserve">
-        <value>Theme name</value>
+        <value>Thema naam</value>
     </data>
   <data name="ThemePublishAuthor" xml:space="preserve">
-        <value>Author</value>
+        <value>Auteur</value>
     </data>
   <data name="ThemePublishAuthorPlaceholder" xml:space="preserve">
-        <value>Your name here</value>
+        <value>Jouw naam hier</value>
     </data>
   <data name="ThemePublishTags" xml:space="preserve">
-        <value>Tags</value>
+        <value>Etiketten</value>
     </data>
   <data name="ThemePublishTagsPlaceholder" xml:space="preserve">
         <value>Comma-separated list</value>
@@ -372,21 +372,21 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Select raw tags</value>
     </data>
   <data name="ThemePublishNoName" xml:space="preserve">
-        <value>Failed to create theme (no name)</value>
+        <value>Thema maken mislukt (geen naam)</value>
     </data>
   <data name="ThemePublishNoRawTags" xml:space="preserve">
-        <value>Failed to create theme (minimum 1 raw tag)</value>
+        <value>Thema maken mislukt (minimaal 1 rauw etiket)</value>
     </data>
   <data name="ThemePublishAlreadyExists" xml:space="preserve">
-        <value>Failed to create theme (already exists): {0}</value>
+        <value>Thema maken mislukt (bestaat al): {0}</value>
     </data>
   <data name="ThemePublishOpenRepo" xml:space="preserve">
         <value>Open repository</value>
     </data>
   <data name="ThemePublishFinalize" xml:space="preserve">
         <value>
-            Your theme is in the folder we just opened.
-            To see it here, open a pull request on our GitHub repository for themes. Check the README for instructions.
+            Jouw thema is in de map die reeds is gopend.
+            Om het hier te bekijken moet je een pull request openen in onze GitHub opslagplaats voor thema's. Bekijk de README voor instructies.
         </value>
     </data>
   <!-- about strings -->
@@ -541,22 +541,22 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         </value>
     </data>
   <data name="ShaderManMaterialCount" xml:space="preserve">
-        <value>{0} material files</value>
+        <value>{0} materiaal bestanden</value>
     </data>
   <data name="ShaderManRename" xml:space="preserve">
-        <value>Rename shader pack</value>
+        <value>Geef een andere naam aan de shader pack</value>
     </data>
   <data name="ShaderManDelete" xml:space="preserve">
-        <value>Delete shader pack</value>
+        <value>Verwijder shader pack</value>
     </data>
   <data name="ShaderManDeleteConfirm" xml:space="preserve">
-        <value>Are you sure you want to delete this shader pack? This action is irreversible.</value>
+        <value>Weet je zeker dat je deze shader pack wilt verwijderen? Deze actie is onomkeerbaar.</value>
     </data>
   <data name="ShaderManNoShaders" xml:space="preserve">
-        <value>No shaders found</value>
+        <value>Geen shaders gevonden</value>
     </data>
   <data name="ShaderManDragDrop" xml:space="preserve">
-        <value>Click here or drag and drop a shader pack to add it</value>
+        <value>Click hier of sleep een bestand om het toe te voegen</value>
     </data>
   <data name="ShaderManDragDropInfo" xml:space="preserve">
         <value>

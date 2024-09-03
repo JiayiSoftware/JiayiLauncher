@@ -363,13 +363,13 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Etiketten</value>
     </data>
   <data name="ThemePublishTagsPlaceholder" xml:space="preserve">
-        <value>Comma-separated list</value>
+        <value>Met komma's gescheiden lijst</value>
     </data>
   <data name="ThemePublishRawTags" xml:space="preserve">
-        <value>Raw tags</value>
+        <value>Rauwe etiketten</value>
     </data>
   <data name="ThemePublishRawTagsSelect" xml:space="preserve">
-        <value>Select raw tags</value>
+        <value>Selecteer rauwe etiketten</value>
     </data>
   <data name="ThemePublishNoName" xml:space="preserve">
         <value>Thema maken mislukt (geen naam)</value>
@@ -381,7 +381,7 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Thema maken mislukt (bestaat al): {0}</value>
     </data>
   <data name="ThemePublishOpenRepo" xml:space="preserve">
-        <value>Open repository</value>
+        <value>Open opslaglocatie</value>
     </data>
   <data name="ThemePublishFinalize" xml:space="preserve">
         <value>
@@ -391,38 +391,38 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
     </data>
   <!-- about strings -->
   <data name="AboutTitle" xml:space="preserve">
-        <value>About</value>
+        <value>Over</value>
     </data>
   <data name="AboutPresenting" xml:space="preserve">
         <value>After 2 years of development hell, we proudly present:</value>
     </data>
   <data name="AboutSourceAvailable" xml:space="preserve">
-        <value>Source available on GitHub</value>
+        <value>Bron beschikbaar op GitHub</value>
     </data>
   <data name="AboutDiscord" xml:space="preserve">
-        <value>Talk to us on Discord</value>
+        <value>Praat met ons op Discord</value>
     </data>
   <data name="AboutCredits" xml:space="preserve">
         <value>Credits</value>
     </data>
   <!-- version manager strings -->
   <data name="VerManName" xml:space="preserve">
-        <value>Manage your game</value>
+        <value>Beheer je spel</value>
     </data>
   <data name="VerManCurrentVersion" xml:space="preserve">
-        <value>Your current version</value>
+        <value>Jouw huidige versie</value>
     </data>
   <data name="VerManResizeTip" xml:space="preserve">
         <value>You can resize Jiayi to see the full list on the right</value>
     </data>
   <data name="VerManManageTip" xml:space="preserve">
-        <value>Manage more versions</value>
+        <value>Beheer meer versies</value>
     </data>
   <data name="VerManPopularVersions" xml:space="preserve">
-        <value>Popular versions</value>
+        <value>Populaire versies</value>
     </data>
   <data name="VerManLatestVersion" xml:space="preserve">
-        <value>Latest version</value>
+        <value>Nieuwste versie</value>
     </data>
   <data name="VerManPopularAmongCommunity" xml:space="preserve">
         <value>Popular among the community</value>
@@ -560,27 +560,27 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
     </data>
   <data name="ShaderManDragDropInfo" xml:space="preserve">
         <value>
-            Any file compressed with the zip format can be used as a shader pack, as long as it contains material files.
+            Een bestand dat in gepakt is met het zip formaat kan gebruikt worden als shader pack, zolang er materiaal bestanden in zitten.
         
-            The launcher can find shaders anywhere in the pack.
+            De launcher kan shaders overal in de pack vinden.
         </value>
     </data>
   <!-- edit shader strings (only renaming atm) (Not like any more functionality is planned) -->
   <data name="EditShaderName" xml:space="preserve">
-        <value>Rename shader</value>
+        <value>Geef een andere naam aan je shader</value>
     </data>
   <data name="EditShaderRenameShader" xml:space="preserve">
-        <value>Give your shader pack a name!</value>
+        <value>Geef je shader pack een naam!</value>
     </data>
   <!-- themes menu strings -->
   <data name="ThemesMenuName" xml:space="preserve">
-        <value>Themes</value>
+        <value>Thema's</value>
     </data>
   <data name="ThemesMenuSearch" xml:space="preserve">
-        <value>Search themes</value>
+        <value>Zoek thema's</value>
     </data>
   <data name="ThemesMenuNoThemes" xml:space="preserve">
-        <value>No themes found</value>
+        <value>Geen thema's gevonden</value>
     </data>
   <data name="ThemesMenuRefresh" xml:space="preserve">
         <value>Refresh themes</value>

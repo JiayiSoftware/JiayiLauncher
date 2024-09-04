@@ -394,7 +394,7 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Over</value>
     </data>
   <data name="AboutPresenting" xml:space="preserve">
-        <value>After 2 years of development hell, we proudly present:</value>
+        <value>Na 2 jaar aan ontwikkeling presenteren wij trots:</value>
     </data>
   <data name="AboutSourceAvailable" xml:space="preserve">
         <value>Bron beschikbaar op GitHub</value>
@@ -413,7 +413,7 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Jouw huidige versie</value>
     </data>
   <data name="VerManResizeTip" xml:space="preserve">
-        <value>You can resize Jiayi to see the full list on the right</value>
+        <value>Je kan de grootte van Jiayi wijzigen om de volledige lijst aan de rechterzijde te kunnen bekijken</value>
     </data>
   <data name="VerManManageTip" xml:space="preserve">
         <value>Beheer meer versies</value>
@@ -425,95 +425,95 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Nieuwste versie</value>
     </data>
   <data name="VerManPopularAmongCommunity" xml:space="preserve">
-        <value>Popular among the community</value>
+        <value>Populair in de gemeenschap</value>
     </data>
   <data name="VerManBestStableRelease" xml:space="preserve">
-        <value>Best stable release without RenderDragon</value>
+        <value>Beste stabiele uitgave zonder RenderDragon</value>
     </data>
   <data name="VerManShaderManagerText" xml:space="preserve">
-        <value>Easily apply RenderDragon shaders to your game. Works best if you have the game installed through Jiayi.</value>
+        <value>Gemakkelijk RenderDragon shaders toe voegen aan je spel. Werkt het beste als je het spel hebt geïnstalleerde via Jiayi.</value>
     </data>
   <data name="VerManShaderManagerVerTooLow" xml:space="preserve">
-        <value>Your game version does not have RenderDragon. Use a resource pack for shaders instead.</value>
+        <value>Jouw huidige versie heeft geen RenderDragon. Gebruik een resource pack om shaders toe te voegen.</value>
     </data>
   <data name="VerManShaderManagerMSStore" xml:space="preserve">
-        <value>Your game is installed through the Microsoft Store. Jiayi cannot apply shaders to it.</value>
+        <value>Jouw spel is geïnstalleerd via de Microsoft webwinkel. Jiayi kan daar geen shaders aan toevoegen.</value>
     </data>
   <!-- install location strings -->
   <data name="InstallLocByJiayi" xml:space="preserve">
-        <value>Installed by Jiayi</value>
+        <value>Geïnstalleerd door Jiayi</value>
     </data>
   <data name="InstallLocFromStore" xml:space="preserve">
-        <value>From Microsoft Store</value>
+        <value>Van de Microsoft webwinkel</value>
     </data>
   <data name="InstallLocExternalManager" xml:space="preserve">
-        <value>Installed by another version manager</value>
+        <value>Geïnstalleerd door een andere versie-beheerder</value>
     </data>
   <data name="InstallLocUnknown" xml:space="preserve">
-        <value>Unknown install location</value>
+        <value>Onbekende installatie locatie</value>
     </data>
   <data name="InstallLocNotInstalled" xml:space="preserve">
-        <value>You don't have the game installed</value>
+        <value>Je hebt geen spel geïnstalleerd</value>
     </data>
   <!-- version list strings -->
   <data name="VerListName" xml:space="preserve">
-        <value>Full version list</value>
+        <value>Volledige versie lijst</value>
     </data>
   <data name="VerListSearch" xml:space="preserve">
-        <value>Search versions</value>
+        <value>Zoek versies</value>
     </data>
   <data name="VerListShowDownloaded" xml:space="preserve">
-        <value>Show downloaded</value>
+        <value>Geef gedownloade weer</value>
     </data>
   <data name="VerListNoVersions" xml:space="preserve">
-        <value>No versions found</value>
+        <value>Geen versies gevonden</value>
     </data>
   <data name="VerListLoadMore" xml:space="preserve">
-        <value>Load more</value>
+        <value>Laad meer</value>
     </data>
   <data name="VerListRemove" xml:space="preserve">
-        <value>Remove version</value>
+        <value>Verwijder versie</value>
     </data>
   <data name="VerListRemoveConfirm" xml:space="preserve">
-        <value>Are you sure you want to remove this version?</value>
+        <value>Weet je zeker dat je deze versie wilt verwijderen?</value>
     </data>
   <data name="VerListDevModeQuestion" xml:space="preserve">
-        <value>You need to enable developer mode to switch versions. Do you want to enable it now?</value>
+        <value>Je moet ontwikkelaar modes aanzetten om van versie te veranderen. Wil je het nu inschakelen?</value>
     </data>
   <data name="VerListNotFound" xml:space="preserve">
-        <value>This version has not been downloaded yet.</value>
+        <value>Deze versie is nog niet gedownload.</value>
     </data>
   <data name="VerListBackupFailed" xml:space="preserve">
         <value>
-            Jiayi couldn't back up your game data before switching versions. This could be because access to the game data folder was denied.
+            Jiayi kon niet je spel data back-uppen voordat je van versie veranderde. Dit zou kunnen zijn doordat toegang tot de spel data map niet gegeven was.
             
-            More information can be found in your log file.
+            Meer informatie kan gevonden worden in het log bestand.
         </value>
     </data>
   <data name="VerListUnknownError" xml:space="preserve">
-        <value>An unknown error occurred while switching versions. Check your log file for more information.</value>
+        <value>Een onbekend probleem trad op bij het wisselen van versies. Bekijk het log bestand voor verdere informatie.</value>
     </data>
   <data name="VerListImport" xml:space="preserve">
-        <value>Import version</value>
+        <value>Importeer versie</value>
     </data>
   <data name="VerListFileFilter" xml:space="preserve">
-        <value>APPX files</value>
+        <value>APPX bestanden</value>
     </data>
   <data name="VerListInvalidPackage" xml:space="preserve">
-        <value>That's not a valid package.</value>
+        <value>Dat is geen kloppend pakket.</value>
     </data>
   <data name="VerListUpdatingVersions" xml:space="preserve">
-        <value>Version list cleared. It will be updated shortly.</value>
+        <value>Versie lijst gewist. Deze wordt spoedig bijgewerkt.</value>
     </data>
   <!-- shader manager strings -->
   <data name="ShaderManName" xml:space="preserve">
-        <value>Shader manager</value>
+        <value>Shader beheerder</value>
     </data>
   <data name="ShaderManCurrentShader" xml:space="preserve">
-        <value>Your current shader pack</value>
+        <value>Jouw huidige shader pack</value>
     </data>
   <data name="ShaderManNoShader" xml:space="preserve">
-        <value>No shaders applied</value>
+        <value>Geen shaders toegepast</value>
     </data>
   <data name="ShaderManUsingVanilla" xml:space="preserve">
         <value>Minecraft's vanilla shaders will be used</value>

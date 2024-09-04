@@ -11,12 +11,15 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Blazored.Modal.Services;
 using Blazored.Toast;
 using Blazored.Toast.Services;
 using JiayiLauncher.Appearance;
+using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Mods;
 using JiayiLauncher.Features.Versions;
 using JiayiLauncher.Localization;
+using JiayiLauncher.Modals;
 using JiayiLauncher.Settings.SpecialTypes;
 using JiayiLauncher.Shared;
 using JiayiLauncher.Shared.Components.Toasts;
@@ -426,6 +429,23 @@ public class JiayiSettings
     
     [Setting("Minimize fix", "Launch", "Prevents the game from suspending itself when minimized. Changes are applied upon launch.")]
     public bool MinimizeFix { get; set; } = true;
+    
+    [Setting("Multi instance", "Launch", "Allow multiple instances of the game to run at the same time. Changes are applied upon reregistering the game.")]
+    public bool MultiInstance { get; set; } = false;
+    
+    [Setting("Reregister game", "Launch", "Reregister the game's package. This is required for some settings to take effect.")]
+    public (string, Action) ReregisterGame { get; set; } = ("Reregister", async () =>
+    {
+        var privileges = Singletons.Get<Privileges>();
+        var blazor = Singletons.Get<BlazorBridge>();
+        if (!privileges.IsAdmin())
+        {
+            var result = await blazor.ShowModal<Escalate>(Strings.PrivEscTitle);
+            if (result.Cancelled) return;
+        }
+        
+        Task.Run(() => Singletons.Get<VersionManager>().Reregister());
+    });
 
     // log settings
     [Setting("Anonymize logs", "Logs",

@@ -6,10 +6,15 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.Management.Deployment;
+using Blazored.Toast;
+using Blazored.Toast.Services;
 using JiayiLauncher.Features.Game;
 using JiayiLauncher.Features.Shaders;
+using JiayiLauncher.Localization;
 using JiayiLauncher.Settings;
+using JiayiLauncher.Shared.Components.Toasts;
 using JiayiLauncher.Utils;
+using Microsoft.AspNetCore.Components;
 
 namespace JiayiLauncher.Features.Versions;
 
@@ -204,7 +209,7 @@ public class VersionManager
 	}
 
 	// my favorite part of this class
-	public async Task<SwitchResult> Switch(string version)
+	public async Task<SwitchResult> Switch(string version, bool force = false)
 	{
 		_log.Write(nameof(VersionManager), $"Switching to version {version}");
 
@@ -229,8 +234,15 @@ public class VersionManager
 		{
 			if (package.InstalledPath.Contains(version))
 			{
-				_log.Write(nameof(VersionManager), "Version already installed");
-				return SwitchResult.Succeeded;
+				if (force)
+				{
+					_log.Write(nameof(VersionManager), "Version already installed, but force is enabled; switching anyway");
+				}
+				else
+				{
+					_log.Write(nameof(VersionManager), "Version already installed");
+					return SwitchResult.Succeeded;
+				}
 			}
 
 			if (package.IsDevelopmentMode)
@@ -261,6 +273,9 @@ public class VersionManager
 		_log.Write(nameof(VersionManager), "Registering package");
 
 		var manifest = Path.Combine(folder, "AppxManifest.xml");
+		
+		// probably safe to apply multi instance setting now
+		await _packageData.MultiInstance(JiayiSettings.Instance.MultiInstance, manifest);
 
 		try
 		{
@@ -294,6 +309,36 @@ public class VersionManager
 		}
 
 		return SwitchResult.UnknownError;
+	}
+	
+	public async Task<SwitchResult> Reregister()
+	{
+		_log.Write(nameof(VersionManager), "Reregistering package");
+		
+		var blazor = Singletons.Get<BlazorBridge>();
+        
+		var toastParams = new ToastParameters()
+			.Add(nameof(JiayiToast.Level), ToastLevel.Info)
+			.Add(nameof(JiayiToast.Title), "Reregister in progress...");
+        
+		blazor.ShowToast(toastParams, toastSettings => toastSettings.DisableTimeout = true);
+
+		var version = await _packageData.GetVersion();
+		var result = await Switch(version, true);
+		
+		toastParams = new ToastParameters()
+			.Add(nameof(JiayiToast.Level), result == SwitchResult.Succeeded 
+				? ToastLevel.Success : ToastLevel.Error)
+			.Add(nameof(JiayiToast.Title), result == SwitchResult.Succeeded 
+				? "Reregistered successfully." : "Failed to reregister. Check the logs for more information.")
+			.Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
+			{
+				(Strings.Okay, EventCallback.Empty)
+			});
+            
+		blazor.ShowToast(toastParams, toastSettings => toastSettings.DisableTimeout = true);
+		
+		return result;
 	}
 
 	public string? GetVersionPath(string ver)

@@ -114,6 +114,35 @@ public class PackageData
 			debugSettings.DisableDebugging(package.AppInfo.Package.Id.FullName);
 	}
 
+	public async Task MultiInstance(bool enable, string manifestPath)
+	{
+		const string f1 = "xmlns:build=\"http://schemas.microsoft.com/developer/appx/2015/build\""; // in AppxManifest.xml - Package
+		const string r1 = "xmlns:build=\"http://schemas.microsoft.com/developer/appx/2015/build\" xmlns:desktop4=\"http://schemas.microsoft.com/appx/manifest/desktop/windows10/4\"";
+		const string f2 = "EntryPoint=\"Minecraft_Win10.App\""; // in AppxManifest.xml - Application
+		const string r2 = "EntryPoint=\"Minecraft_Win10.App\" desktop4:SupportsMultipleInstances=\"true\"";
+		
+		var manifest = await File.ReadAllTextAsync(manifestPath);
+		
+		if (enable)
+		{
+			if (manifest.Contains(r1) && manifest.Contains(r2)) return;
+			
+			manifest = manifest.Replace(f1, r1);
+			manifest = manifest.Replace(f2, r2);
+		}
+		else
+		{
+			if (!manifest.Contains(r1) && !manifest.Contains(r2)) return;
+			
+			manifest = manifest.Replace(r1, f1);
+			manifest = manifest.Replace(r2, f2);
+		}
+		
+		await File.WriteAllTextAsync(manifestPath, manifest);
+		
+		// package should be re-registered at this point
+	}
+
 	public async Task BackupGameData(string to)
 	{
         Directory.CreateDirectory(to);

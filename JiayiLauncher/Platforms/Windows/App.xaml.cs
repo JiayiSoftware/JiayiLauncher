@@ -37,6 +37,7 @@ public partial class App : MauiWinUIApplication
                 "TimeoutException",
                 "Object name: 'System.Net.Sockets.NetworkStream'.",
                 "at WinRT.ExceptionHelpers.<ThrowExceptionForHR>g__Throw|39_0(Int32 hr)",
+                "at Microsoft.AspNetCore.Components.WebView.WebView2.WebView2WebViewManager.SendMessage(String message)",
                 "System.Net.Sockets.SocketException (995): The I/O operation has been aborted because of either a thread exit or an application request."
             };
 			

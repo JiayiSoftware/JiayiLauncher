@@ -175,12 +175,12 @@
         NavigationManager.NavigateTo("/Versions");
     }
     
-    private int _switching = -1;
+    private List<int> _switching = new();
 
     private async Task DownloadClicked(MinecraftVersion ver)
     {
         var i = _versionNames.IndexOf(ver.Version);
-        _switching = i;
+        _switching.Add(i);
 
         _statuses[i] = Strings.Downloading;
         _buttonStates[i] = true;
@@ -189,7 +189,7 @@
         
         _statuses[i] = string.Empty;
         _buttonStates[i] = false;
-        _switching = -1;
+        _switching.Remove(i);
         StateHasChanged();
     }
 

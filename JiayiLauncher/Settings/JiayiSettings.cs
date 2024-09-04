@@ -433,6 +433,7 @@ public class JiayiSettings
     [Setting("Multi instance", "Launch", "Allow multiple instances of the game to run at the same time. Changes are applied upon reregistering the game.")]
     public bool MultiInstance { get; set; } = false;
     
+    [JsonIgnore]
     [Setting("Reregister game", "Launch", "Reregister the game's package. This is required for some settings to take effect.")]
     public (string, Action) ReregisterGame { get; set; } = ("Reregister", async () =>
     {

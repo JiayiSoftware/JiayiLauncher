@@ -266,7 +266,7 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Escaleren</value>
     </data>
   <data name="PrivEscNotice" xml:space="preserve">
-        <value>Jiayi was opgestart met beheerders bemachtigingen</value>
+        <value>Jiayi was opgestart met beheerders bemachtigingen.</value>
     </data>
   <!-- import mod collection strings -->
   <data name="ImportModTitle" xml:space="preserve">
@@ -276,7 +276,7 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Wil je deze verzameling importeren?</value>
     </data>
   <data name="ImportModModCount" xml:space="preserve">
-        <value>modificaties</value>
+        <value>{0} modificaties</value>
     </data>
   <data name="ImportModLocalModCount" xml:space="preserve">
         <value>{0} lokaal opgeslagen</value>
@@ -385,7 +385,7 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
     </data>
   <data name="ThemePublishFinalize" xml:space="preserve">
         <value>
-            Jouw thema is in de map die reeds is gopend.
+            Jouw thema is in de map die reeds is geopend.
             Om het hier te bekijken moet je een pull request openen in onze GitHub opslagplaats voor thema's. Bekijk de README voor instructies.
         </value>
     </data>
@@ -516,26 +516,26 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Geen shaders toegepast</value>
     </data>
   <data name="ShaderManUsingVanilla" xml:space="preserve">
-        <value>Minecraft's vanilla shaders will be used</value>
+        <value>De standaard Minecraft shaders zullen toegepast worden</value>
     </data>
   <data name="ShaderManReplacingCount" xml:space="preserve">
-        <value>Replacing {0} material files</value>
+        <value>{0} materiaal bestanden vervangen</value>
     </data>
   <data name="ShaderManAvailableShaders" xml:space="preserve">
-        <value>Available shaders</value>
+        <value>Beschikbare shaders</value>
     </data>
   <data name="ShaderManSearch" xml:space="preserve">
-        <value>Search shaders</value>
+        <value>Zoek shaders</value>
     </data>
   <data name="ShaderManViewMaterials" xml:space="preserve">
-        <value>View shader materials</value>
+        <value>Bekijk shader materialen</value>
     </data>
   <data name="ShaderManMaterials" xml:space="preserve">
-        <value>Shader materials</value>
+        <value>Shader materialen</value>
     </data>
   <data name="ShaderManViewMaterialsText" xml:space="preserve">
         <value>
-            This shader pack modifies the following materials:
+            Deze shader pack heeft de volgende materialen:
             
             {0}
         </value>
@@ -583,65 +583,65 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Geen thema's gevonden</value>
     </data>
   <data name="ThemesMenuRefresh" xml:space="preserve">
-        <value>Refresh themes</value>
+        <value>Ververs thema's</value>
     </data>
   <!-- dashboard strings -->
   <data name="DashboardMorning" xml:space="preserve">
-        <value>Good morning</value>
+        <value>Goeie morgen</value>
     </data>
   <data name="DashboardAfternoon" xml:space="preserve">
-        <value>Good afternoon</value>
+        <value>Goeie middag</value>
     </data>
   <data name="DashboardEvening" xml:space="preserve">
-        <value>Good evening</value>
+        <value>Goeie avond</value>
     </data>
   <data name="DashboardTotalPlaytime" xml:space="preserve">
-        <value>Total play time</value>
+        <value>Totale speeltijd</value>
     </data>
   <data name="DashboardHours" xml:space="preserve">
-        <value>{0} hours</value>
+        <value>{0} uur</value>
     </data>
   <data name="DashboardWithJiayi" xml:space="preserve">
-        <value>with Jiayi</value>
+        <value>met Jiayi</value>
     </data>
   <data name="DashboardCurrentVersion" xml:space="preserve">
-        <value>Your current version</value>
+        <value>Jouw huidige versie</value>
     </data>
   <data name="DashboardSwitchVersions" xml:space="preserve">
-        <value>Switch versions</value>
+        <value>Wissel van versie</value>
     </data>
   <data name="DashboardProfiles" xml:space="preserve">
-        <value>Your profiles</value>
+        <value>Jouw profielen</value>
     </data>
   <data name="DashboardNoProfiles" xml:space="preserve">
-        <value>No profiles</value>
+        <value>Geen profielen</value>
     </data>
   <data name="DashboardProfilesSaved" xml:space="preserve">
-        <value>{0} saved</value>
+        <value>{0} opgeslagen</value>
     </data>
   <data name="DashboardViewProfiles" xml:space="preserve">
-        <value>View profiles</value>
+        <value>Bekijk profielen</value>
     </data>
   <data name="DashboardRecentMod" xml:space="preserve">
-        <value>Most recent mod</value>
+        <value>Meest recente modificatie</value>
     </data>
   <data name="DashboardNoMod" xml:space="preserve">
-        <value>Launch a mod to see it here</value>
+        <value>Lanceer een modificatie om het hier te bekijken</value>
     </data>
   <data name="DashboardPlayedMod" xml:space="preserve">
-        <value>Most played mod</value>
+        <value>Meest gespeelde modificatie</value>
     </data>
   <data name="DashboardOurCommunity" xml:space="preserve">
-        <value>Our community</value>
+        <value>Onze gemeenschap</value>
     </data>
   <data name="DashboardWebsite" xml:space="preserve">
-        <value>Jiayi Software's website</value>
+        <value>Jiayi Sofware's website</value>
     </data>
   <data name="DashboardDiscord" xml:space="preserve">
-        <value>Talk to us on Discord</value>
+        <value>Praat met ons op Discord</value>
     </data>
   <data name="DashboardGitHub" xml:space="preserve">
-        <value>Jiayi Launcher on GitHub</value>
+        <value>Jiayi Launcher op GitHub</value>
     </data>
   <data name="DashboardJiayiLauncherIs" xml:space="preserve">
         <value>Jiayi Launcher is</value>
@@ -651,52 +651,52 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
     </data>
   <!-- mods strings -->
   <data name="ModsMenuName" xml:space="preserve">
-        <value>Mods</value>
+        <value>Modificaties</value>
     </data>
   <data name="ModsMenuSearch" xml:space="preserve">
-        <value>Search mods</value>
+        <value>Zoek modificaties</value>
     </data>
   <data name="ModsMenuLocallyStored" xml:space="preserve">
-        <value>Locally stored</value>
+        <value>Lokaal opgeslagen</value>
     </data>
   <data name="ModsMenuFromWeb" xml:space="preserve">
-        <value>From the web</value>
+        <value>Van het internet</value>
     </data>
   <data name="ModsMenuNoMods" xml:space="preserve">
-        <value>No mods found</value>
+        <value>Geen modificaties gevonden</value>
     </data>
   <data name="ModsMenuDragDrop" xml:space="preserve">
         <value>
-            Drag mods, folders, or links here
-            or click the plus button to add mods
+            Sleep modificaties, mappen, of links hier
+            of click op de plus om modificaties toe te voegen
         </value>
     </data>
   <data name="ModsMenuNoModsFolder" xml:space="preserve">
         <value>
-            You don't have a mods folder set up.
+            Je hebt nog geen modificatie map opgezet.
             
-            Drag a folder here to make it work with Jiayi,
-            or add mods to create a new folder.
+            Sleep een map hier om het te laten werken met Jiayi,
+            of voeg modificaties toe om een nieuwe map aan te maken.
         </value>
     </data>
   <data name="ModsMenuCreateFolderQuestion" xml:space="preserve">
-        <value>Since you don't have a mods folder set up, Jiayi will make one for you to add these mods. Is that okay? It will be in your documents folder.</value>
+        <value>Omdat je nog geen modificatie map hebt opgezet, zal Jiayi er een voor je maken om deze modificaties aan toe te voegen. Is dat oké? Deze zal in je documenten map zitten.</value>
     </data>
   <!-- profiles strings -->
   <data name="ProfilesMenuName" xml:space="preserve">
-        <value>Profiles</value>
+        <value>Profielen</value>
     </data>
   <data name="ProfilesMenuSearch" xml:space="preserve">
-        <value>Search profiles</value>
+        <value>Zoek profielen</value>
     </data>
   <data name="ProfilesMenuNoProfiles" xml:space="preserve">
-        <value>No profiles found</value>
+        <value>Geen profielen gevonden</value>
     </data>
   <data name="ProfilesMenuBrokenProfile" xml:space="preserve">
-        <value>This profile is broken; the folder containing its game data is missing or empty.</value>
+        <value>Dit profiel is gebroken; de map waarin zijn spel data zit is leeg of vermist.</value>
     </data>
   <data name="ProfilesMenuWorlds" xml:space="preserve">
-        <value>{0} worlds</value>
+        <value>{0} werelden</value>
     </data>
   <data name="ProfilesMenuResourcePacks" xml:space="preserve">
         <value>{0} resource packs</value>
@@ -705,22 +705,22 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>{0} behavior packs</value>
     </data>
   <data name="ProfilesMenuMyProfile" xml:space="preserve">
-        <value>My profile</value>
+        <value>Mijn profiel</value>
     </data>
   <data name="ProfilesMenuEditProfile" xml:space="preserve">
-        <value>Edit profile</value>
+        <value>Bewerk profiel</value>
     </data>
   <data name="ProfilesMenuDeleteProfile" xml:space="preserve">
-        <value>Delete profile</value>
+        <value>Verwijder profiel</value>
     </data>
   <data name="ProfilesMenuApplyProfile" xml:space="preserve">
-        <value>Apply profile</value>
+        <value>Pas profiel toe</value>
     </data>
   <data name="ProfilesMenuApplyProfileConfirm" xml:space="preserve">
-        <value>Are you sure you want to apply this profile? This will overwrite your current game data.</value>
+        <value>Weet je zeker dat je dit profiel wilt toepassen? Dit zal je huidige spel data overschrijven.</value>
     </data>
   <data name="ProfilesMenuAboutProfiles" xml:space="preserve">
-        <value>Creating a profile will copy your current game data, like your worlds, resource packs, and settings.</value>
+        <value>Door een profiel te maken wordt je spel data gekopieerd, denk dan aan je werelden, resource packs, en instellingen.</value>
     </data>
   <data name="ProfilesMenuDeleteProfileConfirm" xml:space="preserve">
         <value>Are you sure you want to delete this profile? This cannot be undone.</value>

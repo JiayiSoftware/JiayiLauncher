@@ -15,8 +15,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 2.85em;
     transition: var(--transition-speed);
+    width: 17.5rem;
 }
 
 .mod-header {
@@ -36,14 +36,25 @@
     margin-top: 0.2rem;
 }
 
-.mod-background .mod-controls .right .material-symbols-sharp {
+.mod-background .mod-controls .left {
+    width: 10.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mod-background .mod-controls .left .material-symbols-sharp {
     transition: var(--transition-speed);
     opacity: 0;
     cursor: pointer;
 }
 
-.mod-background:hover .mod-controls .right .material-symbols-sharp {
+.mod-background:hover .mod-controls .left .material-symbols-sharp {
     opacity: 100%;
+}
+
+.mod-background .mod-controls .right .material-symbols-sharp {
+    cursor: pointer;
 }
 
 /* loading */

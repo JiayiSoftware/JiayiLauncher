@@ -59,25 +59,27 @@
     <div class="mod-controls" style="@(_expanded ? "margin-left: -7rem" : "")">
         @if (_isValid)
         {
-            if (Mod.FromInternet && _internet.OfflineMode)
-            {
-                <JiayiButton Size="JiayiButton.ButtonSize.Small" Disabled="true">@Strings.Launch</JiayiButton>
-            }
-            else
-            {
-                <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" Disabled="@_launching"
-                             Size="JiayiButton.ButtonSize.Small">
-                    <div class="loading-bar" style="width: @_launcher.LaunchProgress%; opacity: @_showLoadingBar;"></div>
-                    @Strings.Launch
-                </JiayiButton>
-            }
-
-            <div class="right">
-                <span class="material-symbols-sharp" title="@(_expanded ? Strings.ModCardHideControls : Strings.ModCardShowControls)" 
+            <div class="left">
+                @if (Mod.FromInternet && _internet.OfflineMode)
+                {
+                    <JiayiButton Size="JiayiButton.ButtonSize.Small" Disabled="true">@Strings.Launch</JiayiButton>
+                }
+                else
+                {
+                    <JiayiButton OnClick="LaunchClicked" @ref="_launchButton" Disabled="@_launching"
+                                 Size="JiayiButton.ButtonSize.Small">
+                        <div class="loading-bar" style="width: @_launcher.LaunchProgress%; opacity: @_showLoadingBar;"></div>
+                        @Strings.Launch
+                    </JiayiButton>
+                }
+                
+                <span class="material-symbols-sharp" title="@(_expanded ? Strings.ModCardHideControls : Strings.ModCardShowControls)"
                       @onclick="() => _expanded = !_expanded">
                     @(_expanded ? "remove" : "more_horiz")
                 </span>
-                
+            </div>
+
+            <div class="right">
                 <span class="material-symbols-sharp" title="@Strings.ModCardManageConfigs" @onclick="ConfigManagerClicked">folder_managed</span>
                 <span class="material-symbols-sharp" title="@Strings.ModCardEditMod" @onclick="EditClicked">edit</span>
                 <span class="material-symbols-sharp" style="color: darkred"

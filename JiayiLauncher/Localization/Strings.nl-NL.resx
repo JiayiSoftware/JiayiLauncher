@@ -949,123 +949,123 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Onthul je thema in de bestandsverkenner. Deze kan gedeeld worden met anderen, of jij kan de thema's van andere mensen gebruiken.</value>
     </data>
   <data name="SettingsRestoreDefaultTheme" xml:space="preserve">
-        <value>Restore default theme</value>
+        <value>Standaard thema herstellen</value>
     </data>
   <data name="SettingsRestoreDefaultThemeDesc" xml:space="preserve">
-        <value>Go back to Jiayi's default theme.</value>
+        <value>Ga terug naar Jiayi's standaardthema.</value>
     </data>
   <data name="SettingsThemesMenu" xml:space="preserve">
-        <value>Themes menu</value>
+        <value>Thema menu</value>
     </data>
   <data name="SettingsThemesMenuDesc" xml:space="preserve">
-        <value>Local and downloadable themes created by the community.</value>
+        <value>Lokaal en downloadbare thema's gemaakt door de gemeenschap.</value>
     </data>
   <!-- discord settings strings -->
   <data name="SettingsRichPresence" xml:space="preserve">
-        <value>Enable rich presence</value>
+        <value>Schakel rijke aanwezigheid aan</value>
     </data>
   <data name="SettingsRichPresenceDesc" xml:space="preserve">
-        <value>Show what you're doing in Jiayi on Discord.</value>
+        <value>Laat aan Jiayi zien wat jij op Discord aan het doen bent.</value>
     </data>
   <data name="SettingsRichPresenceTooltip" xml:space="preserve">
         <value>
-            Available formatting strings for rich presence:
+            Beschikbare tekstreeksen voor rijke aanwezigheid:
 
-            %mod_name% - the name of the mod you're playing with
-            %game_version% - your current Minecraft version
-            %mod_count% - how many mods you have in your collection
-            %shader_name% - the name of the shader you're using
-            %profile_count% - how many profiles you have in your collection
-            %launcher_version% - the version of Jiayi you're using
+            %mod_name% - de naam van de modificatie waarmee je speelt
+            %game_version% - jouw huidige Minecraft versie
+            %mod_count% - hoe veel modificaties jij in je verzameling hebt
+            %shader_name% - de naam van de shader die jij aan het gebruiken bent
+            %profile_count% - hoe veel profielen jij in je verzameling hebt
+            %launcher_version% - de versie van Jiayi die jij aan het gebruiken bent
 
-            Only 1 formatting string can be used per field.
+            Slechts 1 opgemaakte tekstreeks kan worden gebruikt per invulveld.
         </value>
     </data>
   <data name="SettingsDiscordDetails" xml:space="preserve">
-        <value>Top text</value>
+        <value>Bovenste tekst</value>
     </data>
   <data name="SettingsDiscordDetailsDesc" xml:space="preserve">
-        <value>The top-most status text.</value>
+        <value>De hoogste status-tekst.</value>
     </data>
   <data name="SettingsDiscordDetailsDefault" xml:space="preserve">
-        <value>Playing with %mod_name%</value>
+        <value>Aan het spelen met %mod_name%</value>
     </data>
   <data name="SettingsDiscordState" xml:space="preserve">
-        <value>Bottom text</value>
+        <value>Onderste tekst</value>
     </data>
   <data name="SettingsDiscordStateDesc" xml:space="preserve">
-        <value>The bottom-most status text.</value>
+        <value>De onderste status-tekst.</value>
     </data>
   <data name="SettingsDiscordStateDefault" xml:space="preserve">
-        <value>on %game_version%</value>
+        <value>op %game_version%</value>
     </data>
   <data name="SettingsDiscordShowElapsedTime" xml:space="preserve">
-        <value>Show elapsed time</value>
+        <value>Geef verstreken tijd weer</value>
     </data>
   <data name="SettingsDiscordShowElapsedTimeDesc" xml:space="preserve">
-        <value>Show how long you've had Jiayi open for.</value>
+        <value>Laat zien voor hoe lang jij Jiayi al open hebt.</value>
     </data>
   <data name="SettingsDiscordShowDownloadButton" xml:space="preserve">
-        <value>Show download button</value>
+        <value>Geef download knop weer</value>
     </data>
   <data name="SettingsDiscordShowDownloadButtonDesc" xml:space="preserve">
-        <value>Show a button to download Jiayi on Discord.</value>
+        <value>Geef een knop weer om Jiayi op Discord te downloaden.</value>
     </data>
   <data name="SettingsDiscordShareCurrentMod" xml:space="preserve">
-        <value>Share current mod</value>
+        <value>Deel huidige modificatie</value>
     </data>
   <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
-        <value>Show a button for other users to add the mod you're playing with. This only works with web mods.</value>
+        <value>Geef een knop weer waarmee andere gebruikers de modificatie die jij aan het gebruiken bent kunnen toevoegen. Dit werkt alleen met modificaties van het internet.</value>
     </data>
   <data name="SettingsDiscordLargeImageKey" xml:space="preserve">
-        <value>Large image key</value>
+        <value>Sleutel voor grote plaatjes</value>
     </data>
   <data name="SettingsDiscordLargeImageKeyDesc" xml:space="preserve">
-        <value>The large image key to use for rich presence.</value>
+        <value>De sleutel voor grote plaatjes in rijke aanwezigheid.</value>
     </data>
   <data name="SettingsDiscordSmallImageKey" xml:space="preserve">
-        <value>Small image key</value>
+        <value>Sleutel voor kleine plaatjes</value>
     </data>
   <data name="SettingsDiscordSmallImageKeyDesc" xml:space="preserve">
-        <value>The small image key to use for rich presence.</value>
+        <value>De sleutel voor kleine plaatjes in rijke aanwezigheid.</value>
     </data>
   <data name="SettingsDiscordLargeImageText" xml:space="preserve">
-        <value>Large image text</value>
+        <value>Groot tekstplaatje</value>
     </data>
   <data name="SettingsDiscordLargeImageTextDesc" xml:space="preserve">
-        <value>The text to display when hovering over the large image.</value>
+        <value>De tekst die weergeven wordt als er over het grote plaatje wordt gezweefd.</value>
     </data>
   <data name="SettingsDiscordSmallImageText" xml:space="preserve">
-        <value>Small image text</value>
+        <value>Klein tekstplaatje</value>
     </data>
   <data name="SettingsDiscordSmallImageTextDesc" xml:space="preserve">
-        <value>The text to display when hovering over the small image.</value>
+        <value>De tekst die weergeven wordt als er over het kleine plaatje wordt gezweefd.</value>
     </data>
   <!-- update settings strings -->
   <data name="SettingsEnableUpdater" xml:space="preserve">
-        <value>Enable the updater</value>
+        <value>Schakel de updater in</value>
     </data>
   <data name="SettingsEnableUpdaterDesc" xml:space="preserve">
-        <value>Allow the launcher to check for and download updates.</value>
+        <value>Sta toe dat de Laucher voor downloads kan controleren en ze ook kan downloaden.</value>
     </data>
   <data name="SettingsAutoDownloadUpdates" xml:space="preserve">
-        <value>Automatically download updates</value>
+        <value>Automatisch updates downloaden</value>
     </data>
   <data name="SettingsAutoDownloadUpdatesDesc" xml:space="preserve">
-        <value>Always download updates when they're available.</value>
+        <value>Altijd updates downloaden als ze beschikbaar zijn.</value>
     </data>
   <!-- network settings strings -->
   <data name="SettingsOfflineMode" xml:space="preserve">
-        <value>Offline mode</value>
+        <value>Offline modus</value>
     </data>
   <data name="SettingsOfflineModeDesc" xml:space="preserve">
-        <value>Disable access to the internet. Some features may not work. Restart Jiayi for this to take full effect.</value>
+        <value>Schakel toegang tot het internet uit. Sommige functies zullen niet werken. Start Jiayi opnieuw op om deze actie volledig toe te passen.</value>
     </data>
   <data name="SettingsOfflineModeTooltip" xml:space="preserve">
-        <value>Features like internet mods, downloading versions, and checking for updates will not work.</value>
+        <value>Functies als internet modificaties, versies downloaden, en updates zoeken zullen niet werken.</value>
     </data>
   <data name="SettingsFollowRedirects" xml:space="preserve">
-        <value>Follow redirects</value>
+        <value>Volg omleidingen</value>
     </data>
   <data name="SettingsFollowRedirectsDesc" xml:space="preserve">
         <value>Follow redirects when adding web mods. Change this setting if you have trouble adding some mods.</value>

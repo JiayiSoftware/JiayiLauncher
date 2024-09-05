@@ -147,7 +147,7 @@ public class Launcher
 			
 			minecraft.ModsLoaded.Add(mod);
 			minecraft.StartUpdate();
-			stats.MostRecentMod = mod;
+			stats.MostRecentMod = mod.Id;
 			
 			return LaunchResult.Success;
 		}
@@ -170,7 +170,7 @@ public class Launcher
 		{
 			minecraft.ModsLoaded.Add(mod);
 			minecraft.StartUpdate();
-			stats.MostRecentMod = mod;
+			stats.MostRecentMod = mod.Id;
 		}
 
 		return injected ? LaunchResult.Success : LaunchResult.InjectionFailed;

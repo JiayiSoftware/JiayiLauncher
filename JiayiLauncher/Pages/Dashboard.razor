@@ -3,6 +3,7 @@
 
 @using System.Diagnostics
 @using JiayiLauncher.Features.Game
+@using JiayiLauncher.Features.Mods
 @using JiayiLauncher.Features.Profiles
 @using JiayiLauncher.Features.Stats
 @using JiayiLauncher.Shared.Components.Mods
@@ -55,30 +56,31 @@
             <div class="card">
                 <h4>@Strings.DashboardRecentMod</h4>
                 
-                @if (_stats.MostRecentMod == null)
+                @if (_stats.MostRecentMod == null || ModCollection.Current == null || !ModCollection.Current!.HasMod(_stats.MostRecentMod.Value))
                 {
                     <i>@Strings.DashboardNoMod</i>
                 }
                 else
                 {
-                    <JiayiModCard Mod="_stats.MostRecentMod" />
+                    <JiayiModCard Mod="ModCollection.Current!.GetMod(_stats.MostRecentMod.Value)" />
                     @* <i>@($"{_stats.MostRecentMod.PlayTime.TotalHours:F2} hours played")</i> *@
-                    <i>@string.Format(Strings.DashboardHours, $"{_stats.MostRecentMod.PlayTime.TotalHours:F2}")</i>
+                    <i>@string.Format(Strings.DashboardHours, 
+                           $"{ModCollection.Current!.GetMod(_stats.MostRecentMod.Value).PlayTime.TotalHours:F2}")</i>
                 }
             </div>
             
             <div class="card">
                 <h4>@Strings.DashboardPlayedMod</h4>
 
-                @if (_stats.MostPlayedMod == null)
+                @if (_stats.MostPlayedMod == null || ModCollection.Current == null || !ModCollection.Current!.HasMod(_stats.MostPlayedMod.Value))
                 {
                     <i>@Strings.DashboardNoMod</i>
                 }
                 else
                 {
-                    <JiayiModCard Mod="_stats.MostPlayedMod" />
+                    <JiayiModCard Mod="ModCollection.Current!.GetMod(_stats.MostPlayedMod.Value)" />
                     @* <i>@($"{_stats.MostPlayedMod.PlayTime.TotalHours:F2} hours played")</i> *@
-                    <i>@string.Format(Strings.DashboardHours, $"{_stats.MostPlayedMod.PlayTime.TotalHours:F2}")</i>
+                    <i>@string.Format(Strings.DashboardHours, $"{ModCollection.Current!.GetMod(_stats.MostPlayedMod.Value).PlayTime.TotalHours:F2}")</i>
                 }
             </div>
             

@@ -110,7 +110,7 @@
         }
 
         // basically skips confirmation if mod is already in collection
-        ModCollection.Current!.Add(Mod, !ModCollection.Current.HasMod(Mod.Path));
+        ModCollection.Current!.Add(Mod, !ModCollection.Current.HasMod(Mod.Id.Value));
         
         await Modal.CloseAsync(ModalResult.Ok(Mod));
         

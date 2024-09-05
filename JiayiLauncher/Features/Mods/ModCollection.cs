@@ -87,6 +87,7 @@ public class ModCollection
 	    
 	    using var stream = File.OpenWrite(indexPath);
 	    JsonSerializer.Serialize(stream, this, _options);
+	    stream.Close();
 	    
 	    #if DEBUG
 	    _log.Write(this, "Saved mod collection.");
@@ -95,15 +96,6 @@ public class ModCollection
 
     public static void Load(string path)
     {
-	    // an artifact from the old mod collection system
-	    var oldPath = Path.Combine(path, ".jiayi");
-	    if (Directory.Exists(oldPath))
-	    {
-		    Directory.Delete(oldPath, true);
-		    Current = Create(path);
-		    return;
-	    }
-	    
 	    var indexPath = Path.Combine(path, "index.json");
         if (!File.Exists(indexPath))
 		{
@@ -125,8 +117,18 @@ public class ModCollection
 		        return;
 			}
 	        
+	        var idUpdate = false;
+	        
+	        // find existing mods that do not have an id and assign them one
+	        foreach (var mod in collection.Mods.Where(x => x.Id == null))
+	        {
+		        idUpdate = true;
+		        mod.Id = Random.Shared.NextInt64();
+	        }
+	        
 	        collection.BasePath = path;
 	        Current = collection;
+	        if (idUpdate) Current.Save();
 	    }
         catch (Exception e)
 		{
@@ -185,7 +187,7 @@ public class ModCollection
 			            File.Copy(Path.Combine(tempDir, Path.GetFileName(mod.Path)), mod.Path, true);
 		            }
 
-		            if (Current.HasMod(mod.Path))
+		            if (Current.HasMod(mod.Id.Value))
 		            {
 			            var existingIndex = Current.Mods.FindIndex(m => m.Path == mod.Path);
 			            Current.Mods[existingIndex] = mod;
@@ -218,7 +220,7 @@ public class ModCollection
 
     public void Add(Mod mod, bool confirm = true)
     {
-	    if (HasMod(mod.Path) && confirm)
+	    if (HasMod(mod.Id.Value) && confirm)
 	    {
 		    var existing = Mods.First(m => m.Path == mod.Path);
 
@@ -239,7 +241,7 @@ public class ModCollection
 
 		    _blazor.ShowModal<MessageBox>(Strings.NewModName, parameters).Wait();
 	    }
-	    else if (HasMod(mod.Path))
+	    else if (HasMod(mod.Id.Value))
 	    {
 		    var existing = Mods.First(m => m.Path == mod.Path);
 		    Mods.Remove(existing);
@@ -258,10 +260,15 @@ public class ModCollection
 		Save();
     }
 
-    public bool HasMod(string path)
-    {
-        return Mods.Any(mod => mod.Path == path);
-    }
+    public bool HasMod(long id)
+	{
+		return Mods.Any(mod => mod.Id == id);
+	}
+    
+    public Mod? GetMod(long id)
+	{
+	    return Mods.FirstOrDefault(mod => mod.Id == id);
+	}
 
     public static ModCollectionInfo GetInfo(string path = "")
     {

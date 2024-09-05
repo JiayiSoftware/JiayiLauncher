@@ -198,7 +198,7 @@
             url = uri.AbsoluteUri;
         }
 
-        if (ModCollection.Current != null && ModCollection.Current.HasMod(url))
+        if (ModCollection.Current != null && ModCollection.Current.Mods.Any(x => x.Path == url))
         {
             _urlStatus = Strings.NewModAlreadyInCollection;
             return;

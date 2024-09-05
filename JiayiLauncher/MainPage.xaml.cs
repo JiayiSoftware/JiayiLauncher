@@ -95,7 +95,7 @@ public partial class MainPage : ContentPage
         Singletons.Add<ShaderManager>();
         Singletons.Add<VersionManager>();
         Singletons.Add<Injector>();
-        Singletons.Add<JiayiStats>();
+        Singletons.Add<JiayiStats>().Load();
         Singletons.Add<Minecraft>();
         Singletons.Add<Launcher>();
         Singletons.Add<ModImporter>();

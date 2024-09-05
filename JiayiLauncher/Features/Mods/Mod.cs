@@ -12,6 +12,8 @@ namespace JiayiLauncher.Features.Mods;
 [Serializable]
 public class Mod
 {
+	// TODO: nullable for backwards compatibility. once enough people have IDs for mods, make this non-nullable
+	public long? Id { get; set; }
 	public string Name { get; set; }
 	public string Path { get; set; }
 	public List<string> SupportedVersions { get; set; }
@@ -27,6 +29,9 @@ public class Mod
 
 	public Mod(string name, string path, List<string>? supportedVersions = null)
 	{
+		// assign random id
+		Id = Random.Shared.NextInt64();
+		
 		Name = name;
 		Path = path;
 		SupportedVersions = supportedVersions ?? new List<string> { "Any version" };

@@ -798,155 +798,155 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Het pad naar de map waarin jouw modificaties zitten.</value>
     </data>
   <data name="SettingsExportCollection" xml:space="preserve">
-        <value>Export your mods</value>
+        <value>Exporteer je modificaties</value>
     </data>
   <data name="SettingsExportCollectionDesc" xml:space="preserve">
-        <value>Export your mod collection to a file. You can share this with other people.</value>
+        <value>Exporteer je modificatie verzameling als een bestand. Deze kan gedeeld worden met anderen.</value>
     </data>
   <data name="SettingsExportCollectionFilter" xml:space="preserve">
-        <value>Jiayi mod collection</value>
+        <value>Jiayi's modificatie verzameling</value>
     </data>
   <data name="SettingsProfileCollectionPath" xml:space="preserve">
-        <value>Profile folder path</value>
+        <value>Profiel map pad</value>
     </data>
   <data name="SettingsProfileCollectionPathDesc" xml:space="preserve">
-        <value>The path to the folder containing your profiles.</value>
+        <value>Het pad naar de map waarin jouw profielen zitten.</value>
     </data>
   <data name="SettingsVersionsPath" xml:space="preserve">
-        <value>Version folder path</value>
+        <value>Versie map pad</value>
     </data>
   <data name="SettingsVersionsPathDesc" xml:space="preserve">
-        <value>The path to the folder containing your game installs.</value>
+        <value>Het pad naar de map waarin jouw spel installaties zitten.</value>
     </data>
   <data name="SettingsUpdateVersionList" xml:space="preserve">
-        <value>Update version list</value>
+        <value>Update versie lijst</value>
     </data>
   <data name="SettingsUpdateVersionListDesc" xml:space="preserve">
-        <value>Update the list of available versions.</value>
+        <value>Ververs de lijst van beschikbare versies.</value>
     </data>
   <data name="SettingsShadersPath" xml:space="preserve">
-        <value>Shader folder path</value>
+        <value>Shader map pad</value>
     </data>
   <data name="SettingsShadersPathDesc" xml:space="preserve">
-        <value>The path to the folder containing your shaders.</value>
+        <value>Het pad naar de map waarin jouw shaders zitten.</value>
     </data>
   <!-- appearance settings strings -->
   <data name="SettingsPrimaryBackgroundColor" xml:space="preserve">
-        <value>Primary background color</value>
+        <value>Primaire achtergrondkleur</value>
     </data>
   <data name="SettingsPrimaryBackgroundColorDesc" xml:space="preserve">
-        <value>The primary background color of the launcher.</value>
+        <value>De primaire achtergrondkleur van de Launcher.</value>
     </data>
   <data name="SettingsSecondaryBackgroundColor" xml:space="preserve">
-        <value>Secondary background color</value>
+        <value>Secundaire achtergrondkleur</value>
     </data>
   <data name="SettingsSecondaryBackgroundColorDesc" xml:space="preserve">
-        <value>The secondary background color of the launcher.</value>
+        <value>De secundaire achtergrondkleur van de Launcher.</value>
     </data>
   <data name="SettingsAccentColor" xml:space="preserve">
-        <value>Accent color</value>
+        <value>Accentkleur</value>
     </data>
   <data name="SettingsAccentColorDesc" xml:space="preserve">
-        <value>The accent color of the launcher.</value>
+        <value>De accentkleur van de Launcher.</value>
     </data>
   <data name="SettingsTextColor" xml:space="preserve">
-        <value>Text color</value>
+        <value>Tekstkleur</value>
     </data>
   <data name="SettingsTextColorDesc" xml:space="preserve">
-        <value>The color of text seen throughout the launcher.</value>
+        <value>De kleur van de tekst in de Launcher.</value>
     </data>
   <data name="SettingsAccentTextColor" xml:space="preserve">
-        <value>Text color (on accent)</value>
+        <value>Tekstkleur (op accent)</value>
     </data>
   <data name="SettingsAccentTextColorDesc" xml:space="preserve">
-        <value>The color of text on top of the accent color.</value>
+        <value>De kleur bovenop de accentkleur.</value>
     </data>
   <data name="SettingsGrayTextColor" xml:space="preserve">
-        <value>Gray text color</value>
+        <value>Grijze tekstkleur</value>
     </data>
   <data name="SettingsGrayTextColorDesc" xml:space="preserve">
-        <value>A gray version of the text color.</value>
+        <value>Een grijze versie van de tekstkleur.</value>
     </data>
   <data name="SettingsShadowDistance" xml:space="preserve">
-        <value>Shadow distance</value>
+        <value>Schaduwafstanden</value>
     </data>
   <data name="SettingsShadowDistanceDesc" xml:space="preserve">
-        <value>The distance of the shadows on UI elements.</value>
+        <value>De afstand van schaduwen op de gebruikersinterface-elementen.</value>
     </data>
   <data name="SettingsMovementSpeed" xml:space="preserve">
-        <value>UI movement speed</value>
+        <value>Gebruikersinterface bewegingssnelheid</value>
     </data>
   <data name="SettingsMovementSpeedDesc" xml:space="preserve">
-        <value>The speed at which the UI moves.</value>
+        <value>De snelheid waarmee de gebruikersinterface beweegt.</value>
     </data>
   <data name="SettingsUseBackgroundImage" xml:space="preserve">
-        <value>Use background image</value>
+        <value>Gebruik achtergrondplaatje</value>
     </data>
   <data name="SettingsUseBackgroundImageDesc" xml:space="preserve">
-        <value>Use an image as the background of the launcher.</value>
+        <value>Gebruik en plaatje als de achtergrond van de Launcher.</value>
     </data>
   <data name="SettingsSelectBackground" xml:space="preserve">
-        <value>Select background image</value>
+        <value>Selecteer achtergrondplaatje</value>
     </data>
   <data name="SettingsSelectBackgroundDesc" xml:space="preserve">
-        <value>Select a background image from your computer.</value>
+        <value>Selecteer een achtergrondplaatje van je computer.</value>
     </data>
   <data name="SettingsSelectBackgroundImageFilter" xml:space="preserve">
-        <value>Image files</value>
+        <value>Fotobestanden</value>
     </data>
   <data name="SettingsSelectBackgroundVideoFilter" xml:space="preserve">
-        <value>Video files</value>
+        <value>Videobestanden</value>
     </data>
   <data name="SettingsGeneratePalette" xml:space="preserve">
-        <value>Generate palette from background</value>
+        <value>Genereer een kleurenpalet van de achtergrond</value>
     </data>
   <data name="SettingsGeneratePaletteDesc" xml:space="preserve">
-        <value>Create a color palette based on your background image. Videos are NOT supported.</value>
+        <value>Maak een kleurenpalet gebaseerd op je achtergrondplaatje. Video's zijn NIET ondersteunt.</value>
     </data>
   <data name="SettingsGeneratePaletteTooltip" xml:space="preserve">
-        <value>Palette generation is memory intensive and may take a while. Every generated palette is slightly different.</value>
+        <value>Palet generatie is geheugen-intensief en kan een tijdje duren. Elk gegenereerde palet is uniek.</value>
     </data>
   <data name="SettingsBackgroundBlur" xml:space="preserve">
-        <value>Background blur</value>
+        <value>Achtergrondvervaging</value>
     </data>
   <data name="SettingsBackgroundBlurDesc" xml:space="preserve">
-        <value>How much to blur the background by.</value>
+        <value>De hoeveelheid achtergrondvervaging.</value>
     </data>
   <data name="SettingsBackgroundBrightness" xml:space="preserve">
-        <value>Background brightness</value>
+        <value>Achtergrond helderheid</value>
     </data>
   <data name="SettingsBackgroundBrightnessDesc" xml:space="preserve">
-        <value>How bright the background should be.</value>
+        <value>Hoe helder de achtergrond moet zijn.</value>
     </data>
   <data name="SettingsRounding" xml:space="preserve">
-        <value>Rounding</value>
+        <value>Ronding</value>
     </data>
   <data name="SettingsRoundingDesc" xml:space="preserve">
-        <value>How much to round the corners of most UI elements.</value>
+        <value>Hoe rond de hoeken van elementen van de gebruikersinterface moeten zijn.</value>
     </data>
   <data name="SettingsBorderColor" xml:space="preserve">
-        <value>Border color</value>
+        <value>Randkleur</value>
     </data>
   <data name="SettingsBorderColorDesc" xml:space="preserve">
-        <value>The color of the borders on UI elements.</value>
+        <value>De kleur van randen van de gebruikersinterface-elementen.</value>
     </data>
   <data name="SettingsAccentBorderColor" xml:space="preserve">
-        <value>Border color (on accent)</value>
+        <value>Randkleur (op accent)</value>
     </data>
   <data name="SettingsAccentBorderColorDesc" xml:space="preserve">
-        <value>The color of the borders around the accent color.</value>
+        <value>De kleur van randen om de accentkleur.</value>
     </data>
   <data name="SettingsBorderThickness" xml:space="preserve">
-        <value>Border thickness</value>
+        <value>Randdikte</value>
     </data>
   <data name="SettingsBorderThicknessDesc" xml:space="preserve">
-        <value>The thickness of borders on UI elements.</value>
+        <value>De dikte van randen op de gebruikersinterface-elementen.</value>
     </data>
   <data name="SettingsOpenTheme" xml:space="preserve">
-        <value>Show theme</value>
+        <value>Geef thema weer</value>
     </data>
   <data name="SettingsOpenThemeDesc" xml:space="preserve">
-        <value>Reveal your theme in File Explorer. You can share this with other people or use other people's themes.</value>
+        <value>Onthul je thema in de bestandsverkenner. Deze kan gedeeld worden met anderen, of jij kan de thema's van andere mensen gebruiken.</value>
     </data>
   <data name="SettingsRestoreDefaultTheme" xml:space="preserve">
         <value>Restore default theme</value>

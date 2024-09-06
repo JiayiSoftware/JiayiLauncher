@@ -1068,29 +1068,29 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Volg omleidingen</value>
     </data>
   <data name="SettingsFollowRedirectsDesc" xml:space="preserve">
-        <value>Follow redirects when adding web mods. Change this setting if you have trouble adding some mods.</value>
+        <value>Volg omleidingen als je modificaties van het internet toevoegt. Verander deze instelling als je problemen ervaart met sommige modificaties.</value>
     </data>
   <!-- launch settings strings -->
   <data name="SettingsUseInjectionDelay" xml:space="preserve">
-        <value>Use injection delay</value>
+        <value>Gebruik injectievertraging</value>
     </data>
   <data name="SettingsUseInjectionDelayDesc" xml:space="preserve">
-        <value>Wait for a set amount of time instead of waiting for the game to load before injecting.</value>
+        <value>Wacht voor een ingestelde hoeveelheid tijd in plaats van wachten voor het spel om volledig te laden voordat je injecteert.</value>
     </data>
   <data name="SettingsInjectionDelay" xml:space="preserve">
-        <value>Injection delay</value>
+        <value>Injectievertraging</value>
     </data>
   <data name="SettingsInjectionDelayDesc" xml:space="preserve">
-        <value>The amount of time to wait before injecting, in seconds.</value>
+        <value>De hoeveelheid tijd om te wachten met injecteren, in seconden.</value>
     </data>
   <data name="SettingsOverrideModuleRequirement" xml:space="preserve">
-        <value>Override module requirement</value>
+        <value>Module overschrijving eisen</value>
     </data>
   <data name="SettingsOverrideModuleRequirementDesc" xml:space="preserve">
         <value>
-            Override the amount of loaded modules needed before Jiayi will inject.
+            Overschrijf de hoeveelheid nodige geladen modules voordat Jiayi injecteert.
             
-            If the launcher injects too early or too late, try changing this value.
+            Als de launcher te laat of te vroeg injecteert, probeer dan deze waarde te veranderen.
         </value>
     </data>
   <data name="SettingsModuleRequirement" xml:space="preserve">

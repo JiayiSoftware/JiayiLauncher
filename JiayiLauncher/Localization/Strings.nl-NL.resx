@@ -1094,60 +1094,60 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         </value>
     </data>
   <data name="SettingsModuleRequirement" xml:space="preserve">
-        <value>Module requirement</value>
+        <value>Module eisen</value>
     </data>
   <data name="SettingsModuleRequirementDesc" xml:space="preserve">
-        <value>The amount of loaded modules needed before Jiayi will inject.</value>
+        <value>De hoeveelheid geladen modules nodig voordat Jiayi geïnjecteerd wordt.</value>
     </data>
   <data name="SettingsAccelerateGameLoading" xml:space="preserve">
-        <value>Accelerate game loading</value>
+        <value>Spel laden versnellen</value>
     </data>
   <data name="SettingsAccelerateGameLoadingDesc" xml:space="preserve">
-        <value>Speed up loading times by terminating unnecessary processes. Beware of jank.</value>
+        <value>Versnel de laadtijden door onnodige processen te termineren. Let op voor mogelijke onstabiliteit.</value>
     </data>
   <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
-        <value>May cause issues related to Microsoft Store licensing (determining whether you own the game or not).</value>
+        <value>Can problemen veroorzaken met Microsoft webwinkel licenties (determineren of jij in bezit bent van het spel).</value>
     </data>
   <data name="SettingsMinimizeFix" xml:space="preserve">
-        <value>Minimize fix</value>
+        <value>Minimaliseren oplossen</value>
     </data>
   <data name="SettingsMinimizeFixDesc" xml:space="preserve">
-        <value>Prevents the game from suspending itself when minimized. Changes are applied on launch.</value>
+        <value>Stopt tot stilstand komen van het als het is geminimaliseerd. Veranderingen worden toegepast op lancering.</value>
     </data>
   <!-- log settings strings -->
   <data name="SettingsAnonymizeLogs" xml:space="preserve">
-        <value>Anonymize logs</value>
+        <value>Logboeken anonimiseren</value>
     </data>
   <data name="SettingsAnonymizeLogsDesc" xml:space="preserve">
-        <value>Hides any identifying information from logs. This does not apply retroactively.</value>
+        <value>Verstopt identificerende informatie in de logboeken. Dit wordt niet op bestaande log bestanden toegepast.</value>
     </data>
   <data name="SettingsOpenLogFolder" xml:space="preserve">
-        <value>Open log folder</value>
+        <value>Open logboek map</value>
     </data>
   <data name="SettingsOpenLogFolderDesc" xml:space="preserve">
-        <value>Open the log folder in File Explorer.</value>
+        <value>Open de map van de logboeken in je Bestandsverkenner.</value>
     </data>
   <data name="SettingsClearPreviousLogs" xml:space="preserve">
-        <value>Clear previous logs</value>
+        <value>Wis bestaande logboeken</value>
     </data>
   <data name="SettingsClearPreviousLogsDesc" xml:space="preserve">
-        <value>Delete all previous log files.</value>
+        <value>Verwijder alle bestaande logboek bestanden.</value>
     </data>
   <!-- mod card strings -->
   <data name="ModCardInvalidLink" xml:space="preserve">
-        <value>This mod is broken; it doesn't exist on the web anymore.</value>
+        <value>Deze modificatie is kapot, hij bestaat niet meet op het internet.</value>
     </data>
   <data name="ModCardMissingFile" xml:space="preserve">
-        <value>This mod is broken; the file is missing from the mods directory.</value>
+        <value>Deze modificatie is kapot, het bestand mist van de modificatie map.</value>
     </data>
   <data name="ModCardOffline" xml:space="preserve">
-        <value>Internet mods are disabled in offline mode</value>
+        <value>Internet modificaties zijn uitgeschakeld in offline modus</value>
     </data>
   <data name="ModCardInternetMod" xml:space="preserve">
-        <value>Downloaded from the web</value>
+        <value>Gedownload van het internet</value>
     </data>
   <data name="ModCardLocalMod" xml:space="preserve">
-        <value>Locally stored</value>
+        <value>Lokaal opgeslagen</value>
     </data>
   <data name="ModCardSupportedVersions" xml:space="preserve">
         <value>Works on {0}</value>

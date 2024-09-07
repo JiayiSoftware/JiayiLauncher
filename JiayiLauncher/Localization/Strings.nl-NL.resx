@@ -1150,7 +1150,7 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Lokaal opgeslagen</value>
     </data>
   <data name="ModCardSupportedVersions" xml:space="preserve">
-        <value>Works on {0}</value>
+        <value>Werkt op {0}</value>
     </data>
   <data name="ModCardHideControls" xml:space="preserve">
         <value>Hide controls</value>

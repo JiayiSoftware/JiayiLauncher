@@ -1153,118 +1153,118 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Werkt op {0}</value>
     </data>
   <data name="ModCardHideControls" xml:space="preserve">
-        <value>Hide controls</value>
+        <value>Verstop gebruikersaanwijzingen</value>
     </data>
   <data name="ModCardShowControls" xml:space="preserve">
-        <value>Show controls</value>
+        <value>Laat gebruikersaanwijzingen zien</value>
     </data>
   <data name="ModCardManageConfigs" xml:space="preserve">
-        <value>Manage configs</value>
+        <value>Beheer configuraties</value>
     </data>
   <data name="ModCardEditMod" xml:space="preserve">
-        <value>Edit mod</value>
+        <value>Wijzig modificatie</value>
     </data>
   <data name="ModCardDeleteMod" xml:space="preserve">
-        <value>Delete mod (irreversible)</value>
+        <value>Verwijder modificatie (onomkeerbaar)</value>
     </data>
   <data name="ModCardDeleteModConfirm" xml:space="preserve">
-        <value>Are you sure you want to delete {0}? This action is irreversible.</value>
+        <value>Weet je zeker dat je {0} wilt verwijderen? Deze actie is onomkeerbaar.</value>
     </data>
   <data name="ModCardLaunchMultipleModsConfirm" xml:space="preserve">
-        <value>Launching more than one mod at a time can make your game unstable. Are you sure you want to launch {0}?</value>
+        <value>Meer dan één modificatie tegelijk lanceren kan ervoor zorgen dat je spel onstabiel wordt. Weet je zeker dat je {0} wil lanceren?</value>
     </data>
   <data name="ModCardDownloadFailed" xml:space="preserve">
-        <value>Failed to download mod. Please try again later.</value>
+        <value>Modificatie downloaden gefaald. Probeer het later opnieuw.</value>
     </data>
   <data name="ModCardModNotFound" xml:space="preserve">
-        <value>Your mod was deleted during launch. Try turning off your antivirus.</value>
+        <value>Je modificatie is verwijderd tijdens het lanceren, probeer je antivirus uit te schakelen.</value>
     </data>
   <data name="ModCardGameNotFound" xml:space="preserve">
-        <value>The game was closed during launch. Turn off your antivirus in case it's terminating the game.</value>
+        <value>Het spel is uitgeschakeld tijdens het lanceren. Probeer je antivirus uit te schakelen als die het spel termineert.</value>
     </data>
   <data name="ModCardVersionMismatch" xml:space="preserve">
-        <value>{0} doesn't support your current game version. Would you like to switch to {1}?</value>
+        <value>{0} ondersteunt niet de huidige versie van het spel. Wil je wisselen naar {1}?</value>
     </data>
   <data name="ModCardInjectionFailed" xml:space="preserve">
-        <value>Your mod could not be injected. Try turning off your antivirus, and check logs for extended error information.</value>
+        <value>Jouw modificatie kon niet geïnjecteerd worden. Probeer je antivirus uit te schakelen, en bekijk de logboeken voor verdere informatie.</value>
     </data>
   <data name="ModCardAlreadyLoaded" xml:space="preserve">
-        <value>This mod is already loaded!</value>
+        <value>Deze modificatie is al geladen!</value>
     </data>
   <!-- theme card strings -->
   <data name="ThemeCardAuthor" xml:space="preserve">
-        <value>by {0}</value>
+        <value>door {0}</value>
     </data>
   <data name="ThemeCardPrepareUpload" xml:space="preserve">
-        <value>Prepare theme upload</value>
+        <value>Bereid thema uploaden voor</value>
     </data>
   <data name="ThemeCardReinstall" xml:space="preserve">
-        <value>Reinstall theme</value>
+        <value>Herinstalleer thema</value>
     </data>
   <data name="ThemeCardOverwriteConfirm" xml:space="preserve">
-        <value>Are you sure you want to overwrite this theme? All of your local changes will be lost.</value>
+        <value>Weet je zeker dat je dit thema wilt overschrijven? Al je lokale data zal verloren gaan.</value>
     </data>
   <!-- don't ask again strings -->
   <data name="DontAskAgain" xml:space="preserve">
         <value>
-            Stop asking
-            I said no
-            Shut up
-            Really, no
-            No more
-            No means no
-            Please stop
-            Stop it
-            Never again
-            Suck my nuts
+            Stop met vragen
+            Ik zei nee
+            Hou je bek
+            Oprecht, nee
+            Niet meer
+            Nee is nee
+            Stop alsjeblieft
+            Stop
+            Nooit meer
+            Zuig aan me ballen
         </value>
     </data>
   <!-- offline mode strings -->
   <data name="OfflineMode" xml:space="preserve">
-        <value>Offline Mode</value>
+        <value>Offline modus</value>
     </data>
   <data name="OfflineModeDesc" xml:space="preserve">
-        <value>You're offline. Some features may not work.</value>
+        <value>Je bent offline, sommige functies zullen niet werken.</value>
     </data>
   <!-- update strings -->
   <data name="UpdateInstalled" xml:space="preserve">
-        <value>Update installed</value>
+        <value>Update geïnstalleerd</value>
     </data>
   <data name="UpdateInstalledDesc" xml:space="preserve">
-        <value>Jiayi was updated to {0}.</value>
+        <value>Jiayi is geüpdatet naar {0}.</value>
     </data>
   <data name="UpdateInstalledDesc2" xml:space="preserve">
-        <value>You can view the changelog on GitHub.</value>
+        <value>Je kan het wijzigingslogboek vinden op GitHub.</value>
     </data>
   <data name="UpdateAvailable" xml:space="preserve">
-        <value>Update available</value>
+        <value>Update beschikbaar</value>
     </data>
   <data name="UpdateAvailableDesc" xml:space="preserve">
-        <value>An update is available. Would you like to download it?</value>
+        <value>Een update is beschikbaar. Wil je het downloaden?</value>
     </data>
   <data name="UpdateDownloading" xml:space="preserve">
-        <value>Downloading update...</value>
+        <value>Update downloaden...</value>
     </data>
   <data name="UpdateDownloaded" xml:space="preserve">
-        <value>Update downloaded</value>
+        <value>Update gedownload</value>
     </data>
   <data name="UpdateDownloadedDesc" xml:space="preserve">
-        <value>Restart to install the update.</value>
+        <value>Start opnieuw op om de update te installeren.</value>
     </data>
   <!-- sidebar strings -->
   <data name="SidebarDashboard" xml:space="preserve">
         <value>Dashboard</value>
     </data>
   <data name="SidebarMods" xml:space="preserve">
-        <value>Mods</value>
+        <value>Modificaties</value>
     </data>
   <data name="SidebarProfiles" xml:space="preserve">
-        <value>Profiles</value>
+        <value>Profielen</value>
     </data>
   <data name="SidebarGame" xml:space="preserve">
-        <value>Game</value>
+        <value>Spel</value>
     </data>
   <data name="SidebarSettings" xml:space="preserve">
-        <value>Settings</value>
+        <value>Instellingen</value>
     </data>
 </root>

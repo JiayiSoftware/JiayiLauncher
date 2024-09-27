@@ -410,78 +410,78 @@
         <value>Manage your game</value>
     </data>
   <data name="VerManCurrentVersion" xml:space="preserve">
-        <value>Your current version</value>
+        <value>Текущая версия</value>
     </data>
   <data name="VerManResizeTip" xml:space="preserve">
-        <value>You can resize Jiayi to see the full list on the right</value>
+        <value>Вы можете изменить размер окна, чтобы увидеть весь список справа</value>
     </data>
   <data name="VerManManageTip" xml:space="preserve">
-        <value>Manage more versions</value>
+        <value>Все версии</value>
     </data>
   <data name="VerManPopularVersions" xml:space="preserve">
-        <value>Popular versions</value>
+        <value>Популярные версии</value>
     </data>
   <data name="VerManLatestVersion" xml:space="preserve">
-        <value>Latest version</value>
+        <value>Последняя версия</value>
     </data>
   <data name="VerManPopularAmongCommunity" xml:space="preserve">
-        <value>Popular among the community</value>
+        <value>Популярна среди игроков</value>
     </data>
   <data name="VerManBestStableRelease" xml:space="preserve">
-        <value>Best stable release without RenderDragon</value>
+        <value>Лучший стабильный релиз без RenderDragon</value>
     </data>
   <data name="VerManShaderManagerText" xml:space="preserve">
-        <value>Easily apply RenderDragon shaders to your game. Works best if you have the game installed through Jiayi.</value>
+        <value>Легко применяйте шейдеры RenderDragon в игру. Работает лучше с версиями из Jiayi.</value>
     </data>
   <data name="VerManShaderManagerVerTooLow" xml:space="preserve">
-        <value>Your game version does not have RenderDragon. Use a resource pack for shaders instead.</value>
+        <value>Ваша версия не поддерживает RenderDragon. Используйте ресурспак в игре.</value>
     </data>
   <data name="VerManShaderManagerMSStore" xml:space="preserve">
-        <value>Your game is installed through the Microsoft Store. Jiayi cannot apply shaders to it.</value>
+        <value>Minecraft установлен через Microsoft Store! Применение шейдеров невозможно.</value>
     </data>
   <!-- install location strings -->
   <data name="InstallLocByJiayi" xml:space="preserve">
-        <value>Installed by Jiayi</value>
+        <value>Установлено через Jiayi</value>
     </data>
   <data name="InstallLocFromStore" xml:space="preserve">
-        <value>From Microsoft Store</value>
+        <value>Из Microsoft Store</value>
     </data>
   <data name="InstallLocExternalManager" xml:space="preserve">
-        <value>Installed by another version manager</value>
+        <value>Установлено через другой менеджер версий</value>
     </data>
   <data name="InstallLocUnknown" xml:space="preserve">
-        <value>Unknown install location</value>
+        <value>Неизвестное расположение установки</value>
     </data>
   <data name="InstallLocNotInstalled" xml:space="preserve">
-        <value>You don't have the game installed</value>
+        <value>Игра не установлена</value>
     </data>
   <!-- version list strings -->
   <data name="VerListName" xml:space="preserve">
-        <value>Full version list</value>
+        <value>Все версии</value>
     </data>
   <data name="VerListSearch" xml:space="preserve">
-        <value>Search versions</value>
+        <value>Найти</value>
     </data>
   <data name="VerListShowDownloaded" xml:space="preserve">
-        <value>Show downloaded</value>
+        <value>Показывать скачанные</value>
     </data>
   <data name="VerListNoVersions" xml:space="preserve">
-        <value>No versions found</value>
+        <value>Версии не найдены</value>
     </data>
   <data name="VerListLoadMore" xml:space="preserve">
-        <value>Load more</value>
+        <value>Больше</value>
     </data>
   <data name="VerListRemove" xml:space="preserve">
-        <value>Remove version</value>
+        <value>Удалить версию</value>
     </data>
   <data name="VerListRemoveConfirm" xml:space="preserve">
-        <value>Are you sure you want to remove this version?</value>
+        <value>Вы действительно хотите удалить эту версию?</value>
     </data>
   <data name="VerListDevModeQuestion" xml:space="preserve">
-        <value>You need to enable developer mode to switch versions. Do you want to enable it now?</value>
+        <value>Необходимо включить режим разработчика. Хотите включить его сейчас?</value>
     </data>
   <data name="VerListNotFound" xml:space="preserve">
-        <value>This version has not been downloaded yet.</value>
+        <value>Эта версия ещё не скачана.</value>
     </data>
   <data name="VerListBackupFailed" xml:space="preserve">
         <value>

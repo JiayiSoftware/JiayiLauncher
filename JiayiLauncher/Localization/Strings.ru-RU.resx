@@ -485,41 +485,41 @@
     </data>
   <data name="VerListBackupFailed" xml:space="preserve">
         <value>
-            Jiayi couldn't back up your game data before switching versions. This could be because access to the game data folder was denied.
+            Jiayi не смог создать резервную копию перед сменой версий. Возможно, запрос на доступ к папке игры был отклонён.
             
-            More information can be found in your log file.
+            Больше информации в вашем файле журнала.
         </value>
     </data>
   <data name="VerListUnknownError" xml:space="preserve">
-        <value>An unknown error occurred while switching versions. Check your log file for more information.</value>
+        <value>Неизвестная ошибка при смене версии. Проверьте файл журнала для детальной информации.</value>
     </data>
   <data name="VerListImport" xml:space="preserve">
-        <value>Import version</value>
+        <value>Импортировать версию</value>
     </data>
   <data name="VerListFileFilter" xml:space="preserve">
-        <value>APPX files</value>
+        <value>Файл APPX</value>
     </data>
   <data name="VerListInvalidPackage" xml:space="preserve">
-        <value>That's not a valid package.</value>
+        <value>Недействительный пакет.</value>
     </data>
   <data name="VerListUpdatingVersions" xml:space="preserve">
-        <value>Version list cleared. It will be updated shortly.</value>
+        <value>Список версий очищен и скоро будет обновлён.</value>
     </data>
   <!-- shader manager strings -->
   <data name="ShaderManName" xml:space="preserve">
-        <value>Shader manager</value>
+        <value>Менеджер шейдеров</value>
     </data>
   <data name="ShaderManCurrentShader" xml:space="preserve">
-        <value>Your current shader pack</value>
+        <value>Текущий пакет шейдеров</value>
     </data>
   <data name="ShaderManNoShader" xml:space="preserve">
-        <value>No shaders applied</value>
+        <value>Шейдеры не применены</value>
     </data>
   <data name="ShaderManUsingVanilla" xml:space="preserve">
-        <value>Minecraft's vanilla shaders will be used</value>
+        <value>Будет использован стандартный шейдер Minecraft</value>
     </data>
   <data name="ShaderManReplacingCount" xml:space="preserve">
-        <value>Replacing {0} material files</value>
+        <value>Заменяем {0} файлов материала</value>
     </data>
   <data name="ShaderManAvailableShaders" xml:space="preserve">
         <value>Доступные шейдеры</value>
@@ -693,158 +693,158 @@
         <value>Профили не найдены</value>
     </data>
   <data name="ProfilesMenuBrokenProfile" xml:space="preserve">
-        <value>This profile is broken; the folder containing its game data is missing or empty.</value>
+        <value>Этот профиль испорчен; папка с данными игры отсутствует или пуста.</value>
     </data>
   <data name="ProfilesMenuWorlds" xml:space="preserve">
-        <value>{0} worlds</value>
+        <value>{0} мир(а/ов)</value>
     </data>
   <data name="ProfilesMenuResourcePacks" xml:space="preserve">
-        <value>{0} resource packs</value>
+        <value>{0} пакет(а/ов) ресурсов</value>
     </data>
   <data name="ProfilesMenuBehaviorPacks" xml:space="preserve">
-        <value>{0} behavior packs</value>
+        <value>{0} набор(а/ов) параметров</value>
     </data>
   <data name="ProfilesMenuMyProfile" xml:space="preserve">
-        <value>My profile</value>
+        <value>Мой профиль</value>
     </data>
   <data name="ProfilesMenuEditProfile" xml:space="preserve">
-        <value>Edit profile</value>
+        <value>Изменить профиль</value>
     </data>
   <data name="ProfilesMenuDeleteProfile" xml:space="preserve">
-        <value>Delete profile</value>
+        <value>Удалить профиль</value>
     </data>
   <data name="ProfilesMenuApplyProfile" xml:space="preserve">
-        <value>Apply profile</value>
+        <value>Применить профиль</value>
     </data>
   <data name="ProfilesMenuApplyProfileConfirm" xml:space="preserve">
-        <value>Are you sure you want to apply this profile? This will overwrite your current game data.</value>
+        <value>Вы действительно хотите применить этот профиль? Он перезапишет текущие данные игры.</value>
     </data>
   <data name="ProfilesMenuAboutProfiles" xml:space="preserve">
-        <value>Creating a profile will copy your current game data, like your worlds, resource packs, and settings.</value>
+        <value>Создание профиля скопирует текущие данные (миры, пакеты ресурсов, настройки и т.п.).</value>
     </data>
   <data name="ProfilesMenuDeleteProfileConfirm" xml:space="preserve">
-        <value>Are you sure you want to delete this profile? This cannot be undone.</value>
+        <value>Вы действительно хотите удалить этот профиль? Он будет удалён навсегда!</value>
     </data>
   <!-- secret strings -->
   <data name="SecretTitle" xml:space="preserve">
-        <value>Secret</value>
+        <value>Секрет</value>
     </data>
   <data name="SecretText" xml:space="preserve">
-        <value>provided by freeminesweeper.org</value>
+        <value>предоставлено freeminesweeper.org</value>
     </data>
   <data name="SecretText2" xml:space="preserve">
         <value>livesweeper: competitive minesweeper</value>
     </data>
   <!-- settings page strings -->
   <data name="SettingsMenuName" xml:space="preserve">
-        <value>Settings</value>
+        <value>Настройки</value>
     </data>
   <data name="SettingsCategories" xml:space="preserve">
-        <value>Categories:</value>
+        <value>Категории:</value>
     </data>
   <data name="SettingsGeneral" xml:space="preserve">
-        <value>General</value>
+        <value>Главное</value>
     </data>
   <data name="SettingsAppearance" xml:space="preserve">
-        <value>Appearance</value>
+        <value>Внешний вид</value>
     </data>
   <data name="SettingsUpdate" xml:space="preserve">
-        <value>Update</value>
+        <value>Обновления</value>
     </data>
   <data name="SettingsDiscord" xml:space="preserve">
         <value>Discord</value>
     </data>
   <data name="SettingsNetwork" xml:space="preserve">
-        <value>Network</value>
+        <value>Интернет</value>
     </data>
   <data name="SettingsLaunch" xml:space="preserve">
-        <value>Launch</value>
+        <value>Запуск</value>
     </data>
   <data name="SettingsLog" xml:space="preserve">
-        <value>Log</value>
+        <value>Журнал</value>
     </data>
   <data name="SettingsAbout" xml:space="preserve">
         <value>About</value>
     </data>
   <data name="SettingsAboutSettingTitle" xml:space="preserve">
-        <value>About this setting</value>
+        <value>Об этой настройке</value>
     </data>
   <data name="SettingsResetDefault" xml:space="preserve">
-        <value>Reset to default</value>
+        <value>Сбросить всё</value>
     </data>
   <data name="SettingsMoreInfo" xml:space="preserve">
-        <value>More info</value>
+        <value>Подробнее</value>
     </data>
   <data name="SettingsEasterEggText" xml:space="preserve">
         <value>Peekaboo!</value>
     </data>
   <data name="SettingsConfirmEnable" xml:space="preserve">
-        <value>Are you sure you want to enable this setting?</value>
+        <value>Вы действительно хотите включить это?</value>
     </data>
   <data name="SettingsConfirmAction" xml:space="preserve">
-        <value>Are you sure you want do this?</value>
+        <value>Вы действительно хотите это сделать?</value>
     </data>
   <data name="SettingsInvalidSettingsText" xml:space="preserve">
-        <value>Your settings file was corrupted or invalid.</value>
+        <value>Файл настроек повреждён или недействителен.</value>
     </data>
   <data name="SettingsInvalidSettingsText2" xml:space="preserve">
-        <value>A new settings file has been created, and your previous settings have been lost.</value>
+        <value>Новый файл настроек создан, а ваши старые настройки стёрты.</value>
     </data>
   <!-- general settings strings -->
   <data name="SettingsModCollectionPath" xml:space="preserve">
-        <value>Mod folder path</value>
+        <value>Путь к папке с модами</value>
     </data>
   <data name="SettingsModCollectionPathDesc" xml:space="preserve">
-        <value>The path to the folder containing your mods.</value>
+        <value>Путь к папке, хранящей ваши моды.</value>
     </data>
   <data name="SettingsExportCollection" xml:space="preserve">
-        <value>Export your mods</value>
+        <value>Экспортировать моды</value>
     </data>
   <data name="SettingsExportCollectionDesc" xml:space="preserve">
-        <value>Export your mod collection to a file. You can share this with other people.</value>
+        <value>Экспортирует связку модов в файл. Можете поделиться ей с людьми.</value>
     </data>
   <data name="SettingsExportCollectionFilter" xml:space="preserve">
-        <value>Jiayi mod collection</value>
+        <value>Связка модов Jiayi</value>
     </data>
   <data name="SettingsProfileCollectionPath" xml:space="preserve">
-        <value>Profile folder path</value>
+        <value>Путь к папке с профилями</value>
     </data>
   <data name="SettingsProfileCollectionPathDesc" xml:space="preserve">
-        <value>The path to the folder containing your profiles.</value>
+        <value>Путь к папке, хранящей ваши профили.</value>
     </data>
   <data name="SettingsVersionsPath" xml:space="preserve">
-        <value>Version folder path</value>
+        <value>Путь к папке с версиями</value>
     </data>
   <data name="SettingsVersionsPathDesc" xml:space="preserve">
-        <value>The path to the folder containing your game installs.</value>
+        <value>Путь к папке, хранящей ваши версии игры.</value>
     </data>
   <data name="SettingsUpdateVersionList" xml:space="preserve">
-        <value>Update version list</value>
+        <value>Обновить список версий</value>
     </data>
   <data name="SettingsUpdateVersionListDesc" xml:space="preserve">
-        <value>Update the list of available versions.</value>
+        <value>Обновляет список доступных версий.</value>
     </data>
   <data name="SettingsShadersPath" xml:space="preserve">
-        <value>Shader folder path</value>
+        <value>Путь к папке с шейдерами</value>
     </data>
   <data name="SettingsShadersPathDesc" xml:space="preserve">
-        <value>The path to the folder containing your shaders.</value>
+        <value>Путь к папке, хранящей ваши шейдеры.</value>
     </data>
   <!-- appearance settings strings -->
   <data name="SettingsPrimaryBackgroundColor" xml:space="preserve">
-        <value>Primary background color</value>
+        <value>Основной цвет фона</value>
     </data>
   <data name="SettingsPrimaryBackgroundColorDesc" xml:space="preserve">
-        <value>The primary background color of the launcher.</value>
+        <value>Основной цвет фона лаунчера.</value>
     </data>
   <data name="SettingsSecondaryBackgroundColor" xml:space="preserve">
-        <value>Secondary background color</value>
+        <value>Дополнительный цвет фона</value>
     </data>
   <data name="SettingsSecondaryBackgroundColorDesc" xml:space="preserve">
-        <value>The secondary background color of the launcher.</value>
+        <value>Дополнительный цвет фона лаунчера.</value>
     </data>
   <data name="SettingsAccentColor" xml:space="preserve">
-        <value>Accent color</value>
+        <value>Акцентный цвет</value>
     </data>
   <data name="SettingsAccentColorDesc" xml:space="preserve">
         <value>Акцентный цвет лаунчера.</value>
@@ -853,169 +853,169 @@
         <value>Цвет текста</value>
     </data>
   <data name="SettingsTextColorDesc" xml:space="preserve">
-        <value>The color of text seen throughout the launcher.</value>
+        <value>Цвет текста, отображаемого в лаунчере.</value>
     </data>
   <data name="SettingsAccentTextColor" xml:space="preserve">
-        <value>Text color (on accent)</value>
+        <value>Цвет текста (акцентный)</value>
     </data>
   <data name="SettingsAccentTextColorDesc" xml:space="preserve">
-        <value>The color of text on top of the accent color.</value>
+        <value>Цвет текста, отображаемого поверх акцентного цвета.</value>
     </data>
   <data name="SettingsGrayTextColor" xml:space="preserve">
-        <value>Gray text color</value>
+        <value>Цвет серого текста</value>
     </data>
   <data name="SettingsGrayTextColorDesc" xml:space="preserve">
-        <value>A gray version of the text color.</value>
+        <value>Серая вариация цвета текста.</value>
     </data>
   <data name="SettingsShadowDistance" xml:space="preserve">
-        <value>Shadow distance</value>
+        <value>Дистанция тени</value>
     </data>
   <data name="SettingsShadowDistanceDesc" xml:space="preserve">
-        <value>The distance of the shadows on UI elements.</value>
+        <value>Дистанция теней, отбрасываемых элементами интерфейса.</value>
     </data>
   <data name="SettingsMovementSpeed" xml:space="preserve">
-        <value>UI movement speed</value>
+        <value>Скорость движения интерфейса</value>
     </data>
   <data name="SettingsMovementSpeedDesc" xml:space="preserve">
-        <value>The speed at which the UI moves.</value>
+        <value>Задаёт скорость, с которой движется интерфейс.</value>
     </data>
   <data name="SettingsUseBackgroundImage" xml:space="preserve">
-        <value>Use background image</value>
+        <value>Использовать фоновое изображение</value>
     </data>
   <data name="SettingsUseBackgroundImageDesc" xml:space="preserve">
-        <value>Use an image as the background of the launcher.</value>
+        <value>Использовать изображение в качестве фона лаунчера.</value>
     </data>
   <data name="SettingsSelectBackground" xml:space="preserve">
-        <value>Select background image</value>
+        <value>Выберите фоновое изображение</value>
     </data>
   <data name="SettingsSelectBackgroundDesc" xml:space="preserve">
-        <value>Select a background image from your computer.</value>
+        <value>Выбор фонового изображения с вашего устройства.</value>
     </data>
   <data name="SettingsSelectBackgroundImageFilter" xml:space="preserve">
-        <value>Image files</value>
+        <value>Изображения</value>
     </data>
   <data name="SettingsSelectBackgroundVideoFilter" xml:space="preserve">
-        <value>Video files</value>
+        <value>Видео</value>
     </data>
   <data name="SettingsGeneratePalette" xml:space="preserve">
-        <value>Generate palette from background</value>
+        <value>Сгенерировать палитру из фона</value>
     </data>
   <data name="SettingsGeneratePaletteDesc" xml:space="preserve">
-        <value>Create a color palette based on your background image. Videos are NOT supported.</value>
+        <value>Создаёт палитру цветов, основанную на вашем фоне. Видео НЕ поддерживается.</value>
     </data>
   <data name="SettingsGeneratePaletteTooltip" xml:space="preserve">
-        <value>Palette generation is memory intensive and may take a while. Every generated palette is slightly different.</value>
+        <value>Генерация палитры требует оперативной памяти и времени. Каждая сгенерированная палитра слегка отличается от предыдущей.</value>
     </data>
   <data name="SettingsBackgroundBlur" xml:space="preserve">
-        <value>Background blur</value>
+        <value>Размытие фона</value>
     </data>
   <data name="SettingsBackgroundBlurDesc" xml:space="preserve">
-        <value>How much to blur the background by.</value>
+        <value>Насколько сильно размоется ваш фон.</value>
     </data>
   <data name="SettingsBackgroundBrightness" xml:space="preserve">
-        <value>Background brightness</value>
+        <value>Яркость фона</value>
     </data>
   <data name="SettingsBackgroundBrightnessDesc" xml:space="preserve">
-        <value>How bright the background should be.</value>
+        <value>Насколько ярким ваш фон должен быть.</value>
     </data>
   <data name="SettingsRounding" xml:space="preserve">
-        <value>Rounding</value>
+        <value>Скругление</value>
     </data>
   <data name="SettingsRoundingDesc" xml:space="preserve">
-        <value>How much to round the corners of most UI elements.</value>
+        <value>Скругляет углы большинства элементов интерфейса.</value>
     </data>
   <data name="SettingsBorderColor" xml:space="preserve">
-        <value>Border color</value>
+        <value>Цвет рамки</value>
     </data>
   <data name="SettingsBorderColorDesc" xml:space="preserve">
-        <value>The color of the borders on UI elements.</value>
+        <value>Цвет рамок элементов интерфейса.</value>
     </data>
   <data name="SettingsAccentBorderColor" xml:space="preserve">
-        <value>Border color (on accent)</value>
+        <value>Цвет рамки (акцентный)</value>
     </data>
   <data name="SettingsAccentBorderColorDesc" xml:space="preserve">
-        <value>The color of the borders around the accent color.</value>
+        <value>Цвет рамок вокруг акцентного цвета.</value>
     </data>
   <data name="SettingsBorderThickness" xml:space="preserve">
-        <value>Border thickness</value>
+        <value>Ширина рамки</value>
     </data>
   <data name="SettingsBorderThicknessDesc" xml:space="preserve">
-        <value>The thickness of borders on UI elements.</value>
+        <value>Ширина рамок элементов интерфейса.</value>
     </data>
   <data name="SettingsOpenTheme" xml:space="preserve">
-        <value>Show theme</value>
+        <value>Показать тему</value>
     </data>
   <data name="SettingsOpenThemeDesc" xml:space="preserve">
-        <value>Reveal your theme in File Explorer. You can share this with other people or use other people's themes.</value>
+        <value>Открывает вашу тему в Проводнике. Можете поделиться ей с другими людьми или использовать их темы.</value>
     </data>
   <data name="SettingsRestoreDefaultTheme" xml:space="preserve">
-        <value>Restore default theme</value>
+        <value>Сброс темы</value>
     </data>
   <data name="SettingsRestoreDefaultThemeDesc" xml:space="preserve">
-        <value>Go back to Jiayi's default theme.</value>
+        <value>Возвращает к стандартному оформлению.</value>
     </data>
   <data name="SettingsThemesMenu" xml:space="preserve">
-        <value>Themes menu</value>
+        <value>Меню тем</value>
     </data>
   <data name="SettingsThemesMenuDesc" xml:space="preserve">
-        <value>Local and downloadable themes created by the community.</value>
+        <value>Локальные и загружаемые темы от сообщества.</value>
     </data>
   <!-- discord settings strings -->
   <data name="SettingsRichPresence" xml:space="preserve">
-        <value>Enable rich presence</value>
+        <value>Включить "Играет в..."</value>
     </data>
   <data name="SettingsRichPresenceDesc" xml:space="preserve">
-        <value>Show what you're doing in Jiayi on Discord.</value>
+        <value>Показывает, что вы делаете в Jiayi в Discord.</value>
     </data>
   <data name="SettingsRichPresenceTooltip" xml:space="preserve">
         <value>
-            Available formatting strings for rich presence:
+            Для изменения "Играет в..." доступны значения:
 
-            %mod_name% - the name of the mod you're playing with
-            %game_version% - your current Minecraft version
-            %mod_count% - how many mods you have in your collection
-            %shader_name% - the name of the shader you're using
-            %profile_count% - how many profiles you have in your collection
-            %launcher_version% - the version of Jiayi you're using
+            %mod_name% - название мода с которым вы играете
+            %game_version% - текущая версия Minecraft
+            %mod_count% - количество модов
+            %shader_name% - имя используемого шейдера
+            %profile_count% - количество профилей
+            %launcher_version% - версия Jiayi
 
-            Only 1 formatting string can be used per field.
+            Только одно значение на одно поле.
         </value>
     </data>
   <data name="SettingsDiscordDetails" xml:space="preserve">
-        <value>Top text</value>
+        <value>Верхний текст</value>
     </data>
   <data name="SettingsDiscordDetailsDesc" xml:space="preserve">
         <value>The top-most status text.</value>
     </data>
   <data name="SettingsDiscordDetailsDefault" xml:space="preserve">
-        <value>Playing with %mod_name%</value>
+        <value>Играет с %mod_name%</value>
     </data>
   <data name="SettingsDiscordState" xml:space="preserve">
-        <value>Bottom text</value>
+        <value>Нижний текст</value>
     </data>
   <data name="SettingsDiscordStateDesc" xml:space="preserve">
         <value>The bottom-most status text.</value>
     </data>
   <data name="SettingsDiscordStateDefault" xml:space="preserve">
-        <value>on %game_version%</value>
+        <value>на %game_version%</value>
     </data>
   <data name="SettingsDiscordShowElapsedTime" xml:space="preserve">
-        <value>Show elapsed time</value>
+        <value>Показать время игры</value>
     </data>
   <data name="SettingsDiscordShowElapsedTimeDesc" xml:space="preserve">
-        <value>Show how long you've had Jiayi open for.</value>
+        <value>Показывает как долго был запущен Jiayi.</value>
     </data>
   <data name="SettingsDiscordShowDownloadButton" xml:space="preserve">
-        <value>Show download button</value>
+        <value>Показать кнопку загрузки</value>
     </data>
   <data name="SettingsDiscordShowDownloadButtonDesc" xml:space="preserve">
-        <value>Show a button to download Jiayi on Discord.</value>
+        <value>Показать кнопку загрузки Jiayi в Discord.</value>
     </data>
   <data name="SettingsDiscordShareCurrentMod" xml:space="preserve">
-        <value>Share current mod</value>
+        <value>Поделиться текущим модом</value>
     </data>
   <data name="SettingsDiscordShareCurrentModDesc" xml:space="preserve">
-        <value>Show a button for other users to add the mod you're playing with. This only works with web mods.</value>
+        <value>Показать кнопку для загрузки текущего мода. Не работает с локальными модами.</value>
     </data>
   <data name="SettingsDiscordLargeImageKey" xml:space="preserve">
         <value>Large image key</value>
@@ -1030,112 +1030,112 @@
         <value>The small image key to use for rich presence.</value>
     </data>
   <data name="SettingsDiscordLargeImageText" xml:space="preserve">
-        <value>Large image text</value>
+        <value>Текст большого изображения</value>
     </data>
   <data name="SettingsDiscordLargeImageTextDesc" xml:space="preserve">
-        <value>The text to display when hovering over the large image.</value>
+        <value>Текст при наведении мыши на большое изображение.</value>
     </data>
   <data name="SettingsDiscordSmallImageText" xml:space="preserve">
-        <value>Small image text</value>
+        <value>Текст малого изображения</value>
     </data>
   <data name="SettingsDiscordSmallImageTextDesc" xml:space="preserve">
-        <value>The text to display when hovering over the small image.</value>
+        <value>Текст при наведении мыши на малое изображение.</value>
     </data>
   <!-- update settings strings -->
   <data name="SettingsEnableUpdater" xml:space="preserve">
-        <value>Enable the updater</value>
+        <value>Включить обновления</value>
     </data>
   <data name="SettingsEnableUpdaterDesc" xml:space="preserve">
-        <value>Allow the launcher to check for and download updates.</value>
+        <value>Разрешает лаунчеру проверять и загружать обновления.</value>
     </data>
   <data name="SettingsAutoDownloadUpdates" xml:space="preserve">
-        <value>Automatically download updates</value>
+        <value>Автозагрузка обновлений</value>
     </data>
   <data name="SettingsAutoDownloadUpdatesDesc" xml:space="preserve">
-        <value>Always download updates when they're available.</value>
+        <value>Всегда загружать обновления, когда они доступны.</value>
     </data>
   <!-- network settings strings -->
   <data name="SettingsOfflineMode" xml:space="preserve">
-        <value>Offline mode</value>
+        <value>Оффлайн режим</value>
     </data>
   <data name="SettingsOfflineModeDesc" xml:space="preserve">
-        <value>Disable access to the internet. Some features may not work. Restart Jiayi for this to take full effect.</value>
+        <value>Отключает доступ в интернет. Некоторые функции будут недоступны. Перезагрузите для применения.</value>
     </data>
   <data name="SettingsOfflineModeTooltip" xml:space="preserve">
-        <value>Features like internet mods, downloading versions, and checking for updates will not work.</value>
+        <value>Функции по типу модов из интернета, загрузки версий и проверки обновлений не заработают.</value>
     </data>
   <data name="SettingsFollowRedirects" xml:space="preserve">
-        <value>Follow redirects</value>
+        <value>Следовать переходам</value>
     </data>
   <data name="SettingsFollowRedirectsDesc" xml:space="preserve">
-        <value>Follow redirects when adding web mods. Change this setting if you have trouble adding some mods.</value>
+        <value>Следовать перенаправлениям при добавлении модов из интернета. Измените эту настройку, если у вас какие-то проблемы.</value>
     </data>
   <!-- launch settings strings -->
   <data name="SettingsUseInjectionDelay" xml:space="preserve">
-        <value>Use injection delay</value>
+        <value>Использовать задержку встраивания</value>
     </data>
   <data name="SettingsUseInjectionDelayDesc" xml:space="preserve">
-        <value>Wait for a set amount of time instead of waiting for the game to load before injecting.</value>
+        <value>Подождать определённое время вместо ожидания загрузки игры, перед встраиванием мода.</value>
     </data>
   <data name="SettingsInjectionDelay" xml:space="preserve">
-        <value>Injection delay</value>
+        <value>Задержка встраивания</value>
     </data>
   <data name="SettingsInjectionDelayDesc" xml:space="preserve">
-        <value>The amount of time to wait before injecting, in seconds.</value>
+        <value>Время задержки перед встраиванием мода в секундах.</value>
     </data>
   <data name="SettingsOverrideModuleRequirement" xml:space="preserve">
-        <value>Override module requirement</value>
+        <value>Перезаписать зависимость модулей</value>
     </data>
   <data name="SettingsOverrideModuleRequirementDesc" xml:space="preserve">
         <value>
-            Override the amount of loaded modules needed before Jiayi will inject.
+            Перезаписывает количество модулей, необходимых Jiayi для встраивания.
             
-            If the launcher injects too early or too late, try changing this value.
+            Если Jiayi встраивает моды слишком поздно/рано, то измените эту настройку.
         </value>
     </data>
   <data name="SettingsModuleRequirement" xml:space="preserve">
-        <value>Module requirement</value>
+        <value>Зависимость модулей</value>
     </data>
   <data name="SettingsModuleRequirementDesc" xml:space="preserve">
-        <value>The amount of loaded modules needed before Jiayi will inject.</value>
+        <value>Количество необходимых модулей, прежде чем встраивать моды.</value>
     </data>
   <data name="SettingsAccelerateGameLoading" xml:space="preserve">
-        <value>Accelerate game loading</value>
+        <value>Ускорить загрузку игры</value>
     </data>
   <data name="SettingsAccelerateGameLoadingDesc" xml:space="preserve">
-        <value>Speed up loading times by terminating unnecessary processes. Beware of jank.</value>
+        <value>Ускоряет загрузку игры, завершая ненужные процессы.</value>
     </data>
   <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
-        <value>May cause issues related to Microsoft Store licensing (determining whether you own the game or not).</value>
+        <value>Может вызвать сбои в работе лицензирования через Microsoft Store (в зависимости от владения игрой).</value>
     </data>
   <data name="SettingsMinimizeFix" xml:space="preserve">
-        <value>Minimize fix</value>
+        <value>Починка сворачивания</value>
     </data>
   <data name="SettingsMinimizeFixDesc" xml:space="preserve">
-        <value>Prevents the game from suspending itself when minimized. Changes are applied on launch.</value>
+        <value>Не даёт игре приостановить себя при сворачивании окна. Изменения применяются при запуске.</value>
     </data>
   <!-- log settings strings -->
   <data name="SettingsAnonymizeLogs" xml:space="preserve">
-        <value>Anonymize logs</value>
+        <value>Анонимизировать журнал</value>
     </data>
   <data name="SettingsAnonymizeLogsDesc" xml:space="preserve">
-        <value>Hides any identifying information from logs. This does not apply retroactively.</value>
+        <value>Скрывает всё, что идентифицирует вас, из журнала.</value>
     </data>
   <data name="SettingsOpenLogFolder" xml:space="preserve">
-        <value>Open log folder</value>
+        <value>Открыть папку журнала</value>
     </data>
   <data name="SettingsOpenLogFolderDesc" xml:space="preserve">
-        <value>Open the log folder in File Explorer.</value>
+        <value>Открывает папку журнала в Проводнике.</value>
     </data>
   <data name="SettingsClearPreviousLogs" xml:space="preserve">
-        <value>Clear previous logs</value>
+        <value>Очистить предыдущий журнал</value>
     </data>
   <data name="SettingsClearPreviousLogsDesc" xml:space="preserve">
-        <value>Delete all previous log files.</value>
+        <value>Удаляет все предыдущие записи в журнал.</value>
     </data>
   <!-- mod card strings -->
   <data name="ModCardInvalidLink" xml:space="preserve">
-        <value>This mod is broken; it doesn't exist on the web anymore.</value>
+        <value>Неверный мод; он больше не доступен в сети.</value>
     </data>
   <data name="ModCardMissingFile" xml:space="preserve">
         <value>This mod is broken; the file is missing from the mods directory.</value>
@@ -1189,82 +1189,82 @@
         <value>Your mod could not be injected. Try turning off your antivirus, and check logs for extended error information.</value>
     </data>
   <data name="ModCardAlreadyLoaded" xml:space="preserve">
-        <value>This mod is already loaded!</value>
+        <value>Мод уже загружен!</value>
     </data>
   <!-- theme card strings -->
   <data name="ThemeCardAuthor" xml:space="preserve">
-        <value>by {0}</value>
+        <value>от {0}</value>
     </data>
   <data name="ThemeCardPrepareUpload" xml:space="preserve">
-        <value>Prepare theme upload</value>
+        <value>Подготовить тему к отправке</value>
     </data>
   <data name="ThemeCardReinstall" xml:space="preserve">
-        <value>Reinstall theme</value>
+        <value>Переустановить тему</value>
     </data>
   <data name="ThemeCardOverwriteConfirm" xml:space="preserve">
-        <value>Are you sure you want to overwrite this theme? All of your local changes will be lost.</value>
+        <value>Вы действительно хотите перезаписать текущую тему? Все ваши изменения будут стёрты.</value>
     </data>
   <!-- don't ask again strings -->
   <data name="DontAskAgain" xml:space="preserve">
         <value>
-            Stop asking
-            I said no
-            Shut up
-            Really, no
-            No more
-            No means no
-            Please stop
-            Stop it
-            Never again
-            Suck my nuts
+            Не спрашивай
+            Я сказал нет
+            Заткнись
+            Реально, нет
+            Хватит
+            Нет - значит нет
+            Пожалуйста, перестань
+            Прекрати
+            Задолбал
+            Пососи
         </value>
     </data>
   <!-- offline mode strings -->
   <data name="OfflineMode" xml:space="preserve">
-        <value>Offline Mode</value>
+        <value>Оффлайн режим</value>
     </data>
   <data name="OfflineModeDesc" xml:space="preserve">
-        <value>You're offline. Some features may not work.</value>
+        <value>Вы оффлайн. Некоторые функции могут не работать.</value>
     </data>
   <!-- update strings -->
   <data name="UpdateInstalled" xml:space="preserve">
-        <value>Update installed</value>
+        <value>Обновить установку</value>
     </data>
   <data name="UpdateInstalledDesc" xml:space="preserve">
-        <value>Jiayi was updated to {0}.</value>
+        <value>Jiayi был обновлён до {0}.</value>
     </data>
   <data name="UpdateInstalledDesc2" xml:space="preserve">
-        <value>You can view the changelog on GitHub.</value>
+        <value>Список изменений доступен в GitHub.</value>
     </data>
   <data name="UpdateAvailable" xml:space="preserve">
-        <value>Update available</value>
+        <value>Доступно обновление</value>
     </data>
   <data name="UpdateAvailableDesc" xml:space="preserve">
-        <value>An update is available. Would you like to download it?</value>
+        <value>Обновление доступно. Не хотите его скачать?</value>
     </data>
   <data name="UpdateDownloading" xml:space="preserve">
-        <value>Downloading update...</value>
+        <value>Скачивание обновления...</value>
     </data>
   <data name="UpdateDownloaded" xml:space="preserve">
-        <value>Update downloaded</value>
+        <value>Обновление скачано</value>
     </data>
   <data name="UpdateDownloadedDesc" xml:space="preserve">
-        <value>Restart to install the update.</value>
+        <value>Перезапустите, чтобы установить обновление.</value>
     </data>
   <!-- sidebar strings -->
   <data name="SidebarDashboard" xml:space="preserve">
         <value>Dashboard</value>
     </data>
   <data name="SidebarMods" xml:space="preserve">
-        <value>Mods</value>
+        <value>Моды</value>
     </data>
   <data name="SidebarProfiles" xml:space="preserve">
-        <value>Profiles</value>
+        <value>Профили</value>
     </data>
   <data name="SidebarGame" xml:space="preserve">
-        <value>Game</value>
+        <value>Игра</value>
     </data>
   <data name="SidebarSettings" xml:space="preserve">
-        <value>Settings</value>
+        <value>Настройки</value>
     </data>
 </root>

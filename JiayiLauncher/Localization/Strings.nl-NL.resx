@@ -231,7 +231,7 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Modificatie data map naam</value>
     </data>
   <data name="EditModDataFolderNotice" xml:space="preserve">
-        <value>Meestal in RoamingStatus</value>
+        <value>Meestal in RoamingState</value>
     </data>
   <data name="EditModDefaultLocationNotice" xml:space="preserve">
         <value>Modificaties worden opgeslagen in hun standaardlocatie, die veranderd kan worden in instellingen</value>

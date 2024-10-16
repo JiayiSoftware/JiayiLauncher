@@ -58,6 +58,9 @@
 <JiayiButton OnClick="EscalateModal">Ask for permissions</JiayiButton>
 <JiayiButton OnClick="EscalateImmediately">Escalate immediately</JiayiButton>
 
+<h4>Tasks</h4>
+<JiayiButton OnClick="CreateTask">Create 5 second task</JiayiButton>
+
 <h4>Themes Page</h4>
 <a href="/Themes">Themes</a>
 
@@ -183,6 +186,18 @@
     private void EscalateImmediately()
     {
         _privileges.Escalate();
+    }
+
+    private void CreateTask()
+    {
+        var tasks = Singletons.Get<JiayiTasks>();
+        var task = tasks.AddTask(new Task(async () =>
+        {
+            await Task.Delay(5000);
+            Console.WriteLine("Task completed.");
+        }), "Dummy task", "TestPlace");
+        
+        task.Start();
     }
 
 }

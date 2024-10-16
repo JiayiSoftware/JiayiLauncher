@@ -96,4 +96,8 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Shared\Components\Settings\" />
+    </ItemGroup>
+
 </Project>

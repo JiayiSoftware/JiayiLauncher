@@ -8,7 +8,7 @@ namespace JiayiLauncher.Utils;
 
 public class InternetManager
 {
-	private const string IP = "https://1.1.1.1";
+	private const string IP = "https://phased.tech";
 	
 	public bool OfflineMode { get; private set; }
 	public HttpClient Client { get; } = new();

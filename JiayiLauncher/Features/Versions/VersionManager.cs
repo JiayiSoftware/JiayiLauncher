@@ -205,7 +205,7 @@ public class VersionManager
 			Directory.Delete(folder, true);
 		});
 
-		await _shaderManager.DeleteBackupShaders();
+		await _shaderManager.DeleteBackupShaders(ver);
 	}
 
 	// my favorite part of this class

@@ -54,9 +54,8 @@ public class ShaderManager
 		_log.Write(nameof(ShaderManager), $"Backed up vanilla shaders for version {await _packageData.GetVersion()}");
 	}
 	
-	public async Task DeleteBackupShaders()
+	public async Task DeleteBackupShaders(string version)
 	{
-		var version = await _packageData.GetVersion();
 		var path = Path.Combine(JiayiSettings.Instance.ShadersPath, "Vanilla", version);
 		if (Directory.Exists(path)) Directory.Delete(path, true);
 		

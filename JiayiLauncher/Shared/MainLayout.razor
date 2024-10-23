@@ -46,6 +46,9 @@
         if (!firstRender) return;
 
         Instance = this;
+        
+        // uhh
+        Singletons.Add<JiayiTasks>();
 
         if (_internet.OfflineMode)
         {

@@ -100,7 +100,6 @@ public partial class MainPage : ContentPage
         Singletons.Add<Launcher>();
         Singletons.Add<ModImporter>();
         Singletons.Add<RichPresence>();
-        Singletons.Add<JiayiTasks>();
         Singletons.Add(this);
 
         WebView.BlazorWebViewInitialized += (_, e) =>

@@ -193,8 +193,7 @@
         var tasks = Singletons.Get<JiayiTasks>();
         var task = tasks.AddTask(new Task(async () =>
         {
-            await Task.Delay(5000);
-            Console.WriteLine("Task completed.");
+            await Task.Delay(-1);
         }), "Dummy task", "TestPlace");
         
         task.Start();

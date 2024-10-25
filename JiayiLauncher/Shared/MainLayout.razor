@@ -48,7 +48,7 @@
         Instance = this;
         
         // uhh
-        Singletons.Add<JiayiTasks>();
+        Singletons.Add<JiayiTasks>(NavigationManager, ToastService);
 
         if (_internet.OfflineMode)
         {

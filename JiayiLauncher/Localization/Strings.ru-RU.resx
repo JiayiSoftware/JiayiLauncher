@@ -733,7 +733,7 @@
         <value>предоставлено freeminesweeper.org</value>
     </data>
   <data name="SecretText2" xml:space="preserve">
-        <value>livesweeper: competitive minesweeper</value>
+        <value>живопёр: соревновательный сапёр</value>
     </data>
   <!-- settings page strings -->
   <data name="SettingsMenuName" xml:space="preserve">
@@ -764,7 +764,7 @@
         <value>Журнал</value>
     </data>
   <data name="SettingsAbout" xml:space="preserve">
-        <value>About</value>
+        <value>О нас</value>
     </data>
   <data name="SettingsAboutSettingTitle" xml:space="preserve">
         <value>Об этой настройке</value>
@@ -1018,16 +1018,16 @@
         <value>Показать кнопку для загрузки текущего мода. Не работает с локальными модами.</value>
     </data>
   <data name="SettingsDiscordLargeImageKey" xml:space="preserve">
-        <value>Large image key</value>
+        <value>Описание большой картинки</value>
     </data>
   <data name="SettingsDiscordLargeImageKeyDesc" xml:space="preserve">
-        <value>The large image key to use for rich presence.</value>
+        <value>Текстовое описание при наведении на большую картинку.</value>
     </data>
   <data name="SettingsDiscordSmallImageKey" xml:space="preserve">
-        <value>Small image key</value>
+        <value>Описание маленькой картинки</value>
     </data>
   <data name="SettingsDiscordSmallImageKeyDesc" xml:space="preserve">
-        <value>The small image key to use for rich presence.</value>
+        <value>Текстовое описанием при наведении на маленькую картинку.</value>
     </data>
   <data name="SettingsDiscordLargeImageText" xml:space="preserve">
         <value>Текст большого изображения</value>
@@ -1138,19 +1138,19 @@
         <value>Неверный мод; он больше не доступен в сети.</value>
     </data>
   <data name="ModCardMissingFile" xml:space="preserve">
-        <value>This mod is broken; the file is missing from the mods directory.</value>
+        <value>Мод повреждён: отсутствует файл в папке мода.</value>
     </data>
   <data name="ModCardOffline" xml:space="preserve">
-        <value>Internet mods are disabled in offline mode</value>
+        <value>Моды из интернета недоступны в оффлайн режиме</value>
     </data>
   <data name="ModCardInternetMod" xml:space="preserve">
-        <value>Downloaded from the web</value>
+        <value>Загружено из интернета</value>
     </data>
   <data name="ModCardLocalMod" xml:space="preserve">
-        <value>Locally stored</value>
+        <value>Загружено из хранилища</value>
     </data>
   <data name="ModCardSupportedVersions" xml:space="preserve">
-        <value>Works on {0}</value>
+        <value>Работает на {0}</value>
     </data>
   <data name="ModCardHideControls" xml:space="preserve">
         <value>Hide controls</value>

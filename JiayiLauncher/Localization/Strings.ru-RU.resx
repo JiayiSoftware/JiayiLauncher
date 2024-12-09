@@ -1153,40 +1153,40 @@
         <value>Работает на {0}</value>
     </data>
   <data name="ModCardHideControls" xml:space="preserve">
-        <value>Hide controls</value>
+        <value>Спрятать управление</value>
     </data>
   <data name="ModCardShowControls" xml:space="preserve">
-        <value>Show controls</value>
+        <value>Показать управление</value>
     </data>
   <data name="ModCardManageConfigs" xml:space="preserve">
-        <value>Manage configs</value>
+        <value>Редактировать настройки</value>
     </data>
   <data name="ModCardEditMod" xml:space="preserve">
-        <value>Edit mod</value>
+        <value>Редактировать мод</value>
     </data>
   <data name="ModCardDeleteMod" xml:space="preserve">
-        <value>Delete mod (irreversible)</value>
+        <value>Удалить мод (навсегда)</value>
     </data>
   <data name="ModCardDeleteModConfirm" xml:space="preserve">
-        <value>Are you sure you want to delete {0}? This action is irreversible.</value>
+        <value>Вы точно хотите удалить мод {0}? Он удалится навсегда (очень долго)!</value>
     </data>
   <data name="ModCardLaunchMultipleModsConfirm" xml:space="preserve">
-        <value>Launching more than one mod at a time can make your game unstable. Are you sure you want to launch {0}?</value>
+        <value>Запуск нескольких модов может сделать вашу игру нестабильной (если она вообще будет работать). Вы уверены, что хотите запустить {0}?</value>
     </data>
   <data name="ModCardDownloadFailed" xml:space="preserve">
-        <value>Failed to download mod. Please try again later.</value>
+        <value>Ошибка загрузки мода! Повторите попытку позже.</value>
     </data>
   <data name="ModCardModNotFound" xml:space="preserve">
-        <value>Your mod was deleted during launch. Try turning off your antivirus.</value>
+        <value>Мод был удалён во время запуска. Попробуйте добавить его в исключения своего антивируса.</value>
     </data>
   <data name="ModCardGameNotFound" xml:space="preserve">
-        <value>The game was closed during launch. Turn off your antivirus in case it's terminating the game.</value>
+        <value>Игра закрылась при запуске. Выключите свой антивирус, если он мешает запуску игры.</value>
     </data>
   <data name="ModCardVersionMismatch" xml:space="preserve">
-        <value>{0} doesn't support your current game version. Would you like to switch to {1}?</value>
+        <value>Мод {0} не поддерживает текущую версию игры. Хотите переключаться на {1}?</value>
     </data>
   <data name="ModCardInjectionFailed" xml:space="preserve">
-        <value>Your mod could not be injected. Try turning off your antivirus, and check logs for extended error information.</value>
+        <value>Не удалось встроить ваш мод. Проверьте ваш антивирус и журнал для анализа ошибок.</value>
     </data>
   <data name="ModCardAlreadyLoaded" xml:space="preserve">
         <value>Мод уже загружен!</value>

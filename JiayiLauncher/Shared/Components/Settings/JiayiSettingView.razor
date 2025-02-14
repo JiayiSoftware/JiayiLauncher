@@ -74,7 +74,7 @@
                     @* ReSharper disable once AccessToModifiedClosure *@
                     <a href=@href><JiayiButton Size="JiayiButton.ButtonSize.Small" Style="padding: 0.5rem 1rem">@content</JiayiButton></a>
                     break;
-                case true when Setting.PropertyType == typeof(Color):
+                case true when Setting.PropertyType == typeof(System.Drawing.Color):
                     @* for now *@
                     var color = (System.Drawing.Color)Setting.GetValue(JiayiSettings.Instance)!;
                     var hex = $"#{color.R:x2}{color.G:x2}{color.B:x2}";

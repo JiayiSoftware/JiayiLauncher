@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @using System.Reflection
+@using JiayiLauncher.Appearance
 @using JiayiLauncher.Settings
 @using JiayiLauncher.Settings.SpecialTypes
 
@@ -78,7 +79,7 @@
                     @* for now *@
                     var color = (System.Drawing.Color)Setting.GetValue(JiayiSettings.Instance)!;
                     var hex = $"#{color.R:x2}{color.G:x2}{color.B:x2}";
-                    <JiayiColorPicker Color="@hex" ColorChanged="s => ChangeColorSetting(s, Setting)"/>
+                    <JiayiColorPicker Color="@(new TranslatableColor(color))" ColorChanged="s => ChangeColorSetting(s, Setting)"/>
                     break;
                 case true when Setting.PropertyType == typeof(ModeSetting):
                     var modeSetting = (ModeSetting)Setting.GetValue(JiayiSettings.Instance)!;
@@ -146,17 +147,9 @@
         JiayiSettings.Instance!.Save();
     }
 
-    private void ChangeColorSetting(object? value, PropertyInfo setting)
+    private void ChangeColorSetting(TranslatableColor value, PropertyInfo setting)
     {
-        var color = value as string ?? "#000000";
-        var bytes = new byte[3];
-        for (var i = 0; i < 3; i++)
-        {
-            bytes[i] = byte.Parse(color.Substring(i * 2 + 1, 2), NumberStyles.HexNumber);
-        }
-        
-        var newColor = System.Drawing.Color.FromArgb(bytes[0], bytes[1], bytes[2]);
-        setting.SetValue(JiayiSettings.Instance, newColor);
+        setting.SetValue(JiayiSettings.Instance, value.Color);
         JiayiSettings.Instance!.Save();
     }
     

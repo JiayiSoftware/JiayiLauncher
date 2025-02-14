@@ -1,18 +1,204 @@
-﻿<label class="color-picker" style="background-color: @Color">
-    <input type="color" value="@Color" @onchange="OnChange">
-</label>
+﻿@using JiayiLauncher.Appearance
+@using JiayiLauncher.Utils
+
+<div class="color-picker-container" @onfocusout="Close" @onmouseleave="MouseLeft" @onmouseover="MouseOver">
+    <button class="color-preview" style="background-color: @Color.Hex" @onclick="Clicked">
+        @* <input type="color" value="@Color" @onchange="OnChange"> *@
+    </button>
+
+    <div class="color-picker" style="display: @_showColorPicker">
+        <div class="color-zone" style="background: @_zoneBackground">
+            <div class="color-pointer"></div>
+        </div>
+
+        <div class="color-info">
+            <div class="color-hue-slider" title="Hue">
+                <span class="material-symbols-sharp">invert_colors</span>
+                <JiayiSlider Max="360" Value="@((float)Math.Round(Color.Hue))" Style="width: 84%; height: 4rem;" Step="1" ValueChanged="_hueChanged" />
+            </div>
+
+            <div class="color-values">
+                <div class="color-value" id="rgb" style="display: @(_colorMode == ColorMode.RGB ? "block" : "none")">
+                    <input type="number" min="0" max="255" step="1" value="@(Color.Red)" @onchange="_redChanged">
+                    <input type="number" min="0" max="255" step="1" value="@(Color.Green)" @onchange="_greenChanged">
+                    <input type="number" min="0" max="255" step="1" value="@(Color.Blue)" @onchange="_blueChanged">
+                </div>
+
+                <div class="color-value" id="hsl" style="display: @(_colorMode == ColorMode.HSL ? "block" : "none")">
+                    <input type="number" min="0" max="360" step="1" value="@((float)Math.Round(Color.Hue))" @onchange="_hueChanged2">
+                    <input type="number" min="0" max="1" step="1" value="@(Math.Round(Color.Saturation * 100))" @onchange="_saturationChanged">
+                    <input type="number" min="0" max="100" step="1" value="@(Math.Round(Color.Lightness * 100))" @onchange="_lightnessChanged">
+                </div>
+
+                <div class="color-value" id="hex" style="display: @(_colorMode == ColorMode.HEX ? "block" : "none")">
+                    <JiayiTextBox Placeholder="#000000" Value="@(Color.Hex)" Style="width: 100%" Changed="HexChanged" />
+                </div>
+
+                <div class="color-mode-select">
+                    <span class="material-symbols-sharp" title="Previous color mode"
+                          @onclick="() => _colorMode = (ColorMode)(((int)_colorMode + 2) % 3)">arrow_left</span>
+
+                    <p class="color-mode">@_colorMode</p>
+
+                    <span class="material-symbols-sharp" title="Next color mode"
+                          @onclick="() => _colorMode = (ColorMode)(((int)_colorMode + 1) % 3)">arrow_right</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @code {
-    [Parameter]
-    public string Color { get; set; } = "#000000";
-    
-    [Parameter]
-    public EventCallback<string> ColorChanged { get; set; }
-
-    private void OnChange(ChangeEventArgs obj)
+    enum ColorMode
     {
-        var color = obj.Value as string ?? "#000000";
-        Color = color;
-        ColorChanged.InvokeAsync(color);
+        RGB,
+        HSL,
+        HEX
     }
+
+    [Parameter]
+    public TranslatableColor Color { get; set; } = new(255, 0, 0);
+
+    [Parameter]
+    public EventCallback<TranslatableColor> ColorChanged { get; set; }
+
+    private ColorMode _colorMode = ColorMode.RGB;
+
+    // styles
+    private string _showColorPicker = "none";
+    private string _zoneBackground => "linear-gradient(to bottom, transparent, black), " +
+                                      $"linear-gradient(to right, white, hsl({Color.Hue}, {Color.Saturation * 100}%, {Color.Lightness * 100}%))";
+
+    // debounce actions
+    private Action<float> _hueChanged;
+    private Action<ChangeEventArgs> _redChanged, _greenChanged, _blueChanged;
+    private Action<ChangeEventArgs> _hueChanged2, _saturationChanged, _lightnessChanged;
+    
+    // thing
+    private bool _mouseOver;
+
+    protected override void OnInitialized()
+    {
+        int debounce = 5;
+        _hueChanged = ((Action<float>)HueChanged).Debounce(debounce);
+        _redChanged = ((Action<ChangeEventArgs>)RedChanged).Debounce(debounce);
+        _greenChanged = ((Action<ChangeEventArgs>)GreenChanged).Debounce(debounce);
+        _blueChanged = ((Action<ChangeEventArgs>)BlueChanged).Debounce(debounce);
+        _hueChanged2 = ((Action<ChangeEventArgs>)HueChanged).Debounce(debounce);
+        _saturationChanged = ((Action<ChangeEventArgs>)SaturationChanged).Debounce(debounce);
+        _lightnessChanged = ((Action<ChangeEventArgs>)LightnessChanged).Debounce(debounce);
+    }
+
+    // private void OnChange(ChangeEventArgs obj)
+    // {
+    //     var color = obj.Value as string ?? "#000000";
+    //     Color = color;
+    //     ColorChanged.InvokeAsync(color);
+    // }
+
+    private void Clicked()
+    {
+        _showColorPicker = _showColorPicker == "none" ? "block" : "none";
+        ColorChanged.InvokeAsync(Color);
+    }
+
+    private async Task Close()
+    {
+        // only proceed with closing if the mouse is actually outside the color picker
+        if (_mouseOver) return;
+        
+        _showColorPicker = "none";
+        await ColorChanged.InvokeAsync(Color);
+    }
+
+    private void UpdateEverything()
+    {
+        InvokeAsync(StateHasChanged); // DUMB
+    }
+
+    private float HueToRgb(float p, float q, float t)
+    {
+        if (t < 0f) t += 1f;
+        if (t > 1f) t -= 1f;
+        if (t < 1f / 6f) return p + (q - p) * 6f * t;
+        if (t < 1f / 2f) return q;
+        if (t < 2f / 3f) return p + (q - p) * (2f / 3f - t) * 6f;
+        return p;
+    }
+
+    private void HueChanged(float newHue)
+    {
+        Color.Hue = newHue;
+        UpdateEverything();
+    }
+
+    // stupid functions
+    private void RedChanged(ChangeEventArgs e)
+    {
+        Color.Red = int.Parse((string)(e.Value ?? "0"));
+        RGBChanged();
+    }
+
+    private void GreenChanged(ChangeEventArgs e)
+    {
+        Color.Green = int.Parse((string)(e.Value ?? "0"));
+        RGBChanged();
+    }
+
+    private void BlueChanged(ChangeEventArgs e)
+    {
+        Color.Blue = int.Parse((string)(e.Value ?? "0"));
+        RGBChanged();
+    }
+
+    private void HueChanged(ChangeEventArgs e)
+    {
+        HueChanged(int.Parse((string)(e.Value ?? "0")));
+    }
+
+    private void SaturationChanged(ChangeEventArgs e)
+    {
+        try
+        {
+            Color.Saturation = float.Parse((string)(e.Value ?? "0")) / 100f;
+        }
+        catch (FormatException fe)
+        {
+            Color.Saturation = 0;
+        }
+        UpdateEverything();
+    }
+
+    private void LightnessChanged(ChangeEventArgs e)
+    {
+        try
+        {
+            Color.Lightness = float.Parse((string)(e.Value ?? "0")) / 100f;
+        }
+        catch (FormatException fe) { }
+        UpdateEverything();
+    }
+
+    private void RGBChanged()
+    {
+        UpdateEverything();
+    }
+
+    private void HexChanged(string? obj)
+    {
+        Color.Hex = obj;
+        UpdateEverything();
+    }
+
+    private void MouseLeft()
+    {
+        _mouseOver = false;
+    }
+
+    private void MouseOver()
+    {
+        _mouseOver = true;
+    }
+
 }

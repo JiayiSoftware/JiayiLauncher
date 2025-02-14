@@ -34,6 +34,7 @@ public partial class App : MauiWinUIApplication
             // list of suppressed exceptions
             var suppressed = new List<string>
             {
+                "System.Threading.Tasks.TaskCanceledException",
                 "TimeoutException",
                 "Object name: 'System.Net.Sockets.NetworkStream'.",
                 "at WinRT.ExceptionHelpers.<ThrowExceptionForHR>g__Throw",

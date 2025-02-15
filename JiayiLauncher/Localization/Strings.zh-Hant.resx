@@ -1106,7 +1106,7 @@
         <value>通過終止不必要的進程來加快加載時間。 謹防卡頓。</value>
     </data>
   <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
-        <value>可能會導致與 Microsoft Store 許可相關的問題（確定您是否擁有該遊戲）。</value>
+        <value>May cause issues related to Microsoft Store licensing (determining whether you own the game or not). This option has become useless in later versions, as Mojang has improved loading times.</value>
     </data>
   <data name="SettingsMinimizeFix" xml:space="preserve">
         <value>最小化修復</value>

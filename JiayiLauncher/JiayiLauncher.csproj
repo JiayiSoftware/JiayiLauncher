@@ -135,4 +135,10 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="upload.bat">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

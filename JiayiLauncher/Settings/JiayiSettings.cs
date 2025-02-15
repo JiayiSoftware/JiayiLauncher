@@ -64,26 +64,7 @@ public class JiayiSettings
     public ModeSetting Language { get; set; } = new("Use system language",
     [
         "Use system language",
-        // "Arabic",
-        // "Chinese (Simplified)",
-        // "Chinese (Traditional)",
-        // "Dutch",
-        // "English (US)",
-        // "English (UK)",
-        // "Filipino",
-        // "French",
-        // "German",
-        // "Hindi",
-        // "Italian",
-        // "Japanese",
-        // "Macedonian",
-        // "Pirate Speak",
-        // "Romanian",
-        // "Russian",
-        // "Spanish",
-        // "Thai",
-        // "Turkish",
-        // "Ukrainian"
+        // languages are added programmatically
     ]);
     
     [Setting("Mod folder path", "General", "The path to the folder containing your mods.", canReset: false)]

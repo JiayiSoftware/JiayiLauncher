@@ -20,7 +20,6 @@
                 <p>@_currentVersion</p>
                 <div class="install-location">
                     <i>@_installLocation</i>
-                    <span class="material-symbols-sharp" title="Manage game tweaks" @onclick="TweaksClicked">tune</span>
                 </div>
             </div>
 
@@ -150,11 +149,6 @@
     private void ShadersClicked()
     {
         NavigationManager.NavigateTo("/Shaders");
-    }
-
-    private void TweaksClicked()
-    {
-        NavigationManager.NavigateTo("/Tweaks");
     }
 
 }

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
-        <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+        <TargetFramework>net9.0-windows10.0.22621.0</TargetFramework>
         <OutputType>Exe</OutputType>
         <RootNamespace>JiayiLauncher</RootNamespace>
         <UseMaui>true</UseMaui>
@@ -39,10 +39,10 @@
         <PackageReference Include="Blazored.Modal" Version="7.3.1" />
         <PackageReference Include="Blazored.Toast" Version="4.2.1" />
         <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
-        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="8.0.100" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.2" />
         <PackageReference Include="Octokit" Version="14.0.0" />
         <PackageReference Include="System.Drawing.Common" Version="9.0.2" />
         <PackageReference Include="WindowsAPICodePack.Shell.CommonFileDialogs" Version="1.1.5" />

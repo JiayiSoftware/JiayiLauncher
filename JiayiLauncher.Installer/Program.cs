@@ -134,7 +134,7 @@ Console.Clear();
 // dotnet
 Console.WriteLine("[2/4] Installing .NET\n");
 // check if .NET is on the PATH
-Console.WriteLine("Jiayi Launcher requires .NET 8 to run.");
+Console.WriteLine("Jiayi Launcher requires .NET 9 to run.");
 var dotnetInstalled = Environment.GetEnvironmentVariable("PATH")?.Contains("dotnet") ?? false;
 if (dotnetInstalled)
 {
@@ -152,14 +152,14 @@ if (dotnetInstalled)
 	
 	process?.WaitForExit();
 	var output = process?.StandardOutput.ReadToEnd();
-	if (output != null && output.StartsWith("8."))
+	if (output != null && output.StartsWith("9."))
 	{
-		Console.WriteLine("It looks like .NET 8 is already installed on your system.");
+		Console.WriteLine("It looks like .NET 9 is already installed on your system.");
 		Console.WriteLine("If you'd like to install it anyway, type \"install\".");
 	}
 	else
 	{
-		Console.WriteLine("It looks like .NET is already installed on your system, but it's not .NET 8.");
+		Console.WriteLine("It looks like .NET is already installed on your system, but it's not .NET 9.");
 		Console.WriteLine("If you'd like to install it, type \"install\".");
 	}
 }
@@ -211,7 +211,7 @@ if (dotnet)
 {
 	Console.WriteLine("Installing .NET...");
 	const string dotnetDownloadUrl = 
-		"https://download.visualstudio.microsoft.com/download/pr/f18288f6-1732-415b-b577-7fb46510479a/a98239f751a7aed31bc4aa12f348a9bf/windowsdesktop-runtime-8.0.1-win-x64.exe";
+		"https://aka.ms/dotnet/9.0/windowsdesktop-runtime-win-x64.exe";
 	var dotnetDownloadPath = Path.Combine(Path.GetTempPath(), "dotnet.exe");
 	await Download(dotnetDownloadUrl, dotnetDownloadPath);
 	

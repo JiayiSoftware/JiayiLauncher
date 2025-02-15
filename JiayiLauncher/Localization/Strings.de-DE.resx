@@ -1102,7 +1102,7 @@
         <value>Beschleunigung der Ladezeiten durch Beendigung unnötiger Prozesse. Vorsicht vor Jank.</value>
     </data>
   <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
-        <value>Es kann zu Problemen im Zusammenhang mit der Microsoft Store-Lizenzierung kommen (Feststellung, ob du das Spiel besitzt oder nicht).</value>
+        <value>May cause issues related to Microsoft Store licensing (determining whether you own the game or not). This option has become useless in later versions, as Mojang has improved loading times.</value>
     </data>
   <data name="SettingsMinimizeFix" xml:space="preserve">
         <value>Minimierungsfix</value>

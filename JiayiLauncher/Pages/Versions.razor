@@ -117,8 +117,9 @@
         }
 
         var versions = await versionList.GetVersionList();
-        // shave the last 2 characters off the version name as they're not shown in game
-        _latestVersion = versions[0][..^2];
+        // shave everything after the last dot
+        _latestVersion = versions[0][..versions[0].LastIndexOf('.')];
+        
         _popularVersions.Add(versions[0]);
         
         if (_currentVersion != Strings.Unknown && versionList.CompareVersions("1.16.200.2", _currentVersion))

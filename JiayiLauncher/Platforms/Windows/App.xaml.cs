@@ -39,7 +39,7 @@ public partial class App : MauiWinUIApplication
                 "Object name: 'System.Net.Sockets.NetworkStream'.",
                 "at WinRT.ExceptionHelpers.<ThrowExceptionForHR>g__Throw",
                 "at Microsoft.AspNetCore.Components.WebView.WebView2.WebView2WebViewManager.SendMessage(String message)",
-                "System.Net.Sockets.SocketException (995): The I/O operation has been aborted because of either a thread exit or an application request."
+                "System.Net.Sockets.SocketException (995):"
             };
 			
             AppDomain.CurrentDomain.FirstChanceException += (_, ex) =>

@@ -1106,7 +1106,7 @@
         <value>Ускоряет загрузку игры, завершая ненужные процессы.</value>
     </data>
   <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
-        <value>Может вызвать сбои в работе лицензирования через Microsoft Store (в зависимости от владения игрой).</value>
+        <value>May cause issues related to Microsoft Store licensing (determining whether you own the game or not). This option has become useless in later versions, as Mojang has improved loading times.</value>
     </data>
   <data name="SettingsMinimizeFix" xml:space="preserve">
         <value>Починка сворачивания</value>

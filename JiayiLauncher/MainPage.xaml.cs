@@ -95,10 +95,11 @@ public partial class MainPage : ContentPage
         Singletons.Add<ShaderManager>();
         Singletons.Add<VersionManager>();
         Singletons.Add<Injector>();
-        Singletons.Add<JiayiStats>().Load();
+        var stats = Singletons.Add<JiayiStats>();
         Singletons.Add<Minecraft>();
         Singletons.Add<Launcher>();
         Singletons.Add<ModImporter>();
+        Singletons.Add<ModDownloader>();
         Singletons.Add<RichPresence>();
         Singletons.Add(this);
 
@@ -123,6 +124,7 @@ public partial class MainPage : ContentPage
         if (JiayiSettings.Instance.ModCollectionPath != string.Empty)
         {
             ModCollection.Load(JiayiSettings.Instance.ModCollectionPath);
+            stats.Load();
         }
 		      
         if (JiayiSettings.Instance.ProfileCollectionPath != string.Empty)

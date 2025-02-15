@@ -1579,7 +1579,7 @@ namespace JiayiLauncher.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to May cause issues related to Microsoft Store licensing (determining whether you own the game or not)..
+        ///   Looks up a localized string similar to May cause issues related to Microsoft Store licensing (determining whether you own the game or not). This option has become useless in later versions, as Mojang has improved loading times..
         /// </summary>
         internal static string SettingsAccelerateGameLoadingTooltip {
             get {

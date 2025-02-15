@@ -405,7 +405,8 @@ public class JiayiSettings
 
     [Setting("Accelerate game loading", "Launch",
         "Speed up loading times by terminating unnecessary processes. Beware of jank.",
-        tooltip: "May cause issues related to Microsoft Store licensing (determining whether you own the game or not).")]
+        tooltip: "May cause issues related to Microsoft Store licensing (determining whether you own the game or not). " +
+                 "This option has become useless in later versions, as Mojang has improved loading times.")]
     public bool AccelerateGameLoading { get; set; } = false;
     
     [Setting("Minimize fix", "Launch", "Prevents the game from suspending itself when minimized. Changes are applied upon launch.")]

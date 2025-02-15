@@ -16,6 +16,12 @@ public class PackageData
 {
 	public const string FAMILY_NAME = "Microsoft.MinecraftUWP_8wekyb3d8bbwe";
 	
+	private readonly Dictionary<string, string> _versionOverrides = new()
+	{
+		{ "1.20.1.0", "1.20.0.1" },
+		{ "1.21.60.0", "1.21.60.10" }
+	};
+	
 	public PackageManager PackageManager { get; } = new();
 	
 	private readonly Log _log = Singletons.Get<Log>();
@@ -49,19 +55,13 @@ public class PackageData
 		}
 		else
 		{
-			// for some reason 1.20.0.1's build and revision are swapped (1.20.1.0)
-			// i sure hope mojang just changed how versions work and this isn't a one time thing
-			if (version == new PackageVersion(1, 20, 1, 0))
-				return "1.20.0.1";
-			
-			// UPDATE: they did it again. i'm not hardcoding this
-			
 			// when mojang does the silly and makes the build number 1 digit
 			// the revision is literally the revision
 			revision = version.Revision.ToString()[^1];
 		}
 		
-		return $"{major}.{minor}.{build}.{revision}";
+		var finalVer = $"{major}.{minor}.{build}.{revision}";
+		return _versionOverrides.GetValueOrDefault(finalVer, finalVer);
 	}
 
 	public async Task<InstallLocation> GetInstallLocation()

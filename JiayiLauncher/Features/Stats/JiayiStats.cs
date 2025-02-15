@@ -96,6 +96,7 @@ public class JiayiStats
 		}
 		catch (Exception e)
 		{
+			_loaded = true;
 			Save();
 			log.Write(nameof(JiayiStats), $"Stats file was corrupted or invalid. Created new stats file. Error: {e}");
 		}

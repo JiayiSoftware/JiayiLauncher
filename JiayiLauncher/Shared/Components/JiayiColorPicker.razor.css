@@ -75,6 +75,17 @@
     cursor: pointer;
 }
 
+.color-pointer {
+    width: 10px;
+    height: 10px;
+    border: 2px solid gray;
+    border-radius: 100%;
+    position: absolute;
+
+    user-select: none;
+    pointer-events: none;
+}
+
 input[type=number] {
     width: 4.5rem;
     border-radius: var(--rounding);

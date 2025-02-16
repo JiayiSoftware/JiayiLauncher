@@ -78,8 +78,7 @@
                 case true when Setting.PropertyType == typeof(System.Drawing.Color):
                     @* for now *@
                     var color = (System.Drawing.Color)Setting.GetValue(JiayiSettings.Instance)!;
-                    var hex = $"#{color.R:x2}{color.G:x2}{color.B:x2}";
-                    <JiayiColorPicker Color="@(new TranslatableColor(color))" ColorChanged="s => ChangeColorSetting(s, Setting)"/>
+                    <JiayiColorPicker Color="@(new TranslatableColor(color))" ColorChanged="s => ChangeColorSetting(s, Setting)" />
                     break;
                 case true when Setting.PropertyType == typeof(ModeSetting):
                     var modeSetting = (ModeSetting)Setting.GetValue(JiayiSettings.Instance)!;

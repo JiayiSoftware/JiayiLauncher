@@ -1106,7 +1106,7 @@ Zorg dat je de goede data map naam hebt ingesteld.        </value>
         <value>Versnel de laadtijden door onnodige processen te termineren. Let op voor mogelijke onstabiliteit.</value>
     </data>
   <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
-        <value>Can problemen veroorzaken met Microsoft webwinkel licenties (determineren of jij in bezit bent van het spel).</value>
+        <value>May cause issues related to Microsoft Store licensing (determining whether you own the game or not). This option has become useless in later versions, as Mojang has improved loading times.</value>
     </data>
   <data name="SettingsMinimizeFix" xml:space="preserve">
         <value>Minimaliseren oplossen</value>

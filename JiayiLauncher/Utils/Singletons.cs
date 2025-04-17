@@ -34,4 +34,9 @@ public static class Singletons
 
 		return singleton;
 	}
+
+	public static T? TryGet<T>() where T : class
+	{
+		return _singletons.OfType<T>().FirstOrDefault();
+	}
 }

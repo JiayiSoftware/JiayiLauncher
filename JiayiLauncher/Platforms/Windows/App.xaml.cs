@@ -15,6 +15,8 @@ public partial class App : MauiWinUIApplication
     // mutex is out here to prevent it from being garbage collected
     private Mutex _mutex;
 
+    private Exception? _lastException;
+
     public App()
     {
         InitializeComponent();
@@ -31,41 +33,40 @@ public partial class App : MauiWinUIApplication
 
         if (createdNew) // only one instance of the launcher
         {
-            // list of suppressed exceptions
-            var suppressed = new List<string>
-            {
-                "System.Threading.Tasks.TaskCanceledException",
-                "TimeoutException",
-                "Object name: 'System.Net.Sockets.NetworkStream'.",
-                "at WinRT.ExceptionHelpers.<ThrowExceptionForHR>g__Throw",
-                "at Microsoft.AspNetCore.Components.WebView.WebView2.WebView2WebViewManager.SendMessage(String message)",
-                "System.Net.Sockets.SocketException (995):"
-            };
-			
+            // exception handler taken from https://gist.github.com/mattjohnsonpint/7b385b7a2da7059c4a16562bc5ddb3b7
+            
             AppDomain.CurrentDomain.FirstChanceException += (_, ex) =>
             {
-                var exception = ex.Exception.ToString();
-                if (suppressed.Any(exception.Contains)) return;
-                
-                log.Write(ex.Exception, exception, Log.LogLevel.Error);
+                _lastException = ex.Exception;
+            };
 
-                var windowHandle = FindWindowW(null, "Jiayi Launcher");
-                var result = MessageBoxW(
-                    windowHandle, 
-                    """
-                    Jiayi has ran into an issue and needs to close. Please send your log file to the nearest developer.
-
-                    Would you like to open the log folder? Your log file is saved as 'Current.log'.
-                    """, 
-                    "Crash", 
-                    0x00000004 | 0x00000010);
-                
-                if (result == 6) // yes
+            Microsoft.UI.Xaml.Application.Current.UnhandledException += (_, ex) =>
+            {
+                var exception = ex.Exception;
+                if (exception.StackTrace == null)
                 {
-                    Process.Start("explorer.exe", Log.LogPath);
+                    exception = _lastException!;
                 }
-                
-                Environment.Exit(1);
+
+                log.Write(exception, exception.ToString(), Log.LogLevel.Error);
+
+                var blazor = Singletons.TryGet<BlazorBridge>();
+                if (blazor == null) return;
+
+                var parameters = new ToastParameters()
+                    .Add(nameof(JiayiToast.Level), ToastLevel.Warning)
+                    .Add(nameof(JiayiToast.Title), "Internal error")
+                    .Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
+                    {
+                        builder.OpenElement(0, "p");
+                        builder.AddContent(1,
+                            "This should not affect the launcher. View your log file for more information.");
+                        builder.CloseElement();
+                    }));
+                blazor.ShowToast(parameters, settings =>
+                {
+                    settings.Timeout = 5;
+                });
             };
 			
             return;

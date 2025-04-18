@@ -1,20 +1,23 @@
 ﻿Developers:
-carlton • DeathlyBower959
+phase • DeathlyBower959
 
 Testers:
-Frankie • fizz • n3twoik • Gary • SlySlacker • CheemzZ • hmmm_ • ItzPhoenix • TTF_fog • bolo • scoreboard. • skylleerr
+Frankie • fizz • Gary • SlySlacker • hmmm • ttf • Bolo • scoreboard. • fimi
 
 Contributors (up to this release):
 GacekKosmatek • Nyami • Flash_ • Plextora • always
 
-VIPs (from the Discord server):
-VastraKai • Flash_ • Overmind_ • Brady • SWIMS • CXCube • ASM • elle • Skid • ghosty • NoSkillPureAndy • Hammond • megahendrik • Aether • pod • JayRSky • rice • bolo
+Translators:
+always, SpinierYard212 (English (UK)) • MAHER CRAFT (Arabic) • Itsme64 (Dutch) • YaGoat (Turkish) • David, treegfx, Bolo, CR Jakob (German) • Rasky1 (Japanese) • MRUIAW (Chinese) • ASM (Italian) • reikumi (Russian) • Raspberry (Filipino) • Namu (Thai) • Hammond (Pirate Speak, not in the launcher atm - sorry!) • Aether (Spanish) • MRUIAW (Taiwanese) • rares (Romanian) • azure (Macedonian) • Jerryeatsbeans (French)
 
-Press (YouTubers, streamers, etc.):
-SpinierYard212 • YaGoat
+VIPs from the Discord server:
+Overmind_ • loud • rares • Aether • srxfiq • Flash_ • Brady • SWIMS • CXCube • ASM • Skid • ghosty • Hammond • megahendrik • notshige • JayRSky • rice • Bolo • White
+
+Media:
+SpinierYard212 • YaGoat • Itsme64 • splu4ug
 
 And finally, greets to:
-mrarm and dktapps for some version manager code • rtm516 • White • Bionic • Floppy • Dr.FarFar • kelvin • xqwo • Plu4qlEve • arson/penguin/qieh • Haze. • jqms • 12brendon34 • ByArth • Kl0dz • notshige • Exallotriote • the people over at CSI • MC:BE Modding Community • YOU • my mom lol
+mrarm and dktapps for some version manager code • rtm516 • Bionic • Floppy • Dr.FarFar • kelvin • xqwo • Plu4qlEve • MC:BE Modding Community • YOU • my mom lol
 
 Jiayi Launcher is released under the GNU General Public License, version 3.0. You can find the source code on GitHub.
 If you bought this program, you were scammed!

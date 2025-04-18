@@ -46,8 +46,9 @@
             true when line.Contains("Developer") => "red",
             true when line.Contains("Tester") => "#e67e22",
             true when line.Contains("Contributor") => "#2ecc71",
+            true when line.Contains("Translator") => "#e91e63",
             true when line.Contains("VIP") => "#f1c40f",
-            true when line.Contains("Press") => "#9b59b6",
+            true when line.Contains("Media") => "#9b59b6",
             true when line.Contains("greets") => "var(--text-primary)",
             _ => _currentColor
         };

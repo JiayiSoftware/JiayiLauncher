@@ -1,3 +1,5 @@
+### ⚠ This project is now in maintenance mode. We'll still accept pull requests.
+
 <div align="center">
   <a href="https://jiayisoftware.github.io/launcher"><img src="https://github.com/JiayiSoftware/JiayiLauncher/blob/master/.github/assets/logo.png" alt="Jiayi Launcher" width="700"></a>
 </div>

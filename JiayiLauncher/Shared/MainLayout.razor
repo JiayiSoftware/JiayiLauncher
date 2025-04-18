@@ -76,6 +76,21 @@
             
             ToastService.ShowToast<JiayiToast>(parameters, settings => settings.DisableTimeout = true);
         }
+        
+        var death = new ToastParameters()
+            .Add(nameof(JiayiToast.Title), Strings.JiayiLauncher)
+            .Add(nameof(JiayiToast.Content), new RenderFragment(builder =>
+            {
+                builder.OpenElement(0, "p");
+                builder.AddContent(1, "This project is now in maintenance mode while work is done on the next major version. Thank you for sticking with us through the years. Stay tuned.");
+                builder.CloseElement();
+            }))
+            .Add(nameof(JiayiToast.Buttons), new List<(string, EventCallback)>
+            {
+                ("See you later, Jiayi", EventCallback.Empty)
+            });
+            
+        ToastService.ShowToast<JiayiToast>(death, settings => settings.DisableTimeout = true);
 
         if (_sidebar != null) _sidebar.OnToggle += ChangeMargin;
         

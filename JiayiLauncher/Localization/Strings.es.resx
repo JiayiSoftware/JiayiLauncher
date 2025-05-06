@@ -1106,7 +1106,7 @@
         <value>Acelera los tiempos de carga terminando procesos innecesarios. Puede causar bugs.</value>
     </data>
   <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
-        <value>Esto puede causar problemas relacionados con la licencia de la Microsoft Store (determinar si posees el juego o no).</value>
+        <value>May cause issues related to Microsoft Store licensing (determining whether you own the game or not). This option has become useless in later versions, as Mojang has improved loading times.</value>
     </data>
   <data name="SettingsMinimizeFix" xml:space="preserve">
         <value>Arreglar el Minimizado</value>

@@ -1106,7 +1106,7 @@
         <value>การทำให้เกมโหลดเร็วขึ้นจะปิดสิ่งที่ไม่ต้องใช้หลายอย่าง (อาจไม่ค่อยเสถียร)</value>
     </data>
   <data name="SettingsAccelerateGameLoadingTooltip" xml:space="preserve">
-        <value>อาจทำให้ License ของ Microsoft Store ผิดปกติ (ขึ้นอยู่กับคุณเป็นเจ้าของเกมหรือเปล่า)</value>
+        <value>May cause issues related to Microsoft Store licensing (determining whether you own the game or not). This option has become useless in later versions, as Mojang has improved loading times.</value>
     </data>
   <data name="SettingsMinimizeFix" xml:space="preserve">
         <value>ซ่อมพับจอ</value>

@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
         <TargetFramework>net9.0-windows10.0.22621.0</TargetFramework>
+        <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
         <OutputType>Exe</OutputType>
         <RootNamespace>JiayiLauncher</RootNamespace>
         <UseMaui>true</UseMaui>
@@ -26,8 +27,8 @@
         <Platforms>AnyCPU;x64</Platforms>
         <Company>Jiayi Software</Company>
         <Product>Jiayi Launcher</Product>
-        <AssemblyVersion>2.1.3</AssemblyVersion>
-        <FileVersion>2.1.3.0</FileVersion>
+        <AssemblyVersion>2.1.4</AssemblyVersion>
+        <FileVersion>2.1.4.0</FileVersion>
         <NeutralLanguage>en-US</NeutralLanguage>
     </PropertyGroup>
     

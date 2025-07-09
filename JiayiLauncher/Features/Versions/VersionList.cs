@@ -17,7 +17,7 @@ namespace JiayiLauncher.Features.Versions;
 public class VersionList
 {
 	private const string STORE_ID = "9NBLGGH2JHXJ";
-	private const string OLD_VERSIONS_DB = "https://raw.githubusercontent.com/MCMrARM/mc-w10-versiondb/master/versions.txt";
+	private const string OLD_VERSIONS_DB = "https://raw.githubusercontent.com/ddf8196/mc-w10-versiondb-auto-update/master/versions.txt";
 	
 	private readonly List<string> _versions = new();
 	private readonly SortedDictionary<string, MinecraftVersion> _versionDict = new(new VersionComparer());

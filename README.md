@@ -1,38 +1,36 @@
-### ⚠ This project is now in maintenance mode. We'll still accept pull requests.
+# Jiayi Launcher
+Minecraft for Windows mod manager (Bedrock Edition)
 
-<div align="center">
-  <a href="https://jiayisoftware.github.io/launcher"><img src="https://github.com/JiayiSoftware/JiayiLauncher/blob/master/.github/assets/logo.png" alt="Jiayi Launcher" width="700"></a>
-</div>
-
-### Minecraft for Windows mod manager (Bedrock Edition)
+**This project has been marked as legacy software, and no major features will be added. We are shifting our focus towards a complete remake of Jiayi Launcher, hoping to achieve feature parity with the legacy mod manager as well as add new features. We will still accept pull requests. Join our Discord server in the badge below for more info on development.**
 
 [![Build](https://github.com/JiayiSoftware/JiayiLauncher/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JiayiSoftware/JiayiLauncher/actions/workflows/dotnet.yml)
 [![Discord server](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://jiayisoftware.github.io/discord)
 
 ## Features
-> * Simple, clean user interface
-> * Manage and launch internal and external mods, both stored locally and from the Internet
-> * A version manager that goes hand in hand with the mod manager
-> * Switch between different game data folders with Profiles (resource packs, worlds, settings, etc.)
-> * Extreme customizability, from the launcher's appearance down to the source code
-> * Easily apply Renderdragon shaders and make your game look beautiful
+* Simple, clean, and customizable user interface
+* Manage and launch internal and external mods, both stored locally and from the internet
+* A version manager that integrates with the mod manager
+* Back up and switch between different game data folders with Profiles (resource packs, worlds, settings, etc.)
+* Easily apply Renderdragon shaders and make your game look beautiful
 
 ## Installation
-If you're a regular user, you can download the installer [here](https://phased.tech/download/JiayiInstaller.exe). It's about 6 MB in size.
+### Using the installer
+Most users would prefer a program that handles the installation of Jiayi Launcher. Our installer can be downloaded [here](https://phased.tech/download/JiayiInstaller.exe), and it's about 6 MB in size. The installer automatically downloads and installs the mod manager, installs required dependencies, and integrates Jiayi Launcher with the shell. The source code for the installer is also contained within this repository.
 
-Older releases can be found in the [Releases](https://github.com/JiayiSoftware/JiayiLauncher/releases) page.
-
-You can clone the repository and build Jiayi Launcher yourself with the instructions below.
+### Manual/portable install
+Our current and past releases of Jiayi Launcher can be found in the [Releases](https://github.com/JiayiSoftware/JiayiLauncher/releases) page. All releases are zipped and can be ran immediately after extracting, no installer required.
 
 ## Building
+If you'd like to, you can clone this repository and build Jiayi Launcher yourself with the instructions below.
+
 ### Requirements
-* A computer running Windows 10 or later
+* A computer running Windows 10 or 11
 * [Git](https://git-scm.com/)
-* [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-* Optionally, an IDE that supports .NET 8 (e.g. [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) or [JetBrains Rider](https://www.jetbrains.com/rider/))
+* [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
+* Optionally, an IDE that supports .NET 9 (e.g. [Visual Studio](https://visualstudio.microsoft.com/vs/) or [JetBrains Rider](https://www.jetbrains.com/rider/))
 
 ### Steps
-1. Clone the repository
+1. Clone the repository, and all of its dependencies
 * ```git clone --recursive https://github.com/JiayiSoftware/JiayiLauncher.git```
 
 **With an IDE:**
@@ -44,20 +42,19 @@ You can clone the repository and build Jiayi Launcher yourself with the instruct
 
 2. Navigate to the repository's root directory
 3. Run ```dotnet build```
-
-This will build the launcher in debug mode. You can append ```-c Release``` to build in release mode.
+> This will build the mod manager in debug mode. You can append ```-c Release``` to build in release mode.
 
 ## Contributing
-If you want to contribute to Jiayi Launcher, you can fork the repository and submit a pull request.
+If you want to contribute to Jiayi Launcher, you can fork the repository and submit a pull request. Jiayi Launcher is written in C# and uses HTML for the UI via Blazor Hybrid.
 
-Jiayi is written in C# and uses HTML for the UI via Blazor Hybrid.
-
-The code is admittedly a mess, hence why there is no code style to adhere to. However, please try to keep the code clean and readable. There will be a code style guide in the future.
+The code is admittedly a mess, hence why there is no code style to adhere to. However, please try to keep the code clean and readable.
 
 ## License
-Jiayi Launcher is released under the GNU GPL-3.0 license, and you can read it [here](https://github.com/JiayiSoftware/JiayiLauncher/blob/master/LICENSE).
+Jiayi Launcher is released under the GNU General Public License, version 3.0. You can read the license [here](https://github.com/JiayiSoftware/JiayiLauncher/blob/master/LICENSE).
 
-A quick rundown for those who don't want to read all that:
+This is a summary of the license:
 - You can modify, share and sell the code any way you please
-- but you have to open source projects that do this under a compatible GPL license
-- Any changes should be documented 
+- ...but you have to open source projects that do this under a compatible GPL license
+- Any changes should be documented
+
+If you bought this program, you were scammed!
